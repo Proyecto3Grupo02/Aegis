@@ -17,12 +17,13 @@
 mono_crash.*
 
 # Build results
-[Dd]ebug/
+AegisEngine/[Dd]ebug/
 [Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
-x64/
-x86/
+AegisEngine/[Rr]elease/
+AegisEngine/[Rr]eleases/
+AegisEngine/Temp/
+AegisEngine/Projects/AegisEngine/AegisEngine.vcxproj.user
+
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
 bld/
