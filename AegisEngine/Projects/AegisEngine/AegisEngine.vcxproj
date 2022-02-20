@@ -75,28 +75,28 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IntDir>$(solutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)Exes\$(Platform)\$(Configuration)\</OutDir>
     <SourcePath>$(SolutionDir)Exes\$(Platform)\$(Configuration)\;$(SolutionDir)Src\;$(SourcePath)</SourcePath>
     <IncludePath>C:\Users\jonat\OneDrive\Escritorio\Aegis\AegisEngine\Dependencias\Ogre\Source\OgreMain\include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IntDir>$(solutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)Exes\$(Platform)\$(Configuration)\</OutDir>
     <SourcePath>$(SolutionDir)Exes\$(Platform)\$(Configuration)\;$(SolutionDir)Src\;$(SourcePath)</SourcePath>
     <IncludePath>C:\Users\jonat\OneDrive\Escritorio\Aegis\AegisEngine\Dependencias\Ogre\Source\OgreMain\include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IntDir>$(solutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)Exes\$(Platform)\$(Configuration)\</OutDir>
     <SourcePath>$(SolutionDir)Exes\$(Platform)\$(Configuration)\;$(SolutionDir)Src\;$(SourcePath)</SourcePath>
     <IncludePath>C:\Users\jonat\OneDrive\Escritorio\Aegis\AegisEngine\Dependencias\Ogre\Source\OgreMain\include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IntDir>$(solutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)Exes\$(Platform)\$(Configuration)\</OutDir>
     <SourcePath>$(SolutionDir)Exes\$(Platform)\$(Configuration)\;$(SolutionDir)Src\;$(SourcePath)</SourcePath>
     <IncludePath>C:\Users\jonat\OneDrive\Escritorio\Aegis\AegisEngine\Dependencias\Ogre\Source\OgreMain\include</IncludePath>
