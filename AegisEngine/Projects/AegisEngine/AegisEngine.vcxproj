@@ -92,14 +92,14 @@
     <IntDir>$(SolutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)Exes\$(Platform)\$(Configuration)\</OutDir>
     <SourcePath>$(SolutionDir)Exes\$(Platform)\$(Configuration)\;$(SolutionDir)Src\;$(SourcePath)</SourcePath>
-    <IncludePath>C:\Users\jonat\OneDrive\Escritorio\Aegis\AegisEngine\Dependencias\Ogre\Source\OgreMain\include</IncludePath>
+    <IncludePath>$(SolutionDir)\Dependencias\Ogre\Source\OgreMain\include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IntDir>$(SolutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)Exes\$(Platform)\$(Configuration)\</OutDir>
     <SourcePath>$(SolutionDir)Exes\$(Platform)\$(Configuration)\;$(SolutionDir)Src\;$(SourcePath)</SourcePath>
-    <IncludePath>C:\Users\jonat\OneDrive\Escritorio\Aegis\AegisEngine\Dependencias\Ogre\Source\OgreMain\include</IncludePath>
+    <IncludePath>$(SolutionDir)\Dependencias\Ogre\Source\OgreMain\include</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
