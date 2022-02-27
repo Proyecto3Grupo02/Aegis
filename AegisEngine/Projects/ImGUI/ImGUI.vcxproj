@@ -19,29 +19,25 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Dependencias\imgui\source\backends\imgui_impl_glfw.h" />
-    <ClInclude Include="..\..\Dependencias\imgui\source\backends\imgui_impl_opengl3.h" />
-    <ClInclude Include="..\..\Dependencias\imgui\source\backends\imgui_impl_sdl.h" />
-    <ClInclude Include="..\..\Dependencias\imgui\source\backends\imgui_impl_sdlrenderer.h" />
-    <ClInclude Include="..\..\Dependencias\imgui\source\codigo\imconfig.h" />
-    <ClInclude Include="..\..\Dependencias\imgui\source\codigo\imgui.h" />
-    <ClInclude Include="..\..\Dependencias\imgui\source\codigo\imgui_internal.h" />
-    <ClInclude Include="..\..\Dependencias\imgui\source\codigo\imstb_rectpack.h" />
-    <ClInclude Include="..\..\Dependencias\imgui\source\codigo\imstb_textedit.h" />
-    <ClInclude Include="..\..\Dependencias\imgui\source\codigo\imstb_truetype.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\Dependencias\imgui\source\backends\imgui_impl_glfw.cpp" />
-    <ClCompile Include="..\..\Dependencias\imgui\source\backends\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="..\..\Dependencias\imgui\source\backends\imgui_impl_sdl.cpp" />
-    <ClCompile Include="..\..\Dependencias\imgui\source\backends\imgui_impl_sdlrenderer.cpp" />
-    <ClCompile Include="..\..\Dependencias\imgui\source\codigo\imgui.cpp" />
-    <ClCompile Include="..\..\Dependencias\imgui\source\codigo\imgui_demo.cpp" />
-    <ClCompile Include="..\..\Dependencias\imgui\source\codigo\imgui_draw.cpp" />
-    <ClCompile Include="..\..\Dependencias\imgui\source\codigo\imgui_tables.cpp" />
-    <ClCompile Include="..\..\Dependencias\imgui\source\codigo\imgui_widgets.cpp" />
+    <ClCompile Include="..\..\Dependencias\imgui\backends\imgui_impl_glfw.cpp" />
+    <ClCompile Include="..\..\Dependencias\imgui\backends\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="..\..\Dependencias\imgui\codigo\imgui.cpp" />
+    <ClCompile Include="..\..\Dependencias\imgui\codigo\imgui_demo.cpp" />
+    <ClCompile Include="..\..\Dependencias\imgui\codigo\imgui_draw.cpp" />
+    <ClCompile Include="..\..\Dependencias\imgui\codigo\imgui_tables.cpp" />
+    <ClCompile Include="..\..\Dependencias\imgui\codigo\imgui_widgets.cpp" />
     <ClCompile Include="..\..\Src\ImGUI\glad.c" />
     <ClCompile Include="..\..\Src\ImGUI\temp.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Dependencias\imgui\backends\imgui_impl_glfw.h" />
+    <ClInclude Include="..\..\Dependencias\imgui\backends\imgui_impl_opengl3.h" />
+    <ClInclude Include="..\..\Dependencias\imgui\codigo\imconfig.h" />
+    <ClInclude Include="..\..\Dependencias\imgui\codigo\imgui.h" />
+    <ClInclude Include="..\..\Dependencias\imgui\codigo\imgui_internal.h" />
+    <ClInclude Include="..\..\Dependencias\imgui\codigo\imstb_rectpack.h" />
+    <ClInclude Include="..\..\Dependencias\imgui\codigo\imstb_textedit.h" />
+    <ClInclude Include="..\..\Dependencias\imgui\codigo\imstb_truetype.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
