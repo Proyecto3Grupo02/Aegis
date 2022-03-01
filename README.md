@@ -10,7 +10,7 @@ Documento de diseño de motor
 
 ## **Páginas de interés**
 ### [Página web]()
-### [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2551633)
+### [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2555675)
 ### [Repositorio](https://github.com/Proyecto3Grupo02)
 
 ## Intro
