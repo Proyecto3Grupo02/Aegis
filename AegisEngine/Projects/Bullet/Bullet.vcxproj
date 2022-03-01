@@ -155,11 +155,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-<<<<<<< HEAD
       <AdditionalIncludeDirectories>$(SolutionDir)dependencias/bullet/build/x64/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-=======
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias/Bullet/Build/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
->>>>>>> effc656c580893fd942cd2f08dfdb7c5976a95d5
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
