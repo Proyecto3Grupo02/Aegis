@@ -60,7 +60,121 @@ El repositorio de GitHub incluirá:
 * Una vez finalizada, en un meeting se comprobará su validez.
 * Se une esta rama a la principal y se finaliza la historia.
 
-## Estructura clases (UML)
+## Estructura clases
+
+### Application
+
+#### Atributos
+
+- Scene* currentScene
+- ResourceManager* manager
+
+#### Metodos
+
+> Load_Game(string path)
+
+> Load_Scene()
+
+> Change_Scene()
+
+> Update
+
+### Scene
+
+#### Atributos
+
+- List<Entity*> entities
+- List<List<Entity*>::iterator> entitiesToDelete
+
+####  Metodos
+
+> AddEntity(Entity* entity)
+
+> DestroyEntity(Entity* entity)
+
+> FixedUpdate()
+
+> Update()
+
+> LateUpdate()
+
+### Entity
+
+#### Atributos
+
+- Scene* scene
+- bool isActive
+- List<int> activeComponents
+- vecto<Component*> components
+- string name
+
+####  Metodos
+
+> Init()
+
+> FixedUpdate()
+
+> Update()
+
+> LateUpdate()
+
+> bool IsActive()
+
+> void SetActive(bool active)
+
+> void SetName(string name)
+
+> string GetName()
+
+Dudas
+
+> Render()
+
+> GetScene()
+
+> SetScene(Scene* scene)
+
+> ReceiveEvent()
+
+> HasComponent(int cmpId)
+
+> OnCollision(Entity* other)
+
+> OnTrigger(Entity* other)
+
+### Input System (static)
+
+#### Atributos
+
+```c++
+struct key
+{
+    bool pressedThisFrame, down, releasedThisFrame;
+}
+```
+
+- vector<key> keys[256]
+
+####  Metodos
+
+Public
+> bool IsKeyDown
+
+> IsPressedThisFrame
+
+> IsReleasedThisFrame
+
+
+Private
+
+> void OnKeyDown(SDLK key)
+
+> void OnKeyUp()
+
+> void UpdateState()
+
+> int SDLK_ToInt();
+
 
 ## Licencias
 Ogre3D (Copyright (c) 2000-2013 Torus Knot Software Ltd)
