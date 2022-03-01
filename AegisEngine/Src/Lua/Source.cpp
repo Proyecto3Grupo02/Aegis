@@ -4,7 +4,6 @@ extern "C" {
 #include "lauxlib.h"
 #include "lualib.h"
 }
-
 int main() {
 	int susmuertos = 0;
 	std::cout << "Bienvenido a Aegis Engine.\n";
