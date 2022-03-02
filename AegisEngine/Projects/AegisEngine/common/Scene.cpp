@@ -55,7 +55,7 @@ void Scene::UpdateInput()
 void Scene::Update(float dt)
 {
 	for (Entity* entity : *entities)
-		entity->update();
+		entity->update(dt);
 }
 
 void Scene::LateUpdate(float dt)

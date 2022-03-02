@@ -1,6 +1,9 @@
+#pragma once 
 #include <vector>
 #include <list>
 #include <string>
+#include "ComponentManager.h"
+
 
 class Component;
 class Scene;
@@ -27,9 +30,12 @@ class Entity{
         inline void setName(std::string name){}
 
         //handle the components
-        void addComponent(Component* component);
-        void removeComponent(Component* component);
-        Component* getComponent(unsigned int cmpID);
+       
+        template<typename T>
+        T* addComponent();
+
+        template<typename T>
+        T* getComponent();
 
         inline Scene* getScene(){return mScene_;}
         inline void setScene(Scene* scene){mScene_= scene;}
@@ -50,3 +56,4 @@ class Entity{
 
 
 };
+

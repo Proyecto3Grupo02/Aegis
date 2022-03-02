@@ -20,14 +20,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="common\Component.cpp" />
+    <ClCompile Include="common\ComponentManager.cpp" />
     <ClCompile Include="common\Entity.cpp" />
     <ClCompile Include="common\Scene.cpp" />
+    <ClCompile Include="common\Singleton.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\Component.h" />
+    <ClInclude Include="common\ComponentManager.h" />
     <ClInclude Include="common\Entity.h" />
     <ClInclude Include="common\Scene.h" />
+    <ClInclude Include="common\Singleton.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

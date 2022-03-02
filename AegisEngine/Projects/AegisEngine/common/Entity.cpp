@@ -1,7 +1,7 @@
 #include "Entity.h"
 #include "Component.h"
 Entity::Entity(): 
-	mNumOfComponents_(0),active_(true),mScene_(nullptr)
+	active_(true),mScene_(nullptr)
 {
 }
 
@@ -16,36 +16,63 @@ void Entity::init()
 
 void Entity::fixedUpdate()
 {
-	for (auto i : mNumOfActiveComponents_) {
-		mComponents_[i]->fixedUpdate();
+	if (active_) {
+		for (auto i : mNumOfActiveComponents_) {
+			mComponents_[i]->fixedUpdate();
+		}
 	}
 }
 
 void Entity::update(float dt)
 {
-	for (auto i : mNumOfActiveComponents_) {
-		mComponents_[i]->update(dt);
+	if (active_) {
+		for (auto i : mNumOfActiveComponents_) {
+			mComponents_[i]->update(dt);
+		}
 	}
 }
 
 void Entity::lateUpdate()
 {
-	for (auto i : mNumOfActiveComponents_) {
-		mComponents_[i]->lateUpdate();
+	if (active_) {
+		for (auto i : mNumOfActiveComponents_) {
+			mComponents_[i]->lateUpdate();
+		}
 	}
 }
 
 void Entity::render()
 {
-	for (auto i : mNumOfActiveComponents_) {
-		mComponents_[i]->render();
+	if (active_) {
+		for (auto i : mNumOfActiveComponents_) {
+			mComponents_[i]->render();
+		}
 	}
 }
 
-Component* Entity::getComponent(unsigned int cmpID)
+template<typename T>
+inline T* Entity::addComponent()
 {
-	return mComponents_[cmpID];
+	ComponentManager* cmpManager = ComponentManager::getInstance();
+
+	std::string id = cmpManager->getCmpID<T>();
+	auto constructor = cmpManager->getCmpFactory(id);
+	mComponents_[id] = constructor(this);
+
+	return (T*)mComponents_[id];
+
 }
+
+template<typename T>
+T* Entity::getComponent()
+{
+	ComponentManager* cmpManager = ComponentManager::getInstance();
+
+	std::string id = cmpManager->getCmpID<T>();
+
+	return T * mComponents_[id];
+}
+
 
 void Entity::receiveEvent(Entity* receive)
 {
@@ -66,7 +93,7 @@ void Entity::onCollision(Entity* other)
 void Entity::onTrigger(Entity* other)
 {
 	for (auto i : mNumOfActiveComponents_) {
-		mComponents_[i]->onTrigger();
+		mComponents_[i]->onTrigger(other);
 	}
 }
 	

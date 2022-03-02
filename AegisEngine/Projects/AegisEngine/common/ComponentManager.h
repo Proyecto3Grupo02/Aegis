@@ -6,6 +6,7 @@
 #include "Component.h"
 #include <string>
 
+class Entity;
 typedef std::function<Component* (Entity*)> ComponentFactory;
 
 class ComponentManager: public Singleton<ComponentManager>

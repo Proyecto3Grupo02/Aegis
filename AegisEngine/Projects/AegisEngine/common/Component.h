@@ -1,8 +1,10 @@
+#pragma once
 
 class Entity;
+
 class Component{
     public:
-       Component(unsigned int id):mID_(id) {};
+       Component(Entity* entity);
 
        ~Component() {};
 
@@ -19,9 +21,7 @@ class Component{
        virtual void onCollision(Entity* other)=0;
        virtual void onTrigger(Entity* other)=0;
 
-
     private:
-        unsigned int mID_;
         Entity* mEntity_;
         
 };
