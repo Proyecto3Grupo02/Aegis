@@ -40,4 +40,21 @@ Component* Entity::getComponent(unsigned int cmpID)
 {
 	return nullptr;
 }
+
+void Entity::receiveEvent(Entity* receive)
+{
+}
+
+bool Entity::hasComponent(unsigned int cmpID)
+{
+	return false;
+}
+
+void Entity::onCollision(Entity* other)
+{
+}
+
+void Entity::onTrigger(Entity* other)
+{
+}
 	
