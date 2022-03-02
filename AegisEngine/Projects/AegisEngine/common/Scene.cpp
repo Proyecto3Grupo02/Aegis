@@ -1,6 +1,7 @@
 #include "Scene.h"
 #include "Entity.h"
 
+// Es posible que aqui queramos inicializar una escena de ogre y sincronizarla con las entidades
 Scene::Scene() : accumulator(0), entities(new list<Entity*>()), entitiesToDelete(list<list<Entity*>::iterator>()) {}
 
 Scene::~Scene()
@@ -10,18 +11,19 @@ Scene::~Scene()
 
 	delete this->entities;
 
-	DeletePendingEntities();
+	RemoveAndFreePendingEntities();
 }
 
-void Scene::RemoveEntity(list<Entity*>::iterator entity)
+void Scene::RemoveAndFreeEntity(list<Entity*>::iterator entity)
 {
+	delete *entity;
 	this->entities->erase(entity);
 }
 
-void Scene::DeletePendingEntities()
+void Scene::RemoveAndFreePendingEntities()
 {
 	for (list<Entity*>::iterator entity : entitiesToDelete)
-		RemoveEntity(entity);
+		RemoveAndFreeEntity(entity);
 
 	this->entitiesToDelete.clear();
 }
@@ -43,7 +45,7 @@ void Scene::FixedUpdate(float dt)
 	{
 		// Call entities physics update
 		//for (Entity* entity : *entities)
-			//entity->update();
+			//entity->integrate();
 		accumulator -= PHYSICS_STEP;
 	}
 }
@@ -55,7 +57,7 @@ void Scene::UpdateInput()
 void Scene::Update(float dt)
 {
 	for (Entity* entity : *entities)
-		entity->update();
+		entity->update(dt);
 }
 
 void Scene::LateUpdate(float dt)
@@ -77,5 +79,6 @@ void Scene::UpdateScene(float dt)
 	UpdateInput();
 	Update(dt);
 	LateUpdate(dt);
+	RemoveAndFreePendingEntities();
 	//Render;
 }
