@@ -21,10 +21,10 @@ void Entity::fixedUpdate()
 	}
 }
 
-void Entity::update()
+void Entity::update(float dt)
 {
 	for (auto i : mNumOfActiveComponents_) {
-		mComponents_[i]->update();
+		mComponents_[i]->update(dt);
 	}
 }
 
@@ -40,20 +40,6 @@ void Entity::render()
 	for (auto i : mNumOfActiveComponents_) {
 		mComponents_[i]->render();
 	}
-}
-
-void Entity::addComponent(Component* component)
-{
-	component->setID(mNumOfComponents_);
-	mComponents_.push_back(component);
-	component->init();
-	
-	mNumOfComponents_++;
-}
-
-void Entity::removeComponent(unsigned int componentId)
-{
-	delete mComponents_[componentId];
 }
 
 Component* Entity::getComponent(unsigned int cmpID)

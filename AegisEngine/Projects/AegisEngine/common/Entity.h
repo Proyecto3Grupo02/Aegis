@@ -14,7 +14,7 @@ class Entity{
        
         
         void fixedUpdate();
-        void update();
+        void update(float dt);
         void lateUpdate();
 
         void render();
@@ -43,7 +43,7 @@ class Entity{
         Scene* mScene_; //scene pointer 
 
         std::vector<Component*> mComponents_; //list of all the components in scene
-        std::list<int> numOfActiveComponents_; //list of the index of their active component 
+        std::list<int> mNumOfActiveComponents_; //list of the index of their active component 
         bool active_; //bool to check if the entity is active or not
     private:
         std::string mName_; //name of the entity, works like a tag, useful to debug

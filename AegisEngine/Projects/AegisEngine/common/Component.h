@@ -11,7 +11,7 @@ class Component{
        virtual void init()=0;
        
        virtual void fixedUpdate() = 0;
-       virtual void update()=0;
+       virtual void update(float dt)=0;
        virtual void lateUpdate()=0;
      
        virtual void render() = 0;
