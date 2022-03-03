@@ -120,12 +120,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Src\Aegis\Entity;$(SolutionDir)Src\Aegis\Scene;$(SolutionDir)Src\Aegis\Managers;$(SolutionDir)Src\Aegis\Component;$(SolutionDir)Dependencias\Ogre\Build\x64\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-2.0.20\include;$(SolutionDir)Src\Aegis\Entity;$(SolutionDir)Src\Aegis\Scene;$(SolutionDir)Src\Aegis\Managers;$(SolutionDir)Src\Aegis\Component;$(SolutionDir)Dependencias\Ogre\Build\x64\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencias\Ogre\Build\x64\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>OgreMain_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
@@ -140,14 +140,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Src\Aegis\Entity;$(SolutionDir)Src\Aegis\Scene;$(SolutionDir)Src\Aegis\Managers;$(SolutionDir)Src\Aegis\Component;$(SolutionDir)Dependencias\Ogre\Build\x64\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-2.0.20\include;$(SolutionDir)Src\Aegis\Entity;$(SolutionDir)Src\Aegis\Scene;$(SolutionDir)Src\Aegis\Managers;$(SolutionDir)Src\Aegis\Component;$(SolutionDir)Dependencias\Ogre\Build\x64\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencias\Ogre\Build\x64\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>OgreMain.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
@@ -160,12 +160,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Src\Aegis\Entity;$(SolutionDir)Src\Aegis\Scene;$(SolutionDir)Src\Aegis\Managers;$(SolutionDir)Src\Aegis\Component;$(SolutionDir)Dependencias\Ogre\Build\x64\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-2.0.20\include;$(SolutionDir)Src\Aegis\Entity;$(SolutionDir)Src\Aegis\Scene;$(SolutionDir)Src\Aegis\Managers;$(SolutionDir)Src\Aegis\Component;$(SolutionDir)Dependencias\Ogre\Build\x64\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencias\Ogre\Build\x64\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>OgreMain_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
@@ -180,14 +180,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Src\Aegis\Entity;$(SolutionDir)Src\Aegis\Scene;$(SolutionDir)Src\Aegis\Managers;$(SolutionDir)Src\Aegis\Component;$(SolutionDir)Dependencias\Ogre\Build\x64\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-2.0.20\include;$(SolutionDir)Src\Aegis\Entity;$(SolutionDir)Src\Aegis\Scene;$(SolutionDir)Src\Aegis\Managers;$(SolutionDir)Src\Aegis\Component;$(SolutionDir)Dependencias\Ogre\Build\x64\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencias\Ogre\Build\x64\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>OgreMain.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
