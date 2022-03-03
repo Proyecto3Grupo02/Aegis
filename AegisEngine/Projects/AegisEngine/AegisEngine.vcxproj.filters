@@ -18,39 +18,39 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="common\Scene.cpp">
+    <ClCompile Include="..\..\Src\Aegis\Scene\Scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="common\Component.cpp">
+    <ClCompile Include="..\..\Src\Aegis\Managers\ComponentManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="common\Entity.cpp">
+    <ClCompile Include="..\..\Src\Aegis\Managers\Singleton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="common\ComponentManager.cpp">
+    <ClCompile Include="..\..\Src\Aegis\Entity\Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="common\Singleton.cpp">
+    <ClCompile Include="..\..\Src\Aegis\Component\Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="common\Scene.h">
+    <ClInclude Include="..\..\Src\Aegis\Component\Component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="common\Entity.h">
+    <ClInclude Include="..\..\Src\Aegis\Component\RegisterComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="common\Singleton.h">
+    <ClInclude Include="..\..\Src\Aegis\Entity\Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="common\Component.h">
+    <ClInclude Include="..\..\Src\Aegis\Managers\ComponentManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="common\ComponentManager.h">
+    <ClInclude Include="..\..\Src\Aegis\Managers\Singleton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="common\RegisterComponent.h">
+    <ClInclude Include="..\..\Src\Aegis\Scene\Scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
