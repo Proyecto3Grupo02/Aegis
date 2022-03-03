@@ -30,6 +30,7 @@
     <ClInclude Include="common\Component.h" />
     <ClInclude Include="common\ComponentManager.h" />
     <ClInclude Include="common\Entity.h" />
+    <ClInclude Include="common\RegisterComponent.h" />
     <ClInclude Include="common\Scene.h" />
     <ClInclude Include="common\Singleton.h" />
   </ItemGroup>

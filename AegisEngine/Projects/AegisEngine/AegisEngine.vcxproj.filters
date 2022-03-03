@@ -50,5 +50,8 @@
     <ClInclude Include="common\ComponentManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="common\RegisterComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
