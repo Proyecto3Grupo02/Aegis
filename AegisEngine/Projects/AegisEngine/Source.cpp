@@ -2,6 +2,7 @@
 #include <Ogre.h>
 #include <SDL.h>
 #include <SDL_syswm.h>
+#undef main
 
 using namespace std;
 
@@ -21,6 +22,8 @@ void openSDLWindow() {
 
 	Ogre::Root* root = new Ogre::Root();
 	root->restoreConfig();
+	Ogre::RenderSystem* renderSys = new Ogre::RenderSystem();
+	root->setRenderSystem();
 	root->initialise(false);
 
 	Ogre::NameValuePairList params; // ogre window / render system params
@@ -50,7 +53,12 @@ void openSDLWindow() {
 	// see OGRE documentation on how to populate width, height, and isFullscreen to suit your needs
 
 	// create OGRE scene manager, camera, viewports, etc
+
+
+	//DELETES
 }
+
+
 
 int main(int argc, char** argv[]) {
 	int susmuertos = 0;
