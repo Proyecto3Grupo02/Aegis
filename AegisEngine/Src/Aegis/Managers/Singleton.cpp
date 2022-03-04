@@ -2,16 +2,16 @@
 #include "Singleton.h"
 
 
-template<typename T>
-Singleton<T>::Singleton()
-{
-	Singleton::mInstance_ = static_cast<T*>(this);
-}
+//template<typename T>
+//Singleton<T>::Singleton()
+//{
+//	Singleton::mInstance_ = static_cast<T*>(this);
+//}
 
-template<typename T>
-inline Singleton<T>::~Singleton()
-{
-}
+//template<typename T>
+//inline Singleton<T>::~Singleton()
+//{
+//}
 
 template<typename T>
 T* Singleton<T>::getInstance()

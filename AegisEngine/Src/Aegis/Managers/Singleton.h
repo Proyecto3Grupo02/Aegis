@@ -19,3 +19,15 @@ private:
 
 
 };
+
+
+template<typename T>
+Singleton<T>::Singleton()
+{
+    Singleton::mInstance_ = static_cast<T*>(this);
+}
+
+template<typename T>
+inline Singleton<T>::~Singleton()
+{
+}

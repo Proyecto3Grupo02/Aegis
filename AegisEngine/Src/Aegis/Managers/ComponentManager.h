@@ -31,3 +31,11 @@ class ComponentManager: public Singleton<ComponentManager>
     std::map<std::string, std::string> mCmpIDs_;
 
 };
+
+ComponentManager::ComponentManager()
+{
+}
+
+ComponentManager::~ComponentManager()
+{
+}
