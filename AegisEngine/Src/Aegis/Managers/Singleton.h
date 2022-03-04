@@ -20,11 +20,14 @@ private:
 
 };
 
+template<typename T>
+typename T* Singleton<T>::mInstance_ = nullptr;
 
 template<typename T>
 Singleton<T>::Singleton()
 {
     Singleton::mInstance_ = static_cast<T*>(this);
+
 }
 
 template<typename T>
