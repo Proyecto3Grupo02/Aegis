@@ -33,4 +33,12 @@ Singleton<T>::Singleton()
 template<typename T>
 inline Singleton<T>::~Singleton()
 {
+
+}
+
+template<typename T>
+inline void Singleton<T>::deleteInstance() {
+    delete Singleton<T>::mInstance_;
+    Singleton<T>::mInstance_ = nullptr;
+
 }

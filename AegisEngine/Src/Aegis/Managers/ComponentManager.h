@@ -32,10 +32,20 @@ class ComponentManager: public Singleton<ComponentManager>
 
 };
 
-ComponentManager::ComponentManager()
+template<typename T>
+void ComponentManager::registerComponent(const std::string& cmpID)
 {
+    if (mFactories_.find(cmpID) != mFactories_.end())
+    {
+       
+        return;
+    }
+    mCmpIDs_[typeid(T).name()] = cmpID;
+    mFactories_[cmpID] = [](Entity* e) { return new T(e); };
 }
 
-ComponentManager::~ComponentManager()
+template<typename T>
+inline const std::string& ComponentManager::getCmpID()
 {
+    return mCmpIDs_[typeid(T).name()];
 }

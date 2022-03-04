@@ -1,6 +1,13 @@
 #include "ComponentManager.h"
 
 
+ComponentManager::ComponentManager()
+{
+}
+
+ComponentManager::~ComponentManager()
+{
+}
 
 void ComponentManager::init()
 {
@@ -18,21 +25,4 @@ ComponentFactory* ComponentManager::getCmpFactory(const std::string factID)
 		return &mFactories_[factID];
 	}
 	return nullptr;
-}
-
-template<typename T>
-void ComponentManager::registerComponent(const std::string& cmpID)
-{
-	if (mFactories_.find(cmpID) != mFactories_.end())
-	{
-		return;
-	}
-	mCmpIDs_[typeid(T).name()] = cmpID;
-	mFactories_[cmpID] = [](Entity* entity) { return new T(Entity); };
-}
-
-template<typename T>
-inline const std::string& ComponentManager::getCmpID()
-{
-	return mCmpIDs_[typeid(T).name()];
 }
