@@ -7,6 +7,7 @@
 #include <OgreCamera.h>
 #include <OgreViewport.h>
 #include <OgreEntity.h>
+#include <OgreSceneNode.h>
 
 #include <iostream>
 #include <fstream>
@@ -58,12 +59,12 @@ bool AegisMain::go()
     cf.load(mResourcesCfg);
 
 
-    Ogre::String name, locType , sec;
+    Ogre::String name, locType;
    
 
     Ogre::ConfigFile::SettingsBySection_::const_iterator seci;
     for (seci = cf.getSettingsBySection().begin(); seci != cf.getSettingsBySection().end(); ++seci) {
-        sec = seci->first;
+        /*sec = seci->first;*/
         const Ogre::ConfigFile::SettingsMultiMap& settings = seci->second;
         Ogre::ConfigFile::SettingsMultiMap::const_iterator it;
 
@@ -72,7 +73,7 @@ bool AegisMain::go()
         {
             locType = it->first;
             name = it->second;
-            Ogre::ResourceGroupManager::getSingleton().addResourceLocation(name, locType, sec);
+            Ogre::ResourceGroupManager::getSingleton().addResourceLocation(name, locType);
         }
     }
 
@@ -89,8 +90,11 @@ bool AegisMain::go()
   
     mSceneMgr = mRoot->createSceneManager();
 
-
+    Ogre::SceneNode* ogreCam = mSceneMgr->getRootSceneNode()->createChildSceneNode();
     mCamera = mSceneMgr->createCamera("MainCam");
+    ogreCam->attachObject(mCamera);
+    ogreCam->setPosition(0, 0, 20);
+    ogreCam->lookAt(Ogre::Vector3(0, 0, -300), Ogre::Node::TS_WORLD);
     /*mCamera->setPosition(0, 0, 80);
     mCamera->lookAt(0, 0, -300);*/
     mCamera->setNearClipDistance(5);
@@ -104,7 +108,7 @@ bool AegisMain::go()
         Ogre::Real(vp->getActualWidth()) /
         Ogre::Real(vp->getActualHeight()));
 
-    Ogre::Entity* ogreEntity = mSceneMgr->createEntity("sphere.mesh");
+        Ogre::Entity* ogreEntity = mSceneMgr->createEntity("fish.mesh");
 
     Ogre::SceneNode* ogreNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
     ogreNode->attachObject(ogreEntity);
@@ -115,7 +119,7 @@ bool AegisMain::go()
     Ogre::Light* light = mSceneMgr->createLight("MainLight");
     ogreLight->attachObject(light);
 
-    //light->setPosition(20, 80, 50);
+    ogreLight->setPosition(-20, 80, 50);
 
     while (true) {
        /* mRoot->renderOneFrame();*/
