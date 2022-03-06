@@ -1,5 +1,5 @@
 #include <iostream>	
-
+#include <Ogre.h>
 using namespace std;
 
 int main() {

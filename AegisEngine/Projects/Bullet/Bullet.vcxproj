@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -18,27 +18,11 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\Src\Aegis\Component\Component.cpp" />
-    <ClCompile Include="..\..\Src\Aegis\Entity\Entity.cpp" />
-    <ClCompile Include="..\..\Src\Aegis\Managers\ComponentManager.cpp" />
-    <ClCompile Include="..\..\Src\Aegis\Managers\Singleton.cpp" />
-    <ClCompile Include="..\..\Src\Aegis\Scene\Scene.cpp" />
-    <ClCompile Include="Source.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\Src\Aegis\Component\Component.h" />
-    <ClInclude Include="..\..\Src\Aegis\Component\RegisterComponent.h" />
-    <ClInclude Include="..\..\Src\Aegis\Entity\Entity.h" />
-    <ClInclude Include="..\..\Src\Aegis\Managers\ComponentManager.h" />
-    <ClInclude Include="..\..\Src\Aegis\Managers\Singleton.h" />
-    <ClInclude Include="..\..\Src\Aegis\Scene\Scene.h" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{03500f0b-060b-4948-bb90-8693691cefeb}</ProjectGuid>
-    <RootNamespace>AegisEngine</RootNamespace>
+    <ProjectGuid>{a52e98dd-862c-4722-81d0-771410a59e7c}</ProjectGuid>
+    <RootNamespace>Bullet</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -88,31 +72,31 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IntDir>$(SolutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
-    <OutDir>$(SolutionDir)Exes\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <SourcePath>$(SolutionDir)Exes\$(Platform)\$(Configuration)\;$(SolutionDir)Src\;$(SourcePath)</SourcePath>
-    <IncludePath>$(SolutionDir)\Dependencias\Ogre\Source\OgreMain\include</IncludePath>
+    <OutDir>$(SolutionDir)Exes\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)dependencias/bullet/source/src</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IntDir>$(SolutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
-    <OutDir>$(SolutionDir)Exes\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <SourcePath>$(SolutionDir)Exes\$(Platform)\$(Configuration)\;$(SolutionDir)Src\;$(SourcePath)</SourcePath>
-    <IncludePath>$(SolutionDir)\Dependencias\Ogre\Source\OgreMain\include</IncludePath>
+    <OutDir>$(SolutionDir)Exes\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)dependencias/bullet/source/src</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IntDir>$(SolutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
-    <OutDir>$(SolutionDir)Exes\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <SourcePath>$(SolutionDir)Exes\$(Platform)\$(Configuration)\;$(SolutionDir)Src\;$(SourcePath)</SourcePath>
-    <IncludePath>$(SolutionDir)\Dependencias\Ogre\Source\OgreMain\include</IncludePath>
+    <IncludePath>$(SolutionDir)dependencias/bullet/source/src</IncludePath>
+    <OutDir>$(SolutionDir)Exes\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IntDir>$(SolutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
-    <OutDir>$(SolutionDir)Exes\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <SourcePath>$(SolutionDir)Exes\$(Platform)\$(Configuration)\;$(SolutionDir)Src\;$(SourcePath)</SourcePath>
-    <IncludePath>$(SolutionDir)\Dependencias\Ogre\Source\OgreMain\include</IncludePath>
+    <IncludePath>$(SolutionDir)dependencias/bullet/source/src</IncludePath>
+    <OutDir>$(SolutionDir)Exes\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -120,17 +104,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-2.0.20\include;$(SolutionDir)Src\Aegis\Entity;$(SolutionDir)Src\Aegis\Scene;$(SolutionDir)Src\Aegis\Managers;$(SolutionDir)Src\Aegis\Component;$(SolutionDir)Dependencias\Ogre\Build\x64\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencias/bullet/build/x64/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencias\Ogre\Build\x64\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OgreMain_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\bullet\Build\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>clsocket_Debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PostBuildEvent>
-      <Command>xcopy /y /d $(SolutionDir)Dependencias\Ogre\Build\x64\bin\$(Configuration)\OgreMain.dll $(OutDir)</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -140,19 +121,16 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-2.0.20\include;$(SolutionDir)Src\Aegis\Entity;$(SolutionDir)Src\Aegis\Scene;$(SolutionDir)Src\Aegis\Managers;$(SolutionDir)Src\Aegis\Component;$(SolutionDir)Dependencias\Ogre\Build\x64\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencias/bullet/build/x64/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencias\Ogre\Build\x64\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OgreMain.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\bullet\Build\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>clsocket.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PostBuildEvent>
-      <Command>xcopy /y /d $(SolutionDir)Dependencias\Ogre\Build\x64\bin\$(Configuration)\OgreMain.dll $(OutDir)</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -160,17 +138,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-2.0.20\include;$(SolutionDir)Src\Aegis\Entity;$(SolutionDir)Src\Aegis\Scene;$(SolutionDir)Src\Aegis\Managers;$(SolutionDir)Src\Aegis\Component;$(SolutionDir)Dependencias\Ogre\Build\x64\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencias/bullet/build/x64/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencias\Ogre\Build\x64\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OgreMain_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\bullet\Build\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>clsocket_Debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PostBuildEvent>
-      <Command>xcopy /y /d $(SolutionDir)Dependencias\Ogre\Build\x64\bin\$(Configuration)\OgreMain.dll $(OutDir)</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -180,20 +155,20 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-2.0.20\include;$(SolutionDir)Src\Aegis\Entity;$(SolutionDir)Src\Aegis\Scene;$(SolutionDir)Src\Aegis\Managers;$(SolutionDir)Src\Aegis\Component;$(SolutionDir)Dependencias\Ogre\Build\x64\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencias/bullet/build/x64/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencias\Ogre\Build\x64\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OgreMain.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\bullet\Build\x64\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>clsocket.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PostBuildEvent>
-      <Command>xcopy /y /d $(SolutionDir)Dependencias\Ogre\Build\x64\bin\$(Configuration)\OgreMain.dll $(OutDir)</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="temp.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
