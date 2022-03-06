@@ -5,6 +5,7 @@ class AegisMain
 {
 private:
     Ogre::Root* mRoot;
+
     Ogre::String mResourcesCfg;
     Ogre::String mPluginsCfg;
 
