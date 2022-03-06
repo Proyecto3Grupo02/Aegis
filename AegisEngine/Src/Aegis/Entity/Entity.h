@@ -23,10 +23,12 @@ class Entity{
 
         inline bool isActive(){return active_;}
         inline void setActive(bool act){active_=act;}
-
-        
+  
         inline std::string getName(){return mName_;}
         inline void setName(std::string name){}
+
+
+        inline Ogre::SceneNode* getNode() { return mNode_; }
 
         //handle the components
        
