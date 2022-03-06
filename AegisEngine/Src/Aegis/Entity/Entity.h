@@ -3,19 +3,18 @@
 #include <list>
 #include <string>
 #include "ComponentManager.h"
+#include <Ogre.h>
 
 
 class Component;
 class Scene;
 class Entity{
     public:
-        Entity();
+        Entity(Ogre::SceneNode* node);
         ~Entity();
 
-        //when a entity is created is called
         void init();
        
-        
         void fixedUpdate();
         void update(float dt);
         void lateUpdate();
@@ -45,12 +44,16 @@ class Entity{
         void onCollision(Entity* other); 
         void onTrigger(Entity* other);
 
+
     protected:
         Scene* mScene_; //scene pointer 
-
         std::vector<Component*> mComponents_; //list of all the components in scene
         std::list<int> mNumOfActiveComponents_; //list of the index of their active component 
         bool active_; //bool to check if the entity is active or not
+
+        Ogre::SceneNode* mNode_;
+
+
     private:
         std::string mName_; //name of the entity, works like a tag, useful to debug
 

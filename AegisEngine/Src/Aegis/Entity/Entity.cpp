@@ -1,7 +1,7 @@
 #include "Entity.h"
 #include "Component.h"
-Entity::Entity(): 
-	active_(true),mScene_(nullptr)
+Entity::Entity(Ogre::SceneNode* node):
+	mNode_(node),active_(true),mScene_(nullptr)
 {
 }
 
