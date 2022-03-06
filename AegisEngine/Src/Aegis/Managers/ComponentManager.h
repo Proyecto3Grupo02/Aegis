@@ -1,3 +1,4 @@
+
 #include<functional>
 #include <map>
 
@@ -49,3 +50,4 @@ inline const std::string& ComponentManager::getCmpID()
 {
     return mCmpIDs_[typeid(T).name()];
 }
+

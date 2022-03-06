@@ -7,3 +7,4 @@ Component::Component(Entity* entity):
 {
 	
 }
+

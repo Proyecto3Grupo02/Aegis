@@ -1,3 +1,4 @@
+
 #include "Entity.h"
 #include "Component.h"
 Entity::Entity(Ogre::SceneNode* node):
@@ -96,4 +97,3 @@ void Entity::onTrigger(Entity* other)
 		mComponents_[i]->onTrigger(other);
 	}
 }
-	

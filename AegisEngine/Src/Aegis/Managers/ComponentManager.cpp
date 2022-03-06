@@ -1,3 +1,4 @@
+
 #include "ComponentManager.h"
 
 
@@ -26,3 +27,4 @@ ComponentFactory* ComponentManager::getCmpFactory(const std::string factID)
 	}
 	return nullptr;
 }
+
