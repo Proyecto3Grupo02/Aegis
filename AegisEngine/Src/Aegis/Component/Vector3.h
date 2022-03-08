@@ -1,27 +1,27 @@
 #pragma once
 
-template<typename T>
+
 class Vector3 {
 public:
-	Vector3(T _x, T _y, T _z) : x(_x), y(_y), z(_z) {};
-	Vector3() : x(), y(), z() {};
+	Vector3(float _x, float _y, float _z) : x(_x), y(_y), z(_z) {};
+	Vector3() : x(0), y(0), z(0) {};
 
-	T GetX() { return x; }
-	T GetY() { return y; }
-	T GetZ() { return z; }
+	float GetX() { return x; }
+	float GetY() { return y; }
+	float GetZ() { return z; }
 
-	void SetX(T _x) { x = _x; }
-	void SetY(T _y) { x = _y; }
-	void SetZ(T _z) { x = _z; }
+	void SetX(float _x) { x = _x; }
+	void SetY(float _y) { x = _y; }
+	void SetZ(float _z) { x = _z; }
 
 	Vector3 operator+(Vector3 const& b) { return Vector3(x + b.x, y + b.y, z + b.z); }
 	Vector3 operator-(Vector3 const& b) { return Vector3(x - b.x, y - b.y, z - b.z); }
 	Vector3 operator*(Vector3 const& b) { return Vector3(x * b.x, y * b.y, z * b.z); }
 	Vector3 operator*(float const& f) { return Vector3(x * f, y * f, z * f); }
 	bool operator==(Vector3 const& b) { return ((x == b.x) && (y == b.y) && (z == b.z)); }
-	bool operator!=(Vector3 const& b) { return !(this == b); }
+	bool operator!=(Vector3 const& b) { return !((x == b.x) && (y == b.y) && (z == b.z));}
 protected:
-	T x;
-	T y;
-	T z;
+	float x;
+	float y;
+	float z;
 };

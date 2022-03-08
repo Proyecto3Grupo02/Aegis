@@ -1,16 +1,21 @@
 #pragma once
 
+#ifndef COMPONENT_REGISTER
+#define COMPONENT_REGISTER
+
 #include "ComponentManager.h"
 
-#define To_String(x) #x
-#define Link_This(x) int link_##x=0;
+#define TO_STRING(x) #x
 
-#define RegisterFactory(cmp)\
-LinkThis(cmp);\
-class Register_##cmp{\
-public:\
-	Register_##cmp(){\
-		ComponentManager::getInstance()->registerComponent<cmp>(To_String(cmp));\
-	}\
+#define FORCE_LINK_THIS(x) int force_link_##x = 0;
+#define REGISTER_FACTORY (cmp)\
+FORCE_LINK_THIS(cmp);\
+class Register_##tipo { \
+	public:\
+		Register_##tipo() {\
+			ComponentManager::getInstance()->registerComponent<tipo>(TO_STRING(tipo));\
+		}\
 };\
 Register_##cmp register_##cmp = Register_##cmp();
+
+#endif
