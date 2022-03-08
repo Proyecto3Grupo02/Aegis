@@ -108,6 +108,7 @@
     <OutDir>$(SolutionDir)Exes\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <SourcePath>$(SolutionDir)Exes\$(Platform)\$(Configuration)\;$(SolutionDir)Src\;$(SourcePath)</SourcePath>
     <IncludePath>$(SolutionDir)\Dependencias\Ogre\Source\OgreMain\include</IncludePath>
+    <PostBuildEventUseInBuild>Si</PostBuildEventUseInBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -196,24 +197,18 @@ xcopy /y /d $(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo\
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencias\Ogre\Build\x64\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OgreMain_d.lib;SDL2.lib;SDL2main.lib;RenderSystem_Direct3D11_d.lib;RenderSystem_GL_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OgreMain_d.lib;SDL2.lib;SDL2main.lib;RenderSystem_GL_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y /d $(SolutionDir)Dependencias\Ogre\Build\x64\bin\$(Configuration)\OgreMain_d.dll $(OutDir)
+      <Command>xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\x64\bin\$(Configuration)\OgreMain_d.dll "$(OutDir)"
 
-xcopy /y /d $(SolutionDir)Dependencias\Ogre\Build\x64\bin\$(Configuration)\OgreMain_d.pdb $(OutDir)
+xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\x64\bin\$(Configuration)\OgreMain_d.pdb "$(OutDir)"
 
-xcopy /y /d $(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo\RenderSystem_Direct3D11_d.dll $(OutDir)
+xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo\SDL2.dll "$(OutDir)"
 
-xcopy /y /d $(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo\RenderSystem_GL_d.dll $(OutDir)
+xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo\SDL2.pdb "$(OutDir)"
 
-xcopy /y /d $(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo\SDL2.dll $(OutDir)
-
-xcopy /y /d $(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo\SDL2.pdb $(OutDir)
-
-xcopy /y /d $(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo\SDL2main.dll $(OutDir)
-
-xcopy /y /d $(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo\SDL2main.pdb $(OutDir)</Command>
+xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo\SDL2main.pdb "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -235,21 +230,17 @@ xcopy /y /d $(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo\
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;OgreMain.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y /d $(SolutionDir)Dependencias\Ogre\Build\x64\bin\$(Configuration)\OgreMain.dll $(OutDir)
+      <Command>xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\x64\bin\$(Configuration)\OgreMain.dll "$(OutDir)"
 
-xcopy /y /d $(SolutionDir)Dependencias\Ogre\Build\x64\bin\$(Configuration)\OgreMain.pdb $(OutDir)
+xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\x64\bin\$(Configuration)\OgreMain.pdb "$(OutDir)"
 
-xcopy /y /d $(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo\RenderSystem_Direct3D11.dll $(OutDir)
+xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo\SDL2.dll "$(OutDir)"
 
-xcopy /y /d $(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo\RenderSystem_GL.dll $(OutDir)
+xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo\SDL2.pdb "$(OutDir)"
 
-xcopy /y /d $(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo\SDL2.dll $(OutDir)
+xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo\SDL2main.dll "$(OutDir)"
 
-xcopy /y /d $(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo\SDL2.pdb $(OutDir)
-
-xcopy /y /d $(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo\SDL2main.dll $(OutDir)
-
-xcopy /y /d $(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo\SDL2main.pdb $(OutDir)</Command>
+xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo\SDL2main.pdb "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

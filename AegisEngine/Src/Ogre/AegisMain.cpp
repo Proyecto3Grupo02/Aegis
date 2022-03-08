@@ -136,7 +136,6 @@ bool AegisMain::go()
 
 
 
-
 //#include "AegisMain.h"
 //
 //#include <OgreEntity.h>
