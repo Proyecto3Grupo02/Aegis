@@ -15,7 +15,7 @@ class ComponentManager: public Singleton<ComponentManager>
         ComponentManager();
         ~ComponentManager();
 
-        template<typename T>
+        template<typename FLOAT>
         void registerComponent(const std::string& cmpID);
 
     private:
@@ -24,7 +24,7 @@ class ComponentManager: public Singleton<ComponentManager>
 
         ComponentFactory* getCmpFactory(const std::string factID);
 
-        template <typename T>
+        template <typename FLOAT>
         const std::string& getCmpID();
     
     
@@ -33,20 +33,20 @@ class ComponentManager: public Singleton<ComponentManager>
 
 };
 
-template<typename T>
+template<typename FLOAT>
 void ComponentManager::registerComponent(const std::string& cmpID)
 {
     if (mFactories_.find(cmpID) != mFactories_.end())
     {
         return;
     }
-    mCmpIDs_[typeid(T).name()] = cmpID;
-    mFactories_[cmpID] = [](Entity* e) { return new T(e); };
+    mCmpIDs_[typeid(FLOAT).name()] = cmpID;
+    mFactories_[cmpID] = [](Entity* e) { return new FLOAT(e); };
 }
 
-template<typename T>
+template<typename FLOAT>
 inline const std::string& ComponentManager::getCmpID()
 {
-    return mCmpIDs_[typeid(T).name()];
+    return mCmpIDs_[typeid(FLOAT).name()];
 }
 

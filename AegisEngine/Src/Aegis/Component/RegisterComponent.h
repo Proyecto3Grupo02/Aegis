@@ -4,13 +4,13 @@ class Component;
 class Entity;
 class ComponentManager;
 class Scene;
-
-class ComponentFactory {
-public:
-	ComponentFactory() = default;
-	virtual ~ComponentFactory() = default;
-	virtual Component* create(Entity* entity) = 0;
-};
+//
+//class ComponentFactory {
+//public:
+//	ComponentFactory() = default;
+//	virtual ~ComponentFactory() = default;
+//	virtual Component* create(Entity* entity) = 0;
+//};
 
 //macro for selfdeclaration of the components
 #define DECLARE(cmpName) \

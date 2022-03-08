@@ -1,6 +1,5 @@
 #include "Transform.h"
 
-
 Vector3 Transform::GetPosition()
 {
 	return position;
