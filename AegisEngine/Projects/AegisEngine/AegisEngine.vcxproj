@@ -20,6 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\Aegis\Component\Component.cpp" />
+    <ClCompile Include="..\..\Src\Aegis\Component\Transform.cpp" />
+    <ClCompile Include="..\..\Src\Aegis\Component\Vector3.cpp" />
+    <ClCompile Include="..\..\Src\Aegis\Component\Vector4.cpp" />
     <ClCompile Include="..\..\Src\Aegis\Entity\Entity.cpp" />
     <ClCompile Include="..\..\Src\Aegis\Managers\ComponentManager.cpp" />
     <ClCompile Include="..\..\Src\Aegis\Managers\Singleton.cpp" />
@@ -30,6 +33,9 @@
   <ItemGroup>
     <ClInclude Include="..\..\Src\Aegis\Component\Component.h" />
     <ClInclude Include="..\..\Src\Aegis\Component\RegisterComponent.h" />
+    <ClInclude Include="..\..\Src\Aegis\Component\Transform.h" />
+    <ClInclude Include="..\..\Src\Aegis\Component\Vector3.h" />
+    <ClInclude Include="..\..\Src\Aegis\Component\Vector4.h" />
     <ClInclude Include="..\..\Src\Aegis\Entity\Entity.h" />
     <ClInclude Include="..\..\Src\Aegis\Managers\ComponentManager.h" />
     <ClInclude Include="..\..\Src\Aegis\Managers\Singleton.h" />
