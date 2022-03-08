@@ -1,7 +1,7 @@
 #include "Transform.h"
 #include"RegisterComponent.h"
 
-//REGISTER_FACTORY(Transform);
+REGISTER_FACTORY(Transform);
 
 Vector3 Transform::GetPosition()
 {

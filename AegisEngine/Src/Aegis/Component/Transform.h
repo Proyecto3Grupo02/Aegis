@@ -12,6 +12,7 @@ public:
 	Transform(Entity* ent) : Component(ent), position(Vector3()), rotation(Vector4()), scale(Vector3()) {};
 	Transform(Entity* ent, Vector3 _pos, Vector4 _rot, Vector3 _scale) :
 			Component(ent), position(_pos), rotation(_rot), scale(_scale) {};
+	virtual ~Transform() {}
 
 	Vector3 GetPosition();
 	Vector3 GetRotation();

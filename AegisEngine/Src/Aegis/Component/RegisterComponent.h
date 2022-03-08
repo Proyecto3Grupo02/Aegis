@@ -8,14 +8,14 @@
 #define TO_STRING(x) #x
 
 #define FORCE_LINK_THIS(x) int force_link_##x = 0;
-#define REGISTER_FACTORY (cmp)\
-FORCE_LINK_THIS(cmp);\
+#define REGISTER_FACTORY(tipo)\
+FORCE_LINK_THIS(tipo);\
 class Register_##tipo { \
 	public:\
 		Register_##tipo() {\
 			ComponentManager::getInstance()->registerComponent<tipo>(TO_STRING(tipo));\
 		}\
 };\
-Register_##cmp register_##cmp = Register_##cmp();
+Register_##tipo register_##tipo = Register_##tipo();
 
 #endif
