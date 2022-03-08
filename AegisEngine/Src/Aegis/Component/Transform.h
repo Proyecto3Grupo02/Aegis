@@ -4,7 +4,7 @@
 #define TRANSFORM_
 #include "Component.h"
 #include "Vector4.h"
-
+#include"RegisterComponent.h"
 class Entity;
 
 class Transform : public Component {
@@ -27,5 +27,7 @@ protected:
 	Vector4 rotation;
 	Vector3 scale;
 };
+
+REGISTER_FACTORY(Transform);
 
 #endif TRANSFORM_

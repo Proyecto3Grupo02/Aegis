@@ -38,7 +38,6 @@ void ComponentManager::registerComponent(const std::string& cmpID)
 {
     if (mFactories_.find(cmpID) != mFactories_.end())
     {
-       
         return;
     }
     mCmpIDs_[typeid(T).name()] = cmpID;

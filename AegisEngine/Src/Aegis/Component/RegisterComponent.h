@@ -1,21 +1,32 @@
 #pragma once
-
-#ifndef COMPONENT_REGISTER
-#define COMPONENT_REGISTER
-
 #include "ComponentManager.h"
+class Component;
+class Entity;
+class ComponentManager;
+class Scene;
 
-#define TO_STRING(x) #x
+class ComponentFactory {
+public:
+	ComponentFactory() = default;
+	virtual ~ComponentFactory() = default;
+	virtual Component* create(Entity* entity) = 0;
+};
 
-#define FORCE_LINK_THIS(x) int force_link_##x = 0;
-#define REGISTER_FACTORY(tipo)\
-FORCE_LINK_THIS(tipo);\
-class Register_##tipo { \
-	public:\
-		Register_##tipo() {\
-			ComponentManager::getInstance()->registerComponent<tipo>(TO_STRING(tipo));\
-		}\
-};\
-Register_##tipo register_##tipo = Register_##tipo();
+//macro for selfdeclaration of the components
+#define DECLARE(cmpName) \
+class CmpName##Factory final: public ComponentFactory{  \
+public:													\
+	CmpName##Factory();									\
+	Component* create(Entity* entity) override;			\
+};														\
+\
+class CmpName##FactoryRegister{							\
+public:													\
+	CmpName##FactoryRegister();							\
+};														\
 
-#endif
+#define DEFINE(CmpName)									\
+														\
+CmpName##FactoryRegister::CmpName##FactoryRegister() {	\
+	ComponentManager::getInstance()->											\
+}														\
