@@ -25,6 +25,8 @@ AegisEngine/Temp/
 AegisEngine/Dependencias/
 AegisEngine/Exes/x64/[Dd]ebug
 AegisEngine/Exes/x64/[Rr]elease
+AegisEngine/Exes/AegisEngine/x64/Debug/
+AegisEngine/Exes/AegisEngine/x64/Release/
 AegisEngine/Projects/AegisEngine/AegisEngine.vcxproj.user
 
 [Aa][Rr][Mm]/
