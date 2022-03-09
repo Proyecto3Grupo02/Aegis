@@ -36,12 +36,12 @@ class ComponentManager: public Singleton<ComponentManager>
 template<typename T>
 void ComponentManager::registerComponent(const std::string& cmpID)
 {
-    if (mFactories_.find(cmpID) != mFactories_.end())
+    if (mFactories_.find(cmpID) == mFactories_.end())
     {
-        return;
+        mCmpIDs_[typeid(T).name()] = cmpID;
+        //mFactories_[cmpID] = [](Entity* e) { return new T(e); };
+        
     }
-    mCmpIDs_[typeid(T).name()] = cmpID;
-    mFactories_[cmpID] = [](Entity* e) { return new T(e); };
 }
 
 template<typename T>

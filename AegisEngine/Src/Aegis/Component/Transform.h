@@ -1,15 +1,21 @@
 #pragma once
 
-#include "Component.h"
+
+
+#include "AegisComponent.h"
 #include "Vector4.h"
-#include"RegisterComponent.h"
+#include "ComponentManager.h"
 class Entity;
 
-class Transform : public Component {
+class Transform : public AegisComponent {
 public:
-	Transform(Entity* ent) : Component(ent), position(Vector3()), rotation(Vector4()), scale(Vector3(1.0f,1.0f,1.0f)) {};
+	Transform(Entity* ent) : AegisComponent(ent), position(Vector3()), rotation(Vector4()), scale(Vector3(1.0f,1.0f,1.0f)) {
+		ComponentManager::getInstance()->registerComponent<Transform>("Transform");
+	};
 	Transform(Entity* ent, Vector3 _pos, Vector4 _rot, Vector3 _scale) :
-			Component(ent), position(_pos), rotation(_rot), scale(_scale) {};
+			AegisComponent(ent), position(_pos), rotation(_rot), scale(_scale) {
+		ComponentManager::getInstance()->registerComponent<Transform>("Transform");
+	};
 	virtual ~Transform() {}
 
 	Vector3 GetPosition();

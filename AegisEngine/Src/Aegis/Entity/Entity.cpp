@@ -69,7 +69,7 @@ T* Entity::getComponent()
 {
 	ComponentManager* cmpManager = ComponentManager::getInstance();
 
-	std::string id = cmpManager->getCmpID<floa>();
+	std::string id = cmpManager->getCmpID<T>();
 
 	return T* mComponents_[id];
 }

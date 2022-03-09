@@ -77,5 +77,8 @@
     <ClInclude Include="..\..\Src\Aegis\Component\Vector4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\Aegis\Component\AegisComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,5 +1,8 @@
 #include "Transform.h"
 
+#include"RegisterComponent.h"
+
+
 Vector3 Transform::GetPosition()
 {
 	return position;
