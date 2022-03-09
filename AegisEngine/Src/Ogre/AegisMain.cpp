@@ -62,7 +62,7 @@ AegisMain::~AegisMain()
 /// <returns></returns>
 bool AegisMain::Init()
 {
-	//ogreWrap->Init();
+	ogreWrap->Init();
 	SDL_Init(SDL_INIT_EVENTS);
 	GameLoop();
 
