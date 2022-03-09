@@ -9,9 +9,9 @@ Documento de diseño de motor
 *Jonathan Sebastián Andrade Gordillo | Álvaro Cuerva Hernández | Rubén González Ortiz | Sergio Alberto Luis Cano | Javier Meitín Moreno | Nicolás Rosa Caballero | Amparo Rubio Bellón | Rodrigo Tobar Guillén | Jorge Zurdo Izquierdo*
 
 ## **Páginas de interés**
-### [Página web]()
-### [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2555675)
-### [Repositorio](https://github.com/Proyecto3Grupo02)
+* [Página web]()
+* [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2555675)
+* [Repositorio](https://github.com/Proyecto3Grupo02)
 
 ## Intro
 Aegis es un motor de videojuegos hecho por G.Q.P.L.C.E (Grupo Que Presenta La Célula Eucariota) GQPLPCS (Gente que pesca los PeCeS) diseñado para crear juegos en C++ y LUA como lenguaje de scripting en el uso de blueprints.
