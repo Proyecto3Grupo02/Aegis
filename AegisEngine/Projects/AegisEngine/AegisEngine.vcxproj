@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\Aegis\Component\Component.cpp" />
+    <ClCompile Include="..\..\Src\Aegis\Component\Renderer.cpp" />
     <ClCompile Include="..\..\Src\Aegis\Component\Transform.cpp" />
     <ClCompile Include="..\..\Src\Aegis\Component\Vector3.cpp" />
     <ClCompile Include="..\..\Src\Aegis\Component\Vector4.cpp" />
@@ -34,6 +35,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\Src\Aegis\Component\Component.h" />
     <ClInclude Include="..\..\Src\Aegis\Component\RegisterComponent.h" />
+    <ClInclude Include="..\..\Src\Aegis\Component\Renderer.h" />
     <ClInclude Include="..\..\Src\Aegis\Component\Transform.h" />
     <ClInclude Include="..\..\Src\Aegis\Component\Vector3.h" />
     <ClInclude Include="..\..\Src\Aegis\Component\Vector4.h" />

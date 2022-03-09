@@ -1,4 +1,6 @@
 #pragma once
+#include <string>
+#include <Ogre.h>
 
 class Entity;
 

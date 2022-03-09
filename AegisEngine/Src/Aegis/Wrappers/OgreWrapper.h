@@ -17,6 +17,9 @@ private:
 public:
     OgreWrapper();
     virtual ~OgreWrapper();
+
+    Ogre::SceneManager* getSceneMng() { return mSceneMgr; }
+
     bool Init() override;
 };
 

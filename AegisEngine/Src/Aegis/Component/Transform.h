@@ -19,7 +19,7 @@ public:
 	virtual ~Transform() {}
 
 	Vector3 GetPosition();
-	Vector3 GetRotation();
+	Vector4 GetRotation();
 	Vector3 GetScale();
 
 	void SetPosition(Vector3 newPos);
