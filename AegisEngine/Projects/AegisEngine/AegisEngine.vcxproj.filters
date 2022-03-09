@@ -16,6 +16,9 @@
     <Filter Include="Interfacse">
       <UniqueIdentifier>{2b0ccc15-e6ff-4e9d-a4bb-bc48567be410}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Structs">
+      <UniqueIdentifier>{555bd5c5-5782-4846-ac65-24709688796f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\Aegis\Scene\Scene.cpp">
@@ -70,6 +73,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\Aegis\Interfaces\IInitializable.h">
       <Filter>Interfacse</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Aegis\Structs\GameLoopData.h">
+      <Filter>Structs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

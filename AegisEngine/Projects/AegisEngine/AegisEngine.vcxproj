@@ -36,6 +36,7 @@
     <ClInclude Include="..\..\Src\Aegis\Managers\ComponentManager.h" />
     <ClInclude Include="..\..\Src\Aegis\Managers\Singleton.h" />
     <ClInclude Include="..\..\Src\Aegis\Scene\Scene.h" />
+    <ClInclude Include="..\..\Src\Aegis\Structs\GameLoopData.h" />
     <ClInclude Include="..\..\Src\Aegis\Wrappers\OgreWrapper.h" />
     <ClInclude Include="..\..\Src\Ogre\AegisMain.h" />
   </ItemGroup>
@@ -194,7 +195,7 @@ xcopy /y /d $(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo\
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-2.0.20\include;$(SolutionDir)Src\Aegis\Entity;$(SolutionDir)Src\Aegis\Scene;$(SolutionDir)Src\Aegis\Managers;$(SolutionDir)Src\Aegis\Component;$(SolutionDir)Dependencias\Ogre\Build\x64\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-2.0.20\include;$(SolutionDir)Src\Aegis\Entity;$(SolutionDir)Src\Aegis\Interfaces;$(SolutionDir)Src\Aegis\Wrappers;$(SolutionDir)Src\Aegis\Structs;$(SolutionDir)Src\Aegis\Scene;$(SolutionDir)Src\Aegis\Managers;$(SolutionDir)Src\Aegis\Component;$(SolutionDir)Dependencias\Ogre\Build\x64\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -222,7 +223,7 @@ xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebIn
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-2.0.20\include;$(SolutionDir)Src\Aegis\Entity;$(SolutionDir)Src\Aegis\Scene;$(SolutionDir)Src\Aegis\Managers;$(SolutionDir)Src\Aegis\Component;$(SolutionDir)Dependencias\Ogre\Build\x64\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-2.0.20\include;$(SolutionDir)Src\Aegis\Entity;$(SolutionDir)Src\Aegis\Interfaces;$(SolutionDir)Src\Aegis\Wrappers;$(SolutionDir)Src\Aegis\Structs;$(SolutionDir)Src\Aegis\Scene;$(SolutionDir)Src\Aegis\Managers;$(SolutionDir)Src\Aegis\Component;$(SolutionDir)Dependencias\Ogre\Build\x64\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

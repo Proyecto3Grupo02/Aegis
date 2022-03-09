@@ -1,12 +1,20 @@
 #pragma once
-#include "../Interfaces/IInitializable.h"
-#include "../Wrappers/OgreWrapper.h"
+#include "IInitializable.h"
+
+class OgreWrapper;
+class Scene;
+struct GameLoopData;
 
 class AegisMain : IInitializable
 {
 private:
     OgreWrapper* ogreWrap;
+    Scene* scene;
+    GameLoopData* gameLoopData;
 
+    bool exit;
+
+    void GameLoop();
 public:
     AegisMain();
     virtual ~AegisMain();

@@ -12,13 +12,48 @@
 #include <iostream>
 #include <fstream>
 
+#include "OgreWrapper.h"
+#include "Scene.h"
+#include "GameLoopData.h"
+#include <SDL.h>
 
-AegisMain::AegisMain() : ogreWrap(new OgreWrapper())
+//#include <sdlu>
+
+void AegisMain::GameLoop()
+{
+	SDL_Event eventHandler;
+
+	while (!exit)
+	{
+		gameLoopData->frameStartTime = SDL_GetTicks();
+
+		while (SDL_PollEvent(&eventHandler) != 0)
+		{
+			if (eventHandler.type == SDL_KEYDOWN || eventHandler.type == SDL_QUIT)
+				exit = true;
+		}
+
+		//gameLoopData += gameLoopData->GetDelta();
+		//scene->UpdateScene(gameLoopData->deltaTime);
+
+		Uint32 frameTime = gameLoopData->UpdateDelta(SDL_GetTicks());
+
+		if (frameTime < 20)
+			SDL_Delay(20 - frameTime);
+
+	}
+}
+
+AegisMain::AegisMain() :
+	ogreWrap(new OgreWrapper()), gameLoopData(new GameLoopData()), scene(new Scene()), exit(false)
 {
 }
 
 AegisMain::~AegisMain()
 {
+	delete ogreWrap;
+	delete scene;
+	delete gameLoopData;
 }
 
 /// <summary>
@@ -27,7 +62,9 @@ AegisMain::~AegisMain()
 /// <returns></returns>
 bool AegisMain::Init()
 {
-	ogreWrap->Init();
+	//ogreWrap->Init();
+	SDL_Init(SDL_INIT_EVENTS);
+	GameLoop();
 
 	return true;
 }
