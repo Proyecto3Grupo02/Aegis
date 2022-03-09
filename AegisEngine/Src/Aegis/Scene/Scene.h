@@ -30,11 +30,11 @@ private:
 	/// <summary>
 	/// FixedUpdate se "ejecuta" cada PHYSICS_STEP (se ejecuta en el mismo hilo que lo demas). 
 	/// En cada llamada a FixedUpdate, se acumula el tiempo entre frames (dt o deltaTime). Mientas este tiempo es superior a <param>PHYSICS_STEP</param>
-	/// Se llama al integrate de cada entidad. Es decir, si el tiempo entre frames es muy alto, se ejecutará varias veces para "compensar" y que la simulacion 
+	/// Se llama al integrate de cada entidad. Es decir, si el tiempo entre frames es muy alto, se ejecutarÃ¡ varias veces para "compensar" y que la simulacion 
 	/// sea realista. Por el contrario, si es muy bajo es posible que no se llame todos los frames. Esto depende en parte del framerate maximo del juego y de como de pesado sea el 
 	/// update. Si Framerate > PHYSICS_STEP, entonces FixedUpdate se ejecutara cada 1,25 UpdateScene (asumiento que dt siempre es igual y que Update no se pasa del tiempo de framerate).
 	/// FixedUpdate no se puede ejecutar cada 1,25 UpdateScene, pero si puede hacerlo cada 2, el tiempo que sobra se acumula. En este caso y asumiendo las condiciones anteriores, 
-	/// FixedUpdate se actualiza cada 2 UpdateScene, con la excepción de cada 4 UpdateScene  no se ejecuta.
+	/// FixedUpdate se actualiza cada 2 UpdateScene, con la excepciÃ³n de cada 4 UpdateScene  no se ejecuta.
 	/// La tabla de ejecucion seria asi:
 	/// En la ultima fila pondre el valor de acumulator antes de ejecutar FixedUpdate, asumimos que dt siempre es 0,016), en la penultima el valor despues de
 	/// ejecutar FixedUpdate
@@ -54,7 +54,7 @@ private:
 	void FixedUpdate(float dt);
 
 	/// <summary>
-	/// Llama el InputSystem estatico para que actualice sus registros (si una tecla se pulsó en el estado anterior y se puso a true
+	/// Llama el InputSystem estatico para que actualice sus registros (si una tecla se pulsÃ³ en el estado anterior y se puso a true
 	/// por un evento, aqui hay que ponerlo a false)
 	/// Hay que asegurarse de que si se pulsa una tecla en un frame X, sea despues del UpdateInput. Hay que ver como enlazar SDL desde Ogre hasta
 	/// la escena y controlar la pool de eventos.
@@ -78,14 +78,14 @@ public:
 	~Scene();
 
 	/// <summary>
-	/// Añade una entidad ya creada a la escena. No se comprueba que la entidad sea nula en ningún momento.
-	/// Añadir una entidad nula provocaria undefine behaviour o excepciones
+	/// AÃ±ade una entidad ya creada a la escena. No se comprueba que la entidad sea nula en ningÃºn momento.
+	/// AÃ±adir una entidad nula provocaria undefine behaviour o excepciones
 	/// </summary>
 	/// <param name="entity"></param>
 	void AddEntity(Entity* entity);
 
 	/// <summary>
-	/// Añade un interador de entidad a la lista de entidades a destruir. La destruccion se realiza despues de lateUpdate y antes del render
+	/// AÃ±ade un interador de entidad a la lista de entidades a destruir. La destruccion se realiza despues de lateUpdate y antes del render
 	/// Usamos un interador para no tener que buscar la entidad en la lista
 	/// </summary>
 	/// <param name="entity"></param>

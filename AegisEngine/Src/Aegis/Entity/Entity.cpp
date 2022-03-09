@@ -51,16 +51,16 @@ void Entity::render()
 	}
 }
 
-template<typename T>
-inline T* Entity::addComponent()
+template<typename floa>
+inline floa* Entity::addComponent()
 {
 	ComponentManager* cmpManager = ComponentManager::getInstance();
 
-	std::string id = cmpManager->getCmpID<T>();
+	std::string id = cmpManager->getCmpID<floa>();
 	auto constructor = cmpManager->getCmpFactory(id);
 	mComponents_[id] = constructor(this);
 
-	return (T*)mComponents_[id];
+	return (floa*)mComponents_[id];
 
 }
 
@@ -71,7 +71,7 @@ T* Entity::getComponent()
 
 	std::string id = cmpManager->getCmpID<T>();
 
-	return T * mComponents_[id];
+	return T* mComponents_[id];
 }
 
 
