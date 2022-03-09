@@ -24,16 +24,19 @@
     <ClCompile Include="..\..\Src\Aegis\Managers\ComponentManager.cpp" />
     <ClCompile Include="..\..\Src\Aegis\Managers\Singleton.cpp" />
     <ClCompile Include="..\..\Src\Aegis\Scene\Scene.cpp" />
+    <ClCompile Include="..\..\Src\Aegis\Wrappers\OgreWrapper.cpp" />
     <ClCompile Include="..\..\Src\Ogre\AegisMain.cpp" />
-    <ClCompile Include="..\..\Src\Ogre\Source.cpp" />
+    <ClCompile Include="..\..\Src\Ogre\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Aegis\Component\Component.h" />
     <ClInclude Include="..\..\Src\Aegis\Component\RegisterComponent.h" />
     <ClInclude Include="..\..\Src\Aegis\Entity\Entity.h" />
+    <ClInclude Include="..\..\Src\Aegis\Interfaces\IInitializable.h" />
     <ClInclude Include="..\..\Src\Aegis\Managers\ComponentManager.h" />
     <ClInclude Include="..\..\Src\Aegis\Managers\Singleton.h" />
     <ClInclude Include="..\..\Src\Aegis\Scene\Scene.h" />
+    <ClInclude Include="..\..\Src\Aegis\Wrappers\OgreWrapper.h" />
     <ClInclude Include="..\..\Src\Ogre\AegisMain.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

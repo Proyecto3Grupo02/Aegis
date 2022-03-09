@@ -4,9 +4,7 @@
 int main() {
 
 	AegisMain a;
-	a.go();
-
+	a.Init();
 
 	return 0;
-
 }

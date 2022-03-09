@@ -1,23 +1,16 @@
 #pragma once
-#include <OgreRoot.h>
+#include "../Interfaces/IInitializable.h"
+#include "../Wrappers/OgreWrapper.h"
 
-class AegisMain
+class AegisMain : IInitializable
 {
 private:
-    Ogre::Root* mRoot;
-
-    Ogre::String mResourcesCfg;
-    Ogre::String mPluginsCfg;
-
-    Ogre::RenderWindow* mWindow;
-    Ogre::SceneManager* mSceneMgr;
-    Ogre::Camera* mCamera;
-
+    OgreWrapper* ogreWrap;
 
 public:
     AegisMain();
     virtual ~AegisMain();
-    bool go();
+    bool Init() override;
 };
 
 

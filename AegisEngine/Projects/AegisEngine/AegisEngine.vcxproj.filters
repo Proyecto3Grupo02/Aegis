@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Interfacse">
+      <UniqueIdentifier>{2b0ccc15-e6ff-4e9d-a4bb-bc48567be410}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\Aegis\Scene\Scene.cpp">
@@ -33,7 +36,10 @@
     <ClCompile Include="..\..\Src\Ogre\AegisMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\Ogre\Source.cpp">
+    <ClCompile Include="..\..\Src\Ogre\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Aegis\Wrappers\OgreWrapper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -58,6 +64,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\Ogre\AegisMain.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Aegis\Wrappers\OgreWrapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Aegis\Interfaces\IInitializable.h">
+      <Filter>Interfacse</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
