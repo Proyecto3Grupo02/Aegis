@@ -64,14 +64,14 @@ inline floa* Entity::addComponent()
 
 }
 
-template<typename floa>
-floa* Entity::getComponent()
+template<typename T>
+T* Entity::getComponent()
 {
 	ComponentManager* cmpManager = ComponentManager::getInstance();
 
 	std::string id = cmpManager->getCmpID<floa>();
 
-	return floa * mComponents_[id];
+	return T* mComponents_[id];
 }
 
 
