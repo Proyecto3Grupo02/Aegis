@@ -24,18 +24,10 @@ Aegis es un motor de videojuegos hecho por G.Q.P.L.C.E (Grupo Que Presenta La C�
 * Gestión de sonido (FMOD)
 
 ## Arquitectura
-Gestión del proyecto mediante el uso de GameManagers:
-* PhysicsManager (maneja colisiones)
-* RenderManager (superposición de entidades??)
-* SoundManager (maneja y reproduce sfx y música)
-* EntityManager (maneja a todas las entidades)
-* InputManager (maneja inputs)
-* SceneManager
-* Bucle principal: llamará a todos los managers para que manejen lo necesario 
-
 Los Game Objects vendrían estructurados mediante la política de EC
 * Entidades: equivalente a un gameobject en Unity, contiene componentes y funciona mediante estos
 * Componentes (Transform, RenderMesh, Rigidbody, Colliders, Animators, EventHandlers… )
+![Untitled Diagram drawio (1)](https://user-images.githubusercontent.com/62613312/157449060-c9b83b50-9d16-4d91-b0b7-ca7cd4375e5c.png)
 
 ## Estructura de la solución y proyecto
 Aegis Engine  (carpeta principal)
