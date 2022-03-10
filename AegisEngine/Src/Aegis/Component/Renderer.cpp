@@ -3,19 +3,6 @@
 #include "OgreWrapper.h"
 #include "Transform.h"
 
-Renderer::Renderer(Entity* _ent, std::string meshName, Ogre::SceneManager* sceneMng, bool ir) : 
-	AegisComponent()
-{
-	setEntity(_ent);
-	setRendering(ir);
-	mesh = sceneMng->createEntity(meshName);
-	node = getEntity()->getNode();
-	node->attachObject(mesh);
-
-	transform = getEntity()->getComponent<Transform>();
-	if (transform == nullptr) throw "ENTITY WITHOUT TRANSFORM"; //Pulir excepcion
-}
-
 void Renderer::render()
 {
 	Vector3 pos = transform->GetPosition();
@@ -32,4 +19,17 @@ void Renderer::render()
 void Renderer::setRendering(bool iR)
 {
 	mesh->setVisible(iR);
+}
+
+void Renderer::constructoraRenderer(Entity* _ent, std::string meshName, Ogre::SceneManager* sceneMng, bool ir)
+{
+
+	setEntity(_ent);
+	setRendering(ir);
+	mesh = sceneMng->createEntity(meshName);
+	node = getEntity()->getNode();
+	node->attachObject(mesh);
+
+	transform = getEntity()->getComponent<Transform>();
+	if (transform == nullptr) throw "ENTITY WITHOUT TRANSFORM"; //Pulir excepcion
 }

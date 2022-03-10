@@ -62,7 +62,7 @@ class Entity{
 
             std::string id = cmpManager->GetID<T>();
 
-            return static_cast<T*>(mComponents_[id]);
+            return (T*)mComponents_[id];
         }
 
         inline Scene* getScene(){return mScene_;}
