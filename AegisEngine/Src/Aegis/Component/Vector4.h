@@ -4,7 +4,8 @@
 class Vector4 : public Vector3 {
 public:
 	Vector4(float _x, float _y, float _z, float _w) : Vector3(_x, _y, _z), w(_w) {};
-	Vector4() : Vector3(), w() {};
+	Vector4(float _all) : Vector3(_all), w(_all) {};
+	Vector4() : Vector3(), w(1.0f) {};
 
 	float GetW() { return w; }
 	void SetW(float _w) { w = _w; }

@@ -12,6 +12,10 @@
 
 #include <SDL_syswm.h>
 
+#include "Entity.h"
+#include "Transform.h"
+#include "Renderer.h"
+
 OgreWrapper::OgreWrapper() : mRoot(0),
 mResourcesCfg(Ogre::BLANKSTRING),
 mPluginsCfg(Ogre::BLANKSTRING)
@@ -92,10 +96,12 @@ bool OgreWrapper::Init()
 		Ogre::Real(vp->getActualWidth()) /
 		Ogre::Real(vp->getActualHeight()));
 
-	//fish creation
-	Ogre::Entity* ogreEntity = mSceneMgr->createEntity("fish.mesh");
-	Ogre::SceneNode* ogreNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-	ogreNode->attachObject(ogreEntity);
+	//fish creation with components
+	Ogre::SceneNode* fishNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+	Entity* fish = new Entity(fishNode);
+	fish->addComponent<Transform>("Transform", Vector3(), Vector4(), Vector3(1.0f, -1.0f, 1.0f));
+	Renderer* fishRenderer = fish->addComponent<Renderer>("Renderer", fish, "fish.mesh", mSceneMgr, true);
+	fishRenderer->render();
 
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
 
@@ -105,14 +111,6 @@ bool OgreWrapper::Init()
 	ogreLight->attachObject(light);
 
 	ogreLight->setPosition(-20, 80, 50);
-
-	//dummy game's loop
-	//while (true) {
-
-	//    if (mWindow->isClosed()) return false;
-
-	//    if (!mRoot->renderOneFrame()) return false;
-	//}
 }
 
 
