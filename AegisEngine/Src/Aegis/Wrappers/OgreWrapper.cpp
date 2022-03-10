@@ -104,7 +104,12 @@ bool OgreWrapper::Init()
 	Ogre::Light* light = mSceneMgr->createLight("MainLight");
 	ogreLight->attachObject(light);
 
-	ogreLight->setPosition(-20, 80, 50);
+    //fish creation with components
+    Ogre::SceneNode* fishNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+    Entity* fish = new Entity(fishNode);
+    fish->addComponent<Transform>("Transform", Vector3(), Vector4(), Vector3(1.0f));
+    Renderer* fishRenderer = fish->addComponent<Renderer>("Renderer", fish, "fish.mesh", mSceneMgr, true);
+    fishRenderer->render();
 
 	//dummy game's loop
 	//while (true) {
