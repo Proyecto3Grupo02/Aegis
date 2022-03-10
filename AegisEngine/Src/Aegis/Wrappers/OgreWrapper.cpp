@@ -99,8 +99,8 @@ bool OgreWrapper::Init()
     //fish creation with components
     Ogre::SceneNode* fishNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
     Entity* fish = new Entity(fishNode);
-    fish->addComponent<Transform>(Vector3(), Vector4(), Vector3());
-    Renderer* fishRenderer = fish->addComponent<Renderer>(fish, "fish.mesh", mSceneMgr, true);
+    fish->addComponent<Transform>("Transform", Vector3(), Vector4(), Vector3(1.0f));
+    Renderer* fishRenderer = fish->addComponent<Renderer>("Renderer", fish, "fish.mesh", mSceneMgr, true);
     fishRenderer->render();
 
     mSceneMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));

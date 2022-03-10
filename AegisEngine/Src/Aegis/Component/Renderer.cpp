@@ -18,17 +18,17 @@ void Renderer::render()
 
 void Renderer::setRendering(bool iR)
 {
-	mesh->setVisible(iR);
+	node->setVisible(iR);
 }
 
 void Renderer::constructoraRenderer(Entity* _ent, std::string meshName, Ogre::SceneManager* sceneMng, bool ir)
 {
-
 	setEntity(_ent);
-	setRendering(ir);
 	mesh = sceneMng->createEntity(meshName);
 	node = getEntity()->getNode();
 	node->attachObject(mesh);
+
+	setRendering(ir);
 
 	transform = getEntity()->getComponent<Transform>();
 	if (transform == nullptr) throw "ENTITY WITHOUT TRANSFORM"; //Pulir excepcion

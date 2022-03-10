@@ -35,11 +35,15 @@ class Entity{
         //handle the components
        
         template<typename T, typename...Targs>
-        inline T* addComponent(Targs&&...args)
+        inline T* addComponent(std::string name, Targs&&...args)
         {
             ComponentManager* mngr = ComponentManager::getInstance();
             if (mngr != nullptr) {
-                std::string key = mngr->GetID<T>(); //cuando un component esta registrado  pilla su id de ahi
+                //std::string key = mngr->GetID<T>(); //cuando un component esta registrado  pilla su id de ahi
+
+                //SOLUCIÓN PROVISIONAL EN LA QUE HAY QUE PASAR COMO PARÁMETRO EL NOMBRE DEL COMPONENTE,
+                //DEBERÍA DE FUNCIONAR CON EL KEY DE ENCIMA DE ESTE COMENTARIO
+                std::string key = name;
 
                 if (mComponents_.find(key) == mComponents_.end()) { //si no está lo añadimos
                     T* t = (new T(std::forward<Targs>(args)...));
