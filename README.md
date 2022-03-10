@@ -27,7 +27,7 @@ Aegis es un motor de videojuegos hecho por G.Q.P.L.C.E (Grupo Que Presenta La C�
 Los Game Objects vendrían estructurados mediante la política de EC
 * Entidades: equivalente a un gameobject en Unity, contiene componentes y funciona mediante estos
 * Componentes (Transform, RenderMesh, Rigidbody, Colliders, Animators, EventHandlers… )
-![Untitled Diagram drawio (1)](https://user-images.githubusercontent.com/62613312/157449060-c9b83b50-9d16-4d91-b0b7-ca7cd4375e5c.png)
+![Untitled Diagram drawio](https://user-images.githubusercontent.com/62613312/157743110-91a47321-25e3-442c-a97a-dd12bf4dcf50.png)
 
 ## Estructura de la solución y proyecto
 Aegis Engine  (carpeta principal)
