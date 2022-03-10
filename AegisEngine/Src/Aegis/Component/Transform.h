@@ -9,12 +9,12 @@ class Entity;
 
 class Transform : public AegisComponent {
 public:
-	Transform(Entity* ent) : AegisComponent(ent), position(Vector3()), rotation(Vector4()), scale(Vector3(1.0f,1.0f,1.0f)) {
-		ComponentManager::getInstance()->registerComponent<Transform>("Transform");
+	Transform() : AegisComponent(), position(Vector3()), rotation(Vector4()), scale(Vector3(1.0f,1.0f,1.0f)) {
+		ComponentManager::getInstance()->RegisterComponent<Transform>("Transform");
 	};
-	Transform(Entity* ent, Vector3 _pos, Vector4 _rot, Vector3 _scale) :
-			AegisComponent(ent), position(_pos), rotation(_rot), scale(_scale) {
-		ComponentManager::getInstance()->registerComponent<Transform>("Transform");
+	Transform( Vector3 _pos, Vector4 _rot, Vector3 _scale) :
+			AegisComponent(), position(_pos), rotation(_rot), scale(_scale) {
+		ComponentManager::getInstance()->RegisterComponent<Transform>("Transform");
 	};
 	virtual ~Transform() {}
 
