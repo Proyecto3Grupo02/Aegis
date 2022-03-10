@@ -10,6 +10,8 @@
 #include <OgreEntity.h>
 #include <OgreSceneNode.h>
 
+#include <SDL_syswm.h>
+
 OgreWrapper::OgreWrapper() : mRoot(0),
 mResourcesCfg(Ogre::BLANKSTRING),
 mPluginsCfg(Ogre::BLANKSTRING)
@@ -97,17 +99,15 @@ bool OgreWrapper::Init()
 
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
 
-    //fish creation
-    Ogre::Entity* ogreEntity = mSceneMgr->createEntity("fish.mesh");
-    Ogre::SceneNode* ogreNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-    ogreNode->attachObject(ogreEntity);
+	//Scene's lightning
+	Ogre::SceneNode* ogreLight = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+	Ogre::Light* light = mSceneMgr->createLight("MainLight");
+	ogreLight->attachObject(light);
 
-    mSceneMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
+	ogreLight->setPosition(-20, 80, 50);
 
-    //Scene's lightning
-    Ogre::SceneNode* ogreLight = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-    Ogre::Light* light = mSceneMgr->createLight("MainLight");
-    ogreLight->attachObject(light);
+	//dummy game's loop
+	//while (true) {
 
 	//    if (mWindow->isClosed()) return false;
 

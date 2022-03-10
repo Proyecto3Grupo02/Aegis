@@ -1,49 +1,52 @@
-#pragma once
 
-#ifndef  COMPONENT_MANAGER 
-#define COMPONENT_MANAGER
+#include<functional>
+#include <map>
 
 #include "Singleton.h"
-#include <map>
-#include <functional>
-#include <unordered_map>
-class Component;
+#include "Component.h"
+#include <string>
+
 class Entity;
-
 typedef std::function<Component* (Entity*)> ComponentFactory;
-class ComponentManager: public Singleton<ComponentManager> {
-public:
-	ComponentManager();
-	virtual ~ComponentManager();
-	
-	template<typename T>
-	void RegisterComponent(std::string id);
 
-	template <typename T>
-	const std::string GetID();
+class ComponentManager: public Singleton<ComponentManager>
+{
+    public:
+        ComponentManager();
+        ~ComponentManager();
 
-	void close();
+        template<typename T>
+        void registerComponent(const std::string& cmpID);
 
-private:
-	std::unordered_map<std::string, std::string> mComponentTypes_;
-	std::map <std::string, ComponentFactory> mComponentFactory_;
-	
+    private:
+        void init();
+        void close();
+
+        ComponentFactory* getCmpFactory(const std::string factID);
+
+        template <typename T>
+        const std::string& getCmpID();
+    
+    
+    std::map<std::string, ComponentFactory> mFactories_;
+    std::map<std::string, std::string> mCmpIDs_;
 
 };
 
-#endif // ! COMPONENT_MANAGER 
-
 template<typename T>
-void ComponentManager::RegisterComponent(std::string id) {
-	std::string typeName = typeid(T).name();
-
-	if (mComponentTypes_.find(typeName) == mComponentTypes_.end()) {
-		mComponentTypes_[typeName] = id;
-	}
+void ComponentManager::registerComponent(const std::string& cmpID)
+{
+    if (mFactories_.find(cmpID) == mFactories_.end())
+    {
+        mCmpIDs_[typeid(T).name()] = cmpID;
+        //mFactories_[cmpID] = [](Entity* e) { return new T(e); };
+        
+    }
 }
 
 template<typename T>
-const std::string ComponentManager::GetID() {
-	std::string typeName = typeid(T).name();
-	return mComponentTypes_[typeName];
+inline const std::string& ComponentManager::getCmpID()
+{
+    return mCmpIDs_[typeid(T).name()];
 }
+

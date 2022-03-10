@@ -1,17 +1,14 @@
 #pragma once
-#include <string>
-#include <Ogre.h>
 
 class Entity;
 
 class Component{
     public:
-       Component();
+       Component(Entity* entity);
 
        ~Component() {};
 
        inline Entity* getEntity() { return mEntity_; }
-       void setEntity(Entity* entity) { mEntity_ = entity; }
 
        virtual void init()=0;
        

@@ -8,7 +8,7 @@ Vector3 Transform::GetPosition()
 	return position;
 }
 
-Vector4 Transform::GetRotation()
+Vector3 Transform::GetRotation()
 {
 	return rotation;
 }

@@ -3,9 +3,9 @@
 #define AEGIS_COMPONENT
 #include "Component.h"
 class Entity;
-class AegisComponent : public Component {
+class AegisComponent : Component {
 public: 
-	AegisComponent() : Component(){}
-	~AegisComponent(){}
+	AegisComponent(Entity* ent) : Component(ent){}
+	virtual ~AegisComponent(){}
 };
 #endif
