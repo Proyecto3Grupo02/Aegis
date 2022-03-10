@@ -9,43 +9,43 @@ InputSystem::~InputSystem() {
 }
 
 void InputSystem::Init() {
-	keys = std::vector<key>(256, { false, false, false });
+	keyNums = 322;
+	keys = std::vector<key>(keyNums, { false, false, false });
 }
 
 void InputSystem::UpdateState() {
-	for (int i = 0; i < keys.size(); i++) {
-		if (keys[i].pressedThisFrame) {
-			keys[i].pressedThisFrame = false;
-			keys[i].down = true;
-		}		
-
+	for (int i = 0; i < keyNums; i++) {
 		keys[i].releasedThisFrame = false;
 	}
 }
 
 void InputSystem::ClearState() {
-	for (int i = 0; i < keys.size(); i++) {
+	for (int i = 0; i < keyNums; i++) {
 		keys[i].pressedThisFrame = false;
 		keys[i].down = false;
 		keys[i].releasedThisFrame = false;
 	}
 }
 
-int InputSystem::getId(SDL_Scancode key) {
-	
-	return 0;
+int InputSystem::getId(SDL_Keycode key) {
+	// Se clampea porque teclas especiales como Shift tienen valores fuera del array
+	return SDL_clamp(key, 0, keyNums - 1);
 }
 
 //UPDATE KEY STATE-------------------------------------------------------
-void InputSystem::OnKeyDown(SDL_Scancode key) {
+void InputSystem::OnKeyDown(SDL_Keycode key) {
 	int i = getId(key);
-	
-	keys[i].pressedThisFrame = true;
-	keys[i].down = false;
-	keys[i].releasedThisFrame = false;
+
+	if (!keys[i].pressedThisFrame)
+		keys[i].pressedThisFrame = true;
+	else
+	{
+		keys[i].down = true;
+		keys[i].pressedThisFrame = false;
+	}
 }
 
-void InputSystem::OnKeyUp(SDL_Scancode key) {
+void InputSystem::OnKeyUp(SDL_Keycode key) {
 	int i = getId(key);
 	keys[i].pressedThisFrame = false;
 	keys[i].down = false;
@@ -53,12 +53,18 @@ void InputSystem::OnKeyUp(SDL_Scancode key) {
 }
 
 //CONSULT KEY STATE------------------------------------------------------------
-bool InputSystem::isKeyDown(SDL_Scancode key) {
+bool InputSystem::isKeyDown(SDL_Keycode key) {
 	int i = getId(key);
 	return keys[i].down;
 }
 
-bool InputSystem::isKeyUp(SDL_Scancode key) {
+bool InputSystem::isKeyPressedThisFrame(SDL_Keycode key)
+{
+	int i = getId(key);
+	return keys[i].pressedThisFrame;
+}
+
+bool InputSystem::isKeyUp(SDL_Keycode key) {
 	int i = getId(key);
 	return keys[i].releasedThisFrame;
 }

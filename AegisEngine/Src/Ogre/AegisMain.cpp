@@ -17,16 +17,19 @@
 #include "GameLoopData.h"
 #include <SDL.h>
 
+#include "InputSystem.h"
+
 void AegisMain::GameLoop()
 {
 	SDL_Event eventHandler;
 	uint32_t frameTimeMS = (uint32_t)floor((1 / TARGET_FRAME_RATE) * 1000);
 
+	std::cout << '\n';
 	while (!exit)
 	{
 		//Tiempo al inicio del frame
 		gameLoopData->frameStartTime = SDL_GetTicks();
-
+		Input()->UpdateState();
 		while (SDL_PollEvent(&eventHandler) != 0)
 		{
 			switch (eventHandler.type)
@@ -36,10 +39,10 @@ void AegisMain::GameLoop()
 			case SDL_KEYDOWN:
 				if (eventHandler.key.keysym.sym == SDLK_ESCAPE)
 					exit = true;
-				//Input().OnKeyDown(eventHandler.key.keysym.sym);
+				Input()->OnKeyDown(eventHandler.key.keysym.sym);
 				break;
 			case SDL_KEYUP:
-				//Input().OnKeyDown(eventHandler.key.keysym.sym);
+				Input()->OnKeyUp(eventHandler.key.keysym.sym);
 				break;
 			default:
 				break;
@@ -47,7 +50,6 @@ void AegisMain::GameLoop()
 		}
 
 		scene->UpdateScene(gameLoopData->deltaTime);
-		//Input().Update();
 		scene->Render();
 
 		ogreWrap->Render();
@@ -58,6 +60,10 @@ void AegisMain::GameLoop()
 
 		// Actualiza deltaTime y timeSinceSceneStart
 		gameLoopData->UpdateTimeRegistry(SDL_GetTicks());
+
+		std::cout << "a key is down: " << Input()->isKeyDown(SDLK_a) << "a key is pressedThis: ";
+		std::cout << Input()->isKeyPressedThisFrame(SDLK_a) << "a key is released: " << Input()->isKeyUp(SDLK_a);
+		std::cout << "\r";
 	}
 }
 
@@ -79,6 +85,7 @@ AegisMain::~AegisMain()
 /// <returns></returns>
 bool AegisMain::Init()
 {
+	Input()->Init();
 	ogreWrap->Init();
 	GameLoop();
 
