@@ -22,6 +22,9 @@ public:
     OgreWrapper();
     bool Render();
     virtual ~OgreWrapper();
+
+    Ogre::SceneManager* getSceneMng() { return mSceneMgr; }
+
     bool Init() override;
 };
 
