@@ -13,7 +13,6 @@ public:
 	void setRendering(bool iR);
 
 protected:
-	Vector4 previousRotation;
 	Ogre::SceneNode* node;
 	Transform* transform;
 	Ogre::Entity* mesh;
