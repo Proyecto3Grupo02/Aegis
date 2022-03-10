@@ -54,14 +54,6 @@ private:
 	void FixedUpdate(float dt);
 
 	/// <summary>
-	/// Llama el InputSystem estatico para que actualice sus registros (si una tecla se pulsó en el estado anterior y se puso a true
-	/// por un evento, aqui hay que ponerlo a false)
-	/// Hay que asegurarse de que si se pulsa una tecla en un frame X, sea despues del UpdateInput. Hay que ver como enlazar SDL desde Ogre hasta
-	/// la escena y controlar la pool de eventos.
-	/// </summary>
-	void UpdateInput();
-
-	/// <summary>
 	/// Llama al update de cada entidad para que actualice respectivamente sus componentes
 	/// </summary>
 	/// <param name="dt">deltaTime</param>
@@ -102,5 +94,6 @@ public:
 	/// </summary>
 	/// <param name="dt"></param>
 	void UpdateScene(float dt);
-	//void Render();
+	
+	void Render();
 };

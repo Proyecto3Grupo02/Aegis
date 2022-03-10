@@ -17,31 +17,47 @@
 #include "GameLoopData.h"
 #include <SDL.h>
 
-//#include <sdlu>
-
 void AegisMain::GameLoop()
 {
 	SDL_Event eventHandler;
+	uint32_t frameTimeMS = (uint32_t)floor((1 / TARGET_FRAME_RATE) * 1000);
 
 	while (!exit)
 	{
+		//Tiempo al inicio del frame
 		gameLoopData->frameStartTime = SDL_GetTicks();
 
 		while (SDL_PollEvent(&eventHandler) != 0)
 		{
-			if (eventHandler.type == SDL_KEYDOWN || eventHandler.type == SDL_QUIT)
+			switch (eventHandler.type)
+			{
+			case SDL_QUIT:
 				exit = true;
+			case SDL_KEYDOWN:
+				if (eventHandler.key.keysym.sym == SDLK_ESCAPE)
+					exit = true;
+				//Input().OnKeyDown(eventHandler.key.keysym.sym);
+				break;
+			case SDL_KEYUP:
+				//Input().OnKeyDown(eventHandler.key.keysym.sym);
+				break;
+			default:
+				break;
+			}
 		}
 
-		//gameLoopData += gameLoopData->GetDelta();
-		//scene->UpdateScene(gameLoopData->deltaTime);
+		scene->UpdateScene(gameLoopData->deltaTime);
+		//Input().Update();
+		scene->Render();
 
-		Uint32 frameTime = gameLoopData->UpdateDelta(SDL_GetTicks());
 		ogreWrap->Render();
+		Uint32 frameTime = SDL_GetTicks();
 
-		if (frameTime < 16)
-			SDL_Delay(16 - frameTime);
+		if (frameTime < frameTimeMS)
+			SDL_Delay(frameTimeMS - frameTime);
 
+		// Actualiza deltaTime y timeSinceSceneStart
+		gameLoopData->UpdateTimeRegistry(SDL_GetTicks());
 	}
 }
 

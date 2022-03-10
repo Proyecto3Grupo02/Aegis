@@ -13,12 +13,15 @@ private:
     GameLoopData* gameLoopData;
 
     bool exit;
+    //uint32_t frameTimeMS;
 
     void GameLoop();
 public:
     AegisMain();
     virtual ~AegisMain();
     bool Init() override;
+    
+    const float TARGET_FRAME_RATE = 60.0f;
 };
 
 

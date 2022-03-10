@@ -50,10 +50,6 @@ void Scene::FixedUpdate(float dt)
 	}
 }
 
-void Scene::UpdateInput()
-{
-}
-
 void Scene::Update(float dt)
 {
 	for (Entity* entity : *entities)
@@ -76,9 +72,11 @@ void Scene::UpdateScene(float dt)
 	//previousFrameTime = current;
 
 	FixedUpdate(dt);
-	UpdateInput();
 	Update(dt);
 	LateUpdate(dt);
 	RemoveAndFreePendingEntities();
-	//Render;
+}
+
+void Scene::Render()
+{
 }
