@@ -33,8 +33,8 @@ class Entity{
 
         //handle the components
        
-        template<typename T>
-        T* addComponent();
+        template<typename T, typename...Targs>
+        T* addComponent(Targs&&...args);
 
         template<typename T>
         T* getComponent();
@@ -50,7 +50,8 @@ class Entity{
 
     protected:
         Scene* mScene_; //scene pointer 
-        std::vector<Component*> mComponents_; //list of all the components in scene
+        std::map<std::string, Component*> mComponents_; //list of all the components in scene
+       std::vector<Component*> mComponentsArray_; //list of all the components in scene
         std::list<int> mNumOfActiveComponents_; //list of the index of their active component 
         bool active_; //bool to check if the entity is active or not
 

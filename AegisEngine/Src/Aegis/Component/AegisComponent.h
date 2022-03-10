@@ -5,7 +5,7 @@
 class Entity;
 class AegisComponent : Component {
 public: 
-	AegisComponent(Entity* ent) : Component(ent){}
+	AegisComponent() : Component(){}
 	virtual ~AegisComponent(){}
 };
 #endif

@@ -4,11 +4,12 @@ class Entity;
 
 class Component{
     public:
-       Component(Entity* entity);
+       Component();
 
        ~Component() {};
 
        inline Entity* getEntity() { return mEntity_; }
+       void setEntity(Entity* entity) { mEntity_ = entity; }
 
        virtual void init()=0;
        
