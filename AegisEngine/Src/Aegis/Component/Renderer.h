@@ -9,7 +9,7 @@ public:
 	Renderer(Entity* _ent, std::string meshName, Ogre::SceneManager* sceneMng, bool ir = true);
 	~Renderer() {};
 	void render();
-
+	virtual void init(){};
 	void setRendering(bool iR);
 
 protected:

@@ -5,6 +5,7 @@
 #include <string>
 #include "ComponentManager.h"
 #include <Ogre.h>
+#include "Transform.h"
 
 
 class Component;
@@ -34,10 +35,35 @@ class Entity{
         //handle the components
        
         template<typename T, typename...Targs>
-        T* addComponent(Targs&&...args);
+        inline T* addComponent(Targs&&...args)
+        {
+            ComponentManager* mngr = ComponentManager::getInstance();
+            if (mngr != nullptr) {
+                std::string key = mngr->GetID<T>(); //cuando un component esta registrado  pilla su id de ahi
+
+                if (mComponents_.find(key) == mComponents_.end()) { //si no está lo añadimos
+                    T* t = (new T(std::forward<Targs>(args)...));
+                    t->setEntity(this);
+
+                    mComponentsArray_.push_back(t);
+                    mComponents_[key] = t;
+                    return (T*)mComponents_[key];
+
+                }
+
+            }
+            return nullptr;
+        }
 
         template<typename T>
-        T* getComponent();
+        inline T* getComponent()
+        {
+            ComponentManager* cmpManager = ComponentManager::getInstance();
+
+            std::string id = cmpManager->GetID<T>();
+
+            return static_cast<T*>(mComponents_[id]);
+        }
 
         inline Scene* getScene(){return mScene_;}
         inline void setScene(Scene* scene){mScene_= scene;}

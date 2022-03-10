@@ -17,6 +17,7 @@ public:
 		ComponentManager::getInstance()->RegisterComponent<Transform>("Transform");
 	};
 	virtual ~Transform() {}
+	virtual void init(){}
 
 	Vector3 GetPosition();
 	Vector4 GetRotation();

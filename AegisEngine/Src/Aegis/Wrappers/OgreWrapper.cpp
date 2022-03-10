@@ -101,7 +101,7 @@ bool OgreWrapper::Init()
     Entity* fish = new Entity(fishNode);
     fish->addComponent<Transform>(Vector3(), Vector4(), Vector3(1.0f, 1.0f, 1.0f));
     Renderer* fishRenderer = fish->addComponent<Renderer>(fish, "fish.mesh", mSceneMgr, true);
-    fishRenderer->render();
+    //fishRenderer->render();
 
     mSceneMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
 

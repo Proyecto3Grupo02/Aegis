@@ -8,6 +8,7 @@ class Singleton
 public:
     static T* getInstance();
    static void deleteInstance();
+  
 protected:
     static T* mInstance_;
     Singleton();
@@ -42,4 +43,15 @@ inline void Singleton<T>::deleteInstance() {
     delete Singleton<T>::mInstance_;
     Singleton<T>::mInstance_ = nullptr;
 
+}
+
+template<typename T>
+T* Singleton<T>::getInstance()
+{
+    if (Singleton<T>::mInstance_ == nullptr)
+    {
+        Singleton<T>::mInstance_ = new T();
+    }
+
+    return Singleton<T>::mInstance_;
 }

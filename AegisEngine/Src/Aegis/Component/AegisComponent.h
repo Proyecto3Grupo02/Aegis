@@ -6,6 +6,6 @@ class Entity;
 class AegisComponent : public Component {
 public: 
 	AegisComponent() : Component(){}
-	virtual ~AegisComponent(){}
+	~AegisComponent(){}
 };
 #endif
