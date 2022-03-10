@@ -7,8 +7,7 @@ class Singleton
 
 public:
     static T* getInstance();
-    static void deleteInstance();
-
+   static void deleteInstance();
 protected:
     static T* mInstance_;
     Singleton();
