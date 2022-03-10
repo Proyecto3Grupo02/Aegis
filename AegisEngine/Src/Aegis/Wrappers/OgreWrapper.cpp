@@ -10,10 +10,17 @@
 #include <OgreEntity.h>
 #include <OgreSceneNode.h>
 
+#include <SDL_syswm.h>
+
 OgreWrapper::OgreWrapper() : mRoot(0),
 mResourcesCfg(Ogre::BLANKSTRING),
 mPluginsCfg(Ogre::BLANKSTRING)
 {
+}
+
+bool OgreWrapper::Render()
+{
+	return mRoot->renderOneFrame();
 }
 
 
@@ -24,88 +31,126 @@ OgreWrapper::~OgreWrapper()
 
 bool OgreWrapper::Init()
 {
-    //files that contains the resources that ogre will use and the plugins used, specifically, Gl and D3D11 are
+	//files that contains the resources that ogre will use and the plugins used, specifically, Gl and D3D11 are
 //added in order to have a render winow
 
-    mResourcesCfg = "resources.cfg";
-    mPluginsCfg = "plugins.cfg";
+	mResourcesCfg = "resources.cfg";
+	mPluginsCfg = "plugins.cfg";
 
 
-    mRoot = new Ogre::Root(mPluginsCfg);
+	mRoot = new Ogre::Root(mPluginsCfg);
 
-    Ogre::ConfigFile cf;
-    cf.load(mResourcesCfg);
-
-
-    Ogre::String name, locType;
-
-    //we add all sections in resources.cfg (like [Essential]) and their list of locations to the ResourceGroupManager
-    Ogre::ConfigFile::SettingsBySection_::const_iterator seci;
-    for (seci = cf.getSettingsBySection().begin(); seci != cf.getSettingsBySection().end(); ++seci) {
-
-        const Ogre::ConfigFile::SettingsMultiMap& settings = seci->second;
-        Ogre::ConfigFile::SettingsMultiMap::const_iterator it;
-
-        for (it = settings.begin(); it != settings.end(); it++)
-        {
-            //The name parameter is the path to the resources(i.e. "../media").The locType parameter defines what kind of location this is(i.e.Filesystem, Zip, etc.)
-            locType = it->first;
-            name = it->second;
-            Ogre::ResourceGroupManager::getSingleton().addResourceLocation(name, locType);
-        }
-    }
-
-    //creates an ogre.cfg in case there isn't one already
-    if (!(mRoot->restoreConfig() || mRoot->showConfigDialog(nullptr)))
-        return false;
-
-    mWindow = mRoot->initialise(true, "TutorialApplication Render Window");
+	Ogre::ConfigFile cf;
+	cf.load(mResourcesCfg);
 
 
-    Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
+	Ogre::String name, locType;
 
-    //initialise all resources found by ogre
-    Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
+	//we add all sections in resources.cfg (like [Essential]) and their list of locations to the ResourceGroupManager
+	Ogre::ConfigFile::SettingsBySection_::const_iterator seci;
+	for (seci = cf.getSettingsBySection().begin(); seci != cf.getSettingsBySection().end(); ++seci) {
 
-    mSceneMgr = mRoot->createSceneManager();
+		const Ogre::ConfigFile::SettingsMultiMap& settings = seci->second;
+		Ogre::ConfigFile::SettingsMultiMap::const_iterator it;
 
-    //scene camera
+		for (it = settings.begin(); it != settings.end(); it++)
+		{
+			//The name parameter is the path to the resources(i.e. "../media").The locType parameter defines what kind of location this is(i.e.Filesystem, Zip, etc.)
+			locType = it->first;
+			name = it->second;
+			Ogre::ResourceGroupManager::getSingleton().addResourceLocation(name, locType);
+		}
+	}
 
-    Ogre::SceneNode* ogreCam = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-    mCamera = mSceneMgr->createCamera("MainCam");
-    ogreCam->attachObject(mCamera);
-    ogreCam->setPosition(0, 0, 20);
-    ogreCam->lookAt(Ogre::Vector3(0, 0, -300), Ogre::Node::TS_WORLD);
-    mCamera->setNearClipDistance(5);
+	//creates an ogre.cfg in case there isn't one already
+	if (!(mRoot->restoreConfig() || mRoot->showConfigDialog(nullptr)))
+		return false;
 
-    //viewPort
-    Ogre::Viewport* vp = mWindow->addViewport(mCamera);
+	CreateWindowNative();
+	Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
 
-    vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
+	//initialise all resources found by ogre
+	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 
-    mCamera->setAspectRatio(
-        Ogre::Real(vp->getActualWidth()) /
-        Ogre::Real(vp->getActualHeight()));
+	mSceneMgr = mRoot->createSceneManager();
 
-    //fish creation
-    Ogre::Entity* ogreEntity = mSceneMgr->createEntity("fish.mesh");
-    Ogre::SceneNode* ogreNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-    ogreNode->attachObject(ogreEntity);
+	//scene camera
 
-    mSceneMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
+	Ogre::SceneNode* ogreCam = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+	mCamera = mSceneMgr->createCamera("MainCam");
+	ogreCam->attachObject(mCamera);
+	ogreCam->setPosition(0, 0, 20);
+	ogreCam->lookAt(Ogre::Vector3(0, 0, -300), Ogre::Node::TS_WORLD);
+	mCamera->setNearClipDistance(5);
 
-    //Scene's lightning
-    Ogre::SceneNode* ogreLight = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-    Ogre::Light* light = mSceneMgr->createLight("MainLight");
-    ogreLight->attachObject(light);
+	//viewPort
+	Ogre::Viewport* vp = render->addViewport(mCamera);
 
-    ogreLight->setPosition(-20, 80, 50);
+	vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
 
-    //dummy game's loop
-    while (true) {
+	mCamera->setAspectRatio(
+		Ogre::Real(vp->getActualWidth()) /
+		Ogre::Real(vp->getActualHeight()));
 
-        if (mWindow->isClosed()) return false;
+	//fish creation
+	Ogre::Entity* ogreEntity = mSceneMgr->createEntity("fish.mesh");
+	Ogre::SceneNode* ogreNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+	ogreNode->attachObject(ogreEntity);
 
-        if (!mRoot->renderOneFrame()) return false;
-    }
+	mSceneMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
+
+	//Scene's lightning
+	Ogre::SceneNode* ogreLight = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+	Ogre::Light* light = mSceneMgr->createLight("MainLight");
+	ogreLight->attachObject(light);
+
+	ogreLight->setPosition(-20, 80, 50);
+
+	//dummy game's loop
+	//while (true) {
+
+	//    if (mWindow->isClosed()) return false;
+
+	//    if (!mRoot->renderOneFrame()) return false;
+	//}
+}
+
+
+void OgreWrapper::CreateWindowNative()
+{
+	mRoot->restoreConfig();
+	mRoot->initialise(false);
+
+	uint32_t w, h;
+	Ogre::ConfigOptionMap ropts = mRoot->getRenderSystem()->getConfigOptions();
+
+	std::istringstream mode(ropts["Video Mode"].currentValue);
+	Ogre::String token;
+	mode >> w; // width
+	mode >> token; // 'x' as seperator between width and height
+	mode >> h; // height
+	Uint32 flags = SDL_WINDOW_RESIZABLE;
+	if (!SDL_WasInit(SDL_INIT_VIDEO)) SDL_InitSubSystem(SDL_INIT_VIDEO);
+
+	native = SDL_CreateWindow("SDL", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, flags);
+
+	SDL_SysWMinfo wmInfo;
+	SDL_VERSION(&wmInfo.version);
+	if (SDL_GetWindowWMInfo(native, &wmInfo) == SDL_FALSE) {
+		OGRE_EXCEPT(Ogre::Exception::ERR_INTERNAL_ERROR,
+			"Couldn't get WM Info! (SDL2)",
+			"BaseApplication::setup");
+	}
+
+	Ogre::NameValuePairList params; // ogre window / render system params
+	params.insert(std::make_pair("macAPI", "win"));
+	params.insert(std::make_pair("macAPIWinUseNSView", "true"));
+
+	// grab a string representing the NSWindow pointer
+	Ogre::String winHandle = Ogre::StringConverter::toString((unsigned long)wmInfo.info.win.window);
+
+	// assign the NSWindow pointer to the parentWindowHandle parameter
+	params.insert(std::make_pair("parentWindowHandle", winHandle));
+
+	render = mRoot->createRenderWindow("myWindowTitle", w, h, false, &params);
 }

@@ -37,9 +37,10 @@ void AegisMain::GameLoop()
 		//scene->UpdateScene(gameLoopData->deltaTime);
 
 		Uint32 frameTime = gameLoopData->UpdateDelta(SDL_GetTicks());
+		ogreWrap->Render();
 
-		if (frameTime < 20)
-			SDL_Delay(20 - frameTime);
+		if (frameTime < 16)
+			SDL_Delay(16 - frameTime);
 
 	}
 }
@@ -62,8 +63,7 @@ AegisMain::~AegisMain()
 /// <returns></returns>
 bool AegisMain::Init()
 {
-	//ogreWrap->Init();
-	SDL_Init(SDL_INIT_EVENTS);
+	ogreWrap->Init();
 	GameLoop();
 
 	return true;

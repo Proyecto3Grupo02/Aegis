@@ -1,5 +1,6 @@
 #pragma once
 #include <OgreRoot.h>
+#include <SDL.h>
 #include "../Interfaces/IInitializable.h"
 
 class OgreWrapper : IInitializable
@@ -10,12 +11,16 @@ private:
     Ogre::String mResourcesCfg;
     Ogre::String mPluginsCfg;
 
-    Ogre::RenderWindow* mWindow;
+    Ogre::RenderWindow* render = nullptr;
+    SDL_Window* native = nullptr;
+
     Ogre::SceneManager* mSceneMgr;
     Ogre::Camera* mCamera;
 
+    void CreateWindowNative();
 public:
     OgreWrapper();
+    bool Render();
     virtual ~OgreWrapper();
     bool Init() override;
 };
