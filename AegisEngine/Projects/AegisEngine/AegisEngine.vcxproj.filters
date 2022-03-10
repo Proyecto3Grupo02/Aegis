@@ -60,6 +60,9 @@
     <ClCompile Include="..\..\Src\Aegis\Component\Vector4.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\Aegis\Managers\InputSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Aegis\Entity\Entity.h">
@@ -99,6 +102,9 @@
       <Filter>Header Files\Component</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\Aegis\Component\RegisterComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Aegis\Managers\InputSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
