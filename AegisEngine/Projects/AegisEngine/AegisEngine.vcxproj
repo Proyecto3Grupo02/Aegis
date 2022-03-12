@@ -26,6 +26,7 @@
     <ClCompile Include="..\..\Src\Aegis\Component\Vector4.cpp" />
     <ClCompile Include="..\..\Src\Aegis\Entity\Entity.cpp" />
     <ClCompile Include="..\..\Src\Aegis\Managers\ComponentManager.cpp" />
+    <ClCompile Include="..\..\Src\Aegis\Managers\DebugManager.cpp" />
     <ClCompile Include="..\..\Src\Aegis\Managers\InputSystem.cpp" />
     <ClCompile Include="..\..\Src\Aegis\Managers\Singleton.cpp" />
     <ClCompile Include="..\..\Src\Aegis\Scene\Scene.cpp" />
@@ -43,6 +44,7 @@
     <ClInclude Include="..\..\Src\Aegis\Entity\Entity.h" />
     <ClInclude Include="..\..\Src\Aegis\Interfaces\IInitializable.h" />
     <ClInclude Include="..\..\Src\Aegis\Managers\ComponentManager.h" />
+    <ClInclude Include="..\..\Src\Aegis\Managers\DebugManager.h" />
     <ClInclude Include="..\..\Src\Aegis\Managers\InputSystem.h" />
     <ClInclude Include="..\..\Src\Aegis\Managers\Singleton.h" />
     <ClInclude Include="..\..\Src\Aegis\Scene\Scene.h" />

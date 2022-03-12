@@ -1,6 +1,7 @@
 #include "Transform.h"
 
 #include"RegisterComponent.h"
+#include "Entity.h"
 
 
 Vector3 Transform::GetPosition()
@@ -31,4 +32,11 @@ void Transform::SetRotation(Vector4 newRot)
 void Transform::SetScale(Vector3 newScale)
 {
 	scale = newScale;
+}
+void Transform::update()
+{
+	//pass the parameters from vector3 /vector4 to Ogre::Node position rotation and scale
+	getEntity()->getNode()->setPosition(position.GetX(), position.GetY(), position.GetZ());
+	getEntity()->getNode()->setScale(scale.GetX(), scale.GetY(), scale.GetZ());
+	getEntity()->getNode()->setOrientation(rotation.GetX(), rotation.GetY(), rotation.GetZ(), rotation.GetW());
 }

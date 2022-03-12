@@ -1,12 +1,14 @@
 #pragma once
 
-
 #ifndef DEBUG
 #define DEBUG
 
 #include "Singleton.h"
 #include <string>
+#include <OgreManualObject.h>
+#include<vector>
 
+#include "Vector3.h"
 
 class DebugManager: public Singleton<DebugManager>{
 public:
@@ -25,9 +27,10 @@ public:
     //shows delta time num of entities 
     void showInfo();
 
+    void drawLine(Vector3 origin, Vector3 end, Vector3 color);
 
-    template <typename T>
-    void checknull();
+protected:
+    Ogre::ManualObject* mLines_;
 
 
 };
