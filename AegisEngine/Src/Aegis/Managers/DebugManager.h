@@ -7,10 +7,11 @@
 #include <string>
 #include <OgreManualObject.h>
 #include<vector>
+#include "IInitializable.h"
 
 #include "Vector3.h"
 
-class DebugManager: public Singleton<DebugManager>{
+class DebugManager: public Singleton<DebugManager>, public IInitializable{
 public:
     DebugManager();
     virtual ~DebugManager();
@@ -24,16 +25,20 @@ public:
     //write in console a warning
     void LogWarning(const std::string& error);
 
-    //shows delta time num of entities 
+    //shows delta time, num of entities... 
     void showInfo();
 
     void drawLine(Vector3 origin, Vector3 end, Vector3 color);
 
+    bool Init();
 protected:
     Ogre::ManualObject* mLines_;
 
 
 };
 
+inline DebugManager* Debug() {
+    return DebugManager::getInstance();
+}
 #endif
 

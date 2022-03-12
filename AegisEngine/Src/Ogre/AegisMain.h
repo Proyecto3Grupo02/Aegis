@@ -1,6 +1,5 @@
 #pragma once
 #include "IInitializable.h"
-
 class OgreWrapper;
 class Scene;
 struct GameLoopData;

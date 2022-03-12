@@ -5,9 +5,7 @@
 DebugManager::DebugManager(): 
 	Singleton()
 {
-	mLines_ = new Ogre::ManualObject("lines");
-	assert(mLines_);
-	mLines_->setDynamic(true);
+
 
 	//necesito el scene manager para debugear lineas
 }
@@ -38,4 +36,13 @@ void DebugManager::drawLine(Vector3 origin,  Vector3 end, Vector3 color) {
 	mLines_->colour(c);
 	mLines_->position(b);
 	mLines_->colour(c);
+}
+
+bool DebugManager::Init()
+{
+	mLines_ = new Ogre::ManualObject("lines");
+	assert(mLines_);
+	mLines_->setDynamic(true);
+
+	return true;
 }

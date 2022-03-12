@@ -18,6 +18,7 @@
 #include <SDL.h>
 
 #include "InputSystem.h"
+#include "DebugManager.h"
 
 void AegisMain::GameLoop()
 {
@@ -25,6 +26,8 @@ void AegisMain::GameLoop()
 	uint32_t frameTimeMS = (uint32_t)floor((1 / TARGET_FRAME_RATE) * 1000);
 
 	std::cout << '\n';
+	Debug()->Log("Aegis loaded");
+
 	while (!exit)
 	{
 		//Tiempo al inicio del frame
@@ -86,8 +89,11 @@ AegisMain::~AegisMain()
 bool AegisMain::Init()
 {
 	Input()->Init();
+	Debug()->Init();
 	ogreWrap->Init();
 	GameLoop();
+
+	Debug()->Log("Aegis Engine init");
 
 	return true;
 }
