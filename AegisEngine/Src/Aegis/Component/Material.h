@@ -1,5 +1,7 @@
 
 #pragma once
+#ifndef MATERIAL_CMP
+#define MATERIAL_CMP
 #include "AegisComponent.h"
 
 class Renderer;
@@ -16,3 +18,5 @@ private:
 	Renderer* mRenderer_;
 	std::string mMaterialName_;
 };
+
+#endif
