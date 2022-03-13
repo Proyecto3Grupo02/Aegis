@@ -1,4 +1,7 @@
 #pragma once
+#ifndef VECTOR4_H 
+#define VECTOR4_H
+
 #include "Vector3.h"
 
 class Vector4 : public Vector3 {
@@ -20,3 +23,5 @@ public:
 protected:
 	float w;
 };
+
+#endif //

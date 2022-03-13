@@ -1,6 +1,7 @@
-
 #include "Entity.h"
 #include "Component.h"
+#include "Transform.h"
+
 Entity::Entity(Ogre::SceneNode* node):
 	mNode_(node),active_(true),mScene_(nullptr)
 {

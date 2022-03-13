@@ -1,5 +1,6 @@
-
 #pragma once
+#ifndef SINGLETON_H 
+#define SINGLETON_H
 
 template<typename T>
 class Singleton
@@ -17,9 +18,6 @@ private:
 //    //if it's called here is because there are multiple instances so we have to delete
     Singleton(Singleton const&) = delete; //copy
     Singleton& operator=(Singleton const&) = delete; //operator =
-
-
-
 };
 
 template<typename T>
@@ -55,3 +53,5 @@ T* Singleton<T>::getInstance()
 
     return Singleton<T>::mInstance_;
 }
+
+#endif //

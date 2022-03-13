@@ -1,13 +1,15 @@
 #pragma once
+#ifndef SCENE_H 
+#define SCENE_H
+
 #include <list>
-using namespace std;
 
 class Entity;
 class Scene
 {
 private:
-	list<Entity*>* entities;
-	list<list<Entity*>::iterator> entitiesToDelete;
+	std::list<Entity*>* entities;
+	std::list<std::list<Entity*>::iterator> entitiesToDelete;
 
 	// Fixed Update arguments
 
@@ -20,7 +22,7 @@ private:
 	/// Es una funcion auxiliar usada en <function>RemoveAndFreePendingEntities</function>
 	/// </summary>
 	/// <param name="entity">Iterador de la entidad a borrar</param>
-	void RemoveAndFreeEntity(list<Entity*>::iterator entity);
+	void RemoveAndFreeEntity(std::list<Entity*>::iterator entity);
 	
 	/// <summary>
 	///  Borra y destruye todas las entidades de <param>entitiesToDelete</param>
@@ -81,7 +83,7 @@ public:
 	/// Usamos un interador para no tener que buscar la entidad en la lista
 	/// </summary>
 	/// <param name="entity"></param>
-	void DestroyEntity(list<Entity*>::iterator entity);
+	void DestroyEntity(std::list<Entity*>::iterator entity);
 
 	/// <summary>
 	/// Update principal de la escena que llamar a los demas updates. El orden de ejecucion es
@@ -97,3 +99,5 @@ public:
 	
 	void Render();
 };
+
+#endif

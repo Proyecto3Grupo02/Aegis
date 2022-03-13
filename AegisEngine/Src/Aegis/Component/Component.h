@@ -1,5 +1,7 @@
 #pragma once
-#include <string>
+#ifndef  COMPONENT_H 
+#define COMPONENT_H
+
 #include <Ogre.h>
 
 class Entity;
@@ -31,5 +33,7 @@ class Component{
         bool isActive_;
         
 };
+
+#endif // ! COMPONENT_H
 
 

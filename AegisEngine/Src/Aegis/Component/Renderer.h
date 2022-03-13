@@ -1,9 +1,13 @@
 #pragma once
-#include "AegisComponent.h"
-#include "ComponentManager.h"
+#ifndef  RENDERER_H 
+#define RENDERER_H
+
+#include "ComponentManager.h" //Da error en el cpp
+#include "AegisComponent.h" //Da error en el cpp
 
 class OgreWrapper;
 class Transform;
+class AegisComponent;
 
 class Renderer : public AegisComponent {
 public:
@@ -28,3 +32,6 @@ protected:
 	Transform* transform;
 	Ogre::Entity* mesh;
 };
+
+
+#endif //RENDERER_H

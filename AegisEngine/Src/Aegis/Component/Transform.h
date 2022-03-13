@@ -1,6 +1,6 @@
 #pragma once
-
-
+#ifndef TRANSFORM_H 
+#define TRANSFORM_H
 
 #include "AegisComponent.h"
 #include "Vector4.h"
@@ -32,3 +32,5 @@ protected:
 	Vector4 rotation;
 	Vector3 scale;
 };
+
+#endif //TRANSFORM

@@ -66,8 +66,8 @@
     <ClCompile Include="..\..\Src\Aegis\Component\Renderer.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\Aegis\Component\Material.cpp">
-      <Filter>Source Files\Components</Filter>
+    <ClCompile Include="..\..\Src\Aegis\Scene\SceneManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -116,8 +116,8 @@
     <ClInclude Include="..\..\Src\Aegis\Component\Renderer.h">
       <Filter>Header Files\Component</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\Aegis\Component\Material.h">
-      <Filter>Source Files\Components</Filter>
+    <ClInclude Include="..\..\Src\Aegis\Scene\SceneManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

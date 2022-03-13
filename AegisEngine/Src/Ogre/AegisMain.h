@@ -1,15 +1,19 @@
 #pragma once
-#include "IInitializable.h"
+#ifndef AEGIS_MAIN_H 
+#define AEGIS_MAIN_H
+
+#include "IInitializable.h" //Da error en el cpp
 
 class OgreWrapper;
 class Scene;
+class SceneManager;
 struct GameLoopData;
 
 class AegisMain : IInitializable
 {
 private:
     OgreWrapper* ogreWrap;
-    Scene* scene;
+    SceneManager* sceneManager;
     GameLoopData* gameLoopData;
 
     bool exit;
@@ -24,7 +28,7 @@ public:
     const float TARGET_FRAME_RATE = 60.0f;
 };
 
-
+#endif //
 
 
 

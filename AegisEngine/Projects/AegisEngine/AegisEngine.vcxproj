@@ -30,6 +30,7 @@
     <ClCompile Include="..\..\Src\Aegis\Managers\InputSystem.cpp" />
     <ClCompile Include="..\..\Src\Aegis\Managers\Singleton.cpp" />
     <ClCompile Include="..\..\Src\Aegis\Scene\Scene.cpp" />
+    <ClCompile Include="..\..\Src\Aegis\Scene\SceneManager.cpp" />
     <ClCompile Include="..\..\Src\Aegis\Wrappers\OgreWrapper.cpp" />
     <ClCompile Include="..\..\Src\Ogre\AegisMain.cpp" />
     <ClCompile Include="..\..\Src\Ogre\main.cpp" />
@@ -48,6 +49,7 @@
     <ClInclude Include="..\..\Src\Aegis\Managers\InputSystem.h" />
     <ClInclude Include="..\..\Src\Aegis\Managers\Singleton.h" />
     <ClInclude Include="..\..\Src\Aegis\Scene\Scene.h" />
+    <ClInclude Include="..\..\Src\Aegis\Scene\SceneManager.h" />
     <ClInclude Include="..\..\Src\Aegis\Structs\GameLoopData.h" />
     <ClInclude Include="..\..\Src\Aegis\Wrappers\OgreWrapper.h" />
     <ClInclude Include="..\..\Src\Ogre\AegisMain.h" />
