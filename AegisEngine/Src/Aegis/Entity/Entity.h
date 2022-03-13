@@ -48,9 +48,9 @@ class Entity{
                 if (mComponents_.find(key) == mComponents_.end()) { //si no está lo añadimos
                     T* t = (new T(std::forward<Targs>(args)...));
                     t->setEntity(this);
-
                     mComponentsArray_.push_back(t);
                     mComponents_[key] = t;
+                    t->init();
                     return (T*)mComponents_[key];
 
                 }

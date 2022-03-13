@@ -14,6 +14,5 @@ public:
 
 private:
 	Renderer* mRenderer_;
-	std::string mMaterial_;
-
+	std::string mMaterialName_;
 };
