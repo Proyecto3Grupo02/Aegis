@@ -2,11 +2,12 @@
 #ifndef  RENDERER_H 
 #define RENDERER_H
 
-#include "AegisComponent.h"
-#include "ComponentManager.h"
+#include "ComponentManager.h" //Da error en el cpp
+#include "AegisComponent.h" //Da error en el cpp
 
 class OgreWrapper;
 class Transform;
+class AegisComponent;
 
 class Renderer : public AegisComponent {
 public:

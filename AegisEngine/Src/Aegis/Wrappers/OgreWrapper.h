@@ -4,7 +4,7 @@
 
 #include <OgreRoot.h>
 #include <SDL.h>
-#include "../Interfaces/IInitializable.h"
+#include "IInitializable.h"
 
 class OgreWrapper : IInitializable
 {

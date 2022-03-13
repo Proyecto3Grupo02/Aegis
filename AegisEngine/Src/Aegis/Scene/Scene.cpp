@@ -2,7 +2,8 @@
 #include "Entity.h"
 
 // Es posible que aqui queramos inicializar una escena de ogre y sincronizarla con las entidades
-Scene::Scene() : accumulator(0), entities(new list<Entity*>()), entitiesToDelete(list<list<Entity*>::iterator>()) {}
+Scene::Scene() : 
+	accumulator(0), entities(new std::list<Entity*>()), entitiesToDelete(std::list<std::list<Entity*>::iterator>()) {}
 
 Scene::~Scene()
 {
@@ -14,7 +15,7 @@ Scene::~Scene()
 	RemoveAndFreePendingEntities();
 }
 
-void Scene::RemoveAndFreeEntity(list<Entity*>::iterator entity)
+void Scene::RemoveAndFreeEntity(std::list<Entity*>::iterator entity)
 {
 	delete *entity;
 	this->entities->erase(entity);
@@ -22,7 +23,7 @@ void Scene::RemoveAndFreeEntity(list<Entity*>::iterator entity)
 
 void Scene::RemoveAndFreePendingEntities()
 {
-	for (list<Entity*>::iterator entity : entitiesToDelete)
+	for (std::list<Entity*>::iterator entity : entitiesToDelete)
 		RemoveAndFreeEntity(entity);
 
 	this->entitiesToDelete.clear();
@@ -33,7 +34,7 @@ void Scene::AddEntity(Entity* entity)
 	this->entities->push_back(entity);
 }
 
-void Scene::DestroyEntity(list<Entity*>::iterator entity)
+void Scene::DestroyEntity(std::list<Entity*>::iterator entity)
 {
 	this->entitiesToDelete.push_back(entity);
 }

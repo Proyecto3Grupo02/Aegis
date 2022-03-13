@@ -7,10 +7,11 @@
 #include <string>
 #include "ComponentManager.h"
 #include <Ogre.h>
-#include "Transform.h"
 
 class Component;
+class Transform;
 class Scene;
+
 class Entity{
     public:
         Entity(Ogre::SceneNode* node);

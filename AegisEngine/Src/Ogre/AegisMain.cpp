@@ -1,4 +1,6 @@
 #include "AegisMain.h"
+
+//OGRE
 #include <OgreException.h>
 #include <OgreConfigFile.h>
 #include <OgreRenderWindow.h>
@@ -8,6 +10,7 @@
 #include <OgreViewport.h>
 #include <OgreEntity.h>
 #include <OgreSceneNode.h>
+#include <SDL.h>
 
 #include <iostream>
 #include <fstream>
@@ -15,8 +18,6 @@
 #include "OgreWrapper.h"
 #include "Scene.h"
 #include "GameLoopData.h"
-#include <SDL.h>
-
 #include "InputSystem.h"
 #include "SceneManager.h"
 

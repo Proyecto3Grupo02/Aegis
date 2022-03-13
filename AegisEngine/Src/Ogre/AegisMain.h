@@ -2,7 +2,7 @@
 #ifndef AEGIS_MAIN_H 
 #define AEGIS_MAIN_H
 
-#include "IInitializable.h"
+#include "IInitializable.h" //Da error en el cpp
 
 class OgreWrapper;
 class Scene;

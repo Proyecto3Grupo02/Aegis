@@ -2,10 +2,11 @@
 #ifndef  COMPONENT_MANAGER 
 #define COMPONENT_MANAGER
 
-#include "Singleton.h"
+#include "Singleton.h" //Da error en el cpp
 #include <map>
 #include <functional>
 #include <unordered_map>
+
 class Component;
 class Entity;
 

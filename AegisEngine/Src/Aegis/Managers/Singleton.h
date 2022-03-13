@@ -18,9 +18,6 @@ private:
 //    //if it's called here is because there are multiple instances so we have to delete
     Singleton(Singleton const&) = delete; //copy
     Singleton& operator=(Singleton const&) = delete; //operator =
-
-
-
 };
 
 template<typename T>
