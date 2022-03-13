@@ -23,7 +23,7 @@ public:
 	void render();
 	virtual void init(){};
 	void setRendering(bool iR);
-	Ogre::Entity* getMesh() { return mesh; }
+	Ogre::Entity* getMesh() { return mesh; };
 
 protected:
 	void constructoraRenderer(Entity* _ent, std::string meshName, Ogre::SceneManager* sceneMng, bool ir);
