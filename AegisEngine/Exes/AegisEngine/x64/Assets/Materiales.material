@@ -1,0 +1,11 @@
+//EJER 38 ==> AVION & PLANETA
+material red // nombre
+{
+	technique // al menos una
+	{
+		pass // al menos uno
+		{
+			diffuse 1.0 0.0 0.0
+		}
+	}
+}
