@@ -18,6 +18,7 @@
 #include <SDL.h>
 
 #include "InputSystem.h"
+#include "SceneManager.h"
 
 void AegisMain::GameLoop()
 {
@@ -49,8 +50,8 @@ void AegisMain::GameLoop()
 			}
 		}
 
-		scene->UpdateScene(gameLoopData->deltaTime);
-		scene->Render();
+		sceneManager->UpdateCurrentScene(gameLoopData->deltaTime);
+		sceneManager->RenderCurrentScene();
 
 		ogreWrap->Render();
 		Uint32 frameTime = SDL_GetTicks();
@@ -68,14 +69,14 @@ void AegisMain::GameLoop()
 }
 
 AegisMain::AegisMain() :
-	ogreWrap(new OgreWrapper()), gameLoopData(new GameLoopData()), scene(new Scene()), exit(false)
+	ogreWrap(new OgreWrapper()), gameLoopData(new GameLoopData()), sceneManager(new SceneManager("NombreScena")), exit(false)
 {
 }
 
 AegisMain::~AegisMain()
 {
 	delete ogreWrap;
-	delete scene;
+	delete sceneManager;
 	delete gameLoopData;
 }
 

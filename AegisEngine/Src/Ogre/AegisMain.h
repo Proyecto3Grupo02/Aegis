@@ -3,13 +3,14 @@
 
 class OgreWrapper;
 class Scene;
+class SceneManager;
 struct GameLoopData;
 
 class AegisMain : IInitializable
 {
 private:
     OgreWrapper* ogreWrap;
-    Scene* scene;
+    SceneManager* sceneManager;
     GameLoopData* gameLoopData;
 
     bool exit;
