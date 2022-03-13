@@ -1,4 +1,7 @@
 #pragma once
+#ifndef OGRE_WRAPPER_H 
+#define OGRE_WRAPPER_H
+
 #include <OgreRoot.h>
 #include <SDL.h>
 #include "../Interfaces/IInitializable.h"
@@ -25,3 +28,4 @@ public:
     bool Init() override;
 };
 
+#endif

@@ -1,4 +1,7 @@
 #pragma once
+#ifndef AEGIS_MAIN_H 
+#define AEGIS_MAIN_H
+
 #include "IInitializable.h"
 
 class OgreWrapper;
@@ -25,7 +28,7 @@ public:
     const float TARGET_FRAME_RATE = 60.0f;
 };
 
-
+#endif //
 
 
 

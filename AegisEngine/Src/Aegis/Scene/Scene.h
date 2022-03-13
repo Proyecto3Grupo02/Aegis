@@ -1,4 +1,7 @@
 #pragma once
+#ifndef SCENE_H 
+#define SCENE_H
+
 #include <list>
 using namespace std;
 
@@ -97,3 +100,5 @@ public:
 	
 	void Render();
 };
+
+#endif

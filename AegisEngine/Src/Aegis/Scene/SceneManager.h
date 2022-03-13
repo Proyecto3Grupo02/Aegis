@@ -1,4 +1,7 @@
 #pragma once
+#ifndef SCENE_MANAGER_H 
+#define SCENE_MANAGER_H
+
 #include <string>
 
 class Scene;
@@ -16,3 +19,4 @@ public:
 	void RenderCurrentScene();
 	void ChangeScene(std::string sceneName);
 };
+#endif

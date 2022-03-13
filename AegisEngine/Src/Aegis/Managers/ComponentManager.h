@@ -1,5 +1,4 @@
 #pragma once
-
 #ifndef  COMPONENT_MANAGER 
 #define COMPONENT_MANAGER
 

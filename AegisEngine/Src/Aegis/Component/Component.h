@@ -1,4 +1,7 @@
 #pragma once
+#ifndef  COMPONENT_H 
+#define COMPONENT_H
+
 #include <string>
 #include <Ogre.h>
 
@@ -31,5 +34,7 @@ class Component{
         bool isActive_;
         
 };
+
+#endif // ! COMPONENT_H
 
 

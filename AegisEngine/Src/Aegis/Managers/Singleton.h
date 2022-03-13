@@ -1,5 +1,6 @@
-
 #pragma once
+#ifndef SINGLETON_H 
+#define SINGLETON_H
 
 template<typename T>
 class Singleton
@@ -55,3 +56,5 @@ T* Singleton<T>::getInstance()
 
     return Singleton<T>::mInstance_;
 }
+
+#endif //

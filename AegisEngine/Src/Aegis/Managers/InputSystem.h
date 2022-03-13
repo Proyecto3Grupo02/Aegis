@@ -1,4 +1,7 @@
 #pragma once
+#ifndef INPUT_SYSTEM_H 
+#define INPUT_SYSTEM_H
+
 #include "Singleton.h"
 #include <vector>
 #include<SDL.h>
@@ -39,3 +42,5 @@ inline InputSystem* Input()
 {
 	return InputSystem::getInstance();
 }
+
+#endif //

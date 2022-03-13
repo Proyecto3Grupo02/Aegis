@@ -1,5 +1,6 @@
 #pragma once
-
+#ifndef VECTOR3_H 
+#define VECTOR3_H
 
 class Vector3 {
 public:
@@ -26,3 +27,5 @@ protected:
 	float y;
 	float z;
 };
+
+#endif // VECTOR 3_H

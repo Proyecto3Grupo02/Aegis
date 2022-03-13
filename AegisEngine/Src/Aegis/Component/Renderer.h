@@ -1,4 +1,7 @@
 #pragma once
+#ifndef  RENDERER_H 
+#define RENDERER_H
+
 #include "AegisComponent.h"
 #include "ComponentManager.h"
 
@@ -27,3 +30,6 @@ protected:
 	Transform* transform;
 	Ogre::Entity* mesh;
 };
+
+
+#endif //RENDERER_H

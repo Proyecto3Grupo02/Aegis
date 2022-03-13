@@ -1,12 +1,13 @@
+#pragma once
+#ifndef ENTITY_H 
+#define ENTITY_H
 
-#pragma once 
 #include <vector>
 #include <list>
 #include <string>
 #include "ComponentManager.h"
 #include <Ogre.h>
 #include "Transform.h"
-
 
 class Component;
 class Scene;
@@ -94,3 +95,4 @@ class Entity{
 
 };
 
+#endif //
