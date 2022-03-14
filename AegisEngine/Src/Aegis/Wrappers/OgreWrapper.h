@@ -6,26 +6,30 @@
 #include <SDL.h>
 #include "IInitializable.h"
 
-class OgreWrapper : IInitializable
-{
-private:
-    Ogre::Root* mRoot;
+using namespace AegisUtils;
 
-    Ogre::String mResourcesCfg;
-    Ogre::String mPluginsCfg;
+namespace AegisOgre {
+    
+    class OgreWrapper : IInitializable
+    {
+    private:
+        Ogre::Root* mRoot;
 
-    Ogre::RenderWindow* render = nullptr;
-    SDL_Window* native = nullptr;
+        Ogre::String mResourcesCfg;
+        Ogre::String mPluginsCfg;
 
-    Ogre::SceneManager* mSceneMgr;
-    Ogre::Camera* mCamera;
+        Ogre::RenderWindow* render = nullptr;
+        SDL_Window* native = nullptr;
 
-    void CreateWindowNative();
-public:
-    OgreWrapper();
-    bool Render();
-    virtual ~OgreWrapper();
-    bool Init() override;
-};
+        Ogre::SceneManager* mSceneMgr;
+        Ogre::Camera* mCamera;
 
+        void CreateWindowNative();
+    public:
+        OgreWrapper();
+        bool Render();
+        virtual ~OgreWrapper();
+        bool Init() override;
+    };
+}
 #endif

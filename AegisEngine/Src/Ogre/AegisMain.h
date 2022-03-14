@@ -3,30 +3,30 @@
 #define AEGIS_MAIN_H
 
 #include "IInitializable.h" //Da error en el cpp
+#include "OgreWrapper.h"
+#include "Scene.h"
+#include "GameLoopData.h"
+#include "SceneManager.h"
 
-class OgreWrapper;
-class Scene;
-class SceneManager;
-struct GameLoopData;
+using namespace AegisUtils;
+    class AegisMain : IInitializable
+    {
+    private:
+        AegisOgre::OgreWrapper* ogreWrap;
+        AegisEngine::SceneManager* sceneManager;
+        AegisUtils::GameLoopData* gameLoopData;
 
-class AegisMain : IInitializable
-{
-private:
-    OgreWrapper* ogreWrap;
-    SceneManager* sceneManager;
-    GameLoopData* gameLoopData;
+        bool exit;
+        //uint32_t frameTimeMS;
 
-    bool exit;
-    //uint32_t frameTimeMS;
+        void GameLoop();
+    public:
+        AegisMain();
+        virtual ~AegisMain();
+        virtual bool Init() override;
 
-    void GameLoop();
-public:
-    AegisMain();
-    virtual ~AegisMain();
-    bool Init() override;
-    
-    const float TARGET_FRAME_RATE = 60.0f;
-};
+        const float TARGET_FRAME_RATE = 60.0f;
+    };
 
 #endif //
 

@@ -7,43 +7,44 @@
 #include <functional>
 #include <unordered_map>
 
-class Component;
-class Entity;
+using namespace AegisUtils;
+namespace AegisEngine {
+	class Component;
+	class Entity;
 
-typedef std::function<Component* (Entity*)> ComponentFactory;
-class ComponentManager: public Singleton<ComponentManager> {
-public:
-	ComponentManager();
-	virtual ~ComponentManager();
-	
-	template<typename T>
-	void RegisterComponent(std::string id);
+	typedef std::function<Component* (Entity*)> ComponentFactory;
+	class ComponentManager : public Singleton<ComponentManager> {
+	public:
+		ComponentManager();
+		virtual ~ComponentManager();
 
-	template <typename T>
-	const std::string GetID();
+		template<typename T>
+		void RegisterComponent(std::string id);
 
-	void close();
+		template <typename T>
+		const std::string GetID();
 
-private:
-	std::unordered_map<std::string, std::string> mComponentTypes_;
-	std::map <std::string, ComponentFactory> mComponentFactory_;
-	
+	private:
+		std::unordered_map<std::string, std::string> mComponentTypes_;
+		std::map <std::string, ComponentFactory> mComponentFactory_;
 
-};
+
+	};
 
 #endif // ! COMPONENT_MANAGER 
 
-template<typename T>
-void ComponentManager::RegisterComponent(std::string id) {
-	std::string typeName = typeid(T).name();
+	template<typename T>
+	void ComponentManager::RegisterComponent(std::string id) {
+		std::string typeName = typeid(T).name();
 
-	if (mComponentTypes_.find(typeName) == mComponentTypes_.end()) {
-		mComponentTypes_[typeName] = id;
+		if (mComponentTypes_.find(typeName) == mComponentTypes_.end()) {
+			mComponentTypes_[typeName] = id;
+		}
 	}
-}
 
-template<typename T>
-const std::string ComponentManager::GetID() {
-	std::string typeName = typeid(T).name();
-	return mComponentTypes_[typeName];
+	template<typename T>
+	const std::string ComponentManager::GetID() {
+		std::string typeName = typeid(T).name();
+		return mComponentTypes_[typeName];
+	}
 }

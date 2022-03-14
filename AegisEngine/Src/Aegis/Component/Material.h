@@ -4,19 +4,20 @@
 #define MATERIAL_CMP
 #include "AegisComponent.h"
 
-class Renderer;
+namespace AegisEngine {
+	class Renderer;
 
-class Material: public AegisComponent {
-public: 
-	Material();
-	Material(std::string matName);
-	virtual ~Material();
+	class Material : public AegisComponent {
+	public:
+		Material();
+		Material(std::string matName);
+		virtual ~Material();
 
-	virtual void init();
+		virtual void init();
 
-private:
-	Renderer* mRenderer_;
-	std::string mMaterialName_;
-};
-
+	private:
+		Renderer* mRenderer_;
+		std::string mMaterialName_;
+	};
+}
 #endif

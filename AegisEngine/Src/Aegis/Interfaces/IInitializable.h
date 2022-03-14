@@ -2,9 +2,11 @@
 #ifndef IINITIALIZABLE_H 
 #define IINITIALIZABLE_H 
 
-class IInitializable
-{
-public:
-	virtual bool Init() = 0;
-};
+namespace AegisUtils {
+	class IInitializable
+	{
+	public:
+		virtual bool Init() = 0;
+	};
+}
 #endif //
