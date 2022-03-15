@@ -18,44 +18,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\Src\Aegis\Component\Component.cpp" />
-    <ClCompile Include="..\..\Src\Aegis\Component\Material.cpp" />
-    <ClCompile Include="..\..\Src\Aegis\Component\Renderer.cpp" />
-    <ClCompile Include="..\..\Src\Aegis\Component\Transform.cpp" />
-    <ClCompile Include="..\..\Src\Aegis\Component\Vector3.cpp" />
-    <ClCompile Include="..\..\Src\Aegis\Component\Vector4.cpp" />
-    <ClCompile Include="..\..\Src\Aegis\Entity\Entity.cpp" />
-    <ClCompile Include="..\..\Src\Aegis\Managers\ComponentManager.cpp" />
-    <ClCompile Include="..\..\Src\Aegis\Managers\DebugManager.cpp" />
-    <ClCompile Include="..\..\Src\Aegis\Managers\InputSystem.cpp" />
-    <ClCompile Include="..\..\Src\Aegis\Managers\Singleton.cpp" />
-    <ClCompile Include="..\..\Src\Aegis\Scene\Scene.cpp" />
-    <ClCompile Include="..\..\Src\Aegis\Scene\SceneManager.cpp" />
-    <ClCompile Include="..\..\Src\Aegis\Wrappers\OgreWrapper.cpp" />
-    <ClCompile Include="..\..\Src\Ogre\AegisMain.cpp" />
-    <ClCompile Include="..\..\Src\Ogre\main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\Src\Aegis\Component\Component.h" />
-    <ClInclude Include="..\..\Src\Aegis\Component\Material.h" />
-    <ClInclude Include="..\..\Src\Aegis\Component\RegisterComponent.h" />
-    <ClInclude Include="..\..\Src\Aegis\Component\Renderer.h" />
-    <ClInclude Include="..\..\Src\Aegis\Component\Transform.h" />
-    <ClInclude Include="..\..\Src\Aegis\Component\Vector3.h" />
-    <ClInclude Include="..\..\Src\Aegis\Component\Vector4.h" />
-    <ClInclude Include="..\..\Src\Aegis\Entity\Entity.h" />
-    <ClInclude Include="..\..\Src\Aegis\Interfaces\IInitializable.h" />
-    <ClInclude Include="..\..\Src\Aegis\Managers\ComponentManager.h" />
-    <ClInclude Include="..\..\Src\Aegis\Managers\DebugManager.h" />
-    <ClInclude Include="..\..\Src\Aegis\Managers\InputSystem.h" />
-    <ClInclude Include="..\..\Src\Aegis\Managers\Singleton.h" />
-    <ClInclude Include="..\..\Src\Aegis\Scene\Scene.h" />
-    <ClInclude Include="..\..\Src\Aegis\Scene\SceneManager.h" />
-    <ClInclude Include="..\..\Src\Aegis\Structs\GameLoopData.h" />
-    <ClInclude Include="..\..\Src\Aegis\Wrappers\OgreWrapper.h" />
-    <ClInclude Include="..\..\Src\Ogre\AegisMain.h" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

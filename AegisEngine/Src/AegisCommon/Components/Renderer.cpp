@@ -1,7 +1,11 @@
 #include "Renderer.h"
-#include "Entity.h"
+#include "../Entity/Entity.h"
 #include "OgreWrapper.h"
 #include "Transform.h"
+
+#include "../Utils/Vector3.h"
+#include "../Utils/Vector4.h"
+
 
 void Renderer::render()
 {
