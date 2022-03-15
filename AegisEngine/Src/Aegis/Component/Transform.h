@@ -18,7 +18,7 @@ public:
 	};
 	virtual ~Transform() {}
 	virtual void init(){}
-
+	virtual void update();
 	Vector3 GetPosition();
 	Vector4 GetRotation();
 	Vector3 GetScale();
