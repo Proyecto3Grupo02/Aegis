@@ -24,7 +24,9 @@ namespace AegisEngine {
 		Vector3 GetPosition();
 		Vector4 GetRotation();
 		Vector3 GetScale();
-
+		
+		virtual void update();
+	
 		void SetPosition(Vector3 newPos);
 		void SetRotation(Vector4 newRot);
 		void SetScale(Vector3 newScale);

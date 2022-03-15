@@ -1,4 +1,5 @@
 #pragma once
+
 #ifndef AEGIS_MAIN_H 
 #define AEGIS_MAIN_H
 

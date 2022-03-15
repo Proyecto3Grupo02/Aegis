@@ -1,6 +1,7 @@
 #include "Transform.h"
 
 #include"RegisterComponent.h"
+
 using namespace AegisUtils;
 namespace AegisEngine {
 	Vector3 Transform::GetPosition()
