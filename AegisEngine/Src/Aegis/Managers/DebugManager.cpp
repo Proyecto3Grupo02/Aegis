@@ -15,7 +15,7 @@ DebugManager::~DebugManager()
 }
 
 void DebugManager::Log(const std::string& msg) {
-	std::cout << msg << std::endl;
+	std::cout<<"DEBUG: " << msg << std::endl;
 }
 
 void DebugManager::LogWarning(const std::string& msg) {
