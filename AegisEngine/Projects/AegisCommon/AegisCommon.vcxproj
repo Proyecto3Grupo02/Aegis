@@ -17,7 +17,6 @@
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -53,25 +52,23 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Label="Shared" >
+  <ImportGroup Label="Shared">
   </ImportGroup>
-    <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    </ImportGroup>
-    <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    </ImportGroup>
-    <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-      <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    </ImportGroup>
-    <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-      <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    </ImportGroup>
-
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
@@ -85,7 +82,6 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -142,8 +138,39 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-
-  <ItemGroup></ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Src\AegisCommon\Components\AegisComponent.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Components\Component.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Components\Material.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Components\RegisterComponent.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Components\Renderer.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Components\Transform.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Entity\Entity.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Interfaces\IInitializable.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Managers\ComponentManager.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Managers\DebugManager.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Managers\InputManager.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Managers\SceneManager.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Scene\Scene.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Utils\GameLoopData.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Utils\Singleton.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Utils\Vector3.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Utils\Vector4.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Src\AegisCommon\Components\Component.cpp" />
+    <ClCompile Include="..\..\Src\AegisCommon\Components\Material.cpp" />
+    <ClCompile Include="..\..\Src\AegisCommon\Components\Renderer.cpp" />
+    <ClCompile Include="..\..\Src\AegisCommon\Components\Transform.cpp" />
+    <ClCompile Include="..\..\Src\AegisCommon\Entity\Entity.cpp" />
+    <ClCompile Include="..\..\Src\AegisCommon\Managers\ComponentManager.cpp" />
+    <ClCompile Include="..\..\Src\AegisCommon\Managers\DebugManager.cpp" />
+    <ClCompile Include="..\..\Src\AegisCommon\Managers\InputManager.cpp" />
+    <ClCompile Include="..\..\Src\AegisCommon\Managers\SceneManager.cpp" />
+    <ClCompile Include="..\..\Src\AegisCommon\Scene\Scene.cpp" />
+    <ClCompile Include="..\..\Src\AegisCommon\Utils\Vector3.cpp" />
+    <ClCompile Include="..\..\Src\AegisCommon\Utils\Vector4.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

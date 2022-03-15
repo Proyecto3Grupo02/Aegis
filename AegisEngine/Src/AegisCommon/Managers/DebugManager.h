@@ -3,13 +3,13 @@
 #ifndef DEBUG
 #define DEBUG
 
-#include "Singleton.h"
+#include "../Utils/Singleton.h"
 #include <string>
 #include <OgreManualObject.h>
 #include<vector>
-#include "IInitializable.h"
+#include "../Interfaces/IInitializable.h"
 
-#include "Vector3.h"
+#include "../Utils/Vector3.h"
 
 class DebugManager: public Singleton<DebugManager>, public IInitializable{
 public:

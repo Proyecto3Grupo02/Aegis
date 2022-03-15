@@ -5,7 +5,7 @@
 #include <vector>
 #include <list>
 #include <string>
-#include "ComponentManager.h"
+#include "../Managers/ComponentManager.h"
 #include <Ogre.h>
 
 class Component;

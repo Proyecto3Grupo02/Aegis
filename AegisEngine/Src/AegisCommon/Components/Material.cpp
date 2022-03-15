@@ -1,6 +1,7 @@
 #include "Material.h"
-#include "Entity.h"
+#include "../Entity/Entity.h"
 #include "Renderer.h"
+#include <cassert>
 Material::Material(): AegisComponent(), mMaterialName_("")
 {
 }

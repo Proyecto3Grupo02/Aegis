@@ -2,7 +2,7 @@
 #ifndef  RENDERER_H 
 #define RENDERER_H
 
-#include "ComponentManager.h" //Da error en el cpp
+#include "../Managers/ComponentManager.h" //Da error en el cpp
 #include "AegisComponent.h" //Da error en el cpp
 
 class OgreWrapper;

@@ -3,6 +3,7 @@
 #ifndef MATERIAL_CMP
 #define MATERIAL_CMP
 #include "AegisComponent.h"
+#include <string>
 
 class Renderer;
 

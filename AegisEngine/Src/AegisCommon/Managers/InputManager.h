@@ -2,7 +2,7 @@
 #ifndef INPUT_SYSTEM_H 
 #define INPUT_SYSTEM_H
 
-#include "Singleton.h"
+#include "../Utils/Singleton.h"
 #include <vector>
 #include<SDL.h>
 

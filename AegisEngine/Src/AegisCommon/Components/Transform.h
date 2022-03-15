@@ -3,8 +3,8 @@
 #define TRANSFORM_H
 
 #include "AegisComponent.h"
-#include "Vector4.h"
-#include "ComponentManager.h"
+#include "../Utils/Vector4.h"
+#include "../Managers/ComponentManager.h"
 class Entity;
 
 class Transform : public AegisComponent {
