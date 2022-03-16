@@ -3,21 +3,20 @@
 #ifndef AEGIS_MAIN_H 
 #define AEGIS_MAIN_H
 
-#include "IInitializable.h" //Da error en el cpp
+#include "../AegisCommon/Interfaces/IInitializable.h" //Da error en el cpp
 
-class AegisOgre::OgreWrapper;
-class AegisEngine::SceneManager;
-class AegisUtils::GameLoopData;
+class OgreWrapper;
+class SceneManager;
+class GameLoopData;
 
 
-using namespace AegisUtils;
 namespace Aegis {
     class AegisMain : IInitializable
     {
     private:
-        AegisOgre::OgreWrapper* ogreWrap;
-        AegisEngine::SceneManager* sceneManager;
-        AegisUtils::GameLoopData* gameLoopData;
+        OgreWrapper* ogreWrap;
+        SceneManager* sceneManager;
+        GameLoopData* gameLoopData;
 
         bool exit;
         //uint32_t frameTimeMS;

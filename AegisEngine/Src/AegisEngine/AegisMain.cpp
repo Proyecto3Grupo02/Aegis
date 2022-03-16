@@ -15,17 +15,14 @@
 #include <iostream>
 #include <fstream>
 
-#include "DebugManager.h"
-#include "SceneManager.h"
-#include <InputSystem.h>
-#include "OgreWrapper.h"
-#include "Scene.h"
-#include "GameLoopData.h"
-#include "SceneManager.h"
+#include "../AegisCommon/Managers/SceneManager.h"
+#include "../AegisCommon/Managers/InputManager.h"
+#include "../AegisCommon/Managers/DebugManager.h"
+#include "../AegisGraphics/OgreWrapper.h"
+#include "../AegisCommon/Scene/Scene.h"
+#include "../AegisCommon/Utils/GameLoopData.h"
 
-using namespace AegisEngine;
-using namespace AegisUtils;
-using namespace AegisOgre;
+
 
 namespace Aegis{
 	void AegisMain::GameLoop() {
@@ -42,7 +39,7 @@ namespace Aegis{
 			{
 				//Tiempo al inicio del frame
 				gameLoopData->frameStartTime = SDL_GetTicks();
-				AegisEngine::Input()->UpdateState();
+				Input()->UpdateState();
 				while (SDL_PollEvent(&eventHandler) != 0)
 				{
 					switch (eventHandler.type)
@@ -52,10 +49,10 @@ namespace Aegis{
 					case SDL_KEYDOWN:
 						if (eventHandler.key.keysym.sym == SDLK_ESCAPE)
 							exit = true;
-						AegisEngine::Input()->OnKeyDown(eventHandler.key.keysym.sym);
+						Input()->OnKeyDown(eventHandler.key.keysym.sym);
 						break;
 					case SDL_KEYUP:
-						AegisEngine::Input()->OnKeyUp(eventHandler.key.keysym.sym);
+						Input()->OnKeyUp(eventHandler.key.keysym.sym);
 						break;
 					default:
 						break;
@@ -74,8 +71,8 @@ namespace Aegis{
 				// Actualiza deltaTime y timeSinceSceneStart
 				gameLoopData->UpdateTimeRegistry(SDL_GetTicks());
 
-				std::cout << "a key is down: " << AegisEngine::Input()->isKeyDown(SDLK_a) << "a key is pressedThis: ";
-				std::cout << AegisEngine::Input()->isKeyPressedThisFrame(SDLK_a) << "a key is released: " << AegisEngine::Input()->isKeyUp(SDLK_a);
+				std::cout << "a key is down: " << Input()->isKeyDown(SDLK_a) << "a key is pressedThis: ";
+				std::cout << Input()->isKeyPressedThisFrame(SDLK_a) << "a key is released: " << Input()->isKeyUp(SDLK_a);
 				std::cout << "\r";
 			}
 		}

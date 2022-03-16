@@ -18,6 +18,15 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Src\AegisEngine\AegisMain.cpp" />
+    <ClCompile Include="..\..\Src\AegisEngine\Appc.cpp" />
+    <ClCompile Include="..\..\Src\AegisEngine\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Src\AegisEngine\AegisMain.h" />
+    <ClInclude Include="..\..\Src\AegisEngine\AppC.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
