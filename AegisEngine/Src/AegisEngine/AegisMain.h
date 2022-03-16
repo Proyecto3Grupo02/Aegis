@@ -10,7 +10,6 @@ class SceneManager;
 class GameLoopData;
 
 
-namespace Aegis {
     class AegisMain : IInitializable
     {
     private:
@@ -29,7 +28,7 @@ namespace Aegis {
 
         const float TARGET_FRAME_RATE = 60.0f;
     };
-}
+
 #endif //
 
 

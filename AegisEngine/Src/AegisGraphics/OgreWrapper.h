@@ -4,7 +4,7 @@
 
 #include <OgreRoot.h>
 #include <SDL.h>
-#include "IInitializable.h"
+#include "../AegisCommon/Interfaces/IInitializable.h"
 
 class OgreWrapper : IInitializable
 {

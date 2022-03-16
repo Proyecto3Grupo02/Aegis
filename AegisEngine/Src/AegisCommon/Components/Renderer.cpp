@@ -1,6 +1,6 @@
 #include "Renderer.h"
 #include "../Entity/Entity.h"
-#include "OgreWrapper.h"
+//#include "OgreWrapper.h"
 #include "Transform.h"
 
 #include "../Utils/Vector3.h"

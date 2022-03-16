@@ -12,11 +12,6 @@
 
 #include <SDL_syswm.h>
 
-#include "Entity.h"
-#include "Transform.h"
-#include "Renderer.h"
-#include "Material.h"
-
 OgreWrapper::OgreWrapper() : mRoot(0),
 mResourcesCfg(Ogre::BLANKSTRING),
 mPluginsCfg(Ogre::BLANKSTRING)
@@ -98,12 +93,12 @@ bool OgreWrapper::Init()
 		Ogre::Real(vp->getActualHeight()));
 
 	//fish creation with components
-	Ogre::SceneNode* fishNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-	Entity* fish = new Entity(fishNode);
-	fish->addComponent<Transform>("Transform", Vector3(), Vector4(), Vector3(1.0f, -1.0f, 1.0f));	
-	Renderer* fishRenderer = fish->addComponent<Renderer>("Renderer", fish, "fish.mesh", mSceneMgr, true);
-	fish->addComponent<Material>("Material", "red");
-	fishRenderer->render();
+	//Ogre::SceneNode* fishNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+	//Entity* fish = new Entity(fishNode);
+	//fish->addComponent<Transform>("Transform", Vector3(), Vector4(), Vector3(1.0f, -1.0f, 1.0f));	
+	//Renderer* fishRenderer = fish->addComponent<Renderer>("Renderer", fish, "fish.mesh", mSceneMgr, true);
+	//fish->addComponent<Material>("Material", "red");
+	//fishRenderer->render();
 
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
 

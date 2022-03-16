@@ -24,18 +24,12 @@
     <ClCompile Include="..\..\Src\AegisEngine\AegisMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\AegisEngine\Appc.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Src\AegisEngine\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AegisEngine\AegisMain.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\AegisEngine\AppC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
