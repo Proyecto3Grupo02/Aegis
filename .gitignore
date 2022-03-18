@@ -355,3 +355,7 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+#ignore all release and debug folders
+[Rr]elease/
+[Dd]ebug/
