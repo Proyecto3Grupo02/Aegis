@@ -9,7 +9,7 @@
 #include <map>
 #include <vector>
 #include <string>
-#include "Quaternion.h"
+//#include "Quaternion.h"
 #include <vector>
 #include "Vector3.h"
 
@@ -21,12 +21,14 @@ typedef FMOD::ChannelGroup ChannelGroup;
 
 class GAIA_API SoundSystem : public Singleton<SoundSystem>
 {
+	// Basic classes for fmod functionality
 	friend class GaiaCore;
 	friend class Reverb;
 	friend class ResourcesManager;
 	friend class SoundEmitter;
 	friend class SoundListener;
 public:
+	// Channel that emits the sound
 	struct SoundChannel {
 		Channel* channel;
 		bool paused;
@@ -35,6 +37,8 @@ public:
 		SoundChannel(Channel* channel);
 		~SoundChannel();
 	};
+
+	// Data from the sound emitted
 	struct EmitterData
 	{
 		std::map<std::string, SoundChannel*> channels;
@@ -44,20 +48,27 @@ public:
 		~EmitterData();
 		bool isPaused();
 	};
+
+	// Data from the listener (camera or player)
+	// Allows for 3d spatialization of the sound
 	struct ListenerData
 	{
 		const Vector3* position;
 		const Quaternion* quaternion;
 	};
-private:
-	System* system;
 
+private:
+	System* system; // Initialization
+
+	// Allows separation of multiple sources for group controls
 	ChannelGroup* music;
 	ChannelGroup* soundEffects;
 
 	float generalVolume;
 	float soundVolume;
 	float musicVolume;
+
+	// VEctor of all the active emitters
 	std::vector<EmitterData*> emitters;
 	ListenerData* listener;
 
