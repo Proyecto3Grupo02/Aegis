@@ -81,12 +81,14 @@
     <OutDir>$(SolutionDir)Exes\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <IncludePath>$(SolutionDir)\Src\AegisCommon\Utils;$(SolutionDir)\Src\AegisCommon\Scene;$(SolutionDir)\Src\AegisCommon\Managers;$(SolutionDir)\Src\AegisCommon\Interfaces;$(SolutionDir)\Src\AegisCommon\Components;$(SolutionDir)\Src\AegisCommon\Entity;$(SolutionDir)\Dependencias\Ogre\Source\OgreMain\include;$(IncludePath)</IncludePath>
+    <SourcePath>$(SolutionDir)Exes\$(Platform)\$(Configuration)\;$(SolutionDir)Src\;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)Exes\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <IncludePath>$(SolutionDir)\Src\AegisCommon\Utils;$(SolutionDir)\Src\AegisCommon\Scene;$(SolutionDir)\Src\AegisCommon\Managers;$(SolutionDir)\Src\AegisCommon\Interfaces;$(SolutionDir)\Src\AegisCommon\Components;$(SolutionDir)\Src\AegisCommon\Entity;$(SolutionDir)\Dependencias\Ogre\Source\OgreMain\include;$(IncludePath)</IncludePath>
+    <SourcePath>$(SolutionDir)Exes\$(Platform)\$(Configuration)\;$(SolutionDir)Src\;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
