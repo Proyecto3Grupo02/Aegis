@@ -3,14 +3,15 @@
 #ifndef SOUND_SYSTEM_H
 #define SOUND_SYSTEM_H
 
+// AegisCommon
 #include "Singleton.h"
 
+// Dependencies\Fmod
 #include <fmod.hpp>
+
 #include <map>
 #include <vector>
 #include <string>
-//#include "Quaternion.h"
-#include <vector>
 #include "Vector3.h"
 
 typedef FMOD_MODE SoundMode;
@@ -19,7 +20,7 @@ typedef FMOD::System System;
 typedef FMOD::Channel Channel;
 typedef FMOD::ChannelGroup ChannelGroup;
 
-class GAIA_API SoundSystem : public Singleton<SoundSystem>
+class SoundSystem : public Singleton<SoundSystem>
 {
 	// Basic classes for fmod functionality
 	friend class GaiaCore;
@@ -54,7 +55,7 @@ public:
 	struct ListenerData
 	{
 		const Vector3* position;
-		const Quaternion* quaternion;
+		const Vector4* quaternion;
 	};
 
 private:
@@ -105,7 +106,7 @@ private:
 	void update(float deltaTime);
 
 	EmitterData* createEmitter(const Vector3* position);
-	ListenerData* createListener(const Vector3* position, const Quaternion* quaternion);
+	ListenerData* createListener(const Vector3* position, const Vector4* quaternion);
 
 	// Utils
 	FMOD_VECTOR vecToFMOD(const Vector3& in);

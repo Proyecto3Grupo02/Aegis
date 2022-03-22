@@ -1,9 +1,7 @@
 #include "SoundSystem.h"
-//#include "Error.h"
-#include <fmod_errors.h>
-//#include "ResourcesManager.h"
-//#include "DebugUtils.h"
 
+#include <fmod_errors.h>
+//#include "DebugUtils.h"
 
 SoundSystem::SoundSystem() : system(nullptr), listener(nullptr), music(nullptr), soundEffects(nullptr)
 {
@@ -50,7 +48,6 @@ void SoundSystem::close()
 
 	removeListener();
 
-	checkNull(system);
 	system->close();
 	system->release();
 
@@ -60,7 +57,6 @@ void SoundSystem::close()
 
 Sound* SoundSystem::createSound(const std::string& name, const SoundMode& mode)
 {
-	checkNullAndBreak(system, nullptr);
 	Sound* sound;
 	if (system->createSound(name.c_str(), mode, nullptr, &sound) == FMOD_RESULT::FMOD_OK)
 		return sound;
@@ -69,7 +65,6 @@ Sound* SoundSystem::createSound(const std::string& name, const SoundMode& mode)
 
 FMOD::Channel* SoundSystem::playSound(const std::string& name)
 {
-	checkNullAndBreak(system, nullptr);
 	Channel* channel;
 	Sound* sound = getSound(name);
 	if (sound == nullptr) return nullptr;
@@ -82,7 +77,6 @@ FMOD::Channel* SoundSystem::playSound(const std::string& name)
 
 FMOD::Channel* SoundSystem::playMusic(const std::string& name)
 {
-	checkNullAndBreak(system, nullptr);
 	Channel* channel;
 	Sound* sound = getSound(name);
 	if (sound == nullptr) return nullptr;
@@ -95,51 +89,40 @@ FMOD::Channel* SoundSystem::playMusic(const std::string& name)
 
 void SoundSystem::setPauseAllSounds(bool pause)
 {
-	checkNullAndBreak(system);
 	ChannelGroup* master;
+
 	FMOD_RESULT result = system->getMasterChannelGroup(&master);
+	
 	ERRCHECK(result);
-	checkNullAndBreak(master);
+
 	master->setPaused(pause);
 }
 
-/*
-Parametros en decimal para no romper timpanos
-*/
 void SoundSystem::setMusicVolume(float volume)
 {
-	checkNullAndBreak(music);
 	music->setVolume(volume);
 	musicVolume = volume;
 }
 
-/*
-Parametros en decimal para no romper timpanos
-*/
 void SoundSystem::setSoundEffectsVolume(float volume)
 {
-	checkNullAndBreak(soundEffects);
 	soundEffects->setVolume(volume);
 	soundVolume = volume;
 }
 
-/*
-Parametros en decimal para no romper timpanos
-*/
 void SoundSystem::setGeneralVolume(float volume)
 {
-	checkNullAndBreak(system);
 	ChannelGroup* master;
 	FMOD_RESULT result = system->getMasterChannelGroup(&master);
+
 	ERRCHECK(result);
-	checkNullAndBreak(master);
+
 	master->setVolume(volume);
 	generalVolume = volume;
 }
 
 void SoundSystem::setListenerAttributes(const Vector3& position, const Vector3& forward, const Vector3& up)
 {
-	checkNullAndBreak(system);
 	FMOD_VECTOR pos, vel, forwardTmp, upTmp;
 	pos = { float(position.x) ,float(position.y) ,float(position.z) };
 	vel = { 0,0,0 };
@@ -204,7 +187,6 @@ void SoundSystem::update(float deltaTime)
 		if (!paused) emitterPosition = vecToFMOD(*data->position);
 	}
 
-	checkNullAndBreak(system);
 	FMOD_RESULT result = system->update();
 	ERRCHECK(result);
 }
@@ -216,7 +198,7 @@ SoundSystem::EmitterData* SoundSystem::createEmitter(const Vector3* position)
 	return data;
 }
 
-SoundSystem::ListenerData* SoundSystem::createListener(const Vector3* position, const Quaternion* quaternion)
+SoundSystem::ListenerData* SoundSystem::createListener(const Vector3* position, const Vector4* quaternion)
 {
 	if (listener != nullptr)
 		delete listener;
@@ -239,7 +221,6 @@ FMOD_VECTOR SoundSystem::vecToFMOD(const Vector3& in)
 
 FMOD::Reverb3D* SoundSystem::createReverb()
 {
-	checkNullAndBreak(system, nullptr);
 	FMOD::Reverb3D* reverb;
 	FMOD_RESULT result = system->createReverb3D(&reverb);
 	ERRCHECK(result);
