@@ -23,13 +23,14 @@ typedef FMOD::ChannelGroup ChannelGroup;
 class SoundSystem : public Singleton<SoundSystem>
 {
 	// Basic classes for fmod functionality
-	friend class GaiaCore;
+	friend class Core;
 	friend class Reverb;
 	friend class ResourcesManager;
 	friend class SoundEmitter;
 	friend class SoundListener;
+
 public:
-	// Channel that emits the sound
+	// Canales par la emision de sonidos
 	struct SoundChannel {
 		Channel* channel;
 		bool paused;
@@ -39,7 +40,7 @@ public:
 		~SoundChannel();
 	};
 
-	// Data from the sound emitted
+	// Datos necesarios para el emisor
 	struct EmitterData
 	{
 		std::map<std::string, SoundChannel*> channels;
@@ -50,8 +51,8 @@ public:
 		bool isPaused();
 	};
 
-	// Data from the listener (camera or player)
-	// Allows for 3d spatialization of the sound
+	// Datos del listener (camara o player)
+	// Permite la espacializacion 3d
 	struct ListenerData
 	{
 		const Vector3* position;
@@ -61,25 +62,28 @@ public:
 private:
 	System* system; // Initialization
 
-	// Allows separation of multiple sources for group controls
+	// Grupos de canales para distinguir musica y efectos
 	ChannelGroup* music;
 	ChannelGroup* soundEffects;
 
-	float generalVolume;
-	float soundVolume;
-	float musicVolume;
+	float generalVolume; // Volumen para todo
+	float soundVolume;	 // Volumen de efectos
+	float musicVolume;	 // Volumen de musica
 
-	// VEctor of all the active emitters
+	// Vector para los emisores
 	std::vector<EmitterData*> emitters;
 	ListenerData* listener;
 
 	void ERRCHECK(FMOD_RESULT result) const;
 
+	// Funcion para obtener los sonidos desde recursos
 	Sound* getSound(const std::string& name) const;
+
 public:
 	SoundSystem();
 	~SoundSystem();
 
+	// Setters y getters
 	void setMusicVolume(float volume);
 	void setSoundEffectsVolume(float volume);
 	void setGeneralVolume(float volume);
@@ -108,7 +112,7 @@ private:
 	EmitterData* createEmitter(const Vector3* position);
 	ListenerData* createListener(const Vector3* position, const Vector4* quaternion);
 
-	// Utils
+	// Utiles de Fmod
 	FMOD_VECTOR vecToFMOD(const Vector3& in);
 	FMOD::Reverb3D* createReverb();
 };
