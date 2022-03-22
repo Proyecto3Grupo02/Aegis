@@ -31,6 +31,14 @@ AegisEngine/Dependencias/LuaProject/x64
 
 
 AegisEngine/Dependencias/Ogre
+AegisEngine/Dependencias/bullet
+AegisEngine/Dependencias/Fmod
+AegisEngine/Dependencias/Cmake
+AegisEngine/Dependencias/imgui
+
+
+
+
 
 
 
