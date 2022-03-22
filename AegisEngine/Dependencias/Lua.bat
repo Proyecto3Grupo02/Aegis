@@ -1,7 +1,7 @@
 @echo off
 
-set LUA_SOL= .\Dependencias\Lua\Lua.sln
-set LUA_LIB_PATH= Lua\Lua.lib
+set LUA_SOL= .\Dependencias\Lua\Lua.sln 
+set LUA_LIB_PATH= .\Dependencias\Lua\Lua.lib
 
 if exist %LUA_LIB_PATH% goto done
 
