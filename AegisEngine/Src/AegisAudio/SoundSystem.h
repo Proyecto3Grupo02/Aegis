@@ -30,7 +30,7 @@ class SoundSystem : public Singleton<SoundSystem>
 	friend class SoundListener;
 
 public:
-	// Canales par la emision de sonidos
+	// Canales para la emision de sonidos
 	struct SoundChannel {
 		Channel* channel;
 		bool paused;

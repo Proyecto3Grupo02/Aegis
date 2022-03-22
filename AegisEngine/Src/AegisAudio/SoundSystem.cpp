@@ -161,7 +161,7 @@ void SoundSystem::setGeneralVolume(float volume)
 /// Ajusta las variables del listener/receptor
 /// </summary>
 /// <param name="position"> Vector3 de la posicion </param>
-/// <param name="forward"> Vector3 de la direccion a la que apunta su eje ¿X?</param>
+/// <param name="forward"> Vector3 de la direccion a la que apunta su eje X</param>
 /// <param name="up"> Vector3 de la direccion a la que apunta su eje Y</param>
 void SoundSystem::setListenerAttributes(const Vector3& position, const Vector3& forward, const Vector3& up)
 {
@@ -392,7 +392,7 @@ SoundSystem::EmitterData::EmitterData(const Vector3* position) : position(positi
 }
 
 /// <summary>
-/// Metodo que pone en pausa a todos los emisores?
+/// Metodo que comprueba si todos los emisores estan pausados
 /// </summary>
 /// <returns></returns>
 bool SoundSystem::EmitterData::isPaused()
