@@ -1,0 +1,9 @@
+html {
+	--primary-color: #628768;
+}
+
+@media (prefers-color-scheme: dark) {
+    html:not(.light-mode) {
+		--primary-color: #628768;
+    }
+}

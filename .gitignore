@@ -29,7 +29,7 @@ AegisEngine/Dependencias/Lua/build
 
 
 # Ogre dependencies
-AegisEngine/Dependencias/Ogre
+AegisEngine/Dependencias/Ogre/build
 
 
 AegisEngine/Dependencias/Bullet
