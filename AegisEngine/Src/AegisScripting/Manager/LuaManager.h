@@ -2,17 +2,28 @@
 
 #ifndef LUA_MANAGER
 #define LUA_MANAGER
-#include "Singleton.h"
+#include "../../AegisCommon/Utils/Singleton.h"
 
-namespace Lua{
-    class LuaScript;
+#ifdef __cplusplus
+	#include <lua.hpp>
+#else
+#include <lua.h>
+#include <lualib.h>
+#include <lauxlib.h>
+#endif
+
+namespace Lua {
+	class LuaScript;
 }
-class LuaManager: public Singleton<LuaManager>{
+class LuaManager : public Singleton<LuaManager> {
 public:
-    LuaManager();
-    virtual ~LuaManager();
+	LuaManager();
+	virtual ~LuaManager();
+	void Execute(const char* filename);
+	void PrintError(lua_State* state);
 
 
+private:
 };
 
 

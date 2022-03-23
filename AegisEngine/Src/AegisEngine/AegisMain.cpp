@@ -19,12 +19,14 @@
 #include "../AegisCommon/Managers/InputManager.h"
 #include "../AegisCommon/Managers/DebugManager.h"
 #include "../AegisGraphics/OgreWrapper.h"
+#include "../AegisScripting/Manager/LuaManager.h"
 #include "../AegisCommon/Scene/Scene.h"
 #include "../AegisCommon/Utils/GameLoopData.h"
 
 void AegisMain::GameLoop() {
 	std::cout << '\n';
 	Debug()->Log("Aegis loaded");
+	luaManager->Execute("../../../../Src/AegisScripting/LuaFiles/template.lua");
 
 	while (!exit)
 	{
@@ -76,6 +78,7 @@ void AegisMain::GameLoop() {
 }
 
 AegisMain::AegisMain() : IInitializable() {
+	luaManager = new LuaManager();
 	ogreWrap = new OgreWrapper();
 	gameLoopData = new GameLoopData();
 	sceneManager = new SceneManager("NombreScena");
