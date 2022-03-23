@@ -5,7 +5,7 @@
 #include "../../AegisCommon/Utils/Singleton.h"
 
 #ifdef __cplusplus
-	#include <lua.hpp>
+#include <lua.hpp>
 #else
 #include <lua.h>
 #include <lualib.h>
@@ -21,8 +21,6 @@ public:
 	virtual ~LuaManager();
 	void Execute(const char* filename);
 	void PrintError(lua_State* state);
-
-
 private:
 };
 
