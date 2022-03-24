@@ -12,19 +12,22 @@
 #include <map>
 #include <vector>
 #include <string>
-#include "Vector3.h"
-#include "Vector4.h"
+#include "Vector3.h"	// AegisCommon
+#include "Vector4.h"	// AegisCommon
 
-typedef FMOD_MODE SoundMode;
-typedef FMOD::Sound Sound;
-typedef FMOD::System System;
-typedef FMOD::Channel Channel;
-typedef FMOD::ChannelGroup ChannelGroup;
+// Typedef to avoid the use of Using
+typedef FMOD_MODE SoundMode;		// Bit Descriptor mode
+typedef FMOD::System System;		// Central FMOD system
 
+typedef FMOD::Sound Sound;			// Sound to play
+typedef FMOD::Channel Channel;		// Temporal channel for sound to play
+typedef FMOD::ChannelGroup ChannelGroup;	// Common groups for utility
+
+// Singleton Class
 class SoundSystem : public Singleton<SoundSystem>
 {
 	// Basic classes for fmod functionality
-	friend class Core;
+	//friend class Core;
 	friend class Reverb;
 	friend class ResourcesManager;
 	friend class SoundEmitter;
@@ -41,7 +44,6 @@ public:
 		~SoundChannel();
 	};
 
-	// Datos necesarios para el emisor
 	struct EmitterData
 	{
 		std::map<std::string, SoundChannel*> channels;
@@ -52,8 +54,7 @@ public:
 		bool isPaused();
 	};
 
-	// Datos del listener (camara o player)
-	// Permite la espacializacion 3d
+	// Camera/Player data for 3D enviroments
 	struct ListenerData
 	{
 		const Vector3* position;
@@ -61,24 +62,23 @@ public:
 	};
 
 private:
-	System* system; // Initialization
-
-	// Grupos de canales para distinguir musica y efectos
+	System* system; // FMOD Initialization
+	
+	// Group channels for menu volumes control
 	ChannelGroup* music;
 	ChannelGroup* soundEffects;
 
-	float generalVolume; // Volumen para todo
-	float soundVolume;	 // Volumen de efectos
-	float musicVolume;	 // Volumen de musica
+	float generalVolume; // General game Volume
+	float soundVolume;	 // Sound channel volume
+	float musicVolume;	 // Music channel volume
 
-	// Vector para los emisores
+	// ECS structure; Manager functionality
 	std::vector<EmitterData*> emitters;
 	ListenerData* listener;
 
-	void ERRCHECK(FMOD_RESULT result) const;
+	void ERRCHECK(FMOD_RESULT result) const;	// FMOD Errorcheck
 
-	// Funcion para obtener los sonidos desde recursos
-	Sound* getSound(const std::string& name) const;
+	Sound* getSound(const std::string& name) const;	// Gets a sound from a resource
 
 public:
 	SoundSystem();
@@ -103,19 +103,20 @@ private:
 	Channel* playSound(const std::string& name);
 	Channel* playMusic(const std::string& name);
 
-	void setListenerAttributes( Vector3& position,  Vector3& forward,  Vector3& up);
+
+	void update(float deltaTime);
+	void setListenerAttributes(Vector3& position, Vector3& forward, Vector3& up);
 
 	void removeEmitter(EmitterData* emitter);
 	void removeListener();
 
-	void update(float deltaTime);
+	// Utiles de Fmod
+	FMOD_VECTOR vecToFMOD(const Vector3& in);
+	FMOD::Reverb3D* createReverb();
 
+	// ECS system classes
 	EmitterData* createEmitter(const Vector3* position);
 	ListenerData* createListener(const Vector3* position, const Vector4* quaternion);
 
-	// Utiles de Fmod
-	FMOD_VECTOR vecToFMOD( Vector3& in);
-	FMOD::Reverb3D* createReverb();
 };
-
 #endif

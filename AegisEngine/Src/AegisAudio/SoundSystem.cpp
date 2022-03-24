@@ -4,42 +4,35 @@
 #include "../AegisCommon/Managers/DebugManager.h"
 #include "../AegisCommon/Utils/Vector4.h"
 
-// Asignacion inicial de variables
 SoundSystem::SoundSystem() : system(nullptr), listener(nullptr), music(nullptr), soundEffects(nullptr)
 {
 }
 
-// Destructora
 SoundSystem::~SoundSystem()
 {
 }
 
-// Iniciacion del SoundSystem
 void SoundSystem::init()
 {
 	generalVolume = 1;
 	musicVolume = 1;
 	soundVolume = 1;
 
+	// Error codes are stored in result
+	// We create and check all the system while we create them
 	FMOD_RESULT result = FMOD::System_Create(&system);
 	ERRCHECK(result);
-
 	result = system->init(128, FMOD_INIT_NORMAL, 0);
 	ERRCHECK(result);
-
 	result = system->createChannelGroup("music", &music);
 	ERRCHECK(result);
-
 	FMOD::ChannelGroup* master;
 	result = system->getMasterChannelGroup(&master);
 	ERRCHECK(result);
-
 	result = master->addGroup(music);
 	ERRCHECK(result);
-
 	result = system->createChannelGroup("soundEffect", &soundEffects);
 	ERRCHECK(result);
-
 	result = master->addGroup(soundEffects);
 	ERRCHECK(result);
 
@@ -313,7 +306,8 @@ FMOD::Reverb3D* SoundSystem::createReverb()
 	return reverb;
 }
 
-
+// When we check the errors the FMOD API returns a cod with info
+// In the event of succes it returns FMOD_OK which we ignore
 void SoundSystem::ERRCHECK(FMOD_RESULT result) const
 {
 	if (result != FMOD_RESULT::FMOD_OK)
