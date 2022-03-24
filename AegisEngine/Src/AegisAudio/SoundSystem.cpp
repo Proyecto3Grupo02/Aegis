@@ -1,7 +1,8 @@
 #include "SoundSystem.h"
-
 #include <fmod_errors.h>
-//#include "DebugUtils.h"
+// Utiles para modo debug
+#include "../AegisCommon/Managers/DebugManager.h"
+#include "../AegisCommon/Utils/Vector4.h"
 
 // Asignacion inicial de variables
 SoundSystem::SoundSystem() : system(nullptr), listener(nullptr), music(nullptr), soundEffects(nullptr)
@@ -42,7 +43,7 @@ void SoundSystem::init()
 	result = master->addGroup(soundEffects);
 	ERRCHECK(result);
 
-	LOG("SOUND SYSTEM: System started");
+	Debug()->Log("SOUND SYSTEM: System started");
 }
 /// <summary>
 /// Se llamara al cerrar el juego, descarta los emisores y el receptor
@@ -163,13 +164,13 @@ void SoundSystem::setGeneralVolume(float volume)
 /// <param name="position"> Vector3 de la posicion </param>
 /// <param name="forward"> Vector3 de la direccion a la que apunta su eje X</param>
 /// <param name="up"> Vector3 de la direccion a la que apunta su eje Y</param>
-void SoundSystem::setListenerAttributes(const Vector3& position, const Vector3& forward, const Vector3& up)
+void SoundSystem::setListenerAttributes( Vector3& position,  Vector3& forward,  Vector3& up)
 {
 	FMOD_VECTOR pos, vel, forwardTmp, upTmp;
-	pos = { float(position.x) ,float(position.y) ,float(position.z) };
+	pos = { float(position.GetX()) ,float(position.GetY()) ,float(position.GetZ()) };
 	vel = { 0,0,0 };
-	forwardTmp = { float(forward.x) ,float(forward.y) ,float(forward.z) };
-	upTmp = { float(up.x) ,float(up.y) ,float(up.z) };
+	forwardTmp = { float(forward.GetX()) ,float(forward.GetY()) ,float(forward.GetZ()) };
+	upTmp = { float(up.GetX()) ,float(up.GetY()) ,float(up.GetZ()) };
 	system->set3DListenerAttributes(0, &pos, &vel, &forwardTmp, &upTmp);
 }
 
@@ -290,12 +291,12 @@ SoundSystem::ListenerData* SoundSystem::createListener(const Vector3* position, 
 /// </summary>
 /// <param name="in"></param>
 /// <returns></returns>
-FMOD_VECTOR SoundSystem::vecToFMOD(const Vector3& in)
+FMOD_VECTOR SoundSystem::vecToFMOD( Vector3& in)
 {
 	FMOD_VECTOR result;
-	result.x = in.x;
-	result.y = in.y;
-	result.z = in.z;
+	result.x = in.GetX();
+	result.y = in.GetY();
+	result.z = in.GetZ();
 
 	return result;
 }
@@ -316,7 +317,7 @@ FMOD::Reverb3D* SoundSystem::createReverb()
 void SoundSystem::ERRCHECK(FMOD_RESULT result) const
 {
 	if (result != FMOD_RESULT::FMOD_OK)
-		LOG("%s", FMOD_ErrorString(result));
+		Debug()->Log("%s", FMOD_ErrorString(result));
 }
 
 /// <summary>
@@ -337,7 +338,7 @@ Sound* SoundSystem::getSound(const std::string& name) const
 	} while (state == FMOD_OPENSTATE_LOADING);
 
 	if (result != FMOD_OK) {
-		LOG("SOUND MANAGER: Error playing sound %s", name.c_str());
+		Debug()->Log("SOUND MANAGER: Error playing sound %s", name.c_str());
 		ERRCHECK(result);
 		return nullptr;
 	}

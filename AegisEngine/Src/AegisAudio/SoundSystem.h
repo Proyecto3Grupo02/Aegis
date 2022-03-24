@@ -13,6 +13,7 @@
 #include <vector>
 #include <string>
 #include "Vector3.h"
+#include "Vector4.h"
 
 typedef FMOD_MODE SoundMode;
 typedef FMOD::Sound Sound;
@@ -102,7 +103,7 @@ private:
 	Channel* playSound(const std::string& name);
 	Channel* playMusic(const std::string& name);
 
-	void setListenerAttributes(const Vector3& position, const Vector3& forward, const Vector3& up);
+	void setListenerAttributes( Vector3& position,  Vector3& forward,  Vector3& up);
 
 	void removeEmitter(EmitterData* emitter);
 	void removeListener();
@@ -113,7 +114,7 @@ private:
 	ListenerData* createListener(const Vector3* position, const Vector4* quaternion);
 
 	// Utiles de Fmod
-	FMOD_VECTOR vecToFMOD(const Vector3& in);
+	FMOD_VECTOR vecToFMOD( Vector3& in);
 	FMOD::Reverb3D* createReverb();
 };
 
