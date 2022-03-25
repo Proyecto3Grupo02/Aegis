@@ -1,5 +1,6 @@
 #include "SoundSystem.h"
 #include <fmod_errors.h>
+#include <string>
 // Utiles para modo debug
 #include "../AegisCommon/Managers/DebugManager.h"
 #include "../AegisCommon/Utils/Vector4.h"
@@ -227,8 +228,11 @@ void SoundSystem::update(float deltaTime)
 	if (listener != nullptr)
 	{
 		pos = *listener->position;
-		forward = GetForwardVector(*listener->quaternion);
-		up = GetUpVector(*listener->quaternion);
+		float z = listener->position->GetZ();
+		float y = listener->position->GetY();
+
+		forward = Vector3 { 0, 0, z }; //Vector3 Forward
+		up = Vector3 { 0, y ,0 }; // Vector3 Up
 		setListenerAttributes(pos, forward, up);
 	}
 	FMOD_VECTOR emitterPosition, zero;
@@ -243,7 +247,8 @@ void SoundSystem::update(float deltaTime)
 			if (!aux)
 				(*it).second->channel->set3DAttributes(&emitterPosition, &zero);
 		}
-		if (!paused) emitterPosition = vecToFMOD(*data->position);
+		Vector3 pos = *data->position;
+		if (!paused) emitterPosition = vecToFMOD(pos);
 	}
 
 	FMOD_RESULT result = system->update();
@@ -268,7 +273,7 @@ SoundSystem::EmitterData* SoundSystem::createEmitter(const Vector3* position)
 /// <param name="position"> Necesita ubicancia </param>
 /// <param name="quaternion"> Necesita orientacion </param>
 /// <returns></returns>
-SoundSystem::ListenerData* SoundSystem::createListener(const Vector3* position, const Vector4* quaternion)
+SoundSystem::ListenerData* SoundSystem::createListener( Vector3* position,  Vector4* quaternion)
 {
 	if (listener != nullptr)
 		delete listener;
@@ -310,8 +315,10 @@ FMOD::Reverb3D* SoundSystem::createReverb()
 // In the event of succes it returns FMOD_OK which we ignore
 void SoundSystem::ERRCHECK(FMOD_RESULT result) const
 {
-	if (result != FMOD_RESULT::FMOD_OK)
-		Debug()->Log("%s", FMOD_ErrorString(result));
+	if (result != FMOD_RESULT::FMOD_OK) {
+		std::string err_log = FMOD_ErrorString(result);
+		Debug()->Log("%s"+ err_log);
+	}
 }
 
 /// <summary>
@@ -332,7 +339,8 @@ Sound* SoundSystem::getSound(const std::string& name) const
 	} while (state == FMOD_OPENSTATE_LOADING);
 
 	if (result != FMOD_OK) {
-		Debug()->Log("SOUND MANAGER: Error playing sound %s", name.c_str());
+		std::string errLog = name.c_str();
+		Debug()->Log("SOUND MANAGER: Error playing sound %s" + errLog);
 		ERRCHECK(result);
 		return nullptr;
 	}

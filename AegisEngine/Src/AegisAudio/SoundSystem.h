@@ -57,8 +57,8 @@ public:
 	// Camera/Player data for 3D enviroments
 	struct ListenerData
 	{
-		const Vector3* position;
-		const Vector4* quaternion;
+		 Vector3* position;
+		 Vector4* quaternion;
 	};
 
 private:
@@ -111,12 +111,12 @@ private:
 	void removeListener();
 
 	// Utiles de Fmod
-	FMOD_VECTOR vecToFMOD(const Vector3& in);
+	FMOD_VECTOR vecToFMOD( Vector3& in);
 	FMOD::Reverb3D* createReverb();
 
 	// ECS system classes
 	EmitterData* createEmitter(const Vector3* position);
-	ListenerData* createListener(const Vector3* position, const Vector4* quaternion);
+	ListenerData* createListener( Vector3* position,  Vector4* quaternion);
 
 };
 #endif
