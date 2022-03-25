@@ -17,7 +17,7 @@ private:
 	float volume;
 
 public:
-	SoundEmitter(GameObject* gameObject);
+	SoundEmitter(Entity* entity);
 	virtual ~SoundEmitter();
 
 	void playSound(const std::string& soundName, bool reverb = false);

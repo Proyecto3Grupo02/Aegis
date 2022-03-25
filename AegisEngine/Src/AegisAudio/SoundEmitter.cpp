@@ -1,16 +1,16 @@
 #include "SoundEmitter.h"
 
-#include "GameObject.h"
-#include "ComponentRegister.h"
+#include "../AegisCommon/Entity/Entity.h"
+#include "../AegisCommon/Managers/ComponentManager.h"
 #include "../AegisCommon/Managers/DebugManager.h"
 
 
 
-SoundEmitter::SoundEmitter(GameObject* gameObject) : AegisComponent(gameObject), emitterData(nullptr), pitch(0.0f), volume(0.0f)
+SoundEmitter::SoundEmitter(Entity* entity) : AegisComponent(entity), emitterData(nullptr), pitch(0.0f), volume(0.0f)
 {
 	SoundSystem* soundSystem = SoundSystem::getInstance();
 
-	emitterData = soundSystem->createEmitter(&gameObject->transform->getPosition());
+	emitterData = soundSystem->createEmitter(&entity->transform->getPosition());
 	pitch = 1.0f;
 	volume = 1.0f;
 }
@@ -66,10 +66,10 @@ void SoundEmitter::resume(const std::string& sound)
 	auto it = emitterData->channels.find(sound);
 	if (it != emitterData->channels.end()) {
 		Channel* Channel = (*it).second;
-		soundChannel->channel->getPaused(&p);
+		Channel->channel->getPaused(&p);
 		if (p) {
-			soundChannel->channel->setPaused(false);
-			soundChannel->paused = false;
+			Channel->channel->setPaused(false);
+			Channel->paused = false;
 		}
 	}
 }
