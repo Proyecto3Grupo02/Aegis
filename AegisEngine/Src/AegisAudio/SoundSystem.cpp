@@ -1,8 +1,8 @@
 #include "SoundSystem.h"
 #include <fmod_errors.h>
-// Utiles para modo debug
-#include "../AegisCommon/Managers/DebugManager.h"
+
 #include "../AegisCommon/Utils/Vector4.h"
+#include "../AegisCommon/Managers/DebugManager.h"
 
 SoundSystem::SoundSystem() : system(nullptr), listener(nullptr), music(nullptr), soundEffects(nullptr)
 {
@@ -85,10 +85,9 @@ FMOD::Channel* SoundSystem::playSound(const std::string& name)
 }
 
 /// <summary>
-/// Ejecuta la cancion
+/// Plays the music
 /// </summary>
-/// <param name="name"> Nombre de la cancion </param>
-/// <returns></returns>
+/// <param name="name"> Song name </param>
 FMOD::Channel* SoundSystem::playMusic(const std::string& name)
 {
 	Channel* channel;
@@ -102,24 +101,23 @@ FMOD::Channel* SoundSystem::playMusic(const std::string& name)
 }
 
 /// <summary>
-/// Para detener todo el audio
+/// Sets all audio to pause, apart from their sound groups
 /// </summary>
-/// <param name="pause"> true o false </param>
+/// <param name="pause"> True o false </param>
 void SoundSystem::setPauseAllSounds(bool pause)
 {
 	ChannelGroup* master;
 
 	FMOD_RESULT result = system->getMasterChannelGroup(&master);
-	
 	ERRCHECK(result);
 
 	master->setPaused(pause);
 }
 
 /// <summary>
-/// Permite ajustar el volumen general de la musica
+/// Sets the MUSIC volume
 /// </summary>
-/// <param name="volume"> Cantidad </param>
+/// <param name="volume"> Volume in % </param>
 void SoundSystem::setMusicVolume(float volume)
 {
 	music->setVolume(volume);
@@ -127,9 +125,9 @@ void SoundSystem::setMusicVolume(float volume)
 }
 
 /// <summary>
-/// Permite ajustar el volumen general de los efectos
+/// Sets the EFFECT volume
 /// </summary>
-/// <param name="volume"> Cantidad </param>
+/// <param name="volume"> Volume in % </param>
 void SoundSystem::setSoundEffectsVolume(float volume)
 {
 	soundEffects->setVolume(volume);
@@ -137,14 +135,14 @@ void SoundSystem::setSoundEffectsVolume(float volume)
 }
 
 /// <summary>
-/// Permite ajustarel volumen general
+/// Sets all volumes
 /// </summary>
-/// <param name="volume"> Cantidad </param>
+/// <param name="volume"> Volume in % </param>
 void SoundSystem::setGeneralVolume(float volume)
 {
 	ChannelGroup* master;
-	FMOD_RESULT result = system->getMasterChannelGroup(&master);
 
+	FMOD_RESULT result = system->getMasterChannelGroup(&master);
 	ERRCHECK(result);
 
 	master->setVolume(volume);
@@ -152,12 +150,12 @@ void SoundSystem::setGeneralVolume(float volume)
 }
 
 /// <summary>
-/// Ajusta las variables del listener/receptor
+/// Sets the Camera/Player variables for 3D sound
 /// </summary>
-/// <param name="position"> Vector3 de la posicion </param>
-/// <param name="forward"> Vector3 de la direccion a la que apunta su eje X</param>
-/// <param name="up"> Vector3 de la direccion a la que apunta su eje Y</param>
-void SoundSystem::setListenerAttributes( Vector3& position,  Vector3& forward,  Vector3& up)
+/// <param name="position"> Camera/Player Position </param>
+/// <param name="forward"> Vector on X axis "points forward" </param>
+/// <param name="up"> Vector on Y axis "points up" </param>
+void SoundSystem::setListenerAttributes(Vector3& position,  Vector3& forward,  Vector3& up)
 {
 	FMOD_VECTOR pos, vel, forwardTmp, upTmp;
 	pos = { float(position.GetX()) ,float(position.GetY()) ,float(position.GetZ()) };
@@ -167,37 +165,25 @@ void SoundSystem::setListenerAttributes( Vector3& position,  Vector3& forward,  
 	system->set3DListenerAttributes(0, &pos, &vel, &forwardTmp, &upTmp);
 }
 
-/// <summary>
-/// Devuelve numericamente la potencia del volumen general
-/// </summary>
-/// <returns> float </returns>
 float SoundSystem::getGeneralVolume() const
 {
 	return generalVolume;
 }
 
-/// <summary>
-/// Devuelve numericamente la potencia del volumen musical
-/// </summary>
-/// <returns> float </returns>
 float SoundSystem::getMusicVolume() const
 {
 	return musicVolume;
 }
 
-/// <summary>
-/// Devuelve numericamente la potencia del volumen de los efectos
-/// </summary>
-/// <returns> float </returns>
 float SoundSystem::getSoundVolume() const
 {
 	return soundVolume;
 }
 
 /// <summary>
-/// Elimina un emisor
+/// Removes an emitter from the array
 /// </summary>
-/// <param name="emitter"> EmitterData </param>
+/// <param name="emitter"> Emitter to be removed </param>
 void SoundSystem::removeEmitter(EmitterData* emitter)
 {
 	auto it = std::find(emitters.begin(), emitters.end(), emitter);
@@ -209,7 +195,9 @@ void SoundSystem::removeEmitter(EmitterData* emitter)
 }
 
 /// <summary>
-/// Elimina el receptor
+/// Removes Listener, which SHOULD be done only on destruction I guess 
+/// (For legal reasons the "I guess" expression is only used for sarcastic value
+/// I actually know it does that)
 /// </summary>
 void SoundSystem::removeListener()
 {
@@ -218,9 +206,9 @@ void SoundSystem::removeListener()
 }
 
 /// <summary>
-/// Metodo que se llama en cada frame para actualizar el listener y los emisores
+/// Updates position of the Listener and Emitters for 3D sound
 /// </summary>
-/// <param name="deltaTime"> float necesario del deltaTime </param>
+/// <param name="deltaTime"> Actual elapsed time </param>
 void SoundSystem::update(float deltaTime)
 {
 	Vector3 pos, forward, up;
@@ -251,10 +239,9 @@ void SoundSystem::update(float deltaTime)
 }
 
 /// <summary>
-/// Para crear emisores
+/// Adds an emitter to the list
 /// </summary>
-/// <param name="position"> Necesita un Vector3 de su posicion </param>
-/// <returns></returns>
+/// <param name="position"> Vector3 with the position of the Object its part from </param>
 SoundSystem::EmitterData* SoundSystem::createEmitter(const Vector3* position)
 {
 	SoundSystem::EmitterData* data = new SoundSystem::EmitterData(position);
@@ -263,11 +250,10 @@ SoundSystem::EmitterData* SoundSystem::createEmitter(const Vector3* position)
 }
 
 /// <summary>
-/// Crea el listener 
+/// Creates the listener, using a queaternion for orientation and position
 /// </summary>
 /// <param name="position"> Necesita ubicancia </param>
 /// <param name="quaternion"> Necesita orientacion </param>
-/// <returns></returns>
 SoundSystem::ListenerData* SoundSystem::createListener(const Vector3* position, const Vector4* quaternion)
 {
 	if (listener != nullptr)
@@ -280,38 +266,42 @@ SoundSystem::ListenerData* SoundSystem::createListener(const Vector3* position, 
 }
 
 /// <summary>
-/// Util para transformaciones de Fmod
+/// Transforms a Vector3 to FMOD_VECTOR
 /// </summary>
-/// <param name="in"></param>
-/// <returns></returns>
-FMOD_VECTOR SoundSystem::vecToFMOD( Vector3& in)
+/// <param name="in"> Vector3 from the Utils class </param>
+/// <returns> Vector3 from the FMOD API </returns>
+FMOD_VECTOR SoundSystem::vecToFMOD(Vector3& in)
 {
-	FMOD_VECTOR result;
-	result.x = in.GetX();
-	result.y = in.GetY();
-	result.z = in.GetZ();
+	FMOD_VECTOR out;
+	out.x = in.GetX();
+	out.y = in.GetY();
+	out.z = in.GetZ();
 
-	return result;
+	return out;
 }
 
 /// <summary>
-/// Util para el reverb de Fmod
+/// FMOD Reverb
 /// </summary>
-/// <returns></returns>
 FMOD::Reverb3D* SoundSystem::createReverb()
 {
 	FMOD::Reverb3D* reverb;
+
 	FMOD_RESULT result = system->createReverb3D(&reverb);
 	ERRCHECK(result);
 	return reverb;
 }
 
-// When we check the errors the FMOD API returns a cod with info
-// In the event of succes it returns FMOD_OK which we ignore
+
+/// <summary>
+/// When we check the errors the FMOD API returns a code with info
+/// In the event of succes it returns FMOD_OK which we ignore
+/// </summary>
 void SoundSystem::ERRCHECK(FMOD_RESULT result) const
 {
+	// Sacado de los apuntes de cuarto, la verdad
 	if (result != FMOD_RESULT::FMOD_OK)
-		Debug()->Log("%s", FMOD_ErrorString(result));
+		Debug()->Log(FMOD_ErrorString(result));
 }
 
 /// <summary>

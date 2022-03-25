@@ -27,7 +27,7 @@ typedef FMOD::ChannelGroup ChannelGroup;	// Common groups for utility
 class SoundSystem : public Singleton<SoundSystem>
 {
 	// Basic classes for fmod functionality
-	//friend class Core;
+	friend class Core;
 	friend class Reverb;
 	friend class ResourcesManager;
 	friend class SoundEmitter;
@@ -111,7 +111,7 @@ private:
 	void removeListener();
 
 	// Utiles de Fmod
-	FMOD_VECTOR vecToFMOD(const Vector3& in);
+	FMOD_VECTOR vecToFMOD(Vector3& in);
 	FMOD::Reverb3D* createReverb();
 
 	// ECS system classes
