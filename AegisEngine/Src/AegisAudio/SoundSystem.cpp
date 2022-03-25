@@ -309,7 +309,7 @@ void SoundSystem::ERRCHECK(FMOD_RESULT result) const
 }
 
 /// <summary>
-/// Devuelve el sonido de efectos procedente de recursos
+/// Get sound from resources
 /// </summary>
 /// <param name="name"></param>
 /// <returns></returns>
