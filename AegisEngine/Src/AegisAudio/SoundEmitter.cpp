@@ -3,14 +3,16 @@
 #include "../AegisCommon/Entity/Entity.h"
 #include "../AegisCommon/Managers/ComponentManager.h"
 #include "../AegisCommon/Managers/DebugManager.h"
+#include "../AegisCommon/Components/Transform.h"
+#include <fmod.hpp>
 
-
-
-SoundEmitter::SoundEmitter(Entity* entity) : AegisComponent(entity), emitterData(nullptr), pitch(0.0f), volume(0.0f)
+SoundEmitter::SoundEmitter(Entity *entity) : AegisComponent(), emitterData(nullptr), pitch(0.0f), volume(0.0f)
 {
 	SoundSystem* soundSystem = SoundSystem::getInstance();
-
-	emitterData = soundSystem->createEmitter(&entity->transform->getPosition());
+	Transform* tr = entity->getComponent<Transform>();
+	Vector3 v3 = tr->GetPosition();
+	const Vector3* v = &v3;
+	emitterData = soundSystem->createEmitter(v);
 	pitch = 1.0f;
 	volume = 1.0f;
 }
@@ -52,10 +54,10 @@ void SoundEmitter::pause(const std::string& sound)
 	if (it != emitterData->channels.end()) {
 		Channel* Channel = (*it).second;
 		
-		Channel->channel->getPaused(&p);
+		Channel->getPaused(&p);
 		if (!p) {
-			Channel->channel->setPaused(true);
-			Channel->paused = true;
+			Channel->setPaused(true);
+			
 		}
 	}
 }
@@ -66,10 +68,10 @@ void SoundEmitter::resume(const std::string& sound)
 	auto it = emitterData->channels.find(sound);
 	if (it != emitterData->channels.end()) {
 		Channel* Channel = (*it).second;
-		Channel->channel->getPaused(&p);
+		Channel->getPaused(&p);
 		if (p) {
-			Channel->channel->setPaused(false);
-			Channel->paused = false;
+			Channel->setPaused(false);
+			
 		}
 	}
 }
@@ -131,17 +133,17 @@ bool SoundEmitter::isPlaying(const std::string& soundName) const
 
 void SoundEmitter::setUpChannel(Channel* soundChannel, bool reverb)
 {
-	if (soundChannel != nullptr && soundChannel->channel != nullptr) {
-		soundChannel->channel->setPitch(pitch);
-		soundChannel->channel->setVolume(volume);
+	if (soundChannel != nullptr) {
+		soundChannel->setPitch(pitch);
+		soundChannel->setVolume(volume);
 
 		if (!reverb)
-			soundChannel->channel->setReverbProperties(0, 0);
+			soundChannel->setReverbProperties(0, 0);
 
-		soundChannel->paused = false;
+		soundChannel->setPaused(false);
 	}
 }
-
+/* ¿Es necesario?
 void SoundEmitter::handleData(ComponentData* data)
 {
 	for (auto prop : data->getProperties()) {
@@ -175,4 +177,4 @@ void SoundEmitter::handleData(ComponentData* data)
 		}
 	}
 
-}
+}*/

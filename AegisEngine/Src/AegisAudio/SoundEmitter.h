@@ -3,10 +3,13 @@
 #ifndef SOUND_EMITTER_H
 #define SOUND_EMITTER_H
 
+
 #include "AegisComponent.h"
 #include "SoundSystem.h"
-
-typedef SoundSystem::Channel Channel;
+//namespace FMOD{
+//	class Channel;
+//}
+typedef FMOD::Channel Channel;
 
 class SoundEmitter : public AegisComponent
 {
@@ -40,7 +43,8 @@ private:
 	void setUpChannel(Channel* channel, bool reverb);
 
 protected:
-	void handleData(ComponentData* data);
+	//std::vector<std::pair<std::string, std::string>> properties;
+	//void handleData(ComponentData* data);
 };
 
 #endif
