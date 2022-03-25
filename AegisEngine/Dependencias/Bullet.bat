@@ -8,7 +8,7 @@ set BUILD_DIR=.\Bullet\build\
 
 set BULLET_BUILD_SOL=.\Bullet\build\BULLET_PHYSICS.sln
 
-set CMAKE_EXEC=..\cmake\bin\cmake.exe
+set CMAKE_EXE=.\cmake\bin\cmake.exe
 
 :: Make the build directory
 if not exist %BUILD_DIR% mkdir %BUILD_DIR%
@@ -17,7 +17,7 @@ if exist %BULLET_BUILD_SOL% goto done
 :: Generate the build
 echo Generating Bullet build...
 
-%CMAKE_EXEC% -D CMAKE_CONFIGURATION_TYPES:STRING=Debug;Release ^
+%CMAKE_EXE%  -D CMAKE_CONFIGURATION_TYPES:STRING=Debug;Release ^
              -D BUILD_BULLET2_DEMOS:BOOL="0" ^
              -D BUILD_CPU_DEMOS:BOOL="0" ^
              -D BUILD_OPENGL3_DEMOS:BOOL="0" ^
