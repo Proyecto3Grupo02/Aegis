@@ -32,7 +32,7 @@ AegisEngine/Dependencias/Lua/build
 AegisEngine/Dependencias/Ogre/build
 
 
-AegisEngine/Dependencias/Bullet
+AegisEngine/Dependencias/Bullet/build
 AegisEngine/Dependencias/Fmod
 AegisEngine/Dependencias/imgui
 
@@ -52,7 +52,7 @@ AegisEngine/Projects/AegisEngine/AegisEngine.vcxproj.user
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
 bld/
-[Bb]in/
+
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
@@ -118,7 +118,6 @@ StyleCopReport.xml
 *.pidb
 *.svclog
 *.scc
-*.exe
 
 # Chutzpah Test files
 _Chutzpah*
