@@ -4,13 +4,7 @@
 #define LUA_MANAGER
 #include "../../AegisCommon/Utils/Singleton.h"
 
-#ifdef __cplusplus
-#include <lua.hpp>
-#else
-#include <lua.h>
-#include <lualib.h>
-#include <lauxlib.h>
-#endif
+#include "LuaBasic.h"
 
 namespace Lua {
 	class LuaScript;
@@ -21,7 +15,10 @@ public:
 	virtual ~LuaManager();
 	void Execute(const char* filename);
 	void PrintError(lua_State* state);
+	void RegisterFunction(lua_CFunction function, const char* functionName);
 private:
+	void RegisterFunctionsToLua();
+	lua_State* state;
 };
 
 

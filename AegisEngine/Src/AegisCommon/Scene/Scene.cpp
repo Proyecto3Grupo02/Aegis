@@ -1,9 +1,28 @@
 #include "Scene.h"
 #include "Entity.h"
+#include "Scripting.h"
+
+extern "C" int lua_AddEntity(lua_State * state)
+{
+	//Scene* currentScene;
+	//Entity* entity;
+
+	//Get parameters from stack
+	//currentScene = LuaManager::getInstance().GetFromStack<Scene*>();
+	//entity= LuaManager::getInstance().GetFromStack<Entity*>();
+
+	//Call function
+	//currentScene->AddEntity(entity);
+
+	return 1;
+}
 
 // Es posible que aqui queramos inicializar una escena de ogre y sincronizarla con las entidades
 Scene::Scene() : 
-	accumulator(0), entities(new std::list<Entity*>()), entitiesToDelete(std::list<std::list<Entity*>::iterator>()) {}
+	accumulator(0), entities(new std::list<Entity*>()), entitiesToDelete(std::list<std::list<Entity*>::iterator>()) 
+{
+	LuaManager::getInstance()->RegisterFunction(lua_AddEntity, "AddEntity");
+}
 
 Scene::~Scene()
 {

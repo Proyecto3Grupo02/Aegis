@@ -124,7 +124,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\build\x64\Components;$(SolutionDir)Dependencias\Ogre\build\x64\include\SDL2;$(SolutionDir)Dependencias\Ogre\build\x64\include;$(SolutionDir)Dependencias\Ogre\build\x64\SDL2-2.0.20\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\build\x64\Components;$(SolutionDir)Dependencias\Ogre\build\x64\include\SDL2;$(SolutionDir)Dependencias\Ogre\build\x64\include;$(SolutionDir)Dependencias\Ogre\build\x64\SDL2-2.0.20\include;$(SolutionDir)\Dependencias\lua\src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -167,6 +167,7 @@
     <ClInclude Include="..\..\Src\AegisCommon\Managers\SceneManager.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Scene\Scene.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Utils\GameLoopData.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Utils\Scripting.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Singleton.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Vector3.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Vector4.h" />

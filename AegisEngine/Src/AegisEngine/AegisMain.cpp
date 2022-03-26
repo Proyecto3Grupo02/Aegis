@@ -26,8 +26,8 @@
 void AegisMain::GameLoop() {
 	std::cout << '\n';
 	Debug()->Log("Aegis loaded");
-	luaManager->Execute("../../../../Src/AegisScripting/LuaFiles/template.lua");
-	luaManager->Execute("../../../../Src/AegisScripting/LuaFiles/callHowdy.lua");
+	luaManager->Execute("template.lua");
+	luaManager->Execute("callHowdy.lua");
 
 	while (!exit)
 	{
