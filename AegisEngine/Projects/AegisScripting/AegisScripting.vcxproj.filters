@@ -23,5 +23,8 @@
     <ClInclude Include="..\..\Src\AegisScripting\Manager\LuaManager.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\AegisScripting\Utils\LuaBasic.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

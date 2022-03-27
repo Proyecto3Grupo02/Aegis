@@ -4,7 +4,7 @@
 #define LUA_MANAGER
 #include "../../AegisCommon/Utils/Singleton.h"
 
-#include "LuaBasic.h"
+#include "../Utils/LuaBasic.h"
 
 namespace Lua {
 	class LuaScript;
