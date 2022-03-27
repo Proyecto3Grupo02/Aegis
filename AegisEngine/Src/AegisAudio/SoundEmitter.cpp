@@ -26,15 +26,15 @@ SoundEmitter::~SoundEmitter()
 void SoundEmitter::playSound(const std::string& soundName, bool reverb)
 {
 	stop(soundName);
-	emitterData->channels[soundName] = new Channel(SoundSystem::getInstance()->playSound(soundName));
-	setUpChannel(emitterData->channels[soundName], reverb);
+	emitterData->channels[soundName]->channel = new Channel(SoundSystem::getInstance()->playSound(soundName));
+	setUpChannel(emitterData->channels[soundName]->channel, reverb);
 }
 
 void SoundEmitter::playMusic(const std::string& soundName, bool reverb)
 {
-	stop(soundName);
-	emitterData->channels[soundName] = new Channel(SoundSystem::getInstance()->playMusic(soundName));
-	setUpChannel(emitterData->channels[soundName], reverb);
+	stop(soundName);	
+	emitterData->channels[soundName]->channel = new Channel(SoundSystem::getInstance()->playMusic(soundName));
+	setUpChannel(emitterData->channels[soundName]->channel, reverb);
 }
 
 void SoundEmitter::stop(const std::string& sound)
@@ -52,7 +52,7 @@ void SoundEmitter::pause(const std::string& sound)
 	bool p;
 	auto it = emitterData->channels.find(sound);
 	if (it != emitterData->channels.end()) {
-		Channel* Channel = (*it).second;
+		Channel* Channel = (*it).second->channel;
 		
 		Channel->getPaused(&p);
 		if (!p) {
@@ -67,7 +67,7 @@ void SoundEmitter::resume(const std::string& sound)
 	bool p;
 	auto it = emitterData->channels.find(sound);
 	if (it != emitterData->channels.end()) {
-		Channel* Channel = (*it).second;
+		Channel* Channel = (*it).second->channel;
 		Channel->getPaused(&p);
 		if (p) {
 			Channel->setPaused(false);

@@ -36,7 +36,7 @@ class SoundSystem : public Singleton<SoundSystem>
 public:
 	// Canales para la emision de sonidos
 	struct SoundChannel {
-		Channel* channel;
+		Channel* channel; /////////////////OJO
 		bool paused;
 
 		SoundChannel();
