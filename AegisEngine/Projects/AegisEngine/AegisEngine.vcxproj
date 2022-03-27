@@ -104,7 +104,7 @@
     <IntDir>$(SolutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)Exes\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <SourcePath>$(SolutionDir)Exes\$(Platform)\$(Configuration)\;$(SolutionDir)Src\;$(SourcePath)</SourcePath>
-    <IncludePath>$(SolutionDir)\Dependencias\Ogre\Source\OgreMain\include</IncludePath>
+    <IncludePath>$(SolutionDir)\Dependencias\Ogre\src\OgreMain\include</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -208,28 +208,28 @@ xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo\S
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-2.0.20\include;$(SolutionDir)Src\Aegis\Entity;$(SolutionDir)Src\Aegis\Interfaces;$(SolutionDir)Src\Aegis\Wrappers;$(SolutionDir)Src\Aegis\Structs;$(SolutionDir)Src\Aegis\Scene;$(SolutionDir)Src\Aegis\Managers;$(SolutionDir)Src\Aegis\Component;$(SolutionDir)Dependencias\Ogre\Build\x64\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\Build\SDL2-2.0.20\include;$(SolutionDir)Src\Aegis\Entity;$(SolutionDir)Src\Aegis\Interfaces;$(SolutionDir)Src\Aegis\Wrappers;$(SolutionDir)Src\Aegis\Structs;$(SolutionDir)Src\Aegis\Scene;$(SolutionDir)Src\Aegis\Managers;$(SolutionDir)Src\Aegis\Component;$(SolutionDir)Dependencias\Ogre\Build\include;$(SolutionDir)\Dependencias\lua\src\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencias\Ogre\Build\x64\lib\$(Configuration)\;$(SolutionDir)\Exes\AegisCommon\x64\Release;$(SolutionDir)\Exes\AegisGraphics\x64\Release;$(SolutionDir)\Exes\AegisScripting\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencias\Ogre\Build\lib\$(Configuration)\;$(SolutionDir)\Exes\AegisCommon\x64\Release;$(SolutionDir)\Exes\AegisGraphics\x64\Release;$(SolutionDir)\Exes\AegisScripting\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>OgreMain.lib;SDL2.lib;SDL2main.lib;RenderSystem_GL.lib;AegisCommon.lib;AegisGraphics.lib;AegisScripting.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\x64\bin\$(Configuration)\OgreMain.dll "$(OutDir)"
+      <Command>xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\bin\$(Configuration)\OgreMain.dll "$(OutDir)"
 
-xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\x64\bin\$(Configuration)\OgreMain.pdb "$(OutDir)"
+xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\bin\$(Configuration)\OgreMain.pdb "$(OutDir)"
 
-xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo\SDL2.dll "$(OutDir)"
+xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo\SDL2.dll "$(OutDir)"
 
-xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo\SDL2.pdb "$(OutDir)"
+xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo\SDL2.pdb "$(OutDir)"
 
-xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo\SDL2main.dll "$(OutDir)"
+xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo\SDL2main.dll "$(OutDir)"
 
-xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo\SDL2main.pdb "$(OutDir)"</Command>
+xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo\SDL2main.pdb "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
