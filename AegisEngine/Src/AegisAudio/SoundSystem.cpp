@@ -314,7 +314,7 @@ void SoundSystem::ERRCHECK(FMOD_RESULT result) const
 /// <returns></returns>
 Sound* SoundSystem::getSound(const std::string& name) const
 {
-	Sound* sound = ResourcesManager::getSound(name);
+	Sound* sound = SoundResources::getSound(name);
 	if (sound == nullptr) return nullptr;
 
 	// Wait till loaded

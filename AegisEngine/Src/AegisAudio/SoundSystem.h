@@ -1,5 +1,4 @@
 #pragma once
-#pragma once
 #ifndef SOUND_SYSTEM_H
 #define SOUND_SYSTEM_H
 
@@ -15,6 +14,8 @@
 #include "Vector3.h"	// AegisCommon
 #include "Vector4.h"	// AegisCommon
 
+#include "SoundResources.h"
+
 // Typedef to avoid the use of Using
 typedef FMOD_MODE SoundMode;		// Bit Descriptor mode
 typedef FMOD::System System;		// Central FMOD system
@@ -22,6 +23,7 @@ typedef FMOD::System System;		// Central FMOD system
 typedef FMOD::Sound Sound;			// Sound to play
 typedef FMOD::Channel Channel;		// Temporal channel for sound to play
 typedef FMOD::ChannelGroup ChannelGroup;	// Common groups for utility
+
 
 // Singleton Class
 class SoundSystem : public Singleton<SoundSystem>
