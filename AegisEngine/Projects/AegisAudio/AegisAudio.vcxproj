@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AegisAudio\SoundEmitter.h" />
+    <ClInclude Include="..\..\Src\AegisAudio\SoundResources.h" />
     <ClInclude Include="..\..\Src\AegisAudio\SoundSystem.h" />
   </ItemGroup>
   <ItemGroup>
