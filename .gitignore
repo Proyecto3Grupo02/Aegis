@@ -22,7 +22,27 @@ AegisEngine/[Dd]ebug/
 AegisEngine/[Rr]elease/
 AegisEngine/[Rr]eleases/
 AegisEngine/Temp/
-AegisEngine/Dependencias/
+
+# Lua dependencies
+AegisEngine/Dependencias/Lua/build
+
+
+
+# Ogre dependencies
+AegisEngine/Dependencias/Ogre/build
+
+
+AegisEngine/Dependencias/Bullet/build
+AegisEngine/Dependencias/Fmod
+AegisEngine/Dependencias/imgui
+
+
+
+
+
+
+
+
 AegisEngine/Exes/x64/[Dd]ebug
 AegisEngine/Exes/x64/[Rr]elease
 AegisEngine/Exes/AegisEngine/x64/Debug/
@@ -32,7 +52,7 @@ AegisEngine/Projects/AegisEngine/AegisEngine.vcxproj.user
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
 bld/
-[Bb]in/
+
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
@@ -98,7 +118,6 @@ StyleCopReport.xml
 *.pidb
 *.svclog
 *.scc
-*.exe
 
 # Chutzpah Test files
 _Chutzpah*
