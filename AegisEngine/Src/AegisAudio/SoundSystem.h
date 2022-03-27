@@ -97,6 +97,7 @@ public:
 private:
 	void init();
 	void close();
+	
 
 	Sound* createSound(const std::string& name, const SoundMode& mode);
 

@@ -50,7 +50,6 @@ void SoundSystem::close()
 	system->close();
 	system->release();
 
-	destroy();
 }
 /// <summary>
 /// Devuelve el tipo sonido si no da fallo al cargarlo

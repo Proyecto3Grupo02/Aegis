@@ -26,14 +26,14 @@ SoundEmitter::~SoundEmitter()
 void SoundEmitter::playSound(const std::string& soundName, bool reverb)
 {
 	stop(soundName);
-	emitterData->channels[soundName]->channel = new Channel(SoundSystem::getInstance()->playSound(soundName));
+	emitterData->channels[soundName]->channel = SoundSystem::getInstance()->playSound(soundName);
 	setUpChannel(emitterData->channels[soundName]->channel, reverb);
 }
 
 void SoundEmitter::playMusic(const std::string& soundName, bool reverb)
 {
 	stop(soundName);	
-	emitterData->channels[soundName]->channel = new Channel(SoundSystem::getInstance()->playMusic(soundName));
+	emitterData->channels[soundName]->channel = SoundSystem::getInstance()->playMusic(soundName);
 	setUpChannel(emitterData->channels[soundName]->channel, reverb);
 }
 
