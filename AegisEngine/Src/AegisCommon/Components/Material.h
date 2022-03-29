@@ -2,7 +2,9 @@
 #pragma once
 #ifndef MATERIAL_CMP
 #define MATERIAL_CMP
+
 #include "AegisComponent.h"
+#include "../../checkML.h" //BASURA
 #include <string>
 
 class Renderer;

@@ -4,31 +4,32 @@
 #define AEGIS_MAIN_H
 
 #include "../AegisCommon/Interfaces/IInitializable.h" //Da error en el cpp
+#include "../checkML.h"
 
 class OgreWrapper;
 class SceneManager;
 class GameLoopData;
 class LuaManager;
 
-    class AegisMain : IInitializable
-    {
-    private:
-        OgreWrapper* ogreWrap;
-        SceneManager* sceneManager;
-        GameLoopData* gameLoopData;
-        LuaManager* luaManager;
+class AegisMain : IInitializable
+{
+private:
+    OgreWrapper* ogreWrap;
+    SceneManager* sceneManager;
+    GameLoopData* gameLoopData;
+    LuaManager* luaManager;
 
-        bool exit;
-        //uint32_t frameTimeMS;
+    bool exit;
+    //uint32_t frameTimeMS;
 
-        void GameLoop();
-    public:
-        AegisMain();
-        virtual ~AegisMain();
-        virtual bool Init() override;
+    void GameLoop();
+public:
+    AegisMain();
+    virtual ~AegisMain();
+    virtual bool Init() override;
 
-        const float TARGET_FRAME_RATE = 60.0f;
-    };
+    const float TARGET_FRAME_RATE = 60.0f;
+};
 
 #endif //
 

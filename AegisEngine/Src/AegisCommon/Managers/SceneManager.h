@@ -3,6 +3,7 @@
 #define SCENE_MANAGER_H
 
 #include <string>
+#include "../../checkML.h" //BASURA
 
 class Scene;
 

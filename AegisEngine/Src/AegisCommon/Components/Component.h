@@ -3,20 +3,19 @@
 #define COMPONENT_H
 
 #include <Ogre.h>
+#include "../../checkML.h" //BASURA
 
 class Entity;
 
 class Component{
     public:
        Component();
-
        ~Component() {};
 
        inline Entity* getEntity() { return mEntity_; }
        void setEntity(Entity* entity) { mEntity_ = entity; }
 
-       virtual void init()=0;
-       
+       virtual void init()=0;       
        virtual void fixedUpdate() {};
        virtual void update(float dt) {};
        virtual void lateUpdate() {};
@@ -30,8 +29,7 @@ class Component{
        void setActive(bool active) { isActive_ = active; }
     private:
         Entity* mEntity_;
-        bool isActive_;
-        
+        bool isActive_;        
 };
 
 #endif // ! COMPONENT_H

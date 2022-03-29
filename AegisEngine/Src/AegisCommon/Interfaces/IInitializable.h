@@ -2,6 +2,8 @@
 #ifndef IINITIALIZABLE_H 
 #define IINITIALIZABLE_H 
 
+#include "../../checkML.h" //BASURA
+
 class IInitializable
 {
 public:

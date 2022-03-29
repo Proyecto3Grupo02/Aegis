@@ -18,31 +18,26 @@ mPluginsCfg(Ogre::BLANKSTRING)
 {
 }
 
-bool OgreWrapper::Render()
-{
+bool OgreWrapper::Render() {
 	return mRoot->renderOneFrame();
 }
 
 
-OgreWrapper::~OgreWrapper()
-{
+OgreWrapper::~OgreWrapper() {
 	delete mRoot;
 }
 
-bool OgreWrapper::Init()
-{
+bool OgreWrapper::Init() {
 	//files that contains the resources that ogre will use and the plugins used, specifically, Gl and D3D11 are
 //added in order to have a render winow
 
 	mResourcesCfg = "resources.cfg";
 	mPluginsCfg = "plugins.cfg";
 
-
 	mRoot = new Ogre::Root(mPluginsCfg);
 
 	Ogre::ConfigFile cf;
 	cf.load(mResourcesCfg);
-
 
 	Ogre::String name, locType;
 
@@ -53,8 +48,7 @@ bool OgreWrapper::Init()
 		const Ogre::ConfigFile::SettingsMultiMap& settings = seci->second;
 		Ogre::ConfigFile::SettingsMultiMap::const_iterator it;
 
-		for (it = settings.begin(); it != settings.end(); it++)
-		{
+		for (it = settings.begin(); it != settings.end(); it++) {
 			//The name parameter is the path to the resources(i.e. "../media").The locType parameter defines what kind of location this is(i.e.Filesystem, Zip, etc.)
 			locType = it->first;
 			name = it->second;
@@ -110,9 +104,7 @@ bool OgreWrapper::Init()
 	ogreLight->setPosition(-20, 80, 50);
 }
 
-
-void OgreWrapper::CreateWindowNative()
-{
+void OgreWrapper::CreateWindowNative() {
 	mRoot->restoreConfig();
 	mRoot->initialise(false);
 

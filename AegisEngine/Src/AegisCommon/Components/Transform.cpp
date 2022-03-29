@@ -4,37 +4,31 @@
 #include "Entity.h"
 
 
-Vector3 Transform::GetPosition()
-{
+Vector3 Transform::GetPosition() {
 	return position;
 }
 
-Vector4 Transform::GetRotation()
-{
+Vector4 Transform::GetRotation() {
 	return rotation;
 }
 
-Vector3 Transform::GetScale()
-{
+Vector3 Transform::GetScale() {
 	return scale;
 }
 
-void Transform::SetPosition(Vector3 newPos)
-{
+void Transform::SetPosition(Vector3 newPos) {
 	position = newPos;
 }
 
-void Transform::SetRotation(Vector4 newRot)
-{
+void Transform::SetRotation(Vector4 newRot) {
 	rotation = newRot;
 }
 
-void Transform::SetScale(Vector3 newScale)
-{
+void Transform::SetScale(Vector3 newScale) {
 	scale = newScale;
 }
-void Transform::update()
-{
+
+void Transform::update() {
 	//pass the parameters from vector3 /vector4 to Ogre::Node position rotation and scale
 	getEntity()->getNode()->setPosition(position.GetX(), position.GetY(), position.GetZ());
 	getEntity()->getNode()->setScale(scale.GetX(), scale.GetY(), scale.GetZ());

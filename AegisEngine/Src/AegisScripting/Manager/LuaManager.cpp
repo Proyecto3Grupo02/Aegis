@@ -1,10 +1,14 @@
 #include "LuaManager.h"
 #include <iostream>
 
+//EXPLICACION LUA (29 de marzo): 
+//* EN \Exes\AegisEngine\x64\Assets\LuaScripts teneis archivos LUA. 
+//* ESOS ARCHIVOS DE MOMENTO HACEN PRINTF O LLAMAN A FUNCIONES DE LUAMANAGER (howdy).
+//* LA MECANICA ES QUE AegisMain HAGA luaManager->Execute("ARCHIVO.lua"), EL CUAL LLMARA A LA FUNCION C++ DESEADA.
+
 //typedef int (*lua_CFunction) (lua_State* L);
 
-extern "C" int howdy(lua_State * state)
-{
+extern "C" int howdy(lua_State * state) {
 	// The number of function arguments will be on top of the stack.
 	int args = lua_gettop(state);
 
@@ -20,19 +24,16 @@ extern "C" int howdy(lua_State * state)
 	return 1;
 }
 
-LuaManager::LuaManager()
-{
+LuaManager::LuaManager() {
 	state = luaL_newstate();
 	RegisterFunctionsToLua();
 }
 
-LuaManager::~LuaManager()
-{
+LuaManager::~LuaManager() {
 	lua_close(state);
 }
 
-void LuaManager::Execute(const char* filename)
-{
+void LuaManager::Execute(const char* filename) {
 	// ESTO ES TEMPORAL
 	std::string name = "../Assets/LuaScripts/";
 	name += filename;
@@ -58,8 +59,7 @@ void LuaManager::Execute(const char* filename)
 	}
 }
 
-void LuaManager::PrintError(lua_State* state)
-{
+void LuaManager::PrintError(lua_State* state) {
 	// The error message is on top of the stack.
 	// Fetch it, print it and then pop it off the stack.
 	const char* message = lua_tostring(state, -1);
@@ -67,12 +67,10 @@ void LuaManager::PrintError(lua_State* state)
 	lua_pop(state, 1);
 }
 
-void LuaManager::RegisterFunction(lua_CFunction function, const char* functionName)
-{
+void LuaManager::RegisterFunction(lua_CFunction function, const char* functionName) {
 	lua_register(state, functionName, function);
 }
 
-void LuaManager::RegisterFunctionsToLua()
-{
+void LuaManager::RegisterFunctionsToLua() {
 	RegisterFunction(howdy, "howdy");
 }

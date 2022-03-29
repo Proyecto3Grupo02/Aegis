@@ -7,8 +7,7 @@ Entity::Entity(Ogre::SceneNode* node):
 {
 }
 
-Entity::~Entity()
-{
+Entity::~Entity() {
 	for (Component* c : mComponentsArray_) {
 		delete c;
 	}
@@ -16,13 +15,11 @@ Entity::~Entity()
 	mComponents_.clear();
 }
 
-void Entity::init()
-{
+void Entity::init() {
 
 }
 
-void Entity::fixedUpdate()
-{
+void Entity::fixedUpdate() {
 	if (active_) {
 		for (auto i : mNumOfActiveComponents_) {
 			mComponentsArray_[i]->fixedUpdate();
@@ -30,8 +27,7 @@ void Entity::fixedUpdate()
 	}
 }
 
-void Entity::update(float dt)
-{
+void Entity::update(float dt) {
 	if (active_) {
 		for (auto i : mNumOfActiveComponents_) {
 			mComponentsArray_[i]->update(dt);
@@ -39,8 +35,7 @@ void Entity::update(float dt)
 	}
 }
 
-void Entity::lateUpdate()
-{
+void Entity::lateUpdate() {
 	if (active_) {
 		for (auto i : mNumOfActiveComponents_) {
 			mComponentsArray_[i]->lateUpdate();
@@ -48,8 +43,7 @@ void Entity::lateUpdate()
 	}
 }
 
-void Entity::render()
-{
+void Entity::render() {
 	if (active_) {
 		for (auto i : mNumOfActiveComponents_) {
 			mComponentsArray_[i]->render();
@@ -57,29 +51,21 @@ void Entity::render()
 	}
 }
 
-
-
-
-
-
 void Entity::receiveEvent(Entity* receive)
 {
 }
 
-bool Entity::hasComponent(unsigned int cmpID)
-{
+bool Entity::hasComponent(unsigned int cmpID) {
 	return mComponentsArray_[cmpID] != nullptr;
 }
 
-void Entity::onCollision(Entity* other)
-{
+void Entity::onCollision(Entity* other) {
 	for (auto i : mNumOfActiveComponents_) {
 		mComponentsArray_[i]->onCollision(other);
 	}
 }
 
-void Entity::onTrigger(Entity* other)
-{
+void Entity::onTrigger(Entity* other) {
 	for (auto i : mNumOfActiveComponents_) {
 		mComponentsArray_[i]->onTrigger(other);
 	}

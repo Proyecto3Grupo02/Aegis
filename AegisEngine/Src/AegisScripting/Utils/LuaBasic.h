@@ -3,6 +3,7 @@
 #ifndef LUA_BASIC_H
 #define LUA_BASIC_H
 #include "../../AegisCommon/Utils/Singleton.h"
+#include "../../checkML.h" //BASURA
 
 #ifdef __cplusplus
 #include <lua.hpp>

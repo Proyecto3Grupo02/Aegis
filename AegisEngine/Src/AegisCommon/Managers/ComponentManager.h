@@ -3,6 +3,7 @@
 #define COMPONENT_MANAGER
 
 #include "../Utils/Singleton.h" //Da error en el cpp
+#include "../../checkML.h" //BASURA
 #include <map>
 #include <functional>
 #include <unordered_map>
@@ -27,8 +28,6 @@ public:
 private:
 	std::unordered_map<std::string, std::string> mComponentTypes_;
 	std::map <std::string, ComponentFactory> mComponentFactory_;
-	
-
 };
 
 #endif // ! COMPONENT_MANAGER 

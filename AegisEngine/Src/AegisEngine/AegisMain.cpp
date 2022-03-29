@@ -86,8 +86,7 @@ AegisMain::AegisMain() : IInitializable() {
 	exit = (false);
 }
 
-AegisMain::~AegisMain()
-{
+AegisMain::~AegisMain() {
 	delete ogreWrap;
 	delete sceneManager;
 	delete gameLoopData;
@@ -97,8 +96,7 @@ AegisMain::~AegisMain()
 /// Inicializa todos los wrappers (Ogre, Input, Imgui...)
 /// </summary>
 /// <returns></returns>
-bool AegisMain::Init()
-{
+bool AegisMain::Init() {
 	Input()->Init();
 	ogreWrap->Init();
 	GameLoop();

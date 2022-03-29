@@ -2,6 +2,7 @@
 #include "../Entity/Entity.h"
 #include "Renderer.h"
 #include <cassert>
+
 Material::Material(): AegisComponent(), mMaterialName_("")
 {
 }
@@ -16,8 +17,7 @@ Material::~Material()
 {
 }
 
-void Material::init()
-{
+void Material::init() {
 	mRenderer_ = getEntity()->getComponent<Renderer>();
 	assert(mRenderer_);
 	if (mMaterialName_ != "") {

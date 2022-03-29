@@ -3,6 +3,7 @@
 #define VECTOR4_H
 
 #include "Vector3.h"
+#include "../../checkML.h" //BASURA
 
 class Vector4 : public Vector3 {
 public:

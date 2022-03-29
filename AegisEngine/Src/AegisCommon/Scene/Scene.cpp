@@ -2,8 +2,7 @@
 #include "Entity.h"
 #include "Scripting.h"
 
-extern "C" int lua_AddEntity(lua_State * state)
-{
+extern "C" int lua_AddEntity(lua_State * state){
 	//Scene* currentScene;
 	//Entity* entity;
 
@@ -24,8 +23,7 @@ Scene::Scene() :
 	LuaManager::getInstance()->RegisterFunction(lua_AddEntity, "AddEntity");
 }
 
-Scene::~Scene()
-{
+Scene::~Scene() {
 	for (Entity* entity : *entities)
 		delete entity;
 
@@ -34,35 +32,29 @@ Scene::~Scene()
 	RemoveAndFreePendingEntities();
 }
 
-void Scene::RemoveAndFreeEntity(std::list<Entity*>::iterator entity)
-{
+void Scene::RemoveAndFreeEntity(std::list<Entity*>::iterator entity) {
 	delete *entity;
 	this->entities->erase(entity);
 }
 
-void Scene::RemoveAndFreePendingEntities()
-{
+void Scene::RemoveAndFreePendingEntities() {
 	for (std::list<Entity*>::iterator entity : entitiesToDelete)
 		RemoveAndFreeEntity(entity);
 
 	this->entitiesToDelete.clear();
 }
 
-void Scene::AddEntity(Entity* entity)
-{
+void Scene::AddEntity(Entity* entity) {
 	this->entities->push_back(entity);
 }
 
-void Scene::DestroyEntity(std::list<Entity*>::iterator entity)
-{
+void Scene::DestroyEntity(std::list<Entity*>::iterator entity) {
 	this->entitiesToDelete.push_back(entity);
 }
 
-void Scene::FixedUpdate(float dt)
-{
+void Scene::FixedUpdate(float dt) {
 	accumulator += dt;
-	while (accumulator >= PHYSICS_STEP)
-	{
+	while (accumulator >= PHYSICS_STEP)	{
 		// Call entities physics update
 		//for (Entity* entity : *entities)
 			//entity->integrate();
@@ -70,20 +62,17 @@ void Scene::FixedUpdate(float dt)
 	}
 }
 
-void Scene::Update(float dt)
-{
+void Scene::Update(float dt) {
 	for (Entity* entity : *entities)
 		entity->update(dt);
 }
 
-void Scene::LateUpdate(float dt)
-{
+void Scene::LateUpdate(float dt) {
 	for (Entity* entity : *entities)
 		entity->lateUpdate();
 }
 
-void Scene::UpdateScene(float dt)
-{
+void Scene::UpdateScene(float dt) {
 	// Esto hay que moverlo al update de la aplicacion, por ahora esta aqui
 	// Es decir, en caso de que el update scene se complete mas rapido de lo esperado
 	// Hay que esperar antes del siguiente update
