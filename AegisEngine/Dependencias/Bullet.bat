@@ -3,6 +3,7 @@
 set SRC_DIR=.\Bullet\src\
 set BUILD_DIR=.\Bullet\build\
 
+dir
 
 :: Batch variables
 
@@ -17,12 +18,13 @@ if exist %BULLET_BUILD_SOL% goto done
 :: Generate the build
 echo Generating Bullet build...
 
-%CMAKE_EXE%  -D CMAKE_CONFIGURATION_TYPES:STRING=Debug;Release ^
+%CMAKE_EXE%  -S %SRC_DIR% -B %BUILD_DIR%
+             -D CMAKE_CONFIGURATION_TYPES:STRING=Debug;Release ^
              -D BUILD_BULLET2_DEMOS:BOOL="0" ^
              -D BUILD_CPU_DEMOS:BOOL="0" ^
              -D BUILD_OPENGL3_DEMOS:BOOL="0" ^
              -D USE_MSVC_RUNTIME_LIBRARY_DLL:BOOL="1" ^
-             -S %SRC_DIR% -B %BUILD_DIR%
+             
 
 echo Bullet build succesfully generated
 
