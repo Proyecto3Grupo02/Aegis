@@ -1,6 +1,2 @@
-pez1 
-./FX/pez1.ogg
-caña 
-./FX/caña.wav
-cancionRelax 
-./Music/cancionRelax.mp3
+clin
+./clin.wav

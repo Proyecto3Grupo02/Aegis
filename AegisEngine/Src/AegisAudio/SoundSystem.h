@@ -77,6 +77,7 @@ private:
 	// ECS structure; Manager functionality
 	std::vector<EmitterData*> emitters;
 	ListenerData* listener;
+	SoundResources* SR;
 
 	void ERRCHECK(FMOD_RESULT result) const;	// FMOD Errorcheck
 

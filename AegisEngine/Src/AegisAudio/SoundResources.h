@@ -6,6 +6,8 @@
 #include <fstream>
 #include <istream>
 #include <sstream>
+#include <sys/stat.h>
+#include <filesystem>
 #include <map>
 #include "../AegisCommon/Managers/DebugManager.h"
 
@@ -16,7 +18,7 @@ class SoundResources
 public:
 	SoundResources();
 	~SoundResources();
-
+	std::string getSong(std::string song);
 private:
 	std::map<cancion,std::string> mapSound;
 	std::string rutaArchivo = "../../Exes/AegisEngine/x64/Assets/Audios";
@@ -25,8 +27,8 @@ private:
 SoundResources::SoundResources()
 {
 	std::fstream archivo;
-	archivo.open(rutaArchivo + "SoundResources.txt", std::ios::in);
 	std::string cancion;
+	archivo.open(rutaArchivo + "SoundResources.txt", std::ios::in);
 	
 	if (!archivo) {
 		std::cout << "El archivo no existe" << std::endl;
@@ -42,8 +44,14 @@ SoundResources::SoundResources()
 
 			getline(archivo, song);
 			getline(archivo, path);
-
-			// Añadir una comprobacion para saber si existe el archivo
+			//rutaArchivo = ../../Exes/AegisEngine/x64/Assets/Audios
+			std::fstream todo;
+			todo.open(rutaArchivo + path, std::ios::in);
+			
+			// Añadimos una comprobacion para saber si existe el archivo
+			if (!todo) {
+				Debug()->Log("El archivo " + song +" no existe");
+			}
 			
 			auto e = std::make_pair(song, path);
 
@@ -56,5 +64,14 @@ SoundResources::SoundResources()
 SoundResources::~SoundResources()
 {
 }
+
+std::string SoundResources::getSong(std::string song)
+{
+	auto it = mapSound.find(song);
+	
+	return it->second;
+}
+
+
 
 #endif

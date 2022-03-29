@@ -5,6 +5,7 @@
 
 SoundSystem::SoundSystem() : system(nullptr), listener(nullptr), music(nullptr), soundEffects(nullptr)
 {
+	
 }
 
 SoundSystem::~SoundSystem()
@@ -36,6 +37,8 @@ void SoundSystem::init()
 	ERRCHECK(result);
 
 	Debug()->Log("SOUND SYSTEM: System started");
+	
+	
 }
 /// <summary>
 /// Se llamara al cerrar el juego, descarta los emisores y el receptor
@@ -314,7 +317,8 @@ void SoundSystem::ERRCHECK(FMOD_RESULT result) const
 /// <returns></returns>
 Sound* SoundSystem::getSound(const std::string& name) const
 {
-	Sound* sound = SoundResources::getSound(name);
+	
+	Sound* sound = createSound(SR->getSong(name),FMOD_DEFAULT);
 	if (sound == nullptr) return nullptr;
 
 	// Wait till loaded
