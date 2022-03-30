@@ -13,7 +13,9 @@ Scene::Scene(Ogre::SceneNode* ogreNode) :
 Scene::~Scene()
 {
 	for (Entity* entity : *entities)
+	{
 		delete entity;
+	}
 
 	delete this->entities;
 

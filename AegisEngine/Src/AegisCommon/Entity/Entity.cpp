@@ -86,12 +86,17 @@ void Entity::onTrigger(Entity* other)
 	}
 }
 
+Entity* CreateEntity(Scene* scene)
+{
+	return new Entity(scene);
+}
+
 void Entity::ConvertToLua(lua_State* state)
 {
 	getGlobalNamespace(state).
 		beginNamespace("ECS").
+		addFunction("CreateEntity", CreateEntity).
 		beginClass<Entity>("Entity").
-			addConstructor <void (*) (Scene*)>().
 			//addFunction("AddComponent", &Entity::addComponent).
 			//addFunction("AddComponent", &Entity::receiveEvent).
 			addFunction("isActive", &Entity::isActive).
