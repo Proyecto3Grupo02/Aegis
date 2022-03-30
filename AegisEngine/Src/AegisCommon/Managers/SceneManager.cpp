@@ -31,3 +31,8 @@ void SceneManager::ChangeScene(std::string sceneName)
 	delete currentScene;
 	LoadScene(sceneName);
 }
+
+void SceneManager::ConvertToLua(lua_State* state)
+{
+	getGlobalNamespace(state).beginNamespace("ECS").endNamespace();
+}

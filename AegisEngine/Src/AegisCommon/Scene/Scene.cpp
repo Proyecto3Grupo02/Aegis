@@ -1,6 +1,7 @@
 #include "Scene.h"
 #include "Entity.h"
 #include "Scripting.h"
+using namespace luabridge;
 
 extern "C" int lua_AddEntity(lua_State * state)
 {
@@ -21,7 +22,6 @@ extern "C" int lua_AddEntity(lua_State * state)
 Scene::Scene() : 
 	accumulator(0), entities(new std::list<Entity*>()), entitiesToDelete(std::list<std::list<Entity*>::iterator>()) 
 {
-	LuaManager::getInstance()->RegisterFunction(lua_AddEntity, "AddEntity");
 }
 
 Scene::~Scene()

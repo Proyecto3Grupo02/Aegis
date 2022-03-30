@@ -24,6 +24,7 @@ extern "C" int howdy(lua_State * state)
 LuaManager::LuaManager()
 {
 	state = luaL_newstate();
+	luaL_openlibs(state);
 	RegisterFunctionsToLua();
 }
 
@@ -37,9 +38,6 @@ void LuaManager::Execute(const char* filename)
 	// ESTO ES TEMPORAL
 	std::string name = "../Assets/LuaScripts/";
 	name += filename;
-	
-	// Make standard libraries available in the Lua object
-	luaL_openlibs(state);
 
 	// Load the program; this supports both source code and bytecode files.
 	int result = luaL_loadfile(state, name.c_str());

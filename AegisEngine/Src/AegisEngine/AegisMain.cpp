@@ -28,24 +28,6 @@ using namespace luabridge;
 void AegisMain::GameLoop() {
 	std::cout << '\n';
 	Debug()->Log("Aegis loaded");
-	luaManager->Execute("template.lua");
-	luaManager->Execute("callHowdy.lua");
-	luaManager->Execute("bridge.lua");
-
-	// Testing
-	auto state = luaManager->GetState();
-	getGlobalNamespace(state).
-		beginNamespace("ECS").
-			beginClass<A>("A").
-				addConstructor <void (*) (int)>().
-				//addProperty("num", &A::GetNumner, &A::SetNumber).
-				addFunction("getN", &A::GetNumner).
-			endClass().
-		endNamespace();
-
-	A* a = new A(5);
-	push(state, &a);
-	lua_setglobal(state, "a");
 
 	while (!exit)
 	{
@@ -97,7 +79,7 @@ void AegisMain::GameLoop() {
 }
 
 AegisMain::AegisMain() : IInitializable() {
-	luaManager = new LuaManager();
+	luaManager = LuaManager::getInstance();
 	ogreWrap = new OgreWrapper();
 	gameLoopData = new GameLoopData();
 	sceneManager = new SceneManager("NombreScena");
@@ -120,6 +102,15 @@ bool AegisMain::Init()
 	Input()->Init();
 	ogreWrap->Init();
 	GameLoop();
+	ConvertObjectToLua();
 
 	return true;
+}
+
+void AegisMain::ConvertObjectToLua()
+{
+	luaManager->Execute("template.lua");
+
+	auto state = luaManager->GetState();
+	sceneManager->ConvertToLua(state);
 }

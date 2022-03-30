@@ -3,6 +3,7 @@
 #define SCENE_MANAGER_H
 
 #include <string>
+#include "../Utils/Scripting.h"
 
 class Scene;
 
@@ -18,5 +19,6 @@ public:
 	void UpdateCurrentScene(float deltaTime);
 	void RenderCurrentScene();
 	void ChangeScene(std::string sceneName);
+	void ConvertToLua(lua_State* state);
 };
 #endif

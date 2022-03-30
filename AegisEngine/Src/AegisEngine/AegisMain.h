@@ -22,6 +22,7 @@ class LuaManager;
         //uint32_t frameTimeMS;
 
         void GameLoop();
+        void ConvertObjectToLua();
     public:
         AegisMain();
         virtual ~AegisMain();
@@ -29,29 +30,6 @@ class LuaManager;
 
         const float TARGET_FRAME_RATE = 60.0f;
     };
-
-    struct A
-    {
-    public:
-        A(int number)
-        {
-            this->number = number;
-        }
-
-        int GetNumner()
-        {
-            return number;
-        }
-
-        void SetNumber(int number)
-        {
-            this->number = number;
-        }
-
-    private:
-        int number;
-    };
-
 #endif //
 
 
