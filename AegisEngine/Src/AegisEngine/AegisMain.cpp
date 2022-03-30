@@ -23,11 +23,29 @@
 #include "../AegisCommon/Scene/Scene.h"
 #include "../AegisCommon/Utils/GameLoopData.h"
 
+using namespace luabridge;
+
 void AegisMain::GameLoop() {
 	std::cout << '\n';
 	Debug()->Log("Aegis loaded");
 	luaManager->Execute("template.lua");
 	luaManager->Execute("callHowdy.lua");
+	luaManager->Execute("bridge.lua");
+
+	// Testing
+	auto state = luaManager->GetState();
+	getGlobalNamespace(state).
+		beginNamespace("ECS").
+			beginClass<A>("A").
+				addConstructor <void (*) (int)>().
+				//addProperty("num", &A::GetNumner, &A::SetNumber).
+				addFunction("getN", &A::GetNumner).
+			endClass().
+		endNamespace();
+
+	A* a = new A(5);
+	push(state, &a);
+	lua_setglobal(state, "a");
 
 	while (!exit)
 	{

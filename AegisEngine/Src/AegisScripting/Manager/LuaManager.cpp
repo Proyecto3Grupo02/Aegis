@@ -1,6 +1,7 @@
 #include "LuaManager.h"
 #include <iostream>
 
+
 //typedef int (*lua_CFunction) (lua_State* L);
 
 extern "C" int howdy(lua_State * state)
@@ -70,6 +71,11 @@ void LuaManager::PrintError(lua_State* state)
 void LuaManager::RegisterFunction(lua_CFunction function, const char* functionName)
 {
 	lua_register(state, functionName, function);
+}
+
+lua_State* LuaManager::GetState()
+{
+	return this->state;
 }
 
 void LuaManager::RegisterFunctionsToLua()

@@ -16,6 +16,7 @@ public:
 	void Execute(const char* filename);
 	void PrintError(lua_State* state);
 	void RegisterFunction(lua_CFunction function, const char* functionName);
+	lua_State* GetState();
 private:
 	void RegisterFunctionsToLua();
 	lua_State* state;
