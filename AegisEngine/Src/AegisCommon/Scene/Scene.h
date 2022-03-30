@@ -3,9 +3,10 @@
 #define SCENE_H
 
 #include <list>
+#include "../Interfaces/ILuaObject.h"
 
 class Entity;
-class Scene
+class Scene : public ILuaObject
 {
 private:
 	std::list<Entity*>* entities;
@@ -98,6 +99,8 @@ public:
 	void UpdateScene(float dt);
 	
 	void Render();
+
+	static void ConvertToLua(lua_State* state);
 };
 
 #endif

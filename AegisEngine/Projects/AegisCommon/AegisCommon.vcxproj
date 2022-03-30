@@ -167,6 +167,7 @@
     <ClInclude Include="..\..\Src\AegisCommon\Components\Transform.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Entity\Entity.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Interfaces\IInitializable.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Interfaces\ILuaObject.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Managers\ComponentManager.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Managers\DebugManager.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Managers\InputManager.h" />

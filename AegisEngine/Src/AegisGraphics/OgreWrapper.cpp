@@ -11,6 +11,7 @@
 #include <OgreSceneNode.h>
 
 #include <SDL_syswm.h>
+#include <OgreLogManager.h>
 
 OgreWrapper::OgreWrapper() : mRoot(0),
 mResourcesCfg(Ogre::BLANKSTRING),
@@ -37,6 +38,12 @@ bool OgreWrapper::Init()
 	mResourcesCfg = "resources.cfg";
 	mPluginsCfg = "plugins.cfg";
 
+	Ogre::LogManager* lm = new Ogre::LogManager();
+	bool writeInConsole = false;
+	#if defined _DEBUG
+		writeInConsole = true;
+	#endif
+	lm->createLog("./Logs/AegisOgreLog.txt", true, writeInConsole, false);
 
 	mRoot = new Ogre::Root(mPluginsCfg);
 

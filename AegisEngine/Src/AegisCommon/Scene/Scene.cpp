@@ -100,3 +100,15 @@ void Scene::UpdateScene(float dt)
 void Scene::Render()
 {
 }
+
+void Scene::ConvertToLua(lua_State* state)
+{
+	getGlobalNamespace(state).
+		beginNamespace("ECS").
+			beginClass<Entity>("Entity").
+			endClass().
+			beginClass<Scene>("Scene").
+				addFunction("AddEntity", &Scene::AddEntity).
+			endClass().
+		endNamespace();
+}

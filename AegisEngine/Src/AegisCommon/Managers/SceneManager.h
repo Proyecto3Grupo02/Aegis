@@ -3,11 +3,11 @@
 #define SCENE_MANAGER_H
 
 #include <string>
-#include "../Utils/Scripting.h"
+#include "../Interfaces/ILuaObject.h"
 
 class Scene;
 
-class SceneManager
+class SceneManager : public ILuaObject
 {
 private:
 	Scene* currentScene;
@@ -19,6 +19,7 @@ public:
 	void UpdateCurrentScene(float deltaTime);
 	void RenderCurrentScene();
 	void ChangeScene(std::string sceneName);
-	void ConvertToLua(lua_State* state);
+	Scene* GetCurrentScene();
+	static void ConvertToLua(lua_State* state);
 };
 #endif

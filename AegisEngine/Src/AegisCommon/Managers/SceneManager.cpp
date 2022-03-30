@@ -26,6 +26,11 @@ void SceneManager::RenderCurrentScene()
 	currentScene->Render();
 }
 
+Scene* SceneManager::GetCurrentScene()
+{
+	return currentScene;
+}
+
 void SceneManager::ChangeScene(std::string sceneName)
 {
 	delete currentScene;
