@@ -26,6 +26,7 @@ public:
     bool Render();
     virtual ~OgreWrapper();
     bool Init() override;
+    Ogre::SceneNode* GetRootNode();
 };
 
 #endif

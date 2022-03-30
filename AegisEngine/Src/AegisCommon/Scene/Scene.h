@@ -4,14 +4,17 @@
 
 #include <list>
 #include "../Interfaces/ILuaObject.h"
+#include <Ogre.h>
 
 class Entity;
+class SceneNode;
+
 class Scene : public ILuaObject
 {
 private:
 	std::list<Entity*>* entities;
 	std::list<std::list<Entity*>::iterator> entitiesToDelete;
-
+	Ogre::SceneNode* ogreNode;
 	// Fixed Update arguments
 
 	// Este parametro quizas sea mejor a la clase application cuando la tengamos
@@ -68,7 +71,7 @@ private:
 	/// <param name="dt">deltaTime</param>
 	void LateUpdate(float dt);
 public:
-	Scene();
+	Scene(Ogre::SceneNode* ogreNode);
 
 	~Scene();
 
@@ -99,6 +102,8 @@ public:
 	void UpdateScene(float dt);
 	
 	void Render();
+
+	Ogre::SceneNode* GetOgreNode();
 
 	static void ConvertToLua(lua_State* state);
 };

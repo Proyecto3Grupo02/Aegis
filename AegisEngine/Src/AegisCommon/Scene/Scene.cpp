@@ -1,26 +1,12 @@
 #include "Scene.h"
 #include "Entity.h"
 #include "Scripting.h"
+
 using namespace luabridge;
 
-extern "C" int lua_AddEntity(lua_State * state)
-{
-	//Scene* currentScene;
-	//Entity* entity;
-
-	//Get parameters from stack
-	//currentScene = LuaManager::getInstance().GetFromStack<Scene*>();
-	//entity= LuaManager::getInstance().GetFromStack<Entity*>();
-
-	//Call function
-	//currentScene->AddEntity(entity);
-
-	return 1;
-}
-
 // Es posible que aqui queramos inicializar una escena de ogre y sincronizarla con las entidades
-Scene::Scene() : 
-	accumulator(0), entities(new std::list<Entity*>()), entitiesToDelete(std::list<std::list<Entity*>::iterator>()) 
+Scene::Scene(Ogre::SceneNode* ogreNode) :
+	accumulator(0), entities(new std::list<Entity*>()), entitiesToDelete(std::list<std::list<Entity*>::iterator>()) , ogreNode(ogreNode)
 {
 }
 
@@ -101,12 +87,15 @@ void Scene::Render()
 {
 }
 
+Ogre::SceneNode* Scene::GetOgreNode()
+{
+	return ogreNode;
+}
+
 void Scene::ConvertToLua(lua_State* state)
 {
 	getGlobalNamespace(state).
 		beginNamespace("ECS").
-			beginClass<Entity>("Entity").
-			endClass().
 			beginClass<Scene>("Scene").
 				addFunction("AddEntity", &Scene::AddEntity).
 			endClass().

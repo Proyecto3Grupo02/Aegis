@@ -1,9 +1,10 @@
 #include "Entity.h"
 #include "Component.h"
 #include "Transform.h"
+#include "../Scene/Scene.h"
 
-Entity::Entity(Ogre::SceneNode* node):
-	mNode_(node),active_(true),mScene_(nullptr)
+Entity::Entity(Scene* node):
+	mNode_(node->GetOgreNode()),active_(true),mScene_(node)
 {
 }
 
@@ -83,4 +84,25 @@ void Entity::onTrigger(Entity* other)
 	for (auto i : mNumOfActiveComponents_) {
 		mComponentsArray_[i]->onTrigger(other);
 	}
+}
+
+void Entity::ConvertToLua(lua_State* state)
+{
+	getGlobalNamespace(state).
+		beginNamespace("ECS").
+		beginClass<Entity>("Entity").
+			addConstructor <void (*) (Scene*)>().
+			//addFunction("AddComponent", &Entity::addComponent).
+			//addFunction("AddComponent", &Entity::receiveEvent).
+			addFunction("isActive", &Entity::isActive).
+			addFunction("setActive", &Entity::setActive).
+			addFunction("getName", &Entity::getName).
+			addFunction("setName", &Entity::setName).
+			addFunction("getNode", &Entity::getNode).
+			addFunction("getScene", &Entity::getScene).
+			addFunction("setScene", &Entity::setScene).
+			addFunction("receiveEvent", &Entity::receiveEvent).
+			addFunction("hasComponent", &Entity::hasComponent).
+		endClass().
+		endNamespace();
 }

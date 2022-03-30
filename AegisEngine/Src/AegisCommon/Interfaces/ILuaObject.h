@@ -2,7 +2,7 @@
 
 #include "../Utils/Scripting.h"
 
-class ILuaObject
+struct ILuaObject
 {
 public:
 	static void ConvertToLua(lua_State* state);

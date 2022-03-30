@@ -1,9 +1,10 @@
 #include "SceneManager.h"
 #include "Scene.h"
 
-SceneManager::SceneManager(std::string sceneName)
+SceneManager::SceneManager(Scene* scene)
 {
-	LoadScene(sceneName);
+	//LoadScene(sceneName);
+	currentScene = scene;
 }
 
 SceneManager::~SceneManager()
@@ -13,7 +14,7 @@ SceneManager::~SceneManager()
 
 void SceneManager::LoadScene(std::string sceneName)
 {
-	currentScene = new Scene();
+	//currentScene = new Scene();
 }
 
 void SceneManager::UpdateCurrentScene(float deltaTime)

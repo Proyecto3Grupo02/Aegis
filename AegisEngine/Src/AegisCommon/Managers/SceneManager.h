@@ -13,7 +13,7 @@ private:
 	Scene* currentScene;
 	void LoadScene(std::string sceneName);
 public:
-	SceneManager(std::string sceneName);
+	SceneManager(Scene* scene);
 	~SceneManager();
 
 	void UpdateCurrentScene(float deltaTime);

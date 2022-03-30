@@ -1,1 +1,2 @@
-currentScene:AddEntity("Hola");
+testEntity = ECS.Entity(currentScene);
+currentScene:AddEntity(testEntity);

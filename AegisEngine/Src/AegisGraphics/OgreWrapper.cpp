@@ -117,6 +117,11 @@ bool OgreWrapper::Init()
 	ogreLight->setPosition(-20, 80, 50);
 }
 
+Ogre::SceneNode* OgreWrapper::GetRootNode()
+{
+	return mSceneMgr->getRootSceneNode()->createChildSceneNode();
+}
+
 
 void OgreWrapper::CreateWindowNative()
 {

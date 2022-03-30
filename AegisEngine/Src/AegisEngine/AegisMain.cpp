@@ -22,6 +22,7 @@
 #include "../AegisScripting/Manager/LuaManager.h"
 #include "../AegisCommon/Scene/Scene.h"
 #include "../AegisCommon/Utils/GameLoopData.h"
+#include "../AegisCommon/Entity/Entity.h"
 
 using namespace luabridge;
 
@@ -82,8 +83,10 @@ void AegisMain::GameLoop() {
 AegisMain::AegisMain() : IInitializable() {
 	luaManager = LuaManager::getInstance();
 	ogreWrap = new OgreWrapper();
+	ogreWrap->Init();
+
 	gameLoopData = new GameLoopData();
-	sceneManager = new SceneManager("NombreScena");
+	sceneManager = new SceneManager(new Scene(ogreWrap->GetRootNode()));
 	exit = (false);
 }
 
@@ -101,7 +104,6 @@ AegisMain::~AegisMain()
 bool AegisMain::Init()
 {
 	Input()->Init();
-	ogreWrap->Init();
 	ConvertObjectToLua(); 
 	GameLoop();
 
@@ -118,6 +120,5 @@ void AegisMain::ConvertObjectToLua()
 	lua_setglobal(state, "currentScene");
 
 	SceneManager::ConvertToLua(state);
-
-
+	Entity::ConvertToLua(state);
 }

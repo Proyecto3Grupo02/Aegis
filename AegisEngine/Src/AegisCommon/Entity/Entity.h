@@ -7,14 +7,15 @@
 #include <string>
 #include "../Managers/ComponentManager.h"
 #include <Ogre.h>
+#include "../Interfaces/ILuaObject.h"
 
 class Component;
 class Transform;
 class Scene;
 
-class Entity{
+struct Entity : public ILuaObject {
     public:
-        Entity(Ogre::SceneNode* node);
+        Entity(Scene* node);
         ~Entity();
 
         void init();
@@ -79,7 +80,7 @@ class Entity{
         void onCollision(Entity* other); 
         void onTrigger(Entity* other);
 
-
+        static void ConvertToLua(lua_State* state);
     protected:
         Scene* mScene_; //scene pointer 
         std::map<std::string, Component*> mComponents_; //list of all the components in scene
