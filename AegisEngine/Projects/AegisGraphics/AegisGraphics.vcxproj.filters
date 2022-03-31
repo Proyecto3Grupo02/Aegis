@@ -13,15 +13,27 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Archivos de encabezado\Component">
+      <UniqueIdentifier>{3001c096-beca-4f5c-b6cc-28d9ac4f730b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Component">
+      <UniqueIdentifier>{e9a4971d-268e-4a99-bc3d-0a2ae8e69de7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\AegisGraphics\OgreWrapper.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\AegisGraphics\Components\Light.cpp">
+      <Filter>Archivos de origen\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AegisGraphics\OgreWrapper.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisGraphics\Components\Light.h">
+      <Filter>Archivos de encabezado\Component</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
