@@ -7,6 +7,6 @@ local NAME="myMath"
 local M = { }
 
 function M.addtwo(a,b) return a+b end
-function M.subtwo(x) return x-2 end
+function M.subtwo(a,b) return a-b end
 
 return M

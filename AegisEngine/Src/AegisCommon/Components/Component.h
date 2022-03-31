@@ -3,10 +3,11 @@
 #define COMPONENT_H
 
 #include <Ogre.h>
+#include "../Interfaces/ILuaObject.h"
 
 class Entity;
 
-class Component{
+class Component : public ILuaObject {
     public:
        Component();
 
@@ -28,6 +29,7 @@ class Component{
 
        bool getActive() { return isActive_; }
        void setActive(bool active) { isActive_ = active; }
+       static void ConvertToLua(lua_State* state);
     private:
         Entity* mEntity_;
         bool isActive_;

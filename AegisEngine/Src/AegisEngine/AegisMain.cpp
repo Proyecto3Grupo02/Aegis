@@ -23,6 +23,7 @@
 #include "../AegisCommon/Scene/Scene.h"
 #include "../AegisCommon/Utils/GameLoopData.h"
 #include "../AegisCommon/Entity/Entity.h"
+#include "../AegisCommon/Components/AegisComponent.h"
 
 using namespace luabridge;
 
@@ -121,4 +122,6 @@ void AegisMain::ConvertObjectToLua()
 
 	SceneManager::ConvertToLua(state);
 	Entity::ConvertToLua(state);
+	Component::ConvertToLua(state);
+	AegisComponent::ConvertToLua(state);
 }
