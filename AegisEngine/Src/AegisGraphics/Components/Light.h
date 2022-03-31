@@ -15,6 +15,7 @@ private:
     Vector3 mSpecular_;
 
     Transform* mTr_;
+    Ogre::Light* mLight_;
     
 public:
     Light();
