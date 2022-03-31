@@ -26,6 +26,7 @@ LuaManager::LuaManager()
 	state = luaL_newstate();
 	luaL_openlibs(state);
 	RegisterFunctionsToLua();
+	setLuaPath(state, "../Assets/LuaScripts");
 }
 
 LuaManager::~LuaManager()
@@ -36,8 +37,8 @@ LuaManager::~LuaManager()
 void LuaManager::Execute(const char* filename)
 {
 	// ESTO ES TEMPORAL
-	std::string name = "../Assets/LuaScripts/";
-	name += filename;
+	std::string name = ".\\..\\Assets\\LuaScripts\\";
+	name.append(filename);
 
 	// Load the program; this supports both source code and bytecode files.
 	int result = luaL_loadfile(state, name.c_str());
@@ -79,4 +80,19 @@ lua_State* LuaManager::GetState()
 void LuaManager::RegisterFunctionsToLua()
 {
 	RegisterFunction(howdy, "howdy");
+}
+
+int LuaManager::setLuaPath(lua_State* L, const char* path)
+{
+	lua_getglobal(L, "package");
+	lua_getfield(L, -1, "path"); // get field "path" from table at top of stack (-1)
+	std::string cur_path = lua_tostring(L, -1); // grab path string from top of stack
+	cur_path.append(";"); // do your path magic here
+	cur_path.append(path);
+	cur_path.append("/?.lua");
+	lua_pop(L, 1); // get rid of the string on the stack we just pushed on line 5
+	lua_pushstring(L, cur_path.c_str()); // push the new one
+	lua_setfield(L, -2, "path"); // set the field "path" in table at -2 with value at top of stack
+	lua_pop(L, 1); // get rid of package table from top of stack
+	return 0; // all done!
 }

@@ -17,8 +17,9 @@ public:
 	void PrintError(lua_State* state);
 	void RegisterFunction(lua_CFunction function, const char* functionName);
 	lua_State* GetState();
-private:
 	void RegisterFunctionsToLua();
+	int setLuaPath(lua_State* L, const char* path);
+private:
 	lua_State* state;
 };
 
