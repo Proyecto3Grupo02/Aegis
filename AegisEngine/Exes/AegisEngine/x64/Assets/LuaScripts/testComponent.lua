@@ -13,21 +13,33 @@ function table.GetNew()
     -- Data for your script, you can have here anything, custom methods, int, other tables... Anything, it will
     -- be stored as a LuaRef in C++
     local data = {};
-    data.time = 13;
+    data.time = 0;
+    
+    -- callbacks, here you define update, lateUpdate,fixedUpdate, onCollisino and onTrigger
+    local funcs = {};
     
     -- Set data to component, otherwise you won't be able to access component data from other scripts
     -- All data is public, optionally I can make a private data that isn't exported to lua as property
     component.data = data;
 
     -- update definition
-    function update(a) 
-        data.time = data.time + a;
+    function update(deltaTime) 
+        data.time = data.time + deltaTime;
         component.entity.transform.position = ECS.Vector3(math.sin(data.time) * 10,0, 0); 
     end;
 
-    component:setUpdate(update);
-    data.update = update;
+    function lateUpdate() end;
+    function lateUpdate(deltaTime) end;
+    function fixedUpdate() end;
+    function onCollision(other) end;
+    function onTrigger(other) end;
 
+    funcs.update = update;
+    funcs.lateUpdate = lateUpdate;
+    funcs.fixedUpate = fixedUpdate;
+    funcs.onTrigger = onTrigger;
+
+    component:setCallbacks(funcs);
     return component;
 end
 

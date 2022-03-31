@@ -9,20 +9,25 @@ enum Callbacks {Update, LateUpdate, FixedUpdate, OnCollisionEnter, OnTriggerEnte
 
 #define LuaRefDefault LuaManager::getInstance()->GetEmptyLuaRef());
 
-class Entity;
+struct Entity;
 class	AegisComponent : public Component, public ILuaObject {
 public: 
 	AegisComponent() : Component() {}
 	~AegisComponent(){}
 	virtual void init() {}
 	virtual void update(float dt) override;
+	virtual void lateUpdate(float dt)  override;
+	virtual void fixedUpdate()  override;
+	virtual void onCollision(Entity* other)  override;
+	virtual void onTrigger(Entity* other) override;
 
 	//Lua stuff
-	static void ConvertToLua(lua_State* state);
-	void setUpdate(LuaRef updateFunc);
+	void setCallbacks(LuaRef updateFunc);
 	
 	void SetData(LuaRef luaRef);
 	LuaRef GetData() const;
+	
+	static void ConvertToLua(lua_State* state);
 private:
 	LuaRef data = LuaManager::getInstance()->GetEmptyLuaRef();
 	LuaRef updateFunc = LuaManager::getInstance()->GetEmptyLuaRef();

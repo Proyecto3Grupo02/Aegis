@@ -5,7 +5,7 @@
 #include <Ogre.h>
 #include "../Interfaces/ILuaObject.h"
 
-class Entity;
+struct Entity;
 
 class Component : public ILuaObject {
     public:
@@ -20,7 +20,7 @@ class Component : public ILuaObject {
        
        virtual void fixedUpdate() {};
        virtual void update(float dt) {};
-       virtual void lateUpdate() {};
+       virtual void lateUpdate(float dt) {};
      
        virtual void render() {};
 

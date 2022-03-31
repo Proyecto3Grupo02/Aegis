@@ -61,12 +61,12 @@ void Entity::update(float dt)
 	}
 }
 
-void Entity::lateUpdate()
+void Entity::lateUpdate(float dt)
 {
 	if (active_) {
 		for (auto component : mComponentsArray_) {
 			if (!component->getActive()) continue;
-			component->lateUpdate();
+			component->lateUpdate(dt);
 		}
 
 		/*	for (Entity* e : mChildren_) {

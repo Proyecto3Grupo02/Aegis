@@ -67,7 +67,7 @@ void Scene::Update(float dt)
 void Scene::LateUpdate(float dt)
 {
 	for (Entity* entity : *entities)
-		entity->lateUpdate();
+		entity->lateUpdate(dt);
 }
 
 void Scene::UpdateScene(float dt)

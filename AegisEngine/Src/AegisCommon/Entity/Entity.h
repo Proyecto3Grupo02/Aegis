@@ -23,7 +23,7 @@ struct Entity : public ILuaObject {
        
         void fixedUpdate();
         void update(float dt);
-        void lateUpdate();
+        void lateUpdate(float dt);
 
         void render();
 
