@@ -12,18 +12,20 @@ class AegisComponent;
 
 class Renderer : public AegisComponent {
 public:
-	Renderer(Entity* _ent, std::string meshName, Ogre::SceneManager* sceneMng, bool ir = true): AegisComponent() {
+	Renderer(Entity* _ent, std::string meshName, std::string materialName, Ogre::SceneManager* sceneMng, bool ir = true): AegisComponent() {
 		ComponentManager::getInstance()->RegisterComponent<Renderer>("Renderer");
 		constructoraRenderer(_ent, meshName, sceneMng, ir);
+		setMaterialName(materialName);
 	}
 
 	~Renderer() {};
 
-	void render();
 	virtual void init(){};
 	void setRendering(bool iR);
 	Ogre::Entity* getMesh() { return mesh; };
-
+	void setMaterialName(std::string name) {
+		mesh->setMaterialName(name);
+	}
 protected:
 	void constructoraRenderer(Entity* _ent, std::string meshName, Ogre::SceneManager* sceneMng, bool ir);
 

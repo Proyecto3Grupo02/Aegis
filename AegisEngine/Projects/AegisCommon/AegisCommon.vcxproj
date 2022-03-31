@@ -155,7 +155,6 @@
   <ItemGroup>
     <ClInclude Include="..\..\Src\AegisCommon\Components\AegisComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\Component.h" />
-    <ClInclude Include="..\..\Src\AegisCommon\Components\Material.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\RegisterComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\Renderer.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\Transform.h" />
@@ -174,7 +173,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\AegisCommon\Components\Component.cpp" />
-    <ClCompile Include="..\..\Src\AegisCommon\Components\Material.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\Renderer.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\Transform.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Entity\Entity.cpp" />

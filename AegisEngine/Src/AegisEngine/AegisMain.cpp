@@ -102,4 +102,4 @@ bool AegisMain::Init() {
 	GameLoop();
 
 	return true;
-}
+} 

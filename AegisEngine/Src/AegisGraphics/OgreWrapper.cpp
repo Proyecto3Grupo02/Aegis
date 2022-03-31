@@ -97,11 +97,6 @@ bool OgreWrapper::Init() {
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
 
 	//Scene's lightning
-	Ogre::SceneNode* ogreLight = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-	Ogre::Light* light = mSceneMgr->createLight("MainLight");
-	ogreLight->attachObject(light);
-
-	ogreLight->setPosition(-20, 80, 50);
 }
 
 void OgreWrapper::CreateWindowNative() {
