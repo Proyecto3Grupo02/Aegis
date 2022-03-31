@@ -5,8 +5,9 @@
 #include "../Utils/Singleton.h"
 #include <vector>
 #include<SDL.h>
+#include "../Interfaces/ILuaObject.h"
 
-class InputSystem : public Singleton<InputSystem> {
+class InputSystem : public Singleton<InputSystem>, public ILuaObject {
 private:
 
 	struct key {
@@ -17,7 +18,6 @@ private:
 	std::vector<key> keys;
 	std::pair<Sint32, Sint32> mousePos_;
 	int keyNums;
-
 public:
 
 	InputSystem();
@@ -35,6 +35,13 @@ public:
 	bool isKeyUp(SDL_Keycode key);
 	bool isKeyDown(SDL_Keycode key);
 	bool isKeyPressedThisFrame(SDL_Keycode key);
+
+	//For lua
+	bool isKeyUpLua(const char* key);
+	bool isKeyDownLua(const char* key);
+	bool isKeyPressedThisFrameLua(const char* key);
+
+	static void ConvertToLua(lua_State* state);
 };
 
 

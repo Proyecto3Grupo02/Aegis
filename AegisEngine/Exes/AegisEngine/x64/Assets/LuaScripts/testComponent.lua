@@ -24,8 +24,25 @@ function table.GetNew()
 
     -- update definition
     function update(deltaTime) 
+        local num = 5;
+        local transform = component.entity.transform;
+        
+        if Input:isKeyPressedThisFrame("a") then
+            print("A key was pressed in lua")
+            transform.position = ECS.Vector3(-num,0, 0); 
+        elseif Input:isKeyPressedThisFrame("w") then
+            print("W key was pressed in lua")
+            transform.position = ECS.Vector3(0,num, 0); 
+        elseif Input:isKeyPressedThisFrame("s") then
+            print("A key was pressed in lua")
+            transform.position = ECS.Vector3(0,-num, 0); 
+        elseif Input:isKeyPressedThisFrame("d") then
+            print("D key was pressed in lua")
+            transform.position = ECS.Vector3(num,0, 0); 
+        end
+        
         data.time = data.time + deltaTime;
-        component.entity.transform.position = ECS.Vector3(math.sin(data.time) * 10,0, 0); 
+        --component.entity.transform.position = ECS.Vector3(math.sin(data.time) * 10,0, 0); 
     end;
 
     function lateUpdate() end;

@@ -75,9 +75,9 @@ void AegisMain::GameLoop() {
 			// Actualiza deltaTime y timeSinceSceneStart
 			gameLoopData->UpdateTimeRegistry(SDL_GetTicks());
 
-			std::cout << "a key is down: " << Input()->isKeyDown(SDLK_a) << "a key is pressedThis: ";
+	/*		std::cout << "a key is down: " << Input()->isKeyDown(SDLK_a) << "a key is pressedThis: ";
 			std::cout << Input()->isKeyPressedThisFrame(SDLK_a) << "a key is released: " << Input()->isKeyUp(SDLK_a);
-			std::cout << "\r";
+			std::cout << "\r";*/
 		}
 	}
 }
@@ -117,10 +117,10 @@ void AegisMain::ConvertObjectToLua()
 	luaManager->Execute("template.lua");
 
 	auto state = luaManager->GetState();
-	Scene::ConvertToLua(state);
-	push(state, sceneManager->GetCurrentScene());
-	lua_setglobal(state, "currentScene");
 
+	//Esto deberia hacerlo alguna funcion C global o algo externo para no tener dependencias en AegisEngine
+  	Scene::ConvertToLua(state);
+	InputSystem::ConvertToLua(state);
 	SceneManager::ConvertToLua(state);
 	Entity::ConvertToLua(state);
 	Component::ConvertToLua(state);
@@ -128,4 +128,10 @@ void AegisMain::ConvertObjectToLua()
 
 	Transform::ConvertToLua(state);
 	Vector3::ConvertToLua(state);
+
+	push(state, sceneManager->GetCurrentScene());
+	lua_setglobal(state, "currentScene");
+
+	push(state, Input());
+	lua_setglobal(state, "Input");
 }

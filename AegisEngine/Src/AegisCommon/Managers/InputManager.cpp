@@ -64,6 +64,33 @@ bool InputSystem::isKeyPressedThisFrame(SDL_Keycode key)
 	return keys[i].pressedThisFrame;
 }
 
+bool InputSystem::isKeyUpLua(const char* key)
+{
+	return isKeyUp(SDL_GetKeyFromName(key));
+}
+
+bool InputSystem::isKeyDownLua(const char* key)
+{
+	return isKeyDown(SDL_GetKeyFromName(key));
+}
+
+bool InputSystem::isKeyPressedThisFrameLua(const char* key)
+{
+	return isKeyPressedThisFrame(SDL_GetKeyFromName(key));
+}
+
+void InputSystem::ConvertToLua(lua_State* state)
+{
+	getGlobalNamespace(state).
+		beginNamespace("ECS").
+			beginClass<InputSystem>("InputSystem").
+				addFunction("isKeyUp", &InputSystem::isKeyUpLua).
+				addFunction("isKeyDown", &InputSystem::isKeyDownLua).
+				addFunction("isKeyPressedThisFrame", &InputSystem::isKeyPressedThisFrameLua).
+			endClass().
+		endNamespace();
+}
+
 bool InputSystem::isKeyUp(SDL_Keycode key) {
 	int i = getId(key);
 	return keys[i].releasedThisFrame;
