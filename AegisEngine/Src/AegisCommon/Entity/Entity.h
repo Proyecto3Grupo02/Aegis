@@ -39,7 +39,12 @@ struct Entity : public ILuaObject {
 
         //handle the components
        
-        template <class T, typename...Targs>
+        template< class T, class... Targs>
+        inline void addComponentFromLua(std::string name, std::function<T(Targs...)> cmp) {
+            addComponent<T>(name,Targs);
+        }
+
+        template <class T, class...Targs>
         inline T* addComponent(std::string name, Targs&&...args)
         {
             ComponentManager* mngr = ComponentManager::getInstance();

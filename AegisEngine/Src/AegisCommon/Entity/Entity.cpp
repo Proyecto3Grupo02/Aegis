@@ -137,8 +137,7 @@ void Entity::ConvertToLua(lua_State* state)
 		addFunction("CreateEntity", CreateEntity).
 	
 		beginClass<Entity>("Entity").
-			//addFunction("AddComponent", &Entity::addComponent).
-			//addFunction("AddComponent", &Entity::receiveEvent).
+			//addFunction("AddComponent", &Entity::addComponentFromLua).
 			addFunction("isActive", &Entity::isActive).
 			addFunction("setActive", &Entity::setActive).
 			addFunction("getName", &Entity::getName).
@@ -149,6 +148,8 @@ void Entity::ConvertToLua(lua_State* state)
 			addFunction("receiveEvent", &Entity::receiveEvent).
 			addFunction("hasComponent", &Entity::hasComponent).
 			addFunction("addChildEntity", &Entity::addChildEntity).
+		
+
 		endClass().
 		endNamespace();
 }
