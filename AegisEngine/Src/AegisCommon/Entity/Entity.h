@@ -6,6 +6,7 @@
 #include <list>
 #include <string>
 #include "../Managers/ComponentManager.h"
+#include "../Components/AegisComponent.h"
 #include <Ogre.h>
 #include "../Interfaces/ILuaObject.h"
 
@@ -39,9 +40,18 @@ struct Entity : public ILuaObject {
 
         //handle the components
        
-        template< class T, class... Targs>
-        inline void addComponentFromLua(std::string name, std::function<T(Targs...)> cmp) {
-            addComponent<T>(name,Targs);
+        inline void addComponentFromLua(AegisComponent* component) {
+            ComponentManager* mngr = ComponentManager::getInstance();
+            if (mngr != nullptr) {
+                std::string key = component->GetComponentName();
+
+                if (mComponents_.find(key) == mComponents_.end()) { //si no está lo añadimos
+                    component->setEntity(this);
+
+                    mComponentsArray_.push_back(component);
+                    mComponents_[key] = component;
+                }
+            }
         }
 
         template <class T, class...Targs>
@@ -90,9 +100,8 @@ struct Entity : public ILuaObject {
         static void ConvertToLua(lua_State* state);
     protected:
         Scene* mScene_; //scene pointer 
-        std::map<std::string, Component*> mComponents_; //list of all the components in scene
-        std::vector<Component*> mComponentsArray_; //list of all the components in scene
-        std::list<int> mNumOfActiveComponents_; //list of the index of their active component 
+        std::map<std::string, AegisComponent*> mComponents_; //list of all the components in scene
+        std::vector<AegisComponent*> mComponentsArray_; //list of all the components in scene
         bool active_; //bool to check if the entity is active or not
 
         Ogre::SceneNode* mNode_;

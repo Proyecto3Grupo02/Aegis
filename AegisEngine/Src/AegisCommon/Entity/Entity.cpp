@@ -3,8 +3,8 @@
 #include "Transform.h"
 #include "../Scene/Scene.h"
 
-Entity::Entity(Scene* node):
-	mNode_(node->GetOgreNode()),active_(true),mScene_(node)
+Entity::Entity(Scene* node) :
+	mNode_(node->GetOgreNode()), active_(true), mScene_(node)
 {
 }
 
@@ -16,9 +16,9 @@ Entity::~Entity()
 	mComponentsArray_.clear();
 	mComponents_.clear();
 
-	for (Entity* e : mChildren_) {
-		delete e;
-	}
+	//for (Entity* e : mChildren_) {
+	//	delete e;
+	//}
 	mChildren_.clear();
 }
 
@@ -30,50 +30,56 @@ void Entity::init()
 void Entity::fixedUpdate()
 {
 	if (active_) {
-		for (auto i : mNumOfActiveComponents_) {
-			mComponentsArray_[i]->fixedUpdate();
+		for (auto component : mComponentsArray_) {
+			if (!component->getActive()) continue;
+			component->fixedUpdate();
 		}
-		for (Entity* e : mChildren_) {
-			e->fixedUpdate();
-		}
+		/*	for (Entity* e : mChildren_) {
+				e->fixedUpdate();
+			}*/
 	}
 }
 
 void Entity::update(float dt)
 {
 	if (active_) {
-		for (auto i : mNumOfActiveComponents_) {
-			mComponentsArray_[i]->update(dt);
+		for (auto component : mComponentsArray_) {
+			if (!component->getActive()) continue;
+
+			component->update(dt);
+			component->doUpdate(dt);
 		}
-		for (Entity* e : mChildren_) {
+		/*for (Entity* e : mChildren_) {
 			e->update(dt);
-		}
+		}*/
 	}
 }
 
 void Entity::lateUpdate()
 {
 	if (active_) {
-		for (auto i : mNumOfActiveComponents_) {
-			mComponentsArray_[i]->lateUpdate();
+		for (auto component : mComponentsArray_) {
+			if (!component->getActive()) continue;
+			component->lateUpdate();
 		}
 
-		for (Entity* e : mChildren_) {
-			e->lateUpdate();
-		}
+		/*	for (Entity* e : mChildren_) {
+				e->lateUpdate();
+			}*/
 	}
 }
 
 void Entity::render()
 {
 	if (active_) {
-		for (auto i : mNumOfActiveComponents_) {
-			mComponentsArray_[i]->render();
+		for (auto component : mComponentsArray_) {
+			if (!component->getActive()) continue;
+			component->render();
 		}
 
-		for (Entity* e : mChildren_) {
+		/*for (Entity* e : mChildren_) {
 			e->render();
-		}
+		}*/
 	}
 }
 
@@ -101,33 +107,35 @@ bool Entity::hasComponent(unsigned int cmpID)
 
 void Entity::onCollision(Entity* other)
 {
-	for (auto i : mNumOfActiveComponents_) {
-		mComponentsArray_[i]->onCollision(other);
+	for (auto component : mComponentsArray_) {
+		if (!component->getActive()) continue;
+		component->onCollision(other);
 	}
 
-	for (Entity* e: mChildren_)
-	{
-		e->onCollision(other);
-	}
+	//for (Entity* e: mChildren_)
+	//{
+	//	e->onCollision(other);
+	//}
 }
 
 void Entity::onTrigger(Entity* other)
 {
-	for (auto i : mNumOfActiveComponents_) {
-		mComponentsArray_[i]->onTrigger(other);
+	for (auto component : mComponentsArray_) {
+		if (!component->getActive()) continue;
+		component->onTrigger(other);
 	}
 
-	for (Entity* e : mChildren_)
-	{
-		e->onTrigger(other);
-	}
+	//for (Entity* e : mChildren_)
+	//{
+	//	e->onTrigger(other);
+	//}
 }
 
 Entity* CreateEntity(Scene* scene)
 {
 	Entity* e = new Entity(scene);
 	return e;
-	
+
 }
 
 void Entity::ConvertToLua(lua_State* state)
@@ -135,21 +143,19 @@ void Entity::ConvertToLua(lua_State* state)
 	getGlobalNamespace(state).
 		beginNamespace("ECS").
 		addFunction("CreateEntity", CreateEntity).
-	
-		beginClass<Entity>("Entity").
-			//addFunction("AddComponent", &Entity::addComponentFromLua).
-			addFunction("isActive", &Entity::isActive).
-			addFunction("setActive", &Entity::setActive).
-			addFunction("getName", &Entity::getName).
-			addFunction("setName", &Entity::setName).
-			addFunction("getNode", &Entity::getNode).
-			addFunction("getScene", &Entity::getScene).
-			addFunction("setScene", &Entity::setScene).
-			addFunction("receiveEvent", &Entity::receiveEvent).
-			addFunction("hasComponent", &Entity::hasComponent).
-			addFunction("addChildEntity", &Entity::addChildEntity).
-		
 
+		beginClass<Entity>("Entity").
+		addFunction("AddComponent", &Entity::addComponentFromLua).
+		addFunction("isActive", &Entity::isActive).
+		addFunction("setActive", &Entity::setActive).
+		addFunction("getName", &Entity::getName).
+		addFunction("setName", &Entity::setName).
+		addFunction("getNode", &Entity::getNode).
+		addFunction("getScene", &Entity::getScene).
+		addFunction("setScene", &Entity::setScene).
+		addFunction("receiveEvent", &Entity::receiveEvent).
+		addFunction("hasComponent", &Entity::hasComponent).
+		addFunction("addChildEntity", &Entity::addChildEntity).
 		endClass().
 		endNamespace();
 }

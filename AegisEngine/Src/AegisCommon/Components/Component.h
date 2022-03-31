@@ -29,10 +29,15 @@ class Component : public ILuaObject {
 
        bool getActive() { return isActive_; }
        void setActive(bool active) { isActive_ = active; }
+
+       std::string GetComponentName() const { return componentName; };
+       void SetComponentName(std::string name) { componentName = name; };
+       
        static void ConvertToLua(lua_State* state);
     private:
         Entity* mEntity_;
         bool isActive_;
+        std::string componentName;
         
 };
 

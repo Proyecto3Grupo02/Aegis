@@ -11,20 +11,16 @@ void TestAegisComponent(AegisComponent component)
 	component.doUpdate(0.16f);
 }
 
-void TestLuaRef(LuaRef lua)
-{
-	lua(1.0f);
-}
-
 void AegisComponent::ConvertToLua(lua_State* state)
 {
 	getGlobalNamespace(state).
 		beginNamespace("ECS").
-		addFunction("TestLua", TestLuaRef).
 		addFunction("CreateComponent", CreateComponent).
 		addFunction("TestAegisComponent", TestAegisComponent).
 		deriveClass<AegisComponent, Component>("Component").
 		addProperty("update", &AegisComponent::getUpdate, &AegisComponent::setUpdate).
+		addProperty("data", &AegisComponent::GetData, &AegisComponent::SetData).
+		addFunction("SetData", &AegisComponent::SetData).
 		endClass().
 		endNamespace();
 }
@@ -37,4 +33,14 @@ void AegisComponent::setUpdate(LuaRef updateFunc)
 std::function<void(float)> AegisComponent::getUpdate() const
 {
 	return doUpdate;
+}
+
+void AegisComponent::SetData(LuaRef luaRef)
+{
+	data.push_back(luaRef);
+}
+
+LuaRef AegisComponent::GetData() const
+{
+	return data[0];
 }

@@ -16,5 +16,10 @@ public:
 	std::function<void(float)> doUpdate;
 	void setUpdate(LuaRef updateFunc);
 	std::function<void(float)> getUpdate() const;
+	
+	void SetData(LuaRef luaRef);
+	LuaRef GetData() const;
+private:
+	std::vector<LuaRef> data;
 };
 #endif
