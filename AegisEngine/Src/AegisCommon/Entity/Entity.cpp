@@ -54,7 +54,6 @@ void Entity::update(float dt)
 			if (!component->getActive()) continue;
 
 			component->update(dt);
-			if (component->doUpdate != nullptr)component->doUpdate(dt);
 		}
 		/*for (Entity* e : mChildren_) {
 			e->update(dt);

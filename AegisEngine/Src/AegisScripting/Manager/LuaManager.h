@@ -19,6 +19,7 @@ public:
 	lua_State* GetState();
 	void RegisterFunctionsToLua();
 	int setLuaPath(lua_State* L, const char* path);
+	luabridge::LuaRef GetEmptyLuaRef();
 private:
 	lua_State* state;
 };

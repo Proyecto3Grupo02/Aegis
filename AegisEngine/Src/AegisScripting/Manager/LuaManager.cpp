@@ -96,3 +96,8 @@ int LuaManager::setLuaPath(lua_State* L, const char* path)
 	lua_pop(L, 1); // get rid of package table from top of stack
 	return 0; // all done!
 }
+
+luabridge::LuaRef LuaManager::GetEmptyLuaRef()
+{
+	return luabridge::LuaRef(state);
+}

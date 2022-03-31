@@ -6,9 +6,14 @@ AegisComponent* CreateComponent()
 	return e;
 }
 
-void TestAegisComponent(AegisComponent component)
+
+void AegisComponent::update(float dt)
 {
-	component.doUpdate(0.16f);
+	if (!updateFunc.isNil())
+		updateFunc(dt);
+
+	//if (doUpdate != nullptr) 
+	//	doUpdate(dt);
 }
 
 void AegisComponent::ConvertToLua(lua_State* state)
@@ -16,9 +21,8 @@ void AegisComponent::ConvertToLua(lua_State* state)
 	getGlobalNamespace(state).
 		beginNamespace("ECS").
 		addFunction("CreateComponent", CreateComponent).
-		addFunction("TestAegisComponent", TestAegisComponent).
 		deriveClass<AegisComponent, Component>("Component").
-		addProperty("update", &AegisComponent::getUpdate, &AegisComponent::setUpdate).
+		addFunction("setUpdate", &AegisComponent::setUpdate).
 		addProperty("data", &AegisComponent::GetData, &AegisComponent::SetData).
 		endClass().
 		endNamespace();
@@ -26,21 +30,16 @@ void AegisComponent::ConvertToLua(lua_State* state)
 
 void AegisComponent::setUpdate(LuaRef updateFunc)
 {
-	this->doUpdate = [updateFunc](float n) { updateFunc(n); };
-}
-
-std::function<void(float)> AegisComponent::getUpdate() const
-{
-	return doUpdate;
+	this->updateFunc = updateFunc;
 }
 
 void AegisComponent::SetData(LuaRef luaRef)
 {
-	if(data.empty())
-		data.push_back(luaRef);
+	float time = luaRef.rawget("time");
+	data = luaRef;
 }
 
 LuaRef AegisComponent::GetData() const
 {
-	return data[0];
+	return data;
 }
