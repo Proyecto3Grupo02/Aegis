@@ -5,9 +5,11 @@
 #include "AegisComponent.h"
 #include "../Utils/Vector4.h"
 #include "../Managers/ComponentManager.h"
+#include "../Interfaces/ILuaObject.h"
+
 class Entity;
 
-class Transform : public AegisComponent {
+class Transform : public AegisComponent, public ILuaObject {
 public:
 	Transform() : AegisComponent(), position(Vector3()), rotation(Vector4()), scale(Vector3(1.0f,1.0f,1.0f)) {
 		ComponentManager::getInstance()->RegisterComponent<Transform>("Transform");
@@ -19,7 +21,7 @@ public:
 	virtual ~Transform() {}
 	virtual void init(){}
 	virtual void update();
-	Vector3 GetPosition();
+	Vector3 GetPosition() const;
 	Vector4 GetRotation();
 	Vector3 GetScale();
 
@@ -27,6 +29,7 @@ public:
 	void SetRotation(Vector4 newRot);
 	void SetScale(Vector3 newScale);
 
+	static void ConvertToLua(lua_State* state);
 protected:
 	Vector3 position;
 	Vector4 rotation;

@@ -97,6 +97,9 @@ struct Entity : public ILuaObject {
         void onCollision(Entity* other); 
         void onTrigger(Entity* other);
 
+        Transform* GetTransform() const;
+        void SetTransform(Transform* transform);
+
         static void ConvertToLua(lua_State* state);
     protected:
         Scene* mScene_; //scene pointer 
@@ -111,7 +114,7 @@ struct Entity : public ILuaObject {
 
     private:
         std::string mName_; //name of the entity, works like a tag, useful to debug
-
+        Transform* transform;
 
 };
 

@@ -87,6 +87,8 @@ void Scene::UpdateScene(float dt)
 
 void Scene::Render()
 {
+	for (Entity* entity : *entities)
+		entity->render();
 }
 
 //the ogreNode usually is the root scene node so we add this node as a child one

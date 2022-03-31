@@ -14,6 +14,8 @@ void Component::ConvertToLua(lua_State* state)
 		beginNamespace("ECS").
 		beginClass<Component>("ComponentBase").
 		addProperty("name", &Component::GetComponentName, &Component::SetComponentName).
+		addProperty("entity", &Component::GetEntity, &Component::SetEntity).
+		addFunction("getEntity", &Component::GetEntity).
 		endClass().
 		endNamespace();
 }

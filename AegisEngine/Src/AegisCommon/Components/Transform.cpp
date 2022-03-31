@@ -4,7 +4,7 @@
 #include "Entity.h"
 
 
-Vector3 Transform::GetPosition()
+Vector3 Transform::GetPosition() const
 {
 	return position;
 }
@@ -33,6 +33,17 @@ void Transform::SetScale(Vector3 newScale)
 {
 	scale = newScale;
 }
+
+void Transform::ConvertToLua(lua_State* state)
+{
+	getGlobalNamespace(state).
+		beginNamespace("ECS").
+			beginClass<Transform>("Transform").
+			addProperty("position", &Transform::GetPosition, &Transform::SetPosition).
+			endClass().
+		endNamespace();
+}
+
 void Transform::update()
 {
 	//pass the parameters from vector3 /vector4 to Ogre::Node position rotation and scale

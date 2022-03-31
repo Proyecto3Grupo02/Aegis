@@ -24,6 +24,7 @@
 #include "../AegisCommon/Utils/GameLoopData.h"
 #include "../AegisCommon/Entity/Entity.h"
 #include "../AegisCommon/Components/AegisComponent.h"
+#include "../AegisCommon/Components/Transform.h"
 
 using namespace luabridge;
 
@@ -124,4 +125,7 @@ void AegisMain::ConvertObjectToLua()
 	Entity::ConvertToLua(state);
 	Component::ConvertToLua(state);
 	AegisComponent::ConvertToLua(state);
+
+	Transform::ConvertToLua(state);
+	Vector3::ConvertToLua(state);
 }

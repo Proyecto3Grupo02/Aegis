@@ -32,6 +32,12 @@ class Component : public ILuaObject {
 
        std::string GetComponentName() const { return componentName; };
        void SetComponentName(std::string name) { componentName = name; };
+
+       Entity* GetEntity() const 
+       { 
+           return mEntity_; 
+       };
+       void SetEntity(Entity* entity) { mEntity_ = entity; };
        
        static void ConvertToLua(lua_State* state);
     private:

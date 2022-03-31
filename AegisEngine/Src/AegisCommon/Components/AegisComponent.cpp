@@ -20,7 +20,6 @@ void AegisComponent::ConvertToLua(lua_State* state)
 		deriveClass<AegisComponent, Component>("Component").
 		addProperty("update", &AegisComponent::getUpdate, &AegisComponent::setUpdate).
 		addProperty("data", &AegisComponent::GetData, &AegisComponent::SetData).
-		addFunction("SetData", &AegisComponent::SetData).
 		endClass().
 		endNamespace();
 }
@@ -37,7 +36,8 @@ std::function<void(float)> AegisComponent::getUpdate() const
 
 void AegisComponent::SetData(LuaRef luaRef)
 {
-	data.push_back(luaRef);
+	if(data.empty())
+		data.push_back(luaRef);
 }
 
 LuaRef AegisComponent::GetData() const

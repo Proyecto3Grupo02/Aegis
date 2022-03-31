@@ -1,11 +1,18 @@
 #include "Entity.h"
 #include "Component.h"
 #include "Transform.h"
+#include "../Components/Renderer.h"
 #include "../Scene/Scene.h"
 
 Entity::Entity(Scene* node) :
 	mNode_(node->GetOgreNode()), active_(true), mScene_(node)
 {
+	//Componente obligatorio para todas las entidades
+	transform = this->addComponent<Transform>("Transform", Vector3(0,0,0), Vector4(), Vector3(1.0f, 1.0f, 1.0f));
+	
+	// TEMPORAL
+	auto r = new Renderer(this, "fish.mesh", mNode_->getCreator());
+	this->addComponentFromLua(r);
 }
 
 Entity::~Entity()
@@ -47,7 +54,7 @@ void Entity::update(float dt)
 			if (!component->getActive()) continue;
 
 			component->update(dt);
-			component->doUpdate(dt);
+			if (component->doUpdate != nullptr)component->doUpdate(dt);
 		}
 		/*for (Entity* e : mChildren_) {
 			e->update(dt);
@@ -131,6 +138,16 @@ void Entity::onTrigger(Entity* other)
 	//}
 }
 
+Transform* Entity::GetTransform() const
+{
+	return transform;
+}
+
+void Entity::SetTransform(Transform* transform)
+{
+	this->transform = transform;
+}
+
 Entity* CreateEntity(Scene* scene)
 {
 	Entity* e = new Entity(scene);
@@ -156,6 +173,8 @@ void Entity::ConvertToLua(lua_State* state)
 		addFunction("receiveEvent", &Entity::receiveEvent).
 		addFunction("hasComponent", &Entity::hasComponent).
 		addFunction("addChildEntity", &Entity::addChildEntity).
+		addFunction("getTransform", &Entity::GetTransform).
+		addProperty("transform", &Entity::GetTransform, &Entity::SetTransform).
 		endClass().
 		endNamespace();
 }
