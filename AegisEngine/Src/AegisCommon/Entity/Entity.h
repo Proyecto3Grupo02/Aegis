@@ -34,10 +34,12 @@ struct Entity : public ILuaObject {
 
 
         inline Ogre::SceneNode* getNode() { return mNode_; }
+        inline void setNode(Ogre::SceneNode* node) { mNode_ = node; }
+        Entity* addChildEntity();
 
         //handle the components
        
-        template<typename T, typename...Targs>
+        template <class T, typename...Targs>
         inline T* addComponent(std::string name, Targs&&...args)
         {
             ComponentManager* mngr = ComponentManager::getInstance();
@@ -84,11 +86,13 @@ struct Entity : public ILuaObject {
     protected:
         Scene* mScene_; //scene pointer 
         std::map<std::string, Component*> mComponents_; //list of all the components in scene
-       std::vector<Component*> mComponentsArray_; //list of all the components in scene
+        std::vector<Component*> mComponentsArray_; //list of all the components in scene
         std::list<int> mNumOfActiveComponents_; //list of the index of their active component 
         bool active_; //bool to check if the entity is active or not
 
         Ogre::SceneNode* mNode_;
+
+        std::list<Entity*> mChildren_;
 
 
     private:

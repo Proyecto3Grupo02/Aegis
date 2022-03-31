@@ -89,9 +89,10 @@ void Scene::Render()
 {
 }
 
+//the ogreNode usually is the root scene node so we add this node as a child one
 Ogre::SceneNode* Scene::GetOgreNode()
 {
-	return ogreNode;
+	return ogreNode->createChildSceneNode(); 
 }
 
 void Scene::ConvertToLua(lua_State* state)
