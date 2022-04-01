@@ -10,7 +10,7 @@ public:
 	Vector4(float _all) : Vector3(_all), w(_all) {};
 	Vector4() : Vector3(), w(1.0f) {};
 
-	float GetW() { return w; }
+	float GetW()const { return w; }
 	void SetW(float _w) { w = _w; }
 
 	Vector4 operator+(Vector4 const& b) { return Vector4(x + b.x, y + b.y, z + b.z, w + b.w); }
