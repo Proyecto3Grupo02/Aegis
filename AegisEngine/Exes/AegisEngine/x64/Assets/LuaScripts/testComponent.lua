@@ -6,8 +6,7 @@ local table = { }
 
 -- i dont need arguments here
 function table.GetNew() 
-    local component = Aegis.CreateComponent();
-    component.name = NAME;
+    local component = Aegis.CreateComponent(NAME);
 
     local data = {};
     component.data = data;
@@ -17,24 +16,24 @@ function table.GetNew()
     data.test = 1;
 
     -- move entity with the keys, press h to print debug info
-    function update(deltaTime) 
+    function Update(deltaTime) 
         local num = 5;
         local transform = component.entity.transform;
 
-        if  Input:anyKeyWasPressed() then
+        if  Input:AnyKeyWasPressed() then
         
-            if Input:keyWasPressed("h") then
+            if Input:KeyWasPressed("h") then
                 print("Test value is " .. component.data.test);
-            elseif Input:keyWasPressed("a") then
+            elseif Input:KeyWasPressed("a") then
                 print("A key was pressed this frame in lua")
                 transform.position = Aegis.Maths.Vector3(-num,0, 0); 
-            elseif Input:keyWasPressed("w") then
+            elseif Input:KeyWasPressed("w") then
                 print("W key was pressed this frame in lua")
                 transform.position = Aegis.Maths.Vector3(0,num, 0); 
-            elseif Input:keyWasPressed("s") then
+            elseif Input:KeyWasPressed("s") then
                 print("S key was pressed this frame in lua")
                 transform.position = Aegis.Maths.Vector3(0,-num, 0); 
-            elseif Input:keyWasPressed("d") then
+            elseif Input:KeyWasPressed("d") then
                 print("D key was pressed this frame in lua")
                 transform.position = Aegis.Maths.Vector3(num,0, 0); 
             end
@@ -43,7 +42,7 @@ function table.GetNew()
         data.time = data.time + deltaTime;
         
         -- if time is bigger than 0 obtain meshRenderer and setvisible to false
-        local meshRenderer = component.entity:getComponent("Renderer").type;
+        local meshRenderer = component.entity:GetComponent("Renderer").type;
 
         if math.sin(data.time) > 0 then
             meshRenderer.visible = false;
@@ -55,19 +54,15 @@ function table.GetNew()
         transform.position = Aegis.Maths.Vector3(math.sin(data.time) * 10,0, 0); 
     end;
 
-    function lateUpdate() end;
-    function lateUpdate(deltaTime) end;
-    function fixedUpdate() end;
-    function onCollision(other) end;
-    function onTrigger(other) end;
+    function LateUpdate(deltaTime) end;
+    function FixedUpdate() end;
+    function OnCollision(other) end;
+    function OnTrigger(other) end;
 
     local funcs = {};
-    funcs.update = update;
-    funcs.lateUpdate = lateUpdate;
-    funcs.fixedUpate = fixedUpdate;
-    funcs.onTrigger = onTrigger;
+    funcs.update = Update;
 
-    component:setCallbacks(funcs);
+    component:SetCallbacks(funcs);
     return component;
 end
 

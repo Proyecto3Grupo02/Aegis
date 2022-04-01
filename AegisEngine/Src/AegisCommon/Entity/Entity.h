@@ -65,8 +65,6 @@ public:
 	inline Scene* getScene() { return mScene_; }
 	inline void setScene(Scene* scene) { mScene_ = scene; }
 	//doubt
-	void receiveEvent(Entity* receive);
-	bool hasComponent(unsigned int cmpID);
 	void onCollision(Entity* other);
 	void onTrigger(Entity* other);
 

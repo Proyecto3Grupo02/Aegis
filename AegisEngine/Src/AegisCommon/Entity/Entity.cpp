@@ -81,16 +81,6 @@ Entity* Entity::addChildEntity()
 	return e;
 }
 
-
-void Entity::receiveEvent(Entity* receive)
-{
-}
-
-bool Entity::hasComponent(unsigned int cmpID)
-{
-	return mComponentsArray_[cmpID] != nullptr;
-}
-
 void Entity::onCollision(Entity* other)
 {
 	for (auto component : mComponentsArray_) {
@@ -132,18 +122,15 @@ void Entity::ConvertToLua(lua_State* state)
 
 		beginClass<Entity>("Entity").
 		addFunction("AddComponent", &Entity::addComponentFromLua).
-		addFunction("getComponent", &Entity::getComponentLua).
-		addFunction("isActive", &Entity::isActive).
-		addFunction("setActive", &Entity::setActive).
-		addFunction("getName", &Entity::getName).
-		addFunction("setName", &Entity::setName).
-		addFunction("getNode", &Entity::getNode).
-		addFunction("getScene", &Entity::getScene).
-		addFunction("setScene", &Entity::setScene).
-		addFunction("receiveEvent", &Entity::receiveEvent).
-		addFunction("hasComponent", &Entity::hasComponent).
-		addFunction("addChildEntity", &Entity::addChildEntity).
-		addFunction("getTransform", &Entity::GetTransform).
+		addFunction("GetComponent", &Entity::getComponentLua).
+		addFunction("IsActive", &Entity::isActive).
+		addFunction("SetActive", &Entity::setActive).
+		addFunction("GetName", &Entity::getName).
+		addFunction("SetName", &Entity::setName).
+		addFunction("GetScene", &Entity::getScene).
+		// No tiene sentido el setScene, no vamos a mover entidades entre escenas
+		//addFunction("SetScene", &Entity::setScene).
+		//addFunction("addChildEntity", &Entity::addChildEntity).
 		addProperty("transform", &Entity::GetTransform, &Entity::SetTransform).
 		endClass().
 		endNamespace();

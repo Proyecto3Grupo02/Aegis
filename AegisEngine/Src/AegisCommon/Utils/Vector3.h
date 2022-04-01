@@ -3,7 +3,7 @@
 #define VECTOR3_H
 #include "../Interfaces/ILuaObject.h"
 
-class Vector3 : public ILuaObject {
+struct Vector3 : public ILuaObject {
 public:
 	Vector3(float _x, float _y, float _z) : x(_x), y(_y), z(_z) {};
 	Vector3(float _all) : x(_all), y(_all), z(_all) {};

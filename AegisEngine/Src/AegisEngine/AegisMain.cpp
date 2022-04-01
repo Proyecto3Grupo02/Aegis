@@ -122,6 +122,7 @@ void AegisMain::ConvertObjectToLua()
 
 	Transform::ConvertToLua(state);
 	Vector3::ConvertToLua(state);
+	Vector4::ConvertToLua(state);
 	Renderer::ConvertToLua(state);
 
 	//push(state, true);

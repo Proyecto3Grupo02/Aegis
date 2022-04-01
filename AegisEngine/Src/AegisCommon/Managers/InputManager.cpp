@@ -115,12 +115,12 @@ void InputSystem::ConvertToLua(lua_State* state)
 	getGlobalNamespace(state).
 		beginNamespace("Aegis").
 			beginClass<InputSystem>("InputSystem").
-				addFunction("keyWasPressed", &InputSystem::keyWasPressedLua).
-				addFunction("isKeyDown", &InputSystem::isKeyDownLua).
-				addFunction("keyWasReleased", &InputSystem::keyWasReleasedLua).
-				addFunction("anyKeyWasPressed", &InputSystem::oneKeyWasPressed).
-				addFunction("anyKeyIsDown", &InputSystem::oneKeyIsDown).
-				addFunction("anyKeyWasReleased", &InputSystem::oneKeyWasReleased).
+				addFunction("KeyWasPressed", &InputSystem::keyWasPressedLua).
+				addFunction("IsKeyDown", &InputSystem::isKeyDownLua).
+				addFunction("KeyWasReleased", &InputSystem::keyWasReleasedLua).
+				addFunction("AnyKeyWasPressed", &InputSystem::oneKeyWasPressed).
+				addFunction("AnyKeyIsDown", &InputSystem::oneKeyIsDown).
+				addFunction("AnyKeyWasReleased", &InputSystem::oneKeyWasReleased).
 			endClass().
 		endNamespace();
 }

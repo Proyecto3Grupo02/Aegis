@@ -1,8 +1,9 @@
 #include "AegisComponent.h"
 
-AegisComponent* CreateComponent()
+AegisComponent* CreateComponent(std::string componentName)
 {
 	AegisComponent* e = new AegisComponent();
+	e->SetComponentName(componentName);
 	return e;
 }
 
@@ -74,7 +75,7 @@ void AegisComponent::ConvertToLua(lua_State* state)
 		beginNamespace("Aegis").
 		addFunction("CreateComponent", CreateComponent).
 		deriveClass<AegisComponent, Component>("Component").
-		addFunction("setCallbacks", &AegisComponent::setCallbacks).
+		addFunction("SetCallbacks", &AegisComponent::setCallbacks).
 		addProperty("data", &AegisComponent::GetData, &AegisComponent::SetData).
 		addProperty("type", &AegisComponent::GetType, &AegisComponent::SetType).
 		endClass().

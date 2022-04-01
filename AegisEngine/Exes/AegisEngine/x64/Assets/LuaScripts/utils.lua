@@ -2,17 +2,24 @@
 
 local NAME="Utils"
 
-local parseEntity = function(object)
+local ParseEntity = function(object)
 
     -- check if type is Entity, if it is create entity and parse components
+    -- if a component is not found it will print a message to console, but 
+    -- execution will continue
     if object.type == "Entity" then
         local entity = Aegis.CreateEntity(currentScene);
-        entity:setName(object.name);
+        entity:SetName(object.name);
         for i, v in ipairs(object.components) do
-            local component = require(v.type).GetNew(entity, v.data);
-            entity:AddComponent(component);
-            if v.overrideData == nil or v.overrideData == true then
-            component.data = v.data;
+            local componentType = require(v.type);
+            if componentType == true then
+                print("Component " .. v.type .. " is not found");
+            else
+                local component = componentType.GetNew(entity, v.data);
+                entity:AddComponent(component);
+                if (v.overrideData == nil or v.overrideData == true) and v.data ~= nil then
+                    component.data = v.data;
+                end
             end
         end
         currentScene:AddEntity(entity);
@@ -21,10 +28,10 @@ end
 
 local table = 
 {
-    parseEntity = parseEntity,
-    parseScene = function(scene)
-        for i, v in pairs(scene) do
-            parseEntity(v);
+    ParseEntity = ParseEntity,
+    ParseScene = function(scene)
+        for i, v in ipairs(scene) do
+            ParseEntity(v);
         end
     end,
 }

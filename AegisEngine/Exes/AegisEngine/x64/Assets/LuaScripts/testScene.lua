@@ -2,7 +2,7 @@
 
 local NAME = "TestScene";
 local scene = {
-	testEnt = {
+	{
 		type = "Entity",
 		name = "TestEntity",
 		components = {

@@ -48,9 +48,9 @@ bool Renderer::getRendering() const
 	return isVisible;
 }
 
-Renderer* CreateRenderer()
+Renderer* CreateRenderer(Entity* _ent, std::string meshName)
 {
-	return new Renderer();
+	return new Renderer(_ent, meshName);
 }
 
 void Renderer::constructoraRenderer(Entity* _ent, std::string meshName, Ogre::SceneManager* sceneMng, bool ir)
@@ -79,7 +79,6 @@ void Renderer::ConvertToLua(lua_State* state)
 		addFunction("CreateRenderer", CreateRenderer).
 		deriveClass<Renderer, AegisComponent>("Renderer").
 		addProperty("visible", &Renderer::getRendering, &Renderer::setRendering).
-		addFunction("init", &Renderer::constructoraRendererLua).
 		endClass().
 		endNamespace().
 		endNamespace();
