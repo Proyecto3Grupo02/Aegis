@@ -1,31 +1,10 @@
 #include "LuaManager.h"
 #include <iostream>
 
-
-//typedef int (*lua_CFunction) (lua_State* L);
-
-extern "C" int howdy(lua_State * state)
-{
-	// The number of function arguments will be on top of the stack.
-	int args = lua_gettop(state);
-
-	printf("howdy() was called with %d arguments:\n", args);
-
-	for (int n = 1; n <= args; ++n) {
-		printf("  argument %d: '%s'\n", n, lua_tostring(state, n));
-	}
-
-	lua_pushnumber(state, 123);
-
-	// Let Lua know how many return values we've passed
-	return 1;
-}
-
 LuaManager::LuaManager()
 {
 	state = luaL_newstate();
 	luaL_openlibs(state);
-	RegisterFunctionsToLua();
 	setLuaPath(state, "../Assets/LuaScripts");
 }
 
@@ -75,11 +54,6 @@ void LuaManager::RegisterFunction(lua_CFunction function, const char* functionNa
 lua_State* LuaManager::GetState()
 {
 	return this->state;
-}
-
-void LuaManager::RegisterFunctionsToLua()
-{
-	RegisterFunction(howdy, "howdy");
 }
 
 int LuaManager::setLuaPath(lua_State* L, const char* path)

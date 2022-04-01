@@ -124,6 +124,12 @@ void AegisMain::ConvertObjectToLua()
 	Vector3::ConvertToLua(state);
 	Renderer::ConvertToLua(state);
 
+	//push(state, true);
+	//lua_setglobal(state, "true");
+	//
+	//push(state, false);
+	//lua_setglobal(state, "false");
+
 	push(state, sceneManager->GetCurrentScene());
 	lua_setglobal(state, "currentScene");
 

@@ -38,12 +38,10 @@ public:
 	inline void setNode(Ogre::SceneNode* node) { mNode_ = node; }
 	Entity* addChildEntity();
 
-	//handle the components
-
 	inline void addComponentFromLua(AegisComponent* component) {
 		std::string key = component->GetComponentName();
 
-		if (mComponents_.find(key) == mComponents_.end()) { //si no está lo añadimos
+		if (mComponents_.count(key) == 0) { //si no está lo añadimos
 			component->setEntity(this);
 
 			mComponentsArray_.push_back(component);
@@ -51,26 +49,7 @@ public:
 		}
 	}
 
-	template <class T, class...Targs>
-	inline T* addComponent(const char* name, Targs&&...args)
-	{
-		//SOLUCIÓN PROVISIONAL EN LA QUE HAY QUE PASAR COMO PARÁMETRO EL NOMBRE DEL COMPONENTE,
-		//DEBERÍA DE FUNCIONAR CON EL KEY DE ENCIMA DE ESTE COMENTARIO
-		auto key = name;
-
-		if (mComponents_.find(key) == mComponents_.end()) { //si no está lo añadimos
-			T* t = (new T(std::forward<Targs>(args)...));
-			t->setEntity(this);
-
-			mComponentsArray_.push_back(t);
-			mComponents_[key] = static_cast<AegisComponent*>(t);
-			return (T*)mComponents_[key];
-		}
-
-		return nullptr;
-	}
-
-	inline AegisComponent* getComponentLua(std::string componentName)
+	AegisComponent* getComponentLua(std::string componentName)
 	{
 		if (mComponents_.count(componentName) == 0)
 			return nullptr;

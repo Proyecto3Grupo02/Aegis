@@ -52,6 +52,16 @@ LuaRef AegisComponent::GetData() const
 	return data;
 }
 
+void AegisComponent::SetType(LuaRef luaRef)
+{
+	type = luaRef;
+}
+
+LuaRef AegisComponent::GetType() const
+{
+	return type;
+}
+
 
 void AegisComponent::SetData(LuaRef luaRef)
 {
@@ -66,6 +76,7 @@ void AegisComponent::ConvertToLua(lua_State* state)
 		deriveClass<AegisComponent, Component>("Component").
 		addFunction("setCallbacks", &AegisComponent::setCallbacks).
 		addProperty("data", &AegisComponent::GetData, &AegisComponent::SetData).
+		addProperty("type", &AegisComponent::GetType, &AegisComponent::SetType).
 		endClass().
 		endNamespace();
 }

@@ -1,29 +1,22 @@
--- capture the name searched for by require
+-- test component as example
+
 local NAME="TestComponent"
 
--- table for our functions
 local table = { }
 
+-- i dont need arguments here
 function table.GetNew() 
     local component = Aegis.CreateComponent();
-    
-    -- Name of the component used to idenfity at runtime, do not change, don't use same name for various components
     component.name = NAME;
 
-    -- Data for your script, you can have here anything, custom methods, int, other tables... Anything, it will
-    -- be stored as a LuaRef in C++
     local data = {};
+    component.data = data;
+
+    -- data is a ref, you can't modify it after setting to component
     data.time = 0;
     data.test = 1;
 
-    -- callbacks, here you define update, lateUpdate,fixedUpdate, onCollisino and onTrigger
-    local funcs = {};
-    
-    -- Set data to component, otherwise you won't be able to access component data from other scripts
-    -- All data is public, optionally I can make a private data that isn't exported to lua as property
-    component.data = data;
-
-    -- update definition
+    -- move entity with the keys, press h to print debug info
     function update(deltaTime) 
         local num = 5;
         local transform = component.entity.transform;
@@ -48,7 +41,18 @@ function table.GetNew()
         end
 
         data.time = data.time + deltaTime;
-        --component.entity.transform.position = ECS.Vector3(math.sin(data.time) * 10,0, 0); 
+        
+        -- if time is bigger than 0 obtain meshRenderer and setvisible to false
+        local meshRenderer = component.entity:getComponent("Renderer").type;
+
+        if math.sin(data.time) > 0 then
+            meshRenderer.visible = false;
+        else
+            meshRenderer.visible = true;
+        end
+
+        -- Quit comment below to see the entity position changing
+        transform.position = Aegis.Maths.Vector3(math.sin(data.time) * 10,0, 0); 
     end;
 
     function lateUpdate() end;
@@ -57,6 +61,7 @@ function table.GetNew()
     function onCollision(other) end;
     function onTrigger(other) end;
 
+    local funcs = {};
     funcs.update = update;
     funcs.lateUpdate = lateUpdate;
     funcs.fixedUpate = fixedUpdate;

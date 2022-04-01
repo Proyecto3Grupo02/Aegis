@@ -1,54 +1,30 @@
--- capture the name searched for by require
-local NAME="YourComponentName"
+local NAME = "YourComponentName";
+local table = {};
+function table.GetNew(entity, params)
+	local component = Aegis.CreateComponent();
+	component.name = NAME;
 
--- table for our functions
-local table = { }
-
-function table.GetNew() 
-    local component = Aegis.CreateComponent();
-    
-    -- Name of the component used to idenfity at runtime, do not change, don't use same name for various components
-    component.name = NAME;
-
-    -- Data for your script, you can have here anything, custom methods, int, other tables... Anything, it will
-    -- be stored as a LuaRef in C++
     local data = {};
-    data.time = 0;
-    data.test = 1;
-
-    -- callbacks, here you define update, lateUpdate,fixedUpdate, onCollisino and onTrigger
-    local funcs = {};
-    
-    -- Set data to component, otherwise you won't be able to access component data from other scripts
-    -- All data is public, optionally I can make a private data that isn't exported to lua as property
     component.data = data;
+    
+	if params ~= nil then
+		data = params;
+	else
+		data.time = 0;
+	end;
 
-    -- update definition
-    function update(deltaTime) 
-        if  Input:anyKeyWasPressed() then
-        
-            if Input:keyWasPressed("a") then
-                print("Test value is " .. component.data.test);
-            end
-        end
-
-        data.time = data.time + deltaTime;
-        --component.entity.transform.position = ECS.Vector3(math.sin(data.time) * 10,0, 0); 
-    end;
-
-    function lateUpdate() end;
-    function lateUpdate(deltaTime) end;
-    function fixedUpdate() end;
-    function onCollision(other) end;
-    function onTrigger(other) end;
-
+    
+	function update(deltaTime) end;
+	function lateUpdate() end;
+	function lateUpdate(deltaTime) end;
+	function fixedUpdate() end;
+	function onCollision(other) end;
+	function onTrigger(other) end;
+	
+	local funcs = {};
     funcs.update = update;
-    funcs.lateUpdate = lateUpdate;
-    funcs.fixedUpate = fixedUpdate;
-    funcs.onTrigger = onTrigger;
+	component:setCallbacks(funcs);
 
-    component:setCallbacks(funcs);
-    return component;
-end
-
-return table
+	return component;
+end;
+return table;

@@ -1,3 +1,5 @@
+-- utility methods to use in other scripts
+
 local NAME="Utils"
 
 local parseEntity = function(object)
@@ -9,7 +11,9 @@ local parseEntity = function(object)
         for i, v in ipairs(object.components) do
             local component = require(v.type).GetNew(entity, v.data);
             entity:AddComponent(component);
+            if v.overrideData == nil or v.overrideData == true then
             component.data = v.data;
+            end
         end
         currentScene:AddEntity(entity);
     end

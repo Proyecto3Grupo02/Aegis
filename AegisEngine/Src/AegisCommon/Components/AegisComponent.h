@@ -26,10 +26,14 @@ public:
 	
 	void SetData(LuaRef luaRef);
 	LuaRef GetData() const;
+
+	void SetType(LuaRef luaRef);
+	LuaRef GetType() const;
 	
 	static void ConvertToLua(lua_State* state);
 private:
 	LuaRef data = LuaManager::getInstance()->GetEmptyLuaRef();
+	LuaRef type = LuaManager::getInstance()->GetEmptyLuaRef();
 	LuaRef updateFunc = LuaManager::getInstance()->GetEmptyLuaRef();
 	LuaRef lateUpdateFunc = LuaManager::getInstance()->GetEmptyLuaRef();
 	LuaRef fixedUpdateFunc = LuaManager::getInstance()->GetEmptyLuaRef();
@@ -45,5 +49,5 @@ protected:
 template<class T>
 inline void AegisComponent::SetDataAsInnerType(T* component)
 {
-	SetData(LuaRef(LuaManager::getInstance()->GetState(), component));
+	SetType(LuaRef(LuaManager::getInstance()->GetState(), component));
 }

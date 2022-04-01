@@ -1,4 +1,4 @@
--- capture the name searched for by require
+-- Wrapper for native component renderer, so it can be used in "json" style and parsed correctly
 local NAME="Renderer"
 
 -- table for our functions
