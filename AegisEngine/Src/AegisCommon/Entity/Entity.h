@@ -101,6 +101,8 @@ struct Entity : public ILuaObject {
         void SetTransform(Transform* transform);
 
         static void ConvertToLua(lua_State* state);
+
+        Ogre::SceneNode* GetNode();
     protected:
         Scene* mScene_; //scene pointer 
         std::map<std::string, AegisComponent*> mComponents_; //list of all the components in scene

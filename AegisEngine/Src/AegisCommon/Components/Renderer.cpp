@@ -7,6 +7,14 @@
 #include "../Utils/Vector4.h"
 
 
+Renderer::Renderer(Entity* _ent, std::string meshName) :
+	AegisComponent()
+{
+	isVisible = true;
+	ComponentManager::getInstance()->RegisterComponent<Renderer>("Renderer");
+	constructoraRenderer(_ent, meshName, _ent->GetNode()->getCreator(), true);
+}
+
 void Renderer::render()
 {
 	Vector3 pos = transform->GetPosition();
@@ -22,7 +30,29 @@ void Renderer::render()
 
 void Renderer::setRendering(bool iR)
 {
+	isVisible = iR;
 	node->setVisible(iR);
+}
+
+bool Renderer::getRendering() const
+{
+	return isVisible;
+}
+
+Renderer* CreateRenderer(Entity* _ent, std::string meshName)
+{
+	return new Renderer(_ent, meshName);
+}
+
+void Renderer::ConvertToLua(lua_State* state)
+{
+	getGlobalNamespace(state).
+		beginNamespace("ECS").
+		addFunction("CreateRenderer", CreateRenderer).
+		deriveClass<Renderer, AegisComponent>("Renderer").
+		addProperty("visible", &Renderer::getRendering, &Renderer::setRendering).
+		endClass().
+		endNamespace();
 }
 
 void Renderer::constructoraRenderer(Entity* _ent, std::string meshName, Ogre::SceneManager* sceneMng, bool ir)
