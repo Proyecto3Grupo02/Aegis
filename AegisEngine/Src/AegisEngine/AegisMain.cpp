@@ -32,7 +32,7 @@ using namespace luabridge;
 void AegisMain::GameLoop() {
 	std::cout << '\n';
 	Debug()->Log("Aegis loaded");
-	luaManager->Execute("bridge.lua");
+	luaManager->Execute("init.lua");
 
 	while (!exit)
 	{

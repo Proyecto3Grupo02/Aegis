@@ -14,7 +14,8 @@ function table.GetNew()
     -- be stored as a LuaRef in C++
     local data = {};
     data.time = 0;
-    
+    data.test = 1;
+
     -- callbacks, here you define update, lateUpdate,fixedUpdate, onCollisino and onTrigger
     local funcs = {};
     
@@ -24,66 +25,13 @@ function table.GetNew()
 
     -- update definition
     function update(deltaTime) 
-        local num = 5;
-        local transform = component.entity:getComponent("Transform").data;
-        
-        -- Only print if transformTest neither renderer are null
-        if(transformTest ~= nil or renderer ~= nil) then
-            print(transformTest);
-            print(renderer);
-        end
-        --local transform = component.entity.transform;
-
         if  Input:anyKeyWasPressed() then
         
             if Input:keyWasPressed("a") then
-                print("A key was pressed this frame in lua")
-                transform.position = ECS.Vector3(-num,0, 0); 
-            elseif Input:keyWasPressed("w") then
-                print("W key was pressed this frame in lua")
-                transform.position = ECS.Vector3(0,num, 0); 
-            elseif Input:keyWasPressed("s") then
-                print("S key was pressed this frame in lua")
-                transform.position = ECS.Vector3(0,-num, 0); 
-            elseif Input:keyWasPressed("d") then
-                print("D key was pressed this frame in lua")
-                transform.position = ECS.Vector3(num,0, 0); 
-            end
-        end
-        
-        if  Input:anyKeyIsDown() then
-        
-            if Input:isKeyDown("a") then
-                print("A key was down in lua")
-                transform.position = ECS.Vector3(-num,0, 0); 
-            elseif Input:isKeyDown("w") then
-                print("W key was down in lua")
-                transform.position = ECS.Vector3(0,num, 0); 
-            elseif Input:isKeyDown("s") then
-                print("S key was down in lua")
-                transform.position = ECS.Vector3(0,-num, 0); 
-            elseif Input:isKeyDown("d") then
-                print("D key was down in lua")
-                transform.position = ECS.Vector3(num,0, 0); 
+                print("Test value is " .. component.data.test);
             end
         end
 
-        if  Input:anyKeyWasReleased() then
-        
-            if Input:keyWasReleased("a") then
-                print("A key was released in lua")
-                transform.position = ECS.Vector3(-num,0, 0); 
-            elseif Input:keyWasReleased("w") then
-                print("W key was released in lua")
-                transform.position = ECS.Vector3(0,num, 0); 
-            elseif Input:keyWasReleased("s") then
-                print("S key was released in lua")
-                transform.position = ECS.Vector3(0,-num, 0); 
-            elseif Input:keyWasReleased("d") then
-                print("D key was released in lua")
-                transform.position = ECS.Vector3(num,0, 0); 
-            end
-        end
         data.time = data.time + deltaTime;
         --component.entity.transform.position = ECS.Vector3(math.sin(data.time) * 10,0, 0); 
     end;

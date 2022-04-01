@@ -12,16 +12,9 @@ class AegisComponent;
 
 class Renderer : public AegisComponent, public ILuaObject {
 public:
-	Renderer(Entity* _ent, std::string meshName, Ogre::SceneManager* sceneMng, bool ir = true):
-		AegisComponent()
-	{
-		isVisible = ir;
-		SetComponentName("Renderer");
-		SetDataAsInnerType(this);
-		constructoraRenderer(_ent, meshName, sceneMng, ir);
-	}
-
+	Renderer(Entity* _ent, std::string meshName, Ogre::SceneManager* sceneMng, bool ir = true);
 	Renderer(Entity* _ent, std::string meshName);
+	Renderer();
 
 	~Renderer() {};
 	void update(float dt) override {}
@@ -29,11 +22,13 @@ public:
 	virtual void init(){};
 	void setRendering(bool iR);
 	bool getRendering() const;
+
 	Ogre::Entity* getMesh() { return mesh; };
 
 	static void ConvertToLua(lua_State* state);
 protected:
 	void constructoraRenderer(Entity* _ent, std::string meshName, Ogre::SceneManager* sceneMng, bool ir);
+	void constructoraRendererLua(Entity* _ent, std::string meshName);
 
 	Ogre::SceneNode* node;
 	Transform* transform;
