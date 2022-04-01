@@ -11,7 +11,8 @@ Renderer::Renderer(Entity* _ent, std::string meshName) :
 	AegisComponent()
 {
 	isVisible = true;
-	ComponentManager::getInstance()->RegisterComponent<Renderer>("Renderer");
+	SetComponentName("Renderer");
+	//ComponentManager::getInstance()->RegisterComponent<Renderer>("Renderer");
 	constructoraRenderer(_ent, meshName, _ent->GetNode()->getCreator(), true);
 }
 
@@ -64,6 +65,6 @@ void Renderer::constructoraRenderer(Entity* _ent, std::string meshName, Ogre::Sc
 
 	setRendering(ir);
 
-	transform = getEntity()->getComponent<Transform>();
+	transform = getEntity()->GetTransform();
 	if (transform == nullptr) throw "ENTITY WITHOUT TRANSFORM"; //Pulir excepcion
 }

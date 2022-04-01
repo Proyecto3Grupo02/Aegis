@@ -12,18 +12,20 @@ class Entity;
 class Transform : public AegisComponent, public ILuaObject {
 public:
 	Transform() : AegisComponent(), position(Vector3()), rotation(Vector4()), scale(Vector3(1.0f,1.0f,1.0f)) {
-		ComponentManager::getInstance()->RegisterComponent<Transform>("Transform");
+		SetComponentName("Transform");
+		//ComponentManager::getInstance()->RegisterComponent<Transform>("Transform");
 	};
 	Transform( Vector3 _pos, Vector4 _rot, Vector3 _scale) :
 			AegisComponent(), position(_pos), rotation(_rot), scale(_scale) {
-		ComponentManager::getInstance()->RegisterComponent<Transform>("Transform");
+		SetComponentName("Transform");
+		//ComponentManager::getInstance()->RegisterComponent<Transform>("Transform");
 	};
 	virtual ~Transform() {}
 	virtual void init(){}
 	virtual void update();
 	Vector3 GetPosition() const;
-	Vector4 GetRotation();
-	Vector3 GetScale();
+	Vector4 GetRotation() const;
+	Vector3 GetScale() const;
 
 	void SetPosition(Vector3 newPos);
 	void SetRotation(Vector4 newRot);

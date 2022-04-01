@@ -8,7 +8,7 @@ function table.GetNew()
     local component = ECS.CreateComponent();
     
     -- Name of the component used to idenfity at runtime, do not change, don't use same name for various components
-    component.name = "testComponent";
+    component.name = "TestComponent";
 
     -- Data for your script, you can have here anything, custom methods, int, other tables... Anything, it will
     -- be stored as a LuaRef in C++
@@ -25,7 +25,8 @@ function table.GetNew()
     -- update definition
     function update(deltaTime) 
         local num = 5;
-        local transform = component.entity.transform;
+        local transform = component.entity:getComponent("Transform");
+        --local transform = component.entity.transform;
 
         if  Input:anyKeyWasPressed() then
         

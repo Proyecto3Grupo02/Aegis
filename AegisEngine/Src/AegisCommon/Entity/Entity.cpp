@@ -162,6 +162,7 @@ void Entity::ConvertToLua(lua_State* state)
 
 		beginClass<Entity>("Entity").
 		addFunction("AddComponent", &Entity::addComponentFromLua).
+		addFunction("getComponent", &Entity::getComponentLua).
 		addFunction("isActive", &Entity::isActive).
 		addFunction("setActive", &Entity::setActive).
 		addFunction("getName", &Entity::getName).

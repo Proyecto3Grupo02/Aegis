@@ -9,12 +9,12 @@ Vector3 Transform::GetPosition() const
 	return position;
 }
 
-Vector4 Transform::GetRotation()
+Vector4 Transform::GetRotation() const
 {
 	return rotation;
 }
 
-Vector3 Transform::GetScale()
+Vector3 Transform::GetScale() const
 {
 	return scale;
 }
