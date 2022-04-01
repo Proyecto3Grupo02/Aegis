@@ -140,5 +140,8 @@
     <ClCompile Include="..\..\Src\AegisCommon\Utils\Vector4.cpp">
       <Filter>Archivos de origen\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\AegisCommon\Components\AnimationComponent.cpp">
+      <Filter>Archivos de origen\Components</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

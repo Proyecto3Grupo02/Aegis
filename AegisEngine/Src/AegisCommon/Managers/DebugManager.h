@@ -28,7 +28,7 @@ public:
     //shows delta time, num of entities... 
     void showInfo();
 
-    void drawLine(Vector3 origin, Vector3 end, Vector3 color);
+    
 
     bool Init();
 
