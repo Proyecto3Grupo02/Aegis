@@ -19,12 +19,13 @@ private:
 	Transform* entTransform;
 	int numKeyFrames, durFrame;
 	std::vector<keyFrame> frames;
-	
+	bool loop, enabled;
 
 public:
-	AnimationComponent();
+	AnimationComponent(Ogre::SceneManager* sceneMng, std::string nombre, int duracion);
 	~AnimationComponent();
-
+	Ogre::NodeAnimationTrack* getTrack();
+	void addKeyFrame(keyFrame frame);
 	void setEnabled(bool enabled);
 	void setLoop(bool isLoop);
 	virtual void init();

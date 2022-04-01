@@ -173,6 +173,7 @@
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Vector4.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Src\AegisCommon\Components\AnimationComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\Component.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\Renderer.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\Transform.cpp" />
