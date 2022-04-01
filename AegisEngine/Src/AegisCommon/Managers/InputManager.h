@@ -18,6 +18,9 @@ private:
 	std::vector<key> keys;
 	std::pair<Sint32, Sint32> mousePos_;
 	int keyNums;
+	bool keydown = false;
+	bool keyup = false;
+	bool keypressed = false;
 public:
 
 	InputSystem();
@@ -35,6 +38,9 @@ public:
 	bool isKeyUp(SDL_Keycode key);
 	bool isKeyDown(SDL_Keycode key);
 	bool isKeyPressedThisFrame(SDL_Keycode key);
+	bool isAnyKeyDown();
+	bool isAnyKeyUp();
+	bool isAnyKeyPressed();
 
 	//For lua
 	bool isKeyUpLua(const char* key);
