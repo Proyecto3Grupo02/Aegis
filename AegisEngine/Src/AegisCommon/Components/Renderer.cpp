@@ -6,6 +6,13 @@
 #include "../Utils/Vector3.h"
 #include "../Utils/Vector4.h"
 
+Renderer::Renderer(Entity* _ent, std::string meshName, std::string materialName, Ogre::SceneManager* sceneMng, bool ir): AegisComponent() {
+	ComponentManager::getInstance()->RegisterComponent<Renderer>("Renderer");
+	constructoraRenderer(_ent, meshName, sceneMng, ir);
+	setMaterialName(materialName);
+}
+
+Renderer::~Renderer(){}
 
 void Renderer::setRendering(bool iR)
 {
