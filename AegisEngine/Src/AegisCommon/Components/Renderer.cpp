@@ -20,6 +20,8 @@ void Renderer::constructoraRenderer(Entity* _ent, std::string meshName, Ogre::Sc
 	mesh = sceneMng->createEntity(meshName);
 	setRendering(ir);
 	transform = getEntity()->getComponent<Transform>();
+
+	
 	
 	assert(transform != nullptr);
 }

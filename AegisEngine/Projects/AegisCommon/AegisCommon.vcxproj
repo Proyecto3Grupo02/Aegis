@@ -154,6 +154,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AegisCommon\Components\AegisComponent.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Components\AnimationComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\Component.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\RegisterComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\Renderer.h" />
