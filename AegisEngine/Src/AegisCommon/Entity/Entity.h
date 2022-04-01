@@ -2,11 +2,12 @@
 #ifndef ENTITY_H 
 #define ENTITY_H
 
+#include "../Managers/ComponentManager.h"
+#include "../../checkML.h" //BASURA
+#include <Ogre.h>
 #include <vector>
 #include <list>
 #include <string>
-#include "../Managers/ComponentManager.h"
-#include <Ogre.h>
 
 class Component;
 class Transform;
@@ -17,8 +18,7 @@ class Entity{
         Entity(Ogre::SceneNode* node);
         ~Entity();
 
-        void init();
-       
+        void init();       
         void fixedUpdate();
         void update(float dt);
         void lateUpdate();
@@ -54,16 +54,13 @@ class Entity{
                     mComponentsArray_.push_back(t);
                     mComponents_[key] = t;
                     return (T*)mComponents_[key];
-
                 }
-
             }
             return nullptr;
         }
 
         template<typename T>
-        inline T* getComponent()
-        {
+        inline T* getComponent() {
             ComponentManager* cmpManager = ComponentManager::getInstance();
 
             std::string id = cmpManager->GetID<T>();
@@ -79,7 +76,6 @@ class Entity{
         void onCollision(Entity* other); 
         void onTrigger(Entity* other);
 
-
     protected:
         Scene* mScene_; //scene pointer 
         std::map<std::string, Component*> mComponents_; //list of all the components in scene
@@ -89,11 +85,8 @@ class Entity{
 
         Ogre::SceneNode* mNode_;
 
-
     private:
         std::string mName_; //name of the entity, works like a tag, useful to debug
-
-
 };
 
 #endif //

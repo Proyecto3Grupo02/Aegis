@@ -58,8 +58,7 @@ bool InputSystem::isKeyDown(SDL_Keycode key) {
 	return keys[i].down;
 }
 
-bool InputSystem::isKeyPressedThisFrame(SDL_Keycode key)
-{
+bool InputSystem::isKeyPressedThisFrame(SDL_Keycode key) {
 	int i = getId(key);
 	return keys[i].pressedThisFrame;
 }

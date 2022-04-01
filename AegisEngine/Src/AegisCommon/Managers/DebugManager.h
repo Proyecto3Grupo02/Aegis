@@ -4,12 +4,12 @@
 #define DEBUG
 
 #include "../Utils/Singleton.h"
+#include "../Interfaces/IInitializable.h"
+#include "../Utils/Vector3.h"
+#include "../../checkML.h" //BASURA
 #include <string>
 #include <OgreManualObject.h>
 #include<vector>
-#include "../Interfaces/IInitializable.h"
-
-#include "../Utils/Vector3.h"
 
 class DebugManager: public Singleton<DebugManager>, public IInitializable{
 public:
@@ -31,10 +31,9 @@ public:
     void drawLine(Vector3 origin, Vector3 end, Vector3 color);
 
     bool Init();
+
 protected:
     Ogre::ManualObject* mLines_;
-
-
 };
 
 inline DebugManager* Debug() {

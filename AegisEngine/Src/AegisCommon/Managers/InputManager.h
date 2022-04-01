@@ -3,8 +3,9 @@
 #define INPUT_SYSTEM_H
 
 #include "../Utils/Singleton.h"
+#include "../../checkML.h" //BASURA
 #include <vector>
-#include<SDL.h>
+#include <SDL.h>
 
 class InputSystem : public Singleton<InputSystem> {
 private:

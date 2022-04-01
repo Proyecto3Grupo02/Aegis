@@ -19,6 +19,7 @@
 #include "../AegisCommon/Managers/InputManager.h"
 #include "../AegisCommon/Managers/DebugManager.h"
 #include "../AegisGraphics/OgreWrapper.h"
+#include "../AegisScripting/Manager/LuaManager.h"
 #include "../AegisCommon/Scene/Scene.h"
 #include "../AegisCommon/Utils/GameLoopData.h"
 #include "..\AegisAudio\SoundSystem.h"
@@ -26,6 +27,8 @@
 void AegisMain::GameLoop() {
 	std::cout << '\n';
 	Debug()->Log("Aegis loaded");
+	luaManager->Execute("template.lua");
+	luaManager->Execute("callHowdy.lua");
 
 	while (!exit)
 	{
@@ -77,14 +80,14 @@ void AegisMain::GameLoop() {
 }
 
 AegisMain::AegisMain() : IInitializable() {
+	luaManager = new LuaManager();
 	ogreWrap = new OgreWrapper();
 	gameLoopData = new GameLoopData();
 	sceneManager = new SceneManager("NombreScena");
 	exit = (false);
 }
 
-AegisMain::~AegisMain()
-{
+AegisMain::~AegisMain() {
 	delete ogreWrap;
 	delete sceneManager;
 	delete gameLoopData;
@@ -94,11 +97,10 @@ AegisMain::~AegisMain()
 /// Inicializa todos los wrappers (Ogre, Input, Imgui...)
 /// </summary>
 /// <returns></returns>
-bool AegisMain::Init()
-{
+bool AegisMain::Init() {
 	Input()->Init();
 	ogreWrap->Init();
 	Audio()->Init();
 	GameLoop();
 	return true;
-}
+} 

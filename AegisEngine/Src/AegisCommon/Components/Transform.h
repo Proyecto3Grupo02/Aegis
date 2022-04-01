@@ -3,8 +3,10 @@
 #define TRANSFORM_H
 
 #include "AegisComponent.h"
-#include "../Utils/Vector4.h"
 #include "../Managers/ComponentManager.h"
+#include "../Utils/Vector4.h"
+#include "../../checkML.h" //BASURA
+
 class Entity;
 
 class Transform : public AegisComponent {
@@ -17,6 +19,7 @@ public:
 		ComponentManager::getInstance()->RegisterComponent<Transform>("Transform");
 	};
 	virtual ~Transform() {}
+
 	virtual void init(){}
 	virtual void update();
 	Vector3 GetPosition();

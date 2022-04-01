@@ -2,6 +2,8 @@
 #ifndef VECTOR3_H 
 #define VECTOR3_H
 
+#include "../../checkML.h" //BASURA
+
 class Vector3 {
 public:
 	Vector3(float _x, float _y, float _z) : x(_x), y(_y), z(_z) {};
@@ -22,6 +24,7 @@ public:
 	Vector3 operator*(float const& f) { return Vector3(x * f, y * f, z * f); }
 	bool operator==(Vector3 const& b) { return ((x == b.x) && (y == b.y) && (z == b.z)); }
 	bool operator!=(Vector3 const& b) { return !((x == b.x) && (y == b.y) && (z == b.z)); }
+
 protected:
 	float x;
 	float y;
