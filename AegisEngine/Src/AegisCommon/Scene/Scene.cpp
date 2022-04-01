@@ -100,7 +100,7 @@ Ogre::SceneNode* Scene::GetOgreNode()
 void Scene::ConvertToLua(lua_State* state)
 {
 	getGlobalNamespace(state).
-		beginNamespace("ECS").
+		beginNamespace("Aegis").
 			beginClass<Scene>("Scene").
 				addFunction("AddEntity", &Scene::AddEntity).
 			endClass().

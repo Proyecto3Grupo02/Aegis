@@ -113,7 +113,7 @@ bool InputSystem::keyWasReleasedLua(const char* key) {
 void InputSystem::ConvertToLua(lua_State* state)
 {
 	getGlobalNamespace(state).
-		beginNamespace("ECS").
+		beginNamespace("Aegis").
 			beginClass<InputSystem>("InputSystem").
 				addFunction("keyWasPressed", &InputSystem::keyWasPressedLua).
 				addFunction("isKeyDown", &InputSystem::isKeyDownLua).

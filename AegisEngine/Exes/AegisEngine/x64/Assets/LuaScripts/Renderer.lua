@@ -5,7 +5,7 @@ local NAME="Renderer"
 local table = { }
 
 function table.GetNew(entity, data) 
-    local component = ECS.CreateRenderer();
+    local component = Aegis.NativeComponents.CreateRenderer();
     component:init(entity, data.mesh);
 
     return component;

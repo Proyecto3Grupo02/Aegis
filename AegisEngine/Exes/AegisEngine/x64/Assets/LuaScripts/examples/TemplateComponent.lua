@@ -1,5 +1,5 @@
 -- capture the name searched for by require
-local NAME="TestComponent"
+local NAME="YourComponentName"
 
 -- table for our functions
 local table = { }
@@ -25,25 +25,10 @@ function table.GetNew()
 
     -- update definition
     function update(deltaTime) 
-        local num = 5;
-        local transform = component.entity.transform;
-
         if  Input:anyKeyWasPressed() then
         
-            if Input:keyWasPressed("h") then
+            if Input:keyWasPressed("a") then
                 print("Test value is " .. component.data.test);
-            elseif Input:keyWasPressed("a") then
-                print("A key was pressed this frame in lua")
-                transform.position = Aegis.Maths.Vector3(-num,0, 0); 
-            elseif Input:keyWasPressed("w") then
-                print("W key was pressed this frame in lua")
-                transform.position = Aegis.Maths.Vector3(0,num, 0); 
-            elseif Input:keyWasPressed("s") then
-                print("S key was pressed this frame in lua")
-                transform.position = Aegis.Maths.Vector3(0,-num, 0); 
-            elseif Input:keyWasPressed("d") then
-                print("D key was pressed this frame in lua")
-                transform.position = Aegis.Maths.Vector3(num,0, 0); 
             end
         end
 

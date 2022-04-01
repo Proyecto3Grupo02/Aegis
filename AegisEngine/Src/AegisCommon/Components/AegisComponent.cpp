@@ -61,7 +61,7 @@ void AegisComponent::SetData(LuaRef luaRef)
 void AegisComponent::ConvertToLua(lua_State* state)
 {
 	getGlobalNamespace(state).
-		beginNamespace("ECS").
+		beginNamespace("Aegis").
 		addFunction("CreateComponent", CreateComponent).
 		deriveClass<AegisComponent, Component>("Component").
 		addFunction("setCallbacks", &AegisComponent::setCallbacks).

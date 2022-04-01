@@ -32,7 +32,6 @@ using namespace luabridge;
 void AegisMain::GameLoop() {
 	std::cout << '\n';
 	Debug()->Log("Aegis loaded");
-	luaManager->Execute("init.lua");
 
 	while (!exit)
 	{
@@ -75,10 +74,6 @@ void AegisMain::GameLoop() {
 
 			// Actualiza deltaTime y timeSinceSceneStart
 			gameLoopData->UpdateTimeRegistry(SDL_GetTicks());
-
-	/*		std::cout << "a key is down: " << Input()->isKeyDown(SDLK_a) << "a key is pressedThis: ";
-			std::cout << Input()->isKeyPressedThisFrame(SDLK_a) << "a key is released: " << Input()->isKeyUp(SDLK_a);
-			std::cout << "\r";*/
 		}
 	}
 }
@@ -108,6 +103,7 @@ bool AegisMain::Init()
 {
 	Input()->Init();
 	ConvertObjectToLua(); 
+	luaManager->Execute("init.lua");
 	GameLoop();
 
 	return true;
@@ -115,10 +111,8 @@ bool AegisMain::Init()
 
 void AegisMain::ConvertObjectToLua()
 {
-	//luaManager->Execute("template.lua");
 	auto state = luaManager->GetState();
 
-	//Esto deberia hacerlo alguna funcion C global o algo externo para no tener dependencias en AegisEngine
   	Scene::ConvertToLua(state);
 	InputSystem::ConvertToLua(state);
 	SceneManager::ConvertToLua(state);

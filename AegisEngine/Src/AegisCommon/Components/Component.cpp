@@ -11,7 +11,7 @@ Component::Component():
 void Component::ConvertToLua(lua_State* state)
 {
 	getGlobalNamespace(state).
-		beginNamespace("ECS").
+		beginNamespace("Aegis").
 		beginClass<Component>("ComponentBase").
 		addProperty("name", &Component::GetComponentName, &Component::SetComponentName).
 		addProperty("entity", &Component::GetEntity, &Component::SetEntity).

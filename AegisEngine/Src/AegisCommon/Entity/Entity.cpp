@@ -8,12 +8,8 @@ Entity::Entity(Scene* node) :
 	mNode_(node->GetOgreNode()), active_(true), mScene_(node)
 {
 	//Componente obligatorio para todas las entidades
-	transform = new Transform(Vector3(0,0,0), Vector4(), Vector3(1.0f, 1.0f, 1.0f));
+	transform = new Transform(Vector3(0,0,0), Vector4(), Vector3(1.0f, 1.0f, 1.0f), getNode());
 	this->addComponentFromLua(transform);
-	
-	// TEMPORAL
-	//auto r = new Renderer(this, "fish.mesh", mNode_->getCreator());
-	//this->addComponentFromLua(r);
 }
 
 Entity::~Entity()
@@ -24,9 +20,6 @@ Entity::~Entity()
 	mComponentsArray_.clear();
 	mComponents_.clear();
 
-	//for (Entity* e : mChildren_) {
-	//	delete e;
-	//}
 	mChildren_.clear();
 }
 
@@ -42,9 +35,6 @@ void Entity::fixedUpdate()
 			if (!component->getActive()) continue;
 			component->fixedUpdate();
 		}
-		/*	for (Entity* e : mChildren_) {
-				e->fixedUpdate();
-			}*/
 	}
 }
 
@@ -56,9 +46,6 @@ void Entity::update(float dt)
 
 			component->update(dt);
 		}
-		/*for (Entity* e : mChildren_) {
-			e->update(dt);
-		}*/
 	}
 }
 
@@ -69,10 +56,6 @@ void Entity::lateUpdate(float dt)
 			if (!component->getActive()) continue;
 			component->lateUpdate(dt);
 		}
-
-		/*	for (Entity* e : mChildren_) {
-				e->lateUpdate();
-			}*/
 	}
 }
 
@@ -83,10 +66,6 @@ void Entity::render()
 			if (!component->getActive()) continue;
 			component->render();
 		}
-
-		/*for (Entity* e : mChildren_) {
-			e->render();
-		}*/
 	}
 }
 
@@ -118,11 +97,6 @@ void Entity::onCollision(Entity* other)
 		if (!component->getActive()) continue;
 		component->onCollision(other);
 	}
-
-	//for (Entity* e: mChildren_)
-	//{
-	//	e->onCollision(other);
-	//}
 }
 
 void Entity::onTrigger(Entity* other)
@@ -131,11 +105,6 @@ void Entity::onTrigger(Entity* other)
 		if (!component->getActive()) continue;
 		component->onTrigger(other);
 	}
-
-	//for (Entity* e : mChildren_)
-	//{
-	//	e->onTrigger(other);
-	//}
 }
 
 Transform* Entity::GetTransform() const
@@ -158,7 +127,7 @@ Entity* CreateEntity(Scene* scene)
 void Entity::ConvertToLua(lua_State* state)
 {
 	getGlobalNamespace(state).
-		beginNamespace("ECS").
+		beginNamespace("Aegis").
 		addFunction("CreateEntity", CreateEntity).
 
 		beginClass<Entity>("Entity").
@@ -178,9 +147,4 @@ void Entity::ConvertToLua(lua_State* state)
 		addProperty("transform", &Entity::GetTransform, &Entity::SetTransform).
 		endClass().
 		endNamespace();
-}
-
-Ogre::SceneNode* Entity::GetNode()
-{
-	return mNode_;
 }

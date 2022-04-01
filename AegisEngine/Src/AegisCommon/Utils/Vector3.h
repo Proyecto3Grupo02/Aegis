@@ -27,13 +27,15 @@ public:
 	static void ConvertToLua(lua_State* state)
 	{
 		getGlobalNamespace(state).
-			beginNamespace("ECS").
+			beginNamespace("Aegis").
+			beginNamespace("Maths").
 			beginClass<Vector3>("Vector3").
 			addConstructor<void(*)(float, float, float)>().
 			addProperty("x", &Vector3::GetX, &Vector3::SetX).
 			addProperty("y", &Vector3::GetY, &Vector3::SetY).
 			addProperty("z", &Vector3::GetZ, &Vector3::SetZ).
 			endClass().
+			endNamespace().
 			endNamespace();
 	}
 protected:
