@@ -30,8 +30,8 @@ class Component : public ILuaObject {
        bool getActive() { return isActive_; }
        void setActive(bool active) { isActive_ = active; }
 
-       const char* GetComponentName() const { return componentName; };
-       void SetComponentName(const char* name) { componentName = name; };
+       std::string GetComponentName() const { return componentName; };
+       void SetComponentName(std::string name) { componentName = name; };
 
        Entity* GetEntity() const 
        { 
@@ -43,7 +43,7 @@ class Component : public ILuaObject {
     private:
         Entity* mEntity_;
         bool isActive_;
-        const char* componentName;
+        std::string componentName;
         
 };
 

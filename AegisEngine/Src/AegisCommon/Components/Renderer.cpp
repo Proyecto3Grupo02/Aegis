@@ -12,7 +12,7 @@ Renderer::Renderer(Entity* _ent, std::string meshName) :
 {
 	isVisible = true;
 	SetComponentName("Renderer");
-	//ComponentManager::getInstance()->RegisterComponent<Renderer>("Renderer");
+	SetDataAsInnerType(this);
 	constructoraRenderer(_ent, meshName, _ent->GetNode()->getCreator(), true);
 }
 

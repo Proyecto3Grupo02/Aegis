@@ -41,7 +41,7 @@ public:
 	//handle the components
 
 	inline void addComponentFromLua(AegisComponent* component) {
-		const char* key = component->GetComponentName();
+		std::string key = component->GetComponentName();
 
 		if (mComponents_.find(key) == mComponents_.end()) { //si no está lo añadimos
 			component->setEntity(this);
@@ -63,16 +63,18 @@ public:
 			t->setEntity(this);
 
 			mComponentsArray_.push_back(t);
-			mComponents_[key] = t;
+			mComponents_[key] = static_cast<AegisComponent*>(t);
 			return (T*)mComponents_[key];
 		}
 
 		return nullptr;
 	}
 
-	inline AegisComponent* getComponentLua(const char* componentName)
+	inline AegisComponent* getComponentLua(std::string componentName)
 	{
-		return mComponents_[componentName];
+		if (mComponents_.count(componentName) == 0)
+			return nullptr;
+		else return  mComponents_[componentName];
 	}
 
 	template <typename T>
@@ -97,7 +99,7 @@ public:
 	Ogre::SceneNode* GetNode();
 protected:
 	Scene* mScene_; //scene pointer 
-	std::map<const char*, AegisComponent*> mComponents_; //list of all the components in scene
+	std::unordered_map <std::string, AegisComponent*> mComponents_; //list of all the components in scene
 	std::vector<AegisComponent*> mComponentsArray_; //list of all the components in scene
 	bool active_; //bool to check if the entity is active or not
 

@@ -8,7 +8,8 @@ Entity::Entity(Scene* node) :
 	mNode_(node->GetOgreNode()), active_(true), mScene_(node)
 {
 	//Componente obligatorio para todas las entidades
-	transform = this->addComponent<Transform>("Transform", Vector3(0,0,0), Vector4(), Vector3(1.0f, 1.0f, 1.0f));
+	transform = new Transform(Vector3(0,0,0), Vector4(), Vector3(1.0f, 1.0f, 1.0f));
+	this->addComponentFromLua(transform);
 	
 	// TEMPORAL
 	//auto r = new Renderer(this, "fish.mesh", mNode_->getCreator());

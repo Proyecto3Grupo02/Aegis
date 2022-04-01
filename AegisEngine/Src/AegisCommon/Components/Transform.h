@@ -12,11 +12,13 @@ class Entity;
 class Transform : public AegisComponent, public ILuaObject {
 public:
 	Transform() : AegisComponent(), position(Vector3()), rotation(Vector4()), scale(Vector3(1.0f,1.0f,1.0f)) {
+		SetDataAsInnerType(this);
 		SetComponentName("Transform");
 		//ComponentManager::getInstance()->RegisterComponent<Transform>("Transform");
 	};
 	Transform( Vector3 _pos, Vector4 _rot, Vector3 _scale) :
 			AegisComponent(), position(_pos), rotation(_rot), scale(_scale) {
+		SetDataAsInnerType(this);
 		SetComponentName("Transform");
 		//ComponentManager::getInstance()->RegisterComponent<Transform>("Transform");
 	};

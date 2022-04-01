@@ -1,6 +1,6 @@
 testEntity = ECS.CreateEntity(currentScene);
 
-local testComponent = require "testComponent"
+local testComponent = require "TestComponent"
 local cT = testComponent.GetNew();
 
 local rnd = ECS.CreateRenderer(testEntity, "fish.mesh");

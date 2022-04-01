@@ -35,5 +35,15 @@ private:
 	LuaRef fixedUpdateFunc = LuaManager::getInstance()->GetEmptyLuaRef();
 	LuaRef onCollisionEnterFunc = LuaManager::getInstance()->GetEmptyLuaRef();
 	LuaRef onTriggerEnterFunc = LuaManager::getInstance()->GetEmptyLuaRef();
+
+protected:
+	template <class T>
+	void SetDataAsInnerType(T* component);
 };
 #endif
+
+template<class T>
+inline void AegisComponent::SetDataAsInnerType(T* component)
+{
+	SetData(LuaRef(LuaManager::getInstance()->GetState(), component));
+}

@@ -16,7 +16,8 @@ public:
 		AegisComponent()
 	{
 		isVisible = ir;
-		//ComponentManager::getInstance()->RegisterComponent<Renderer>("Renderer");
+		SetComponentName("Renderer");
+		SetDataAsInnerType(this);
 		constructoraRenderer(_ent, meshName, sceneMng, ir);
 	}
 
