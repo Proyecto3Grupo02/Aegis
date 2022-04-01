@@ -12,7 +12,7 @@ SoundSystem::~SoundSystem()
 {
 }
 
-void SoundSystem::init()
+void SoundSystem::Init()
 {
 	generalVolume = 1;
 	musicVolume = 1;
@@ -60,7 +60,7 @@ void SoundSystem::close()
 /// <param name="name"> Nombre del efecto </param>
 /// <param name="mode"> Modo de sonido (Loop, default etc) </param>
 /// <returns></returns>
-Sound* SoundSystem::createSound(const std::string& name, const SoundMode& mode)
+Sound* SoundSystem::createSound(const std::string& name,  SoundMode mode)
 {
 	Sound* sound;
 	if (system->createSound(name.c_str(), mode, nullptr, &sound) == FMOD_RESULT::FMOD_OK)
@@ -315,7 +315,7 @@ void SoundSystem::ERRCHECK(FMOD_RESULT result) const
 /// </summary>
 /// <param name="name"></param>
 /// <returns></returns>
-Sound* SoundSystem::getSound(const std::string& name) const
+Sound* SoundSystem::getSound(const std::string& name) 
 {
 	
 	Sound* sound = createSound(SR->getSong(name),FMOD_DEFAULT);

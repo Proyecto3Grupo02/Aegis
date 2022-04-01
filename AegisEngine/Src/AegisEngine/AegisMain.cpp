@@ -21,6 +21,7 @@
 #include "../AegisGraphics/OgreWrapper.h"
 #include "../AegisCommon/Scene/Scene.h"
 #include "../AegisCommon/Utils/GameLoopData.h"
+#include "..\AegisAudio\SoundSystem.h"
 
 void AegisMain::GameLoop() {
 	std::cout << '\n';
@@ -30,7 +31,7 @@ void AegisMain::GameLoop() {
 	{
 		SDL_Event eventHandler;
 		uint32_t frameTimeMS = (uint32_t)floor((1 / TARGET_FRAME_RATE) * 1000);
-
+		Audio()->playMusic("clin");
 		std::cout << '\n';
 		while (!exit)
 		{
@@ -97,7 +98,7 @@ bool AegisMain::Init()
 {
 	Input()->Init();
 	ogreWrap->Init();
+	Audio()->Init();
 	GameLoop();
-
 	return true;
 }

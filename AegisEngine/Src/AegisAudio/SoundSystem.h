@@ -3,7 +3,7 @@
 #define SOUND_SYSTEM_H
 
 // AegisCommon
-#include "Singleton.h"
+#include "../AegisCommon/Utils/Singleton.h"
 
 // Dependencies\Fmod
 #include <fmod.hpp>
@@ -38,7 +38,7 @@ class SoundSystem : public Singleton<SoundSystem>
 public:
 	// Canales para la emision de sonidos
 	struct SoundChannel {
-		Channel* channel; /////////////////OJO
+		Channel* channel; 
 		bool paused;
 
 		SoundChannel();
@@ -81,7 +81,7 @@ private:
 
 	void ERRCHECK(FMOD_RESULT result) const;	// FMOD Errorcheck
 
-	Sound* getSound(const std::string& name) const;	// Gets a sound from a resource
+	Sound* getSound(const std::string& name);	// Gets a sound from a resource
 
 public:
 	SoundSystem();
@@ -97,15 +97,15 @@ public:
 	float getMusicVolume() const;
 	float getSoundVolume() const;
 
+	void Init();
+	Channel* playSound(const std::string& name);
+	Channel* playMusic(const std::string& name);
 private:
-	void init();
 	void close();
 	
 
-	Sound* createSound(const std::string& name, const SoundMode& mode);
+	Sound* createSound(const std::string& name,  SoundMode mode);
 
-	Channel* playSound(const std::string& name);
-	Channel* playMusic(const std::string& name);
 
 
 	void update(float deltaTime);
@@ -123,4 +123,10 @@ private:
 	ListenerData* createListener( Vector3* position,  Vector4* quaternion);
 
 };
+
+inline SoundSystem* Audio()
+{
+	return SoundSystem::getInstance();
+}
+
 #endif
