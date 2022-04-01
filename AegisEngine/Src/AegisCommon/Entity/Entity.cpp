@@ -11,8 +11,8 @@ Entity::Entity(Scene* node) :
 	transform = this->addComponent<Transform>("Transform", Vector3(0,0,0), Vector4(), Vector3(1.0f, 1.0f, 1.0f));
 	
 	// TEMPORAL
-	auto r = new Renderer(this, "fish.mesh", mNode_->getCreator());
-	this->addComponentFromLua(r);
+	//auto r = new Renderer(this, "fish.mesh", mNode_->getCreator());
+	//this->addComponentFromLua(r);
 }
 
 Entity::~Entity()
@@ -176,4 +176,9 @@ void Entity::ConvertToLua(lua_State* state)
 		addProperty("transform", &Entity::GetTransform, &Entity::SetTransform).
 		endClass().
 		endNamespace();
+}
+
+Ogre::SceneNode* Entity::GetNode()
+{
+	return mNode_;
 }

@@ -34,7 +34,7 @@ function table.GetNew()
             print("W key was pressed in lua")
             transform.position = ECS.Vector3(0,num, 0); 
         elseif Input:isKeyPressedThisFrame("s") then
-            print("A key was pressed in lua")
+            print("S key was pressed in lua")
             transform.position = ECS.Vector3(0,-num, 0); 
         elseif Input:isKeyPressedThisFrame("d") then
             print("D key was pressed in lua")

@@ -25,6 +25,7 @@
 #include "../AegisCommon/Entity/Entity.h"
 #include "../AegisCommon/Components/AegisComponent.h"
 #include "../AegisCommon/Components/Transform.h"
+#include "../AegisCommon/Components/Renderer.h"
 
 using namespace luabridge;
 
@@ -114,8 +115,7 @@ bool AegisMain::Init()
 
 void AegisMain::ConvertObjectToLua()
 {
-	luaManager->Execute("template.lua");
-
+	//luaManager->Execute("template.lua");
 	auto state = luaManager->GetState();
 
 	//Esto deberia hacerlo alguna funcion C global o algo externo para no tener dependencias en AegisEngine
@@ -128,6 +128,7 @@ void AegisMain::ConvertObjectToLua()
 
 	Transform::ConvertToLua(state);
 	Vector3::ConvertToLua(state);
+	Renderer::ConvertToLua(state);
 
 	push(state, sceneManager->GetCurrentScene());
 	lua_setglobal(state, "currentScene");
