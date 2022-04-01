@@ -27,53 +27,53 @@ function table.GetNew()
         local num = 5;
         local transform = component.entity.transform;
 
-        if  Input:isAnyKeyDown() then
+        if  Input:anyKeyWasPressed() then
         
-            if Input:isKeyPressedThisFrame("a") then
+            if Input:keyWasPressed("a") then
                 print("A key was pressed this frame in lua")
                 transform.position = ECS.Vector3(-num,0, 0); 
-            elseif Input:isKeyPressedThisFrame("w") then
+            elseif Input:keyWasPressed("w") then
                 print("W key was pressed this frame in lua")
                 transform.position = ECS.Vector3(0,num, 0); 
-            elseif Input:isKeyPressedThisFrame("s") then
+            elseif Input:keyWasPressed("s") then
                 print("S key was pressed this frame in lua")
                 transform.position = ECS.Vector3(0,-num, 0); 
-            elseif Input:isKeyPressedThisFrame("d") then
+            elseif Input:keyWasPressed("d") then
                 print("D key was pressed this frame in lua")
                 transform.position = ECS.Vector3(num,0, 0); 
             end
         end
         
-        if  Input:isAnyKeyUp() then
+        if  Input:anyKeyIsDown() then
         
-            if Input:isKeyUp("a") then
-                print("A key was released in lua")
+            if Input:isKeyDown("a") then
+                print("A key was down in lua")
                 transform.position = ECS.Vector3(-num,0, 0); 
-            elseif Input:isKeyUp("w") then
-                print("W key was released in lua")
+            elseif Input:isKeyDown("w") then
+                print("W key was down in lua")
                 transform.position = ECS.Vector3(0,num, 0); 
-            elseif Input:isKeyUp("s") then
-                print("S key was released in lua")
+            elseif Input:isKeyDown("s") then
+                print("S key was down in lua")
                 transform.position = ECS.Vector3(0,-num, 0); 
-            elseif Input:isKeyUp("d") then
-                print("D key was released in lua")
+            elseif Input:isKeyDown("d") then
+                print("D key was down in lua")
                 transform.position = ECS.Vector3(num,0, 0); 
             end
         end
 
-        if  Input:isAnyKeyPressed() then
+        if  Input:anyKeyWasReleased() then
         
-            if Input:isKeyDown("a") then
-                print("A key was Pressed in lua")
+            if Input:keyWasReleased("a") then
+                print("A key was released in lua")
                 transform.position = ECS.Vector3(-num,0, 0); 
-            elseif Input:isKeyDown("w") then
-                print("W key was Pressed in lua")
+            elseif Input:keyWasReleased("w") then
+                print("W key was released in lua")
                 transform.position = ECS.Vector3(0,num, 0); 
-            elseif Input:isKeyDown("s") then
-                print("S key was Pressed in lua")
+            elseif Input:keyWasReleased("s") then
+                print("S key was released in lua")
                 transform.position = ECS.Vector3(0,-num, 0); 
-            elseif Input:isKeyDown("d") then
-                print("D key was Pressed in lua")
+            elseif Input:keyWasReleased("d") then
+                print("D key was released in lua")
                 transform.position = ECS.Vector3(num,0, 0); 
             end
         end
