@@ -108,6 +108,9 @@
     <ClInclude Include="..\..\Src\AegisCommon\Interfaces\ILuaObject.h">
       <Filter>Archivos de encabezado\Interfaces</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\AegisCommon\Utils\Quaternion.h">
+      <Filter>Archivos de encabezado\Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\AegisCommon\Components\Component.cpp">
