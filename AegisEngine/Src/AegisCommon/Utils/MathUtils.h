@@ -8,8 +8,8 @@ using namespace std;
 namespace MathUtils
 {
 	constexpr float PI = 3.14159265358979323846;
-	constexpr float Rad2Deg = PI / 180.0f;
-	constexpr float Deg2Rad = 180.0f / PI;
+	constexpr float Deg2Rad = PI / 180.0f;
+	constexpr float Rad2Deg = 180.0f / PI;
 
 	static float Lerp(float start_value, float end_value, float pct)
 	{

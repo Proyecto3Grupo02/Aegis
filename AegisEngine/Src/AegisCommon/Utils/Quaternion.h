@@ -19,36 +19,27 @@ public:
 	~Quaternion() {};
 
 	Vector3 GetEulerAngles() const {
-		Vector3 euler;
-
 		// if the input quaternion is normalized, this is exactly one. Otherwise, this acts as a correction factor for the quaternion's not-normalizedness
-		float unit = (x * x) + (y * y) + (z * z) + (w * w);
+		Vector3 res;
+		float rx = 0;
+		float ry = 0;
+		float rz = 0;
 
-		// this will have a magnitude of 0.5 or greater if and only if this is a singularity case
-		float test = x * w - y * z;
+		double sinr_cosp = +2.0 * (w * x + y * z);
+		double cosr_cosp = +1.0 - 2.0 * (x * x + y * y);
+		rx = atan2(sinr_cosp, cosr_cosp);
 
-		if (test > 0.4995f * unit) // singularity at north pole
-		{
-			euler.SetX(MathUtils::PI / 2);
-			euler.SetY(2.0f * atan2(y, x));
-			euler.SetZ(0);
-		}
-		else if (test < -0.4995f * unit) // singularity at south pole
-		{
-			euler.SetX(-MathUtils::PI / 2);
-			euler.SetY(-2.0f * atan2(y, x));
-			euler.SetZ(0);
-		}
-		else // no singularity - this is the majority of cases
-		{
-			euler.SetX(asin(2.0f * (w * x - y * z)));
-			euler.SetY(atan2(2.0f * w * y + 2.0f * z * x, 1 - 2.0f * (x * x + y * y)));
-			euler.SetZ(atan2(2.0f * w * z + 2.0f * x * y, 1 - 2.0f * (z * z + x * x)));
-		}
-		// all the math so far has been done in radians. Before returning, we convert to degrees...
-		euler *= MathUtils::Rad2Deg;
+		double sinp = +2.0 * (w * y - z * x);
+		if (abs(sinp) >= 1) 
+			ry = MathUtils::PI / 2 * MathUtils::sign(sinp);
+		else
+			ry = asin(sinp);
 
-		return euler;
+		double siny_cosp = +2.0 * (w * z + x * y);
+		double cosy_cosp = +1.0 - 2.0 * (y * y + z * z);
+		rz = atan2(siny_cosp, cosy_cosp);
+
+		return Vector3(rx, ry, rz) * MathUtils::Rad2Deg;
 	}
 
 	static Quaternion eulerToQuaternion(const Vector3& euler){

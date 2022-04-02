@@ -87,7 +87,7 @@ bool OgreWrapper::Init()
 	mCamera = mSceneMgr->createCamera("MainCam");
 	ogreCam->attachObject(mCamera);
 	ogreCam->setPosition(0, 0, 10);
-	ogreCam->lookAt(Ogre::Vector3(0, 0, -300), Ogre::Node::TS_WORLD);
+	//ogreCam->lookAt(Ogre::Vector3(0, 0, -300), Ogre::Node::TS_WORLD);
 	mCamera->setNearClipDistance(5);
 
 	//viewPort

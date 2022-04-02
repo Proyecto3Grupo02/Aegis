@@ -18,11 +18,13 @@ function table.GetNew()
     function Update(deltaTime) 
         local num = 5;
         local transform = component.entity.transform;
-
-        transform.localEulerAngles = Aegis.Maths.Vector3(0,0, data.time);
-        print(transform.localEulerAngles.z);
-
         data.time = data.time + deltaTime;
+
+        transform.localEulerAngles = Aegis.Maths.Vector3(0,0, data.time * 360);
+        io.write("x: " .. transform.localEulerAngles.x);
+        io.write(" y: " .. transform.localEulerAngles.y);
+        print(" z: " .. transform.localEulerAngles.z);
+
     end;
 
     function LateUpdate(deltaTime) end;
