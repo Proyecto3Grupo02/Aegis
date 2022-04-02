@@ -8,7 +8,7 @@ Entity::Entity(Scene* node) :
 	mNode_(node->GetOgreNode()), active_(true), mScene_(node)
 {
 	//Componente obligatorio para todas las entidades
-	transform = new Transform(Vector3(0,0,0), Vector4(), Vector3(1.0f, 1.0f, 1.0f), getNode());
+	transform = new Transform(Vector3(0,0,0), Quaternion(), Vector3(1.0f, 1.0f, 1.0f), getNode());
 	this->addComponentFromLua(transform);
 }
 

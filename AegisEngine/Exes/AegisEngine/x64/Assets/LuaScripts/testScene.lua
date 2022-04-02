@@ -7,16 +7,12 @@ local scene = {
 		name = "TestEntity",
 		components = {
 			{
-				type = "TestComponent",
-				data = {
-					test = 10,
-					time = 0
-				}
+				type = "SimpleRotate"
 			},
 			{
 				type = "Renderer",
 				data = {
-					mesh = "Rust.mesh"
+					mesh = "fish.mesh"
 				}
 			}
 		}
