@@ -4,6 +4,7 @@
 LuaManager::LuaManager()
 {
 	state = luaL_newstate();
+	empty = luabridge::LuaRef(state);
 	luaL_openlibs(state);
 	setLuaPath(state, "../Assets/LuaScripts");
 }
@@ -73,5 +74,5 @@ int LuaManager::setLuaPath(lua_State* L, const char* path)
 
 luabridge::LuaRef LuaManager::GetEmptyLuaRef()
 {
-	return luabridge::LuaRef(state);
+	return empty;
 }

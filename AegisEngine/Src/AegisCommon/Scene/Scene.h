@@ -13,6 +13,7 @@ class Scene : public ILuaObject
 {
 private:
 	std::list<Entity*>* entities;
+	std::list<Entity*>* uninitializedEntities;
 	std::list<std::list<Entity*>::iterator> entitiesToDelete;
 	Ogre::SceneNode* ogreNode;
 	// Fixed Update arguments
@@ -70,6 +71,12 @@ private:
 	/// </summary>
 	/// <param name="dt">deltaTime</param>
 	void LateUpdate(float dt);
+
+	/// <summary>
+	/// Calls entity.init for every entity that has been added in the first frame
+	/// This allows to call "awake" for entities that are added in runtime
+	/// </summary>
+	void InitEntities();
 public:
 	Scene(Ogre::SceneNode* ogreNode);
 

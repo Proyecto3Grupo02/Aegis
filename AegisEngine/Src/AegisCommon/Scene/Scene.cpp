@@ -4,9 +4,19 @@
 
 using namespace luabridge;
 
+void Scene::InitEntities()
+{
+	for (Entity* entity : *uninitializedEntities)
+	{
+		entity->init();
+	}
+
+	uninitializedEntities->clear();
+}
+
 // Es posible que aqui queramos inicializar una escena de ogre y sincronizarla con las entidades
 Scene::Scene(Ogre::SceneNode* ogreNode) :
-	accumulator(0), entities(new std::list<Entity*>()), entitiesToDelete(std::list<std::list<Entity*>::iterator>()) , ogreNode(ogreNode)
+	accumulator(0), entities(new std::list<Entity*>()), entitiesToDelete(std::list<std::list<Entity*>::iterator>()) , ogreNode(ogreNode), uninitializedEntities(new std::list<Entity*>())
 {
 }
 
@@ -78,7 +88,7 @@ void Scene::UpdateScene(float dt)
 	//double current = getCurrentTime();
 	//double elapsed = current - previousFrameTime;
 	//previousFrameTime = current;
-
+	InitEntities();
 	FixedUpdate(dt);
 	Update(dt);
 	LateUpdate(dt);

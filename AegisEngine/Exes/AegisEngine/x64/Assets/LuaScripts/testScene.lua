@@ -5,6 +5,7 @@ local scene = {
 	{
 		type = "Entity",
 		name = "TestEntity",
+		position = { x = 0, y = 0, z = 0},
 		components = {
 			{
 				type = "SimpleRotate"
@@ -13,21 +14,6 @@ local scene = {
 				type = "Renderer",
 				data = {
 					mesh = "fish.mesh"
-				}
-			}
-		}
-	},
-	{
-		type = "Entity",
-		name = "TestEntity2",
-		components = {
-			{
-				type = "TestComponent"
-			},
-			{
-				type = "Renderer",
-				data = {
-					mesh = "Rust.mesh"
 				}
 			}
 		}

@@ -15,6 +15,10 @@ function table.GetNew()
     data.time = 0;
     data.test = 1;
 
+    function Init() 
+        print("Init");
+    end;
+
     -- move entity with the keys, press h to print debug info
     function Update(deltaTime) 
         local num = 5;

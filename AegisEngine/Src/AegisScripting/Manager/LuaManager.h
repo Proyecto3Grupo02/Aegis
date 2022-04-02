@@ -21,6 +21,7 @@ public:
 	luabridge::LuaRef GetEmptyLuaRef();
 private:
 	lua_State* state;
+	luabridge::LuaRef empty = luabridge::LuaRef(state);
 };
 
 

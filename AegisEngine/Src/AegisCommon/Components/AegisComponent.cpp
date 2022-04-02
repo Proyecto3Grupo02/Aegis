@@ -8,6 +8,10 @@ AegisComponent* CreateComponent(std::string componentName)
 }
 
 
+void AegisComponent::init()
+{
+}
+
 void AegisComponent::update(float dt)
 {
 	if (!updateFunc.isNil())
@@ -61,6 +65,16 @@ LuaRef AegisComponent::GetData() const
 	return data;
 }
 
+void AegisComponent::SetExternalData(LuaRef luaRef)
+{
+	external = luaRef;
+}
+
+LuaRef AegisComponent::GetExtenalData() const
+{
+	return external;
+}
+
 void AegisComponent::SetType(LuaRef luaRef)
 {
 	type = luaRef;
@@ -85,6 +99,7 @@ void AegisComponent::ConvertToLua(lua_State* state)
 		deriveClass<AegisComponent, Component>("Component").
 		addFunction("SetCallbacks", &AegisComponent::setCallbacks).
 		addProperty("data", &AegisComponent::GetData, &AegisComponent::SetData).
+		addProperty("external", &AegisComponent::GetExtenalData, &AegisComponent::SetExternalData).
 		addProperty("type", &AegisComponent::GetType, &AegisComponent::SetType).
 		endClass().
 		endNamespace();

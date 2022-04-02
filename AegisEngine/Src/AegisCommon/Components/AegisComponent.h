@@ -14,7 +14,7 @@ class	AegisComponent : public Component, public ILuaObject {
 public: 
 	AegisComponent() : Component() {}
 	~AegisComponent(){}
-	virtual void init() {}
+	virtual void init() override;
 	virtual void update(float dt) override;
 	virtual void lateUpdate(float dt)  override;
 	virtual void fixedUpdate()  override;
@@ -27,13 +27,18 @@ public:
 	void SetData(LuaRef luaRef);
 	LuaRef GetData() const;
 
+	void SetExternalData(LuaRef luaRef);
+	LuaRef GetExtenalData() const;
+
 	void SetType(LuaRef luaRef);
 	LuaRef GetType() const;
 	
 	static void ConvertToLua(lua_State* state);
 private:
 	LuaRef data = LuaManager::getInstance()->GetEmptyLuaRef();
+	LuaRef external = LuaManager::getInstance()->GetEmptyLuaRef();
 	LuaRef type = LuaManager::getInstance()->GetEmptyLuaRef();
+	LuaRef initFunc = LuaManager::getInstance()->GetEmptyLuaRef();
 	LuaRef updateFunc = LuaManager::getInstance()->GetEmptyLuaRef();
 	LuaRef lateUpdateFunc = LuaManager::getInstance()->GetEmptyLuaRef();
 	LuaRef fixedUpdateFunc = LuaManager::getInstance()->GetEmptyLuaRef();

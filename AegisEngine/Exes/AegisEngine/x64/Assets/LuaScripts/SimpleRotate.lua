@@ -25,9 +25,9 @@ function table.GetNew()
         -- z roll
         local zVec = Aegis.Maths.Vector3(0,0,1);
         transform.localEulerAngles = (transform.localEulerAngles) + zVec;
-        io.write("x: " .. transform.localEulerAngles.x);
-        io.write(" y: " .. transform.localEulerAngles.y);
-        print(" z: " .. transform.localEulerAngles.z);
+        -- io.write("x: " .. transform.localEulerAngles.x);
+        -- io.write(" y: " .. transform.localEulerAngles.y);
+        -- print(" z: " .. transform.localEulerAngles.z);
 
     end;
 

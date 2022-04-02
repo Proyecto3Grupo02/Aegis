@@ -12,6 +12,13 @@ Entity::Entity(Scene* node) :
 	this->addComponentFromLua(transform);
 }
 
+Entity::Entity(Scene* node, Vector3 pos) :
+	mNode_(node->GetOgreNode()), active_(true), mScene_(node)
+{
+	transform = new Transform(pos, Quaternion(), Vector3(1.0f, 1.0f, 1.0f), getNode());
+	this->addComponentFromLua(transform);
+}
+
 Entity::~Entity()
 {
 	for (Component* c : mComponentsArray_) {
@@ -25,7 +32,9 @@ Entity::~Entity()
 
 void Entity::init()
 {
-
+	for (Component* c : mComponentsArray_) {
+		c->init();
+	}
 }
 
 void Entity::fixedUpdate()
@@ -107,10 +116,9 @@ void Entity::SetTransform(Transform* transform)
 	this->transform = transform;
 }
 
-Entity* CreateEntity(Scene* scene)
+Entity* CreateEntity(Scene* scene, Vector3 pos)
 {
-	Entity* e = new Entity(scene);
-	return e;
+	return new Entity(scene, pos);;
 
 }
 
