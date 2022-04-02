@@ -16,6 +16,21 @@ local scene = {
 				}
 			}
 		}
+	},
+	{
+		type = "Entity",
+		name = "TestEntity2",
+		components = {
+			{
+				type = "TestComponent"
+			},
+			{
+				type = "Renderer",
+				data = {
+					mesh = "Rust.mesh"
+				}
+			}
+		}
 	}
 };
 return scene;

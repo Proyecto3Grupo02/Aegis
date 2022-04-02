@@ -64,6 +64,10 @@ public:
 			addProperty("x", &Vector3::GetX, &Vector3::SetX).
 			addProperty("y", &Vector3::GetY, &Vector3::SetY).
 			addProperty("z", &Vector3::GetZ, &Vector3::SetZ).
+			addFunction("__add", &Vector3::operator+).
+			addFunction("__sub", &Vector3::operator-).
+			addFunction("__mul", &Vector3::operator*).
+			addFunction("__div", &Vector3::operator/).
 			endClass().
 			endNamespace().
 			endNamespace();

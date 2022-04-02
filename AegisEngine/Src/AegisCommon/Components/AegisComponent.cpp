@@ -11,7 +11,15 @@ AegisComponent* CreateComponent(std::string componentName)
 void AegisComponent::update(float dt)
 {
 	if (!updateFunc.isNil())
-		updateFunc(dt);
+	{
+		try {
+			updateFunc(dt);
+		}
+		catch (LuaException const& e) {
+			std::cout << e.what() << "\n";
+		}
+		
+	}
 }
 
 void AegisComponent::lateUpdate(float dt)

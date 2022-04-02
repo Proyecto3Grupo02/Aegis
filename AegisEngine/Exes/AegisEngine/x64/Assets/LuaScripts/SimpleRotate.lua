@@ -20,7 +20,11 @@ function table.GetNew()
         local transform = component.entity.transform;
         data.time = data.time + deltaTime;
 
-        transform.localEulerAngles = Aegis.Maths.Vector3(0,0, data.time * 360);
+        -- x pitch
+        -- y yaw
+        -- z roll
+        local zVec = Aegis.Maths.Vector3(0,0,1);
+        transform.localEulerAngles = (transform.localEulerAngles) + zVec;
         io.write("x: " .. transform.localEulerAngles.x);
         io.write(" y: " .. transform.localEulerAngles.y);
         print(" z: " .. transform.localEulerAngles.z);
