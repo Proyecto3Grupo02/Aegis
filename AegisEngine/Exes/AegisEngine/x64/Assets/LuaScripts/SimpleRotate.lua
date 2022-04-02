@@ -7,7 +7,6 @@ local table = { }
 -- i dont need arguments here
 function table.GetNew() 
     local component = Aegis.CreateComponent(NAME);
-
     local data = {};
     component.data = data;
 

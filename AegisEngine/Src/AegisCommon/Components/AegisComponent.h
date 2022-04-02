@@ -5,15 +5,15 @@
 #include "../Interfaces/ILuaObject.h"
 #include <functional>
 
-enum Callbacks {Update, LateUpdate, FixedUpdate, OnCollisionEnter, OnTriggerEnter};
+enum Callbacks { Update, LateUpdate, FixedUpdate, OnCollisionEnter, OnTriggerEnter };
 
 #define LuaRefDefault LuaManager::getInstance()->GetEmptyLuaRef());
 
 struct Entity;
 class	AegisComponent : public Component, public ILuaObject {
-public: 
+public:
 	AegisComponent() : Component() {}
-	~AegisComponent(){}
+	~AegisComponent() {}
 	virtual void init() override;
 	virtual void update(float dt) override;
 	virtual void lateUpdate(float dt)  override;
@@ -23,7 +23,7 @@ public:
 
 	//Lua stuff
 	void setCallbacks(LuaRef updateFunc);
-	
+
 	void SetData(LuaRef luaRef);
 	LuaRef GetData() const;
 
@@ -32,8 +32,11 @@ public:
 
 	void SetType(LuaRef luaRef);
 	LuaRef GetType() const;
-	
+
 	static void ConvertToLua(lua_State* state);
+
+	template <class T>
+	void CallLuaRefFunc(LuaRef func, T args = 0);
 private:
 	LuaRef data = LuaManager::getInstance()->GetEmptyLuaRef();
 	LuaRef external = LuaManager::getInstance()->GetEmptyLuaRef();
@@ -50,6 +53,26 @@ protected:
 	void SetDataAsInnerType(T* component);
 };
 #endif
+
+template<class T>
+inline void AegisComponent::CallLuaRefFunc(LuaRef func, T args)
+{
+#if defined _DEBUG
+	if (!func.isNil())
+	{
+		try {
+			func(args);
+		}
+		catch (LuaException const& e) {
+			std::cout << e.what() << "\n";
+		}
+
+	}
+#else
+	if (!func.isNil())
+		func(args);
+#endif
+}
 
 template<class T>
 inline void AegisComponent::SetDataAsInnerType(T* component)

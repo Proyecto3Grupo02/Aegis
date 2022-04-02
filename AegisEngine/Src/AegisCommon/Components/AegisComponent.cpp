@@ -10,54 +10,32 @@ AegisComponent* CreateComponent(std::string componentName)
 
 void AegisComponent::init()
 {
-	if (!initFunc.isNil())
-	{
-		try {
-			initFunc();
-		}
-		catch (LuaException const& e) {
-			std::cout << e.what() << "\n";
-		}
-
-	}
+	CallLuaRefFunc(initFunc, 0);
 }
 
 void AegisComponent::update(float dt)
 {
-	if (!updateFunc.isNil())
-	{
-		try {
-			updateFunc(dt);
-		}
-		catch (LuaException const& e) {
-			std::cout << e.what() << "\n";
-		}
-		
-	}
+	CallLuaRefFunc(updateFunc, dt);
 }
 
 void AegisComponent::lateUpdate(float dt)
 {
-	if (!lateUpdateFunc.isNil())
-		lateUpdateFunc(dt);
+	CallLuaRefFunc(lateUpdateFunc, dt);
 }
 
 void AegisComponent::fixedUpdate()
 {
-	if (!fixedUpdateFunc.isNil())
-		fixedUpdateFunc();
+	CallLuaRefFunc(fixedUpdateFunc, 0);
 }
 
 void AegisComponent::onCollision(Entity* other)
 {
-	if (!onCollisionEnterFunc.isNil())
-		onCollisionEnterFunc(other);
+	CallLuaRefFunc(onCollisionEnterFunc, other);
 }
 
 void AegisComponent::onTrigger(Entity* other)
 {
-	if (!onTriggerEnterFunc.isNil())
-		onTriggerEnterFunc(other);
+	CallLuaRefFunc(onTriggerEnterFunc, other);
 }
 
 

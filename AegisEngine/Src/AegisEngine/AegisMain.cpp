@@ -31,9 +31,6 @@
 using namespace luabridge;
 
 void AegisMain::GameLoop() {
-	std::cout << '\n';
-	Debug()->Log("Aegis loaded");
-
 	while (!exit)
 	{
 		SDL_Event eventHandler;
@@ -102,6 +99,9 @@ AegisMain::~AegisMain()
 /// <returns></returns>
 bool AegisMain::Init()
 {
+	Debug()->Log("Aegis loaded");
+	std::cout << '\n';
+
 	Input()->Init();
 	ConvertObjectToLua(); 
 	luaManager->Execute("init.lua");
