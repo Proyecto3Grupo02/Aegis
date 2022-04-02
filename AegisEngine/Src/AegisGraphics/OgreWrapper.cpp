@@ -86,7 +86,7 @@ bool OgreWrapper::Init()
 	Ogre::SceneNode* ogreCam = mSceneMgr->getRootSceneNode()->createChildSceneNode();
 	mCamera = mSceneMgr->createCamera("MainCam");
 	ogreCam->attachObject(mCamera);
-	ogreCam->setPosition(0, 0, 20);
+	ogreCam->setPosition(0, 0, 10);
 	ogreCam->lookAt(Ogre::Vector3(0, 0, -300), Ogre::Node::TS_WORLD);
 	mCamera->setNearClipDistance(5);
 

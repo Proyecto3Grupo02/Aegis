@@ -17,7 +17,7 @@ public:
 	Vector4 operator+(Vector4 const& b) { return Vector4(x + b.x, y + b.y, z + b.z, w + b.w); }
 	Vector4 operator-(Vector4 const& b) { return Vector4(x - b.x, y - b.y, z - b.z, w - b.w); }
 	Vector4 operator*(Vector4 const& b) { return Vector4(x * b.x, y * b.y, z * b.z, w * b.w); }
-	Vector4 operator*(float const& f) { return Vector4(x * f, y * f, z * f, w * f); }
+	Vector4 operator*(float  f) { return Vector4(x * f, y * f, z * f, w * f); }
 	bool operator==(Vector4 const& b) { return ((x == b.x) && (y == b.y) && (z == b.z) && (w == b.w)); }
 	bool operator!=(Vector4 const& b) { return !(x == b.x) && (y == b.y) && (z == b.z) && (w == b.w); }
 
@@ -34,7 +34,6 @@ public:
 			endNamespace().
 			endNamespace();
 	}
-protected:
 	float w;
 };
 

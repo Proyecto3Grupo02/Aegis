@@ -16,7 +16,7 @@ local scene = {
 			{
 				type = "Renderer",
 				data = {
-					mesh = "fish.mesh"
+					mesh = "Rust.mesh"
 				}
 			}
 		}

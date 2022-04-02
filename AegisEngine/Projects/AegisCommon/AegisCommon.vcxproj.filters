@@ -114,6 +114,12 @@
     <ClInclude Include="..\..\Src\AegisCommon\Components\Light.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\AegisCommon\Utils\MathUtils.h">
+      <Filter>Archivos de encabezado\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisCommon\Utils\Randomized.h">
+      <Filter>Archivos de encabezado\Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\AegisCommon\Components\Component.cpp">

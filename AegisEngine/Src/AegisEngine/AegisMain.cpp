@@ -26,6 +26,7 @@
 #include "../AegisCommon/Components/AegisComponent.h"
 #include "../AegisCommon/Components/Transform.h"
 #include "../AegisCommon/Components/Renderer.h"
+#include "../AegisCommon/Utils/Quaternion.h"
 
 using namespace luabridge;
 
@@ -123,6 +124,7 @@ void AegisMain::ConvertObjectToLua()
 	Transform::ConvertToLua(state);
 	Vector3::ConvertToLua(state);
 	Vector4::ConvertToLua(state);
+	Quaternion::ConvertToLua(state);
 	Renderer::ConvertToLua(state);
 
 	//push(state, true);

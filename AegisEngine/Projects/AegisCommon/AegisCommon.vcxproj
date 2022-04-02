@@ -175,7 +175,9 @@
     <ClInclude Include="..\..\Src\AegisCommon\Managers\SceneManager.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Scene\Scene.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Utils\GameLoopData.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Utils\MathUtils.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Quaternion.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Utils\Randomized.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Scripting.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Singleton.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Vector3.h" />

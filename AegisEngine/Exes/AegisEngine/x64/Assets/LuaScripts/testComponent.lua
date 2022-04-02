@@ -44,11 +44,11 @@ function table.GetNew()
         -- if time is bigger than 0 obtain meshRenderer and setvisible to false
         local meshRenderer = component.entity:GetComponent("Renderer").type;
 
-        if math.sin(data.time) > 0 then
-            meshRenderer.visible = false;
-        else
-            meshRenderer.visible = true;
-        end
+        -- if math.sin(data.time) > 0 then
+        --     meshRenderer.visible = false;
+        -- else
+        --     meshRenderer.visible = true;
+        -- end
 
         -- Quit comment below to see the entity position changing
         transform.position = Aegis.Maths.Vector3(math.sin(data.time) * 10,0, 0); 
