@@ -48,6 +48,7 @@ void Scene::RemoveAndFreePendingEntities()
 
 void Scene::AddEntity(Entity* entity)
 {
+	this->uninitializedEntities->push_back(entity);
 	this->entities->push_back(entity);
 }
 

@@ -14,6 +14,15 @@ function table.GetNew()
     -- data is a ref, you can't modify it after setting to component
     data.time = 0;
 
+    function Init() 
+        local entName = component.entity:GetName();
+        print("Init: " .. component.name .. " from " .. entName);
+        local rust = component.external.Rust;
+        print("EntityDependency: " .. rust.entity:GetName());
+        print("ComponentDependenty: " .. rust.TestComponent.name);
+        rust.TestComponent.data.test = 5;
+    end;
+
     -- move entity with the keys, press h to print debug info
     function Update(deltaTime) 
         local num = 5;
@@ -37,6 +46,7 @@ function table.GetNew()
     function OnTrigger(other) end;
 
     local funcs = {};
+    funcs.init = Init;
     funcs.update = Update;
 
     component:SetCallbacks(funcs);

@@ -10,6 +10,16 @@ AegisComponent* CreateComponent(std::string componentName)
 
 void AegisComponent::init()
 {
+	if (!initFunc.isNil())
+	{
+		try {
+			initFunc();
+		}
+		catch (LuaException const& e) {
+			std::cout << e.what() << "\n";
+		}
+
+	}
 }
 
 void AegisComponent::update(float dt)
@@ -53,6 +63,7 @@ void AegisComponent::onTrigger(Entity* other)
 
 void AegisComponent::setCallbacks(LuaRef updateFunc)
 {
+	this->initFunc = updateFunc.rawget("init");
 	this->updateFunc = updateFunc.rawget("update");
 	this->lateUpdateFunc = updateFunc.rawget("lateUpdate");
 	this->fixedUpdateFunc = updateFunc.rawget("fixedUpdate");
