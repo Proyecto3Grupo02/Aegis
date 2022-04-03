@@ -13,6 +13,9 @@ public:
 
 	float GetW() { return w; }
 	void SetW(float _w) { w = _w; }
+	Vector3 GetForwardVector(Vector4 quaternion) {
+		return(Vector3(0, 0, quaternion.z));
+	}
 
 	Vector4 operator+(Vector4 const& b) { return Vector4(x + b.x, y + b.y, z + b.z, w + b.w); }
 	Vector4 operator-(Vector4 const& b) { return Vector4(x - b.x, y - b.y, z - b.z, w - b.w); }
