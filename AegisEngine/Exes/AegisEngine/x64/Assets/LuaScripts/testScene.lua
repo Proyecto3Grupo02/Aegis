@@ -39,7 +39,10 @@ local scene = {
 		name = "Rust",
 		components = {
 			{
-				type = "TestComponent"
+				type = "TestComponent",
+				data = {
+					test2 = 1
+				}
 			},
 			{
 				type = "Renderer",

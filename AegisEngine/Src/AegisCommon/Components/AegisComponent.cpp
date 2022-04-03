@@ -39,14 +39,14 @@ void AegisComponent::onTrigger(Entity* other)
 }
 
 
-void AegisComponent::setCallbacks(LuaRef updateFunc)
+void AegisComponent::setCallbacks(LuaRef funcs)
 {
-	this->initFunc = updateFunc.rawget("init");
-	this->updateFunc = updateFunc.rawget("update");
-	this->lateUpdateFunc = updateFunc.rawget("lateUpdate");
-	this->fixedUpdateFunc = updateFunc.rawget("fixedUpdate");
-	this->onCollisionEnterFunc = updateFunc.rawget("onCollisionEnter");
-	this->onTriggerEnterFunc = updateFunc.rawget("onTriggerEnter");
+	this->initFunc = funcs.rawget("init");
+	this->updateFunc = funcs.rawget("update");
+	this->lateUpdateFunc = funcs.rawget("lateUpdate");
+	this->fixedUpdateFunc = funcs.rawget("fixedUpdate");
+	this->onCollisionEnterFunc = funcs.rawget("onCollisionEnter");
+	this->onTriggerEnterFunc = funcs.rawget("onTriggerEnter");
 }
 
 LuaRef AegisComponent::GetData() const

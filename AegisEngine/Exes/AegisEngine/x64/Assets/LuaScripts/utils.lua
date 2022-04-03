@@ -13,13 +13,30 @@ funcs.ParseEntity = function(object)
 			local component = componentType.GetNew(entity, v.data);
 			entity:AddComponent(component);
 			if (v.overrideData == nil or v.overrideData == true) and v.data ~= nil then
-				component.data = v.data;
+				funcs.CopyComponentData(v.data, component.data, component.name);
 			end;
 		end;
 	end;
 	currentScene:AddEntity(entity);
 	return entity;
 end;
+
+--from: component
+--to: data
+funcs.CopyComponentData = function(from, to, componentName)
+-- if key in to is not in from, dont copy and print warning
+    for k, v in pairs(to) do
+        if from[k] == nil then
+            print("Warning: " .. k .. " is not found in " .. componentName .. " data");
+        else
+            -- Intended for debug
+            --print("Copying " .. k .. "(" .. from[k] ..")" .. " from " .. componentName .. " to data" .. "(" .. to[k] .. ")");
+            to[k] = from[k];
+        end
+    end
+end
+
+
 funcs.ParseVector3 = function(vec3, default)
 	if default == nil then
 		default = 0;

@@ -13,28 +13,33 @@ function table.GetNew(entity, params)
     
     -- Data for your script, you can have here anything, custom methods, int, other tables... Anything, it will
     -- be stored as a LuaRef in C++
-    local data = {};
-    -- Set data to component, otherwise you won't be able to access component data from other scripts
-    -- All data is public
-    component.data = data;
+    -- All data is public, you can make a subtable for private data
+    -- It's recommended to store component.data in a local data variable for ease of use
+    local data = component.data;
+
+    -- Entity has a direct access from transform
+    -- Component have an entity access, component.entity but it's not recommended to use it outside methods
+    -- as it could be nil, it's safer to use entity received from constructor
+    local transform = entity.transform;
 
     -- You can edit data after setting it to component.data, as it's a ref value 
 
     -- You may recive params from the scene file, you can use them to initialize your component
     -- We assume params have the correct data, you can also parse it if you dont trust users of this engine
     -- You can store functions here but you shouldn
-    -- parse method will set data to params anyway, unless you set overrideData to false in scene definition
+    
+    -- Params usually are serialized data,
+    -- parse method will set data to params (only for key matches), unless you set overrideData to false in scene definition
+    -- but this params could be another type of info that the component expects. Be aware that in that case, data will always have the 
+    -- same initial values for all of this components instances, unless params contains a subtable with the data, in that case you have to 
+    -- parse it manually
     if params ~= nil then
-        data = params;
-    else
-        -- These are your custom variables, params shuould have the same amount of variables with the sanme
-        -- name as in this section
-        data.thing = "this is a string";
-        data.test = 1;
+        -- do stuff
     end
 
-
-
+    -- This function is called when entity is added to scene, after all dependencies are resolved
+    -- Even if the entity is disabled the first frame, Init will be called
+    function Init() end;
     function Update(deltaTime) 
         if  Input:anyKeyWasPressed() then
             if Input:keyWasPressed("a") then
@@ -66,6 +71,7 @@ function table.GetNew(entity, params)
 
     -- Set the functions to the component, if you dont do this
     -- your component will not have any functions, only data (which you may want in some case)
+    -- Call this methods after setting all functions or else it wont work
     component:SetCallbacks(funcs);
     return component;
 end

@@ -72,7 +72,12 @@ int LuaManager::setLuaPath(lua_State* L, const char* path)
 	return 0; // all done!
 }
 
-luabridge::LuaRef LuaManager::GetEmptyLuaRef()
+luabridge::LuaRef LuaManager::GetSharedEmptyLuaRef()
 {
 	return empty;
+}
+
+luabridge::LuaRef LuaManager::GetNewEmptyTable()
+{
+	return luabridge::newTable(state);
 }

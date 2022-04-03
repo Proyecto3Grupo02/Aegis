@@ -7,7 +7,7 @@
 
 enum Callbacks { Update, LateUpdate, FixedUpdate, OnCollisionEnter, OnTriggerEnter };
 
-#define LuaRefDefault LuaManager::getInstance()->GetEmptyLuaRef());
+#define LuaRefDefault LuaManager::getInstance()->GetSharedEmptyLuaRef());
 
 struct Entity;
 class	AegisComponent : public Component, public ILuaObject {
@@ -37,16 +37,17 @@ public:
 
 	template <class T>
 	void CallLuaRefFunc(LuaRef func, T args = 0);
+protected:
+	LuaRef data =LuaMngr()->GetNewEmptyTable();
 private:
-	LuaRef data = LuaManager::getInstance()->GetEmptyLuaRef();
-	LuaRef external = LuaManager::getInstance()->GetEmptyLuaRef();
-	LuaRef type = LuaManager::getInstance()->GetEmptyLuaRef();
-	LuaRef initFunc = LuaManager::getInstance()->GetEmptyLuaRef();
-	LuaRef updateFunc = LuaManager::getInstance()->GetEmptyLuaRef();
-	LuaRef lateUpdateFunc = LuaManager::getInstance()->GetEmptyLuaRef();
-	LuaRef fixedUpdateFunc = LuaManager::getInstance()->GetEmptyLuaRef();
-	LuaRef onCollisionEnterFunc = LuaManager::getInstance()->GetEmptyLuaRef();
-	LuaRef onTriggerEnterFunc = LuaManager::getInstance()->GetEmptyLuaRef();
+	LuaRef external =LuaMngr()->GetSharedEmptyLuaRef();
+	LuaRef type =LuaMngr()->GetSharedEmptyLuaRef();
+	LuaRef initFunc =LuaMngr()->GetSharedEmptyLuaRef();
+	LuaRef updateFunc =LuaMngr()->GetSharedEmptyLuaRef();
+	LuaRef lateUpdateFunc =LuaMngr()->GetSharedEmptyLuaRef();
+	LuaRef fixedUpdateFunc =LuaMngr()->GetSharedEmptyLuaRef();
+	LuaRef onCollisionEnterFunc =LuaMngr()->GetSharedEmptyLuaRef();
+	LuaRef onTriggerEnterFunc =LuaMngr()->GetSharedEmptyLuaRef();
 
 protected:
 	template <class T>

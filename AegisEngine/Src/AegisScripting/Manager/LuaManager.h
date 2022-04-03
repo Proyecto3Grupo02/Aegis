@@ -18,11 +18,17 @@ public:
 	void RegisterFunction(lua_CFunction function, const char* functionName);
 	lua_State* GetState();
 	int setLuaPath(lua_State* L, const char* path);
-	luabridge::LuaRef GetEmptyLuaRef();
+	luabridge::LuaRef GetSharedEmptyLuaRef();
+	luabridge::LuaRef GetNewEmptyTable();
 private:
 	lua_State* state;
 	luabridge::LuaRef empty = luabridge::LuaRef(state);
 };
+
+inline LuaManager* LuaMngr()
+{
+	return LuaManager::getInstance();
+}
 
 
 #endif

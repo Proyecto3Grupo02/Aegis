@@ -10,6 +10,7 @@
 Renderer::Renderer(Entity* _ent, std::string meshName, Ogre::SceneManager* sceneMng, bool ir) :
 	AegisComponent()
 {
+	data["mesh"] = "fish.mesh";
 	isVisible = ir;
 	SetComponentName("Renderer");
 	SetDataAsInnerType(this);
@@ -19,6 +20,7 @@ Renderer::Renderer(Entity* _ent, std::string meshName, Ogre::SceneManager* scene
 Renderer::Renderer(Entity* _ent, std::string meshName) :
 	AegisComponent()
 {
+	data["mesh"] = "fish.mesh";
 	isVisible = true;
 	SetComponentName("Renderer");
 	SetDataAsInnerType(this);

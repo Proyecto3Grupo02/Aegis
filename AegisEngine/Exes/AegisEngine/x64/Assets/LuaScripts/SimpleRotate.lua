@@ -7,8 +7,7 @@ local table = { }
 -- i dont need arguments here
 function table.GetNew() 
     local component = Aegis.CreateComponent(NAME);
-    local data = {};
-    component.data = data;
+    data = component.data;
 
     -- data is a ref, you can't modify it after setting to component
     data.time = 0;
@@ -20,6 +19,7 @@ function table.GetNew()
         print("EntityDependency: " .. rust.entity:GetName());
         print("ComponentDependenty: " .. rust.TestComponent.name);
         rust.TestComponent.data.test = 5;
+        print("ComponentTest2: " .. rust.TestComponent.data.test2);
     end;
 
     -- move entity with the keys, press h to print debug info

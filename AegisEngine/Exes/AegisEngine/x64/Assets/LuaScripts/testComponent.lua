@@ -7,13 +7,12 @@ local table = { }
 -- i dont need arguments here
 function table.GetNew() 
     local component = Aegis.CreateComponent(NAME);
-
-    local data = {};
-    component.data = data;
+    local data = component.data;
 
     -- data is a ref, you can't modify it after setting to component
     data.time = 0;
-    data.test = 1;
+    data.test = 0;
+    data.test2 = 0;
 
     function Init() 
         print("Init");
@@ -27,7 +26,7 @@ function table.GetNew()
         if  Input:AnyKeyWasPressed() then
         
             if Input:KeyWasPressed("h") then
-                print("Test value is " .. component.data.test);
+                print("Test value is " .. data.test);
             elseif Input:KeyWasPressed("a") then
                 print("A key was pressed this frame in lua")
                 transform.position = Aegis.Maths.Vector3(-num,0, 0); 
