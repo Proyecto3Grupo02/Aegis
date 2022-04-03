@@ -38,6 +38,13 @@ function table.GetNew(entity, params)
     -- parse it manually
     if params ~= nil then
         -- do stuff
+        
+		-- this wont work, it wont give an error it will just be a useless asignment
+        component.data = {}
+
+        -- this won't override component.data, but only the local field data
+        -- i don't know why anyone would do this, just be aware of it
+        data = {}
     end
 
     -- This function is called when entity is added to scene, after all dependencies are resolved

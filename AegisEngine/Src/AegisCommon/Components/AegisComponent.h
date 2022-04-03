@@ -31,6 +31,7 @@ public:
 	LuaRef GetExtenalData() const;
 
 	void SetType(LuaRef luaRef);
+	void SetTypeLua(LuaRef luaRef);
 	LuaRef GetType() const;
 
 	void SetFuncs(LuaRef luaRef);
@@ -43,7 +44,7 @@ public:
 protected:
 	LuaRef data =LuaMngr()->GetNewEmptyTable();
 private:
-	LuaRef external =LuaMngr()->GetSharedEmptyLuaRef();
+	LuaRef external =LuaMngr()->GetNewEmptyTable();
 	LuaRef type =LuaMngr()->GetSharedEmptyLuaRef();
 	LuaRef funcs =LuaMngr()->GetNewEmptyTable();
 	LuaRef initFunc =LuaMngr()->GetSharedEmptyLuaRef();

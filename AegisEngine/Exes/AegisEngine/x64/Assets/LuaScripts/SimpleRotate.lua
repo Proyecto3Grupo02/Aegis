@@ -7,7 +7,7 @@ local table = { }
 -- i dont need arguments here
 function table.GetNew() 
     local component = Aegis.CreateComponent(NAME);
-    data = component.data;
+    local data = component.data;
     local funcs = component.funcs;
 
     -- data is a ref, you can't modify it after setting to component
@@ -21,6 +21,17 @@ function table.GetNew()
         print("ComponentDependenty: " .. rust.TestComponent.name);
         rust.TestComponent.data.test = 5;
         print("ComponentTest2: " .. rust.TestComponent.data.test2);
+
+        -- this will throw a warning through console, you can modify component.data
+        -- but you can't override it
+        component.data = {}
+
+        -- the code below would work
+        --component.data.time = 2;
+
+        -- notice how the print the same address, but component.data has different methamethods
+        io.write("ComponentData: ") print(component.data)
+        io.write("Local Data: ") print(data)
     end;
 
     -- move entity with the keys, press h to print debug info

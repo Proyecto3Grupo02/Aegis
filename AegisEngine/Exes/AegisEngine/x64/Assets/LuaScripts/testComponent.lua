@@ -28,26 +28,24 @@ function table.GetNew()
         local num = 5;
         local transform = component.entity.transform;
 
-        -- Comment the last line of this function and uncomment this
-        -- to control the entitiy with awsd keys and print debug info with h
-        -- if  Input:AnyKeyWasPressed() then
+        if  Input:AnyKeyWasPressed() then
         
-        --     if Input:KeyWasPressed("h") then
-        --         print("Test value is " .. data.test);
-        --     elseif Input:KeyWasPressed("a") then
-        --         print("A key was pressed this frame in lua")
-        --         transform.position = Aegis.Maths.Vector3(-num,0, 0); 
-        --     elseif Input:KeyWasPressed("w") then
-        --         print("W key was pressed this frame in lua")
-        --         transform.position = Aegis.Maths.Vector3(0,num, 0); 
-        --     elseif Input:KeyWasPressed("s") then
-        --         print("S key was pressed this frame in lua")
-        --         transform.position = Aegis.Maths.Vector3(0,-num, 0); 
-        --     elseif Input:KeyWasPressed("d") then
-        --         print("D key was pressed this frame in lua")
-        --         transform.position = Aegis.Maths.Vector3(num,0, 0); 
-        --     end
-        -- end
+            if Input:KeyWasPressed("h") then
+                print("Test value is " .. data.test);
+            elseif Input:KeyWasPressed("a") then
+                print("A key was pressed this frame in lua")
+                transform.position = Aegis.Maths.Vector3(-num,0, 0); 
+            elseif Input:KeyWasPressed("w") then
+                print("W key was pressed this frame in lua")
+                transform.position = Aegis.Maths.Vector3(0,num, 0); 
+            elseif Input:KeyWasPressed("s") then
+                print("S key was pressed this frame in lua")
+                transform.position = Aegis.Maths.Vector3(0,-num, 0); 
+            elseif Input:KeyWasPressed("d") then
+                print("D key was pressed this frame in lua")
+                transform.position = Aegis.Maths.Vector3(num,0, 0); 
+            end
+        end
 
         -- timer, be aware that compound operators don't exist in lua
         data.time = data.time + deltaTime;

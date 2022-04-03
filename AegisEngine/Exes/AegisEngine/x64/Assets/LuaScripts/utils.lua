@@ -65,7 +65,7 @@ funcs.ResolveDependencies = function(scene, entities)
 					else
 						local localComponent = entities[v.name]:GetComponent(cmp.type);
 
-                        localComponent.external= {};
+                        localComponent.external.inited = true;
                         localComponent.external[entity:GetName()] = {};
                         localComponent.external[entity:GetName()].entity = entity; 
 
@@ -81,7 +81,7 @@ funcs.ResolveDependencies = function(scene, entities)
 						end;
 					end;
 				end;
-                
+
                 print();
                 if resolvedCorrectly == false then
                     print("Could not resolve dependencies for " .. v.name);
