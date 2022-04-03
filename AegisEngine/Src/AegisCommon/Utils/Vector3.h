@@ -10,9 +10,9 @@ public:
 	Vector3(float _all) : x(_all), y(_all), z(_all) {};
 	Vector3() : x(0.0f), y(0.0f), z(0.0f) {};
 
-	float GetX() { return x; }
-	float GetY() { return y; }
-	float GetZ() { return z; }
+	float GetX() const { return x; }
+	float GetY() const { return y; }
+	float GetZ() const { return z; }
 
 	void SetX(float _x) { x = _x; }
 	void SetY(float _y) { x = _y; }

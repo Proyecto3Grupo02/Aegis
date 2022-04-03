@@ -2,12 +2,18 @@
 #ifndef ENTITY_H 
 #define ENTITY_H
 
+
+
 #include "../Managers/ComponentManager.h"
 #include "../../checkML.h" //BASURA
-#include <Ogre.h>
+
 #include <vector>
 #include <list>
 #include <string>
+
+namespace Ogre {
+    class SceneNode;
+}
 
 class Component;
 class Transform;
