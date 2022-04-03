@@ -13,7 +13,7 @@ funcs.ParseEntity = function(object)
 			local component = componentType.GetNew(entity, v.data);
 			entity:AddComponent(component);
 			if (v.overrideData == nil or v.overrideData == true) and v.data ~= nil then
-				funcs.CopyComponentData(v.data, component.data, component.name);
+				funcs.CopyComponentData(v.data, component.data, component.name, object.name);
 			end;
 		end;
 	end;
@@ -23,11 +23,12 @@ end;
 
 --from: component
 --to: data
-funcs.CopyComponentData = function(from, to, componentName)
+funcs.CopyComponentData = function(from, to, componentName, entityName)
 -- if key in to is not in from, dont copy and print warning
-    for k, v in pairs(to) do
-        if from[k] == nil then
-            print("Warning: " .. k .. " is not found in " .. componentName .. " data");
+    for k, v in pairs(from) do
+        if to[k] == nil then
+            bool = false;   
+            print("Error: " .. k .. " is not a field of " .. componentName .. ".data, " .. k .. " wasn't copied (" .. entityName ..")");
         else
             -- Intended for debug
             --print("Copying " .. k .. "(" .. from[k] ..")" .. " from " .. componentName .. " to data" .. "(" .. to[k] .. ")");
@@ -53,11 +54,14 @@ funcs.ResolveDependencies = function(scene, entities)
 	for i, v in ipairs(scene) do
 		for p, cmp in ipairs(v.components or {}) do
 			if v.type == "Entity" and cmp.dependencies ~= nil then
-                print("Solving dependencies for " .. v.name .. "\n");
-				for key, dependencie in ipairs(cmp.dependencies) do
-					local entity = entities[dependencie.entity];
+                print("Solving dependencies for " .. v.name .. ":\n");
+                local resolvedCorrectly = true;
+				for key, dependency in ipairs(cmp.dependencies) do
+					local entity = entities[dependency.entity];
+                    print("--Solving dependencies from " .. dependency.entity .. ":");
 					if entity == nil then
-						print("Entity " .. dependencie.entity .. " is not found, could not resolve dependency for " .. v.name);
+                        resolvedCorrectly = false;
+						print("----Entity " .. dependency.entity .. " wasn't found, dependency could not be resolved");
 					else
 						local localComponent = entities[v.name]:GetComponent(cmp.type);
 
@@ -65,18 +69,26 @@ funcs.ResolveDependencies = function(scene, entities)
                         localComponent.external[entity:GetName()] = {};
                         localComponent.external[entity:GetName()].entity = entity; 
 
-						for j, componentName in ipairs(dependencie.components) do
+						for j, componentName in ipairs(dependency.components) do
 							local component = entity:GetComponent(componentName);
 							if component == nil then
-								print("Component " .. componentName .. " wasn't found in " .. dependencie.entity .. ", could not resolve dependency for " .. v.name);
+                                resolvedCorrectly = false;
+								print("----Component " .. componentName .. " wasn't found in " .. dependency.entity .. ", dependency could not be resolved");
 							else
-                                print("Inyecting " .. componentName .. " from " .. dependencie.entity .. " into " .. cmp.type);
+                                print("----Inyecting " .. componentName .. " from " .. dependency.entity .. " into " .. cmp.type);
 								localComponent.external[entity:GetName()][componentName] = component;
-                                print("Dependency solved correctly\n");
 							end;
 						end;
 					end;
 				end;
+                
+                print();
+                if resolvedCorrectly == false then
+                    print("Could not resolve dependencies for " .. v.name);
+                else 
+                    print("Dependency solved correctly");
+                end;
+                print("-------------------");
 			end;
 		end;
 	end;
@@ -89,9 +101,13 @@ funcs.ParseSceneObject = function(object)
 	end;
 end;
 funcs.ParseScene = function(scene)
+    print("Creating Scene Objects");
+    print("-------------------");
 	for i, v in ipairs(scene) do
 		local object = funcs.ParseSceneObject(v);
 	end;
+    print("\nResolving dependencies:");
+    print("-------------------");
 	funcs.ResolveDependencies(scene, entities);
 end;
 return funcs;

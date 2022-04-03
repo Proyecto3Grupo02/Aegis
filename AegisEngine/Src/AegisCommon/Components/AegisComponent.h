@@ -33,6 +33,9 @@ public:
 	void SetType(LuaRef luaRef);
 	LuaRef GetType() const;
 
+	void SetFuncs(LuaRef luaRef);
+	LuaRef GetFuncs() const;
+
 	static void ConvertToLua(lua_State* state);
 
 	template <class T>
@@ -42,6 +45,7 @@ protected:
 private:
 	LuaRef external =LuaMngr()->GetSharedEmptyLuaRef();
 	LuaRef type =LuaMngr()->GetSharedEmptyLuaRef();
+	LuaRef funcs =LuaMngr()->GetNewEmptyTable();
 	LuaRef initFunc =LuaMngr()->GetSharedEmptyLuaRef();
 	LuaRef updateFunc =LuaMngr()->GetSharedEmptyLuaRef();
 	LuaRef lateUpdateFunc =LuaMngr()->GetSharedEmptyLuaRef();

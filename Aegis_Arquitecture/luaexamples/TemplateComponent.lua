@@ -4,7 +4,8 @@ function table.GetNew(entity, params)
 	local component = Aegis.CreateComponent(NAME);
 	local data = component.data;
 	local transform = entity.transform;
-	
+    local funcs = component.funcs;
+
 	if params ~= nil then
 		data = params;
 	else
@@ -18,10 +19,7 @@ function table.GetNew(entity, params)
 	function OnCollision(other) end;
 	function OnTrigger(other) end;
 	
-	local funcs = {};
     funcs.update = Update;
-	component:SetCallbacks(funcs);
-
 	return component;
 end;
 return table;

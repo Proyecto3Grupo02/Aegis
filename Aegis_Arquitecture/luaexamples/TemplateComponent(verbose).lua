@@ -17,6 +17,9 @@ function table.GetNew(entity, params)
     -- It's recommended to store component.data in a local data variable for ease of use
     local data = component.data;
 
+    -- You have to define in this hable your Update, LateUpdate, FixedUpdate, OnCollision, OnTrigger
+    local funcs = component.funcs;
+
     -- Entity has a direct access from transform
     -- Component have an entity access, component.entity but it's not recommended to use it outside methods
     -- as it could be nil, it's safer to use entity received from constructor
@@ -54,25 +57,18 @@ function table.GetNew(entity, params)
     function OnCollision(other) end;
     function OnTrigger(other) end;
 
-    -- callbacks, here you define update, lateUpdate,fixedUpdate, onCollisino and onTrigger
-    -- you should define here too custom functions, helper functions and any kind of function, data
-    -- can also store functions but you should keep that for... data, you know
-    local funcs = {};
-    
-
     -- Here you asign the functions you create, if you dont need a function
     -- then better dont asign it. In C++ it checks if the function is nil and
     -- if it is not it will call it, so it's better to leave it nil so it won't call an empty function
     -- which incurs a performance penalty. That's why only fuction.update is set
+
+    -- this is an example but you can create and assign the function directly by writing
+    -- funcs.update = function(deltaTime) end; 
     funcs.update = Update;
     -- funcs.lateUpdate = lateUpdate;
     -- funcs.fixedUpate = fixedUpdate;
     -- funcs.onTrigger = onTrigger;
 
-    -- Set the functions to the component, if you dont do this
-    -- your component will not have any functions, only data (which you may want in some case)
-    -- Call this methods after setting all functions or else it wont work
-    component:SetCallbacks(funcs);
     return component;
 end
 

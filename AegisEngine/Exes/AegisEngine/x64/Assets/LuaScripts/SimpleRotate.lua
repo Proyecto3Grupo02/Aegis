@@ -8,6 +8,7 @@ local table = { }
 function table.GetNew() 
     local component = Aegis.CreateComponent(NAME);
     data = component.data;
+    local funcs = component.funcs;
 
     -- data is a ref, you can't modify it after setting to component
     data.time = 0;
@@ -39,16 +40,8 @@ function table.GetNew()
 
     end;
 
-    function LateUpdate(deltaTime) end;
-    function FixedUpdate() end;
-    function OnCollision(other) end;
-    function OnTrigger(other) end;
-
-    local funcs = {};
     funcs.init = Init;
     funcs.update = Update;
-
-    component:SetCallbacks(funcs);
     return component;
 end
 

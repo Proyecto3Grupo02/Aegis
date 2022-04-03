@@ -19,7 +19,7 @@ public:
 	~Renderer() {};
 	void update(float dt) override {}
 	void render();
-	virtual void init(){};
+	virtual void init() override {};
 	void setRendering(bool iR);
 	bool getRendering() const;
 

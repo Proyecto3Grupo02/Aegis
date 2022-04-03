@@ -15,7 +15,7 @@ local scene = {
 					{
 						entity = "Rust",
 						components = {
-								"TestComponent", "SimpleRotate"
+								"TestComponent", "NonExistingComponent"
 						}
 					},
 					{
@@ -41,7 +41,8 @@ local scene = {
 			{
 				type = "TestComponent",
 				data = {
-					test2 = 1
+					test2 = 1,
+					test4 = 3
 				}
 			},
 			{

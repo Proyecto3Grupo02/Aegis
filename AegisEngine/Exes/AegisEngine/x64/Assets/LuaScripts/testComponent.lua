@@ -8,14 +8,19 @@ local table = { }
 function table.GetNew() 
     local component = Aegis.CreateComponent(NAME);
     local data = component.data;
+    local funcs = component.funcs;
 
-    -- data is a ref, you can't modify it after setting to component
+    -- this data can be overwritten in scene creation even if you
+    -- don't put the parameters in the GetNew function
     data.time = 0;
     data.test = 0;
     data.test2 = 0;
 
     function Init() 
-        print("Init");
+        -- notice how calling component.entity is safe here, but could use
+        -- constructor parameters too
+        local entName = component.entity:GetName();
+        print("Init: " .. component.name .. " from " .. entName);
     end;
 
     -- move entity with the keys, press h to print debug info
@@ -23,49 +28,45 @@ function table.GetNew()
         local num = 5;
         local transform = component.entity.transform;
 
-        if  Input:AnyKeyWasPressed() then
+        -- Comment the last line of this function and uncomment this
+        -- to control the entitiy with awsd keys and print debug info with h
+        -- if  Input:AnyKeyWasPressed() then
         
-            if Input:KeyWasPressed("h") then
-                print("Test value is " .. data.test);
-            elseif Input:KeyWasPressed("a") then
-                print("A key was pressed this frame in lua")
-                transform.position = Aegis.Maths.Vector3(-num,0, 0); 
-            elseif Input:KeyWasPressed("w") then
-                print("W key was pressed this frame in lua")
-                transform.position = Aegis.Maths.Vector3(0,num, 0); 
-            elseif Input:KeyWasPressed("s") then
-                print("S key was pressed this frame in lua")
-                transform.position = Aegis.Maths.Vector3(0,-num, 0); 
-            elseif Input:KeyWasPressed("d") then
-                print("D key was pressed this frame in lua")
-                transform.position = Aegis.Maths.Vector3(num,0, 0); 
-            end
-        end
+        --     if Input:KeyWasPressed("h") then
+        --         print("Test value is " .. data.test);
+        --     elseif Input:KeyWasPressed("a") then
+        --         print("A key was pressed this frame in lua")
+        --         transform.position = Aegis.Maths.Vector3(-num,0, 0); 
+        --     elseif Input:KeyWasPressed("w") then
+        --         print("W key was pressed this frame in lua")
+        --         transform.position = Aegis.Maths.Vector3(0,num, 0); 
+        --     elseif Input:KeyWasPressed("s") then
+        --         print("S key was pressed this frame in lua")
+        --         transform.position = Aegis.Maths.Vector3(0,-num, 0); 
+        --     elseif Input:KeyWasPressed("d") then
+        --         print("D key was pressed this frame in lua")
+        --         transform.position = Aegis.Maths.Vector3(num,0, 0); 
+        --     end
+        -- end
 
+        -- timer, be aware that compound operators don't exist in lua
         data.time = data.time + deltaTime;
         
         -- if time is bigger than 0 obtain meshRenderer and setvisible to false
         local meshRenderer = component.entity:GetComponent("Renderer").type;
 
+        -- the code below works, uncomment to see it in action
         -- if math.sin(data.time) > 0 then
         --     meshRenderer.visible = false;
         -- else
         --     meshRenderer.visible = true;
         -- end
 
-        -- Quit comment below to see the entity position changing
         transform.position = Aegis.Maths.Vector3(math.sin(data.time) * 10,0, 0); 
     end;
 
-    function LateUpdate(deltaTime) end;
-    function FixedUpdate() end;
-    function OnCollision(other) end;
-    function OnTrigger(other) end;
-
-    local funcs = {};
     funcs.update = Update;
 
-    component:SetCallbacks(funcs);
     return component;
 end
 

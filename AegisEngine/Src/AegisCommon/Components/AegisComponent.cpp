@@ -10,6 +10,7 @@ AegisComponent* CreateComponent(std::string componentName)
 
 void AegisComponent::init()
 {
+	setCallbacks(funcs);
 	CallLuaRefFunc(initFunc, 0);
 }
 
@@ -41,12 +42,12 @@ void AegisComponent::onTrigger(Entity* other)
 
 void AegisComponent::setCallbacks(LuaRef funcs)
 {
-	this->initFunc = funcs.rawget("init");
-	this->updateFunc = funcs.rawget("update");
-	this->lateUpdateFunc = funcs.rawget("lateUpdate");
-	this->fixedUpdateFunc = funcs.rawget("fixedUpdate");
-	this->onCollisionEnterFunc = funcs.rawget("onCollisionEnter");
-	this->onTriggerEnterFunc = funcs.rawget("onTriggerEnter");
+	this->initFunc = funcs["init"];
+	this->updateFunc = funcs["update"];
+	this->lateUpdateFunc = funcs["lateUpdate"];
+	this->fixedUpdateFunc = funcs["fixedUpdate"];
+	this->onCollisionEnterFunc = funcs["onCollisionEnter"];
+	this->onTriggerEnterFunc = funcs["onTriggerEnter"];
 }
 
 LuaRef AegisComponent::GetData() const
@@ -74,6 +75,16 @@ LuaRef AegisComponent::GetType() const
 	return type;
 }
 
+void AegisComponent::SetFuncs(LuaRef luaRef)
+{
+	funcs = luaRef;
+}
+
+LuaRef AegisComponent::GetFuncs() const
+{
+	return funcs;
+}
+
 
 void AegisComponent::SetData(LuaRef luaRef)
 {
@@ -86,8 +97,8 @@ void AegisComponent::ConvertToLua(lua_State* state)
 		beginNamespace("Aegis").
 		addFunction("CreateComponent", CreateComponent).
 		deriveClass<AegisComponent, Component>("Component").
-		addFunction("SetCallbacks", &AegisComponent::setCallbacks).
 		addProperty("data", &AegisComponent::GetData, &AegisComponent::SetData).
+		addProperty("funcs", &AegisComponent::GetFuncs, &AegisComponent::SetFuncs).
 		addProperty("external", &AegisComponent::GetExtenalData, &AegisComponent::SetExternalData).
 		addProperty("type", &AegisComponent::GetType, &AegisComponent::SetType).
 		endClass().

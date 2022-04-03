@@ -24,7 +24,7 @@ public:
 		//ComponentManager::getInstance()->RegisterComponent<Transform>("Transform");
 	};
 	virtual ~Transform() {}
-	virtual void init(){}
+	virtual void init() override {}
 	virtual void update(float deltaTime) override;
 	Vector3 GetPosition() const;
 	Quaternion GetRotation() const;
