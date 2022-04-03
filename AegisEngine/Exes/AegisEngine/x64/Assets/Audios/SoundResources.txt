@@ -1,2 +1,8 @@
 clin
 ./clin.wav
+plop
+./plop.mp3
+rodFlow
+./rodFlow.wav
+splashBig
+./splashBig.wav
