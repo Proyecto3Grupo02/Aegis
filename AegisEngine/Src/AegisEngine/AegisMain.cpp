@@ -27,6 +27,7 @@
 #include "../AegisCommon/Components/Transform.h"
 #include "../AegisCommon/Components/Renderer.h"
 #include "../AegisCommon/Utils/Quaternion.h"
+#include "../AegisAudio/SoundSystem.h"
 
 using namespace luabridge;
 
@@ -102,7 +103,8 @@ bool AegisMain::Init()
 	std::cout << '\n';
 
 	Input()->Init();
-	ConvertObjectToLua(); 
+	Audio()->Init();
+	ConvertObjectToLua();
 	luaManager->Execute("init.lua");
 	GameLoop();
 	return true;
@@ -112,7 +114,7 @@ void AegisMain::ConvertObjectToLua()
 {
 	auto state = luaManager->GetState();
 
-  	Scene::ConvertToLua(state);
+	Scene::ConvertToLua(state);
 	InputSystem::ConvertToLua(state);
 	SceneManager::ConvertToLua(state);
 	Entity::ConvertToLua(state);
