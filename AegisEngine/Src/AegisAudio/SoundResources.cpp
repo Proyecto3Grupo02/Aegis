@@ -4,9 +4,10 @@ SoundResources::SoundResources()
 {
 	std::fstream archivo;
 	std::string cancion;
-	archivo.open(rutaArchivo + "SoundResources.txt", std::ios::in);
+	std::string ruta = rutaArchivo + "SoundResources.txt";
+	archivo.open(ruta, std::ios::in);
 
-	if (!archivo) {
+	if (!archivo.is_open()) {
 		std::cout << "El archivo no existe" << std::endl;
 		Debug()->Log("El archivo no existe");
 		std::cerr << "Error de carga de archivo de audio";
@@ -29,7 +30,7 @@ SoundResources::SoundResources()
 				Debug()->Log("El archivo " + song + " no existe");
 			}
 
-			auto e = std::make_pair(song, path);
+			auto e = std::make_pair(song, rutaArchivo + path);
 
 			mapSound.insert(e);
 		}

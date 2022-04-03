@@ -35,18 +35,18 @@ function table.GetNew(entity, args)
         
             if Input:KeyWasPressed("h") then
                 print("Test value is " .. data.test);
-            elseif Input:KeyWasPressed("a") then
-                print("A key was pressed this frame in lua")
-                transform.position = Aegis.Maths.Vector3(-num,0, 0); 
-            elseif Input:KeyWasPressed("w") then
-                print("W key was pressed this frame in lua")
-                transform.position = Aegis.Maths.Vector3(0,num, 0); 
-            elseif Input:KeyWasPressed("s") then
-                print("S key was pressed this frame in lua")
-                transform.position = Aegis.Maths.Vector3(0,-num, 0); 
-            elseif Input:KeyWasPressed("d") then
-                print("D key was pressed this frame in lua")
-                transform.position = Aegis.Maths.Vector3(num,0, 0); 
+            -- elseif Input:KeyWasPressed("a") then
+            --     print("A key was pressed this frame in lua")
+            --     transform.position = Aegis.Maths.Vector3(-num,0, 0); 
+            -- elseif Input:KeyWasPressed("w") then
+            --     print("W key was pressed this frame in lua")
+            --     transform.position = Aegis.Maths.Vector3(0,num, 0); 
+            -- elseif Input:KeyWasPressed("s") then
+            --     print("S key was pressed this frame in lua")
+            --     transform.position = Aegis.Maths.Vector3(0,-num, 0); 
+            -- elseif Input:KeyWasPressed("d") then
+            --     print("D key was pressed this frame in lua")
+            --     transform.position = Aegis.Maths.Vector3(num,0, 0); 
             end
         end
 
@@ -63,7 +63,7 @@ function table.GetNew(entity, args)
         --     meshRenderer.visible = true;
         -- end
 
-        --transform.position = Aegis.Maths.Vector3(math.sin(data.time) * 10,0, 0); 
+        transform.position = Aegis.Maths.Vector3(math.sin(data.time) * 10,0, 0); 
     end;
 
     funcs.update = Update;

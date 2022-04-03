@@ -3,7 +3,7 @@
 #include "../AegisCommon/Utils/Vector4.h"
 #include "../AegisCommon/Managers/DebugManager.h"
 
-SoundSystem::SoundSystem() : system(nullptr), listener(nullptr), music(nullptr), soundEffects(nullptr)
+SoundSystem::SoundSystem() : system(nullptr), listener(nullptr), music(nullptr), soundEffects(nullptr), SR(new SoundResources())
 {
 	
 }

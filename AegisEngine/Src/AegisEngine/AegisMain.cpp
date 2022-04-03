@@ -36,8 +36,8 @@ void AegisMain::GameLoop() {
 	{
 		SDL_Event eventHandler;
 		uint32_t frameTimeMS = (uint32_t)floor((1 / TARGET_FRAME_RATE) * 1000);
-		//Audio()->playMusic("clin");
-		std::cout << '\n';
+
+		Audio()->playMusic("clin");
 		while (!exit)
 		{
 			//Tiempo al inicio del frame
@@ -99,7 +99,7 @@ AegisMain::~AegisMain() {
 /// <returns></returns>
 bool AegisMain::Init()
 {
-	Debug()->Log("Aegis loaded");
+	Debug()->Log("Aegis loaded\n");
 	std::cout << '\n';
 
 	Input()->Init();
