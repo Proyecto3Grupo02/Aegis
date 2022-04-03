@@ -1,45 +1,43 @@
 #include "SoundResources.h"
+using namespace std;
+#include <cstdio>
+#include <dirent.h>
 
 SoundResources::SoundResources()
 {
-	std::fstream archivo;
-	std::string cancion;
-	std::string ruta = rutaArchivo + "SoundResources.txt";
-	archivo.open(ruta, std::ios::in);
-
-	if (!archivo.is_open()) {
-		std::cout << "El archivo no existe" << std::endl;
-		Debug()->Log("El archivo no existe");
-		std::cerr << "Error de carga de archivo de audio";
-	}
-	else {
-		int i = 0;
-		while (!archivo.eof())
-		{
-			std::string song;
-			std::string path;
-
-			getline(archivo, song);
-			getline(archivo, path);
-			//rutaArchivo = ../../Exes/AegisEngine/x64/Assets/Audios
-			std::fstream todo;
-			todo.open(rutaArchivo + path, std::ios::in);
-
-			// Añadimos una comprobacion para saber si existe el archivo
-			if (!todo) {
-				Debug()->Log("El archivo " + song + " no existe");
-			}
-
-			auto e = std::make_pair(song, rutaArchivo + path);
-
-			mapSound.insert(e);
-		}
-	}
-	archivo.close();
+	ParseDirectory(rutaArchivo);
 }
 
 SoundResources::~SoundResources()
 {
+}
+
+void SoundResources::ParseDirectory(string dir)
+{
+	DIR *dirp;
+	struct dirent *dp;
+	dirp = opendir(dir.c_str());
+	if (dirp == NULL)
+	{
+		Debug()->Log("Error al abrir el directorio");
+		return;
+	}
+	while ((dp = readdir(dirp)) != NULL)
+	{
+		std::string file = dp->d_name;
+		std::string extension = file.substr(file.find_last_of(".") + 1);
+		if (extension == "wav" || extension == "ogg" || extension == "mp3")
+		{
+			std::string path = dir + file;
+			std::fstream todo;
+			todo.open(path, std::ios::in);
+			if (!todo) {
+				Debug()->Log("El archivo " + file + " no existe");
+			}
+			auto e = std::make_pair(file.substr(0, file.find_last_of(".")), path);
+			mapSound.insert(e);
+		}
+	}
 }
 
 std::string SoundResources::getSong(std::string song)

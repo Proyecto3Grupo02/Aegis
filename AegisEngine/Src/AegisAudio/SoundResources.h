@@ -18,6 +18,7 @@ class SoundResources
 public:
 	SoundResources();
 	~SoundResources();
+	void ParseDirectory(std::string dir);
 	std::string getSong(std::string song);
 private:
 	std::map<cancion,std::string> mapSound;
