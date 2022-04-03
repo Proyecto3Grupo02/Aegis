@@ -5,8 +5,8 @@ local NAME="SimpleRotate"
 local table = { }
 
 -- i dont need arguments here
-function table.GetNew() 
-    local component = Aegis.CreateComponent(NAME);
+function table.GetNew(entity, args) 
+    local component = Aegis.CreateComponent(NAME, entity);
     local data = component.data;
     local funcs = component.funcs;
 
@@ -29,7 +29,7 @@ function table.GetNew()
         -- the code below would work
         --component.data.time = 2;
 
-        -- notice how the print the same address, but component.data has different methamethods
+        -- notice how it's not the same address
         io.write("ComponentData: ") print(component.data)
         io.write("Local Data: ") print(data)
     end;

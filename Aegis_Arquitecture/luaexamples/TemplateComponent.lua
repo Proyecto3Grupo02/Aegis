@@ -1,16 +1,10 @@
 local NAME = "YourComponentName";
 local table = {};
 function table.GetNew(entity, params)
-	local component = Aegis.CreateComponent(NAME);
+	local component = Aegis.CreateComponent(NAME, entity);
 	local data = component.data;
 	local transform = entity.transform;
     local funcs = component.funcs;
-
-	if params ~= nil then
-		data = params;
-	else
-		data.time = 0;
-	end;
 
     function Init() end;
 	function Update(deltaTime) end;
@@ -18,7 +12,8 @@ function table.GetNew(entity, params)
 	function FixedUpdate() end;
 	function OnCollision(other) end;
 	function OnTrigger(other) end;
-	
+
+	funcs.init = Init;
     funcs.update = Update;
 	return component;
 end;

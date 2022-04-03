@@ -12,15 +12,13 @@ class Entity;
 
 class Transform : public AegisComponent, public ILuaObject {
 public:
-	Transform(Ogre::SceneNode* node) : AegisComponent(), position(Vector3()), rotation(Quaternion()), scale(Vector3(1.0f,1.0f,1.0f)), mNode(node) {
+	Transform(Ogre::SceneNode* node, Entity* ent) : AegisComponent("Transform", ent), position(Vector3()), rotation(Quaternion()), scale(Vector3(1.0f, 1.0f, 1.0f)), mNode(node) {
 		SetDataAsInnerType(this);
-		SetComponentName("Transform");
 		//ComponentManager::getInstance()->RegisterComponent<Transform>("Transform");
 	};
-	Transform( Vector3 _pos, Quaternion _rot, Vector3 _scale, Ogre::SceneNode* node) :
-			AegisComponent(), position(_pos), rotation(_rot), scale(_scale), mNode(node) {
+	Transform( Vector3 _pos, Quaternion _rot, Vector3 _scale, Ogre::SceneNode* node, Entity* ent) :
+			AegisComponent("Transform", ent), position(_pos), rotation(_rot), scale(_scale), mNode(node) {
 		SetDataAsInnerType(this);
-		SetComponentName("Transform");
 		//ComponentManager::getInstance()->RegisterComponent<Transform>("Transform");
 	};
 	virtual ~Transform() {}

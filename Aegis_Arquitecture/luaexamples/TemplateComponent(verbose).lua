@@ -1,4 +1,5 @@
 -- This name is the "type" of your component, you can use it to require it in other scripts
+-- It is also the name require fill search for.
 local NAME="YourComponentName"
 
 -- table for storing our component constructor
@@ -9,7 +10,7 @@ local table = { }
 -- But you may need a reference to entity in your component before that
 -- Params is the data that parse functions gives you to init your compoennt, it's assumed to be correct
 function table.GetNew(entity, params) 
-    local component = Aegis.CreateComponent(NAME);
+    local component = Aegis.CreateComponent(NAME, entity);
     
     -- Data for your script, you can have here anything, custom methods, int, other tables... Anything, it will
     -- be stored as a LuaRef in C++
@@ -41,20 +42,20 @@ function table.GetNew(entity, params)
         
 		-- this wont work, it wont give an error it will just be a useless asignment
         component.data = {}
+        component.data = params;
 
         -- this won't override component.data, but only the local field data
         -- i don't know why anyone would do this, just be aware of it
         data = {}
     end
 
-    -- This function is called when entity is added to scene, after all dependencies are resolved
+    -- This function is called once when entity is added to scene, after all dependencies are resolved
     -- Even if the entity is disabled the first frame, Init will be called
     function Init() end;
     function Update(deltaTime) 
         if  Input:anyKeyWasPressed() then
             if Input:keyWasPressed("a") then
-                -- You should use component.data instead of data
-                print("Test value is " .. component.data.test);
+                print("Test value is " .. data.test);
             end
         end
     end;

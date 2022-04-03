@@ -44,10 +44,15 @@ public:
 		std::string key = component->GetComponentName();
 
 		if (mComponents_.count(key) == 0) { //si no está lo añadimos
-			component->setEntity(this);
+			//component->SetEntity(this);
 
 			mComponentsArray_.push_back(component);
 			mComponents_[key] = component;
+		}
+		else
+		 {
+			std::cout << key << " is already in " << mName_ << ", component will be deleted";
+			delete component;
 		}
 	}
 
