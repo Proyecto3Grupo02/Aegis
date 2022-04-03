@@ -2,13 +2,16 @@
 #include "../Entity/Entity.h"
 
 AnimationComponent::AnimationComponent(Entity* _ent, Ogre::SceneManager* sceneMng,std::string nombre, int dur):
-	duracion(dur), enabled(false), loop(false)
+	duracion(dur)
 {
-	Ogre::Animation* animation = sceneMng->createAnimation(nombre, duracion);
+	animation = sceneMng->createAnimation(nombre, duracion);
 	nodeTrack = animation->createNodeTrack(0);
 	nodeTrack ->setAssociatedNode(_ent->getNode());
 	_ent->getNode()->setInitialState();
 	durFrame = duracion / numKeyFrames;
+	animationState = sceneMng->createAnimationState(nombre + "State");
+	animationState->setEnabled(false);
+	
 }
 
 
@@ -27,9 +30,14 @@ void AnimationComponent::addFrames(const std::vector<keyFrame>& frames) { //en e
 }
 
 void AnimationComponent::setLoop(bool isLoop) {
-	loop = isLoop;
+	animationState->setLoop(isLoop);
 }
 
 void AnimationComponent::setEnabled(bool isEnabled) {
-	enabled = isEnabled;
+	animationState->setEnabled(isEnabled);
+}
+
+void AnimationComponent::update(float dt)
+{
+	animationState->addTime(dt);
 }

@@ -17,12 +17,12 @@ struct keyFrame {
 class AnimationComponent : public AegisComponent {
 private: 
 	Ogre::Animation* animation;
+	Ogre::AnimationState* animationState;
 	Ogre::NodeAnimationTrack* nodeTrack;
 	Transform* entTransform;
 	int numKeyFrames;
 	double duracion, durFrame;
 	std::vector<keyFrame> frames;
-	bool loop, enabled;
 
 public:
 	AnimationComponent(Entity* _ent, Ogre::SceneManager* sceneMng, std::string nombre, int duracion);
