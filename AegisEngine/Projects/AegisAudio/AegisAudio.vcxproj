@@ -132,7 +132,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Src\AegisCommon\Components;$(SolutionDir)\Src\AegisCommon\Utils;$(SolutionDir)\Dependencias\fmod\inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Src\AegisCommon\Components;$(SolutionDir)\Src\AegisCommon\Utils;$(SolutionDir)\Dependencias\fmod\inc;$(SolutionDir)Dependencias\Lua\src\include;$(SolutionDir)\Dependencias\Libraries</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -155,7 +155,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Src\AegisCommon\Components;$(SolutionDir)\Src\AegisCommon\Utils;$(SolutionDir)\Dependencias\fmod\inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Src\AegisCommon\Components;$(SolutionDir)\Src\AegisCommon\Utils;$(SolutionDir)\Dependencias\fmod\inc;$(SolutionDir)Dependencias\Lua\src\include;$(SolutionDir)\Dependencias\Libraries</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

@@ -5,7 +5,7 @@
 #include <OgreRoot.h>
 #include <SDL.h>
 #include "../AegisCommon/Interfaces/IInitializable.h"
-#include "../../checkML.h" //BASURA
+ //BASURA
 
 class OgreWrapper : IInitializable
 {
@@ -28,6 +28,7 @@ public:
     bool Render();
     virtual ~OgreWrapper();
     bool Init() override;
+    Ogre::SceneNode* GetRootNode();
 };
 
 #endif

@@ -3,22 +3,24 @@
 #define COMPONENT_H
 
 #include <Ogre.h>
-#include "../../checkML.h" //BASURA
+#include "../Interfaces/ILuaObject.h"
 
-class Entity;
+struct Entity;
 
-class Component{
+class Component : public ILuaObject {
     public:
        Component();
+       Component(std::string componentName, Entity* entity);
+
        ~Component() {};
 
        inline Entity* getEntity() { return mEntity_; }
-       void setEntity(Entity* entity) { mEntity_ = entity; }
+       //void SetEntity(Entity* entity) { mEntity_ = entity; }
 
        virtual void init()=0;       
        virtual void fixedUpdate() {};
        virtual void update(float dt) {};
-       virtual void lateUpdate() {};
+       virtual void lateUpdate(float dt) {};
      
        virtual void render() {};
 
@@ -27,9 +29,34 @@ class Component{
 
        bool getActive() { return isActive_; }
        void setActive(bool active) { isActive_ = active; }
+
+       std::string GetComponentName() const { return componentName; };
+       void SetComponentNameLua(std::string name) 
+       { 
+           std::cout << "You can't override component name, but you can read it.";
+           std::cout << "Component name can only be ser through Aegis.CreateComponent\n";
+       };
+       void SetComponentName(std::string name)
+       {
+           this->componentName = name;
+       };
+
+       Entity* GetEntity() const 
+       { 
+           return mEntity_; 
+       };
+       void setEntityLua(Entity* entity)
+       { 
+           std::cout << "You can't override component entity, but you can read it.";
+           std::cout << "Component entity can only be ser through Aegis.CreateComponent\n";
+       };
+       
+       static void ConvertToLua(lua_State* state);
     private:
         Entity* mEntity_;
-        bool isActive_;        
+        bool isActive_;
+        std::string componentName;
+        
 };
 
 #endif // ! COMPONENT_H

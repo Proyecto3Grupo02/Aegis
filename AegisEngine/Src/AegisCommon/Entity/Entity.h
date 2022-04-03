@@ -3,90 +3,100 @@
 #define ENTITY_H
 
 #include "../Managers/ComponentManager.h"
-#include "../../checkML.h" //BASURA
+ //BASURA
 #include <Ogre.h>
 #include <vector>
 #include <list>
 #include <string>
+#include "../Managers/ComponentManager.h"
+#include "../Components/AegisComponent.h"
+#include <Ogre.h>
+#include "../Interfaces/ILuaObject.h"
 
 class Component;
 class Transform;
 class Scene;
+struct Vector3;
 
-class Entity{
-    public:
-        Entity(Ogre::SceneNode* node);
-        ~Entity();
+struct Entity : public ILuaObject {
+public:
+	Entity(Scene* node);
+	Entity(Scene* node, Vector3 pos);
+	~Entity();
 
-        void init();       
-        void fixedUpdate();
-        void update(float dt);
-        void lateUpdate();
+	void init();
 
-        void render();
+	void fixedUpdate();
+	void update(float dt);
+	void lateUpdate(float dt);
 
-        inline bool isActive(){return active_;}
-        inline void setActive(bool act){active_=act;}
-  
-        inline std::string getName(){return mName_;}
-        inline void setName(std::string name) { mName_ = name; }
+	void render();
+
+	inline bool isActive() { return active_; }
+	inline void setActive(bool act) { active_ = act; }
+
+	inline std::string getName() { return mName_; }
+	inline void setName(std::string name) { mName_ = name; }
 
 
-        inline Ogre::SceneNode* getNode() { return mNode_; }
+	inline Ogre::SceneNode* getNode() { return mNode_; }
+	inline void setNode(Ogre::SceneNode* node) { mNode_ = node; }
+	Entity* addChildEntity();
 
-        //handle the components
-       
-        template<typename T, typename...Targs>
-        inline T* addComponent(std::string name, Targs&&...args)
-        {
-            ComponentManager* mngr = ComponentManager::getInstance();
-            if (mngr != nullptr) {
-                //std::string key = mngr->GetID<T>(); //cuando un component esta registrado  pilla su id de ahi
+	inline void addComponentFromLua(AegisComponent* component) {
+		std::string key = component->GetComponentName();
 
-                //SOLUCIÓN PROVISIONAL EN LA QUE HAY QUE PASAR COMO PARÁMETRO EL NOMBRE DEL COMPONENTE,
-                //DEBERÍA DE FUNCIONAR CON EL KEY DE ENCIMA DE ESTE COMENTARIO
-                std::string key = name;
+		if (mComponents_.count(key) == 0) { //si no estï¿½ lo aï¿½adimos
+			//component->SetEntity(this);
 
-                if (mComponents_.find(key) == mComponents_.end()) { //si no está lo añadimos
-                    T* t = (new T(std::forward<Targs>(args)...));
-                    t->setEntity(this);
+			mComponentsArray_.push_back(component);
+			mComponents_[key] = component;
+		}
+		else
+		 {
+			std::cout << key << " is already in " << mName_ << ", component will be deleted";
+			delete component;
+		}
+	}
 
-                    mComponentsArray_.push_back(t);
-                    mComponents_[key] = t;
-                    return (T*)mComponents_[key];
-                }
-            }
-            return nullptr;
-        }
+	AegisComponent* getComponentLua(std::string componentName)
+	{
+		if (mComponents_.count(componentName) == 0)
+			return nullptr;
+		else return  mComponents_[componentName];
+	}
 
-        template<typename T>
-        inline T* getComponent() {
-            ComponentManager* cmpManager = ComponentManager::getInstance();
+	template <typename T>
+	inline T* getComponent(const char* componentName)
+	{
+		return dynamic_cast<T*>(getComponentLua(componentName));
+	}
 
-            std::string id = cmpManager->GetID<T>();
+	inline Scene* getScene() { return mScene_; }
+	inline void setScene(Scene* scene) { mScene_ = scene; }
+	//doubt
+	void onCollision(Entity* other);
+	void onTrigger(Entity* other);
 
-            return (T*)mComponents_[id];
-        }
+	Transform* GetTransform() const;
+	void SetTransform(Transform* transform);
 
-        inline Scene* getScene(){return mScene_;}
-        inline void setScene(Scene* scene){mScene_= scene;}
-        //doubt
-        void receiveEvent(Entity* receive);
-        bool hasComponent(unsigned int cmpID);
-        void onCollision(Entity* other); 
-        void onTrigger(Entity* other);
+	static void ConvertToLua(lua_State* state);
+protected:
+	Scene* mScene_; //scene pointer 
+	std::unordered_map <std::string, AegisComponent*> mComponents_; //list of all the components in scene
+	std::vector<AegisComponent*> mComponentsArray_; //list of all the components in scene
+	bool active_; //bool to check if the entity is active or not
 
-    protected:
-        Scene* mScene_; //scene pointer 
-        std::map<std::string, Component*> mComponents_; //list of all the components in scene
-       std::vector<Component*> mComponentsArray_; //list of all the components in scene
-        std::list<int> mNumOfActiveComponents_; //list of the index of their active component 
-        bool active_; //bool to check if the entity is active or not
+	Ogre::SceneNode* mNode_;
 
-        Ogre::SceneNode* mNode_;
+	std::list<Entity*> mChildren_;
 
-    private:
-        std::string mName_; //name of the entity, works like a tag, useful to debug
+
+private:
+	std::string mName_; //name of the entity, works like a tag, useful to debug
+	Transform* transform;
+
 };
 
 #endif //

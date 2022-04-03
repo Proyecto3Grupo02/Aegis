@@ -4,7 +4,6 @@
 #define LUA_MANAGER
 #include "../../AegisCommon/Utils/Singleton.h"
 #include "../Utils/LuaBasic.h"
-#include "../../checkML.h" //BASURA
 
 //EXPLICACION LUA (29 de marzo): 
 //* EN \Exes\AegisEngine\x64\Assets\LuaScripts teneis archivos LUA. 
@@ -22,11 +21,19 @@ public:
 	void Execute(const char* filename);
 	void PrintError(lua_State* state);
 	void RegisterFunction(lua_CFunction function, const char* functionName);
-
+	lua_State* GetState();
+	int setLuaPath(lua_State* L, const char* path);
+	luabridge::LuaRef GetSharedEmptyLuaRef();
+	luabridge::LuaRef GetNewEmptyTable();
 private:
-	void RegisterFunctionsToLua();
 	lua_State* state;
+	luabridge::LuaRef empty = luabridge::LuaRef(state);
 };
+
+inline LuaManager* LuaMngr()
+{
+	return LuaManager::getInstance();
+}
 
 
 #endif

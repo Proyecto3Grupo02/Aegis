@@ -102,7 +102,22 @@
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Scripting.h">
       <Filter>Archivos de encabezado\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Components\AnimationComponent.h">
+    <ClInclude Include="..\..\Src\AegisCommon\Interfaces\ILuaObject.h">
+      <Filter>Archivos de encabezado\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisCommon\Utils\Quaternion.h">
+      <Filter>Archivos de encabezado\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisCommon\Components\LightComponent.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisCommon\Utils\MathUtils.h">
+      <Filter>Archivos de encabezado\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisCommon\Utils\Randomized.h">
+      <Filter>Archivos de encabezado\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisCommon\Components\CameraComponent.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
   </ItemGroup>
@@ -140,7 +155,13 @@
     <ClCompile Include="..\..\Src\AegisCommon\Utils\Vector4.cpp">
       <Filter>Archivos de origen\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\AegisCommon\Components\AnimationComponent.cpp">
+    <ClCompile Include="..\..\Src\AegisCommon\Components\AegisComponent.cpp">
+      <Filter>Archivos de origen\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AegisCommon\Components\LightComponent.cpp">
+      <Filter>Archivos de origen\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AegisCommon\Components\CameraComponent.cpp">
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
   </ItemGroup>

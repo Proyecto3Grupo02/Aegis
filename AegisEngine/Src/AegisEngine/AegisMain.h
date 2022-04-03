@@ -4,7 +4,7 @@
 #define AEGIS_MAIN_H
 
 #include "../AegisCommon/Interfaces/IInitializable.h" //Da error en el cpp
-#include "../checkML.h"
+
 
 class OgreWrapper;
 class SceneManager;
@@ -22,15 +22,15 @@ private:
     bool exit;
     //uint32_t frameTimeMS;
 
-    void GameLoop();
-public:
-    AegisMain();
-    virtual ~AegisMain();
-    virtual bool Init() override;
+        void GameLoop();
+        void ConvertObjectToLua();
+    public:
+        AegisMain();
+        virtual ~AegisMain();
+        virtual bool Init() override;
 
-    const float TARGET_FRAME_RATE = 60.0f;
-};
-
+        const float TARGET_FRAME_RATE = 60.0f;
+    };
 #endif //
 
 
