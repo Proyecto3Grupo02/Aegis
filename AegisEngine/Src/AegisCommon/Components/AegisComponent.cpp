@@ -1,11 +1,9 @@
 #include "AegisComponent.h"
 #include "../Entity/Entity.h"
 
-AegisComponent* CreateComponent(std::string componentName)
+AegisComponent* CreateComponent(std::string componentName, Entity* entity)
 {
-	AegisComponent* e = new AegisComponent();
-	e->SetComponentName(componentName);
-	return e;
+	return new AegisComponent(componentName, entity);
 }
 
 
@@ -58,7 +56,7 @@ void AegisComponent::setCallbacks(LuaRef funcs)
 void AegisComponent::SetData(LuaRef luaRef)
 {
 	//this function only exist to make data a parameter, but you can't overwrite data table
-	std::cout << "You can't override this table with another one, but you can modify its field\n";
+	PrintErrorModifyingTables("data", "table", true);
 }
 
 LuaRef AegisComponent::GetData() const
@@ -68,7 +66,7 @@ LuaRef AegisComponent::GetData() const
 
 void AegisComponent::SetExternalData(LuaRef luaRef)
 {
-	std::cout << "You can't override this table with another one, but you can modify its field\n";
+	PrintErrorModifyingTables("external", "table", true);
 }
 
 LuaRef AegisComponent::GetExtenalData() const
@@ -83,7 +81,7 @@ void AegisComponent::SetType(LuaRef luaRef)
 
 void AegisComponent::SetTypeLua(LuaRef luaRef)
 {
-	std::cout << "You can't override this userdata with another one, but you can read it\n";
+	PrintErrorModifyingTables("type", "userdata", false);
 }
 
 LuaRef AegisComponent::GetType() const
@@ -94,7 +92,7 @@ LuaRef AegisComponent::GetType() const
 void AegisComponent::SetFuncs(LuaRef luaRef)
 {
 	//this function only exist to make data a parameter, but you can't overwrite funcs table
-	std::cout << "You can't override this table with another one, but you can modify its field\n";
+	PrintErrorModifyingTables("funcs", "table", true);
 }
 
 LuaRef AegisComponent::GetFuncs() const
@@ -114,4 +112,13 @@ void AegisComponent::ConvertToLua(lua_State* state)
 		addProperty("type", &AegisComponent::GetType, &AegisComponent::SetTypeLua).
 		endClass().
 		endNamespace();
+}
+
+void AegisComponent::PrintErrorModifyingTables(std::string fieldName, std::string typeName, bool modifiableFields)
+{
+#if defined _DEBUG
+	std::string modifiable = modifiableFields ? "but you can modify its field\n" : "but you can read it\n";
+	std::cout << "Error on " << getEntity()->getName() << " " << GetComponentName() << "." << fieldName << ": ";
+	std::cout << "You can't override this " << typeName << " with another one, " << modifiable;
+#endif
 }

@@ -5,8 +5,8 @@ local NAME="TestComponent"
 local table = { }
 
 -- i dont need arguments here
-function table.GetNew() 
-    local component = Aegis.CreateComponent(NAME);
+function table.GetNew(entity, args) 
+    local component = Aegis.CreateComponent(NAME, entity);
     local data = component.data;
     local funcs = component.funcs;
 

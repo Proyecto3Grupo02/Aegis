@@ -8,21 +8,19 @@
 
 
 Renderer::Renderer(Entity* _ent, std::string meshName, Ogre::SceneManager* sceneMng, bool ir) :
-	AegisComponent()
+	AegisComponent("Renderer", _ent)
 {
 	data["mesh"] = "fish.mesh";
 	isVisible = ir;
-	SetComponentName("Renderer");
 	SetDataAsInnerType(this);
 	constructoraRenderer(_ent, meshName, sceneMng, ir);
 }
 
 Renderer::Renderer(Entity* _ent, std::string meshName) :
-	AegisComponent()
+	AegisComponent("Renderer", _ent)
 {
 	data["mesh"] = "fish.mesh";
 	isVisible = true;
-	SetComponentName("Renderer");
 	SetDataAsInnerType(this);
 	constructoraRenderer(_ent, meshName, _ent->getNode()->getCreator(), true);
 }
@@ -57,7 +55,6 @@ Renderer* CreateRenderer(Entity* _ent, std::string meshName)
 
 void Renderer::constructoraRenderer(Entity* _ent, std::string meshName, Ogre::SceneManager* sceneMng, bool ir)
 {
-	setEntity(_ent);
 	mesh = sceneMng->createEntity(meshName);
 	node = getEntity()->getNode();
 	node->attachObject(mesh);

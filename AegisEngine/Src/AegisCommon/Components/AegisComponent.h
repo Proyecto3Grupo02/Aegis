@@ -13,6 +13,7 @@ struct Entity;
 class	AegisComponent : public Component, public ILuaObject {
 public:
 	AegisComponent() : Component() {}
+	AegisComponent(std::string componentName, Entity* entity) : Component(componentName, entity) {}
 	~AegisComponent() {}
 	virtual void init() override;
 	virtual void update(float dt) override;
@@ -41,6 +42,8 @@ public:
 
 	template <class T>
 	void CallLuaRefFunc(LuaRef func, T args = 0);
+	// Soy consciente de que todos los cout deberían llamarse desde otro lado, pero por ahora aqui
+	void PrintErrorModifyingTables(std::string fieldName, std::string typeName, bool modifiableFields);
 protected:
 	LuaRef data =LuaMngr()->GetNewEmptyTable();
 private:
