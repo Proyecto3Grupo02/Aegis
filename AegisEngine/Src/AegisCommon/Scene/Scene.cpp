@@ -2,30 +2,29 @@
 #include "Entity.h"
 #include "Scripting.h"
 
-extern "C" int lua_AddEntity(lua_State * state){
-	//Scene* currentScene;
-	//Entity* entity;
+using namespace luabridge;
 
-	//Get parameters from stack
-	//currentScene = LuaManager::getInstance().GetFromStack<Scene*>();
-	//entity= LuaManager::getInstance().GetFromStack<Entity*>();
+void Scene::InitEntities()
+{
+	for (Entity* entity : *uninitializedEntities)
+	{
+		entity->init();
+	}
 
-	//Call function
-	//currentScene->AddEntity(entity);
-
-	return 1;
+	uninitializedEntities->clear();
 }
 
 // Es posible que aqui queramos inicializar una escena de ogre y sincronizarla con las entidades
-Scene::Scene() : 
-	accumulator(0), entities(new std::list<Entity*>()), entitiesToDelete(std::list<std::list<Entity*>::iterator>()) 
+Scene::Scene(Ogre::SceneNode* ogreNode) :
+	accumulator(0), entities(new std::list<Entity*>()), entitiesToDelete(std::list<std::list<Entity*>::iterator>()) , ogreNode(ogreNode), uninitializedEntities(new std::list<Entity*>())
 {
-	LuaManager::getInstance()->RegisterFunction(lua_AddEntity, "AddEntity");
 }
 
 Scene::~Scene() {
 	for (Entity* entity : *entities)
+	{
 		delete entity;
+	}
 
 	delete this->entities;
 
@@ -44,7 +43,9 @@ void Scene::RemoveAndFreePendingEntities() {
 	this->entitiesToDelete.clear();
 }
 
-void Scene::AddEntity(Entity* entity) {
+void Scene::AddEntity(Entity* entity)
+{
+	this->uninitializedEntities->push_back(entity);
 	this->entities->push_back(entity);
 }
 
@@ -69,7 +70,7 @@ void Scene::Update(float dt) {
 
 void Scene::LateUpdate(float dt) {
 	for (Entity* entity : *entities)
-		entity->lateUpdate();
+		entity->lateUpdate(dt);
 }
 
 void Scene::UpdateScene(float dt) {
@@ -79,7 +80,7 @@ void Scene::UpdateScene(float dt) {
 	//double current = getCurrentTime();
 	//double elapsed = current - previousFrameTime;
 	//previousFrameTime = current;
-
+	InitEntities();
 	FixedUpdate(dt);
 	Update(dt);
 	LateUpdate(dt);
@@ -88,4 +89,22 @@ void Scene::UpdateScene(float dt) {
 
 void Scene::Render()
 {
+	for (Entity* entity : *entities)
+		entity->render();
+}
+
+//the ogreNode usually is the root scene node so we add this node as a child one
+Ogre::SceneNode* Scene::GetOgreNode()
+{
+	return ogreNode->createChildSceneNode(); 
+}
+
+void Scene::ConvertToLua(lua_State* state)
+{
+	getGlobalNamespace(state).
+		beginNamespace("Aegis").
+			beginClass<Scene>("Scene").
+				addFunction("AddEntity", &Scene::AddEntity).
+			endClass().
+		endNamespace();
 }

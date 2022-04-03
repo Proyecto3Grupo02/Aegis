@@ -1,4 +1,5 @@
 #include "InputManager.h"
+#include <iostream>
 
 InputSystem::InputSystem() {
 
@@ -15,15 +16,19 @@ void InputSystem::Init() {
 
 void InputSystem::UpdateState() {
 	for (int i = 0; i < keyNums; i++) {
-		keys[i].releasedThisFrame = false;
+		keys[i].wasReleased = false;
 	}
+
+	KEY_WAS_PRESSED = false;
+	KEY_WAS_RELEASED = false;
+	KEY_DOWN = false;
 }
 
 void InputSystem::ClearState() {
 	for (int i = 0; i < keyNums; i++) {
-		keys[i].pressedThisFrame = false;
+		keys[i].wasPressed = false;
 		keys[i].down = false;
-		keys[i].releasedThisFrame = false;
+		keys[i].wasReleased = false;
 	}
 }
 
@@ -36,35 +41,87 @@ int InputSystem::getId(SDL_Keycode key) {
 void InputSystem::OnKeyDown(SDL_Keycode key) {
 	int i = getId(key);
 
-	if (!keys[i].pressedThisFrame)
-		keys[i].pressedThisFrame = true;
-	else
-	{
+	//SE PULSA POR PRIMERA VEZ
+	if (!keys[i].wasPressed && !keys[i].down) {
+		//std::cout << "111111\n";
+		keys[i].wasPressed = true;
+		KEY_WAS_PRESSED = true;
+	}		
+
+	//YA ESTBA PULSADA ==> QUEREMOS MANTENERLA
+	else { 
+		//std::cout << "22222222222222\n";
 		keys[i].down = true;
-		keys[i].pressedThisFrame = false;
+		keys[i].wasPressed = false;
+		KEY_DOWN = true;
 	}
 }
 
 void InputSystem::OnKeyUp(SDL_Keycode key) {
+	//std::cout << "33333333333\n";
 	int i = getId(key);
-	keys[i].pressedThisFrame = false;
+	keys[i].wasPressed = false;
 	keys[i].down = false;
-	keys[i].releasedThisFrame = true;
+	keys[i].wasReleased = true;
+	KEY_WAS_RELEASED = true;
+}
+
+//CONSULTA GLOBAL----------------------------
+bool InputSystem::oneKeyWasPressed() {
+	return KEY_WAS_PRESSED;
+}
+
+bool InputSystem::oneKeyIsDown()
+{
+	return KEY_DOWN;
+}
+
+bool InputSystem::oneKeyWasReleased()
+{
+	return KEY_WAS_RELEASED;
 }
 
 //CONSULT KEY STATE------------------------------------------------------------
+bool InputSystem::keyWasPressed(SDL_Keycode key) {
+	int i = getId(key);
+	return keys[i].wasPressed;
+}
+
 bool InputSystem::isKeyDown(SDL_Keycode key) {
 	int i = getId(key);
 	return keys[i].down;
 }
 
-bool InputSystem::isKeyPressedThisFrame(SDL_Keycode key) {
+bool InputSystem::keyWasReleased(SDL_Keycode key) {
 	int i = getId(key);
-	return keys[i].pressedThisFrame;
+	return keys[i].wasReleased;
 }
 
-bool InputSystem::isKeyUp(SDL_Keycode key) {
-	int i = getId(key);
-	return keys[i].releasedThisFrame;
+//LUA-----------------------------------------------------
+bool InputSystem::keyWasPressedLua(const char* key) {
+	return keyWasPressed(SDL_GetKeyFromName(key));
+}
+
+bool InputSystem::isKeyDownLua(const char* key) {
+	return isKeyDown(SDL_GetKeyFromName(key));
+}
+
+bool InputSystem::keyWasReleasedLua(const char* key) {
+	return keyWasReleased(SDL_GetKeyFromName(key));
+}
+
+void InputSystem::ConvertToLua(lua_State* state)
+{
+	getGlobalNamespace(state).
+		beginNamespace("Aegis").
+			beginClass<InputSystem>("InputSystem").
+				addFunction("KeyWasPressed", &InputSystem::keyWasPressedLua).
+				addFunction("IsKeyDown", &InputSystem::isKeyDownLua).
+				addFunction("KeyWasReleased", &InputSystem::keyWasReleasedLua).
+				addFunction("AnyKeyWasPressed", &InputSystem::oneKeyWasPressed).
+				addFunction("AnyKeyIsDown", &InputSystem::oneKeyIsDown).
+				addFunction("AnyKeyWasReleased", &InputSystem::oneKeyWasReleased).
+			endClass().
+		endNamespace();
 }
 

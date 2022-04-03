@@ -3,15 +3,19 @@
 #define SCENE_H
 
 #include <list>
-#include "../../checkML.h" //BASURA
+#include "../Interfaces/ILuaObject.h"
+#include <Ogre.h>
 
 class Entity;
-class Scene
+class SceneNode;
+
+class Scene : public ILuaObject
 {
 private:
 	std::list<Entity*>* entities;
+	std::list<Entity*>* uninitializedEntities;
 	std::list<std::list<Entity*>::iterator> entitiesToDelete;
-
+	Ogre::SceneNode* ogreNode;
 	// Fixed Update arguments
 
 	// Este parametro quizas sea mejor a la clase application cuando la tengamos
@@ -67,8 +71,14 @@ private:
 	/// </summary>
 	/// <param name="dt">deltaTime</param>
 	void LateUpdate(float dt);
+
+	/// <summary>
+	/// Calls entity.init for every entity that has been added in the first frame
+	/// This allows to call "awake" for entities that are added in runtime
+	/// </summary>
+	void InitEntities();
 public:
-	Scene();
+	Scene(Ogre::SceneNode* ogreNode);
 
 	~Scene();
 
@@ -99,6 +109,10 @@ public:
 	void UpdateScene(float dt);
 	
 	void Render();
+
+	Ogre::SceneNode* GetOgreNode();
+
+	static void ConvertToLua(lua_State* state);
 };
 
 #endif

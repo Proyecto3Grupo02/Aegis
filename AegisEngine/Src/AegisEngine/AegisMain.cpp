@@ -22,18 +22,20 @@
 #include "../AegisScripting/Manager/LuaManager.h"
 #include "../AegisCommon/Scene/Scene.h"
 #include "../AegisCommon/Utils/GameLoopData.h"
+#include "../AegisCommon/Entity/Entity.h"
+#include "../AegisCommon/Components/AegisComponent.h"
+#include "../AegisCommon/Components/Transform.h"
+#include "../AegisCommon/Components/Renderer.h"
+#include "../AegisCommon/Utils/Quaternion.h"
+
+using namespace luabridge;
 
 void AegisMain::GameLoop() {
-	std::cout << '\n';
-	Debug()->Log("Aegis loaded");
-	luaManager->Execute("template.lua");
-	luaManager->Execute("callHowdy.lua");
-
 	while (!exit)
 	{
 		SDL_Event eventHandler;
 		uint32_t frameTimeMS = (uint32_t)floor((1 / TARGET_FRAME_RATE) * 1000);
-
+		//Audio()->playMusic("clin");
 		std::cout << '\n';
 		while (!exit)
 		{
@@ -70,19 +72,17 @@ void AegisMain::GameLoop() {
 
 			// Actualiza deltaTime y timeSinceSceneStart
 			gameLoopData->UpdateTimeRegistry(SDL_GetTicks());
-
-			std::cout << "a key is down: " << Input()->isKeyDown(SDLK_a) << "a key is pressedThis: ";
-			std::cout << Input()->isKeyPressedThisFrame(SDLK_a) << "a key is released: " << Input()->isKeyUp(SDLK_a);
-			std::cout << "\r";
 		}
 	}
 }
 
 AegisMain::AegisMain() : IInitializable() {
-	luaManager = new LuaManager();
+	luaManager = LuaManager::getInstance();
 	ogreWrap = new OgreWrapper();
+	ogreWrap->Init();
+
 	gameLoopData = new GameLoopData();
-	sceneManager = new SceneManager("NombreScena");
+	sceneManager = new SceneManager(new Scene(ogreWrap->GetRootNode()));
 	exit = (false);
 }
 
@@ -96,10 +96,44 @@ AegisMain::~AegisMain() {
 /// Inicializa todos los wrappers (Ogre, Input, Imgui...)
 /// </summary>
 /// <returns></returns>
-bool AegisMain::Init() {
-	Input()->Init();
-	ogreWrap->Init();
-	GameLoop();
+bool AegisMain::Init()
+{
+	Debug()->Log("Aegis loaded");
+	std::cout << '\n';
 
+	Input()->Init();
+	ConvertObjectToLua(); 
+	luaManager->Execute("init.lua");
+	GameLoop();
 	return true;
-} 
+}
+
+void AegisMain::ConvertObjectToLua()
+{
+	auto state = luaManager->GetState();
+
+  	Scene::ConvertToLua(state);
+	InputSystem::ConvertToLua(state);
+	SceneManager::ConvertToLua(state);
+	Entity::ConvertToLua(state);
+	Component::ConvertToLua(state);
+	AegisComponent::ConvertToLua(state);
+
+	Transform::ConvertToLua(state);
+	Vector3::ConvertToLua(state);
+	Vector4::ConvertToLua(state);
+	Quaternion::ConvertToLua(state);
+	Renderer::ConvertToLua(state);
+
+	//push(state, true);
+	//lua_setglobal(state, "true");
+	//
+	//push(state, false);
+	//lua_setglobal(state, "false");
+
+	push(state, sceneManager->GetCurrentScene());
+	lua_setglobal(state, "currentScene");
+
+	push(state, Input());
+	lua_setglobal(state, "Input");
+}

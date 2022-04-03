@@ -6,9 +6,8 @@
 #include "../Utils/Singleton.h"
 #include "../Interfaces/IInitializable.h"
 #include "../Utils/Vector3.h"
-#include "../../checkML.h" //BASURA
+ //BASURA
 #include <string>
-#include <OgreManualObject.h>
 #include<vector>
 
 class DebugManager: public Singleton<DebugManager>, public IInitializable{
@@ -28,12 +27,11 @@ public:
     //shows delta time, num of entities... 
     void showInfo();
 
-    void drawLine(Vector3 origin, Vector3 end, Vector3 color);
+    
 
     bool Init();
 
 protected:
-    Ogre::ManualObject* mLines_;
 };
 
 inline DebugManager* Debug() {

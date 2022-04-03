@@ -11,6 +11,7 @@
 #include <OgreSceneNode.h>
 
 #include <SDL_syswm.h>
+#include <OgreLogManager.h>
 
 OgreWrapper::OgreWrapper() : mRoot(0),
 mResourcesCfg(Ogre::BLANKSTRING),
@@ -33,6 +34,13 @@ bool OgreWrapper::Init() {
 
 	mResourcesCfg = "resources.cfg";
 	mPluginsCfg = "plugins.cfg";
+
+	Ogre::LogManager* lm = new Ogre::LogManager();
+	bool writeInConsole = false;
+	#if defined _DEBUG
+		writeInConsole = true;
+	#endif
+	lm->createLog("./Logs/AegisOgreLog.txt", true, false, false);
 
 	mRoot = new Ogre::Root(mPluginsCfg);
 
@@ -73,8 +81,8 @@ bool OgreWrapper::Init() {
 	Ogre::SceneNode* ogreCam = mSceneMgr->getRootSceneNode()->createChildSceneNode();
 	mCamera = mSceneMgr->createCamera("MainCam");
 	ogreCam->attachObject(mCamera);
-	ogreCam->setPosition(0, 0, 20);
-	ogreCam->lookAt(Ogre::Vector3(0, 0, -300), Ogre::Node::TS_WORLD);
+	ogreCam->setPosition(0, 0, 10);
+	//ogreCam->lookAt(Ogre::Vector3(0, 0, -300), Ogre::Node::TS_WORLD);
 	mCamera->setNearClipDistance(5);
 
 	//viewPort
@@ -99,7 +107,14 @@ bool OgreWrapper::Init() {
 	//Scene's lightning
 }
 
-void OgreWrapper::CreateWindowNative() {
+Ogre::SceneNode* OgreWrapper::GetRootNode()
+{
+	return mSceneMgr->getRootSceneNode()->createChildSceneNode();
+}
+
+
+void OgreWrapper::CreateWindowNative()
+{
 	mRoot->restoreConfig();
 	mRoot->initialise(false);
 

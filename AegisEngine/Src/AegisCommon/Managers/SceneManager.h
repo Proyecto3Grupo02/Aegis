@@ -3,21 +3,23 @@
 #define SCENE_MANAGER_H
 
 #include <string>
-#include "../../checkML.h" //BASURA
+#include "../Interfaces/ILuaObject.h"
 
 class Scene;
 
-class SceneManager
+class SceneManager : public ILuaObject
 {
 private:
 	Scene* currentScene;
 	void LoadScene(std::string sceneName);
 public:
-	SceneManager(std::string sceneName);
+	SceneManager(Scene* scene);
 	~SceneManager();
 
 	void UpdateCurrentScene(float deltaTime);
 	void RenderCurrentScene();
 	void ChangeScene(std::string sceneName);
+	Scene* GetCurrentScene();
+	static void ConvertToLua(lua_State* state);
 };
 #endif
