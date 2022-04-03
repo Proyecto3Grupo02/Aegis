@@ -4,14 +4,15 @@
 #define SOUND_EMITTER_H
 
 
-#include "AegisComponent.h"
 #include "SoundSystem.h"
 //namespace FMOD{
 //	class Channel;
 //}
 typedef FMOD::Channel Channel;
 
-class SoundEmitter : public AegisComponent
+struct Vector3;
+
+class SoundEmitter
 {
 
 private:
@@ -20,7 +21,7 @@ private:
 	float volume;
 
 public:
-	SoundEmitter(Entity* entity);
+	SoundEmitter();
 	virtual ~SoundEmitter();
 
 	void playSound(const std::string& soundName, bool reverb = false);
@@ -38,9 +39,11 @@ public:
 	void setPitch(float pitch, const std::string& sound);
 
 	bool isPlaying(const std::string& soundName) const;
+	void setPos(Vector3 position);
 
 private:
 	void setUpChannel(Channel* channel, bool reverb);
+	Vector3 pos;
 
 protected:
 	//std::vector<std::pair<std::string, std::string>> properties;

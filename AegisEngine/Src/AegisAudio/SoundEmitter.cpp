@@ -1,18 +1,14 @@
 #include "SoundEmitter.h"
 
-#include "../AegisCommon/Entity/Entity.h"
-#include "../AegisCommon/Managers/ComponentManager.h"
 #include "../AegisCommon/Managers/DebugManager.h"
-#include "../AegisCommon/Components/Transform.h"
+#include "../AegisCommon/Utils/Vector3.h"
 #include <fmod.hpp>
 
-SoundEmitter::SoundEmitter(Entity *entity) : AegisComponent(), emitterData(nullptr), pitch(0.0f), volume(0.0f)
+SoundEmitter::SoundEmitter() : emitterData(nullptr), pitch(0.0f), volume(0.0f)
 {
 	SoundSystem* soundSystem = SoundSystem::getInstance();
-	Transform* tr = entity->getComponent<Transform>();
-	Vector3 v3 = tr->GetPosition();
-	const Vector3* v = &v3;
-	emitterData = soundSystem->createEmitter(v);
+	this->pos = Vector3(0);
+	emitterData = soundSystem->createEmitter(&pos);
 	pitch = 1.0f;
 	volume = 1.0f;
 }
@@ -26,6 +22,7 @@ SoundEmitter::~SoundEmitter()
 void SoundEmitter::playSound(const std::string& soundName, bool reverb)
 {
 	stop(soundName);
+	emitterData->position = &pos;
 	emitterData->channels[soundName]->channel = SoundSystem::getInstance()->playSound(soundName);
 	setUpChannel(emitterData->channels[soundName]->channel, reverb);
 }
@@ -33,6 +30,7 @@ void SoundEmitter::playSound(const std::string& soundName, bool reverb)
 void SoundEmitter::playMusic(const std::string& soundName, bool reverb)
 {
 	stop(soundName);	
+	emitterData->position = &pos;
 	emitterData->channels[soundName]->channel = SoundSystem::getInstance()->playMusic(soundName);
 	setUpChannel(emitterData->channels[soundName]->channel, reverb);
 }
@@ -129,6 +127,11 @@ bool SoundEmitter::isPlaying(const std::string& soundName) const
 	if (it != emitterData->channels.end())
 		(*it).second->channel->isPlaying(&playing);
 	return playing;
+}
+
+void SoundEmitter::setPos(Vector3 position)
+{
+	this->pos = position;
 }
 
 void SoundEmitter::setUpChannel(Channel* soundChannel, bool reverb)

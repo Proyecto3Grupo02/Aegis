@@ -8,7 +8,6 @@
 #include "../Utils/Vector3.h"
 #include "../../checkML.h" //BASURA
 #include <string>
-#include <OgreManualObject.h>
 #include<vector>
 
 class DebugManager: public Singleton<DebugManager>, public IInitializable{
@@ -33,7 +32,6 @@ public:
     bool Init();
 
 protected:
-    Ogre::ManualObject* mLines_;
 };
 
 inline DebugManager* Debug() {

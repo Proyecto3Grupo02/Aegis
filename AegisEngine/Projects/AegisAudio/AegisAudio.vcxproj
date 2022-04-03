@@ -25,6 +25,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\AegisAudio\SoundEmitter.cpp" />
+    <ClCompile Include="..\..\Src\AegisAudio\SoundResources.cpp" />
     <ClCompile Include="..\..\Src\AegisAudio\SoundSystem.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -49,13 +50,13 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -137,8 +138,14 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)\Exes\AegisCommon\$(PlatformShortName)\$(Configuration);$(SolutionDir)\Dependencias\fmod\lib\$(PlatformShortName)\$(Arch)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(SolutionDir)Dependencias\fmod\core\lib\x64\fmodL_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)Dependencias\fmod\lib\$(PlatformShortName)\fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <Lib>
+      <AdditionalDependencies>$(SolutionDir)Dependencias\fmod\lib\$(PlatformShortName)\fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)\Exes\AegisCommon\$(PlatformShortName)\$(Configuration);$(SolutionDir)\Dependencias\fmod\lib\$(PlatformShortName)\$(Arch);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -155,9 +162,15 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)Dependencias\fmod\core\lib\x64\fmod_vc.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)Dependencias\fmod\lib\$(PlatformShortName)\fmod_vc.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)\Exes\AegisCommon\$(PlatformShortName)\$(Configuration);$(SolutionDir)\Dependencias\fmod\lib\$(PlatformShortName)\$(Arch)</AdditionalLibraryDirectories>
     </Link>
+    <Lib>
+      <AdditionalDependencies>$(SolutionDir)Dependencias\fmod\lib\$(PlatformShortName)\fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)\Exes\AegisCommon\$(PlatformShortName)\$(Configuration);$(SolutionDir)\Dependencias\fmod\lib\$(PlatformShortName)\$(Arch);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

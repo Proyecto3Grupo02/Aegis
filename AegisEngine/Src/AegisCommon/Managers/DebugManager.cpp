@@ -37,9 +37,6 @@ void DebugManager::LogError(const std::string& msg) {
 //}
 
 bool DebugManager::Init() {
-	mLines_ = new Ogre::ManualObject("lines");
-	assert(mLines_);
-	mLines_->setDynamic(true);
 
 	return true;
 }

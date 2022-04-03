@@ -32,5 +32,8 @@
     <ClCompile Include="..\..\Src\AegisAudio\SoundEmitter.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\AegisAudio\SoundResources.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
