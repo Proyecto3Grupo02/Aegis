@@ -22,7 +22,7 @@ public:
 	std::string getSong(std::string song);
 private:
 	std::map<cancion,std::string> mapSound;
-	std::string rutaArchivo = "../Assets/Audios/";
+	std::string rutaArchivo = "../Assets/Audios";
 };
 
 
