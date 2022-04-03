@@ -10,6 +10,9 @@ function table.GetNew(entity, args)
     local data = component.data;
     local funcs = component.funcs;
 
+    data.time = 0;
+    component.data.time = 0;
+
     -- this data can be overwritten in scene creation even if you
     -- don't put the parameters in the GetNew function
     data.time = 0;
@@ -60,7 +63,7 @@ function table.GetNew(entity, args)
         --     meshRenderer.visible = true;
         -- end
 
-        transform.position = Aegis.Maths.Vector3(math.sin(data.time) * 10,0, 0); 
+        --transform.position = Aegis.Maths.Vector3(math.sin(data.time) * 10,0, 0); 
     end;
 
     funcs.update = Update;

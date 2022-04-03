@@ -58,16 +58,20 @@ funcs.ResolveDependencies = function(scene, entities)
                 local resolvedCorrectly = true;
 				for key, dependency in ipairs(cmp.dependencies) do
 					local entity = entities[dependency.entity];
+					local name = dependency.name;
                     print("--Solving dependencies from " .. dependency.entity .. ":");
 					if entity == nil then
                         resolvedCorrectly = false;
 						print("----Entity " .. dependency.entity .. " wasn't found, dependency could not be resolved");
+					elseif name == nil then
+                        resolvedCorrectly = false;
+						print("----No name found, dependency could not be resolved");
 					else
 						local localComponent = entities[v.name]:GetComponent(cmp.type);
 
                         localComponent.external.inited = true;
-                        localComponent.external[entity:GetName()] = {};
-                        localComponent.external[entity:GetName()].entity = entity; 
+                        localComponent.external[name] = {};
+                        localComponent.external[name].entity = entity; 
 
 						for j, componentName in ipairs(dependency.components) do
 							local component = entity:GetComponent(componentName);
@@ -76,7 +80,7 @@ funcs.ResolveDependencies = function(scene, entities)
 								print("----Component " .. componentName .. " wasn't found in " .. dependency.entity .. ", dependency could not be resolved");
 							else
                                 print("----Inyecting " .. componentName .. " from " .. dependency.entity .. " into " .. cmp.type);
-								localComponent.external[entity:GetName()][componentName] = component;
+								localComponent.external[name][componentName] = component;
 							end;
 						end;
 					end;

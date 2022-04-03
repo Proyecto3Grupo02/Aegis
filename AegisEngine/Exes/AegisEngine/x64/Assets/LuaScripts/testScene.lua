@@ -6,14 +6,15 @@ local scene = {
 		type = "Entity",
 		name = "Fish",
 		position = { x = 0, y = 0, z = 0},
+		scale = { x = 0.5 },
 		components = {
 			{
 				type = "SimpleRotate",
-				
 				dependencies=
 				{
 					{
 						entity = "Rust",
+						name = "Test",
 						components = {
 								"TestComponent", "NonExistingComponent"
 						}

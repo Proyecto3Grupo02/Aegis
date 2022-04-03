@@ -16,7 +16,7 @@ function table.GetNew(entity, args)
     function Init() 
         local entName = component.entity:GetName();
         print("Init: " .. component.name .. " from " .. entName);
-        local rust = component.external.Rust;
+        local rust = component.external.Test;
         print("EntityDependency: " .. rust.entity:GetName());
         print("ComponentDependenty: " .. rust.TestComponent.name);
         rust.TestComponent.data.test = 5;
