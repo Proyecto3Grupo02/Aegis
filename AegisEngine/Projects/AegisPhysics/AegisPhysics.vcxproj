@@ -132,8 +132,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Src\AegisCommon\Entity;$(SolutionDir)Src\AegisCommon\Utils;$(SolutionDir)Src\AegisCommon\Managers;$(SolutionDir)Src\AegisPhysics;$(SolutionDir)Src\AegisCommon\Components;$(SolutionDir)Dependencias\Bullet\build\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)Src\AegisCommon\Entity;$(SolutionDir)Src\AegisCommon\Utils;$(SolutionDir)Src\AegisCommon\Managers;$(SolutionDir)Src\AegisPhysics;$(SolutionDir)Src\AegisCommon\Components;$(SolutionDir)Dependencias\Bullet\build\src;$(SolutionDir)Dependencias\Lua\src\include;$(SolutionDir)\Dependencias\Libraries;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,7 +141,7 @@
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Bullet\build\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>LinearMath_Debug.lib;BulletDynamics_Debug.lib;Bullet3Common_Debug.lib;BulletCollision_Debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>LinearMath_Debug.lib;BulletDynamics_Debug.lib;Bullet3Common_Debug.lib;BulletCollision_Debug.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -152,7 +152,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Src\AegisCommon\Entity;$(SolutionDir)Src\AegisCommon\Utils;$(SolutionDir)Src\AegisCommon\Managers;$(SolutionDir)Src\AegisPhysics;$(SolutionDir)Src\AegisCommon\Components;$(SolutionDir)Dependencias\Bullet\build\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Src\AegisCommon\Entity;$(SolutionDir)Src\AegisCommon\Utils;$(SolutionDir)Src\AegisCommon\Managers;$(SolutionDir)Src\AegisPhysics;$(SolutionDir)Src\AegisCommon\Components;$(SolutionDir)Dependencias\Bullet\build\src;$(SolutionDir)Dependencias\Lua\src\include;$(SolutionDir)\Dependencias\Libraries;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -161,7 +162,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Bullet\build\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Bullet\build\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>LinearMath.lib;BulletDynamics.lib;Bullet3Common.lib;BulletCollision.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -24,6 +24,7 @@ echo Generating Bullet build...
              -D BUILD_CPU_DEMOS:BOOL="0" ^
              -D BUILD_OPENGL3_DEMOS:BOOL="0" ^
              -D USE_MSVC_RUNTIME_LIBRARY_DLL:BOOL="1" ^
+	     -DINSTALL_LIBS=ON
              
 
 echo Bullet build succesfully generated

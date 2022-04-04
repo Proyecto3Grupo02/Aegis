@@ -133,6 +133,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)\Src\AegisCommon\Components;$(SolutionDir)\Src\AegisCommon\Utils;$(SolutionDir)\Dependencias\fmod\inc;$(SolutionDir)Dependencias\Lua\src\include;$(SolutionDir)\Dependencias\Libraries</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -156,6 +157,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)\Src\AegisCommon\Components;$(SolutionDir)\Src\AegisCommon\Utils;$(SolutionDir)\Dependencias\fmod\inc;$(SolutionDir)Dependencias\Lua\src\include;$(SolutionDir)\Dependencias\Libraries</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

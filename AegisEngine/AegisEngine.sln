@@ -17,6 +17,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AegisScripting", "Projects\AegisScripting\AegisScripting.vcxproj", "{097FBBDF-2E57-4FB9-B6B9-01966D4AE4A0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AegisEngine", "Projects\AegisEngine\AegisEngine.vcxproj", "{03500F0B-060B-4948-BB90-8693691CEFEB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F6C75DA0-8CD3-4743-9B7A-2F35A977F3EA} = {F6C75DA0-8CD3-4743-9B7A-2F35A977F3EA}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AegisCommon", "Projects\AegisCommon\AegisCommon.vcxproj", "{0FFCF2F0-CE9E-4E21-8B2C-C003A91C4C36}"
 EndProject

@@ -1,8 +1,7 @@
 #include "MotionState.h"
 #include "PhysicsMain.h"
-#include "Transform.h"
 
-MotionState::MotionState(Transform* transform, const Vector3& off) : transform(transform)
+MotionState::MotionState(const Vector3& off)
 {
 	//offset = off;
 }
@@ -11,24 +10,20 @@ MotionState::~MotionState()
 {
 }
 
-Transform* MotionState::getTransform() const
-{
-	return transform;
-}
 //
 //void MotionState::setOffset(const Vector3& off)
 //{
 //	offset = off;
 //}
 
-void MotionState::getWorldTransform(btTransform& worldTrans) const
+void MotionState::getWorldTransform(Vector3 pos, Vector3 rot, btTransform& worldTrans) const
 {
-	worldTrans = PhysicsSystem::getInstance()->parseToBulletTransform(transform);
+	worldTrans = PhysicsSystem::getInstance()->parseToBulletTransform(pos, rot);
 
 	worldTrans.setOrigin(worldTrans.getOrigin());
 }
 
-void MotionState::setWorldTransform(const btTransform& worldTrans)
+void MotionState::setWorldTransform(const btTransform& worldTrans, std::function<void(Vector3)> SetPosition)
 {
 	btScalar x, y, z;
 	worldTrans.getRotation().getEulerZYX(z, y, x);
@@ -38,6 +33,7 @@ void MotionState::setWorldTransform(const btTransform& worldTrans)
 	//agregar metodo para hacer camvio de vector de bullet al normal
 	btVector3 pos = worldTrans.getOrigin();
 
-	transform->SetPosition({ pos.x() , pos.y() , pos.z() });
+	//transform->SetPosition({ pos.x() , pos.y() , pos.z() });
+	SetPosition({ pos.x() , pos.y() , pos.z() });
 }
 

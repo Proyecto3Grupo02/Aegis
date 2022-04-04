@@ -18,12 +18,11 @@ subject to the following restrictions:
 #include <stdio.h>
 #include "PhysicsMain.h"
 #include "Vector3.h"
-#include "Transform.h"
 /// This is a Hello World program for running a basic Bullet physics simulation
 
 
 
-void PhysicsSystem::init()
+void PhysicsSystem::Init()
 {
 
 	///collision configuration contains default setup for memory, collision setup. Advanced users can create their own configuration.
@@ -183,11 +182,10 @@ void PhysicsSystem::remove(){
 	
 }
 
-btTransform PhysicsSystem::parseToBulletTransform(Transform* transform)
+btTransform PhysicsSystem::parseToBulletTransform(Vector3 pos, Vector3 rot)
 {
 	btTransform t;
 	t.setIdentity();
-	Vector3 pos = transform->GetPosition(), rot = transform->GetPosition();
 	t.setOrigin({ btScalar(pos.GetX()), btScalar(pos.GetY()), btScalar(pos.GetZ()) });
 	btQuaternion quat = (btQuaternion(btScalar(rot.GetZ()) * SIMD_RADS_PER_DEG, btScalar(rot.GetY()) * SIMD_RADS_PER_DEG, btScalar(rot.GetX()) * SIMD_RADS_PER_DEG)); quat.normalize();
 	t.setRotation(quat);

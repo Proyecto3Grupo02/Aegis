@@ -1,21 +1,13 @@
 #include "RigidBody.h"
 #include "PhysicsMain.h"
-#include "Transform.h"
-#include "Entity.h"
-#include "ComponentManager.h"
-#include "AegisComponent.h"
 #include "Vector3.h"
 #include <btBulletDynamicsCommon.h>
 
-RigidBody::RigidBody(Entity* ent, std::string bodyMeshName, float m, bool useG, bool isK) : AegisComponent(),
+RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, float m, bool useG, bool isK) :
 mass(m), useGravity(useG), isKinematic(isK) {
-	setEntity(ent);
 	freezePosition = std::vector<bool>(3, false);
 	freezeRotation = std::vector<bool>(3, false);
-	transform = ent->getComponent<Transform>();
-	createRigidBodyComponent(RigidBodyType::Box);
-
-	ComponentManager::getInstance()->RegisterComponent<RigidBody>("RigidBody");
+	createRigidBodyComponent(RigidBodyType::Box, pos, scale, bodyMeshName);
 }
 
 void RigidBody::init() {
@@ -24,7 +16,7 @@ void RigidBody::init() {
 	rigidBody = new btRigidBody(mass, ms, shape);
 	rigidBody->setGravity(btVector3(0, -10, 0)); //DEFAULT???
 	*/
-	createRigidBodyComponent(RigidBodyType::Box);
+	//createRigidBodyComponent(RigidBodyType::Box);
 }
 
 bool RigidBody::getKinematic() { return isKinematic; }
@@ -49,11 +41,9 @@ void RigidBody::setFreezeRotation(bool _x, bool _y, bool _z)
 	freezeRotation[2] = _z;
 }
 
-void RigidBody::createRigidBodyComponent(RigidBodyType rbType, std::string bodyMeshName, bool isConvex)
+void RigidBody::createRigidBodyComponent(RigidBodyType rbType, Vector3 pos, Vector3 scale, std::string bodyMeshName, bool isConvex)
 {
-	Vector3 scale = transform->GetScale();
-	Vector3 pos = transform->GetPosition();
-	rigidBody = PhysicsSystem::getInstance()->createRigidBody(rbType, mass, transform->GetScale(), transform->GetPosition(), bodyMeshName, isConvex);
+	rigidBody = PhysicsSystem::getInstance()->createRigidBody(rbType, mass, scale, pos, bodyMeshName, isConvex);
 }
 
 void RigidBody::addForce(Vector3 vec) {
