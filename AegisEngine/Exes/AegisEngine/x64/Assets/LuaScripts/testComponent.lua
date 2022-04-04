@@ -63,7 +63,7 @@ function table.GetNew(entity, args)
         --     meshRenderer.visible = true;
         -- end
 
-        transform.position = Aegis.Maths.Vector3(math.sin(data.time) * 10,0, 0); 
+        transform.position = Aegis.Maths.Vector3(math.sin(data.time) * 5,0, 0); 
     end;
 
     funcs.update = Update;

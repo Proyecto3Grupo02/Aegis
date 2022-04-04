@@ -7,15 +7,42 @@ local scene = {
 		name = "Fish",
 		position = { x = 0, y = 0, z = 0},
 		scale = { x = 0.5 },
+		rotation = { x = 125, y = 0, z = 0 },
 		components = {
-			{
-				type = "SimpleRotate",
-			},
+			-- {
+			-- 	type = "SimpleRotate"
+			-- },
 			{
 				type = "Renderer",
 				data = {
 					mesh = "fish.mesh",
 					material= "blue"
+				}
+			}
+		}
+	},
+	{
+		type = "Entity",
+		name = "LittleFish",
+		position = { y = 2},
+		scale = { x = 0.25, y = 0.25, z = 0.25},
+		rotation = { y = 90 },
+		components = {
+			{
+				type = "Renderer",
+				data = {
+					mesh = "fish.mesh",
+					material= "red"
+				}
+			},
+			{
+				type = "ParentTest",
+				dependencies =
+				{
+					{
+						entity = "Fish",
+						name = "parent"
+					}
 				}
 			}
 		}

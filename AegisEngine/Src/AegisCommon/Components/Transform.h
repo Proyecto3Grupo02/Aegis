@@ -30,6 +30,8 @@ public:
 	Vector3 GetRotationEuler() const;
 	Vector3 GetScale() const;
 
+	void SetParent(Entity* ent);
+
 	void SetPosition(Vector3 newPos);
 	void SetRotation(Quaternion newRot);
 	void SetRotationEuler(Vector3 newRot);

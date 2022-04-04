@@ -46,7 +46,6 @@ public:
 
 	inline Ogre::SceneNode* getNode() { return mNode_; }
 	inline void setNode(Ogre::SceneNode* node) { mNode_ = node; }
-	Entity* addChildEntity();
 
 	inline void addComponentFromLua(AegisComponent* component) {
 		std::string key = component->GetComponentName();
@@ -85,6 +84,7 @@ public:
 
 	Transform* GetTransform() const;
 	void SetTransform(Transform* transform);
+	void SetParent(Entity* ent);
 
 	static void ConvertToLua(lua_State* state);
 protected:

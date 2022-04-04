@@ -77,7 +77,7 @@ funcs.ResolveDependencies = function(scene, entities)
                         localComponent.external[name] = {};
                         localComponent.external[name].entity = entity; 
 
-						for j, componentName in ipairs(dependency.components) do
+						for j, componentName in ipairs(dependency.components or {}) do
 							local component = entity:GetComponent(componentName);
 							if component == nil then
                                 resolvedCorrectly = false;

@@ -21,6 +21,29 @@ Vector3 Transform::GetScale() const
 	return scale;
 }
 
+void Transform::SetParent(Entity* ent)
+{
+	//if parent node is not null, remove from parent, then attach to ent node
+	auto root = mNode->getCreator()->getRootSceneNode();
+	auto parent = mNode->getParentSceneNode();
+
+	if (parent != nullptr)
+		parent->removeChild(mNode);
+
+	if (ent == nullptr)
+		root->addChild(mNode);
+	else
+	{
+		auto entNode = ent->getNode();
+		auto ogrePos = mEntity_->getNode()->getPosition();
+		entNode->addChild(mNode);
+		ogrePos = mEntity_->getNode()->getPosition();
+		auto entPos = entNode->getPosition();
+		auto vecPos = Vector3(entPos.x, entPos.y, entPos.z);
+		//position = 
+	}
+}
+
 void Transform::SetPosition(Vector3 newPos) {
 	position = newPos;
 }
@@ -50,7 +73,7 @@ void Transform::update(float deltaTime)
 	//pass the parameters from vector3 /vector4 to Ogre::Node position rotation and scale
 	mNode->setPosition(position.GetX(), position.GetY(), position.GetZ());
 	mNode->setScale(scale.GetX(), scale.GetY(), scale.GetZ());
-	mNode->setOrientation(rotation.GetW(),rotation.GetX(), rotation.GetY(), rotation.GetZ());
+	mNode->setOrientation(rotation.GetW(), rotation.GetX(), rotation.GetY(), rotation.GetZ());
 }
 
 void Transform::ConvertToLua(lua_State* state)
@@ -63,6 +86,7 @@ void Transform::ConvertToLua(lua_State* state)
 		addProperty("scale", &Transform::GetScale, &Transform::SetScale).
 		addProperty("rotation", &Transform::GetRotation, &Transform::SetRotation).
 		addProperty("localEulerAngles", &Transform::GetRotationEuler, &Transform::SetRotationEuler).
+		addFunction("SetParent", &Transform::SetParent).
 		endClass().
 		endNamespace().
 		endNamespace();

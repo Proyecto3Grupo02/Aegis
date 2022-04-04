@@ -75,18 +75,6 @@ void Entity::render() {
 	}
 }
 
-Entity* Entity::addChildEntity()
-{
-	Ogre::SceneNode* node = mNode_->createChildSceneNode();
-	Entity* e = new Entity(nullptr);
-
-	e->setNode(node);
-
-	mChildren_.push_back(e);
-
-	return e;
-}
-
 void Entity::onCollision(Entity* other)
 {
 	for (auto component : mComponentsArray_) {
@@ -113,6 +101,14 @@ void Entity::SetTransform(Transform* transform)
 	transform->PrintErrorModifyingTables("transform", "Transform", true);
 }
 
+void Entity::SetParent(Entity* ent)
+{
+	if (transform != nullptr)
+		transform->SetParent(ent);
+	else
+		std::cout << "ERROR: For some reason transform is null in entity " << getName() << "\n";
+}
+
 Entity* CreateEntity(Scene* scene, Vector3 pos)
 {
 	return new Entity(scene, pos);;
@@ -133,6 +129,7 @@ void Entity::ConvertToLua(lua_State* state)
 		addFunction("GetName", &Entity::getName).
 		addFunction("SetName", &Entity::setName).
 		addFunction("GetScene", &Entity::getScene).
+		addFunction("SetParent", &Entity::SetParent).
 		// No tiene sentido el setScene, no vamos a mover entidades entre escenas
 		//addFunction("SetScene", &Entity::setScene).
 		//addFunction("addChildEntity", &Entity::addChildEntity).
