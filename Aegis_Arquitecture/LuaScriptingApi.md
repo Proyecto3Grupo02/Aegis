@@ -307,27 +307,27 @@ Entities can be created calling Aegis.CreateEntity(currentScene), then you can c
 
 local NAME = "TestScene";
 local scene = {
-	{
-		type = "Entity",
-		name = "TestEntity",
-		position = { x = 0, y = 0, z = 0},
-		components = {
-			{
-				type = "TestComponent",
-				overrideData = true,
-				data = {
-					test = 10,
-					time = 0
-				}
-			},
-			{
-				type = "Renderer",
-				data = {
-					mesh = "fish.mesh"
-				}
-			}
-		}
-	}
+  {
+    type = "Entity",
+    name = "TestEntity",
+    position = { x = 0, y = 0, z = 0},
+    components = {
+      {
+        type = "TestComponent",
+        overrideData = true,
+        data = {
+          test = 10,
+          time = 0
+        }
+      },
+      {
+        type = "Renderer",
+        data = {
+          mesh = "fish.mesh"
+        }
+      }
+    }
+  }
 };
 return scene;
 
