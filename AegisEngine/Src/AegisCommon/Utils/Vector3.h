@@ -19,6 +19,7 @@ public:
 	void SetY(float _y) { x = _y; }
 	void SetZ(float _z) { x = _z; }
 
+	Vector3 divide(Vector3 const& b) const { return Vector3(x / b.x, y / b.y, z / b.z); }
 	float magnitudeSquared() const { return x * x + y * y + z * z; }
 	float magnitude() const { return sqrt(magnitudeSquared()); }
 	float dot(const Vector3& v) const { return x * v.x + y * v.y + z * v.z; }
@@ -32,7 +33,7 @@ public:
 	{
 		const float m = magnitude();
 		if (m > 0.0f)
-			*this = *this/m;
+			*this = *this / m;
 		return m;
 	}
 

@@ -25,23 +25,28 @@ void Transform::SetParent(Entity* ent)
 {
 	//if parent node is not null, remove from parent, then attach to ent node
 	auto root = mNode->getCreator()->getRootSceneNode();
-	auto parent = mNode->getParentSceneNode();
 
-	if (parent != nullptr)
-		parent->removeChild(mNode);
+	position = position + ParseOgreVector3(parent->getPosition());
+	UpdateOgreNode();
+	parent->removeChild(mNode);
 
 	if (ent == nullptr)
+	{
+		parent = root;
 		root->addChild(mNode);
+	}
 	else
 	{
+		parent = ent->getNode();
+		position = position - ent->GetTransform()->GetPosition();
+		//rotation = rotation + ent->GetTransform()->GetRotation();
+		//scale = scale.divide(ent->GetTransform()->GetScale());
+		UpdateOgreNode();
+
 		auto entNode = ent->getNode();
-		auto ogrePos = mEntity_->getNode()->getPosition();
 		entNode->addChild(mNode);
-		ogrePos = mEntity_->getNode()->getPosition();
-		auto entPos = entNode->getPosition();
-		auto vecPos = Vector3(entPos.x, entPos.y, entPos.z);
-		//position = 
 	}
+
 }
 
 void Transform::SetPosition(Vector3 newPos) {
@@ -68,9 +73,18 @@ void Transform::SetScale(Vector3 newScale)
 	scale = newScale;
 }
 
+Vector3 Transform::ParseOgreVector3(Ogre::Vector3 ogreVec)
+{
+	return Vector3(ogreVec.x, ogreVec.y, ogreVec.z);
+}
+
 void Transform::update(float deltaTime)
 {
-	//pass the parameters from vector3 /vector4 to Ogre::Node position rotation and scale
+	UpdateOgreNode();
+}
+
+inline void Transform::UpdateOgreNode()
+{
 	mNode->setPosition(position.GetX(), position.GetY(), position.GetZ());
 	mNode->setScale(scale.GetX(), scale.GetY(), scale.GetZ());
 	mNode->setOrientation(rotation.GetW(), rotation.GetX(), rotation.GetY(), rotation.GetZ());

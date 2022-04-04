@@ -17,7 +17,7 @@ function table.GetNew(entity, params)
         parent = external.parent.entity;
 	end;
 	function Update(deltaTime)
-		if data.time > 5 then
+		if data.time > 2 then
 			if data.parented == false then
                 print(entity:GetName() .. ": " .. transform.position.x .. " " .. transform.position.y .. " " .. transform.position.z);
 				entity:SetParent(parent);

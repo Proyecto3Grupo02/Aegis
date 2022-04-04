@@ -10,6 +10,22 @@ material red
 	}
 }
 
+material aegis
+{
+	technique
+	{
+		pass
+		{
+			diffuse 1.0 1.0 1.0
+			texture_unit
+			{
+				tex_coord_set 0
+				texture aegis.png
+				tex_address_mode wrap
+			}
+		}
+	}
+}
 
 material blue // nombre
 {
