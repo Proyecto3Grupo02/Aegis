@@ -17,7 +17,6 @@ private:
     OgreWrapper* ogreWrap;
     SceneManager* sceneManager;
     GameLoopData* gameLoopData;
-    LuaManager* luaManager;
 
     bool exit;
     //uint32_t frameTimeMS;

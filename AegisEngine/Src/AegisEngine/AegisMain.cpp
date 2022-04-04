@@ -20,6 +20,7 @@
 #include "../AegisCommon/Managers/DebugManager.h"
 #include "../AegisGraphics/OgreWrapper.h"
 #include "../AegisScripting/Manager/LuaManager.h"
+#include "../AegisPhysics/PhysicsMain.h"
 #include "../AegisCommon/Scene/Scene.h"
 #include "../AegisCommon/Utils/GameLoopData.h"
 #include "../AegisCommon/Entity/Entity.h"
@@ -78,7 +79,6 @@ void AegisMain::GameLoop() {
 }
 
 AegisMain::AegisMain() : IInitializable() {
-	luaManager = LuaManager::getInstance();
 	ogreWrap = new OgreWrapper();
 	ogreWrap->Init();
 
@@ -104,15 +104,16 @@ bool AegisMain::Init()
 
 	Input()->Init();
 	Audio()->Init();
+	Physics()->Init();
 	ConvertObjectToLua();
-	luaManager->Execute("init.lua");
+	LuaMngr()->Execute("init.lua");
 	GameLoop();
 	return true;
 }
 
 void AegisMain::ConvertObjectToLua()
 {
-	auto state = luaManager->GetState();
+	auto state = LuaMngr()->GetState();
 
 	Scene::ConvertToLua(state);
 	InputSystem::ConvertToLua(state);
