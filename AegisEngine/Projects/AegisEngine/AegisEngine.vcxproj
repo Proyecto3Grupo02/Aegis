@@ -181,6 +181,7 @@ xcopy /y /d $(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo\
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)Src\Aegis\Entity;$(SolutionDir)Src\Aegis\Interfaces;$(SolutionDir)Src\Aegis\Wrappers;$(SolutionDir)Src\Aegis\Structs;$(SolutionDir)Src\Aegis\Scene;$(SolutionDir)Src\Aegis\Managers;$(SolutionDir)Src\Aegis\Component;$(SolutionDir)\Dependencias\lua\src\include;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)\Dependencias\Libraries;$(SolutionDir)\Dependencias\Libraries;$(SolutionDir)\Dependencias\fmod\inc;$(SolutionDir)\Src\AegisCommon\Utils;$(SolutionDir)Dependencias\Bullet\build\src</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

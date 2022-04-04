@@ -1,4 +1,7 @@
 #pragma once
+#ifndef PHYSICS_MAIN_H 
+#define PHYSICS_MAIN_H
+
 
 class btDiscreteDynamicsWorld;
 class btDefaultCollisionConfiguration;
@@ -45,7 +48,9 @@ public:
 
 };
 
-PhysicsSystem* Physics()
+inline PhysicsSystem* Physics()
 {
     return PhysicsSystem::getInstance();
 }
+
+#endif

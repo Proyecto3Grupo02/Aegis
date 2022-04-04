@@ -10,10 +10,6 @@ MotionState::~MotionState()
 {
 }
 
-Transform* MotionState::getTransform() const
-{
-	return transform;
-}
 //
 //void MotionState::setOffset(const Vector3& off)
 //{
