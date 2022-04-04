@@ -4,10 +4,9 @@
 
 #include <OgreRoot.h>
 #include <SDL.h>
-#include "../AegisCommon/Interfaces/IInitializable.h"
  //BASURA
 
-class OgreWrapper : IInitializable
+class OgreWrapper
 {
 private:
     Ogre::Root* mRoot;
@@ -27,7 +26,7 @@ public:
     OgreWrapper();
     bool Render();
     virtual ~OgreWrapper();
-    bool Init() override;
+    bool Init();
     Ogre::SceneNode* GetRootNode();
 };
 

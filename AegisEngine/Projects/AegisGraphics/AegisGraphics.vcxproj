@@ -142,10 +142,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>OgreMain_d.lib;SDL2.lib;SDL2main.lib;RenderSystem_GL_d.lib;AegisCommon.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OgreMain_d.lib;SDL2.lib;SDL2main.lib;RenderSystem_GL_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\build\lib\$(Configuration)\;$(SolutionDir)\Exes\AegisCommon\x64\Debug;$(SolutionDir)Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\build\lib\$(Configuration)\;$(SolutionDir)Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -166,8 +166,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>OgreMain.lib;SDL2.lib;SDL2main.lib;RenderSystem_GL.lib;AegisCommon.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)\Exes\AegisCommon\x64\Debug;$(SolutionDir)Dependencias\Ogre\Build\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OgreMain.lib;SDL2.lib;SDL2main.lib;RenderSystem_GL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencias\Ogre\Build\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
