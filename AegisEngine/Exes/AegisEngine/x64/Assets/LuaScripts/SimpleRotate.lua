@@ -15,23 +15,23 @@ function table.GetNew(entity, args)
 
     function Init() 
         local entName = component.entity:GetName();
-        print("Init: " .. component.name .. " from " .. entName);
-        local rust = component.external.Test;
-        print("EntityDependency: " .. rust.entity:GetName());
-        print("ComponentDependenty: " .. rust.TestComponent.name);
-        rust.TestComponent.data.test = 5;
-        print("ComponentTest2: " .. rust.TestComponent.data.test2);
+        -- print("Init: " .. component.name .. " from " .. entName);
+        -- local rust = component.external.Test;
+        -- print("EntityDependency: " .. rust.entity:GetName());
+        -- print("ComponentDependenty: " .. rust.TestComponent.name);
+        -- rust.TestComponent.data.test = 5;
+        -- print("ComponentTest2: " .. rust.TestComponent.data.test2);
 
-        -- this will throw a warning through console, you can modify component.data
-        -- but you can't override it
-        component.data = {}
+        -- -- this will throw a warning through console, you can modify component.data
+        -- -- but you can't override it
+        -- component.data = {}
 
-        -- the code below would work
-        --component.data.time = 2;
+        -- -- the code below would work
+        -- --component.data.time = 2;
 
-        -- notice how it's not the same address
-        io.write("ComponentData: ") print(component.data)
-        io.write("Local Data: ") print(data)
+        -- -- notice how it's not the same address
+        -- io.write("ComponentData: ") print(component.data)
+        -- io.write("Local Data: ") print(data)
     end;
 
     -- move entity with the keys, press h to print debug info

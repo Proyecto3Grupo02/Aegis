@@ -52,7 +52,7 @@ class Component : public ILuaObject {
        };
        
        static void ConvertToLua(lua_State* state);
-    private:
+    protected:
         Entity* mEntity_;
         bool isActive_;
         std::string componentName;

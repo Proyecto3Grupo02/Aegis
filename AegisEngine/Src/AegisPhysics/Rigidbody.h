@@ -29,7 +29,6 @@ public:
 	void setGravity(Vector3 vec);
 
 	void setFreezeRotation(bool _x, bool _y, bool _z);
-
 protected:
 	btRigidBody* rigidBody;
 	float mass;

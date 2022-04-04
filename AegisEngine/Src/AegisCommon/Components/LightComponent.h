@@ -19,15 +19,12 @@ private:
 
     AegisLight* mLight_;
 
-    void initLight();
     void setLightOn() {
         mLight_->setLightOn();
     }
     void setLightOff() {
         mLight_->setLightOff();
     }
-    
-
    
 public:
     LightComponent(Entity* ent, LuaRef args);
@@ -45,6 +42,8 @@ public:
     void setDirLight();
     void setPointLight();
     void setSpotLight();
+    void setLightType(std::string lightType);
+    void setDirection(Vector3 dir);
 
     static void ConvertToLua(lua_State* state);
 

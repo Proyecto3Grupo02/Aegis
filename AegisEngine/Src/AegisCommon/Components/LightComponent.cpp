@@ -1,23 +1,19 @@
 #include "LightComponent.h"
 #include "../Entity/Entity.h"
 
-void LightComponent::initLight()
+LightComponent::LightComponent(Entity* ent, LuaRef args) :
+	AegisComponent("Light", ent), mLight_(new AegisLight(ent->getNode(), ent->getNode()->getCreator()))
 {
-	mLight_ = new AegisLight(getEntity()->getNode(),getEntity()->getNode()->getCreator());
-}
+	data = args;
 
-LightComponent::LightComponent(Entity* ent,LuaRef args):
-	AegisComponent("Light", ent), mLight_(nullptr)
-{
-	
-	initLight();
-
-	mDiffuse_ = Vector3(args["color_r"], args["color_g"], args["color_b"]);
-	mSpecular_ = Vector3(args["spec_r"], args["spec_g"], args["spec_b"]);
+	setLightType(LuaMngr()->ParseString(args["lightType"], "PointLight"));
+	if (!args["direction"].isNil())
+		setDirection(Vector3::ParseVector3(args["direction"]));
+	mDiffuse_ = Vector3::ParseVector3(args["color"], Vector3Mode::RGB);
+	mSpecular_ = Vector3::ParseVector3(args["spec"], Vector3Mode::RGB);
 
 	setLightColor(mDiffuse_);
 	setSpecularColor(mSpecular_);
-
 }
 
 LightComponent::~LightComponent()
@@ -25,15 +21,15 @@ LightComponent::~LightComponent()
 	delete mLight_;
 }
 
-LightComponent* CreateLight(Entity* ent, LuaRef ref ) {
+LightComponent* CreateLight(Entity* ent, LuaRef ref) {
 
-	return new LightComponent(ent,ref);
+	return new LightComponent(ent, ref);
 
 }
 
 inline Vector3 LightComponent::getLightColor() const
 {
-	 return mDiffuse_;
+	return mDiffuse_;
 }
 
 void LightComponent::setLightColor(Vector3 spec)
@@ -68,6 +64,18 @@ void LightComponent::setSpotLight()
 	mLight_->setSpotLight();
 }
 
+void LightComponent::setLightType(std::string lightType)
+{
+	mLight_->setLightType(lightType);
+}
+
+void LightComponent::setDirection(Vector3 dir)
+{
+	// Si el transform está activo actualizará la rotación y eso a su vez invalida la dirección
+	mEntity_->GetTransform()->setActive(false);
+	mLight_->setDirection(dir.x, dir.y, dir.z);
+}
+
 void LightComponent::ConvertToLua(lua_State* state)
 {
 	getGlobalNamespace(state).
@@ -77,6 +85,7 @@ void LightComponent::ConvertToLua(lua_State* state)
 		deriveClass<LightComponent, AegisComponent>("Light").
 		addProperty("diffuse", &LightComponent::getLightColor, &LightComponent::setLightColor).
 		addProperty("specular", &LightComponent::getSpecularColor, &LightComponent::setSpecularColor).
+		addFunction("SetDirection", &LightComponent::setDirection).
 		endClass().
 		endNamespace().
 		endNamespace();

@@ -3,6 +3,8 @@
 #define VECTOR3_H
 #include "../Interfaces/ILuaObject.h"
 
+enum Vector3Mode { RGB, XYZ };
+
 struct Vector3 : public ILuaObject {
 public:
 	Vector3(float _x, float _y, float _z) : x(_x), y(_y), z(_z) {};
@@ -53,6 +55,12 @@ public:
 
 	bool operator==(Vector3 const& b) { return ((x == b.x) && (y == b.y) && (z == b.z)); }
 	bool operator!=(Vector3 const& b) { return !((x == b.x) && (y == b.y) && (z == b.z)); }
+
+	static Vector3 ParseVector3(LuaRef vector3Ref, Vector3Mode mode = Vector3Mode::XYZ)
+	{
+		std::string keys = (mode == Vector3Mode::XYZ ? "xyz" : "rgb");
+		return Vector3(LuaMngr()->ParseFloat(vector3Ref[keys[0]]), LuaMngr()->ParseFloat(vector3Ref[keys[1]]), LuaMngr()->ParseFloat(vector3Ref[keys[2]]));
+	}
 
 	static void ConvertToLua(lua_State* state)
 	{

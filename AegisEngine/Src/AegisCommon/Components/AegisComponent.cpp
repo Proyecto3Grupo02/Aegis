@@ -6,7 +6,6 @@ AegisComponent* CreateComponent(std::string componentName, Entity* entity)
 	return new AegisComponent(componentName, entity);
 }
 
-
 void AegisComponent::init()
 {
 	// Not all components will have dependencies, it's better to free the able and set this to nil

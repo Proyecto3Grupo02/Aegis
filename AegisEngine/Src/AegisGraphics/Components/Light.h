@@ -1,15 +1,52 @@
 #pragma once
 #include <OgreLight.h>
-enum LightType{NONE, DIRLIGHT, POINTLIGHT, SPOTLIGHT};
+enum LightType { NONE, DIRLIGHT, POINTLIGHT, SPOTLIGHT };
 class AegisLight {
 public:
-	AegisLight(Ogre::SceneNode* node,Ogre::SceneManager* sceneMng): 
+	AegisLight(Ogre::SceneNode* node, Ogre::SceneManager* sceneMng) :
 		mngr_(sceneMng) {
 		mType = LightType::NONE;
 		initLight(node);
+		setPointLight();
 	}
 	~AegisLight() {
 		mNode_->detachObject(mLight_);
+	}
+
+	static std::string LightTypeToString(LightType mType)
+	{
+		std::string type;
+		switch (mType)
+		{
+		case LightType::DIRLIGHT:
+			type = "DirLight";
+			break;
+		case LightType::POINTLIGHT:
+			type = "PointLight";
+			break;
+		case LightType::SPOTLIGHT:
+			type = "SpotLight";
+			break;
+		default:
+			type = "None";
+			break;
+		}
+		return type;
+	}
+
+	void setLightType(std::string lightType)
+	{
+		if (lightType == "DirLight")
+			setDirLight();
+		else if (lightType == "PointLight")
+			setPointLight();
+		else if (lightType == "SpotLight")
+			setSpotLight();
+	}
+
+	void setDirection(float x, float y, float z)
+	{
+		mNode_->setDirection(Ogre::Vector3(x, y, z));
 	}
 
 	void setDirLight() {
@@ -22,7 +59,7 @@ public:
 		mType = LightType::POINTLIGHT;
 		mLight_->setType(Ogre::Light::LT_POINT);
 	}
-	
+
 	void setSpotLight() {
 
 		mType = LightType::SPOTLIGHT;
@@ -47,23 +84,23 @@ public:
 	void setSpecularColor(float r, float g, float b) {
 		mLight_->setSpecularColour(r, g, b);
 	}
-	
+
 	bool isVisible() const {
 		return mLight_->isVisible();
 	}
-	
+
 	bool isSpotLight() const {
-		return mType == LightType::SPOTLIGHT;
+		return mType == LightTypeToString(LightType::SPOTLIGHT);
 	}
 	bool isDirLight() const {
-		return mType == LightType::DIRLIGHT;
+		return mType == LightTypeToString(LightType::DIRLIGHT);
 	}
 	bool isPointLight() const {
-		return mType == LightType::POINTLIGHT;
+		return mType == LightTypeToString(LightType::POINTLIGHT);
 	}
 
 private:
-	LightType mType;
+	std::string mType;
 	Ogre::SceneNode* mNode_;
 	Ogre::Light* mLight_;
 	Ogre::SceneManager* mngr_;

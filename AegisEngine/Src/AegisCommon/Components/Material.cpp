@@ -18,7 +18,7 @@
 //
 //void Material::init()
 //{
-//	mRenderer_ = getEntity()->getComponent<Renderer>("Renderer");
+//	mRenderer_ = ent->getComponent<Renderer>("Renderer");
 //	assert(mRenderer_);
 //	if (mMaterialName_ != "") {
 //		mRenderer_->getMesh()->setMaterialName(mMaterialName_);

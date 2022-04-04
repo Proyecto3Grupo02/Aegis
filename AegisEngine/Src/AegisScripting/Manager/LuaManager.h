@@ -25,6 +25,9 @@ public:
 	int setLuaPath(lua_State* L, const char* path);
 	luabridge::LuaRef GetSharedEmptyLuaRef();
 	luabridge::LuaRef GetNewEmptyTable();
+	
+	float ParseFloat(luabridge::LuaRef ref);
+	std::string ParseString(luabridge::LuaRef ref, std::string defaultString = "");
 private:
 	lua_State* state;
 	luabridge::LuaRef empty = luabridge::LuaRef(state);

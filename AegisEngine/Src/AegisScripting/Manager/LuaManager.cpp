@@ -44,6 +44,16 @@ void LuaManager::PrintError(lua_State* state) {
 	lua_pop(state, 1);
 }
 
+float LuaManager::ParseFloat(luabridge::LuaRef ref)
+{
+	return ref.isNil() ? 0 : ref.cast<float>();
+}
+
+std::string LuaManager::ParseString(luabridge::LuaRef ref, std::string defaultString)
+{
+	return ref.isNil() ? defaultString : ref.cast<std::string>();
+}
+
 void LuaManager::RegisterFunction(lua_CFunction function, const char* functionName) {
 	lua_register(state, functionName, function);
 }

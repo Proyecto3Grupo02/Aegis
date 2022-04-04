@@ -3,7 +3,11 @@ local funcs = {};
 funcs.ParseEntity = function(object)
 	local entity = Aegis.CreateEntity(currentScene, funcs.ParseVector3(object.position));
 	entity.transform.scale = funcs.ParseVector3(object.scale, 1);
-	entity.transform.localEulerAngles = funcs.ParseVector3(object.rotation);
+	
+	if object.rotation ~= nil then
+		entity.transform.localEulerAngles = funcs.ParseVector3(object.rotation);
+	end
+	
 	entity:SetName(object.name);
 	for i, v in ipairs(object.components) do
 		local componentType = require(v.type);
