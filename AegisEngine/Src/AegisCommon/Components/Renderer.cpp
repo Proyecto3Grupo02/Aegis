@@ -7,22 +7,24 @@
 #include "../Utils/Vector4.h"
 
 
-Renderer::Renderer(Entity* _ent, std::string meshName, Ogre::SceneManager* sceneMng, bool ir) :
+Renderer::Renderer(Entity* _ent, std::string meshName, std::string matName, Ogre::SceneManager* sceneMng, bool ir) :
 	AegisComponent("Renderer", _ent)
 {
 	data["mesh"] = "fish.mesh";
+	data["material"] = matName;
 	isVisible = ir;
 	SetDataAsInnerType(this);
-	constructoraRenderer(_ent, meshName, sceneMng, ir);
+	constructoraRenderer(_ent, meshName,matName, sceneMng, ir);
 }
 
-Renderer::Renderer(Entity* _ent, std::string meshName) :
+Renderer::Renderer(Entity* _ent, std::string meshName, std::string matName) :
 	AegisComponent("Renderer", _ent)
 {
 	data["mesh"] = "fish.mesh";
+	data["material"] = "red";
 	isVisible = true;
 	SetDataAsInnerType(this);
-	constructoraRenderer(_ent, meshName, _ent->getNode()->getCreator(), true);
+	constructoraRenderer(_ent, meshName, matName,_ent->getNode()->getCreator(), true);
 }
 
 Renderer::Renderer()
@@ -48,26 +50,27 @@ bool Renderer::getRendering() const
 	return isVisible;
 }
 
-Renderer* CreateRenderer(Entity* _ent, std::string meshName)
+Renderer* CreateRenderer(Entity* _ent, std::string meshName, std::string matName)
 {
-	return new Renderer(_ent, meshName);
+	return new Renderer(_ent, meshName,matName);
 }
 
-void Renderer::constructoraRenderer(Entity* _ent, std::string meshName, Ogre::SceneManager* sceneMng, bool ir)
+void Renderer::constructoraRenderer(Entity* _ent, std::string meshName, std::string matName, Ogre::SceneManager* sceneMng, bool ir)
 {
 	mesh = sceneMng->createEntity(meshName);
+	mesh->setMaterialName(matName);
+
 	node = getEntity()->getNode();
 	node->attachObject(mesh);
-	mesh = sceneMng->createEntity(meshName);
 	setRendering(ir);
 
 	transform = getEntity()->GetTransform();
 	if (transform == nullptr) throw "ENTITY WITHOUT TRANSFORM"; //Pulir excepcion
 }
 
-void Renderer::constructoraRendererLua(Entity* _ent, std::string meshName)
+void Renderer::constructoraRendererLua(Entity* _ent, std::string meshName,std::string matName)
 {
-	constructoraRenderer(_ent, meshName, _ent->getNode()->getCreator(), isVisible);
+	constructoraRenderer(_ent, meshName,matName, _ent->getNode()->getCreator(), isVisible);
 }
 
 void Renderer::ConvertToLua(lua_State* state)

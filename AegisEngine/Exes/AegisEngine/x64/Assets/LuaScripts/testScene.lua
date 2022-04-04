@@ -30,14 +30,15 @@ local scene = {
 			{
 				type = "Renderer",
 				data = {
-					mesh = "fish.mesh"
+					mesh = "fish.mesh",
+					material= "red"
 				}
 			}
 		}
 	},
 	{
 		type = "Entity",
-		name = "Rust",
+		name = "fosh",
 		components = {
 			{
 				type = "TestComponent",
@@ -49,7 +50,8 @@ local scene = {
 			{
 				type = "Renderer",
 				data = {
-					mesh = "Rust.mesh"
+					mesh = "Rust.mesh",
+					material="red"
 				}
 			}
 		}

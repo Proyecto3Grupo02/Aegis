@@ -13,7 +13,8 @@ local scene = {
 			{
 				type = "Renderer",
 				data = {
-					mesh = "fish.mesh"
+					mesh = "fish.mesh",
+					material="red"
 				},
 				dependencies=
 				{
@@ -37,7 +38,8 @@ local scene = {
 			{
 				type = "Renderer",
 				data = {
-					mesh = "Rust.mesh"
+					mesh = "Rust.mesh",
+					material="red"
 				}
 			}
 		}
