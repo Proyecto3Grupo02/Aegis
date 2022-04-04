@@ -1,26 +1,23 @@
-#include <OgreCamera.h>
+
+#include "Camera.h"
+#include <OgreSceneManager.h>
 
 
-class AegisCamera
+AegisCamera::AegisCamera(std::string camName,Ogre::SceneNode* node, Ogre::SceneManager* sceneMng, bool maincam): 
+	mNode_(node), mngr(sceneMng)
 {
-private:
-    Ogre::Camera* mCam_;
-public:
-    AegisCamera(/* args */);
-    ~AegisCamera();
-
-    void lookAt(float x, float y, float z);
-    void setDirection(float x, float y, float z);
-
-
-    
-
-};
-
-AegisCamera::AegisCamera(/* args */)
-{
+	mCamera_ = mngr->createCamera(camName);
 }
 
 AegisCamera::~AegisCamera()
 {
 }
+
+void AegisCamera::setDirection(float x, float y, float z)
+{
+}
+
+void AegisCamera::setOrientation(float x, float y, float z, float w)
+{
+}
+

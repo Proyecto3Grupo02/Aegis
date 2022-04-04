@@ -3,7 +3,7 @@
 
 void LightComponent::initLight()
 {
-	mLight_ = new AegisLight(getEntity()->getNode()->getCreator());
+	mLight_ = new AegisLight(getEntity()->getNode(),getEntity()->getNode()->getCreator());
 }
 
 LightComponent::LightComponent(Entity* ent,LuaRef args):
@@ -15,8 +15,8 @@ LightComponent::LightComponent(Entity* ent,LuaRef args):
 	mDiffuse_ = Vector3(args["color_r"], args["color_g"], args["color_b"]);
 	mSpecular_ = Vector3(args["spec_r"], args["spec_g"], args["spec_b"]);
 
-	setLightColor(mDiffuse_.x, mDiffuse_.y, mDiffuse_.z);
-	setSpecularColor(mSpecular_.x, mSpecular_.y, mSpecular_.z);
+	setLightColor(mDiffuse_);
+	setSpecularColor(mSpecular_);
 
 }
 
@@ -25,23 +25,47 @@ LightComponent::~LightComponent()
 	delete mLight_;
 }
 
-LightComponent* createLight(Entity* ent, LuaRef ref ) {
+LightComponent* CreateLight(Entity* ent, LuaRef ref ) {
 
 	return new LightComponent(ent,ref);
 
 }
 
-void LightComponent::setLightColor(float r, float g, float b)
+inline Vector3 LightComponent::getLightColor() const
 {
-	mDiffuse_ = Vector3(r, g, b);
-	mLight_->setLightColor(r, g, b);
-
+	 return mDiffuse_;
 }
 
-void LightComponent::setSpecularColor(float r, float g, float b)
+void LightComponent::setLightColor(Vector3 spec)
 {
-	mSpecular_ = Vector3(r, g, b);
-	mLight_->setSpecularColor(r, g, b);
+	mDiffuse_ = spec;
+	mLight_->setLightColor(spec.x, spec.y, spec.z);
+}
+
+inline Vector3 LightComponent::getSpecularColor() const
+{
+	return mSpecular_;
+}
+
+void LightComponent::setSpecularColor(Vector3 spec)
+{
+	mSpecular_ = spec;
+	mLight_->setSpecularColor(spec.x, spec.y, spec.z);
+}
+
+void LightComponent::setDirLight()
+{
+	mLight_->setDirLight();
+}
+
+void LightComponent::setPointLight()
+{
+	mLight_->setPointLight();
+}
+
+void LightComponent::setSpotLight()
+{
+	mLight_->setSpotLight();
 }
 
 void LightComponent::ConvertToLua(lua_State* state)
@@ -49,7 +73,7 @@ void LightComponent::ConvertToLua(lua_State* state)
 	getGlobalNamespace(state).
 		beginNamespace("Aegis").
 		beginNamespace("NativeComponents").
-		addFunction("createLight", createLight).
+		addFunction("CreateLight", CreateLight).
 		deriveClass<LightComponent, AegisComponent>("Light").
 		addProperty("diffuse", &LightComponent::getLightColor, &LightComponent::setLightColor).
 		addProperty("specular", &LightComponent::getSpecularColor, &LightComponent::setSpecularColor).

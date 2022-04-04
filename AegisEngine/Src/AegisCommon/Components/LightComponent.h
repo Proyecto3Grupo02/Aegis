@@ -36,21 +36,15 @@ public:
     virtual void init() override {};
 
 
-    inline Vector3 getLightColor() { return mDiffuse_; }
-    void setLightColor(float r, float g, float b);
+    Vector3 getLightColor() const;
+    void setLightColor(Vector3 diffuse);
 
-    inline Vector3 getSpecularColor() { return mSpecular_; }
-    void setSpecularColor(float r, float g, float b);
+    inline Vector3 getSpecularColor() const;
+    void setSpecularColor(Vector3 spec);
 
-    inline void setDirLight() {
-        mLight_->setDirLight();
-    }
-    inline void setPointLight() {
-        mLight_->setPointLight();
-    }
-    void setSpotLight() {
-        mLight_->setSpotLight();
-    }
+    void setDirLight();
+    void setPointLight();
+    void setSpotLight();
 
     static void ConvertToLua(lua_State* state);
 

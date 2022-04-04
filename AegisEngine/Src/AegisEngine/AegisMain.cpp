@@ -29,6 +29,7 @@
 #include "../AegisCommon/Components/Renderer.h"
 #include "../AegisCommon/Utils/Quaternion.h"
 #include "../AegisAudio/SoundSystem.h"
+#include "../AegisCommon/Components/LightComponent.h"
 
 using namespace luabridge;
 
@@ -127,6 +128,7 @@ void AegisMain::ConvertObjectToLua()
 	Vector4::ConvertToLua(state);
 	Quaternion::ConvertToLua(state);
 	Renderer::ConvertToLua(state);
+	LightComponent::ConvertToLua(state);
 
 	//push(state, true);
 	//lua_setglobal(state, "true");

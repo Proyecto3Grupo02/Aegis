@@ -3,9 +3,10 @@
 enum LightType{NONE, DIRLIGHT, POINTLIGHT, SPOTLIGHT};
 class AegisLight {
 public:
-	AegisLight(Ogre::SceneManager* sceneMng): 
+	AegisLight(Ogre::SceneNode* node,Ogre::SceneManager* sceneMng): 
 		mngr_(sceneMng) {
 		mType = LightType::NONE;
+		initLight(node);
 	}
 	~AegisLight() {
 		mNode_->detachObject(mLight_);

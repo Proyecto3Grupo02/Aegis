@@ -4,7 +4,7 @@ local NAME="Light"
 local table = { }
 
 function table.GetNew(entity, args) 
-    local component = Aegis.NativeComponents.createLight(entity,args);
+    local component = Aegis.NativeComponents.CreateLight(entity,args);
     return component;
 end
     
