@@ -11,7 +11,7 @@ Renderer::Renderer(Entity* _ent, std::string meshName, std::string matName, Ogre
 	AegisComponent("Renderer", _ent)
 {
 	data["mesh"] = "fish.mesh";
-	data["material"] = matName;
+	data["material"] = "red";
 	isVisible = ir;
 	SetDataAsInnerType(this);
 	constructoraRenderer(_ent, meshName,matName, sceneMng, ir);

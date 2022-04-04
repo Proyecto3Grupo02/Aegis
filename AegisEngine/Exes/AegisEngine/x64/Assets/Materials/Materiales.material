@@ -1,9 +1,9 @@
 
-material red // nombre
+material red 
 {
-	technique // al menos una
+	technique 
 	{
-		pass // al menos uno
+		pass 
 		{
 			diffuse 1.0 0.0 0.0
 		}

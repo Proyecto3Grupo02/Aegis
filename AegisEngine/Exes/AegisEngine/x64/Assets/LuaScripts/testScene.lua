@@ -38,7 +38,7 @@ local scene = {
 	},
 	{
 		type = "Entity",
-		name = "fosh",
+		name = "Rust",
 		components = {
 			{
 				type = "TestComponent",
@@ -52,6 +52,26 @@ local scene = {
 				data = {
 					mesh = "Rust.mesh",
 					material="red"
+				}
+			}
+		}
+	},
+
+	{
+		type = "Entity",
+		name = "light",
+		position = { x = 0, y = 0, z = 0},
+		components = {
+			{
+				type = "Light",
+				data = {
+					color_r=0.1,
+					color_g=0.1,
+					color_b=0.1,
+
+					spec_r=0.1,
+					spec_g=0.1,
+					spec_b=0.1
 				}
 			}
 		}

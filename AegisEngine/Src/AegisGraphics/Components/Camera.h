@@ -1,5 +1,5 @@
 #pragma once
-
+#include <OgreCamera.h>
 class AegisCamera
 {
 public:
@@ -7,7 +7,8 @@ public:
 	~AegisCamera();
 
 private:
-	
+	Ogre::Camera* mCamera_;
+	bool isMainCam_;
 
 };
 

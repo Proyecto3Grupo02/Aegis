@@ -13,21 +13,44 @@
 class LightComponent: public AegisComponent
 {
 private:
-    Vector3 mAmbient_;
+
     Vector3 mDiffuse_;
     Vector3 mSpecular_;
 
     AegisLight* mLight_;
 
     void initLight();
+    void setLightOn() {
+        mLight_->setLightOn();
+    }
+    void setLightOff() {
+        mLight_->setLightOff();
+    }
     
 
    
 public:
-    LightComponent(Entity* ent, Vector3 amb, Vector3 diff, Vector3 spec);
+    LightComponent(Entity* ent, LuaRef args);
     ~LightComponent();
 
     virtual void init() override {};
+
+
+    inline Vector3 getLightColor() { return mDiffuse_; }
+    void setLightColor(float r, float g, float b);
+
+    inline Vector3 getSpecularColor() { return mSpecular_; }
+    void setSpecularColor(float r, float g, float b);
+
+    inline void setDirLight() {
+        mLight_->setDirLight();
+    }
+    inline void setPointLight() {
+        mLight_->setPointLight();
+    }
+    void setSpotLight() {
+        mLight_->setSpotLight();
+    }
 
     static void ConvertToLua(lua_State* state);
 
