@@ -307,27 +307,27 @@ Entities can be created calling Aegis.CreateEntity(currentScene), then you can c
 
 local NAME = "TestScene";
 local scene = {
-	{
-		type = "Entity",
-		name = "TestEntity",
-		position = { x = 0, y = 0, z = 0},
-		components = {
-			{
-				type = "TestComponent",
-				overrideData = true,
-				data = {
-					test = 10,
-					time = 0
-				}
-			},
-			{
-				type = "Renderer",
-				data = {
-					mesh = "fish.mesh"
-				}
-			}
-		}
-	}
+  {
+    type = "Entity",
+    name = "TestEntity",
+    position = { x = 0, y = 0, z = 0},
+    components = {
+      {
+        type = "TestComponent",
+        overrideData = true,
+        data = {
+          test = 10,
+          time = 0
+                    }
+      },
+      {
+        type = "Renderer",
+        data = {
+          mesh = "fish.mesh"
+        }
+      }
+    }
+  }
 };
 return scene;
 
@@ -348,58 +348,58 @@ Imagine we want a certain entity component to get accesss to other entity compon
 
 local NAME = "TestScene";
 local scene = {
-	{
-		type = "Entity",
-		name = "Fish",
-		position = { x = 0, y = 0, z = 0},
-		components = {
-			{
-				type = "SimpleRotate",
-				
-				dependencies=
-				{
-					{
-						entity = "Rust",
-						components = {
-								"TestComponent", "NonExistingComponent"
-						}
-					},
-					{
-						entity = "TestEntity3",
-						components = {
-								"TestComponent"
-						}
-					}
-				}
-			},
-			{
-				type = "Renderer",
-				data = {
-					mesh = "fish.mesh"
-				}
-			}
-		}
-	},
-	{
-		type = "Entity",
-		name = "Rust",
-		components = {
-			{
-				type = "TestComponent",
-				data = {
-					test2 = 1,
-					--This will be ignored as it doesn exist in TestComponent
-					test4 = 3 
-				}
-			},
-			{
-				type = "Renderer",
-				data = {
-					mesh = "Rust.mesh"
-				}
-			}
-		}
-	}
+  {
+    type = "Entity",
+    name = "Fish",
+    position = { x = 0, y = 0, z = 0},
+    components = {
+      {
+        type = "SimpleRotate",
+        
+        dependencies=
+        {
+          {
+            entity = "Rust",
+            components = {
+                "TestComponent", "NonExistingComponent"
+            }
+          },
+          {
+            entity = "TestEntity3",
+            components = {
+                "TestComponent"
+            }
+          }
+        }
+      },
+      {
+        type = "Renderer",
+        data = {
+          mesh = "fish.mesh"
+        }
+      }
+    }
+  },
+  {
+    type = "Entity",
+    name = "Rust",
+    components = {
+      {
+        type = "TestComponent",
+        data = {
+          test2 = 1,
+          --This will be ignored as it doesn exist in TestComponent
+          test4 = 3 
+        }
+      },
+      {
+        type = "Renderer",
+        data = {
+          mesh = "Rust.mesh"
+        }
+      }
+    }
+  }
 };
 return scene;
 
