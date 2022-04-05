@@ -24,7 +24,9 @@ function table.GetNew(entity, params)
                 print(entity:GetName() .. ": " .. transform.position.x .. " " .. transform.position.y .. " " .. transform.position.z);
                 data.parented = true;
 			else
+                print(entity:GetName() .. ": " .. transform.position.x .. " " .. transform.position.y .. " " .. transform.position.z);
 				entity:SetParent(nil);
+                print(entity:GetName() .. ": " .. transform.position.x .. " " .. transform.position.y .. " " .. transform.position.z);
                 data.parented = false;
 			end;
 			data.time = data.time - 5;

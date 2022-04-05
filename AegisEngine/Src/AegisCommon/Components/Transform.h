@@ -37,6 +37,7 @@ public:
 	void SetRotationEuler(Vector3 newRot);
 	void SetScale(Vector3 newScale);
 	static Vector3 ParseOgreVector3(Ogre::Vector3 ogreVec);
+	static Ogre::Vector3 Vector3ToOgre(Vector3 vec);
 
 	void UpdateOgreNode();
 	static void ConvertToLua(lua_State* state);

@@ -5,13 +5,16 @@ local scene = {
 	{
 		type = "Entity",
 		name = "Fish",
-		position = { x = -3, y = 0, z = 0},
-		--scale = { x = 1, y = 0.25, z = 0.25},
+		--position = { x = -3, y = 0, z = 0},
+		scale = { x = 1, y = 0.25, z = 0.25},
 		--rotation = { x = 125, y = 0, z = 0 },
 		components = {
 			-- {
 			-- 	type = "SimpleRotate"
 			-- },
+			{
+				type = "TestComponent",
+			},
 			{
 				type = "Renderer",
 				data = {

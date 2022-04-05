@@ -20,6 +20,7 @@ public:
 	void SetZ(float _z) { x = _z; }
 
 	Vector3 divide(Vector3 const& b) const { return Vector3(x / b.x, y / b.y, z / b.z); }
+	Vector3 scalarMult(Vector3 const& b) const { return Vector3(x * b.x, y * b.y, z * b.z); }
 	float magnitudeSquared() const { return x * x + y * y + z * z; }
 	float magnitude() const { return sqrt(magnitudeSquared()); }
 	float dot(const Vector3& v) const { return x * v.x + y * v.y + z * v.z; }
