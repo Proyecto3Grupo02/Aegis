@@ -6,7 +6,7 @@
 AegisCamera::AegisCamera(std::string camName,Ogre::SceneNode* node, Ogre::SceneManager* sceneMng, bool maincam): 
 	mNode_(node), mngr(sceneMng), isMainCam_(maincam)
 {
-
+	
 	mCamera_ = mngr->createCamera(camName);
 	mNode_->attachObject(mCamera_);
 }
@@ -37,3 +37,8 @@ Ogre::Viewport* AegisCamera::getViewport()
 	return mCamera_->getViewport();
 }
 
+void AegisCamera::setClipDistances(double near, double far)
+{
+	mCamera_->setNearClipDistance(near);
+	mCamera_->setFarClipDistance(far);
+}

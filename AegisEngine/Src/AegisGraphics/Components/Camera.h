@@ -12,6 +12,7 @@ public:
 	void setViewport(double left, double top, double w, double h);
 	Ogre::Viewport* getViewport();
 
+	void setClipDistances(double near, double far);
 
 private:
 	Ogre::Camera* mCamera_;

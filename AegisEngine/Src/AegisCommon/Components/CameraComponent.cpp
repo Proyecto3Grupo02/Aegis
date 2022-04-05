@@ -5,6 +5,8 @@ CameraComponent::CameraComponent(Entity* ent, std::string name, bool isMainCam):
 {
 	mCamera_ = new AegisCamera(name, getEntity()->getNode(), getEntity()->getNode()->getCreator(), isMainCam);
 	tr_ = getEntity()->GetTransform();
+
+	
 }
 
 CameraComponent::~CameraComponent()
@@ -19,11 +21,9 @@ void CameraComponent::lookAt(float x, float y, float z,SpaceReference mRef)
 		mNode_->lookAt(Ogre::Vector3(x, y, z), Ogre::Node::TS_LOCAL);
 		break;
 	case SpaceReference::PARENT:
-
 		mNode_->lookAt(Ogre::Vector3(x, y, z), Ogre::Node::TS_PARENT);
 		break;	
 	case SpaceReference::WORLD:
-
 		mNode_->lookAt(Ogre::Vector3(x, y, z), Ogre::Node::TS_WORLD);
 		break;	
 	}
@@ -117,4 +117,5 @@ void CameraComponent::ConvertToLua(lua_State* state)
 
 void CameraComponent::setClipDistances(double near, double far)
 {
+	mCamera_->setClipDistances(near, far);
 }

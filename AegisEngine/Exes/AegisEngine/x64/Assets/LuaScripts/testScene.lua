@@ -3,6 +3,22 @@
 local NAME = "TestScene";
 local scene = {
 	{
+		type= "Entity",
+		name= "Camera",
+
+		position={x=0, y=10, z=20},
+		rotation={x=90, y=0, z=0},
+		
+		components={
+			type= "Camera",
+			data={
+				name="mCamera",
+				main=true,
+				look={0,0,-300}
+			}
+		}
+	},
+	{
 		type = "Entity",
 		name = "Fish",
 		--position = { x = -3, y = 0, z = 0},

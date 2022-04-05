@@ -17,6 +17,7 @@ public:
 	CameraComponent(Entity* ent, std::string name,bool isMainCam);
 	~CameraComponent();
 	
+
 	void lookAt(float x, float y, float z,SpaceReference mRef );
 	Vector3 getDirection() const;
 	Quaternion getOrientation() const;
