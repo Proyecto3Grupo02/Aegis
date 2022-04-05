@@ -6,8 +6,12 @@ public:
 	AegisCamera(std::string camName,Ogre::SceneNode* node, Ogre::SceneManager* sceneMng, bool maincam);
 	~AegisCamera();
 
-	void setDirection(float x, float y, float z);
-	void setOrientation(float x, float y, float z, float w);
+	Ogre::Matrix4 getProjectionMatrix();
+	Ogre::Matrix4  getViewMatrix();
+
+	void setViewport(double left, double top, double w, double h);
+	Ogre::Viewport* getViewport();
+
 
 private:
 	Ogre::Camera* mCamera_;
