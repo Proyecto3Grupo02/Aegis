@@ -13,11 +13,11 @@ class Entity;
 
 class Transform : public AegisComponent, public ILuaObject {
 public:
-	Transform(Ogre::SceneNode* node, Entity* ent) : AegisComponent("Transform", ent), position(Vector3()), rotation(Quaternion()), scale(Vector3(1.0f, 1.0f, 1.0f)), mNode(node), parent(node->getParentSceneNode()) {
+	Transform(Ogre::SceneNode* node, Entity* ent) : AegisComponent("Transform", ent), position(Vector3()), rotation(Ogre::Quaternion()), scale(Vector3(1.0f, 1.0f, 1.0f)), mNode(node), parent(node->getParentSceneNode()) {
 		SetDataAsInnerType(this);
 		//ComponentManager::getInstance()->RegisterComponent<Transform>("Transform");
 	};
-	Transform( Vector3 _pos, Quaternion _rot, Vector3 _scale, Ogre::SceneNode* node, Entity* ent) :
+	Transform( Vector3 _pos, Ogre::Quaternion _rot, Vector3 _scale, Ogre::SceneNode* node, Entity* ent) :
 			AegisComponent("Transform", ent), position(_pos), rotation(_rot), scale(_scale), mNode(node), parent(node->getParentSceneNode()) {
 		SetDataAsInnerType(this);
 		//ComponentManager::getInstance()->RegisterComponent<Transform>("Transform");
@@ -26,25 +26,28 @@ public:
 	virtual void init() override {}
 	virtual void update(float deltaTime) override;
 	Vector3 GetPosition() const;
-	Quaternion GetRotation() const;
+	Ogre::Quaternion GetRotation() const;
 	Vector3 GetRotationEuler() const;
 	Vector3 GetScale() const;
 
 	void SetParent(Entity* ent);
 
 	void SetPosition(Vector3 newPos);
-	void SetRotation(Quaternion newRot);
+	void SetRotation(Ogre::Quaternion newRot);
 	void SetRotationEuler(Vector3 newRot);
 	void SetScale(Vector3 newScale);
 	static Vector3 ParseOgreVector3(Ogre::Vector3 ogreVec);
 	static Ogre::Vector3 Vector3ToOgre(Vector3 vec);
+	static Quaternion ParseOgreQuaternion(Ogre::Quaternion quat);
+	static Vector3 OgreQuatEuler(const Ogre::Quaternion& quaternion);
+	static Ogre::Quaternion EulerToOgreQuat(const Vector3& degreesVector);
 
 	void UpdateOgreNode();
 	static void ConvertToLua(lua_State* state);
 protected:
 	Ogre::SceneNode* mNode;
 	Vector3 position;
-	Quaternion rotation;
+	Ogre::Quaternion rotation;
 	Vector3 scale;
 	Ogre::SceneNode* parent;
 };

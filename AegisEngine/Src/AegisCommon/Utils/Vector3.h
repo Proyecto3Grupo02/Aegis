@@ -42,6 +42,7 @@ public:
 	Vector3 operator-(Vector3 const& b) { return Vector3(x - b.x, y - b.y, z - b.z); }
 	//Vector3 operator*(Vector3 const& b) { return Vector3(x * b.x, y * b.y, z * b.z); }
 	Vector3 operator*(float const& f) const { return Vector3(x * f, y * f, z * f); }
+	Vector3 operator%(float const& f) const { return Vector3(fmod(x,f), fmod(y, f), fmod(z, f)); }
 	Vector3 operator/(float f) const
 	{
 		f = 1.0f / f;

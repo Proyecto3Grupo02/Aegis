@@ -19,14 +19,14 @@ function table.GetNew(entity, params)
 	function Update(deltaTime)
 		if data.time > 2 then
 			if data.parented == false then
-                print(entity:GetName() .. ": " .. transform.position.x .. " " .. transform.position.y .. " " .. transform.position.z);
+                print(entity:GetName() .. ": " .. transform.localEulerAngles.x .. " " .. transform.localEulerAngles.y .. " " .. transform.localEulerAngles.z);
 				entity:SetParent(parent);
-                print(entity:GetName() .. ": " .. transform.position.x .. " " .. transform.position.y .. " " .. transform.position.z);
+                print(entity:GetName() .. ": " .. transform.localEulerAngles.x .. " " .. transform.localEulerAngles.y .. " " .. transform.localEulerAngles.z);
                 data.parented = true;
 			else
-                print(entity:GetName() .. ": " .. transform.position.x .. " " .. transform.position.y .. " " .. transform.position.z);
+                print(entity:GetName() .. ": " .. transform.localEulerAngles.x .. " " .. transform.localEulerAngles.y .. " " .. transform.localEulerAngles.z);
 				entity:SetParent(nil);
-                print(entity:GetName() .. ": " .. transform.position.x .. " " .. transform.position.y .. " " .. transform.position.z);
+                print(entity:GetName() .. ": " .. transform.localEulerAngles.x .. " " .. transform.localEulerAngles.y .. " " .. transform.localEulerAngles.z);
                 data.parented = false;
 			end;
 			data.time = data.time - 5;

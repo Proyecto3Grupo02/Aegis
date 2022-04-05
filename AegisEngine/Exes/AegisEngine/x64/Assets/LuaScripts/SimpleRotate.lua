@@ -43,7 +43,7 @@ function table.GetNew(entity, args)
         -- x pitch
         -- y yaw
         -- z roll
-        local zVec = Aegis.Maths.Vector3(0.5,0,0);
+        local zVec = Aegis.Maths.Vector3(0,0,0.5);
         transform.localEulerAngles = (transform.localEulerAngles) + zVec;
         
         -- io.write("x: " .. transform.localEulerAngles.x);

@@ -8,14 +8,14 @@ Entity::Entity(Scene* node) :
 	mNode_(node->GetOgreNode()), active_(true), mScene_(node)
 {
 	//Componente obligatorio para todas las entidades
-	transform = new Transform(Vector3(0,0,0), Quaternion(), Vector3(1.0f, 1.0f, 1.0f), getNode(), this);
+	transform = new Transform(Vector3(0,0,0), Ogre::Quaternion(), Vector3(1.0f, 1.0f, 1.0f), getNode(), this);
 	this->addComponentFromLua(transform);
 }
 
 Entity::Entity(Scene* node, Vector3 pos) :
 	mNode_(node->GetOgreNode()), active_(true), mScene_(node)
 {
-	transform = new Transform(pos, Quaternion(), Vector3(1.0f, 1.0f, 1.0f), getNode(), this);
+	transform = new Transform(pos, Ogre::Quaternion(), Vector3(1.0f, 1.0f, 1.0f), getNode(), this);
 	this->addComponentFromLua(transform);
 }
 
