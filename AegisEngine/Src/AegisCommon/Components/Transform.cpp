@@ -42,7 +42,7 @@ void Transform::SetParent(Entity* ent)
 	Ogre::Quaternion newParentRotation = parent->getOrientation();
 
 	//Correction rotation "before" unparenting
-	rotation = EulerToOgreQuat((GetRotationEuler() + OgreQuatEuler(oldParentRotation)));
+	rotation = oldParentRotation * rotation;
 	position = position.scalarMult(oldParentScale);
 	position = RotateByQuaternion(oldParentRotation, position);
 	scale = scale.scalarMult(oldParentScale);
@@ -53,7 +53,7 @@ void Transform::SetParent(Entity* ent)
 	scale = scale.divide(newParentScale);
 	position = RotateByQuaternion(newParentRotation.Inverse(), position);
 	position = position.divide(newParentScale);
-	rotation = EulerToOgreQuat((GetRotationEuler() - OgreQuatEuler(newParentRotation)));
+	rotation = newParentRotation.Inverse() * rotation;
 }
 
 void Transform::SetPosition(Vector3 newPos) {

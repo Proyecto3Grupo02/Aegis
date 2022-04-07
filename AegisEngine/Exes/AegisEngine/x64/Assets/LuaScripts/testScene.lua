@@ -5,10 +5,9 @@ local scene = {
 	{
 		type = "Entity",
 		name = "Fish",
-		position = { x = 2, y = 0, z = 0},
+		position = { x = 2, y = 1, z = -2},
 		scale = { x = 1, y = 0.25, z = 0.25},
-		rotation = { x = 0, y = 0, z = 120 },
-		--rotation = { x = 0, y = 0, z = 20 },
+		rotation = { x = 40, y = 120, z = 60 },
 		components = {
 			{
 				type = "SimpleRotate"
@@ -32,8 +31,8 @@ local scene = {
 		type = "Entity",
 		name = "LittleFish",
 		position = { y = 2, x = 1, z = 2},
-		scale = { x = 0.5, y = 0.25, z = 0.25},
-		rotation = { z = 30 },
+		scale = { x = 0.5, y = 0.25, z = 0.75},
+		rotation = { z = 30, x = 60, x = 20 },
 		components = {
 			{
 				type = "Renderer",
