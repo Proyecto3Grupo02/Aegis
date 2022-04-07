@@ -167,4 +167,54 @@ namespace MathUtils
 	{
 		return true;
 	}
+
+	//Ogre to Aegis bind, this is here because if we put this in Vector3 class, AegisPhysics will have a dependency on Ogre and we don't want that
+	static Vector3 ParseOgreVector3(Ogre::Vector3 ogreVec)
+	{
+		return Vector3(ogreVec.x, ogreVec.y, ogreVec.z);
+	}
+
+	static Ogre::Vector3 Vector3ToOgre(Vector3 vec)
+	{
+		return Ogre::Vector3(vec.x, vec.y, vec.z);
+	}
+
+	static Vector3 OgreQuatEuler(const Ogre::Quaternion& quaternion)
+	{
+		Ogre::Matrix3 mx2;
+		quaternion.ToRotationMatrix(mx2);
+		Ogre::Radian x, y, z;
+		mx2.ToEulerAnglesYXZ(y, x, z);
+		Vector3 vect(x.valueAngleUnits(),
+			y.valueAngleUnits(), z.valueAngleUnits());
+
+		return vect;
+	}
+
+	static Ogre::Quaternion EulerToOgreQuat(const Vector3& degreesVector)
+	{
+		Ogre::Matrix3 mx;
+		mx.FromEulerAnglesYXZ(Ogre::Degree(degreesVector.y), Ogre::Degree(degreesVector.x), Ogre::Degree(degreesVector.z));
+		Ogre::Quaternion result(mx);
+		return result;
+	}
+
+	static Vector3 RotateByQuaternion(Ogre::Quaternion q, const Vector3& v)
+	{
+		// Using quaternions is easier to understand but uses way more CPU
+		//auto pureQuat = Ogre::Quaternion(0, v.x, v.y, v.z);
+		//pureQuat = quat * pureQuat * quat.Inverse();
+		//return Vector3(pureQuat.x, pureQuat.y, pureQuat.z);
+
+		// Extract the vector part of the quaternion
+		Vector3 u(q.x, q.y, q.z);
+
+		// Extract the scalar part of the quaternion
+		float s = q.w;
+
+		// Do the math
+		return  Vector3(2.0f * u.dot(v) * u
+			+ (s * s - u.dot(u)) * v
+			+ 2.0f * s * u.cross(v));
+	}
 }

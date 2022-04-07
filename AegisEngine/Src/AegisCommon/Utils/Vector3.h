@@ -37,7 +37,9 @@ public:
 			*this = *this / m;
 		return m;
 	}
+	Vector3 Inverse() { return Vector3(-x, -y, -z); }
 
+	friend Vector3 operator*(float s, Vector3 v) { return v*= s; }
 	Vector3 operator+(Vector3 const& b) { return Vector3(x + b.x, y + b.y, z + b.z); }
 	Vector3 operator-(Vector3 const& b) { return Vector3(x - b.x, y - b.y, z - b.z); }
 	//Vector3 operator*(Vector3 const& b) { return Vector3(x * b.x, y * b.y, z * b.z); }

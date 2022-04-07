@@ -21,7 +21,6 @@ class Component : public ILuaObject {
        virtual void fixedUpdate() {};
        virtual void update(float dt) {};
        virtual void lateUpdate(float dt) {};
-     
        virtual void render() {};
 
        virtual void onCollision(Entity* other) {};

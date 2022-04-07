@@ -20,7 +20,7 @@ void SceneManager::UpdateCurrentScene(float deltaTime) {
 	currentScene->UpdateScene(deltaTime);
 }
 
-void SceneManager::RenderCurrentScene() {
+void SceneManager::PreRenderScene() {
 	currentScene->Render();
 }
 

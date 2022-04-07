@@ -17,20 +17,18 @@ function table.GetNew(entity, params)
         parent = external.parent.entity;
 	end;
 	function Update(deltaTime)
-		if data.time > 2 then
+	if  Input:AnyKeyWasPressed() then
+		if Input:KeyWasPressed("p") then
 			if data.parented == false then
-                print(entity:GetName() .. ": " .. transform.localEulerAngles.x .. " " .. transform.localEulerAngles.y .. " " .. transform.localEulerAngles.z);
 				entity:SetParent(parent);
-                print(entity:GetName() .. ": " .. transform.localEulerAngles.x .. " " .. transform.localEulerAngles.y .. " " .. transform.localEulerAngles.z);
                 data.parented = true;
 			else
-                print(entity:GetName() .. ": " .. transform.localEulerAngles.x .. " " .. transform.localEulerAngles.y .. " " .. transform.localEulerAngles.z);
 				entity:SetParent(nil);
-                print(entity:GetName() .. ": " .. transform.localEulerAngles.x .. " " .. transform.localEulerAngles.y .. " " .. transform.localEulerAngles.z);
                 data.parented = false;
 			end;
 			data.time = data.time - 5;
 		end;
+	end;
 		data.time = data.time + deltaTime;
 
         --print each position of entity

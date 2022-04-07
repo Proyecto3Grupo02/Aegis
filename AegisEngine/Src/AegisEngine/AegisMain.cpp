@@ -41,6 +41,7 @@ void AegisMain::GameLoop() {
 		uint32_t frameTimeMS = (uint32_t)floor((1 / TARGET_FRAME_RATE) * 1000);
 
 		Audio()->playMusic("clin");
+		//SDL_EnableKeyRepeat(0, 0);
 		while (!exit)
 		{
 			//Tiempo al inicio del frame
@@ -55,18 +56,23 @@ void AegisMain::GameLoop() {
 				case SDL_KEYDOWN:
 					if (eventHandler.key.keysym.sym == SDLK_ESCAPE)
 						exit = true;
+					//std::cout << "KeyDown (" << eventHandler.type << "): ";
 					Input()->OnKeyDown(eventHandler.key.keysym.sym);
 					break;
 				case SDL_KEYUP:
+					//std::cout << "KeyUp (" << eventHandler.type << "): ";
 					Input()->OnKeyUp(eventHandler.key.keysym.sym);
 					break;
 				default:
+						//std::cout << "Default (" << eventHandler.type << ")\n";
 					break;
 				}
 			}
+			SDL_PumpEvents();
+
 
 			sceneManager->UpdateCurrentScene(gameLoopData->deltaTime);
-			sceneManager->RenderCurrentScene();
+			sceneManager->PreRenderScene();
 
 			ogreWrap->Render();
 			Uint32 frameTime = SDL_GetTicks();

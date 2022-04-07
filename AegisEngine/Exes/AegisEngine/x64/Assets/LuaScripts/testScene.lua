@@ -3,31 +3,16 @@
 local NAME = "TestScene";
 local scene = {
 	{
-		type= "Entity",
-		name= "Camera",
-
-		position={x=0, y=10, z=20},
-		rotation={x=90, y=0, z=0},
-		
-		components={
-			type= "Camera",
-			data={
-				name="mCamera",
-				main=true,
-				look={0,0,-300}
-			}
-		}
-	},
-	{
 		type = "Entity",
 		name = "Fish",
-		--position = { x = -3, y = 0, z = 0},
-		--scale = { x = 1, y = 0.25, z = 0.25},
+		position = { x = 2, y = 0, z = 0},
+		scale = { x = 1, y = 0.25, z = 0.25},
 		rotation = { x = 0, y = 0, z = 120 },
+		--rotation = { x = 0, y = 0, z = 20 },
 		components = {
-			-- {
-			-- 	type = "SimpleRotate"
-			-- },
+			{
+				type = "SimpleRotate"
+			},
 			-- {
 			-- 	type = "TestComponent",
 			-- },
@@ -46,9 +31,9 @@ local scene = {
 	{
 		type = "Entity",
 		name = "LittleFish",
-		position = { y = 2},
-		scale = { x = 0.25, y = 0.25, z = 0.25},
-		--rotation = { y = 90 },
+		position = { y = 2, x = 1, z = 2},
+		scale = { x = 0.5, y = 0.25, z = 0.25},
+		rotation = { z = 30 },
 		components = {
 			{
 				type = "Renderer",
@@ -102,9 +87,9 @@ local scene = {
 				type = "Light",
 				data = {
 					lightType = "DirLight",
-					color = { r = 0.5, g = 0.5, b = 0.5  },
-					spec = { r = 0.2, g = 0.2, b = 0.2 },
-					direction = { x = 0, y = 1, z = 0 }
+					color = { r = 0.6, g = 0.6, b = 0.6  },
+					spec = { r = 0.6, g = 0.6, b = 0.6 },
+					direction = { x = 0, y = 0, z = -0.75 }
 				}
 			}
 		}

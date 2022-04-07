@@ -18,7 +18,7 @@ public:
 
 	~Renderer() {};
 	void update(float dt) override {}
-	void render();
+	void render() override;
 	virtual void init() override {};
 	void setRendering(bool iR);
 	bool getRendering() const;

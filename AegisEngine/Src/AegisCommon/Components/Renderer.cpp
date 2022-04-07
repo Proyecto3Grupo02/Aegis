@@ -36,7 +36,7 @@ Renderer::Renderer()
 
 void Renderer::render()
 {
-
+	transform->UpdateOgreNode();
 }
 
 void Renderer::setRendering(bool iR)
