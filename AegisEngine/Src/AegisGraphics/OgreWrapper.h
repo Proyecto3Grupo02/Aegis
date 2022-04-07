@@ -4,6 +4,7 @@
 
 #include <OgreRoot.h>
 #include <SDL.h>
+class AegisCamera;
  //BASURA
 
 class OgreWrapper
@@ -18,7 +19,7 @@ private:
     SDL_Window* native = nullptr;
 
     Ogre::SceneManager* mSceneMgr;
-    Ogre::Camera* mCamera;
+    AegisCamera* mCamera;
 
     void CreateWindowNative();
 

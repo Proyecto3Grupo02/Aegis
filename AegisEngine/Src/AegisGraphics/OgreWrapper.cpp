@@ -12,6 +12,7 @@
 
 #include <SDL_syswm.h>
 #include <OgreLogManager.h>
+#include "./Components/Camera.h"
 
 OgreWrapper::OgreWrapper() : mRoot(0),
 mResourcesCfg(Ogre::BLANKSTRING),
@@ -81,16 +82,20 @@ bool OgreWrapper::Init() {
 	//Ogre::SceneNode* ogreCam = mSceneMgr->getRootSceneNode()->createChildSceneNode();
 	//mCamera = mSceneMgr->createCamera("MainCam");
 	//ogreCam->attachObject(mCamera);
-	//ogreCam->setPosition(0, 0, 10);
-	////ogreCam->lookAt(Ogre::Vector3(0, 0, -300), Ogre::Node::TS_WORLD);
-	//mCamera->setNearClipDistance(5);
 
 	//viewPort
-	Ogre::Viewport* vp = render->addViewport(mCamera);
+	auto ogreCamNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+	mCamera = new AegisCamera("MainCamera",ogreCamNode);
+	auto ogreCam = mCamera->GetCamera();
+	Ogre::Viewport* vp = render->addViewport(ogreCam);
+
+	ogreCamNode->setPosition(0, 0, 10);
+	ogreCamNode->lookAt(Ogre::Vector3(0, 0, -300), Ogre::Node::TS_WORLD);
+	ogreCam->setNearClipDistance(5);
 
 	vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
 
-	mCamera->setAspectRatio(
+	ogreCam->setAspectRatio(
 		Ogre::Real(vp->getActualWidth()) /
 		Ogre::Real(vp->getActualHeight()));
 

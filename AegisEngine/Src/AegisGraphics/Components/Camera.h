@@ -3,7 +3,7 @@
 class AegisCamera
 {
 public:
-	AegisCamera(std::string camName,Ogre::SceneNode* node, Ogre::SceneManager* sceneMng, bool maincam);
+	AegisCamera(std::string camName,Ogre::SceneNode* node, bool maincam = true);
 	~AegisCamera();
 
 	Ogre::Matrix4 getProjectionMatrix();
@@ -13,7 +13,7 @@ public:
 	Ogre::Viewport* getViewport();
 
 	void setClipDistances(double near, double far);
-
+	Ogre::Camera* GetCamera();
 private:
 	Ogre::Camera* mCamera_;
 	Ogre::SceneManager* mngr;

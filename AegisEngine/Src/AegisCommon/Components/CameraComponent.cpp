@@ -1,12 +1,10 @@
 #include "CameraComponent.h"
 #include "../Entity/Entity.h"
-CameraComponent::CameraComponent(Entity* ent, std::string name, bool isMainCam):
-	AegisComponent("Camera", ent), mCamera_(nullptr), isMainCam_(isMainCam)
+CameraComponent::CameraComponent(Entity* ent, LuaRef args):
+	AegisComponent("Camera", ent), mCamera_(nullptr), isMainCam_(args["isMainCam"])
 {
-	mCamera_ = new AegisCamera(name, getEntity()->getNode(), getEntity()->getNode()->getCreator(), isMainCam);
-	tr_ = getEntity()->GetTransform();
-
-	
+	mCamera_ = new AegisCamera(args["name"], getEntity()->getNode(), isMainCam_);
+	// deberiamos poner la camara principal como variable global? :think:
 }
 
 CameraComponent::~CameraComponent()
@@ -14,46 +12,46 @@ CameraComponent::~CameraComponent()
 	delete mCamera_;
 }
 
-void CameraComponent::lookAt(float x, float y, float z,SpaceReference mRef)
-{
-	switch (mRef) {
-	case SpaceReference::LOCAL:
-		mNode_->lookAt(Ogre::Vector3(x, y, z), Ogre::Node::TS_LOCAL);
-		break;
-	case SpaceReference::PARENT:
-		mNode_->lookAt(Ogre::Vector3(x, y, z), Ogre::Node::TS_PARENT);
-		break;	
-	case SpaceReference::WORLD:
-		mNode_->lookAt(Ogre::Vector3(x, y, z), Ogre::Node::TS_WORLD);
-		break;	
-	}
-}
+//void CameraComponent::lookAt(float x, float y, float z,SpaceReference mRef)
+//{
+//	switch (mRef) {
+//	case SpaceReference::LOCAL:
+//		mNode_->lookAt(Ogre::Vector3(x, y, z), Ogre::Node::TS_LOCAL);
+//		break;
+//	case SpaceReference::PARENT:
+//		mNode_->lookAt(Ogre::Vector3(x, y, z), Ogre::Node::TS_PARENT);
+//		break;	
+//	case SpaceReference::WORLD:
+//		mNode_->lookAt(Ogre::Vector3(x, y, z), Ogre::Node::TS_WORLD);
+//		break;	
+//	}
+//}
 
-Vector3 CameraComponent::getDirection() const
-{
-	auto direction = mNode_->getOrientation().zAxis() * -1;
+//Vector3 CameraComponent::getDirection() const
+//{
+//	auto direction = mNode_->getOrientation().zAxis() * -1;
+//
+//	Vector3 dir = Vector3(dir.x, dir.y, dir.z);
+//
+//	return dir;
+//}
+//
+//Quaternion CameraComponent::getOrientation() const
+//{
+//	return mOrientation_;
+//
+//}
 
-	Vector3 dir = Vector3(dir.x, dir.y, dir.z);
-
-	return dir;
-}
-
-Quaternion CameraComponent::getOrientation() const
-{
-	return mOrientation_;
-
-}
-
-void CameraComponent::setDirection(Vector3 dir)
-{
-	mNode_->setDirection(dir.x, dir.y, dir.z);
-}
-
-void CameraComponent::setOrientation(const Quaternion& orientation)
-{
-	mOrientation_ = orientation;
-	tr_->SetRotation(orientation);
-}
+//void CameraComponent::setDirection(Vector3 dir)
+//{
+//	mNode_->setDirection(dir.x, dir.y, dir.z);
+//}
+//
+//void CameraComponent::setOrientation(const Quaternion& orientation)
+//{
+//	mOrientation_ = orientation;
+//	tr_->SetRotation(orientation);
+//}
 
 Vector3 CameraComponent::worldToScreen(const Vector3& worldPoint)
 {
@@ -92,8 +90,8 @@ Vector3 CameraComponent::worldToScreenPixel(const Vector3& worldPoint)
 	return result;
 }
 
-CameraComponent* createCamera(Entity* ent, std::string name, bool isMainCam){
-	return new CameraComponent(ent,name,isMainCam);
+CameraComponent* createCamera(Entity* ent, LuaRef args){
+	return new CameraComponent(ent, args);
 }
 
 void CameraComponent::setViewportDimensions(float left, float top, float width, float height)
@@ -108,8 +106,8 @@ void CameraComponent::ConvertToLua(lua_State* state)
 		beginNamespace("NativeComponents").
 		addFunction("CreateCamera", createCamera).
 		deriveClass<CameraComponent, AegisComponent>("Camera").
-		addProperty("direction", &CameraComponent::getDirection, &CameraComponent::setDirection).
-		addProperty("orientation", &CameraComponent::getOrientation, &CameraComponent::setOrientation).
+		//addProperty("direction", &CameraComponent::getDirection, &CameraComponent::setDirection).
+		//addProperty("orientation", &CameraComponent::getOrientation, &CameraComponent::setOrientation).
 		endClass().
 		endNamespace().
 		endNamespace();
