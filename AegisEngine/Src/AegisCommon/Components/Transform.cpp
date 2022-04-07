@@ -43,10 +43,20 @@ void Transform::SetParent(Entity* ent)
 	position = position + oldParentPos;
 	position = position.scalarMult(oldParentScale);
 
+	auto pureQuat = Ogre::Quaternion(0, position.x, position.y, position.z);
+	pureQuat = oldParentRotation * pureQuat * oldParentRotation.Inverse();
+	auto rotatedPos = Ogre::Vector3(pureQuat.x, pureQuat.y, pureQuat.z);
+	position = ParseOgreVector3(rotatedPos);
+
 	// Correct data for parenting
 	scale = scale.divide(newParentScale);
 	position = position.divide(newParentScale);
 	position = position - newParentPos;
+
+	pureQuat = Ogre::Quaternion(0, position.x, position.y, position.z);
+	pureQuat = newParentRotation.Inverse() * pureQuat * newParentRotation;
+	rotatedPos = Ogre::Vector3(pureQuat.x, pureQuat.y, pureQuat.z);
+	position = ParseOgreVector3(rotatedPos);
 
 	oldParent->removeChild(mNode);
 	parent->addChild(mNode);
