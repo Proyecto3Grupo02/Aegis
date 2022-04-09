@@ -5,6 +5,7 @@
 
 
 #include "SoundSystem.h"
+#include "../../Dependencias/fmod/inc/fmod.hpp"
 //namespace FMOD{
 //	class Channel;
 //}

@@ -168,6 +168,8 @@
     <ClInclude Include="..\..\Src\AegisCommon\Components\Material.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\RegisterComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\Renderer.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Components\SoundEmitterComponent.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Components\SoundListenerComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\Transform.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Entity\Entity.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Interfaces\IInitializable.h" />
@@ -193,6 +195,8 @@
     <ClCompile Include="..\..\Src\AegisCommon\Components\LightComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\Material.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\Renderer.cpp" />
+    <ClCompile Include="..\..\Src\AegisCommon\Components\SoundEmitterComponent.cpp" />
+    <ClCompile Include="..\..\Src\AegisCommon\Components\SoundListenerComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\Transform.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Entity\Entity.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Managers\ComponentManager.cpp" />
