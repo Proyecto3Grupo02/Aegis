@@ -26,9 +26,9 @@ public:
 	luabridge::LuaRef GetSharedEmptyLuaRef();
 	luabridge::LuaRef GetNewEmptyTable();
 	
-	float ParseFloat(luabridge::LuaRef ref);
+	float ParseFloat(luabridge::LuaRef ref, float defaultValue = 0);
 	std::string ParseString(luabridge::LuaRef ref, std::string defaultString = "");
-	
+
 	//if nil, it returns false
 	bool ParseBool(luabridge::LuaRef ref, bool defaultBool = false);
 

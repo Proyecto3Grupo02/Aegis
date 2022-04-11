@@ -44,9 +44,9 @@ void LuaManager::PrintError(lua_State* state) {
 	lua_pop(state, 1);
 }
 
-float LuaManager::ParseFloat(luabridge::LuaRef ref)
+float LuaManager::ParseFloat(luabridge::LuaRef ref, float defaultValue)
 {
-	return ref.isNil() ? 0 : ref.cast<float>();
+	return ref.isNil() ? defaultValue : ref.cast<float>();
 }
 
 std::string LuaManager::ParseString(luabridge::LuaRef ref, std::string defaultString)
@@ -54,7 +54,7 @@ std::string LuaManager::ParseString(luabridge::LuaRef ref, std::string defaultSt
 	return ref.isNil() ? defaultString : ref.cast<std::string>();
 }
 
-bool LuaManager::ParseBool(luabridge::LuaRef ref, bool defaultBool = false)
+bool LuaManager::ParseBool(luabridge::LuaRef ref, bool defaultBool)
 {
 	return ref.isNil() ? defaultBool : ref.cast<bool>();
 }

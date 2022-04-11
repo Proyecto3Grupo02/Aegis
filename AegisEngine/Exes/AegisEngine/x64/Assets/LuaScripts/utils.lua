@@ -54,6 +54,7 @@ funcs.ParseVector3 = function(vec3, default)
 	local z = vec3.z or default;
 	return Aegis.Maths.Vector3(x, y, z);
 end;
+
 funcs.ResolveDependencies = function(scene, entities)
 	for i, v in ipairs(scene) do
 		for p, cmp in ipairs(v.components or {}) do

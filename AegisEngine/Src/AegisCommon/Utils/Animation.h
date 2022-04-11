@@ -1,7 +1,6 @@
 #pragma once
 #include <Vector3.h>
 #include <MathUtils.h>
-using namespace MathUtils;
 
 struct keyFrame {
 	Vector3 pos, scale;
@@ -16,6 +15,11 @@ struct Animation {
 	float timer = 0;
 	bool finished = false;
 	bool loop = false;
+
+	void addKeyframe(keyFrame frame)
+	{
+		frames.push_back(frame);
+	}
 
 	Vector3 GetInterpolatedPos()
 	{
@@ -35,13 +39,17 @@ struct Animation {
 	//Returns a value between 0 and 1 interpolating frame start and frame end
 	float getNormalizedTime()
 	{
+		float t = getCurrentKeyFrame().time;
+		float nextT = getFrame(currentKeyFrame + 1).time;
+		float currentT = timer;
+
 		return MathUtils::InverseLerp(getCurrentKeyFrame().time, getFrame(currentKeyFrame + 1).time, timer);
 	}
 
 	void addTime(float time)
 	{
 		this->timer += time;
-		if (timer > getCurrentKeyFrame().time)
+		if (timer > getFrame(currentKeyFrame + 1).time)
 			advanceKeyframe();
 	}
 
@@ -50,12 +58,12 @@ struct Animation {
 	bool advanceKeyframe()
 	{
 		currentKeyFrame = MathUtils::loop(0, numKeyFrames, currentKeyFrame + 1);
-		if (currentKeyFrame)
+		if (currentKeyFrame == 0)
 		{
 			if (!loop)
 				finished = true;
-			else
-				timer = 0;
+
+			timer = 0;
 		}
 		return finished;
 	}

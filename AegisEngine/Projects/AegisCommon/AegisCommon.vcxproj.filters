@@ -129,11 +129,11 @@
     <ClInclude Include="..\..\Src\AegisCommon\Components\SoundListenerComponent.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Components\AnimationComponent.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Animation.h">
       <Filter>Archivos de encabezado\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisCommon\Components\AnimationComponent.h">
+      <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

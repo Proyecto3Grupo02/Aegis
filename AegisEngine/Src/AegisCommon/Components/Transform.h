@@ -3,10 +3,7 @@
 #define TRANSFORM_H
 
 #include "AegisComponent.h"
-#include "../Managers/ComponentManager.h"
 #include "../Utils/Vector4.h"
-#include "../Utils/Quaternion.h"
-#include "../Managers/ComponentManager.h"
 #include "../Interfaces/ILuaObject.h"
 
 class Entity;

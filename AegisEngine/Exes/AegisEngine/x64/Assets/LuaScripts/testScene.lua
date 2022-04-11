@@ -28,7 +28,7 @@ local scene = {
 			{
 				type = "Animation",
 				data = {
-					loop = true,
+					loop = false,
 					easing = "linear", --Currently not working, we haven't implemented it yet, but we can
 					keyframes = 
 					{
@@ -36,24 +36,25 @@ local scene = {
 							position = { x = 0, y = 0, z = 0 },
 							rotation = { x = 0, y = 0, z = 0 },
 							scale = { x = 1, y = 1, z = 1 },
-							time = 0.5
+							time = 0
 						},
 						{
 							position = {x = 2, y = 1, z = -2},
-							rotation = { x = 40, y = 120, z = 60 },
+							rotation = { x = 90 },
 							scale = { x = 1, y = 0.25, z = 0.25},
-							time = 1
+							time = 0.4
 						},
 						{
-							rotation = { x = 40, y = 0, z = 60 },
-							scale = { x = 0.5, y = 0.5, z = 2},
-							time = 1.5
+							position = {x = 2, y = 2, z = -2},
+							time = 2
+						},
+						{
+							position = { x = 0, y = 0, z = 0 },
+							rotation = { x = 0, y = 0, z = 0 },
+							scale = { x = 1, y = 1, z = 1 },
+							time = 3
 						}
-					},
-					{
-
 					}
-
 				}
 			}
 		}

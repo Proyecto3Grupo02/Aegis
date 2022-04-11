@@ -34,12 +34,15 @@ namespace MathUtils
 		return ((a < b) ? (a < c ? a : c) : (b < c ? b : c));
 	}
 
-	static float InverseLerp(float start_value, float end_value, float currentValue)
+	static float Clamp(float startValue, float endValue, float currentValue)
 	{
-		float start = 0;
-		float current = currentValue - start_value;
-		float end = end_value - start_value;
-		return (min(currentValue, end_value) / end_value);
+		return  min(max(currentValue, startValue), endValue);
+	}
+
+	static float InverseLerp(float startValue, float endValue, float currentValue)
+	{
+		float clamped = Clamp(startValue, endValue, currentValue);
+		return (clamped - startValue) / (endValue - startValue);
 	}
 
 	static Vector3 Lerp(Vector3 start_value, Vector3 end_value, float t)
@@ -196,6 +199,7 @@ namespace MathUtils
 		Ogre::Matrix3 mx;
 		mx.FromEulerAnglesYXZ(Ogre::Degree(degreesVector.y), Ogre::Degree(degreesVector.x), Ogre::Degree(degreesVector.z));
 		Ogre::Quaternion result(mx);
+		result.normalise();
 		return result;
 	}
 
