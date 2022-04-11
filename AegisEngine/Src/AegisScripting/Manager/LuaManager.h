@@ -28,6 +28,10 @@ public:
 	
 	float ParseFloat(luabridge::LuaRef ref);
 	std::string ParseString(luabridge::LuaRef ref, std::string defaultString = "");
+	
+	//if nil, it returns false
+	bool ParseBool(luabridge::LuaRef ref, bool defaultBool = false);
+
 private:
 	lua_State* state;
 	luabridge::LuaRef empty = luabridge::LuaRef(state);
@@ -37,6 +41,4 @@ inline LuaManager* LuaMngr()
 {
 	return LuaManager::getInstance();
 }
-
-
 #endif

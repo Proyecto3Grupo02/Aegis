@@ -9,9 +9,9 @@ local scene = {
 		scale = { x = 1, y = 0.25, z = 0.25},
 		rotation = { x = 40, y = 120, z = 60 },
 		components = {
-			{
-				type = "SimpleRotate"
-			},
+			-- {
+			-- 	type = "SimpleRotate"
+			-- },
 			-- {
 			-- 	type = "TestComponent",
 			-- },
@@ -24,6 +24,37 @@ local scene = {
 			},
 			{
 				type = "TestVisible"
+			},
+			{
+				type = "Animation",
+				data = {
+					loop = true,
+					easing = "linear", --Currently not working, we haven't implemented it yet, but we can
+					keyframes = 
+					{
+						{
+							position = { x = 0, y = 0, z = 0 },
+							rotation = { x = 0, y = 0, z = 0 },
+							scale = { x = 1, y = 1, z = 1 },
+							time = 0.5
+						},
+						{
+							position = {x = 2, y = 1, z = -2},
+							rotation = { x = 40, y = 120, z = 60 },
+							scale = { x = 1, y = 0.25, z = 0.25},
+							time = 1
+						},
+						{
+							rotation = { x = 40, y = 0, z = 60 },
+							scale = { x = 0.5, y = 0.5, z = 2},
+							time = 1.5
+						}
+					},
+					{
+
+					}
+
+				}
 			}
 		}
 	},

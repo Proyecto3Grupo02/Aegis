@@ -54,6 +54,11 @@ std::string LuaManager::ParseString(luabridge::LuaRef ref, std::string defaultSt
 	return ref.isNil() ? defaultString : ref.cast<std::string>();
 }
 
+bool LuaManager::ParseBool(luabridge::LuaRef ref, bool defaultBool = false)
+{
+	return ref.isNil() ? defaultBool : ref.cast<bool>();
+}
+
 void LuaManager::RegisterFunction(lua_CFunction function, const char* functionName) {
 	lua_register(state, functionName, function);
 }
@@ -87,3 +92,4 @@ luabridge::LuaRef LuaManager::GetNewEmptyTable()
 {
 	return luabridge::newTable(state);
 }
+

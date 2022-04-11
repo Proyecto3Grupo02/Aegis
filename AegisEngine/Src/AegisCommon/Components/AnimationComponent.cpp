@@ -2,9 +2,18 @@
 #include "../Entity/Entity.h"
 #include "Transform.h"
 
-AnimationComponent::AnimationComponent(Entity* _ent, Ogre::SceneManager* sceneMng)
+AnimationComponent::AnimationComponent(Entity* _ent, LuaRef args) : AegisComponent("Animation", _ent)
 {
 	entTransform = _ent->GetTransform();
+	animation.loop = LuaMngr()->ParseBool(args["loop"]);
+
+	LuaRef keyframes = args["keyframes"];
+	if (!keyframes.isNil())
+		ReadKeyframes(keyframes);
+}
+
+void AnimationComponent::ReadKeyframes(LuaRef frames)
+{
 }
 
 void AnimationComponent::addFrames(const std::vector<keyFrame>& frames) { //en el caso de pasar el vector entero
@@ -16,45 +25,30 @@ void AnimationComponent::addFrames(const std::vector<keyFrame>& frames) { //en e
 	}
 }
 
-void AnimationComponent::setLoop(bool isLoop) {
-	loop = isLoop;
-}
-
-// Solo reinicia la animación si el estado cambia
-void AnimationComponent::setEnabled(bool isEnabled) {
-	if (!isActive && isEnabled)
-	{
-		animation.tiempoUltimoFrame = 0;
-		animation.frameActual = 0;
-	}
-	else if (isActive && !isEnabled)
-	{
-		animation.tiempoUltimoFrame = 0;
-		animation.frameActual = 0;
-	}
-	isActive = isEnabled;
-}
-
 void AnimationComponent::update(float dt)
 {
-	if (!isActive) return;
+	if (animation.finished) return;
+	
+	animation.addTime(dt);
 
-	if (dt - animation.tiempoUltimoFrame > animation.durFrame)
-	{
-		if (animation.frameActual < animation.numKeyFrames - 1)
-			animation.frameActual++;
-		else if (loop) animation.frameActual = 0;
-		animation.tiempoUltimoFrame = dt;
-	}
+	entTransform->SetPosition(animation.GetInterpolatedPos());
+	entTransform->SetRotationEuler(animation.GetInterpolatedEulerAngles());
+	entTransform->SetScale(animation.GetInterpolatedScale());
+}
 
-	// porcentaje de progreso de frame A a frame B
-	float percentage = dt / (animation.tiempoUltimoFrame + animation.durFrame);
+AnimationComponent* CreateAnimation(Entity* _ent, LuaRef args)
+{
+	return new AnimationComponent(_ent, args);
+}
 
-	Vector3 interpolatedPos = MathUtils::Lerp(animation.frames[animation.frameActual].pos, animation.frames[(animation.frameActual + 1)].pos, percentage);
-	Vector3 interpolatedRot = MathUtils::Lerp(animation.frames[animation.frameActual].degrees, animation.frames[(animation.frameActual + 1)].degrees, percentage);
-	Vector3 interpolatedScale = MathUtils::Lerp(animation.frames[animation.frameActual].scale, animation.frames[(animation.frameActual + 1)].scale, percentage);
-
-	entTransform->SetPosition(interpolatedPos);
-	entTransform->SetRotationEuler(interpolatedRot);
-	entTransform->SetScale(interpolatedScale);
+void AnimationComponent::ConvertToLua(lua_State* state)
+{
+	getGlobalNamespace(state).
+		beginNamespace("Aegis").
+		beginNamespace("NativeComponents").
+		addFunction("CreateAnimation", CreateAnimation).
+		deriveClass<AnimationComponent, AegisComponent>("Animation").
+		endClass().
+		endNamespace().
+		endNamespace();
 }

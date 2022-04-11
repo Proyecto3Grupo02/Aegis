@@ -31,6 +31,7 @@
 #include "../AegisAudio/SoundSystem.h"
 #include "../AegisCommon/Components/LightComponent.h"
 #include "../AegisCommon/Components/CameraComponent.h"
+#include "../AegisCommon/Components/AnimationComponent.h"
 
 using namespace luabridge;
 
@@ -137,11 +138,7 @@ void AegisMain::ConvertObjectToLua()
 	Renderer::ConvertToLua(state);
 	LightComponent::ConvertToLua(state);
 	CameraComponent::ConvertToLua(state);
-	//push(state, true);
-	//lua_setglobal(state, "true");
-	//
-	//push(state, false);
-	//lua_setglobal(state, "false");
+	AnimationComponent::ConvertToLua(state);
 
 	push(state, sceneManager->GetCurrentScene());
 	lua_setglobal(state, "currentScene");
