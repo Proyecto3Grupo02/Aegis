@@ -1,33 +1,34 @@
 #pragma once
 #include "AegisComponent.h"
-#include <OgreAnimation.h>
-#include <OgreAnimationState.h>
-#include <OgreKeyFrame.h>
-#include <OgreAnimationTrack.h>
 #include <Vector3.h>
+#include <MathUtils.h>
 
 class Transform;
 class OgreWrapper;
 
 struct keyFrame {
-	Ogre::Vector3 pos, boolRot, scale;
-	Ogre::Degree degrees;
+	Vector3 pos, scale;
+	Vector3 degrees;
+};
+
+struct Animation {
+	int numKeyFrames = 0;
+	double durFrame = 0;
+	int frameActual = 0;
+	std::vector<keyFrame> frames;
+	float tiempoUltimoFrame = 0;
 };
 
 class AnimationComponent : public AegisComponent {
 private: 
-	Ogre::Animation* animation;
-	Ogre::AnimationState* animationState;
-	Ogre::NodeAnimationTrack* nodeTrack;
+	Animation animation;
 	Transform* entTransform;
-	int numKeyFrames;
-	double duracion, durFrame;
-	std::vector<keyFrame> frames;
+	bool isActive = false;
+	bool loop = false;
 
 public:
-	AnimationComponent(Entity* _ent, Ogre::SceneManager* sceneMng, std::string nombre, int duracion);
+	AnimationComponent(Entity* _ent, Ogre::SceneManager* sceneMng);
 	~AnimationComponent();
-	Ogre::NodeAnimationTrack* getTrack();
 	void addFrames(const std::vector<keyFrame>& kf);
 	void setEnabled(bool enabled);
 	void setLoop(bool isLoop);
