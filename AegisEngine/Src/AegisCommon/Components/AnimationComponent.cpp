@@ -4,6 +4,7 @@
 
 AnimationComponent::AnimationComponent(Entity* _ent, LuaRef args) : AegisComponent("Animation", _ent)
 {
+	this->data = args;
 	entTransform = _ent->GetTransform();
 	animation.loop = LuaMngr()->ParseBool(args["loop"]);
 

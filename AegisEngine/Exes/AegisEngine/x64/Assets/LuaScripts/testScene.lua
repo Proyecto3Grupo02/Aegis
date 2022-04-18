@@ -9,12 +9,6 @@ local scene = {
 		scale = { x = 1, y = 0.25, z = 0.25},
 		rotation = { x = 40, y = 120, z = 60 },
 		components = {
-			-- {
-			-- 	type = "SimpleRotate"
-			-- },
-			-- {
-			-- 	type = "TestComponent",
-			-- },
 			{
 				type = "Renderer",
 				data = {
@@ -28,7 +22,7 @@ local scene = {
 			{
 				type = "Animation",
 				data = {
-					loop = false,
+					loop = true,
 					easing = "linear", --Currently not working, we haven't implemented it yet, but we can
 					keyframes = 
 					{
@@ -75,40 +69,13 @@ local scene = {
 			},
 			{
 				type = "ParentTest",
-				dependencies =
-				{
-					{
-						entity = "Fish",
-						name = "parent"
-					}
+				data = {
+					parent="@Fish",
+					parentRender = "@Fish.Renderer",
 				}
 			},
-			-- {
-			-- 	type = "SimpleRotate"
-			-- }
 		}
 	},
-	-- {
-	-- 	type = "Entity",
-	-- 	name = "Rust",
-	-- 	components = {
-	-- 		{
-	-- 			type = "TestComponent",
-	-- 			data = {
-	-- 				test2 = 1,
-	-- 				test4 = 3
-	-- 			}
-	-- 		},
-	-- 		{
-	-- 			type = "Renderer",
-	-- 			data = {
-	-- 				mesh = "Rust.mesh",
-	-- 				material="red"
-	-- 			}
-	-- 		}
-	-- 	}
-	-- },
-
 	{
 		type = "Entity",
 		name = "light",

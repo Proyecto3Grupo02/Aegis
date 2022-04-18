@@ -55,53 +55,97 @@ funcs.ParseVector3 = function(vec3, default)
 	return Aegis.Maths.Vector3(x, y, z);
 end;
 
+funcs.HasDependencies = function(data)
+	if data == nil then
+		print("Error: data is nil");
+		return false;
+	end;
+	for i, v in pairs(data) do
+		if type(v) == "string" and v:sub(1, 1) == "@" then
+			return true;
+		end;
+		return false;
+	end;
+end;
+
+-- Splits a string into a table of strings using a delimiter (default is :)
+funcs.Split = function(str, sep)
+	local sep, fields = sep or ":", {}
+	local pattern = string.format("([^%s]+)", sep)
+	str:gsub(pattern, function(c) fields[#fields+1] = c end)
+	return fields
+end;
+
+-- Receives a string with the form "Entity.Component" where Component is optional and returns 
+-- the entity or component found, if any
+funcs.SearchEntityOrComponent = function(entities,data)
+	local splitStr = funcs.Split(data, ".");
+	local entityName = splitStr[1];
+	--print("Seaching for entity: " .. entityName);
+	local entity = entities[entityName]
+	if entity == nil then
+		print("Searcher: Entity " .. entityName .. " not found");
+		return nil;
+	end;
+
+	-- If splitStr has more than 1 element, then we are searching for a component
+	if #splitStr == 1 then
+		--print("Entity found: " .. entityName);
+		return entity;
+	end;
+
+	-- If there is a point, then we want to search for a component in that entity
+	-- Substring data from first point to second point or end of string
+	local component = entity:GetComponent(splitStr[2]);
+
+	if component == nil then
+		print("Searcher: Component " .. splitStr[2] .. " not found");
+		return nil;
+	else
+		return component;
+	end;
+end;
+
 funcs.ResolveDependencies = function(scene, entities)
 	for i, v in ipairs(scene) do
-		for p, cmp in ipairs(v.components or {}) do
-			if v.type == "Entity" and cmp.dependencies ~= nil then
-                print("Solving dependencies for " .. v.name .. ":\n");
-                local resolvedCorrectly = true;
-				for key, dependency in ipairs(cmp.dependencies) do
-					local entity = entities[dependency.entity];
-					local name = dependency.name;
-                    print("--Solving dependencies from " .. dependency.entity .. ":");
-					if entity == nil then
-                        resolvedCorrectly = false;
-						print("----Entity " .. dependency.entity .. " wasn't found, dependency could not be resolved");
-					elseif name == nil then
-                        resolvedCorrectly = false;
-						print("----No name found, dependency could not be resolved");
-					else
-						local localComponent = entities[v.name]:GetComponent(cmp.type);
-
-                        localComponent.external.inited = true;
-                        localComponent.external[name] = {};
-                        localComponent.external[name].entity = entity; 
-
-						for j, componentName in ipairs(dependency.components or {}) do
-							local component = entity:GetComponent(componentName);
-							if component == nil then
-                                resolvedCorrectly = false;
-								print("----Component " .. componentName .. " wasn't found in " .. dependency.entity .. ", dependency could not be resolved");
+		if v.type == "Entity" then
+			for p, cmp in ipairs(v.components or {}) do
+				if cmp.data ~= nil and funcs.HasDependencies(cmp.data) then
+					print("Solving dependencies for " .. v.name .. ":\n");
+					local resolvedCorrectly = true;
+					local entityData = entities[v.name]:GetComponent(cmp.type).data;
+					for key, cmpData in pairs(cmp.data) do
+						if entityData[key] ~= nil then
+						
+						if type(cmpData) == "string" and cmpData:sub(1, 1) == "@" then
+							local dependencyData = funcs.SearchEntityOrComponent(entities, cmpData:sub(2));
+							if dependencyData == nil then
+								print("Error: Data " .. cmpData:sub(2) .. " was not found, field is untouched");
+								resolvedCorrectly = false;
 							else
-                                print("----Inyecting " .. componentName .. " from " .. dependency.entity .. " into " .. cmp.type);
-								localComponent.external[name][componentName] = component;
+								print("Inyecting " ..  cmpData:sub(2) .. " into " .. cmp.type .. "." .. key);
+								entityData[key] = dependencyData;
 							end;
 						end;
+					else
+						print("Error: " .. key .. " is not a field of " .. cmp.type .. ".data, " .. key .. " wasn't was copied");
+						resolvedCorrectly = false;
 					end;
+					end;
+					print();
+					if resolvedCorrectly == false then
+						print("Could not resolve dependencies for " .. v.name);
+					else
+						print("Dependency solved correctly");
+					end;
+					print("-------------------");
 				end;
-
-                print();
-                if resolvedCorrectly == false then
-                    print("Could not resolve dependencies for " .. v.name);
-                else 
-                    print("Dependency solved correctly");
-                end;
-                print("-------------------");
 			end;
 		end;
 	end;
 end;
+
+
 local entities = {};
 funcs.ParseSceneObject = function(object)
 	if object.type == "Entity" then
@@ -109,6 +153,7 @@ funcs.ParseSceneObject = function(object)
 		entities[entity:GetName()] = entity;
 	end;
 end;
+
 funcs.ParseScene = function(scene)
     print("Creating Scene Objects");
     print("-------------------");
@@ -119,4 +164,6 @@ funcs.ParseScene = function(scene)
     print("-------------------");
 	funcs.ResolveDependencies(scene, entities);
 end;
+
 return funcs;
+

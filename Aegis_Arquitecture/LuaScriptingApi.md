@@ -2,32 +2,32 @@
 
 ## Table of Contents
 - [Aegis Scripting Api](#aegis-scripting-api)
-	- [Table of Contents](#table-of-contents)
+  - [Table of Contents](#table-of-contents)
 - [Game Init](#game-init)
 - [Tables and Namespaces](#tables-and-namespaces)
-	- [Aegis methods](#aegis-methods)
-	- [Aegis.NativeComponents methods](#aegisnativecomponents-methods)
-	- [Aegis.Maths](#aegismaths)
+  - [Aegis methods](#aegis-methods)
+  - [Aegis.NativeComponents methods](#aegisnativecomponents-methods)
+  - [Aegis.Maths](#aegismaths)
 - [Types and Functions](#types-and-functions)
-	- [Functions](#functions)
-	- [Properties](#properties)
-	- [Operators](#operators)
-	- [Aegis](#aegis)
-		- [Scene](#scene)
-		- [InputSystem](#inputsystem)
-		- [Entity](#entity)
-		- [ComponentBase](#componentbase)
-		- [AegisComponent](#aegiscomponent)
-	- [Aegis.NativeComponents](#aegisnativecomponents)
-		- [Transform](#transform)
-		- [Renderer](#renderer)
-	- [Aegis.Maths](#aegismaths-1)
-		- [Vector3](#vector3)
-		- [Vector4](#vector4)
-		- [Quaternion](#quaternion)
+  - [Functions](#functions)
+  - [Properties](#properties)
+  - [Operators](#operators)
+  - [Aegis](#aegis)
+    - [Scene](#scene)
+    - [InputSystem](#inputsystem)
+    - [Entity](#entity)
+    - [ComponentBase](#componentbase)
+    - [AegisComponent](#aegiscomponent)
+  - [Aegis.NativeComponents](#aegisnativecomponents)
+    - [Transform](#transform)
+    - [Renderer](#renderer)
+  - [Aegis.Maths](#aegismaths-1)
+    - [Vector3](#vector3)
+    - [Vector4](#vector4)
+    - [Quaternion](#quaternion)
 - [Components](#components)
 - [Entities and Scenes](#entities-and-scenes)
-	- [Scene dependencies](#scene-dependencies)
+  - [Scene dependencies](#scene-dependencies)
 - [Lua Utils](#lua-utils)
 - [Limitations](#limitations)
 
@@ -346,136 +346,104 @@ Imagine we want a certain entity component to get accesss to other entity compon
 
 ```lua
 
+-- Example of scene, it's just a table with list of entities
+
 local NAME = "TestScene";
 local scene = {
-  {
-    type = "Entity",
-    name = "Fish",
-    position = { x = 0, y = 0, z = 0},
-    components = {
-      {
-        type = "SimpleRotate",
-        
-        dependencies=
-        {
-          {
-            entity = "Rust",
-            components = {
-                "TestComponent", "NonExistingComponent"
-            }
-          },
-          {
-            entity = "TestEntity3",
-            components = {
-                "TestComponent"
-            }
-          }
-        }
-      },
-      {
-        type = "Renderer",
-        data = {
-          mesh = "fish.mesh"
-        }
-      }
-    }
-  },
-  {
-    type = "Entity",
-    name = "Rust",
-    components = {
-      {
-        type = "TestComponent",
-        data = {
-          test2 = 1,
-          --This will be ignored as it doesn exist in TestComponent
-          test4 = 3 
-        }
-      },
-      {
-        type = "Renderer",
-        data = {
-          mesh = "Rust.mesh"
-        }
-      }
-    }
-  }
+	{
+		type = "Entity",
+		name = "Fish",
+		components = {
+			{
+				type = "Renderer",
+				data = {
+					mesh = "fish.mesh",
+					material= "blue"
+				}
+			},
+		},
+	},
+	{
+		type = "Entity",
+		name = "LittleFish",
+		components = {
+			{
+				type = "Renderer",
+				data = {
+					mesh = "fish.mesh",
+					material= "red"
+				}
+			},
+			{
+				type = "ParentTest",
+				data = {
+					parent="@Fish",
+					parentRender = "@Fish.Renderer",
+				}
+			},
+		},
+	},
 };
 return scene;
 
-```
 
-Alright, let's go step by step
+```
 
 We have two entities that follows this structure of components
 
 ```
 Fish
-│ SimpleRotate
 │ Renderer
-Rust
-│ TestComponent
+LittleFish
 │ Renderer
+│ ParentTest
 ```
 
-Now if you look at the code, the component SimpleRotate of Fish has a dependency on Rust, an entity that exist. It has two dependencies, one for TestComponent and one for NonExistingComponent.
-
-During dependency solving, TestComponent will be injected into component.external.Rust.TestComponent, while NonExistingComponent, as it isn't a Rust component, won't be injected. A message will be printed to console warning that.
-Rust entity will also be injected in component.external.Rust.entity, just as a
-shorthand, you can it too from the injected component.
-
-Now the next dependency is from TestEntity3, but there isn't any TestEntity3 defined, so it will be ignored and printed as warning to console. Console log will be this.
+Now, if we execute the code, we wil get this output:
 
 ```
 DEBUG: Aegis loaded
 
+
+DEBUG: SOUND SYSTEM: System started
 Creating Scene Objects
 -------------------
-Error: test4 is not a field of TestComponent.data, test4 wasn't copied (Rust)
 
 Resolving dependencies:
 -------------------
-Solving dependencies for Fish:
+Solving dependencies for LittleFish:
 
---Solving dependencies from Rust:
-----Inyecting TestComponent from Rust into SimpleRotate
-----Component NonExistingComponent wasn't found in Rust, dependency could not be resolved
---Solving dependencies from TestEntity3:
-----Entity TestEntity3 wasn't found, dependency could not be resolved
+Inyecting Fish.Renderer into ParentTest.parentRender
+Inyecting Fish into ParentTest.parent
 
-Could not resolve dependencies for Fish
+Dependency solved correctly
 -------------------
+ParentMat is blue
 ```
 
-Notice how test4 wasn't copied as it isn't a field of TestComponent.data.
+If just one dependency is missing, the message will change to indicate the error but the scene will still be loaded.
 
-
-Despite the last message some dependencies were resolved and can be used in SimpleRotate.
-
-Dependencies are solved after component data is resolved, so if SimpleRotate Init code is this:
+Dependencies are solved after component data is resolved, so you can access it in the Init method without any danger. Although it's recommended to check if it's nil.
 
 ```lua
-        local entName = component.entity:GetName();
-        print("Init: " .. component.name .. " from " .. entName);
-        local rust = component.external.Rust;
-        print("EntityDependency: " .. rust.entity:GetName());
-        print("ComponentDependenty: " .. rust.TestComponent.name);
-        rust.TestComponent.data.test = 5;
-        print("ComponentTest2: " .. rust.TestComponent.data.test2);
+local NAME = "ParentTest";
+local table = {};
+function table.GetNew(entity, params)
+	local component = Aegis.CreateComponent(NAME, entity);
+	local data = component.data;
+	local funcs = component.funcs;
+	local entity = component.entity;
 
-        -- this will throw a warning through console, you can modify component.data
-        -- but you can't override it
-        component.data = {}
-```
+	data.parent = "undefined";
+	data.parentRender = "null";
 
-TestComponent.data.test will be 5 after init, TestComponent.data.test2 will be 1. This is the output
+	function Init()
+		print("ParentMat is " .. data.parentRender.data.material);
+	end;
 
 ```
-Init: SimpleRotate from Fish
-EntityDependency: Rust
-ComponentDependenty: TestComponent
-ComponentTest2: 1
-```
+Be aware that you shouldn't initialize data to nil outside init, because then the parser will think it's a missing entry to the table
+and won't be able to inject data and neither solved dependencies for that field. We are still working on a solution for this.
 
 # Lua Utils
 

@@ -8,10 +8,6 @@ AegisComponent* CreateComponent(std::string componentName, Entity* entity)
 
 void AegisComponent::init()
 {
-	// Not all components will have dependencies, it's better to free the able and set this to nil
-	if (!external.isNil() && external["inited"].isNil()) 
-		external = Nil();
-
 	setCallbacks(funcs);
 	CallLuaRefFunc(initFunc, 0);
 }
@@ -63,16 +59,6 @@ LuaRef AegisComponent::GetData() const
 	return data;
 }
 
-void AegisComponent::SetExternalData(LuaRef luaRef)
-{
-	PrintErrorModifyingTables("external", "table", true);
-}
-
-LuaRef AegisComponent::GetExtenalData() const
-{
-	return external;
-}
-
 void AegisComponent::SetType(LuaRef luaRef)
 {
 	type = luaRef;
@@ -107,7 +93,6 @@ void AegisComponent::ConvertToLua(lua_State* state)
 		deriveClass<AegisComponent, Component>("Component").
 		addProperty("data", &AegisComponent::GetData, &AegisComponent::SetData).
 		addProperty("funcs", &AegisComponent::GetFuncs, &AegisComponent::SetFuncs).
-		addProperty("external", &AegisComponent::GetExtenalData, &AegisComponent::SetExternalData).
 		addProperty("type", &AegisComponent::GetType, &AegisComponent::SetTypeLua).
 		endClass().
 		endNamespace();
