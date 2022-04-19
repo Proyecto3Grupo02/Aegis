@@ -51,8 +51,5 @@ void RigidBody::addForce(Vector3 vec) {
 	rigidBody->applyForce(forc, btVector3());
 }
 
-void RigidBody::fixedUpdate() {
-	if (isKinematic) return;
-}
 
 
