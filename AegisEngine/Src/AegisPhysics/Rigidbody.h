@@ -7,8 +7,11 @@
 #include <string>
 
 class btRigidBody;
+class btTransform;
+class btQuaternion;
 class Transform;
 class Vector3;
+class Vector4;
 
 class RigidBody {
 public:
@@ -16,7 +19,7 @@ public:
 
 	RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, float m = 1, bool useG = true, bool isK = false);
 	void init();
-	~RigidBody() {};
+	~RigidBody() { };
 	//void fixedUpdate();
 
 	void addForce(Vector3 vec);
@@ -27,10 +30,14 @@ public:
 	void setUsingGravity(bool uG);
 	void setGravity(Vector3 vec);
 
+	Vector3 getRbPosition();
+	Vector4 getRotation();
+
 	void setFreezeRotation(bool _x, bool _y, bool _z);
 
 protected:
 	btRigidBody* rigidBody;
+
 	float mass;
 	bool useGravity;
 	bool isKinematic;

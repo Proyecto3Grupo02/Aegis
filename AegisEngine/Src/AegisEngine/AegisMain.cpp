@@ -32,6 +32,7 @@
 #include "../AegisCommon/Components/LightComponent.h"
 #include "../AegisCommon/Components/CameraComponent.h"
 #include "../AegisCommon/Components/AnimationComponent.h"
+#include "../AegisCommon/Components/RigidbodyComponent.h"
 
 using namespace luabridge;
 
@@ -100,6 +101,8 @@ AegisMain::~AegisMain() {
 	delete ogreWrap;
 	delete sceneManager;
 	delete gameLoopData;
+	
+	Physics()->remove();
 }
 
 /// <summary>
@@ -139,6 +142,7 @@ void AegisMain::ConvertObjectToLua()
 	LightComponent::ConvertToLua(state);
 	CameraComponent::ConvertToLua(state);
 	AnimationComponent::ConvertToLua(state);
+	RigidbodyComponent::ConvertToLua(state);
 
 	push(state, sceneManager->GetCurrentScene());
 	lua_setglobal(state, "currentScene");

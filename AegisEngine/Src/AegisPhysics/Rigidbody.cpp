@@ -1,6 +1,7 @@
 #include "RigidBody.h"
 #include "PhysicsMain.h"
 #include "Vector3.h"
+#include "Vector4.h"
 #include <btBulletDynamicsCommon.h>
 
 RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, float m, bool useG, bool isK) :
@@ -43,7 +44,7 @@ void RigidBody::setFreezeRotation(bool _x, bool _y, bool _z)
 
 void RigidBody::createRigidBodyComponent(RigidBodyType rbType, Vector3 pos, Vector3 scale, std::string bodyMeshName, bool isConvex)
 {
-	rigidBody = PhysicsSystem::getInstance()->createRigidBody(rbType, mass, scale, pos, bodyMeshName, isConvex);
+	rigidBody = PhysicsSystem::getInstance()->createRigidBody(rbType, mass, scale, pos, bodyMeshName, isConvex, isKinematic);
 }
 
 void RigidBody::addForce(Vector3 vec) {
@@ -51,4 +52,18 @@ void RigidBody::addForce(Vector3 vec) {
 	rigidBody->applyForce(forc, btVector3());
 }
 
+Vector3 RigidBody::getRbPosition()
+{
+	btTransform t;
+	rigidBody->getMotionState()->getWorldTransform(t);
+	return Physics()->parseFromBulletVector(t.getOrigin());
+}
+
+Vector4 RigidBody::getRotation()
+{
+	btTransform t;
+	rigidBody->getMotionState()->getWorldTransform(t);
+	auto quat = t.getRotation();
+	return Vector4(quat.getX(), quat.getY(), quat.getZ(), quat.getW());
+}
 

@@ -60,6 +60,8 @@ private:
 	/// </summary>
 	void FixedUpdate(float dt);
 
+	void SyncTransforms();
+
 	/// <summary>
 	/// Llama al update de cada entidad para que actualice respectivamente sus componentes
 	/// </summary>

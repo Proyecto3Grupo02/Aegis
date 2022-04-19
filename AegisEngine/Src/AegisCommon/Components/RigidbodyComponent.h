@@ -20,12 +20,15 @@ public:
 	virtual void init() override {};
 	virtual void update(float deltaTime) override {};
 	virtual void fixedUpdate() override {};
+	void SyncToTransform();
 
 	//LUA------------
 	static void ConvertToLua(lua_State* state);
 
 private:
+	Vector3 initialPos;
 	RigidBody* rigidbody = nullptr;
+	Transform* transform = nullptr;
 };
 
 #endif // ! RIGIDBODY_H

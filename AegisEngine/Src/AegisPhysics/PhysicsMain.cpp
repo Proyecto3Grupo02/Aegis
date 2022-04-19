@@ -41,102 +41,99 @@ void PhysicsSystem::Init()
 
 	dynamicsWorld->setGravity(btVector3(0, -10, 0));
 
-	
+
 }
-	///create a few basic rigid bodies
+///create a few basic rigid bodies
 
-	////the ground is a cube of side 100 at position y = -56.
-	////the sphere will hit it at y = -6, with center at -5
-	//{
-	//	btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(50.), btScalar(50.), btScalar(50.)));
+////the ground is a cube of side 100 at position y = -56.
+////the sphere will hit it at y = -6, with center at -5
+//{
+//	btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(50.), btScalar(50.), btScalar(50.)));
 
-	//	collisionShapes.push_back(groundShape);
+//	collisionShapes.push_back(groundShape);
 
-	//	btTransform groundTransform;
-	//	groundTransform.setIdentity();
-	//	groundTransform.setOrigin(btVector3(0, -56, 0));
+//	btTransform groundTransform;
+//	groundTransform.setIdentity();
+//	groundTransform.setOrigin(btVector3(0, -56, 0));
 
-	//	btScalar mass(0.);
+//	btScalar mass(0.);
 
-	//	//rigidbody is dynamic if and only if mass is non zero, otherwise static
-	//	bool isDynamic = (mass != 0.f);
+//	//rigidbody is dynamic if and only if mass is non zero, otherwise static
+//	bool isDynamic = (mass != 0.f);
 
-	//	btVector3 localInertia(0, 0, 0);
-	//	if (isDynamic)
-	//		groundShape->calculateLocalInertia(mass, localInertia);
+//	btVector3 localInertia(0, 0, 0);
+//	if (isDynamic)
+//		groundShape->calculateLocalInertia(mass, localInertia);
 
-	//	//using motionstate is optional, it provides interpolation capabilities, and only synchronizes 'active' objects
-	//	btDefaultMotionState* myMotionState = new btDefaultMotionState(groundTransform);
-	//	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, groundShape, localInertia);
-	//	btRigidBody* body = new btRigidBody(rbInfo);
+//	//using motionstate is optional, it provides interpolation capabilities, and only synchronizes 'active' objects
+//	btDefaultMotionState* myMotionState = new btDefaultMotionState(groundTransform);
+//	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, groundShape, localInertia);
+//	btRigidBody* body = new btRigidBody(rbInfo);
 
-	//	//add the body to the dynamics world
-	//	dynamicsWorld->addRigidBody(body);
-	//}
+//	//add the body to the dynamics world
+//	dynamicsWorld->addRigidBody(body);
+//}
 
-	//{
-	//	//create a dynamic rigidbody
+//{
+//	//create a dynamic rigidbody
 
-	//	//btCollisionShape* colShape = new btBoxShape(btVector3(1,1,1));
-	//	btCollisionShape* colShape = new btSphereShape(btScalar(1.));
-	//	collisionShapes.push_back(colShape);
+//	//btCollisionShape* colShape = new btBoxShape(btVector3(1,1,1));
+//	btCollisionShape* colShape = new btSphereShape(btScalar(1.));
+//	collisionShapes.push_back(colShape);
 
-	//	/// Create Dynamic Objects
-	//	btTransform startTransform;
-	//	startTransform.setIdentity();
+//	/// Create Dynamic Objects
+//	btTransform startTransform;
+//	startTransform.setIdentity();
 
-	//	btScalar mass(1.f);
+//	btScalar mass(1.f);
 
-	//	//rigidbody is dynamic if and only if mass is non zero, otherwise static
-	//	bool isDynamic = (mass != 0.f);
+//	//rigidbody is dynamic if and only if mass is non zero, otherwise static
+//	bool isDynamic = (mass != 0.f);
 
-	//	btVector3 localInertia(0, 0, 0);
-	//	if (isDynamic)
-	//		colShape->calculateLocalInertia(mass, localInertia);
+//	btVector3 localInertia(0, 0, 0);
+//	if (isDynamic)
+//		colShape->calculateLocalInertia(mass, localInertia);
 
-	//	startTransform.setOrigin(btVector3(2, 10, 0));
+//	startTransform.setOrigin(btVector3(2, 10, 0));
 
-	//	//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
-	//	btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
-	//	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, colShape, localInertia);
-	//	btRigidBody* body = new btRigidBody(rbInfo);
+//	//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
+//	btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
+//	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, colShape, localInertia);
+//	btRigidBody* body = new btRigidBody(rbInfo);
 
-	//	dynamicsWorld->addRigidBody(body);
-	//}
+//	dynamicsWorld->addRigidBody(body);
+//}
 
-	/// Do some simulation
+/// Do some simulation
 void PhysicsSystem::update() {
-		///-----stepsimulation_start-----
-		for (int i = 0; i < 150; i++)
+	///-----stepsimulation_start-----
+	float timeStep = 1.f / 50.f;
+	dynamicsWorld->stepSimulation(timeStep, 10);
+	
+	std::cout << "Colisions: " << dynamicsWorld->getNumCollisionObjects() << " ";
+	for (int j = dynamicsWorld->getNumCollisionObjects() - 1; j >= 0; j--)
+	{
+		btCollisionObject* obj = dynamicsWorld->getCollisionObjectArray()[j];
+		btRigidBody* body = btRigidBody::upcast(obj);
+		btTransform trans;
+		if (body && body->getMotionState())
 		{
-			dynamicsWorld->stepSimulation(1.f / 60.f, 10);
-
-			//print positions of all objects
-			for (int j = dynamicsWorld->getNumCollisionObjects() - 1; j >= 0; j--)
-			{
-				btCollisionObject* obj = dynamicsWorld->getCollisionObjectArray()[j];
-				btRigidBody* body = btRigidBody::upcast(obj);
-				btTransform trans;
-				if (body && body->getMotionState())
-				{
-					body->getMotionState()->getWorldTransform(trans);
-				}
-				else
-				{
-					trans = obj->getWorldTransform();
-				}
-				printf("world pos object %d = %f,%f,%f\n", j, float(trans.getOrigin().getX()), float(trans.getOrigin().getY()), float(trans.getOrigin().getZ()));
-			}
+			body->getMotionState()->getWorldTransform(trans);
 		}
-		
+		else
+		{
+			trans = obj->getWorldTransform();
+		}
+		printf("world pos object %d = %f,%f,%f\n", j, float(trans.getOrigin().getX()), float(trans.getOrigin().getY()), float(trans.getOrigin().getZ()));
 	}
+}
 
-	///-----stepsimulation_end-----
+///-----stepsimulation_end-----
 
-	//cleanup in the reverse order of creation/initialization
+//cleanup in the reverse order of creation/initialization
 
-	///-----cleanup_start-----
-void PhysicsSystem::clear(){
+///-----cleanup_start-----
+void PhysicsSystem::clear() {
 	//remove the rigidbodies from the dynamics world and delete them
 	for (int i = dynamicsWorld->getNumCollisionObjects() - 1; i >= 0; i--)
 	{
@@ -158,10 +155,10 @@ void PhysicsSystem::clear(){
 		delete shape;
 	}
 
-	
+
 }
 
-void PhysicsSystem::remove(){
+void PhysicsSystem::remove() {
 	//delete dynamics world
 	delete dynamicsWorld;
 
@@ -179,7 +176,7 @@ void PhysicsSystem::remove(){
 	//next line is optional: it will be cleared by the destructor when the array goes out of scope
 	collisionShapes.clear();
 
-	
+
 }
 
 btTransform PhysicsSystem::parseToBulletTransform(Vector3 pos, Vector3 rot)
@@ -200,7 +197,7 @@ std::vector<Vector3> PhysicsSystem::getVertexFromMesh(std::string meshName)
 
 const btVector3 PhysicsSystem::parseToBulletVector(const Vector3& v) const
 {
-	return btVector3(btScalar( v.GetX()), btScalar(v.GetY()), btScalar(v.GetZ()));
+	return btVector3(btScalar(v.GetX()), btScalar(v.GetY()), btScalar(v.GetZ()));
 }
 
 const Vector3 PhysicsSystem::parseFromBulletVector(const btVector3& v) const
@@ -245,16 +242,16 @@ btCollisionShape* PhysicsSystem::createBodyShape(RigidBody::RigidBodyType rbType
 {
 	btCollisionShape* rbShape = nullptr;
 	switch (rbType) {
-	case RigidBody::RigidBodyType::Box :
+	case RigidBody::RigidBodyType::Box:
 		rbShape = new btBoxShape(btVector3(btScalar(_dim.GetX() / 2.0f), btScalar(_dim.GetY() / 2.0f), btScalar(_dim.GetZ() / 2.0f)));
 		break;
-	case RigidBody::RigidBodyType::Sphere :
+	case RigidBody::RigidBodyType::Sphere:
 		rbShape = new btSphereShape(btScalar(_dim.GetX() / 2.0f));
 		break;
-	case RigidBody::RigidBodyType::Custom :
+	case RigidBody::RigidBodyType::Custom:
 		rbShape = createShapeWithVertices(_dim, bodyMeshName, isConvex);
 		break;
-	case RigidBody::RigidBodyType::CapsuleX :
+	case RigidBody::RigidBodyType::CapsuleX:
 		rbShape = new btCapsuleShapeX(btScalar(_dim.GetZ() / 2.0f), btScalar(_dim.GetX()));
 		break;
 	case RigidBody::RigidBodyType::CapsuleZ:
@@ -266,10 +263,10 @@ btCollisionShape* PhysicsSystem::createBodyShape(RigidBody::RigidBodyType rbType
 	return rbShape;
 }
 
-btRigidBody* PhysicsSystem::createRigidBody(RigidBody::RigidBodyType rbType, float _mass, Vector3 _dim, Vector3 _pos, std::string bodyMeshName, bool isConvex) {
+btRigidBody* PhysicsSystem::createRigidBody(RigidBody::RigidBodyType rbType, float _mass, Vector3 _dim, Vector3 _pos, std::string bodyMeshName, bool isConvex, bool isKinematic) {
 	btCollisionShape* rbShape = createBodyShape(rbType, _dim, bodyMeshName, isConvex);
-	
-	
+
+
 	//= 
 	collisionShapes.push_back(rbShape);
 
@@ -278,13 +275,13 @@ btRigidBody* PhysicsSystem::createRigidBody(RigidBody::RigidBodyType rbType, flo
 	groundTransform.setOrigin(btVector3(_pos.GetX(), _pos.GetY(), _pos.GetZ()));
 	btScalar mass(_mass);
 
-	bool isDynamic = (_mass != 0.f);
-
 	btVector3 localInertia(0, 0, 0);
 
 	//rigidbody is dynamic if and only if mass is non zero, otherwise static
-	if (isDynamic)
+	if (!isKinematic)
 		rbShape->calculateLocalInertia(mass, localInertia);
+	else
+		mass = 0;
 
 	//using motionstate is optional, it provides interpolation capabilities, and only synchronizes 'active' objects
 	btDefaultMotionState* myMotionState = new btDefaultMotionState(groundTransform);
@@ -298,10 +295,10 @@ btRigidBody* PhysicsSystem::createRigidBody(RigidBody::RigidBodyType rbType, flo
 }
 
 
-	PhysicsSystem::PhysicsSystem()
-	{
-	}
+PhysicsSystem::PhysicsSystem()
+{
+}
 
-	PhysicsSystem::~PhysicsSystem()
-	{
-	}
+PhysicsSystem::~PhysicsSystem()
+{
+}

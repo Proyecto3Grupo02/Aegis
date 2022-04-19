@@ -82,6 +82,7 @@ void Transform::SetScale(Vector3 newScale)
 
 void Transform::update(float deltaTime) {}
 
+// TODO: Mover esto a Renderer
 void Transform::UpdateOgreNode()
 {
 	mNode->setPosition(Vector3ToOgre(position));

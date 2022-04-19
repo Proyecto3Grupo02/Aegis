@@ -2,7 +2,6 @@
 #ifndef PHYSICS_MAIN_H 
 #define PHYSICS_MAIN_H
 
-
 #include <vector>
 #include "../AegisCommon/Utils/Singleton.h"
 #include "Rigidbody.h"
@@ -39,7 +38,7 @@ public:
     void update();
     void remove();
     btTransform parseToBulletTransform(Vector3 pos, Vector3 rot);
-    btRigidBody* createRigidBody(RigidBody::RigidBodyType rbType, float _mass, Vector3 _dim, Vector3 _pos, std::string bodyMeshName = "", bool isConvex = true);
+    btRigidBody* createRigidBody(RigidBody::RigidBodyType rbType, float _mass, Vector3 _dim, Vector3 _pos, std::string bodyMeshName = "", bool isConvex = true, bool isKinematic = false);
     
     std::vector<Vector3> getVertexFromMesh(std::string meshName);
     
@@ -50,8 +49,6 @@ public:
     btCollisionShape* createBodyShape(RigidBody::RigidBodyType rbType, Vector3 _dim, std::string bodyMeshName, bool isConvex);
     
     void clear();
-
-
 };
 
 inline PhysicsSystem* Physics()

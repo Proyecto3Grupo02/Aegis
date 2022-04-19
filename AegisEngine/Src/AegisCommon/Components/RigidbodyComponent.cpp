@@ -2,11 +2,12 @@
 
 #include "Entity.h"
 
-RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m = 1, bool useG = true, bool isK = false) 
+RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m, bool useG, bool isK) 
 	: AegisComponent("Rigidbody", ent) 
 {
-	Transform* t = ent->GetTransform();
-	rigidbody = new RigidBody(bodyMeshName, t->GetPosition(), t->GetScale(), m, useG, isK);
+	transform = ent->GetTransform();
+	initialPos = transform->GetPosition();
+	rigidbody = new RigidBody(bodyMeshName, transform->GetPosition(), transform->GetScale(), m, useG, isK);
 };
 
 //LUA-------------------------------------------------------------------------------------------------------
@@ -18,6 +19,16 @@ RigidbodyComponent* CreateRigidbody(Entity* ent, LuaRef args) //Doesn't belong t
 	bool isKinematic = LuaMngr()->ParseBool(args["isKinematic"], false);
 
 	return new RigidbodyComponent(ent, bodyName, mass, useGravity, isKinematic);
+}
+
+void RigidbodyComponent::SyncToTransform()
+{
+	Vector3 updatedPos = rigidbody->getRbPosition();
+
+	transform->SetPosition(rigidbody->getRbPosition());
+	auto quat = rigidbody->getRotation();
+	Ogre::Quaternion ogreQuat(quat.w, quat.x, quat.y, quat.z);
+	transform->SetRotation(ogreQuat);
 }
 
 void RigidbodyComponent::ConvertToLua(lua_State* state)

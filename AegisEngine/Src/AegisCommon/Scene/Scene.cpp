@@ -1,6 +1,8 @@
 #include "Scene.h"
 #include "Entity.h"
 #include "Scripting.h"
+#include "../../AegisPhysics/PhysicsMain.h"
+#include "../Components/RigidbodyComponent.h"
 
 using namespace luabridge;
 
@@ -63,6 +65,17 @@ void Scene::FixedUpdate(float dt) {
 	}
 }
 
+void Scene::SyncTransforms()
+{
+	for (Entity* entity : *entities)
+	{
+		auto rb = entity->getComponent<RigidbodyComponent>("Rigidbody");
+		if (rb != nullptr)
+			rb->SyncToTransform();
+	}
+		//entity->update(dt);
+}
+
 void Scene::Update(float dt) {
 	for (Entity* entity : *entities)
 		entity->update(dt);
@@ -74,14 +87,10 @@ void Scene::LateUpdate(float dt) {
 }
 
 void Scene::UpdateScene(float dt) {
-	// Esto hay que moverlo al update de la aplicacion, por ahora esta aqui
-	// Es decir, en caso de que el update scene se complete mas rapido de lo esperado
-	// Hay que esperar antes del siguiente update
-	//double current = getCurrentTime();
-	//double elapsed = current - previousFrameTime;
-	//previousFrameTime = current;
 	InitEntities();
 	FixedUpdate(dt);
+	Physics()->update();
+	SyncTransforms();
 	Update(dt);
 	LateUpdate(dt);
 	RemoveAndFreePendingEntities();
