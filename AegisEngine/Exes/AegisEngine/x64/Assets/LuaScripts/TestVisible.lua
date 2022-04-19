@@ -10,7 +10,7 @@ function table.GetNew(entity, params)
 	function Update(deltaTime) 
         local meshRenderer = component.entity:GetComponent("Renderer").type;
         -- change visibility when pressing v
-    if  Input:AnyKeyWasPressed() then
+    if  Input:AnyKeyWasPressed() then -- GENERIC CHECK BEFORE CHECKING INDIVIDUAL KEY ==> NECESSARY
         if Input:KeyWasPressed("v") then
             if (meshRenderer.visible == true) then
                 meshRenderer.visible = false;

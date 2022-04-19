@@ -111,7 +111,7 @@ funcs.ResolveDependencies = function(scene, entities)
 		if v.type == "Entity" then
 			for p, cmp in ipairs(v.components or {}) do
 				if cmp.data ~= nil and funcs.HasDependencies(cmp.data) then
-					print("Solving dependencies for " .. v.name .. ":\n");
+					print("Solving dependencies for " .. v.name .. ":");
 					local resolvedCorrectly = true;
 					local entityData = entities[v.name]:GetComponent(cmp.type).data;
 					for key, cmpData in pairs(cmp.data) do
@@ -120,23 +120,23 @@ funcs.ResolveDependencies = function(scene, entities)
 						if type(cmpData) == "string" and cmpData:sub(1, 1) == "@" then
 							local dependencyData = funcs.SearchEntityOrComponent(entities, cmpData:sub(2));
 							if dependencyData == nil then
-								print("Error: Data " .. cmpData:sub(2) .. " was not found, field is untouched");
+								print("* Error: Data " .. cmpData:sub(2) .. " was not found, field is untouched");
 								resolvedCorrectly = false;
 							else
-								print("Inyecting " ..  cmpData:sub(2) .. " into " .. cmp.type .. "." .. key);
+								print("* Inyecting " ..  cmpData:sub(2) .. " into " .. cmp.type .. "." .. key);
 								entityData[key] = dependencyData;
 							end;
 						end;
 					else
-						print("Error: " .. key .. " is not a field of " .. cmp.type .. ".data, " .. key .. " wasn't was copied");
+						print("* Error: " .. key .. " is not a field of " .. cmp.type .. ".data, " .. key .. " wasn't was copied");
 						resolvedCorrectly = false;
 					end;
 					end;
 					print();
 					if resolvedCorrectly == false then
-						print("Could not resolve dependencies for " .. v.name);
+						print("* Could not resolve dependencies for " .. v.name);
 					else
-						print("Dependency solved correctly");
+						print("* Dependency solved correctly");
 					end;
 					print("-------------------");
 				end;
