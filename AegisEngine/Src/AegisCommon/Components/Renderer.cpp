@@ -76,12 +76,12 @@ void Renderer::constructoraRendererLua(Entity* _ent, std::string meshName,std::s
 void Renderer::ConvertToLua(lua_State* state)
 {
 	getGlobalNamespace(state).
-		beginNamespace("Aegis").
-		beginNamespace("NativeComponents").
-		addFunction("CreateRenderer", CreateRenderer).
-		deriveClass<Renderer, AegisComponent>("Renderer").
-		addProperty("visible", &Renderer::getRendering, &Renderer::setRendering).
-		endClass().
-		endNamespace().
+			beginNamespace("Aegis").
+				beginNamespace("NativeComponents").
+				addFunction("CreateRenderer", CreateRenderer).
+				deriveClass<Renderer, AegisComponent>("Renderer").
+				addProperty("visible", &Renderer::getRendering, &Renderer::setRendering).
+				endClass().
+			endNamespace().
 		endNamespace();
 }

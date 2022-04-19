@@ -51,5 +51,43 @@ void RigidBody::addForce(Vector3 vec) {
 	rigidBody->applyForce(forc, btVector3());
 }
 
+// LUA ----------------------------------------------------------
 
+void RigidBody::addForceLua(Vector3 vec) {
+
+}
+bool RigidBody::getKinematicLua() {
+
+}
+bool RigidBody::getUseGravityLua() {
+
+}
+void RigidBody::setKinematicLua(bool sK) {
+
+}
+void RigidBody::setUsingGravityLua(bool uG) {
+
+}
+void RigidBody::setGravityLua(Vector3 vec) {
+
+}
+void RigidBody::setFreezeRotationLua(bool _x, bool _y, bool _z) {
+
+}
+
+void RigidBody::ConvertToLua(lua_State* state)
+{
+	getGlobalNamespace(state).
+		beginNamespace("Aegis").
+			beginClass<RigidBody>("RigidBody").
+				/*addFunction("addForce", &RigidBody::addForceLua).
+				addFunction("getKinematic", &RigidBody::getKinematicLua).*/
+				addFunction("getUseGravity", &RigidBody::getUseGravity).
+				/*addFunction("setKinematic", &RigidBody::setKinematicLua).
+				addFunction("setUsingGravity", &RigidBody::setUsingGravityLua).
+				addFunction("setGravity", &RigidBody::setGravityLua).
+				addFunction("setFreezeRotation", &RigidBody::setFreezeRotationLua).*/
+			endClass().
+		endNamespace();
+}
 

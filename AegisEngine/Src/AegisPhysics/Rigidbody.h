@@ -7,6 +7,8 @@
 #include <vector>
 #include <string>
 
+#include "../Interfaces/ILuaObject.h"
+
 class btRigidBody;
 class Transform;
 class Vector3;
@@ -29,6 +31,19 @@ public:
 	void setGravity(Vector3 vec);
 
 	void setFreezeRotation(bool _x, bool _y, bool _z);
+
+	//LUA
+	static void ConvertToLua(lua_State* state);
+
+	void addForceLua(Vector3 vec);
+	bool getKinematicLua();
+	bool getUseGravityLua();
+	void setKinematicLua(bool sK);
+	void setUsingGravityLua(bool uG);
+	void setGravityLua(Vector3 vec);
+	void setFreezeRotationLua(bool _x, bool _y, bool _z);
+
+
 protected:
 	btRigidBody* rigidBody;
 	float mass;

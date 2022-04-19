@@ -92,16 +92,16 @@ void Transform::UpdateOgreNode()
 void Transform::ConvertToLua(lua_State* state)
 {
 	getGlobalNamespace(state).
-		beginNamespace("Aegis").
-		beginNamespace("NativeComponents").
-		beginClass<Transform>("Transform").
-		addProperty("position", &Transform::GetPosition, &Transform::SetPosition).
-		addProperty("scale", &Transform::GetScale, &Transform::SetScale).
-		addProperty("rotation", &Transform::GetRotation, &Transform::SetRotation).
-		addProperty("localEulerAngles", &Transform::GetRotationEuler, &Transform::SetRotationEuler).
-		addFunction("SetParent", &Transform::SetParent).
-		endClass().
-		endNamespace().
+			beginNamespace("Aegis").
+				beginNamespace("NativeComponents").
+					beginClass<Transform>("Transform").
+					addProperty("position", &Transform::GetPosition, &Transform::SetPosition).
+					addProperty("scale", &Transform::GetScale, &Transform::SetScale).
+					addProperty("rotation", &Transform::GetRotation, &Transform::SetRotation).
+					addProperty("localEulerAngles", &Transform::GetRotationEuler, &Transform::SetRotationEuler).
+					addFunction("SetParent", &Transform::SetParent).
+				endClass().
+			endNamespace().
 		endNamespace();
 }
 
