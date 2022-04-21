@@ -98,11 +98,12 @@ AegisMain::AegisMain() : IInitializable() {
 }
 
 AegisMain::~AegisMain() {
-	delete ogreWrap;
-	delete sceneManager;
 	delete gameLoopData;
+	delete sceneManager;
+	delete ogreWrap;
 	
 	Physics()->remove();
+	Audio()->close();
 }
 
 /// <summary>

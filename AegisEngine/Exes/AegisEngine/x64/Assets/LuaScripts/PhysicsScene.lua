@@ -4,7 +4,7 @@ local NAME = "PhysicsScene";
 local scene = {
 	{
 		type = "Entity",
-		name = "Fish",
+		name = "Cubo",
 		position = { y = 2},
 		components = {
 			{
@@ -15,17 +15,21 @@ local scene = {
 				}
 			},
 			{
-				type = "RigidBody",
+				type = "Rigidbody",
 				data = 
 				{
 					bodyName = "R1"
 				}
 			}
+			,
+			{
+				type = "CharacterMovement"				
+			}
 		}
 	},
 	{
 		type = "Entity",
-		name = "LittleFish",
+		name = "Suelo",
 		position = { y = -2 },
 		scale = { x = 5, y = 0.1, z = 5},
 		components = {
@@ -37,12 +41,19 @@ local scene = {
 				}
 			},
 			{
-				type = "RigidBody",
+				type = "Rigidbody",
 				data = 
 				{
 					bodyName = "R2",
 					isKinematic = true,
 					useGravity = false
+				}
+			},
+			{
+				type = "DestroyTest",
+				data =
+				{
+					child = "@Cubo"
 				}
 			}
 		}
@@ -59,6 +70,31 @@ local scene = {
 					color = { r = 0.8, g = 0.8, b = 0.8  },
 					spec = { r = 0.8, g = 0.8, b = 0.8 },
 					direction = { x = 0, y = 0.25, z = -0.75 }
+				}
+			}
+		}
+		
+	},
+	{
+		type = "Entity",
+		name = "RandomFish",
+		position = { y = 1.1, z =1.01 },
+		scale = {x = 0.5, y = 0.5, z =0.5},
+		components = {
+			{
+				type = "Renderer",
+				data = {
+						mesh = "Cube.mesh",
+						material= "yellow"
+					}
+			},
+			{
+				type = "Rigidbody",
+				data = 
+				{
+					bodyName = "R2",
+					isKinematic = true,
+					useGravity = false
 				}
 			}
 		}

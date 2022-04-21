@@ -1,11 +1,11 @@
-#include "Entity.h"
+﻿#include "Entity.h"
 #include "Component.h"
 #include "Transform.h"
 #include "../Components/Renderer.h"
 #include "../Scene/Scene.h"
 
 Entity::Entity(Scene* node) :
-	mNode_(node->GetOgreNode()), active_(true), mScene_(node)
+	mNode_(node->GetNewNode()), active_(true), mScene_(node)
 {
 	//Componente obligatorio para todas las entidades
 	transform = new Transform(Vector3(0,0,0), Ogre::Quaternion(), Vector3(1.0f, 1.0f, 1.0f), getNode(), this);
@@ -13,7 +13,7 @@ Entity::Entity(Scene* node) :
 }
 
 Entity::Entity(Scene* node, Vector3 pos) :
-	mNode_(node->GetOgreNode()), active_(true), mScene_(node)
+	mNode_(node->GetNewNode()), active_(true), mScene_(node)
 {
 	transform = new Transform(pos, Ogre::Quaternion(), Vector3(1.0f, 1.0f, 1.0f), getNode(), this);
 	this->addComponentFromLua(transform);
@@ -28,6 +28,17 @@ Entity::~Entity()
 	mComponents_.clear();
 
 	mChildren_.clear();
+	
+	//Node can be null if a parent destroys a child before the child destroys itself
+	auto mParent = mNode_ == nullptr ? nullptr : mNode_->getParentSceneNode();
+	if(mParent != nullptr)
+		mParent->removeAndDestroyChild(mNode_);
+}
+
+template<typename T>
+inline T* Entity::getComponent(const char* componentName)
+{
+	return dynamic_cast<T*>(getComponentLua(componentName));
 }
 
 void Entity::init()
@@ -75,6 +86,35 @@ void Entity::render() {
 	}
 }
 
+inline void Entity::addComponentFromLua(AegisComponent* component)
+{
+	std::string key = component->GetComponentName();
+
+	if (mComponents_.count(key) == 0) { //si no est� lo a�adimos
+		//component->SetEntity(this);
+
+		mComponentsArray_.push_back(component);
+		mComponents_[key] = component;
+	}
+	else
+	{
+		std::cout << key << " is already in " << mName_ << ", component will be deleted";
+		delete component;
+	}
+}
+
+AegisComponent* Entity::getComponentLua(std::string componentName)
+{
+	if (mComponents_.count(componentName) == 0)
+		return nullptr;
+	else return  mComponents_[componentName];
+}
+
+void Entity::SetIterator(std::list<Entity*>::iterator entityIterator)
+{
+	this->entityIterator = entityIterator;
+}
+
 void Entity::onCollision(Entity* other)
 {
 	for (auto component : mComponentsArray_) {
@@ -109,6 +149,12 @@ void Entity::SetParent(Entity* ent)
 		std::cout << "ERROR: For some reason transform is null in entity " << getName() << "\n";
 }
 
+void Entity::Destroy()
+{
+	GetTransform()->DestroyChilds();
+	mScene_->DestroyEntity(entityIterator);
+}
+
 Entity* CreateEntity(Scene* scene, Vector3 pos)
 {
 	return new Entity(scene, pos);;
@@ -130,9 +176,7 @@ void Entity::ConvertToLua(lua_State* state)
 		addFunction("SetName", &Entity::setName).
 		addFunction("GetScene", &Entity::getScene).
 		addFunction("SetParent", &Entity::SetParent).
-		// No tiene sentido el setScene, no vamos a mover entidades entre escenas
-		//addFunction("SetScene", &Entity::setScene).
-		//addFunction("addChildEntity", &Entity::addChildEntity).
+		addFunction("Destroy", &Entity::Destroy).
 		addProperty("transform", &Entity::GetTransform, &Entity::SetTransform).
 		endClass().
 		endNamespace();

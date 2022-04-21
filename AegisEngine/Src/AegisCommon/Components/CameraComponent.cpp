@@ -4,6 +4,7 @@ CameraComponent::CameraComponent(Entity* ent, LuaRef args):
 	AegisComponent("Camera", ent), mCamera_(nullptr), isMainCam_(args["isMainCam"])
 {
 	mCamera_ = new AegisCamera(args["name"], getEntity()->getNode(), isMainCam_);
+	SetDataAsInnerType(this);
 	// deberiamos poner la camara principal como variable global? :think:
 }
 

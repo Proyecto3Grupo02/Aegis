@@ -15,7 +15,7 @@ class	AegisComponent : public Component, public ILuaObject {
 public:
 	AegisComponent() : Component() {}
 	AegisComponent(std::string componentName, Entity* entity) : Component(componentName, entity) {}
-	~AegisComponent() {}
+	virtual ~AegisComponent() {}
 	virtual void init() override;
 	virtual void update(float dt) override;
 	virtual void lateUpdate(float dt)  override;

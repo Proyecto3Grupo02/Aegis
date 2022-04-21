@@ -15,12 +15,19 @@ class RigidbodyComponent : public AegisComponent, public ILuaObject
 {
 public:
 	RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m = 1, bool useG = true, bool isK = false);
-	virtual ~RigidbodyComponent() {};
+	virtual ~RigidbodyComponent();
 
 	virtual void init() override {};
 	virtual void update(float deltaTime) override {};
 	virtual void fixedUpdate() override {};
 	void SyncToTransform();
+
+	void AddForce(Vector3 force);
+	Vector3 GetPosition() const;
+	void SetPosition(Vector3 pos);
+	//Vector4 getRotation();
+
+	void SetIterator(std::list<RigidbodyComponent*>::iterator physicsEntityIt);
 
 	//LUA------------
 	static void ConvertToLua(lua_State* state);
@@ -29,6 +36,7 @@ private:
 	Vector3 initialPos;
 	RigidBody* rigidbody = nullptr;
 	Transform* transform = nullptr;
+	std::list<RigidbodyComponent*>::iterator physicsEntityIt;
 };
 
 #endif // ! RIGIDBODY_H

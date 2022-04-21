@@ -11,6 +11,8 @@ AnimationComponent::AnimationComponent(Entity* _ent, LuaRef args) : AegisCompone
 	LuaRef keyframes = args["keyframes"];
 	if (!keyframes.isNil())
 		ReadKeyframes(keyframes);
+
+	SetDataAsInnerType(this);
 }
 
 //Esto hay que moverlo a otro sitio, pero en luaref causaria dependencias con aegiscommons asi que no se

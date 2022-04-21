@@ -18,6 +18,7 @@ subject to the following restrictions:
 #include <stdio.h>
 #include "PhysicsMain.h"
 #include "Vector3.h"
+#include "Vector4.h"
 /// This is a Hello World program for running a basic Bullet physics simulation
 
 
@@ -110,7 +111,7 @@ void PhysicsSystem::update() {
 	float timeStep = 1.f / 50.f;
 	dynamicsWorld->stepSimulation(timeStep, 10);
 	
-	std::cout << "Colisions: " << dynamicsWorld->getNumCollisionObjects() << " ";
+	//std::cout << "Colisions: " << dynamicsWorld->getNumCollisionObjects() << " ";
 	for (int j = dynamicsWorld->getNumCollisionObjects() - 1; j >= 0; j--)
 	{
 		btCollisionObject* obj = dynamicsWorld->getCollisionObjectArray()[j];
@@ -124,7 +125,7 @@ void PhysicsSystem::update() {
 		{
 			trans = obj->getWorldTransform();
 		}
-		printf("world pos object %d = %f,%f,%f\n", j, float(trans.getOrigin().getX()), float(trans.getOrigin().getY()), float(trans.getOrigin().getZ()));
+		//printf("world pos object %d = %f,%f,%f\n", j, float(trans.getOrigin().getX()), float(trans.getOrigin().getY()), float(trans.getOrigin().getZ()));
 	}
 }
 
@@ -188,6 +189,18 @@ btTransform PhysicsSystem::parseToBulletTransform(Vector3 pos, Vector3 rot)
 	t.setRotation(quat);
 	return t;
 }
+
+btTransform PhysicsSystem::parseToBulletTransform(Vector3 pos, Vector4 rot)
+{
+	btTransform t;
+	t.setIdentity();
+	t.setOrigin({ btScalar(pos.GetX()), btScalar(pos.GetY()), btScalar(pos.GetZ()) });
+	btQuaternion quat = btQuaternion(rot.x, rot.y, rot.z, rot.w);
+	quat.normalize();
+	t.setRotation(quat);
+	return t;
+}
+
 std::vector<Vector3> PhysicsSystem::getVertexFromMesh(std::string meshName)
 {
 	std::vector<Vector3> vertex;

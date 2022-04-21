@@ -23,6 +23,7 @@ public:
 	//void fixedUpdate();
 
 	void addForce(Vector3 vec);
+	void addTorque(Vector3 vec);
 
 	bool getKinematic();
 	bool getUseGravity();
@@ -31,6 +32,9 @@ public:
 	void setGravity(Vector3 vec);
 
 	Vector3 getRbPosition();
+	void setRbPosition(Vector3 vec);
+	void setRbRotation(Vector4 vec);
+	
 	Vector4 getRotation();
 
 	void setFreezeRotation(bool _x, bool _y, bool _z);

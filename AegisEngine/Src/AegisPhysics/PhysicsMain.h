@@ -38,6 +38,7 @@ public:
     void update();
     void remove();
     btTransform parseToBulletTransform(Vector3 pos, Vector3 rot);
+    btTransform parseToBulletTransform(Vector3 pos, Vector4 rot);
     btRigidBody* createRigidBody(RigidBody::RigidBodyType rbType, float _mass, Vector3 _dim, Vector3 _pos, std::string bodyMeshName = "", bool isConvex = true, bool isKinematic = false);
     
     std::vector<Vector3> getVertexFromMesh(std::string meshName);

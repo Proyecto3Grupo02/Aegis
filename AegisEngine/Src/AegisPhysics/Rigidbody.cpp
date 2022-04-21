@@ -52,11 +52,27 @@ void RigidBody::addForce(Vector3 vec) {
 	rigidBody->applyForce(forc, btVector3());
 }
 
+void RigidBody::addTorque(Vector3 vec)
+{
+	btVector3 torque = btVector3(vec.GetX(), vec.GetY(), vec.GetZ());
+	rigidBody->applyTorque(torque);
+}
+
 Vector3 RigidBody::getRbPosition()
 {
 	btTransform t;
 	rigidBody->getMotionState()->getWorldTransform(t);
 	return Physics()->parseFromBulletVector(t.getOrigin());
+}
+
+void RigidBody::setRbPosition(Vector3 vec)
+{
+	rigidBody->getMotionState()->setWorldTransform(Physics()->parseToBulletTransform(vec, getRotation()));
+}
+
+void RigidBody::setRbRotation(Vector4 vec)
+{
+	rigidBody->getMotionState()->setWorldTransform(Physics()->parseToBulletTransform(getRbPosition(), vec));
 }
 
 Vector4 RigidBody::getRotation()

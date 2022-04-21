@@ -5,13 +5,14 @@
 
 #include "../Utils/Vector3.h"
 #include "../Utils/Vector4.h"
+#include "../Utils/MathUtils.h"
+
+using namespace MathUtils;
 
 
 Renderer::Renderer(Entity* _ent, std::string meshName, std::string matName, Ogre::SceneManager* sceneMng, bool ir) :
 	AegisComponent("Renderer", _ent)
 {
-	data["mesh"] = "fish.mesh";
-	data["material"] = "red";
 	isVisible = ir;
 	SetDataAsInnerType(this);
 	constructoraRenderer(_ent, meshName,matName, sceneMng, ir);
@@ -20,8 +21,6 @@ Renderer::Renderer(Entity* _ent, std::string meshName, std::string matName, Ogre
 Renderer::Renderer(Entity* _ent, std::string meshName, std::string matName) :
 	AegisComponent("Renderer", _ent)
 {
-	data["mesh"] = "fish.mesh";
-	data["material"] = "red";
 	isVisible = true;
 	SetDataAsInnerType(this);
 	constructoraRenderer(_ent, meshName, matName,_ent->getNode()->getCreator(), true);
@@ -36,7 +35,9 @@ Renderer::Renderer()
 
 void Renderer::render()
 {
-	transform->UpdateOgreNode();
+	node->setPosition(Vector3ToOgre(transform->GetPosition()));
+	node->setScale(Vector3ToOgre(transform->GetScale()));
+	node->setOrientation(transform->GetRotation());
 }
 
 void Renderer::setRendering(bool iR)

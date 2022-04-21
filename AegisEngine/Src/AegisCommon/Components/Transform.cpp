@@ -25,11 +25,19 @@ Vector3 Transform::GetScale() const
 void Transform::SetParent(Entity* ent)
 {
 	auto root = mNode->getCreator()->getRootSceneNode();
-	auto oldParent = parent;
-	parent = ent == nullptr ? root : ent->getNode();
+	auto oldParent = parentNode;
+	auto oldParentEntity = parentEntity;
+	parentNode = ent == nullptr ? root : ent->getNode();
+	parentEntity = ent;
+	
+	if (oldParentEntity != ent && oldParentEntity != nullptr)
+		oldParentEntity->GetTransform()->RemoveChild(GetEntity());
+
+	if (parentEntity != nullptr)
+		parentEntity->GetTransform()->AddChild(this->GetEntity());
 
 	oldParent->removeChild(mNode);
-	parent->addChild(mNode);
+	parentNode->addChild(mNode);
 
 	// Old parent data (the one we have detached of)
 	Vector3 oldParentScale = ParseOgreVector3(oldParent->getScale());
@@ -37,9 +45,9 @@ void Transform::SetParent(Entity* ent)
 	Ogre::Quaternion oldParentRotation = oldParent->getOrientation();
 
 	// New parent data (the one we have attached to)
-	Vector3 newParentScale = ParseOgreVector3(parent->getScale());
-	Vector3 newParentPos = ParseOgreVector3(parent->getPosition());
-	Ogre::Quaternion newParentRotation = parent->getOrientation();
+	Vector3 newParentScale = ParseOgreVector3(parentNode->getScale());
+	Vector3 newParentPos = ParseOgreVector3(parentNode->getPosition());
+	Ogre::Quaternion newParentRotation = parentNode->getOrientation();
 
 	//Correction rotation "before" unparenting
 	rotation = oldParentRotation * rotation;
@@ -80,29 +88,40 @@ void Transform::SetScale(Vector3 newScale)
 	scale = newScale;
 }
 
-void Transform::update(float deltaTime) {}
+Transform::~Transform() {}
 
-// TODO: Mover esto a Renderer
-void Transform::UpdateOgreNode()
-{
-	mNode->setPosition(Vector3ToOgre(position));
-	mNode->setScale(Vector3ToOgre(scale));
-	mNode->setOrientation(rotation);
-}
+void Transform::update(float deltaTime) {}
 
 void Transform::ConvertToLua(lua_State* state)
 {
 	getGlobalNamespace(state).
-			beginNamespace("Aegis").
-				beginNamespace("NativeComponents").
-					beginClass<Transform>("Transform").
-					addProperty("position", &Transform::GetPosition, &Transform::SetPosition).
-					addProperty("scale", &Transform::GetScale, &Transform::SetScale).
-					addProperty("rotation", &Transform::GetRotation, &Transform::SetRotation).
-					addProperty("localEulerAngles", &Transform::GetRotationEuler, &Transform::SetRotationEuler).
-					addFunction("SetParent", &Transform::SetParent).
-				endClass().
-			endNamespace().
+		beginNamespace("Aegis").
+		beginNamespace("NativeComponents").
+		beginClass<Transform>("Transform").
+		addProperty("position", &Transform::GetPosition, &Transform::SetPosition).
+		addProperty("scale", &Transform::GetScale, &Transform::SetScale).
+		addProperty("rotation", &Transform::GetRotation, &Transform::SetRotation).
+		addProperty("localEulerAngles", &Transform::GetRotationEuler, &Transform::SetRotationEuler).
+		addFunction("SetParent", &Transform::SetParent).
+		endClass().
+		endNamespace().
 		endNamespace();
+}
+
+void Transform::AddChild(Entity* child)
+{
+	childs.push_back(child);
+}
+
+void Transform::RemoveChild(Entity* child)
+{
+	childs.remove(child);
+}
+
+void Transform::DestroyChilds()
+{
+	//Destroys every child calling its Destroy function
+	for (Entity* child : childs)
+		child->Destroy();
 }
 

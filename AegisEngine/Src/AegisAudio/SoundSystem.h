@@ -98,10 +98,10 @@ public:
 	float getSoundVolume() const;
 
 	void Init();
+	void close();
 	Channel* playSound(const std::string& name);
 	Channel* playMusic(const std::string& name);
 private:
-	void close();
 	
 
 	Sound* createSound(const std::string& name,  SoundMode mode);

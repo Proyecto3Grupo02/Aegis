@@ -18,19 +18,20 @@ void Scene::InitEntities()
 
 // Es posible que aqui queramos inicializar una escena de ogre y sincronizarla con las entidades
 Scene::Scene(Ogre::SceneNode* ogreNode) :
-	accumulator(0), entities(new std::list<Entity*>()), entitiesToDelete(std::list<std::list<Entity*>::iterator>()) , ogreNode(ogreNode), uninitializedEntities(new std::list<Entity*>())
+	accumulator(0), entities(new std::list<Entity*>()), entitiesToDelete(std::list<std::list<Entity*>::iterator>()) , ogreNode(ogreNode), uninitializedEntities(new std::list<Entity*>()),
+	physicsEntities(new std::list<RigidbodyComponent*>())
 {
 }
 
 Scene::~Scene() {
 	for (Entity* entity : *entities)
-	{
 		delete entity;
-	}
+	
+	RemoveAndFreePendingEntities();
 
 	delete this->entities;
-
-	RemoveAndFreePendingEntities();
+	delete this->uninitializedEntities;
+	delete this->physicsEntities;
 }
 
 void Scene::RemoveAndFreeEntity(std::list<Entity*>::iterator entity) {
@@ -49,31 +50,43 @@ void Scene::AddEntity(Entity* entity)
 {
 	this->uninitializedEntities->push_back(entity);
 	this->entities->push_back(entity);
+	entity->SetIterator(--entities->end());
+}
+
+void Scene::AddPhysicsEntity(RigidbodyComponent* physicsEntity)
+{
+	this->physicsEntities->push_back(physicsEntity);
+	physicsEntity->SetIterator(--physicsEntities->end());
 }
 
 void Scene::DestroyEntity(std::list<Entity*>::iterator entity) {
 	this->entitiesToDelete.push_back(entity);
 }
 
+void Scene::RemovePhysicsEntity(std::list<RigidbodyComponent*>::iterator physicsEntity)
+{
+	this->physicsEntities->erase(physicsEntity);
+}
+
 void Scene::FixedUpdate(float dt) {
 	accumulator += dt;
-	while (accumulator >= PHYSICS_STEP)	{
-		// Call entities physics update
-		//for (Entity* entity : *entities)
-			//entity->integrate();
+	uint16_t remainingSteps = MAX_PHYSICS_STEP_PER_FRAME;
+
+	while (accumulator >= PHYSICS_STEP && remainingSteps > 0)	{
+		for(RigidbodyComponent* rb : *physicsEntities)
+			rb->getEntity()->fixedUpdate();
+
 		accumulator -= PHYSICS_STEP;
+		remainingSteps--;
 	}
 }
 
 void Scene::SyncTransforms()
 {
-	for (Entity* entity : *entities)
-	{
-		auto rb = entity->getComponent<RigidbodyComponent>("Rigidbody");
-		if (rb != nullptr)
-			rb->SyncToTransform();
-	}
-		//entity->update(dt);
+	//Iterate physics entities and sync their transforms
+	for (RigidbodyComponent* physicsEntity : *physicsEntities)
+		physicsEntity->SyncToTransform();
+	
 }
 
 void Scene::Update(float dt) {
@@ -103,9 +116,14 @@ void Scene::Render()
 }
 
 //the ogreNode usually is the root scene node so we add this node as a child one
-Ogre::SceneNode* Scene::GetOgreNode()
+Ogre::SceneNode* Scene::GetNewNode()
 {
-	return ogreNode->createChildSceneNode(); 
+	return ogreNode->createChildSceneNode();
+}
+
+Ogre::SceneManager* Scene::GetOgreManager()
+{
+	return ogreNode->getCreator();
 }
 
 void Scene::ConvertToLua(lua_State* state)
