@@ -16,10 +16,6 @@ local scene = {
 			},
 			{
 				type = "Rigidbody",
-				data = 
-				{
-					bodyName = "R1"
-				}
 			},
 			{
 				type = "CharacterMovement"				
@@ -43,7 +39,6 @@ local scene = {
 				type = "Rigidbody",
 				data = 
 				{
-					bodyName = "R2",
 					isKinematic = true,
 					useGravity = false
 				}
@@ -91,7 +86,6 @@ local scene = {
 				type = "Rigidbody",
 				data = 
 				{
-					bodyName = "R2",
 					isKinematic = true,
 					useGravity = false
 				}

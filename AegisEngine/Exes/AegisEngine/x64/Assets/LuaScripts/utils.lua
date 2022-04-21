@@ -14,7 +14,7 @@ funcs.ParseEntity = function(object)
 		if componentType == true then
 			print("Component " .. v.type .. " is not found");
 		else
-			local component = componentType.GetNew(entity, v.data);
+			local component = componentType.GetNew(entity, v.data or {});
 			entity:AddComponent(component);
 
 			local native = componentType.isNative;

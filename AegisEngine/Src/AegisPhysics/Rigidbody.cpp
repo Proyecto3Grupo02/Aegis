@@ -23,7 +23,8 @@ void RigidBody::init() {
 
 RigidBody::~RigidBody()
 {
-
+	delete rigidBody->getCollisionShape();
+	Physics()->removeRigidbody(this->rigidBody);
 }
 
 bool RigidBody::getKinematic() { return isKinematic; }

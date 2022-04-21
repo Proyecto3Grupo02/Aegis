@@ -140,20 +140,14 @@ void PhysicsSystem::clear() {
 	{
 		btCollisionObject* obj = dynamicsWorld->getCollisionObjectArray()[i];
 		btRigidBody* body = btRigidBody::upcast(obj);
+		
 		if (body && body->getMotionState())
 		{
 			delete body->getMotionState();
+			delete body->getCollisionShape();
 		}
 		dynamicsWorld->removeCollisionObject(obj);
 		delete obj;
-	}
-
-	//delete collision shapes
-	for (int j = 0; j < collisionShapes.size(); j++)
-	{
-		btCollisionShape* shape = collisionShapes[j];
-		collisionShapes[j] = 0;
-		delete shape;
 	}
 }
 
@@ -173,9 +167,20 @@ void PhysicsSystem::remove() {
 	delete dispatcher;
 
 	delete collisionConfiguration;
+}
 
-	//next line is optional: it will be cleared by the destructor when the array goes out of scope
-	collisionShapes.clear();
+void PhysicsSystem::removeRigidbody(btCollisionObject* rb)
+{
+	//remove the rigidbodies from the dynamics world and delete them
+		
+		btCollisionObject* obj = dynamicsWorld->getCollisionObjectArray()[rb->getWorldArrayIndex()];
+		btRigidBody* body = btRigidBody::upcast(obj);
+		if (body && body->getMotionState())
+		{
+			delete body->getMotionState();
+		}
+		dynamicsWorld->removeCollisionObject(obj);
+		delete obj;
 }
 
 btTransform PhysicsSystem::parseToBulletTransform(Vector3 pos, Vector3 rot)
@@ -277,9 +282,6 @@ btCollisionShape* PhysicsSystem::createBodyShape(RigidBody::RigidBodyType rbType
 btRigidBody* PhysicsSystem::createRigidBody(RigidBody::RigidBodyType rbType, float _mass, Vector3 _dim, Vector3 _pos, std::string bodyMeshName, bool isConvex, bool isKinematic) {
 	btCollisionShape* rbShape = createBodyShape(rbType, _dim, bodyMeshName, isConvex);
 
-
-	//= 
-	collisionShapes.push_back(rbShape);
 
 	btTransform groundTransform;
 	groundTransform.setIdentity();

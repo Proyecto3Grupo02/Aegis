@@ -12,6 +12,7 @@ class btCollisionDispatcher;
 class btBroadphaseInterface;
 class btSequentialImpulseConstraintSolver;
 class btCollisionShape;
+class btCollisionObject;
 
 class Vector3;
 class Transform;
@@ -26,9 +27,6 @@ private:
     btCollisionDispatcher* dispatcher;
     btBroadphaseInterface* overlappingPairCache;
     btSequentialImpulseConstraintSolver* solver;
-
-    std::vector<btCollisionShape*> collisionShapes;
-
 public:
     PhysicsSystem();
     ~PhysicsSystem();
@@ -37,6 +35,7 @@ public:
     void Init();
     void update();
     void remove();
+    void removeRigidbody(btCollisionObject* rb);
     btTransform parseToBulletTransform(Vector3 pos, Vector3 rot);
     btTransform parseToBulletTransform(Vector3 pos, Vector4 rot);
     btRigidBody* createRigidBody(RigidBody::RigidBodyType rbType, float _mass, Vector3 _dim, Vector3 _pos, std::string bodyMeshName = "", bool isConvex = true, bool isKinematic = false);
