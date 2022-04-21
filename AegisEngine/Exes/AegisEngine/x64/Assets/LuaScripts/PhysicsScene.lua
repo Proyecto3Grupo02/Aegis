@@ -15,7 +15,7 @@ local scene = {
 				}
 			},
 			{
-				type = "RigidBody",
+				type = "Rigidbody",
 				data = 
 				{
 					bodyName = "R1"
@@ -41,7 +41,7 @@ local scene = {
 				}
 			},
 			{
-				type = "RigidBody",
+				type = "Rigidbody",
 				data = 
 				{
 					bodyName = "R2",

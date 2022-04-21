@@ -8,19 +8,17 @@ function table.GetNew(entity, params)
 
     function Init() end;
 	function Update(deltaTime) 
-        local rigidbody = component.entity:GetComponent("Rigidbody").type;
+        local rigidbody = component.entity:GetComponent("Rigidbody").type; -- RETURNS NIL
         --local transform = component.entity.transform;
         -- MOVE CHARACTER:
         if  Input:AnyKeyIsDown() then -- GENERIC CHECK BEFORE CHECKING INDIVIDUAL KEY ==> NECESSARY
             if Input:IsKeyDown("w") then
-                --if (meshRenderer.visible == true) then
-                --  meshRenderer.visible = false;
-                --else
-                --  meshRenderer.visible = true;
-                --end;
-                print("Tecla W");
                 
-                rigidbody:AddForce(Aegis.Maths.Vector3(0,10, 0));
+                print("Tecla W");
+                rigidbody:AddForce(Aegis.Maths.Vector3(0, 10, 0))
+              -- print(rigidbody);
+               -- print(transform.ramon);
+               print("Tecla W");
                 
             end;
             if Input:IsKeyDown("a") then

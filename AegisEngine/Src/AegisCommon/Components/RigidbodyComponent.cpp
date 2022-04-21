@@ -21,17 +21,6 @@ RigidbodyComponent::~RigidbodyComponent()
 	mEntity_->getScene()->RemovePhysicsEntity(this->physicsEntityIt);
 };
 
-//LUA-------------------------------------------------------------------------------------------------------
-RigidbodyComponent* CreateRigidbody(Entity* ent, LuaRef args) //Doesn't belong to this class
-{
-	std::string bodyName = ent->getName();
-	float mass = LuaMngr()->ParseFloat(args["mass"], 1);
-	bool useGravity = LuaMngr()->ParseBool(args["useGravity"], true);
-	bool isKinematic = LuaMngr()->ParseBool(args["isKinematic"], false);
-
-	return new RigidbodyComponent(ent, bodyName, mass, useGravity, isKinematic);
-}
-
 void RigidbodyComponent::SyncToTransform()
 {
 	Vector3 updatedPos = rigidbody->getRbPosition();
@@ -51,7 +40,7 @@ void RigidbodyComponent::AddForce(Vector3 force) {
 	rigidbody->addForce(force);
 }
 
-Vector3 RigidbodyComponent::GetPosition() {
+Vector3 RigidbodyComponent::GetPosition() const{
 	return rigidbody->getRbPosition();
 }
 

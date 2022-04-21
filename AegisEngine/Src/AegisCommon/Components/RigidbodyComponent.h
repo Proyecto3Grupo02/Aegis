@@ -23,7 +23,7 @@ public:
 	void SyncToTransform();
 
 	void AddForce(Vector3 force);
-	Vector3 GetPosition();
+	Vector3 GetPosition() const;
 	void SetPosition(Vector3 pos);
 	//Vector4 getRotation();
 
