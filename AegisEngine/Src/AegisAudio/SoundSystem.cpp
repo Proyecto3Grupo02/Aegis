@@ -2,8 +2,14 @@
 #include <fmod_errors.h>
 #include "../AegisCommon/Utils/Vector4.h"
 #include "../AegisCommon/Managers/DebugManager.h"
+#include "../checkML.h"
 
-SoundSystem::SoundSystem() : system(nullptr), listener(nullptr), music(nullptr), soundEffects(nullptr), SR(new SoundResources())
+SoundSystem::SoundSystem() :
+	system(nullptr), 
+	listener(nullptr), 
+	music(nullptr), 
+	soundEffects(nullptr),
+	SR(new SoundResources())
 {
 	
 }
@@ -52,6 +58,7 @@ void SoundSystem::close()
 
 	system->close();
 	system->release();
+	delete SR;
 
 }
 /// <summary>

@@ -5,7 +5,7 @@
 #include "../Scene/Scene.h"
 
 Entity::Entity(Scene* node) :
-	mNode_(node->GetOgreNode()), active_(true), mScene_(node)
+	mNode_(node->GetNewNode()), active_(true), mScene_(node)
 {
 	//Componente obligatorio para todas las entidades
 	transform = new Transform(Vector3(0,0,0), Ogre::Quaternion(), Vector3(1.0f, 1.0f, 1.0f), getNode(), this);
@@ -13,7 +13,7 @@ Entity::Entity(Scene* node) :
 }
 
 Entity::Entity(Scene* node, Vector3 pos) :
-	mNode_(node->GetOgreNode()), active_(true), mScene_(node)
+	mNode_(node->GetNewNode()), active_(true), mScene_(node)
 {
 	transform = new Transform(pos, Ogre::Quaternion(), Vector3(1.0f, 1.0f, 1.0f), getNode(), this);
 	this->addComponentFromLua(transform);
@@ -28,6 +28,11 @@ Entity::~Entity()
 	mComponents_.clear();
 
 	mChildren_.clear();
+	
+	//Node can be null if a parent destroys a child before the child destroys itself
+	auto mParent = mNode_ == nullptr ? nullptr : mNode_->getParentSceneNode();
+	if(mParent != nullptr)
+		mParent->removeAndDestroyChild(mNode_);
 }
 
 template<typename T>
@@ -146,6 +151,7 @@ void Entity::SetParent(Entity* ent)
 
 void Entity::Destroy()
 {
+	GetTransform()->DestroyChilds();
 	mScene_->DestroyEntity(entityIterator);
 }
 

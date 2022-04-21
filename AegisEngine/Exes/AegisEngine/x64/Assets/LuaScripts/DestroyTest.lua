@@ -5,6 +5,7 @@ function table.GetNew(entity, params)
 	local data = component.data;
 	local transform = entity.transform;
     local funcs = component.funcs;
+    data.child = "Undefined";
 
     function Init() end;
 	function Update(deltaTime) 
@@ -12,6 +13,8 @@ function table.GetNew(entity, params)
         -- change visibility when pressing v
     if  Input:AnyKeyWasPressed() then -- GENERIC CHECK BEFORE CHECKING INDIVIDUAL KEY ==> NECESSARY
         if Input:KeyWasPressed("v") then
+            data.child:SetParent(entity);
+            print("DestroyTest: " .. component.entity:GetName());
            entity:Destroy();
         end;
     end        

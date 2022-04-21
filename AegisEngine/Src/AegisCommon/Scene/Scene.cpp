@@ -25,13 +25,13 @@ Scene::Scene(Ogre::SceneNode* ogreNode) :
 
 Scene::~Scene() {
 	for (Entity* entity : *entities)
-	{
 		delete entity;
-	}
+	
+	RemoveAndFreePendingEntities();
 
 	delete this->entities;
-
-	RemoveAndFreePendingEntities();
+	delete this->uninitializedEntities;
+	delete this->physicsEntities;
 }
 
 void Scene::RemoveAndFreeEntity(std::list<Entity*>::iterator entity) {
@@ -116,9 +116,14 @@ void Scene::Render()
 }
 
 //the ogreNode usually is the root scene node so we add this node as a child one
-Ogre::SceneNode* Scene::GetOgreNode()
+Ogre::SceneNode* Scene::GetNewNode()
 {
-	return ogreNode->createChildSceneNode(); 
+	return ogreNode->createChildSceneNode();
+}
+
+Ogre::SceneManager* Scene::GetOgreManager()
+{
+	return ogreNode->getCreator();
 }
 
 void Scene::ConvertToLua(lua_State* state)

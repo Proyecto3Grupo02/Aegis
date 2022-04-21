@@ -12,3 +12,4 @@
 // Agrega checkML.h al proyecto e inclúyelo en todos los módulos del proyecto 
 // Escribe el siguiente comando al inicio de la función main
 // _CrtSetDbgFlag ( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF ); 
+// Esto te dice en que linea creas la memoria dinamica que no borras en caso de que la haya

@@ -4,7 +4,7 @@ local NAME = "PhysicsScene";
 local scene = {
 	{
 		type = "Entity",
-		name = "Fish",
+		name = "Cubo",
 		position = { y = 2},
 		components = {
 			{
@@ -29,7 +29,7 @@ local scene = {
 	},
 	{
 		type = "Entity",
-		name = "LittleFish",
+		name = "Suelo",
 		position = { y = -2 },
 		scale = { x = 5, y = 0.1, z = 5},
 		components = {
@@ -50,7 +50,11 @@ local scene = {
 				}
 			},
 			{
-				type = "DestroyTest"
+				type = "DestroyTest",
+				data =
+				{
+					child = "@Cubo"
+				}
 			}
 		}
 	},

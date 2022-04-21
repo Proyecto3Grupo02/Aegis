@@ -12,7 +12,7 @@ class Component : public ILuaObject {
        Component();
        Component(std::string componentName, Entity* entity);
 
-       ~Component() {};
+       virtual ~Component() {};
 
        inline Entity* getEntity() { return mEntity_; }
        //void SetEntity(Entity* entity) { mEntity_ = entity; }

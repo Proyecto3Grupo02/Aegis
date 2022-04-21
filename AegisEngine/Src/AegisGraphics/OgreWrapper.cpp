@@ -26,6 +26,9 @@ bool OgreWrapper::Render() {
 
 
 OgreWrapper::~OgreWrapper() {
+	delete mCamera;
+	render->destroy();
+	mSceneMgr->clearScene();
 	delete mRoot;
 }
 
@@ -36,7 +39,7 @@ bool OgreWrapper::Init() {
 	mResourcesCfg = "resources.cfg";
 	mPluginsCfg = "plugins.cfg";
 
-	Ogre::LogManager* lm = new Ogre::LogManager();
+	lm = new Ogre::LogManager();
 	bool writeInConsole = false;
 	#if defined _DEBUG
 		writeInConsole = true;
@@ -114,7 +117,7 @@ bool OgreWrapper::Init() {
 
 Ogre::SceneNode* OgreWrapper::GetRootNode()
 {
-	return mSceneMgr->getRootSceneNode()->createChildSceneNode();
+	return mSceneMgr->getRootSceneNode();
 }
 
 

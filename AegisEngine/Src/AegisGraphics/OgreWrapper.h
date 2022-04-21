@@ -4,6 +4,8 @@
 
 #include <OgreRoot.h>
 #include <SDL.h>
+#include "../checkML.h"
+
 class AegisCamera;
  //BASURA
 
@@ -20,7 +22,8 @@ private:
 
     Ogre::SceneManager* mSceneMgr;
     AegisCamera* mCamera;
-
+    Ogre::LogManager* lm;
+    
     void CreateWindowNative();
 
 public:

@@ -117,7 +117,8 @@ public:
 	
 	void Render();
 
-	Ogre::SceneNode* GetOgreNode();
+	Ogre::SceneNode* GetNewNode();
+	Ogre::SceneManager* GetOgreManager();
 
 	static void ConvertToLua(lua_State* state);
 };
