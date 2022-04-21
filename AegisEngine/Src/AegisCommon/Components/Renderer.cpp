@@ -5,6 +5,9 @@
 
 #include "../Utils/Vector3.h"
 #include "../Utils/Vector4.h"
+#include "../Utils/MathUtils.h"
+
+using namespace MathUtils;
 
 
 Renderer::Renderer(Entity* _ent, std::string meshName, std::string matName, Ogre::SceneManager* sceneMng, bool ir) :
@@ -36,7 +39,9 @@ Renderer::Renderer()
 
 void Renderer::render()
 {
-	transform->UpdateOgreNode();
+	node->setPosition(Vector3ToOgre(transform->GetPosition()));
+	node->setScale(Vector3ToOgre(transform->GetScale()));
+	node->setOrientation(transform->GetRotation());
 }
 
 void Renderer::setRendering(bool iR)

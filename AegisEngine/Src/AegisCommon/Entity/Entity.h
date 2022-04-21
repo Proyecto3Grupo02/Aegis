@@ -47,37 +47,16 @@ public:
 	inline Ogre::SceneNode* getNode() { return mNode_; }
 	inline void setNode(Ogre::SceneNode* node) { mNode_ = node; }
 
-	inline void addComponentFromLua(AegisComponent* component) {
-		std::string key = component->GetComponentName();
-
-		if (mComponents_.count(key) == 0) { //si no est� lo a�adimos
-			//component->SetEntity(this);
-
-			mComponentsArray_.push_back(component);
-			mComponents_[key] = component;
-		}
-		else
-		 {
-			std::cout << key << " is already in " << mName_ << ", component will be deleted";
-			delete component;
-		}
-	}
-
-	AegisComponent* getComponentLua(std::string componentName)
-	{
-		if (mComponents_.count(componentName) == 0)
-			return nullptr;
-		else return  mComponents_[componentName];
-	}
+	inline void addComponentFromLua(AegisComponent* component);
+	AegisComponent* getComponentLua(std::string componentName);
 
 	template <typename T>
-	inline T* getComponent(const char* componentName)
-	{
-		return dynamic_cast<T*>(getComponentLua(componentName));
-	}
+	inline T* getComponent(const char* componentName);
 
 	inline Scene* getScene() { return mScene_; }
 	inline void setScene(Scene* scene) { mScene_ = scene; }
+	void SetIterator(std::list<Entity*>::iterator entityIterator);
+
 	//doubt
 	void onCollision(Entity* other);
 	void onTrigger(Entity* other);
@@ -85,6 +64,8 @@ public:
 	Transform* GetTransform() const;
 	void SetTransform(Transform* transform);
 	void SetParent(Entity* ent);
+
+	void Destroy();
 
 	static void ConvertToLua(lua_State* state);
 protected:
@@ -101,7 +82,7 @@ protected:
 private:
 	std::string mName_; //name of the entity, works like a tag, useful to debug
 	Transform* transform;
-
+	std::list<Entity*>::iterator entityIterator;
 };
 
 #endif //

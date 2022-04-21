@@ -82,14 +82,6 @@ void Transform::SetScale(Vector3 newScale)
 
 void Transform::update(float deltaTime) {}
 
-// TODO: Mover esto a Renderer
-void Transform::UpdateOgreNode()
-{
-	mNode->setPosition(Vector3ToOgre(position));
-	mNode->setScale(Vector3ToOgre(scale));
-	mNode->setOrientation(rotation);
-}
-
 void Transform::ConvertToLua(lua_State* state)
 {
 	getGlobalNamespace(state).

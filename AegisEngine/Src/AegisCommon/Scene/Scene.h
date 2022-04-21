@@ -6,13 +6,15 @@
 #include "../Interfaces/ILuaObject.h"
 #include <Ogre.h>
 
-class Entity;
+struct Entity;
 class SceneNode;
+class RigidbodyComponent;
 
 class Scene : public ILuaObject
 {
 private:
 	std::list<Entity*>* entities;
+	std::list<RigidbodyComponent*>* physicsEntities;
 	std::list<Entity*>* uninitializedEntities;
 	std::list<std::list<Entity*>::iterator> entitiesToDelete;
 	Ogre::SceneNode* ogreNode;
@@ -20,6 +22,7 @@ private:
 
 	// Este parametro quizas sea mejor a la clase application cuando la tengamos
 	const double PHYSICS_STEP = 0.02; 
+	const uint16_t MAX_PHYSICS_STEP_PER_FRAME = 5;
 	double accumulator;
 
 	/// <summary>
@@ -90,6 +93,7 @@ public:
 	/// </summary>
 	/// <param name="entity"></param>
 	void AddEntity(Entity* entity);
+	void AddPhysicsEntity(RigidbodyComponent* physicsEntity);
 
 	/// <summary>
 	/// Añade un interador de entidad a la lista de entidades a destruir. La destruccion se realiza despues de lateUpdate y antes del render
@@ -97,6 +101,7 @@ public:
 	/// </summary>
 	/// <param name="entity"></param>
 	void DestroyEntity(std::list<Entity*>::iterator entity);
+	void RemovePhysicsEntity(std::list<RigidbodyComponent*>::iterator physicsEntity);
 
 	/// <summary>
 	/// Update principal de la escena que llamar a los demas updates. El orden de ejecucion es

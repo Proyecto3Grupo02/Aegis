@@ -34,7 +34,6 @@ public:
 	void SetRotationEuler(Vector3 newRot);
 	void SetScale(Vector3 newScale);
 
-	void UpdateOgreNode();
 	static void ConvertToLua(lua_State* state);
 protected:
 	Ogre::SceneNode* mNode;
