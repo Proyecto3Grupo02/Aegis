@@ -14,8 +14,8 @@ function table.GetNew(entity, params)
         -- MOVE CHARACTER; 
 		-- cada x tiempo random
 		if deltatime > lastTime+5 then
-		local rot =math.random(rigidbody:getRotation()-Aegis.Maths.Vector4(5, 0, 0, 0),rigidbody:getRotation()+Aegis.Maths.Vector4(5, 0, 0, 0));
-		rigidbody:setRbRotation(rot,0,0,0);
+		local rot = math.random(-45,45);
+		rigidbody:addTorque(Aegis.Maths.Vector3(0, rot, 0);
 		lastTime = deltaTime;
 		end;
 		rigidbody:AddForce(Aegis.Maths.Vector3(20, 0, 0));
