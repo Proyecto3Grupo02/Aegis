@@ -15,6 +15,7 @@ function table.GetNew(entity, params)
             if Input:IsKeyDown("w") then
                 
                 print("Tecla W");
+            
                 rigidbody:AddForce(Aegis.Maths.Vector3(0, 10, 0))
               -- print(rigidbody);
                -- print(transform.ramon);

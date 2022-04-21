@@ -44,7 +44,7 @@ material yellow // nombre
 	{
 		pass // al menos uno
 		{
-			diffuse 0.0 1.0 1.0
+			diffuse 1.0 1.0 0.0
 		}
 	}
 }
