@@ -61,10 +61,13 @@ Vector3 RigidBody::getRbPosition()
 
 void RigidBody::setRbPosition(Vector3 vec)
 {
-	btTransform transform;
 	rigidBody->getMotionState()->setWorldTransform(Physics()->parseToBulletTransform(vec, getRotation()));
 }
 
+void RigidBody::setRbRotation(Vector4 vec)
+{
+	rigidBody->getMotionState()->setWorldTransform(Physics()->parseToBulletTransform(getRbPosition(), vec));
+}
 
 Vector4 RigidBody::getRotation()
 {

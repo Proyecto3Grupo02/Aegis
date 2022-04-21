@@ -32,6 +32,7 @@ public:
 
 	Vector3 getRbPosition();
 	void setRbPosition(Vector3 vec);
+	void setRbRotation(Vector4 vec);
 
 	Vector4 getRotation();
 
