@@ -16,7 +16,9 @@ funcs.ParseEntity = function(object)
 		else
 			local component = componentType.GetNew(entity, v.data);
 			entity:AddComponent(component);
-			if (v.overrideData == nil or v.overrideData == true) and v.data ~= nil then
+
+			local native = componentType.isNative;
+			if ((v.overrideData == nil or v.overrideData == true) and v.data ~= nil) and native == nil then
 				funcs.CopyComponentData(v.data, component.data, component.name, object.name);
 			end;
 		end;

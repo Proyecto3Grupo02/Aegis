@@ -14,6 +14,8 @@ LightComponent::LightComponent(Entity* ent, LuaRef args) :
 
 	setLightColor(mDiffuse_);
 	setSpecularColor(mSpecular_);
+	
+	SetDataAsInnerType(this);	
 }
 
 LightComponent::~LightComponent()

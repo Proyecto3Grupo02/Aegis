@@ -3,6 +3,7 @@ local NAME="Rigidbody"
 
 -- table for our functions
 local table = { }
+table.isNative = true
 
 function table.GetNew(entity, args) 
     local component = Aegis.NativeComponents.CreateRigidbody(entity, args);

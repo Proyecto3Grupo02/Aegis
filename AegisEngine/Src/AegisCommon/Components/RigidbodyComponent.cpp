@@ -11,6 +11,8 @@ RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, fl
 	initialPos = transform->GetPosition();
 	rigidbody = new RigidBody(bodyMeshName, transform->GetPosition(), transform->GetScale(), m, useG, isK);
 	mEntity_->getScene()->AddPhysicsEntity(this);
+
+	SetDataAsInnerType(this);
 }
 
 RigidbodyComponent::~RigidbodyComponent()
@@ -22,7 +24,7 @@ RigidbodyComponent::~RigidbodyComponent()
 //LUA-------------------------------------------------------------------------------------------------------
 RigidbodyComponent* CreateRigidbody(Entity* ent, LuaRef args) //Doesn't belong to this class
 {
-	std::string bodyName = LuaMngr()->ParseString(args["bodyName"], "DefaultBodyName");
+	std::string bodyName = ent->getName();
 	float mass = LuaMngr()->ParseFloat(args["mass"], 1);
 	bool useGravity = LuaMngr()->ParseBool(args["useGravity"], true);
 	bool isKinematic = LuaMngr()->ParseBool(args["isKinematic"], false);

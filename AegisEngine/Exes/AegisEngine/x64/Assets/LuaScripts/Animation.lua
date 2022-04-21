@@ -3,6 +3,7 @@ local NAME="Animation"
 
 -- table for our functions
 local table = { }
+table.isNative = true
 
 function table.GetNew(entity, args) 
     local component = Aegis.NativeComponents.CreateAnimation(entity, args);
