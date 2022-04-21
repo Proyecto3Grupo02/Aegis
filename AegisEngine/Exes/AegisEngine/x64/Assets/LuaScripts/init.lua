@@ -3,5 +3,5 @@
 
 local utility = require "Utils";
 local testScene = require "PhysicsScene";
-
+math.randomseed(os.time());
 utility.ParseScene(testScene);

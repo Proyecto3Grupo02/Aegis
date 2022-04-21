@@ -5,13 +5,16 @@ function table.GetNew(entity, params)
 	local data = component.data;
 	local transform = entity.transform;
     local funcs = component.funcs;
+    local rigidbod;
     data.initPos = transform.position;
 
-    function Init() end;
+    function Init()
+        rigidbody = component.entity:GetComponent("Rigidbody").type;
+     end;
+
 	function Update(deltaTime) 
         if  Input:AnyKeyWasPressed() then -- GENERIC CHECK BEFORE CHECKING INDIVIDUAL KEY ==> NECESSARY
             if Input:KeyWasPressed("s") then
-                local rigidbody = component.entity:GetComponent("Rigidbody").type; -- RETURNS NIL
                 rigidbody.position = data.initPos;
             end;
             if Input:KeyWasPressed("a") then
