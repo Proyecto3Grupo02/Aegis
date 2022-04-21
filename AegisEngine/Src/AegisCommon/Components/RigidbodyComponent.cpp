@@ -4,8 +4,8 @@
 #include <Scene.h>
 
 
-RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m, bool useG, bool isK) 
-	: AegisComponent("Rigidbody", ent) 
+RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m, bool useG, bool isK)
+	: AegisComponent("Rigidbody", ent)
 {
 	transform = ent->GetTransform();
 	initialPos = transform->GetPosition();
@@ -47,14 +47,39 @@ void RigidbodyComponent::SetIterator(std::list<RigidbodyComponent*>::iterator ph
 	this->physicsEntityIt = physicsEntityIt;
 }
 
+void RigidbodyComponent::AddForce(Vector3 force) {
+	rigidbody->addForce(force);
+}
+
+Vector3 RigidbodyComponent::GetPosition() {
+	return rigidbody->getRbPosition();
+}
+
+void RigidbodyComponent::SetPosition(Vector3 pos) {
+	//rigidbody->set
+}
+
+//LUA-------------------------------------------------------------------------------------------------------
+RigidbodyComponent* CreateRigidbody(Entity* ent, LuaRef args) //Doesn't belong to this class
+{
+	std::string bodyName = ent->getName();
+	float mass = LuaMngr()->ParseFloat(args["mass"], 1);
+	bool useGravity = LuaMngr()->ParseBool(args["useGravity"], true);
+	bool isKinematic = LuaMngr()->ParseBool(args["isKinematic"], false);
+
+	return new RigidbodyComponent(ent, bodyName, mass, useGravity, isKinematic);
+}
+
 void RigidbodyComponent::ConvertToLua(lua_State* state)
 {
 	getGlobalNamespace(state).
 		beginNamespace("Aegis").
-			beginNamespace("NativeComponents").
-				addFunction("CreateRigidbody", CreateRigidbody).
-				deriveClass<RigidbodyComponent, AegisComponent>("Rigidbody").
-				endClass().
-			endNamespace().
+		beginNamespace("NativeComponents").
+		addFunction("CreateRigidbody", CreateRigidbody).
+		deriveClass<RigidbodyComponent, AegisComponent>("Rigidbody").
+		addProperty("position", &RigidbodyComponent::GetPosition, &RigidbodyComponent::SetPosition).
+		addFunction("AddForce", &RigidbodyComponent::AddForce).
+		endClass().
+		endNamespace().
 		endNamespace();
 }

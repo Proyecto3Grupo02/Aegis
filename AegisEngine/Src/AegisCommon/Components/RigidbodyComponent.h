@@ -22,6 +22,11 @@ public:
 	virtual void fixedUpdate() override {};
 	void SyncToTransform();
 
+	void AddForce(Vector3 force);
+	Vector3 GetPosition();
+	void SetPosition(Vector3 pos);
+	//Vector4 getRotation();
+
 	void SetIterator(std::list<RigidbodyComponent*>::iterator physicsEntityIt);
 
 	//LUA------------

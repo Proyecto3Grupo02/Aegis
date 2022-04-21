@@ -20,6 +20,8 @@ function table.GetNew(entity, params)
                 --end;
                 print("Tecla W");
                 
+                rigidbody:AddForce(Aegis.Maths.Vector3(0,10, 0));
+                
             end;
             if Input:IsKeyDown("a") then
                 print("Tecla A");
@@ -34,12 +36,15 @@ function table.GetNew(entity, params)
 
     end;
 	function LateUpdate(deltaTime) end;
-	function FixedUpdate() end;
+	function FixedUpdate() 
+        
+    end;
 	function OnCollision(other) end;
 	function OnTrigger(other) end;
 
 	funcs.init = Init;
     funcs.update = Update;
+    funcs.fixedUpdate = FixedUpdate;
 	return component;
 end;
 return table;
