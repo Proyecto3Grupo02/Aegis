@@ -9,8 +9,6 @@ function table.GetNew(entity, params)
     data.initPos = transform.position;
 
     function Init()
-        local random = math.random(1, 10);
-        print(random);
         rigidbody = component.entity:GetComponent("Rigidbody").type;
      end;
 

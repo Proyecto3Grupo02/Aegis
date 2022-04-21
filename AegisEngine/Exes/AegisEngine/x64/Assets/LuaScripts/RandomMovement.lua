@@ -5,9 +5,11 @@ function table.GetNew(entity, params)
 	local data = component.data;
 	local transform = entity.transform;
     local funcs = component.funcs;
-	local rigidbody = component.entity:GetComponent("Rigidbody").type;
+	local rigidbody;
 	local lastTime = 0;
-    function Init() end;
+    function Init() 
+        rigidbody = component.entity:GetComponent("Rigidbody").type;
+    end;
 	function Update(deltaTime) 
          -- RETURNS NIL
         --local transform = component.entity.transform;
