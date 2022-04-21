@@ -45,7 +45,7 @@ Vector3 RigidbodyComponent::GetPosition() const{
 }
 
 void RigidbodyComponent::SetPosition(Vector3 pos) {
-	//rigidbody->set
+	rigidbody->setRbPosition(pos);
 }
 
 //LUA-------------------------------------------------------------------------------------------------------

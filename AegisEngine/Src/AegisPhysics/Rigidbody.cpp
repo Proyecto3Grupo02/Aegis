@@ -59,6 +59,13 @@ Vector3 RigidBody::getRbPosition()
 	return Physics()->parseFromBulletVector(t.getOrigin());
 }
 
+void RigidBody::setRbPosition(Vector3 vec)
+{
+	btTransform transform;
+	rigidBody->getMotionState()->setWorldTransform(Physics()->parseToBulletTransform(vec, getRotation()));
+}
+
+
 Vector4 RigidBody::getRotation()
 {
 	btTransform t;

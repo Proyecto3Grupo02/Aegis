@@ -73,9 +73,9 @@ void Scene::FixedUpdate(float dt) {
 	uint16_t remainingSteps = MAX_PHYSICS_STEP_PER_FRAME;
 
 	while (accumulator >= PHYSICS_STEP && remainingSteps > 0)	{
-		// Call entities physics update
-		//for (Entity* entity : *entities)
-			//entity->integrate();
+		for(RigidbodyComponent* rb : *physicsEntities)
+			rb->getEntity()->fixedUpdate();
+
 		accumulator -= PHYSICS_STEP;
 		remainingSteps--;
 	}

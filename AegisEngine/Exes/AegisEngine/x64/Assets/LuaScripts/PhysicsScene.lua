@@ -48,6 +48,9 @@ local scene = {
 					isKinematic = true,
 					useGravity = false
 				}
+			},
+			{
+				type = "DestroyTest"
 			}
 		}
 	},

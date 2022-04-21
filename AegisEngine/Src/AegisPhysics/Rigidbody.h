@@ -31,6 +31,8 @@ public:
 	void setGravity(Vector3 vec);
 
 	Vector3 getRbPosition();
+	void setRbPosition(Vector3 vec);
+
 	Vector4 getRotation();
 
 	void setFreezeRotation(bool _x, bool _y, bool _z);
