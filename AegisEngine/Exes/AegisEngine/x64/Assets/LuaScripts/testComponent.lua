@@ -1,4 +1,4 @@
--- test component as example
+-- OUTDATED COMPONENT
 
 local NAME="TestComponent"
 
