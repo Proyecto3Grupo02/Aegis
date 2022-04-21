@@ -52,6 +52,12 @@ void RigidBody::addForce(Vector3 vec) {
 	rigidBody->applyForce(forc, btVector3());
 }
 
+void RigidBody::addTorque(Vector3 vec)
+{
+	btVector3 torque = btVector3(vec.GetX(), vec.GetY(), vec.GetZ());
+	rigidBody->applyTorque(torque);
+}
+
 Vector3 RigidBody::getRbPosition()
 {
 	btTransform t;
