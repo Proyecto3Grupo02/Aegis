@@ -51,6 +51,8 @@ void SoundResources::ParseDirectory(string dir)
 			}
 		}
 	}
+
+	closedir(dirp);
 }
 
 std::string SoundResources::getSong(std::string song)

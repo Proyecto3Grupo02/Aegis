@@ -20,8 +20,7 @@ local scene = {
 				{
 					bodyName = "R1"
 				}
-			}
-			,
+			},
 			{
 				type = "CharacterMovement"				
 			}

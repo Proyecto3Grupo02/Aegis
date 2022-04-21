@@ -155,11 +155,11 @@ void PhysicsSystem::clear() {
 		collisionShapes[j] = 0;
 		delete shape;
 	}
-
-
 }
 
 void PhysicsSystem::remove() {
+	clear();
+
 	//delete dynamics world
 	delete dynamicsWorld;
 
@@ -176,8 +176,6 @@ void PhysicsSystem::remove() {
 
 	//next line is optional: it will be cleared by the destructor when the array goes out of scope
 	collisionShapes.clear();
-
-
 }
 
 btTransform PhysicsSystem::parseToBulletTransform(Vector3 pos, Vector3 rot)

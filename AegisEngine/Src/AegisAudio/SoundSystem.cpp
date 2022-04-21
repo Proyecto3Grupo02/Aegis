@@ -350,6 +350,7 @@ Sound* SoundSystem::getSound(const std::string& name)
 /// </summary>
 SoundSystem::SoundChannel::~SoundChannel()
 {
+	delete channel;
 	channel = nullptr;
 }
 
@@ -379,6 +380,7 @@ SoundSystem::EmitterData::~EmitterData()
 	for (auto it = channels.begin(); it != channels.end(); it++)
 		delete it->second;
 	channels.clear();
+	delete position;
 	position = nullptr;
 }
 

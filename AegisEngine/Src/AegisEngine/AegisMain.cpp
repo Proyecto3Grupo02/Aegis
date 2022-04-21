@@ -34,7 +34,7 @@
 #include "../AegisCommon/Components/AnimationComponent.h"
 #include "../AegisCommon/Components/RigidbodyComponent.h"
 
-using namespace luabridge;
+//using namespace luabridge;
 
 void AegisMain::GameLoop() {
 	while (!exit)
@@ -89,12 +89,12 @@ void AegisMain::GameLoop() {
 }
 
 AegisMain::AegisMain() : IInitializable() {
+	exit = (false);
 	ogreWrap = new OgreWrapper();
 	ogreWrap->Init();
-
+	
 	gameLoopData = new GameLoopData();
 	sceneManager = new SceneManager(new Scene(ogreWrap->GetRootNode()));
-	exit = (false);
 }
 
 AegisMain::~AegisMain() {
@@ -102,8 +102,13 @@ AegisMain::~AegisMain() {
 	delete sceneManager;
 	delete ogreWrap;
 	
-	Physics()->remove();
+	Debug()->deleteInstance();
+	Input()->deleteInstance();
 	Audio()->close();
+	Audio()->deleteInstance();
+	Physics()->remove();
+	Physics()->deleteInstance();
+	LuaMngr()->deleteInstance();
 }
 
 /// <summary>

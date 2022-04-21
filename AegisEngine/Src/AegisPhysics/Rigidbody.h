@@ -19,7 +19,7 @@ public:
 
 	RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, float m = 1, bool useG = true, bool isK = false);
 	void init();
-	~RigidBody() { };
+	~RigidBody();
 	//void fixedUpdate();
 
 	void addForce(Vector3 vec);

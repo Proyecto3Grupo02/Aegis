@@ -30,6 +30,7 @@ OgreWrapper::~OgreWrapper() {
 	render->destroy();
 	mSceneMgr->clearScene();
 	delete mRoot;
+	delete lm;
 }
 
 bool OgreWrapper::Init() {

@@ -3,6 +3,7 @@
 #include "Vector3.h"
 #include "Vector4.h"
 #include <btBulletDynamicsCommon.h>
+#include "../checkML.h"
 
 RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, float m, bool useG, bool isK) :
 mass(m), useGravity(useG), isKinematic(isK) {
@@ -18,6 +19,11 @@ void RigidBody::init() {
 	rigidBody->setGravity(btVector3(0, -10, 0)); //DEFAULT???
 	*/
 	//createRigidBodyComponent(RigidBodyType::Box);
+}
+
+RigidBody::~RigidBody()
+{
+
 }
 
 bool RigidBody::getKinematic() { return isKinematic; }
