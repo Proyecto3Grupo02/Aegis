@@ -34,7 +34,8 @@ public:
 	Vector3 getRbPosition();
 	void setRbPosition(Vector3 vec);
 	void setRbRotation(Vector4 vec);
-	
+	void clearForces();
+
 	Vector4 getRotation();
 
 	void setFreezeRotation(bool _x, bool _y, bool _z);

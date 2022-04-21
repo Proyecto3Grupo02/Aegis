@@ -110,7 +110,8 @@ void PhysicsSystem::update() {
 	///-----stepsimulation_start-----
 	float timeStep = 1.f / 50.f;
 	dynamicsWorld->stepSimulation(timeStep, 10);
-	
+	dynamicsWorld->clearForces();
+
 	//std::cout << "Colisions: " << dynamicsWorld->getNumCollisionObjects() << " ";
 	for (int j = dynamicsWorld->getNumCollisionObjects() - 1; j >= 0; j--)
 	{

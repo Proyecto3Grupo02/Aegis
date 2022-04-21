@@ -34,7 +34,8 @@ bool RigidBody::getUseGravity() { return useGravity; }
 void RigidBody::setKinematic(bool sK) { isKinematic = sK; }
 
 void RigidBody::setUsingGravity(bool uG) {
-	if (uG) rigidBody->applyGravity();
+	
+	if (uG)rigidBody->setGravity({0, -9.8, 0});
 	else rigidBody->clearGravity();
 }
 void RigidBody::setGravity(Vector3 vec) {
@@ -74,12 +75,22 @@ Vector3 RigidBody::getRbPosition()
 
 void RigidBody::setRbPosition(Vector3 vec)
 {
-	rigidBody->getMotionState()->setWorldTransform(Physics()->parseToBulletTransform(vec, getRotation()));
+	btTransform t = Physics()->parseToBulletTransform(vec, getRotation());
+	rigidBody->setWorldTransform(t);
+	rigidBody->getMotionState()->setWorldTransform(t);
+	rigidBody->setLinearVelocity({ 0, 0, 0 });
+	rigidBody->setAngularVelocity({ 0, 0, 0 });
+	rigidBody->clearForces();
 }
 
 void RigidBody::setRbRotation(Vector4 vec)
 {
 	rigidBody->getMotionState()->setWorldTransform(Physics()->parseToBulletTransform(getRbPosition(), vec));
+}
+
+void RigidBody::clearForces()
+{
+	rigidBody->clearForces();
 }
 
 Vector4 RigidBody::getRotation()
