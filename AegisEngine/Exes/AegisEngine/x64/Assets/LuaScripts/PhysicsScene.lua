@@ -69,6 +69,31 @@ local scene = {
 				}
 			}
 		}
+		
+	},
+	{
+		type = "Entity",
+		name = "RandomFish",
+		position = { y = 1.1, z =1.01 },
+		scale = {x = 0.5, y = 0.5, z =0.5},
+		components = {
+			{
+				type = "Renderer",
+				data = {
+						mesh = "Cube.mesh",
+						material= "yellow"
+					}
+			},
+			{
+				type = "Rigidbody",
+				data = 
+				{
+					bodyName = "R2",
+					isKinematic = true,
+					useGravity = false
+				}
+			}
+		}
 	}
 };
 return scene;
