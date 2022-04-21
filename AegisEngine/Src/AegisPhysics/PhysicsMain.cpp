@@ -110,7 +110,7 @@ void PhysicsSystem::update() {
 	float timeStep = 1.f / 50.f;
 	dynamicsWorld->stepSimulation(timeStep, 10);
 	
-	std::cout << "Colisions: " << dynamicsWorld->getNumCollisionObjects() << " ";
+	//std::cout << "Colisions: " << dynamicsWorld->getNumCollisionObjects() << " ";
 	for (int j = dynamicsWorld->getNumCollisionObjects() - 1; j >= 0; j--)
 	{
 		btCollisionObject* obj = dynamicsWorld->getCollisionObjectArray()[j];
@@ -124,7 +124,7 @@ void PhysicsSystem::update() {
 		{
 			trans = obj->getWorldTransform();
 		}
-		printf("world pos object %d = %f,%f,%f\n", j, float(trans.getOrigin().getX()), float(trans.getOrigin().getY()), float(trans.getOrigin().getZ()));
+		//printf("world pos object %d = %f,%f,%f\n", j, float(trans.getOrigin().getX()), float(trans.getOrigin().getY()), float(trans.getOrigin().getZ()));
 	}
 }
 
