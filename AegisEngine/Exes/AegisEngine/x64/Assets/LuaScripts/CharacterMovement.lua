@@ -66,7 +66,8 @@ function table.GetNew(entity, params)
         end;
         if d then                
             rigidbody:AddForce(Aegis.Maths.Vector3(0.5, 0, 0))
-            rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(0.05,0,0);   
+            -- rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(0.05,0,0); 
+            print("Force X Axis: " .. rigidbody:GetForce().x);  
 
         end;
 
