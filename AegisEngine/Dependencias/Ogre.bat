@@ -28,6 +28,7 @@ if exist %OGRE_BUILD_SOL% goto done
 
 echo OGRE and SDL2 build generated
 
+
 echo compiling OGRE...
 msbuild %OGRE_BUILD_SOL%  /t:ALL_BUILD /p:platform=x64 /p:configuration=Debug
 msbuild %OGRE_BUILD_SOL%  /t:ALL_BUILD /p:platform=x64 /p:configuration=Release
