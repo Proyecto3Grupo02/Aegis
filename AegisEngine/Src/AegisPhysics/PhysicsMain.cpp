@@ -15,7 +15,7 @@ subject to the following restrictions:
 
 ///-----includes_start-----
 #include "btBulletDynamicsCommon.h"
-#include "../../src/Extras/Serialize/BulletWorldImporter/btBulletWorldImporter.h"
+//#include "../../src/Extras/Serialize/BulletWorldImporter/btBulletWorldImporter.h"
 #include <stdio.h>
 #include "PhysicsMain.h"
 #include "Vector3.h"
@@ -43,7 +43,7 @@ void PhysicsSystem::Init()
 
 	dynamicsWorld->setGravity(btVector3(0, -10, 0));
 
-	fileLoader = new btBulletWorldImporter(dynamicsWorld);
+	//fileLoader = new btBulletWorldImporter(dynamicsWorld);
 
 
 }
@@ -271,9 +271,9 @@ btCollisionShape* PhysicsSystem::createBodyShape(RigidBody::RigidBodyType rbType
 		rbShape = new btSphereShape(btScalar(_dim.GetX() / 2.0f));
 		break;
 	case RigidBody::RigidBodyType::Custom:
-		char fileName[100];
-		strcpy(fileName, bodyMeshName.c_str());
-		fileLoader->loadFile(fileName);
+		//char fileName[100];
+		//strcpy(fileName, bodyMeshName.c_str());
+		//fileLoader->loadFile(fileName);
 		//rbShape = createShapeWithVertices(_dim, bodyMeshName, isConvex);
 		break;
 	case RigidBody::RigidBodyType::CapsuleX:
