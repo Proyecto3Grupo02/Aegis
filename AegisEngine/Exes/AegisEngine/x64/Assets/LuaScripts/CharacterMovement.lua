@@ -13,14 +13,12 @@ function table.GetNew(entity, params)
      end;
 
 	function Update(deltaTime) 
-        if  Input:AnyKeyWasPressed() then -- GENERIC CHECK BEFORE CHECKING INDIVIDUAL KEY ==> NECESSARY
             if Input:KeyWasPressed("s") then
-                rigidbody.position = data.initPos;
+                print("Key S was pressed");
             end;
-            if Input:KeyWasPressed("a") then
-               print("Transform: x: " .. transform.position.x .." y: " .. transform.position.y .. " z: " .. transform.position.z);
+            if Input:IsKeyDown("a") then
+                print("Key A is down");
             end;
-        end  
     end;
     	function LateUpdate(deltaTime) end;
 	function FixedUpdate() 

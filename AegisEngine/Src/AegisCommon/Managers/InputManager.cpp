@@ -15,13 +15,21 @@ void InputSystem::Init() {
 }
 
 void InputSystem::UpdateState() {
-	for (int i = 0; i < keyNums; i++) {
-		keys[i].wasReleased = false;
-	}
 
 	KEY_WAS_PRESSED = false;
 	KEY_WAS_RELEASED = false;
 	KEY_DOWN = false;
+	
+	
+	for (int i = 0; i < keyNums; i++) {
+		keys[i].wasReleased = false;
+		if (keys[i].wasPressed)
+		{
+			keys[i].wasPressed = false;
+			keys[i].down = true;
+			KEY_DOWN = true;
+		}
+	}
 }
 
 void InputSystem::ClearState() {
@@ -49,12 +57,7 @@ void InputSystem::OnKeyDown(SDL_Keycode key) {
 	}		
 
 	//YA ESTBA PULSADA ==> QUEREMOS MANTENERLA
-	else { 
-		//std::cout << "22222222222222\n";
-		keys[i].down = true;
-		keys[i].wasPressed = false;
-		KEY_DOWN = true;
-	}
+
 }
 
 void InputSystem::OnKeyUp(SDL_Keycode key) {
