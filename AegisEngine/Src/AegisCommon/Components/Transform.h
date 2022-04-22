@@ -22,6 +22,7 @@ public:
 	virtual ~Transform();
 	virtual void init() override {}
 	virtual void update(float deltaTime) override;
+	virtual void render() override;
 	Vector3 GetPosition() const;
 	Ogre::Quaternion GetRotation() const;
 	Vector3 GetRotationEuler() const;

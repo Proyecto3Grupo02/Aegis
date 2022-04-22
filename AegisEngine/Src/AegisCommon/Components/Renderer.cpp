@@ -35,9 +35,7 @@ Renderer::Renderer()
 
 void Renderer::render()
 {
-	node->setPosition(Vector3ToOgre(transform->GetPosition()));
-	node->setScale(Vector3ToOgre(transform->GetScale()));
-	node->setOrientation(transform->GetRotation());
+
 }
 
 void Renderer::setRendering(bool iR)

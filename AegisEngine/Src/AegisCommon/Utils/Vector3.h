@@ -27,15 +27,16 @@ public:
 	Vector3 cross(const Vector3& v) const { return Vector3(y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x); }
 	Vector3 getNormalized() const
 	{
-		const float m = magnitudeSquared();
-		return m > 0.0f ? *this * sqrt(m) : Vector3(0, 0, 0);
+		// return copy of self normalized
+		float m = magnitude();
+		if (m == 0.0f)
+			return Vector3();
+		return Vector3(x / m, y / m, z / m);
 	}
-	float normalize()
+	Vector3 normalize()
 	{
-		const float m = magnitude();
-		if (m > 0.0f)
-			*this = *this / m;
-		return m;
+		*this = getNormalized();
+		return *this;
 	}
 	Vector3 Inverse() { return Vector3(-x, -y, -z); }
 
@@ -77,6 +78,8 @@ public:
 			addProperty("x", &Vector3::GetX, &Vector3::SetX).
 			addProperty("y", &Vector3::GetY, &Vector3::SetY).
 			addProperty("z", &Vector3::GetZ, &Vector3::SetZ).
+			addFunction("Normalize", &Vector3::normalize).
+			addFunction("GetNormalized", &Vector3::getNormalized).
 			addFunction("__add", &Vector3::operator+).
 			addFunction("__sub", &Vector3::operator-).
 			addFunction("__mul", &Vector3::operator*).

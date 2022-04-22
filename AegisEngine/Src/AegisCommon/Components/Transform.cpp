@@ -92,6 +92,13 @@ Transform::~Transform() {}
 
 void Transform::update(float deltaTime) {}
 
+void Transform::render()
+{
+	mNode->setPosition(Vector3ToOgre(position));
+	mNode->setScale(Vector3ToOgre(scale));
+	mNode->setOrientation(rotation);
+}
+
 void Transform::ConvertToLua(lua_State* state)
 {
 	getGlobalNamespace(state).

@@ -3,6 +3,16 @@
 local NAME = "PhysicsScene";
 local scene = {
 	{
+		type = "MainCamera",
+		position = { z = 10 },
+		components = 
+		{
+			{
+				type = "CameraTest"
+			}
+		}
+	},
+	{
 		type = "Entity",
 		name = "Cubo",
 		position = { y = 2},

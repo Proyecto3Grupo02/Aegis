@@ -26,7 +26,7 @@ struct Vector3;
 
 struct Entity : public ILuaObject {
 public:
-	Entity(Scene* scene);
+	Entity(Scene* scene, Ogre::SceneNode* node = nullptr);
 	Entity(Scene* scene, Vector3 pos);
 	~Entity();
 
@@ -46,7 +46,8 @@ public:
 
 
 	inline Ogre::SceneNode* getNode() { return mNode_; }
-	inline void setNode(Ogre::SceneNode* node) { mNode_ = node; }
+
+	void DestroyNode();
 
 	inline void addComponentFromLua(AegisComponent* component);
 	AegisComponent* getComponentLua(std::string componentName);

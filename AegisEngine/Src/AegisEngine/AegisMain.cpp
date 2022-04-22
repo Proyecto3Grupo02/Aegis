@@ -37,9 +37,9 @@
 //using namespace luabridge;
 
 void AegisMain::GameLoop() {
-		
+
 	uint32_t frameTimeMS = (uint32_t)floor((1 / TARGET_FRAME_RATE) * 1000);
-	
+
 	while (!exit)
 	{
 		SDL_Event eventHandler;
@@ -53,22 +53,23 @@ void AegisMain::GameLoop() {
 			Input()->UpdateState();
 			while (SDL_PollEvent(&eventHandler) != 0)
 			{
+				auto key = eventHandler.key.keysym.sym;
 				switch (eventHandler.type)
 				{
 				case SDL_QUIT:
 					exit = true;
 				case SDL_KEYDOWN:
-					if (eventHandler.key.keysym.sym == SDLK_ESCAPE)
+					if (key == SDLK_ESCAPE)
 						exit = true;
 					//std::cout << "KeyDown (" << eventHandler.type << "): ";
-					Input()->OnKeyDown(eventHandler.key.keysym.sym);
+					Input()->OnKeyDown(key);
 					break;
 				case SDL_KEYUP:
 					//std::cout << "KeyUp (" << eventHandler.type << "): ";
-					Input()->OnKeyUp(eventHandler.key.keysym.sym);
+					Input()->OnKeyUp(key);
 					break;
 				default:
-						//std::cout << "Default (" << eventHandler.type << ")\n";
+					//std::cout << "Default (" << eventHandler.type << ")\n";
 					break;
 				}
 			}
@@ -93,8 +94,8 @@ AegisMain::AegisMain() : IInitializable() {
 	exit = (false);
 	ogreWrap = new OgreWrapper();
 	ogreWrap->Init();
-	ogreWrap->CreateCamera();
-	
+	LuaMngr();
+
 	gameLoopData = new GameLoopData();
 	sceneManager = new SceneManager(new Scene(ogreWrap));
 }
@@ -103,7 +104,7 @@ AegisMain::~AegisMain() {
 	delete gameLoopData;
 	delete sceneManager;
 	delete ogreWrap;
-	
+
 	Debug()->deleteInstance();
 	Input()->deleteInstance();
 	Audio()->close();
@@ -126,6 +127,7 @@ bool AegisMain::Init()
 	Audio()->Init();
 	Physics()->Init();
 	ConvertObjectToLua();
+	sceneManager->GetCurrentScene()->Init();
 	LuaMngr()->Execute("init.lua");
 	GameLoop();
 	return true;
@@ -152,9 +154,12 @@ void AegisMain::ConvertObjectToLua()
 	AnimationComponent::ConvertToLua(state);
 	RigidbodyComponent::ConvertToLua(state);
 
-	push(state, sceneManager->GetCurrentScene());
-	lua_setglobal(state, "currentScene");
+	ExportToLua(sceneManager->GetCurrentScene(), "currentScene");
+	ExportToLua(Input(), "Input");
 
-	push(state, Input());
-	lua_setglobal(state, "Input");
+	//push(state, sceneManager->GetCurrentScene());
+	//lua_setglobal(state, "currentScene");
+
+	//push(state, Input());
+	//lua_setglobal(state, "Input");
 }

@@ -14,6 +14,9 @@
 //	class LuaScript;
 //}
 
+template <typename T>
+extern void ExportToLua(T item, const char* name);
+
 class LuaManager : public Singleton<LuaManager> {
 public:
 	LuaManager();
@@ -31,7 +34,6 @@ public:
 
 	//if nil, it returns false
 	bool ParseBool(luabridge::LuaRef ref, bool defaultBool = false);
-
 private:
 	lua_State* state;
 	luabridge::LuaRef empty = luabridge::LuaRef(state);

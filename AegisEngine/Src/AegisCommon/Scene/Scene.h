@@ -4,6 +4,7 @@
 
 #include <list>
 #include "../Interfaces/ILuaObject.h"
+#include "../Interfaces/IInitializable.h"
 #include <Ogre.h>
 
 struct Entity;
@@ -11,7 +12,7 @@ class SceneNode;
 class RigidbodyComponent;
 class OgreWrapper;
 
-class Scene : public ILuaObject
+class Scene : public ILuaObject, public IInitializable
 {
 private:
 	std::list<Entity*>* entities;
@@ -88,6 +89,8 @@ public:
 	Scene(OgreWrapper* wrap);
 
 	~Scene();
+
+	bool Init();
 
 	/// <summary>
 	/// Añade una entidad ya creada a la escena. No se comprueba que la entidad sea nula en ningún momento.

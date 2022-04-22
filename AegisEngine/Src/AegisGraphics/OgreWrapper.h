@@ -23,14 +23,16 @@ private:
     Ogre::SceneManager* mSceneMgr;
     Ogre::LogManager* lm;
     
-    void CreateWindowNative();
+    AegisCamera* mCamera;
 
+    void CreateWindowNative();
+    AegisCamera* CreateCamera(Ogre::SceneNode* node = nullptr);
 public:
     OgreWrapper();
+    AegisCamera* GetCamera();
     bool Render();
     virtual ~OgreWrapper();
     bool Init();
-    AegisCamera* CreateCamera(Ogre::SceneNode* node = nullptr);
     Ogre::SceneNode* GetRootNode();
 };
 

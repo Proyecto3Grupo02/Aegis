@@ -47,3 +47,8 @@ Ogre::Camera* AegisCamera::GetCamera()
 {
 	return mCamera_;
 }
+
+Ogre::SceneNode* AegisCamera::GetNode()
+{
+	return mNode_;
+}

@@ -20,6 +20,11 @@ mPluginsCfg(Ogre::BLANKSTRING)
 {
 }
 
+AegisCamera* OgreWrapper::GetCamera()
+{
+	return mCamera;
+}
+
 bool OgreWrapper::Render() {
 	return mRoot->renderOneFrame();
 }
@@ -82,7 +87,7 @@ bool OgreWrapper::Init() {
 
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
 
-	//Scene's lightning
+	mCamera = CreateCamera();
 }
 
 AegisCamera* OgreWrapper::CreateCamera(Ogre::SceneNode* node)
