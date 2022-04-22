@@ -24,8 +24,7 @@ RigidbodyComponent::~RigidbodyComponent()
 void RigidbodyComponent::SyncToTransform()
 {
 	Vector3 updatedPos = rigidbody->getRbPosition();
-
-	transform->SetPosition(rigidbody->getRbPosition());
+	transform->SetPosition(updatedPos);
 	auto quat = rigidbody->getRotation();
 	Ogre::Quaternion ogreQuat(quat.w, quat.x, quat.y, quat.z);
 	transform->SetRotation(ogreQuat);

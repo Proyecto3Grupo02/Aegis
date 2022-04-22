@@ -11,7 +11,7 @@ function table.GetNew(entity, params)
         rigidbody = component.entity:GetComponent("Rigidbody").type;
     end;
 	function Update(deltaTime) 
-         -- RETURNS NIL
+        -- RETURNS NIL
         --local transform = component.entity.transform;
         -- MOVE CHARACTER; 
 		-- cada x tiempo random
