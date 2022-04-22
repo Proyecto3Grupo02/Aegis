@@ -13,7 +13,7 @@ class btBroadphaseInterface;
 class btSequentialImpulseConstraintSolver;
 class btCollisionShape;
 class btCollisionObject;
-class btBulletWorldImporter;
+//class btBulletWorldImporter;
 
 class Vector3;
 class Transform;
@@ -28,7 +28,7 @@ private:
     btCollisionDispatcher* dispatcher;
     btBroadphaseInterface* overlappingPairCache;
     btSequentialImpulseConstraintSolver* solver;
-    btBulletWorldImporter* fileLoader;
+    //btBulletWorldImporter* fileLoader;
 public:
     PhysicsSystem();
     ~PhysicsSystem();
