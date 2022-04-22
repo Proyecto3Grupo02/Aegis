@@ -24,6 +24,7 @@ public:
 
 	void addForce(Vector3 vec);
 	void addTorque(Vector3 vec);
+	Vector3 getTotalForce();
 
 	bool getKinematic();
 	bool getUseGravity();

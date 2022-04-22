@@ -66,6 +66,11 @@ void RigidBody::addTorque(Vector3 vec)
 	rigidBody->applyTorque(torque);
 }
 
+Vector3 RigidBody::getTotalForce() {
+	btVector3 forc = rigidBody->getTotalForce();
+	return Vector3(forc.x(), forc.y(), forc.z());
+};
+
 Vector3 RigidBody::getRbPosition()
 {
 	btTransform t;
