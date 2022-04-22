@@ -99,7 +99,7 @@ AegisCamera* OgreWrapper::CreateCamera(Ogre::SceneNode* node)
 	
 	ogreCamNode->setPosition(0, 0, 10);
 	ogreCamNode->lookAt(Ogre::Vector3(0, 0, -300), Ogre::Node::TS_WORLD);
-	ogreCam->setNearClipDistance(5);
+	ogreCam->setNearClipDistance(1);
 
 	vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
 

@@ -6,7 +6,9 @@ function table.GetNew(entity, params)
 	local transform = entity.transform;
     local funcs = component.funcs;
     data.child = "Undefined";
-    data.senstivity = 20;
+    data.senstivity = 40;
+    data.smoothStep = 10;
+    data.targetRotation = transform.localEulerAngles;
 
     function Init() 
         --entity:GetComponent("Camera");
@@ -36,11 +38,16 @@ function table.GetNew(entity, params)
     
             local mouseMotion = Input:GetMouseMotion();
             if mouseMotion.x ~= 0 and mouseMotion.y ~= 0 then
-                local rot = transform.localEulerAngles;
                 local y = mouseMotion.y * deltaTime * data.senstivity;
                 local x = mouseMotion.x * deltaTime * data.senstivity;
-                transform.localEulerAngles =  transform.localEulerAngles - Aegis.Maths.Vector3(y, x, 0);
+                --transform.localEulerAngles =  transform.localEulerAngles - Aegis.Maths.Vector3(y, x, 0);
+                targetRotation = transform.localEulerAngles -  Aegis.Maths.Vector3(y, x, 0);
+
+                print("Mouse X: " .. mouseMotion.x .. " Mouse Y: " .. mouseMotion.y);
             end;
+
+        -- Lerp current Rotation to target rotation
+        transform.localEulerAngles = Vector3Lerp(transform.localEulerAngles, targetRotation, deltaTime * data.smoothStep);
     end;
 	function FixedUpdate() end;
 	function OnCollision(other) end;

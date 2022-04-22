@@ -23,17 +23,17 @@ struct Animation {
 
 	Vector3 GetInterpolatedPos()
 	{
-		return MathUtils::Lerp(getCurrentKeyFrame().pos, getFrame(currentKeyFrame + 1).pos, getNormalizedTime());
+		return MathUtils::Vector3Lerp(getCurrentKeyFrame().pos, getFrame(currentKeyFrame + 1).pos, getNormalizedTime());
 	}
 
 	Vector3 GetInterpolatedScale()
 	{
-		return MathUtils::Lerp(getCurrentKeyFrame().scale, getFrame(currentKeyFrame + 1).scale, getNormalizedTime());
+		return MathUtils::Vector3Lerp(getCurrentKeyFrame().scale, getFrame(currentKeyFrame + 1).scale, getNormalizedTime());
 	}
 
 	Vector3 GetInterpolatedEulerAngles()
 	{
-		return MathUtils::Lerp(getCurrentKeyFrame().degrees, getFrame(currentKeyFrame + 1).degrees, getNormalizedTime());
+		return MathUtils::Vector3Lerp(getCurrentKeyFrame().degrees, getFrame(currentKeyFrame + 1).degrees, getNormalizedTime());
 	}
 
 	//Returns a value between 0 and 1 interpolating frame start and frame end

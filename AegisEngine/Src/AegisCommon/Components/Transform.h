@@ -39,6 +39,10 @@ public:
 	Vector3 GetRight() const;
 	Vector3 GetUp() const;
 
+	void Yaw(float degrees);
+	void Pitch(float degrees);
+	void Roll(float degrees);
+
 	// It does nothing, it's for faking the setter
 	void SetFoo(Vector3 nothign) {};
 

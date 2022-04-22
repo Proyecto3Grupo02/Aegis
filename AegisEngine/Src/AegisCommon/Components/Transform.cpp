@@ -103,6 +103,24 @@ Vector3 Transform::GetUp() const
 	return RotateQuaternion(rotation, Vector3(0, 1, 0));
 }
 
+void Transform::Yaw(float degrees)
+{
+	mNode->yaw(Ogre::Degree(degrees));
+	rotation = mNode->getOrientation();
+}
+
+void Transform::Pitch(float degrees)
+{
+	mNode->pitch(Ogre::Degree(degrees));
+	rotation = mNode->getOrientation();
+}
+
+void Transform::Roll(float degrees)
+{
+	mNode->roll(Ogre::Degree(degrees));
+	rotation = mNode->getOrientation();
+}
+
 Transform::~Transform() {}
 
 void Transform::update(float deltaTime) {}
@@ -128,6 +146,9 @@ void Transform::ConvertToLua(lua_State* state)
 		addProperty("forward", &Transform::GetForward, &Transform::SetFoo).
 		addProperty("right", &Transform::GetRight, &Transform::SetFoo).
 		addProperty("up", &Transform::GetUp, &Transform::SetFoo).
+		addFunction("Yaw", &Transform::Yaw).
+		addFunction("Pitch", &Transform::Pitch).
+		addFunction("Roll", &Transform::Roll).
 		endClass().
 		endNamespace().
 		endNamespace();

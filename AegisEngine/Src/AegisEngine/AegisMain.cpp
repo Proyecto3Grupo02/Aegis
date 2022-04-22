@@ -41,7 +41,7 @@ void AegisMain::GameLoop() {
 
 	uint32_t frameTimeMS = (uint32_t)floor((1 / TARGET_FRAME_RATE) * 1000);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
-	
+
 	while (!exit)
 	{
 		SDL_Event eventHandler;
@@ -79,7 +79,6 @@ void AegisMain::GameLoop() {
 					break;
 				}
 			}
-			SDL_PumpEvents();
 
 			sceneManager->UpdateCurrentScene(gameLoopData->deltaTime);
 			sceneManager->PreRenderScene();
@@ -160,13 +159,8 @@ void AegisMain::ConvertObjectToLua()
 	CameraComponent::ConvertToLua(state);
 	AnimationComponent::ConvertToLua(state);
 	RigidbodyComponent::ConvertToLua(state);
+	//MathUtils::ConvertToLua(state);
 
 	ExportToLua(sceneManager->GetCurrentScene(), "currentScene");
 	ExportToLua(Input(), "Input");
-
-	//push(state, sceneManager->GetCurrentScene());
-	//lua_setglobal(state, "currentScene");
-
-	//push(state, Input());
-	//lua_setglobal(state, "Input");
 }
