@@ -203,7 +203,7 @@ namespace MathUtils
 		return result;
 	}
 
-	static Vector3 RotateByQuaternion(Ogre::Quaternion q, const Vector3& v)
+	static Vector3 RotateVector3ByQuaternion(Ogre::Quaternion q, const Vector3& v)
 	{
 		// Using quaternions is easier to understand but uses way more CPU
 		//auto pureQuat = Ogre::Quaternion(0, v.x, v.y, v.z);
@@ -220,5 +220,21 @@ namespace MathUtils
 		return  Vector3(2.0f * u.dot(v) * u
 			+ (s * s - u.dot(u)) * v
 			+ 2.0f * s * u.cross(v));
+	}
+
+	static Vector3 RotateQuaternion(Ogre::Quaternion q, const Vector3& v)
+	{
+		const float x = q.x;
+		const float y = q.y;
+		const float z = q.z;
+		const float w = q.w;
+		
+		const float vx = 2.0f * v.x;
+		const float vy = 2.0f * v.y;
+		const float vz = 2.0f * v.z;
+		const float w2 = w * w - 0.5f;
+		const float dot2 = (x * vx + y * vy + z * vz);
+		return Vector3((vx * w2 + (y * vz - z * vy) * w + x * dot2), (vy * w2 + (z * vx - x * vz) * w + y * dot2),
+			(vz * w2 + (x * vy - y * vx) * w + z * dot2));
 	}
 }

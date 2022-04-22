@@ -19,16 +19,16 @@ function table.GetNew(entity, params)
             -- Move position of transform using awsd keys witha  value of 1, save the value and normalize before applying to transform
             local move = Aegis.Maths.Vector3(0, 0, 0);
             if Input:IsKeyDown("i") then
-                move = move + Aegis.Maths.Vector3(0, 0, -1);
+                move = move - transform.forward;
             end;
             if Input:IsKeyDown("j") then
-                move = move + Aegis.Maths.Vector3(-1, 0, 0);
+                move = move - transform.right;
             end;
             if Input:IsKeyDown("k") then
-                move = move + Aegis.Maths.Vector3(0, 0, 1);
+                move = move + transform.forward;
             end;
             if Input:IsKeyDown("l") then
-                move = move + Aegis.Maths.Vector3(1, 0, 0);
+                move = move + transform.right;
             end;
     
             move:Normalize();

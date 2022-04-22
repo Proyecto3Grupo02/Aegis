@@ -35,6 +35,13 @@ public:
 	void SetRotationEuler(Vector3 newRot);
 	void SetScale(Vector3 newScale);
 
+	Vector3 GetForward() const;
+	Vector3 GetRight() const;
+	Vector3 GetUp() const;
+
+	// It does nothing, it's for faking the setter
+	void SetFoo(Vector3 nothign) {};
+
 	static void ConvertToLua(lua_State* state);
 
 	void AddChild(Entity* child);
