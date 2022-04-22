@@ -22,19 +22,29 @@ function table.GetNew(entity, params)
     end;
     	function LateUpdate(deltaTime) end;
 	function FixedUpdate() 
+        -- print("Force Y Axis: " .. rigidbody:GetForce().y);
         local rigidbody = component.entity:GetComponent("Rigidbody").type; -- RETURNS NIL
         --local transform = component.entity.transform;
         -- MOVE CHARACTER:
         if  Input:AnyKeyIsDown() then -- GENERIC CHECK BEFORE CHECKING INDIVIDUAL KEY ==> NECESSARY
-            if Input:IsKeyDown("w") then
-                
-               print("Tecla W");
-               print("Transform: x: " .. transform.position.x .." y: " .. transform.position.y .. " z: " .. transform.position.z);
-               print("Rigidbody: x: " .. rigidbody.position.x .." y: " .. rigidbody.position.y .. " z: " .. rigidbody.position.z);
-               rigidbody:AddForce(Aegis.Maths.Vector3(20, 0, 0))
-                
-            end;
+            
         end  
+        if Input:IsKeyDown("s") then               
+                
+            rigidbody.position = data.initPos;
+            print("Force Y Axis: " .. rigidbody:GetForce().y);
+            --local vector =; 
+         end;
+        if Input:IsKeyDown("w") then
+            
+           print("Tecla W");
+           print("Transform: x: " .. transform.position.x .." y: " .. transform.position.y .. " z: " .. transform.position.z);
+           print("Rigidbody: x: " .. rigidbody.position.x .." y: " .. rigidbody.position.y .. " z: " .. rigidbody.position.z);
+           rigidbody:AddForce(Aegis.Maths.Vector3(20, 0, 0))
+           print("Force Y Axis: " .. rigidbody:GetForce().x);
+           
+            
+        end;
     end;
 	function OnCollision(other) end;
 	function OnTrigger(other) end;

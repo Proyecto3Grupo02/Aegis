@@ -40,6 +40,10 @@ void RigidbodyComponent::AddForce(Vector3 force) {
 	rigidbody->addForce(force);
 }
 
+Vector3 RigidbodyComponent::GetForce() {
+	return rigidbody->getTotalForce();
+}
+
 Vector3 RigidbodyComponent::GetPosition() const{
 	return rigidbody->getRbPosition();
 }
@@ -63,12 +67,13 @@ void RigidbodyComponent::ConvertToLua(lua_State* state)
 {
 	getGlobalNamespace(state).
 		beginNamespace("Aegis").
-		beginNamespace("NativeComponents").
-		addFunction("CreateRigidbody", CreateRigidbody).
-		deriveClass<RigidbodyComponent, AegisComponent>("Rigidbody").
-		addProperty("position", &RigidbodyComponent::GetPosition, &RigidbodyComponent::SetPosition).
-		addFunction("AddForce", &RigidbodyComponent::AddForce).
-		endClass().
-		endNamespace().
+			beginNamespace("NativeComponents").
+				addFunction("CreateRigidbody", CreateRigidbody).
+				deriveClass<RigidbodyComponent, AegisComponent>("Rigidbody").
+					addProperty("position", &RigidbodyComponent::GetPosition, &RigidbodyComponent::SetPosition).
+					addFunction("AddForce", &RigidbodyComponent::AddForce).
+					addFunction("GetForce", &RigidbodyComponent::GetForce).
+				endClass().
+			endNamespace().
 		endNamespace();
 }
