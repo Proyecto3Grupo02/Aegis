@@ -15,6 +15,7 @@ subject to the following restrictions:
 
 ///-----includes_start-----
 #include "btBulletDynamicsCommon.h"
+#include "../../src/Extras/Serialize/BulletWorldImporter/btBulletWorldImporter.h"
 #include <stdio.h>
 #include "PhysicsMain.h"
 #include "Vector3.h"
@@ -205,12 +206,7 @@ btTransform PhysicsSystem::parseToBulletTransform(Vector3 pos, Vector4 rot)
 	return t;
 }
 
-std::vector<Vector3> PhysicsSystem::getVertexFromMesh(std::string meshName)
-{
-	std::vector<Vector3> vertex;
 
-	return vertex;
-}
 
 const btVector3 PhysicsSystem::parseToBulletVector(const Vector3& v) const
 {
@@ -220,6 +216,13 @@ const btVector3 PhysicsSystem::parseToBulletVector(const Vector3& v) const
 const Vector3 PhysicsSystem::parseFromBulletVector(const btVector3& v) const
 {
 	return Vector3(double(v.x()), double(v.y()), double(v.z()));
+}
+
+/*std::vector<Vector3> PhysicsSystem::getVertexFromMesh(std::string meshName)
+{
+	std::vector<Vector3> vertex;
+
+	return vertex;
 }
 
 btCollisionShape* PhysicsSystem::createShapeWithVertices(Vector3 _dim, std::string bodyMeshName, bool isConvex)
@@ -254,7 +257,7 @@ btCollisionShape* PhysicsSystem::createShapeWithVertices(Vector3 _dim, std::stri
 	}
 	return rbShape;
 }
-
+*/
 btCollisionShape* PhysicsSystem::createBodyShape(RigidBody::RigidBodyType rbType, Vector3 _dim, std::string bodyMeshName, bool isConvex)
 {
 	btCollisionShape* rbShape = nullptr;
@@ -266,7 +269,11 @@ btCollisionShape* PhysicsSystem::createBodyShape(RigidBody::RigidBodyType rbType
 		rbShape = new btSphereShape(btScalar(_dim.GetX() / 2.0f));
 		break;
 	case RigidBody::RigidBodyType::Custom:
-		rbShape = createShapeWithVertices(_dim, bodyMeshName, isConvex);
+		btBulletWorldImporter* fileLoader = new btBulletWorldImporter(dynamicsWorld);
+		char* fileName;
+		strcpy(fileName, bodyMeshName.c_str());
+		fileLoader->loadFile(fileName);
+		//rbShape = createShapeWithVertices(_dim, bodyMeshName, isConvex);
 		break;
 	case RigidBody::RigidBodyType::CapsuleX:
 		rbShape = new btCapsuleShapeX(btScalar(_dim.GetZ() / 2.0f), btScalar(_dim.GetX()));
