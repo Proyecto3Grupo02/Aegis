@@ -9,6 +9,7 @@
 struct Entity;
 class SceneNode;
 class RigidbodyComponent;
+class OgreWrapper;
 
 class Scene : public ILuaObject
 {
@@ -18,6 +19,7 @@ private:
 	std::list<Entity*>* uninitializedEntities;
 	std::list<std::list<Entity*>::iterator> entitiesToDelete;
 	Ogre::SceneNode* ogreNode;
+	OgreWrapper* ogreWrapper;
 	// Fixed Update arguments
 
 	// Este parametro quizas sea mejor a la clase application cuando la tengamos
@@ -83,7 +85,7 @@ private:
 	/// </summary>
 	void InitEntities();
 public:
-	Scene(Ogre::SceneNode* ogreNode);
+	Scene(OgreWrapper* wrap);
 
 	~Scene();
 

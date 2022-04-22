@@ -21,7 +21,6 @@ private:
     SDL_Window* native = nullptr;
 
     Ogre::SceneManager* mSceneMgr;
-    AegisCamera* mCamera;
     Ogre::LogManager* lm;
     
     void CreateWindowNative();
@@ -31,6 +30,7 @@ public:
     bool Render();
     virtual ~OgreWrapper();
     bool Init();
+    AegisCamera* CreateCamera(Ogre::SceneNode* node = nullptr);
     Ogre::SceneNode* GetRootNode();
 };
 

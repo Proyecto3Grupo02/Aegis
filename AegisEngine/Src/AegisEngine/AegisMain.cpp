@@ -92,9 +92,10 @@ AegisMain::AegisMain() : IInitializable() {
 	exit = (false);
 	ogreWrap = new OgreWrapper();
 	ogreWrap->Init();
+	ogreWrap->CreateCamera();
 	
 	gameLoopData = new GameLoopData();
-	sceneManager = new SceneManager(new Scene(ogreWrap->GetRootNode()));
+	sceneManager = new SceneManager(new Scene(ogreWrap));
 }
 
 AegisMain::~AegisMain() {

@@ -3,6 +3,8 @@
 #include "Scripting.h"
 #include "../../AegisPhysics/PhysicsMain.h"
 #include "../Components/RigidbodyComponent.h"
+#include "../../AegisGraphics/OgreWrapper.h"
+#include "../Components/CameraComponent.h"
 
 using namespace luabridge;
 
@@ -17,10 +19,14 @@ void Scene::InitEntities()
 }
 
 // Es posible que aqui queramos inicializar una escena de ogre y sincronizarla con las entidades
-Scene::Scene(Ogre::SceneNode* ogreNode) :
-	accumulator(0), entities(new std::list<Entity*>()), entitiesToDelete(std::list<std::list<Entity*>::iterator>()) , ogreNode(ogreNode), uninitializedEntities(new std::list<Entity*>()),
-	physicsEntities(new std::list<RigidbodyComponent*>())
+Scene::Scene(OgreWrapper* wrap) :
+	accumulator(0), entities(new std::list<Entity*>()), entitiesToDelete(std::list<std::list<Entity*>::iterator>()) , ogreNode(wrap->GetRootNode()), uninitializedEntities(new std::list<Entity*>()),
+	physicsEntities(new std::list<RigidbodyComponent*>()), ogreWrapper(wrap)
 {
+	// Create entity with camera, default entity every scene has
+	//Entity* cameraEntity = new Entity(this);
+	//cameraEntity->addComponentFromLua(new CameraComponent(cameraEntity, wrap->CreateCamera()));
+	//AddEntity(cameraEntity);
 }
 
 Scene::~Scene() {

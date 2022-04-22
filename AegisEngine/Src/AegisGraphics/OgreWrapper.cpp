@@ -26,7 +26,6 @@ bool OgreWrapper::Render() {
 
 
 OgreWrapper::~OgreWrapper() {
-	delete mCamera;
 	render->destroy();
 	mSceneMgr->clearScene();
 	delete mRoot;
@@ -81,18 +80,18 @@ bool OgreWrapper::Init() {
 
 	mSceneMgr = mRoot->createSceneManager();
 
-	//scene camera
+	mSceneMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
 
-	//Ogre::SceneNode* ogreCam = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-	//mCamera = mSceneMgr->createCamera("MainCam");
-	//ogreCam->attachObject(mCamera);
+	//Scene's lightning
+}
 
-	//viewPort
-	auto ogreCamNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-	mCamera = new AegisCamera("MainCamera",ogreCamNode);
+AegisCamera* OgreWrapper::CreateCamera(Ogre::SceneNode* node)
+{
+	auto ogreCamNode = node == nullptr ? mSceneMgr->getRootSceneNode()->createChildSceneNode() : node;
+	auto mCamera = new AegisCamera("MainCamera", ogreCamNode);
 	auto ogreCam = mCamera->GetCamera();
 	Ogre::Viewport* vp = render->addViewport(ogreCam);
-
+	
 	ogreCamNode->setPosition(0, 0, 10);
 	ogreCamNode->lookAt(Ogre::Vector3(0, 0, -300), Ogre::Node::TS_WORLD);
 	ogreCam->setNearClipDistance(5);
@@ -103,17 +102,7 @@ bool OgreWrapper::Init() {
 		Ogre::Real(vp->getActualWidth()) /
 		Ogre::Real(vp->getActualHeight()));
 
-	//fish creation with components
-	//Ogre::SceneNode* fishNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-	//Entity* fish = new Entity(fishNode);
-	//fish->addComponent<Transform>("Transform", Vector3(), Vector4(), Vector3(1.0f, -1.0f, 1.0f));	
-	//Renderer* fishRenderer = fish->addComponent<Renderer>("Renderer", fish, "fish.mesh", mSceneMgr, true);
-	//fish->addComponent<Material>("Material", "red");
-	//fishRenderer->render();
-
-	mSceneMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
-
-	//Scene's lightning
+	return mCamera;
 }
 
 Ogre::SceneNode* OgreWrapper::GetRootNode()

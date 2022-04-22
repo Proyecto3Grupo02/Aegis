@@ -26,8 +26,8 @@ struct Vector3;
 
 struct Entity : public ILuaObject {
 public:
-	Entity(Scene* node);
-	Entity(Scene* node, Vector3 pos);
+	Entity(Scene* scene);
+	Entity(Scene* scene, Vector3 pos);
 	~Entity();
 
 	void init();
