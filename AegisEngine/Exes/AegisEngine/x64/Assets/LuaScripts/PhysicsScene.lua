@@ -39,8 +39,7 @@ local scene = {
 				type = "Rigidbody",
 				data = 
 				{
-					isKinematic = true,
-					useGravity = false
+					isKinematic = true
 				}
 			},
 			{
@@ -87,7 +86,6 @@ local scene = {
 				data = 
 				{
 					isKinematic = true,
-					useGravity = false
 				}
 			}
 		}

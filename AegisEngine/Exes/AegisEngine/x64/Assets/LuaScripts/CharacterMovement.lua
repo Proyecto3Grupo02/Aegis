@@ -18,57 +18,37 @@ function table.GetNew(entity, params)
      end;
 
 	function Update(deltaTime)
-        if Input:IsKeyDown("w") then
-            w = true;           
+        w = Input:IsKeyDown("w");
+        a = Input:IsKeyDown("a");
+        s = Input:IsKeyDown("s");
+        d = Input:IsKeyDown("d");
+    -- IF key is f then set rigibody pos to init pos
+        if Input:IsKeyDown("f") then
+            rigidbody.position = data.initPos;
         end;
-        if Input:IsKeyDown("a") then
-            a=true;
-        end;
-        if Input:IsKeyDown("s") then
-            s=true;
-        end;
-        if Input:IsKeyDown("d")then
-            d=true;
-        end;
-        if Input:KeyWasReleased("w") then
-            w=false;
-        end;
-        if Input:KeyWasReleased("a")then
-            a=false;
-        end;
-        if Input:KeyWasReleased("s") then
-            s=false;
-        end;
-        if Input:KeyWasReleased("d") then
-            d=false;
-        end;
-          
     end;
 
     function LateUpdate(deltaTime) end;
 
 	function FixedUpdate() 
         -- print("Force Y Axis: " .. rigidbody:GetForce().y);
-        local rigidbody = component.entity:GetComponent("Rigidbody").type; -- RETURNS NIL
-        --local transform = component.entity.transform;
         -- MOVE CHARACTER:
         if w then                
             rigidbody:AddForce(Aegis.Maths.Vector3(0, 0, 0.5))
-            rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(0,0, -0.05);                 
+            --rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(0,0, -0.05);                 
         end;
         if a then                
             rigidbody:AddForce(Aegis.Maths.Vector3(-0.5, 0, 0))
-            rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(-0.05,0,0);   
+            --rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(-0.05,0,0);   
         end;
         if s then                
             rigidbody:AddForce(Aegis.Maths.Vector3(0, 0, -0.5))
-            rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(0,0, 0.05);
+            --rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(0,0, 0.05);
         end;
         if d then                
             rigidbody:AddForce(Aegis.Maths.Vector3(0.5, 0, 0))
             -- rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(0.05,0,0); 
-            print("Force X Axis: " .. rigidbody:GetForce().x);  
-
+            --print("Force X Axis: " .. rigidbody:GetForce().x);  
         end;
 
        

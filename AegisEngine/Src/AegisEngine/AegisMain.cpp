@@ -37,10 +37,12 @@
 //using namespace luabridge;
 
 void AegisMain::GameLoop() {
+		
+	uint32_t frameTimeMS = (uint32_t)floor((1 / TARGET_FRAME_RATE) * 1000);
+	
 	while (!exit)
 	{
 		SDL_Event eventHandler;
-		uint32_t frameTimeMS = (uint32_t)floor((1 / TARGET_FRAME_RATE) * 1000);
 
 		Audio()->playMusic("clin");
 		//SDL_EnableKeyRepeat(0, 0);
@@ -72,12 +74,11 @@ void AegisMain::GameLoop() {
 			}
 			SDL_PumpEvents();
 
-
 			sceneManager->UpdateCurrentScene(gameLoopData->deltaTime);
 			sceneManager->PreRenderScene();
 
 			ogreWrap->Render();
-			Uint32 frameTime = SDL_GetTicks();
+			Uint32 frameTime = SDL_GetTicks() - gameLoopData->frameStartTime;
 
 			if (frameTime < frameTimeMS)
 				SDL_Delay(frameTimeMS - frameTime);

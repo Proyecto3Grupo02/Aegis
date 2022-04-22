@@ -39,7 +39,7 @@ void RigidbodyComponent::AddForce(Vector3 force) {
 	rigidbody->addForce(force);
 }
 
-Vector3 RigidbodyComponent::GetForce() {
+Vector3 RigidbodyComponent::GetForce() const {
 	return rigidbody->getTotalForce();
 }
 
@@ -60,7 +60,7 @@ RigidbodyComponent* CreateRigidbody(Entity* ent, LuaRef args) //Doesn't belong t
 	bool isKinematic = LuaMngr()->ParseBool(args["isKinematic"], false);
 
 	return new RigidbodyComponent(ent, bodyName, mass, useGravity, isKinematic);
-}
+}	
 
 void RigidbodyComponent::ConvertToLua(lua_State* state)
 {

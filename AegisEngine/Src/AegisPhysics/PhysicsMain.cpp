@@ -114,23 +114,6 @@ void PhysicsSystem::update() {
 	float timeStep = 1.f / 50.f;
 	dynamicsWorld->stepSimulation(timeStep, 10);
 	dynamicsWorld->clearForces();
-
-	//std::cout << "Colisions: " << dynamicsWorld->getNumCollisionObjects() << " ";
-	for (int j = dynamicsWorld->getNumCollisionObjects() - 1; j >= 0; j--)
-	{
-		btCollisionObject* obj = dynamicsWorld->getCollisionObjectArray()[j];
-		btRigidBody* body = btRigidBody::upcast(obj);
-		btTransform trans;
-		if (body && body->getMotionState())
-		{
-			body->getMotionState()->getWorldTransform(trans);
-		}
-		else
-		{
-			trans = obj->getWorldTransform();
-		}
-		//printf("world pos object %d = %f,%f,%f\n", j, float(trans.getOrigin().getX()), float(trans.getOrigin().getY()), float(trans.getOrigin().getZ()));
-	}
 }
 
 ///-----stepsimulation_end-----
@@ -144,7 +127,7 @@ void PhysicsSystem::clear() {
 	{
 		btCollisionObject* obj = dynamicsWorld->getCollisionObjectArray()[i];
 		btRigidBody* body = btRigidBody::upcast(obj);
-		
+
 		if (body && body->getMotionState())
 		{
 			delete body->getMotionState();
@@ -176,15 +159,15 @@ void PhysicsSystem::remove() {
 void PhysicsSystem::removeRigidbody(btCollisionObject* rb)
 {
 	//remove the rigidbodies from the dynamics world and delete them
-		
-		btCollisionObject* obj = dynamicsWorld->getCollisionObjectArray()[rb->getWorldArrayIndex()];
-		btRigidBody* body = btRigidBody::upcast(obj);
-		if (body && body->getMotionState())
-		{
-			delete body->getMotionState();
-		}
-		dynamicsWorld->removeCollisionObject(obj);
-		delete obj;
+
+	btCollisionObject* obj = dynamicsWorld->getCollisionObjectArray()[rb->getWorldArrayIndex()];
+	btRigidBody* body = btRigidBody::upcast(obj);
+	if (body && body->getMotionState())
+	{
+		delete body->getMotionState();
+	}
+	dynamicsWorld->removeCollisionObject(obj);
+	delete obj;
 }
 
 btTransform PhysicsSystem::parseToBulletTransform(Vector3 pos, Vector3 rot)
