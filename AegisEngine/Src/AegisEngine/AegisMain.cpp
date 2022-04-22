@@ -33,13 +33,15 @@
 #include "../AegisCommon/Components/CameraComponent.h"
 #include "../AegisCommon/Components/AnimationComponent.h"
 #include "../AegisCommon/Components/RigidbodyComponent.h"
+#include "../AegisCommon/Utils/Vector2.h"
 
 //using namespace luabridge;
 
 void AegisMain::GameLoop() {
 
 	uint32_t frameTimeMS = (uint32_t)floor((1 / TARGET_FRAME_RATE) * 1000);
-
+	SDL_SetRelativeMouseMode(SDL_TRUE);
+	
 	while (!exit)
 	{
 		SDL_Event eventHandler;
@@ -67,6 +69,10 @@ void AegisMain::GameLoop() {
 				case SDL_KEYUP:
 					//std::cout << "KeyUp (" << eventHandler.type << "): ";
 					Input()->OnKeyUp(key);
+					break;
+				case SDL_MOUSEMOTION:
+					// This is usually implemented as a callback but for now it will be this way, just for testing...
+					Input()->SetMouseMotion(Vector2(eventHandler.motion.xrel, eventHandler.motion.yrel));
 					break;
 				default:
 					//std::cout << "Default (" << eventHandler.type << ")\n";
@@ -145,6 +151,7 @@ void AegisMain::ConvertObjectToLua()
 	AegisComponent::ConvertToLua(state);
 
 	Transform::ConvertToLua(state);
+	Vector2::ConvertToLua(state);
 	Vector3::ConvertToLua(state);
 	Vector4::ConvertToLua(state);
 	Quaternion::ConvertToLua(state);

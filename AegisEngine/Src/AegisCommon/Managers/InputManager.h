@@ -7,6 +7,7 @@
 #include <vector>
 #include<SDL.h>
 #include "../Interfaces/ILuaObject.h"
+#include "../Utils/Vector2.h"
 
 class InputSystem : public Singleton<InputSystem>, public ILuaObject {
 private:
@@ -22,6 +23,7 @@ private:
 	bool KEY_WAS_PRESSED = false;
 	bool KEY_DOWN = false;
 	bool KEY_WAS_RELEASED = false;
+	Vector2 mouseMotion;
 public:
 
 	InputSystem();
@@ -50,6 +52,9 @@ public:
 	bool keyWasReleasedLua(const char* key);
 
 	static void ConvertToLua(lua_State* state);
+
+	void SetMouseMotion(Vector2 motion);
+	Vector2 GetMouseMotion() const;
 };
 
 
