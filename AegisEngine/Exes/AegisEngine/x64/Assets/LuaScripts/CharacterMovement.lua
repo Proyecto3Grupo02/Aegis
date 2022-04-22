@@ -6,46 +6,73 @@ function table.GetNew(entity, params)
 	local transform = entity.transform;
     local funcs = component.funcs;
     local rigidbod;
+    local w; local a; local s; local d;
     data.initPos = transform.position;
 
     function Init()
         rigidbody = component.entity:GetComponent("Rigidbody").type;
+        w=false;
+        a=false;
+        s=false;
+        d=false;
      end;
 
-	function Update(deltaTime) 
-            if Input:KeyWasPressed("s") then
-                print("Key S was pressed");
-            end;
-            if Input:IsKeyDown("a") then
-                print("Key A is down");
-            end;
+	function Update(deltaTime)
+        if Input:IsKeyDown("w") then
+            w = true;           
+        end;
+        if Input:IsKeyDown("a") then
+            a=true;
+        end;
+        if Input:IsKeyDown("s") then
+            s=true;
+        end;
+        if Input:IsKeyDown("d")then
+            d=true;
+        end;
+        if Input:KeyWasReleased("w") then
+            w=false;
+        end;
+        if Input:KeyWasReleased("a")then
+            a=false;
+        end;
+        if Input:KeyWasReleased("s") then
+            s=false;
+        end;
+        if Input:KeyWasReleased("d") then
+            d=false;
+        end;
+          
     end;
-    	function LateUpdate(deltaTime) end;
+
+    function LateUpdate(deltaTime) end;
+
 	function FixedUpdate() 
         -- print("Force Y Axis: " .. rigidbody:GetForce().y);
         local rigidbody = component.entity:GetComponent("Rigidbody").type; -- RETURNS NIL
         --local transform = component.entity.transform;
         -- MOVE CHARACTER:
-        if  Input:AnyKeyIsDown() then -- GENERIC CHECK BEFORE CHECKING INDIVIDUAL KEY ==> NECESSARY
-            
-        end  
-        if Input:IsKeyDown("s") then               
-                
-            rigidbody.position = data.initPos;
-            print("Force Y Axis: " .. rigidbody:GetForce().y);
-            --local vector =; 
-         end;
-        if Input:IsKeyDown("w") then
-            
-           print("Tecla W");
-           print("Transform: x: " .. transform.position.x .." y: " .. transform.position.y .. " z: " .. transform.position.z);
-           print("Rigidbody: x: " .. rigidbody.position.x .." y: " .. rigidbody.position.y .. " z: " .. rigidbody.position.z);
-           rigidbody:AddForce(Aegis.Maths.Vector3(20, 0, 0))
-           print("Force Y Axis: " .. rigidbody:GetForce().x);
-           
-            
+        if w then                
+            rigidbody:AddForce(Aegis.Maths.Vector3(0, 0, 0.5))
+            rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(0,0, -0.05);                 
         end;
+        if a then                
+            rigidbody:AddForce(Aegis.Maths.Vector3(-0.5, 0, 0))
+            rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(-0.05,0,0);   
+        end;
+        if s then                
+            rigidbody:AddForce(Aegis.Maths.Vector3(0, 0, -0.5))
+            rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(0,0, 0.05);
+        end;
+        if d then                
+            rigidbody:AddForce(Aegis.Maths.Vector3(0.5, 0, 0))
+            rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(0.05,0,0);   
+
+        end;
+
+       
     end;
+
 	function OnCollision(other) end;
 	function OnTrigger(other) end;
 

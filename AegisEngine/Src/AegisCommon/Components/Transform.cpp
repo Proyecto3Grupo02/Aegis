@@ -92,7 +92,7 @@ Transform::~Transform() {}
 
 void Transform::update(float deltaTime) {}
 
-void Transform::ConvertToLua(lua_State* state)
+void Transform::ConvertToLuaº(lua_State* state)
 {
 	getGlobalNamespace(state).
 		beginNamespace("Aegis").
