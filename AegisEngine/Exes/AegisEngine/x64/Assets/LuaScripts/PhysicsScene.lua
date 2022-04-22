@@ -84,11 +84,9 @@ local scene = {
 			},
 			{
 				type = "Rigidbody",
-				data = 
-				{
-					isKinematic = true,
-					useGravity = false
-				}
+			},
+			{
+				type = "RandomMovement"
 			}
 		}
 	}
