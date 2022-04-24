@@ -4,22 +4,13 @@
 #define _SOUND_LISTENER
 
 #include "SoundSystem.h"
-
+#include "../../Dependencias/fmod/inc/fmod.hpp"
 class SoundListener {
 public:
-	SoundListener(Vector3 pos, Vector4 quat) {
-		listenData_ = Audio()->createListener(new Vector3(pos), new Vector4(quat));
-	}
+	SoundListener(Vector3 pos, Vector4 quat);
 	~SoundListener() {
 		Audio()->removeListener();
 	}
-
-	
-
-
-
-
-
 
 private:
 	SoundSystem::ListenerData* listenData_;
