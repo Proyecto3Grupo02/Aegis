@@ -8,4 +8,4 @@ function table.GetNew(entity, args)
     return component;
 end
     
-return table
+return table;

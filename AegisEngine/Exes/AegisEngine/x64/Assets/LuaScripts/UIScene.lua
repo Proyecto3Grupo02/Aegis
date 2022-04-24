@@ -1,6 +1,6 @@
 -- Example of scene, it's just a table with list of entities
 
-local NAME = "PhysicsScene";
+local NAME = "UIScene";
 local scene = {
 	{
 		type = "Entity",
@@ -14,6 +14,7 @@ local scene = {
 					material= "blue"
 				}
 			},
+			mdmdmd
 			{
 				type = "Rigidbody",
 				data = 
