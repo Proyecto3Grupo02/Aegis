@@ -4,6 +4,7 @@
 
 #include <Ogre.h>
 #include "../Interfaces/ILuaObject.h"
+#include "../Interfaces/ILuaObject.h"
 
 struct Entity;
 

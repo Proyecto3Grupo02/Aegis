@@ -15,6 +15,7 @@ subject to the following restrictions:
 
 ///-----includes_start-----
 #include "btBulletDynamicsCommon.h"
+//#include "../../src/Extras/Serialize/BulletWorldImporter/btBulletWorldImporter.h"
 #include <stdio.h>
 #include "PhysicsMain.h"
 #include "Vector3.h"
@@ -41,6 +42,8 @@ void PhysicsSystem::Init()
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, overlappingPairCache, solver, collisionConfiguration);
 
 	dynamicsWorld->setGravity(btVector3(0, -10, 0));
+
+	//fileLoader = new btBulletWorldImporter(dynamicsWorld);
 
 
 }
@@ -110,23 +113,7 @@ void PhysicsSystem::update() {
 	///-----stepsimulation_start-----
 	float timeStep = 1.f / 50.f;
 	dynamicsWorld->stepSimulation(timeStep, 10);
-	
-	//std::cout << "Colisions: " << dynamicsWorld->getNumCollisionObjects() << " ";
-	for (int j = dynamicsWorld->getNumCollisionObjects() - 1; j >= 0; j--)
-	{
-		btCollisionObject* obj = dynamicsWorld->getCollisionObjectArray()[j];
-		btRigidBody* body = btRigidBody::upcast(obj);
-		btTransform trans;
-		if (body && body->getMotionState())
-		{
-			body->getMotionState()->getWorldTransform(trans);
-		}
-		else
-		{
-			trans = obj->getWorldTransform();
-		}
-		//printf("world pos object %d = %f,%f,%f\n", j, float(trans.getOrigin().getX()), float(trans.getOrigin().getY()), float(trans.getOrigin().getZ()));
-	}
+	dynamicsWorld->clearForces();
 }
 
 ///-----stepsimulation_end-----
@@ -140,26 +127,20 @@ void PhysicsSystem::clear() {
 	{
 		btCollisionObject* obj = dynamicsWorld->getCollisionObjectArray()[i];
 		btRigidBody* body = btRigidBody::upcast(obj);
+
 		if (body && body->getMotionState())
 		{
 			delete body->getMotionState();
+			delete body->getCollisionShape();
 		}
 		dynamicsWorld->removeCollisionObject(obj);
 		delete obj;
 	}
-
-	//delete collision shapes
-	for (int j = 0; j < collisionShapes.size(); j++)
-	{
-		btCollisionShape* shape = collisionShapes[j];
-		collisionShapes[j] = 0;
-		delete shape;
-	}
-
-
 }
 
 void PhysicsSystem::remove() {
+	clear();
+
 	//delete dynamics world
 	delete dynamicsWorld;
 
@@ -173,11 +154,20 @@ void PhysicsSystem::remove() {
 	delete dispatcher;
 
 	delete collisionConfiguration;
+}
 
-	//next line is optional: it will be cleared by the destructor when the array goes out of scope
-	collisionShapes.clear();
+void PhysicsSystem::removeRigidbody(btCollisionObject* rb)
+{
+	//remove the rigidbodies from the dynamics world and delete them
 
-
+	btCollisionObject* obj = dynamicsWorld->getCollisionObjectArray()[rb->getWorldArrayIndex()];
+	btRigidBody* body = btRigidBody::upcast(obj);
+	if (body && body->getMotionState())
+	{
+		delete body->getMotionState();
+	}
+	dynamicsWorld->removeCollisionObject(obj);
+	delete obj;
 }
 
 btTransform PhysicsSystem::parseToBulletTransform(Vector3 pos, Vector3 rot)
@@ -201,12 +191,7 @@ btTransform PhysicsSystem::parseToBulletTransform(Vector3 pos, Vector4 rot)
 	return t;
 }
 
-std::vector<Vector3> PhysicsSystem::getVertexFromMesh(std::string meshName)
-{
-	std::vector<Vector3> vertex;
 
-	return vertex;
-}
 
 const btVector3 PhysicsSystem::parseToBulletVector(const Vector3& v) const
 {
@@ -216,6 +201,13 @@ const btVector3 PhysicsSystem::parseToBulletVector(const Vector3& v) const
 const Vector3 PhysicsSystem::parseFromBulletVector(const btVector3& v) const
 {
 	return Vector3(double(v.x()), double(v.y()), double(v.z()));
+}
+
+/*std::vector<Vector3> PhysicsSystem::getVertexFromMesh(std::string meshName)
+{
+	std::vector<Vector3> vertex;
+
+	return vertex;
 }
 
 btCollisionShape* PhysicsSystem::createShapeWithVertices(Vector3 _dim, std::string bodyMeshName, bool isConvex)
@@ -250,7 +242,7 @@ btCollisionShape* PhysicsSystem::createShapeWithVertices(Vector3 _dim, std::stri
 	}
 	return rbShape;
 }
-
+*/
 btCollisionShape* PhysicsSystem::createBodyShape(RigidBody::RigidBodyType rbType, Vector3 _dim, std::string bodyMeshName, bool isConvex)
 {
 	btCollisionShape* rbShape = nullptr;
@@ -262,7 +254,10 @@ btCollisionShape* PhysicsSystem::createBodyShape(RigidBody::RigidBodyType rbType
 		rbShape = new btSphereShape(btScalar(_dim.GetX() / 2.0f));
 		break;
 	case RigidBody::RigidBodyType::Custom:
-		rbShape = createShapeWithVertices(_dim, bodyMeshName, isConvex);
+		//char fileName[100];
+		//strcpy(fileName, bodyMeshName.c_str());
+		//fileLoader->loadFile(fileName);
+		//rbShape = createShapeWithVertices(_dim, bodyMeshName, isConvex);
 		break;
 	case RigidBody::RigidBodyType::CapsuleX:
 		rbShape = new btCapsuleShapeX(btScalar(_dim.GetZ() / 2.0f), btScalar(_dim.GetX()));
@@ -279,9 +274,6 @@ btCollisionShape* PhysicsSystem::createBodyShape(RigidBody::RigidBodyType rbType
 btRigidBody* PhysicsSystem::createRigidBody(RigidBody::RigidBodyType rbType, float _mass, Vector3 _dim, Vector3 _pos, std::string bodyMeshName, bool isConvex, bool isKinematic) {
 	btCollisionShape* rbShape = createBodyShape(rbType, _dim, bodyMeshName, isConvex);
 
-
-	//= 
-	collisionShapes.push_back(rbShape);
 
 	btTransform groundTransform;
 	groundTransform.setIdentity();

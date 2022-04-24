@@ -15,6 +15,7 @@
 #include "Vector4.h"	// AegisCommon
 
 #include "SoundResources.h"
+#include "../checkML.h"
 
 // Typedef to avoid the use of Using
 typedef FMOD_MODE SoundMode;		// Bit Descriptor mode

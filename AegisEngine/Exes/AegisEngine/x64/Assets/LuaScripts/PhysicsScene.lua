@@ -3,6 +3,16 @@
 local NAME = "PhysicsScene";
 local scene = {
 	{
+		type = "MainCamera",
+		position = { z = 10 },
+		components = 
+		{
+			{
+				type = "CameraTest"
+			}
+		}
+	},
+	{
 		type = "Entity",
 		name = "Cubo",
 		position = { y = 2},
@@ -16,12 +26,7 @@ local scene = {
 			},
 			{
 				type = "Rigidbody",
-				data = 
-				{
-					bodyName = "R1"
-				}
-			}
-			,
+			},
 			{
 				type = "CharacterMovement"				
 			}
@@ -44,9 +49,7 @@ local scene = {
 				type = "Rigidbody",
 				data = 
 				{
-					bodyName = "R2",
-					isKinematic = true,
-					useGravity = false
+					isKinematic = true
 				}
 			},
 			{
@@ -92,9 +95,7 @@ local scene = {
 				type = "Rigidbody",
 				data = 
 				{
-					bodyName = "R2",
 					isKinematic = true,
-					useGravity = false
 				}
 			}
 		}

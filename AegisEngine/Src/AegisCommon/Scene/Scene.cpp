@@ -3,6 +3,9 @@
 #include "Scripting.h"
 #include "../../AegisPhysics/PhysicsMain.h"
 #include "../Components/RigidbodyComponent.h"
+#include "../../AegisGraphics/OgreWrapper.h"
+#include "../../AegisGraphics/Components/Camera.h"
+#include "../Components/CameraComponent.h"
 
 using namespace luabridge;
 
@@ -17,9 +20,9 @@ void Scene::InitEntities()
 }
 
 // Es posible que aqui queramos inicializar una escena de ogre y sincronizarla con las entidades
-Scene::Scene(Ogre::SceneNode* ogreNode) :
-	accumulator(0), entities(new std::list<Entity*>()), entitiesToDelete(std::list<std::list<Entity*>::iterator>()) , ogreNode(ogreNode), uninitializedEntities(new std::list<Entity*>()),
-	physicsEntities(new std::list<RigidbodyComponent*>())
+Scene::Scene(OgreWrapper* wrap) :
+	accumulator(0), entities(new std::list<Entity*>()), entitiesToDelete(std::list<std::list<Entity*>::iterator>()) , ogreNode(wrap->GetRootNode()), uninitializedEntities(new std::list<Entity*>()),
+	physicsEntities(new std::list<RigidbodyComponent*>()), ogreWrapper(wrap)
 {
 }
 
@@ -32,6 +35,19 @@ Scene::~Scene() {
 	delete this->entities;
 	delete this->uninitializedEntities;
 	delete this->physicsEntities;
+}
+
+bool Scene::Init()
+{
+	// Create entity with camera, default entity every scene has
+	auto camera = ogreWrapper->GetCamera();
+	Entity* cameraEntity = new Entity(this, camera->GetNode());
+	cameraEntity->setName("MainCamera");
+	AddEntity(cameraEntity);
+	cameraEntity->addComponentFromLua(new CameraComponent(cameraEntity, camera));
+	ExportToLua(cameraEntity, "MainCamera");
+
+	return true;
 }
 
 void Scene::RemoveAndFreeEntity(std::list<Entity*>::iterator entity) {

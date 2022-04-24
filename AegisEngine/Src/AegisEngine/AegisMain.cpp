@@ -33,14 +33,18 @@
 #include "../AegisCommon/Components/CameraComponent.h"
 #include "../AegisCommon/Components/AnimationComponent.h"
 #include "../AegisCommon/Components/RigidbodyComponent.h"
+#include "../AegisCommon/Utils/Vector2.h"
 
-using namespace luabridge;
+//using namespace luabridge;
 
 void AegisMain::GameLoop() {
+
+	uint32_t frameTimeMS = (uint32_t)floor((1 / TARGET_FRAME_RATE) * 1000);
+	SDL_SetRelativeMouseMode(SDL_TRUE);
+
 	while (!exit)
 	{
 		SDL_Event eventHandler;
-		uint32_t frameTimeMS = (uint32_t)floor((1 / TARGET_FRAME_RATE) * 1000);
 
 		Audio()->playMusic("clin");
 		//SDL_EnableKeyRepeat(0, 0);
@@ -51,33 +55,36 @@ void AegisMain::GameLoop() {
 			Input()->UpdateState();
 			while (SDL_PollEvent(&eventHandler) != 0)
 			{
+				auto key = eventHandler.key.keysym.sym;
 				switch (eventHandler.type)
 				{
 				case SDL_QUIT:
 					exit = true;
 				case SDL_KEYDOWN:
-					if (eventHandler.key.keysym.sym == SDLK_ESCAPE)
+					if (key == SDLK_ESCAPE)
 						exit = true;
 					//std::cout << "KeyDown (" << eventHandler.type << "): ";
-					Input()->OnKeyDown(eventHandler.key.keysym.sym);
+					Input()->OnKeyDown(key);
 					break;
 				case SDL_KEYUP:
 					//std::cout << "KeyUp (" << eventHandler.type << "): ";
-					Input()->OnKeyUp(eventHandler.key.keysym.sym);
+					Input()->OnKeyUp(key);
+					break;
+				case SDL_MOUSEMOTION:
+					// This is usually implemented as a callback but for now it will be this way, just for testing...
+					Input()->SetMouseMotion(Vector2(eventHandler.motion.xrel, eventHandler.motion.yrel));
 					break;
 				default:
-						//std::cout << "Default (" << eventHandler.type << ")\n";
+					//std::cout << "Default (" << eventHandler.type << ")\n";
 					break;
 				}
 			}
-			SDL_PumpEvents();
-
 
 			sceneManager->UpdateCurrentScene(gameLoopData->deltaTime);
 			sceneManager->PreRenderScene();
 
 			ogreWrap->Render();
-			Uint32 frameTime = SDL_GetTicks();
+			Uint32 frameTime = SDL_GetTicks() - gameLoopData->frameStartTime;
 
 			if (frameTime < frameTimeMS)
 				SDL_Delay(frameTimeMS - frameTime);
@@ -89,21 +96,27 @@ void AegisMain::GameLoop() {
 }
 
 AegisMain::AegisMain() : IInitializable() {
+	exit = (false);
 	ogreWrap = new OgreWrapper();
 	ogreWrap->Init();
+	LuaMngr();
 
 	gameLoopData = new GameLoopData();
-	sceneManager = new SceneManager(new Scene(ogreWrap->GetRootNode()));
-	exit = (false);
+	sceneManager = new SceneManager(new Scene(ogreWrap));
 }
 
 AegisMain::~AegisMain() {
 	delete gameLoopData;
 	delete sceneManager;
 	delete ogreWrap;
-	
-	Physics()->remove();
+
+	Debug()->deleteInstance();
+	Input()->deleteInstance();
 	Audio()->close();
+	Audio()->deleteInstance();
+	Physics()->remove();
+	Physics()->deleteInstance();
+	LuaMngr()->deleteInstance();
 }
 
 /// <summary>
@@ -119,6 +132,7 @@ bool AegisMain::Init()
 	Audio()->Init();
 	Physics()->Init();
 	ConvertObjectToLua();
+	sceneManager->GetCurrentScene()->Init();
 	LuaMngr()->Execute("init.lua");
 	GameLoop();
 	return true;
@@ -136,6 +150,7 @@ void AegisMain::ConvertObjectToLua()
 	AegisComponent::ConvertToLua(state);
 
 	Transform::ConvertToLua(state);
+	Vector2::ConvertToLua(state);
 	Vector3::ConvertToLua(state);
 	Vector4::ConvertToLua(state);
 	Quaternion::ConvertToLua(state);
@@ -144,10 +159,8 @@ void AegisMain::ConvertObjectToLua()
 	CameraComponent::ConvertToLua(state);
 	AnimationComponent::ConvertToLua(state);
 	RigidbodyComponent::ConvertToLua(state);
+	//MathUtils::ConvertToLua(state);
 
-	push(state, sceneManager->GetCurrentScene());
-	lua_setglobal(state, "currentScene");
-
-	push(state, Input());
-	lua_setglobal(state, "Input");
+	ExportToLua(sceneManager->GetCurrentScene(), "currentScene");
+	ExportToLua(Input(), "Input");
 }

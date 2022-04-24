@@ -1,16 +1,17 @@
-
 #pragma once
 #ifndef VECTOR2_H 
 #define VECTOR2_H
 #include "../Interfaces/ILuaObject.h"
+
 class Vector2
 {
 private:
 
 public:
-    Vector2(float _x, float _y);
-    Vector2(float all);
-    ~Vector2();
+    Vector2(float _x, float _y) : x(_x), y (_y) {}
+    Vector2(float all) : x(all), y(all) {}
+	Vector2(): x(0), y(0) {}
+    ~Vector2() {};
 
     float GetX() const{return x;}    
     float GetY() const{return y;}

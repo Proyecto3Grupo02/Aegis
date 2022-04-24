@@ -3,6 +3,7 @@
 #include "Vector3.h"
 #include "Vector4.h"
 #include <btBulletDynamicsCommon.h>
+#include "../checkML.h"
 
 RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, float m, bool useG, bool isK) :
 mass(m), useGravity(useG), isKinematic(isK) {
@@ -20,6 +21,12 @@ void RigidBody::init() {
 	//createRigidBodyComponent(RigidBodyType::Box);
 }
 
+RigidBody::~RigidBody()
+{
+	delete rigidBody->getCollisionShape();
+	Physics()->removeRigidbody(this->rigidBody);
+}
+
 bool RigidBody::getKinematic() { return isKinematic; }
 bool RigidBody::getUseGravity() { return useGravity; }
 
@@ -27,7 +34,8 @@ bool RigidBody::getUseGravity() { return useGravity; }
 void RigidBody::setKinematic(bool sK) { isKinematic = sK; }
 
 void RigidBody::setUsingGravity(bool uG) {
-	if (uG) rigidBody->applyGravity();
+	
+	if (uG)rigidBody->setGravity({0, -9.8, 0});
 	else rigidBody->clearGravity();
 }
 void RigidBody::setGravity(Vector3 vec) {
@@ -58,6 +66,11 @@ void RigidBody::addTorque(Vector3 vec)
 	rigidBody->applyTorque(torque);
 }
 
+Vector3 RigidBody::getTotalForce() {
+	btVector3 forc = rigidBody->getTotalForce();
+	return Vector3(forc.x(), forc.y(), forc.z());
+};
+
 Vector3 RigidBody::getRbPosition()
 {
 	btTransform t;
@@ -67,12 +80,22 @@ Vector3 RigidBody::getRbPosition()
 
 void RigidBody::setRbPosition(Vector3 vec)
 {
-	rigidBody->getMotionState()->setWorldTransform(Physics()->parseToBulletTransform(vec, getRotation()));
+	btTransform t = Physics()->parseToBulletTransform(vec, getRotation());
+	rigidBody->setWorldTransform(t);
+	rigidBody->getMotionState()->setWorldTransform(t);
+	rigidBody->setLinearVelocity({ 0, 0, 0 });
+	rigidBody->setAngularVelocity({ 0, 0, 0 });
+	rigidBody->clearForces();
 }
 
 void RigidBody::setRbRotation(Vector4 vec)
 {
 	rigidBody->getMotionState()->setWorldTransform(Physics()->parseToBulletTransform(getRbPosition(), vec));
+}
+
+void RigidBody::clearForces()
+{
+	rigidBody->clearForces();
 }
 
 Vector4 RigidBody::getRotation()

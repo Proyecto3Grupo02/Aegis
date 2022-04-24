@@ -15,13 +15,23 @@ void InputSystem::Init() {
 }
 
 void InputSystem::UpdateState() {
-	for (int i = 0; i < keyNums; i++) {
-		keys[i].wasReleased = false;
-	}
 
 	KEY_WAS_PRESSED = false;
 	KEY_WAS_RELEASED = false;
 	KEY_DOWN = false;
+
+
+	for (int i = 0; i < keyNums; i++) {
+		keys[i].wasReleased = false;
+		if (keys[i].wasPressed)
+		{
+			keys[i].wasPressed = false;
+			keys[i].down = true;
+			KEY_DOWN = true;
+		}
+	}
+	
+	mouseMotion = Vector2();
 }
 
 void InputSystem::ClearState() {
@@ -46,15 +56,10 @@ void InputSystem::OnKeyDown(SDL_Keycode key) {
 		//std::cout << "111111\n";
 		keys[i].wasPressed = true;
 		KEY_WAS_PRESSED = true;
-	}		
+	}
 
 	//YA ESTBA PULSADA ==> QUEREMOS MANTENERLA
-	else { 
-		//std::cout << "22222222222222\n";
-		keys[i].down = true;
-		keys[i].wasPressed = false;
-		KEY_DOWN = true;
-	}
+
 }
 
 void InputSystem::OnKeyUp(SDL_Keycode key) {
@@ -110,18 +115,30 @@ bool InputSystem::keyWasReleasedLua(const char* key) {
 	return keyWasReleased(SDL_GetKeyFromName(key));
 }
 
+void InputSystem::SetMouseMotion(Vector2 motion)
+{
+	this->mouseMotion = motion;
+}
+
+Vector2 InputSystem::GetMouseMotion() const
+{
+	return mouseMotion;
+}
+
+
 void InputSystem::ConvertToLua(lua_State* state)
 {
 	getGlobalNamespace(state).
 		beginNamespace("Aegis").
-			beginClass<InputSystem>("InputSystem").
-				addFunction("KeyWasPressed", &InputSystem::keyWasPressedLua).
-				addFunction("IsKeyDown", &InputSystem::isKeyDownLua).
-				addFunction("KeyWasReleased", &InputSystem::keyWasReleasedLua).
-				addFunction("AnyKeyWasPressed", &InputSystem::oneKeyWasPressed).
-				addFunction("AnyKeyIsDown", &InputSystem::oneKeyIsDown).
-				addFunction("AnyKeyWasReleased", &InputSystem::oneKeyWasReleased).
-			endClass().
+		beginClass<InputSystem>("InputSystem").
+		addFunction("KeyWasPressed", &InputSystem::keyWasPressedLua).
+		addFunction("IsKeyDown", &InputSystem::isKeyDownLua).
+		addFunction("KeyWasReleased", &InputSystem::keyWasReleasedLua).
+		addFunction("AnyKeyWasPressed", &InputSystem::oneKeyWasPressed).
+		addFunction("AnyKeyIsDown", &InputSystem::oneKeyIsDown).
+		addFunction("AnyKeyWasReleased", &InputSystem::oneKeyWasReleased).
+		addFunction("GetMouseMotion", &InputSystem::GetMouseMotion).
+		endClass().
 		endNamespace();
 }
 

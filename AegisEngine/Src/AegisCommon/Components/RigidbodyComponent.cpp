@@ -24,8 +24,7 @@ RigidbodyComponent::~RigidbodyComponent()
 void RigidbodyComponent::SyncToTransform()
 {
 	Vector3 updatedPos = rigidbody->getRbPosition();
-
-	transform->SetPosition(rigidbody->getRbPosition());
+	transform->SetPosition(updatedPos);
 	auto quat = rigidbody->getRotation();
 	Ogre::Quaternion ogreQuat(quat.w, quat.x, quat.y, quat.z);
 	transform->SetRotation(ogreQuat);
@@ -38,6 +37,10 @@ void RigidbodyComponent::SetIterator(std::list<RigidbodyComponent*>::iterator ph
 
 void RigidbodyComponent::AddForce(Vector3 force) {
 	rigidbody->addForce(force);
+}
+
+Vector3 RigidbodyComponent::GetForce() const {
+	return rigidbody->getTotalForce();
 }
 
 Vector3 RigidbodyComponent::GetPosition() const{
@@ -57,18 +60,19 @@ RigidbodyComponent* CreateRigidbody(Entity* ent, LuaRef args) //Doesn't belong t
 	bool isKinematic = LuaMngr()->ParseBool(args["isKinematic"], false);
 
 	return new RigidbodyComponent(ent, bodyName, mass, useGravity, isKinematic);
-}
+}	
 
 void RigidbodyComponent::ConvertToLua(lua_State* state)
 {
 	getGlobalNamespace(state).
 		beginNamespace("Aegis").
-		beginNamespace("NativeComponents").
-		addFunction("CreateRigidbody", CreateRigidbody).
-		deriveClass<RigidbodyComponent, AegisComponent>("Rigidbody").
-		addProperty("position", &RigidbodyComponent::GetPosition, &RigidbodyComponent::SetPosition).
-		addFunction("AddForce", &RigidbodyComponent::AddForce).
-		endClass().
-		endNamespace().
+			beginNamespace("NativeComponents").
+				addFunction("CreateRigidbody", CreateRigidbody).
+				deriveClass<RigidbodyComponent, AegisComponent>("Rigidbody").
+					addProperty("position", &RigidbodyComponent::GetPosition, &RigidbodyComponent::SetPosition).
+					addFunction("AddForce", &RigidbodyComponent::AddForce).
+					addFunction("GetForce", &RigidbodyComponent::GetForce).
+				endClass().
+			endNamespace().
 		endNamespace();
 }

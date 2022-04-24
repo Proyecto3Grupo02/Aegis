@@ -2,6 +2,7 @@
 #include "Randomized.h"
 #include <math.h>
 #include <iostream>
+#include "Scripting.h"
 
 using namespace std;
 
@@ -11,7 +12,7 @@ namespace MathUtils
 	constexpr float Deg2Rad = PI / 180.0f;
 	constexpr float Rad2Deg = 180.0f / PI;
 
-	static float Lerp(float start_value, float end_value, float pct)
+	static float FloatLerp(float start_value, float end_value, float pct)
 	{
 		return (start_value + (end_value - start_value) * pct);
 	}
@@ -45,7 +46,7 @@ namespace MathUtils
 		return (clamped - startValue) / (endValue - startValue);
 	}
 
-	static Vector3 Lerp(Vector3 start_value, Vector3 end_value, float t)
+	static Vector3 Vector3Lerp(Vector3 start_value, Vector3 end_value, float t)
 	{
 		return Vector3(
 			start_value.x + (end_value.x - start_value.x) * t,
@@ -203,7 +204,7 @@ namespace MathUtils
 		return result;
 	}
 
-	static Vector3 RotateByQuaternion(Ogre::Quaternion q, const Vector3& v)
+	static Vector3 RotateVector3ByQuaternion(Ogre::Quaternion q, const Vector3& v)
 	{
 		// Using quaternions is easier to understand but uses way more CPU
 		//auto pureQuat = Ogre::Quaternion(0, v.x, v.y, v.z);
@@ -220,5 +221,32 @@ namespace MathUtils
 		return  Vector3(2.0f * u.dot(v) * u
 			+ (s * s - u.dot(u)) * v
 			+ 2.0f * s * u.cross(v));
+	}
+
+	static Vector3 RotateQuaternion(Ogre::Quaternion q, const Vector3& v)
+	{
+		const float x = q.x;
+		const float y = q.y;
+		const float z = q.z;
+		const float w = q.w;
+		
+		const float vx = 2.0f * v.x;
+		const float vy = 2.0f * v.y;
+		const float vz = 2.0f * v.z;
+		const float w2 = w * w - 0.5f;
+		const float dot2 = (x * vx + y * vy + z * vz);
+		return Vector3((vx * w2 + (y * vz - z * vy) * w + x * dot2), (vy * w2 + (z * vx - x * vz) * w + y * dot2),
+			(vz * w2 + (x * vy - y * vx) * w + z * dot2));
+	}
+
+	static void ConvertToLua(lua_State* state)
+	{
+		getGlobalNamespace(state).
+			beginNamespace("Aegis").
+			beginNamespace("Maths").
+			addFunction("Vector3Lerp", &MathUtils::Vector3Lerp).
+			endNamespace().
+			endNamespace().
+			endNamespace();
 	}
 }

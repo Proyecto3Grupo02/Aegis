@@ -4,13 +4,15 @@
 
 #include <list>
 #include "../Interfaces/ILuaObject.h"
+#include "../Interfaces/IInitializable.h"
 #include <Ogre.h>
 
 struct Entity;
 class SceneNode;
 class RigidbodyComponent;
+class OgreWrapper;
 
-class Scene : public ILuaObject
+class Scene : public ILuaObject, public IInitializable
 {
 private:
 	std::list<Entity*>* entities;
@@ -18,6 +20,7 @@ private:
 	std::list<Entity*>* uninitializedEntities;
 	std::list<std::list<Entity*>::iterator> entitiesToDelete;
 	Ogre::SceneNode* ogreNode;
+	OgreWrapper* ogreWrapper;
 	// Fixed Update arguments
 
 	// Este parametro quizas sea mejor a la clase application cuando la tengamos
@@ -83,9 +86,11 @@ private:
 	/// </summary>
 	void InitEntities();
 public:
-	Scene(Ogre::SceneNode* ogreNode);
+	Scene(OgreWrapper* wrap);
 
 	~Scene();
+
+	bool Init();
 
 	/// <summary>
 	/// Añade una entidad ya creada a la escena. No se comprueba que la entidad sea nula en ningún momento.

@@ -15,6 +15,7 @@ class CameraComponent:
 {
 public:
 	CameraComponent(Entity* ent, LuaRef args);
+	CameraComponent(Entity* ent, AegisCamera* cam);
 	~CameraComponent();
 	
 

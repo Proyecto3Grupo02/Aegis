@@ -8,6 +8,11 @@ CameraComponent::CameraComponent(Entity* ent, LuaRef args):
 	// deberiamos poner la camara principal como variable global? :think:
 }
 
+CameraComponent::CameraComponent(Entity* ent, AegisCamera* cam) : AegisComponent("Camera", ent), mCamera_(cam), isMainCam_(true)
+{
+	SetDataAsInnerType(this);
+}
+
 CameraComponent::~CameraComponent()
 {
 	delete mCamera_;

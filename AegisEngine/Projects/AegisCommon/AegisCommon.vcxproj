@@ -189,6 +189,7 @@
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Randomized.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Scripting.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Singleton.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Utils\Vector2.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Vector3.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Vector4.h" />
   </ItemGroup>

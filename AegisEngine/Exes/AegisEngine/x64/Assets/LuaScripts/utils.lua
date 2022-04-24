@@ -3,28 +3,34 @@ local funcs = {};
 funcs.ParseEntity = function(object)
 	local entity = Aegis.CreateEntity(currentScene, funcs.ParseVector3(object.position));
 	entity.transform.scale = funcs.ParseVector3(object.scale, 1);
-	
-	if object.rotation ~= nil then
-		entity.transform.localEulerAngles = funcs.ParseVector3(object.rotation);
-	end
+	entity.transform.localEulerAngles = funcs.ParseVector3(object.rotation, 0);
 	
 	entity:SetName(object.name);
-	for i, v in ipairs(object.components) do
+	funcs.AddComponents(entity, object.components);
+	currentScene:AddEntity(entity);
+	return entity;
+end;
+
+funcs.AddComponents = function(entity, components)
+	if components == nil or entity == nil then
+		return;
+	end;
+
+
+	for i, v in ipairs(components) do
 		local componentType = require(v.type);
 		if componentType == true then
 			print("Component " .. v.type .. " is not found");
 		else
-			local component = componentType.GetNew(entity, v.data);
+			local component = componentType.GetNew(entity, v.data or {});
 			entity:AddComponent(component);
 
 			local native = componentType.isNative;
 			if ((v.overrideData == nil or v.overrideData == true) and v.data ~= nil) and native == nil then
-				funcs.CopyComponentData(v.data, component.data, component.name, object.name);
+				funcs.CopyComponentData(v.data, component.data, component.name, entity:GetName());
 			end;
 		end;
 	end;
-	currentScene:AddEntity(entity);
-	return entity;
 end;
 
 --from: component
@@ -147,12 +153,24 @@ funcs.ResolveDependencies = function(scene, entities)
 	end;
 end;
 
+funcs.TreatSpecialCase = function(object)
+	local possibleEntity = _G[object.type];
+	if possibleEntity ~= nil then
+		possibleEntity.transform.position = funcs.ParseVector3(object.position);
+		possibleEntity.transform.scale = funcs.ParseVector3(object.scale, 1);
+		possibleEntity.transform.localEulerAngles = funcs.ParseVector3(object.rotation, 0);
+
+		funcs.AddComponents(possibleEntity, object.components);
+	end;
+end;
 
 local entities = {};
 funcs.ParseSceneObject = function(object)
 	if object.type == "Entity" then
 		local entity = funcs.ParseEntity(object);
 		entities[entity:GetName()] = entity;
+	else 
+		funcs.TreatSpecialCase(object);
 	end;
 end;
 

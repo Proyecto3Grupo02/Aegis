@@ -19,11 +19,12 @@ public:
 
 	RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, float m = 1, bool useG = true, bool isK = false);
 	void init();
-	~RigidBody() { };
+	~RigidBody();
 	//void fixedUpdate();
 
 	void addForce(Vector3 vec);
 	void addTorque(Vector3 vec);
+	Vector3 getTotalForce();
 
 	bool getKinematic();
 	bool getUseGravity();
@@ -34,7 +35,8 @@ public:
 	Vector3 getRbPosition();
 	void setRbPosition(Vector3 vec);
 	void setRbRotation(Vector4 vec);
-	
+	void clearForces();
+
 	Vector4 getRotation();
 
 	void setFreezeRotation(bool _x, bool _y, bool _z);

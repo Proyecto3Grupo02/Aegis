@@ -4,16 +4,17 @@
 #include "../Components/Renderer.h"
 #include "../Scene/Scene.h"
 
-Entity::Entity(Scene* node) :
-	mNode_(node->GetNewNode()), active_(true), mScene_(node)
+Entity::Entity(Scene* scene, Ogre::SceneNode* node) :
+	mNode_(node == nullptr ?  scene->GetNewNode() : node), active_(true), mScene_(scene)
 {
 	//Componente obligatorio para todas las entidades
 	transform = new Transform(Vector3(0,0,0), Ogre::Quaternion(), Vector3(1.0f, 1.0f, 1.0f), getNode(), this);
 	this->addComponentFromLua(transform);
 }
 
-Entity::Entity(Scene* node, Vector3 pos) :
-	mNode_(node->GetNewNode()), active_(true), mScene_(node)
+
+Entity::Entity(Scene* scene, Vector3 pos) :
+	mNode_(scene->GetNewNode()), active_(true), mScene_(scene)
 {
 	transform = new Transform(pos, Ogre::Quaternion(), Vector3(1.0f, 1.0f, 1.0f), getNode(), this);
 	this->addComponentFromLua(transform);
@@ -29,10 +30,7 @@ Entity::~Entity()
 
 	mChildren_.clear();
 	
-	//Node can be null if a parent destroys a child before the child destroys itself
-	auto mParent = mNode_ == nullptr ? nullptr : mNode_->getParentSceneNode();
-	if(mParent != nullptr)
-		mParent->removeAndDestroyChild(mNode_);
+	DestroyNode();
 }
 
 template<typename T>
@@ -84,6 +82,14 @@ void Entity::render() {
 			component->render();
 		}
 	}
+}
+
+void Entity::DestroyNode()
+{
+	//Node can be null if a parent destroys a child before the child destroys itself
+	auto mParent = mNode_ == nullptr ? nullptr : mNode_->getParentSceneNode();
+	if (mParent != nullptr)
+		mParent->removeAndDestroyChild(mNode_);
 }
 
 inline void Entity::addComponentFromLua(AegisComponent* component)
@@ -158,7 +164,6 @@ void Entity::Destroy()
 Entity* CreateEntity(Scene* scene, Vector3 pos)
 {
 	return new Entity(scene, pos);;
-
 }
 
 void Entity::ConvertToLua(lua_State* state)

@@ -6,38 +6,54 @@ function table.GetNew(entity, params)
 	local transform = entity.transform;
     local funcs = component.funcs;
     local rigidbod;
+    local w; local a; local s; local d;
     data.initPos = transform.position;
 
     function Init()
         rigidbody = component.entity:GetComponent("Rigidbody").type;
+        w=false;
+        a=false;
+        s=false;
+        d=false;
      end;
 
-	function Update(deltaTime) 
-        if  Input:AnyKeyWasPressed() then -- GENERIC CHECK BEFORE CHECKING INDIVIDUAL KEY ==> NECESSARY
-            if Input:KeyWasPressed("s") then
-                rigidbody.position = data.initPos;
-            end;
-            if Input:KeyWasPressed("a") then
-               print("Transform: x: " .. transform.position.x .." y: " .. transform.position.y .. " z: " .. transform.position.z);
-            end;
-        end  
+	function Update(deltaTime)
+        w = Input:IsKeyDown("w");
+        a = Input:IsKeyDown("a");
+        s = Input:IsKeyDown("s");
+        d = Input:IsKeyDown("d");
+    -- IF key is f then set rigibody pos to init pos
+        if Input:IsKeyDown("f") then
+            rigidbody.position = data.initPos;
+        end;
     end;
-    	function LateUpdate(deltaTime) end;
+
+    function LateUpdate(deltaTime) end;
+
 	function FixedUpdate() 
-        local rigidbody = component.entity:GetComponent("Rigidbody").type; -- RETURNS NIL
-        --local transform = component.entity.transform;
+        -- print("Force Y Axis: " .. rigidbody:GetForce().y);
         -- MOVE CHARACTER:
-        if  Input:AnyKeyIsDown() then -- GENERIC CHECK BEFORE CHECKING INDIVIDUAL KEY ==> NECESSARY
-            if Input:IsKeyDown("w") then
-                
-               print("Tecla W");
-               print("Transform: x: " .. transform.position.x .." y: " .. transform.position.y .. " z: " .. transform.position.z);
-               print("Rigidbody: x: " .. rigidbody.position.x .." y: " .. rigidbody.position.y .. " z: " .. rigidbody.position.z);
-               rigidbody:AddForce(Aegis.Maths.Vector3(20, 0, 0))
-                
-            end;
-        end  
+        if w then                
+            rigidbody:AddForce(Aegis.Maths.Vector3(0, 0, 0.5))
+            --rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(0,0, -0.05);                 
+        end;
+        if a then                
+            rigidbody:AddForce(Aegis.Maths.Vector3(-0.5, 0, 0))
+            --rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(-0.05,0,0);   
+        end;
+        if s then                
+            rigidbody:AddForce(Aegis.Maths.Vector3(0, 0, -0.5))
+            --rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(0,0, 0.05);
+        end;
+        if d then                
+            rigidbody:AddForce(Aegis.Maths.Vector3(0.5, 0, 0))
+            -- rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(0.05,0,0); 
+            --print("Force X Axis: " .. rigidbody:GetForce().x);  
+        end;
+
+       
     end;
+
 	function OnCollision(other) end;
 	function OnTrigger(other) end;
 

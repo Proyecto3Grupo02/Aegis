@@ -52,14 +52,14 @@ void Transform::SetParent(Entity* ent)
 	//Correction rotation "before" unparenting
 	rotation = oldParentRotation * rotation;
 	position = position.scalarMult(oldParentScale);
-	position = RotateByQuaternion(oldParentRotation, position);
+	position = RotateVector3ByQuaternion(oldParentRotation, position);
 	scale = scale.scalarMult(oldParentScale);
 	position = position + oldParentPos;
 
 	// Correct data for parenting (inverse order)
 	position = position - newParentPos;
 	scale = scale.divide(newParentScale);
-	position = RotateByQuaternion(newParentRotation.Inverse(), position);
+	position = RotateVector3ByQuaternion(newParentRotation.Inverse(), position);
 	position = position.divide(newParentScale);
 	rotation = newParentRotation.Inverse() * rotation;
 }
@@ -88,9 +88,49 @@ void Transform::SetScale(Vector3 newScale)
 	scale = newScale;
 }
 
+Vector3 Transform::GetForward() const
+{
+	return RotateQuaternion(rotation, Vector3(0, 0, 1));
+}
+
+Vector3 Transform::GetRight() const
+{
+	return RotateQuaternion(rotation, Vector3(1, 0, 0));
+}
+
+Vector3 Transform::GetUp() const
+{
+	return RotateQuaternion(rotation, Vector3(0, 1, 0));
+}
+
+void Transform::Yaw(float degrees)
+{
+	mNode->yaw(Ogre::Degree(degrees));
+	rotation = mNode->getOrientation();
+}
+
+void Transform::Pitch(float degrees)
+{
+	mNode->pitch(Ogre::Degree(degrees));
+	rotation = mNode->getOrientation();
+}
+
+void Transform::Roll(float degrees)
+{
+	mNode->roll(Ogre::Degree(degrees));
+	rotation = mNode->getOrientation();
+}
+
 Transform::~Transform() {}
 
 void Transform::update(float deltaTime) {}
+
+void Transform::render()
+{
+	mNode->setPosition(Vector3ToOgre(position));
+	mNode->setScale(Vector3ToOgre(scale));
+	mNode->setOrientation(rotation);
+}
 
 void Transform::ConvertToLua(lua_State* state)
 {
@@ -103,6 +143,12 @@ void Transform::ConvertToLua(lua_State* state)
 		addProperty("rotation", &Transform::GetRotation, &Transform::SetRotation).
 		addProperty("localEulerAngles", &Transform::GetRotationEuler, &Transform::SetRotationEuler).
 		addFunction("SetParent", &Transform::SetParent).
+		addProperty("forward", &Transform::GetForward, &Transform::SetFoo).
+		addProperty("right", &Transform::GetRight, &Transform::SetFoo).
+		addProperty("up", &Transform::GetUp, &Transform::SetFoo).
+		addFunction("Yaw", &Transform::Yaw).
+		addFunction("Pitch", &Transform::Pitch).
+		addFunction("Roll", &Transform::Roll).
 		endClass().
 		endNamespace().
 		endNamespace();

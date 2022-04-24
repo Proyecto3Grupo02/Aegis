@@ -138,8 +138,8 @@
     <ClInclude Include="..\..\Src\AegisCommon\Components\RigidbodyComponent.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Components\UITransform.h">
-      <Filter>Archivos de encabezado\Components</Filter>
+    <ClInclude Include="..\..\Src\AegisCommon\Utils\Vector2.h">
+      <Filter>Archivos de encabezado\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
