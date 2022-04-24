@@ -1,18 +1,12 @@
-#include "SoundEmitter.h"
-
-#include "../AegisCommon/Managers/DebugManager.h"
-#include "../AegisCommon/Utils/Vector3.h"
-#include <fmod.hpp>
+#include "SoundListener.h"
 
 SoundListener::SoundListener() 
 {
     
-    SoundSystem* soundSystem = SoundSystem::GetInstance();
+	SoundSystem* soundSystem = SoundSystem::getInstance();
     
-    soundSystem->createListener(&gameObject->transform->getPosition(), &gameObject->transform->getQuaternion());
-}
-
-SoundListener::~SoundListener()
-{
+    quat = Vector4(0);
+    pos = Vector3(0);
+    soundSystem->createListener(&pos, &quat);
 
 }

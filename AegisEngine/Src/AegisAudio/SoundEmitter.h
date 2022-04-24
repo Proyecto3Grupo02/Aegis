@@ -19,7 +19,7 @@ class SoundEmitter
 {
 
 private:
-	SoundSystem::EmitterData* emitterData;
+	SoundSystem::EmitterData* emitterData_;
 	float pitch;
 	float volume;
 
