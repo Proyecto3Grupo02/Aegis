@@ -34,6 +34,24 @@ local scene = {
 	},
 	{
 		type = "Entity",
+		name = "Cubo2",
+		position = { y = 2, x = 2},
+		scale = { x = 0.5, y = 0.5, z = 0.5 },
+		components = {
+			{
+				type = "Renderer",
+				data = {
+					mesh = "Cube.mesh",
+					material= "yellow"
+				}
+			},
+			{
+				type = "Rigidbody",
+			},
+		}
+	},
+	{
+		type = "Entity",
 		name = "Suelo",
 		position = { y = -2 },
 		scale = { x = 5, y = 0.1, z = 5},

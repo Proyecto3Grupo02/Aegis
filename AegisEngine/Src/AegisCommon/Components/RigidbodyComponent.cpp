@@ -21,6 +21,10 @@ RigidbodyComponent::~RigidbodyComponent()
 	mEntity_->getScene()->RemovePhysicsEntity(this->physicsEntityIt);
 };
 
+void RigidbodyComponent::lateUpdate(float deltaTime) {}
+
+void RigidbodyComponent::fixedUpdate() {}
+
 void RigidbodyComponent::SyncToTransform()
 {
 	Vector3 updatedPos = rigidbody->getRbPosition();
@@ -48,7 +52,7 @@ Vector3 RigidbodyComponent::GetForce() const {
 	return rigidbody->getTotalForce();
 }
 
-Vector3 RigidbodyComponent::GetPosition() const{
+Vector3 RigidbodyComponent::GetPosition() const {
 	return rigidbody->getRbPosition();
 }
 
@@ -65,20 +69,20 @@ RigidbodyComponent* CreateRigidbody(Entity* ent, LuaRef args) //Doesn't belong t
 	bool isKinematic = LuaMngr()->ParseBool(args["isKinematic"], false);
 
 	return new RigidbodyComponent(ent, bodyName, mass, useGravity, isKinematic);
-}	
+}
 
 void RigidbodyComponent::ConvertToLua(lua_State* state)
 {
 	getGlobalNamespace(state).
 		beginNamespace("Aegis").
-			beginNamespace("NativeComponents").
-				addFunction("CreateRigidbody", CreateRigidbody).
-				deriveClass<RigidbodyComponent, AegisComponent>("Rigidbody").
-					addProperty("position", &RigidbodyComponent::GetPosition, &RigidbodyComponent::SetPosition).
-					addFunction("AddForce", &RigidbodyComponent::AddForce).
-					addFunction("GetForce", &RigidbodyComponent::GetForce).
-					addProperty("isActive", &RigidbodyComponent::isActive).
-				endClass().
-			endNamespace().
+		beginNamespace("NativeComponents").
+		addFunction("CreateRigidbody", CreateRigidbody).
+		deriveClass<RigidbodyComponent, AegisComponent>("Rigidbody").
+		addProperty("position", &RigidbodyComponent::GetPosition, &RigidbodyComponent::SetPosition).
+		addFunction("AddForce", &RigidbodyComponent::AddForce).
+		addFunction("GetForce", &RigidbodyComponent::GetForce).
+		addProperty("isActive", &RigidbodyComponent::isActive).
+		endClass().
+		endNamespace().
 		endNamespace();
 }

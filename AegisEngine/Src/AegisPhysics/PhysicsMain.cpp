@@ -20,8 +20,25 @@ subject to the following restrictions:
 #include "PhysicsMain.h"
 #include "Vector3.h"
 #include "Vector4.h"
+
 /// This is a Hello World program for running a basic Bullet physics simulation
 
+//Copied from btCollisionObject.h because I couldn't include it for some reason
+enum CollisionFlags
+{
+	CF_DYNAMIC_OBJECT = 0,
+	CF_STATIC_OBJECT = 1,
+	CF_KINEMATIC_OBJECT = 2,
+	CF_NO_CONTACT_RESPONSE = 4,
+	CF_CUSTOM_MATERIAL_CALLBACK = 8,  //this allows per-triangle material (friction/restitution)
+	CF_CHARACTER_OBJECT = 16,
+	CF_DISABLE_VISUALIZE_OBJECT = 32,          //disable debug drawing
+	CF_DISABLE_SPU_COLLISION_PROCESSING = 64,  //disable parallel/SPU processing
+	CF_HAS_CONTACT_STIFFNESS_DAMPING = 128,
+	CF_HAS_CUSTOM_DEBUG_RENDERING_COLOR = 256,
+	CF_HAS_FRICTION_ANCHOR = 512,
+	CF_HAS_COLLISION_SOUND_TRIGGER = 1024
+};
 
 
 void PhysicsSystem::Init()
@@ -293,6 +310,14 @@ btRigidBody* PhysicsSystem::createRigidBody(RigidBody::RigidBodyType rbType, flo
 	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, rbShape, localInertia);
 	btRigidBody* body = new btRigidBody(rbInfo);
 
+	if (isKinematic)
+		body->setCollisionFlags(CF_KINEMATIC_OBJECT);
+	else
+	{
+		body->setCollisionFlags(CF_DYNAMIC_OBJECT);
+		body->setActivationState(4); //Never sleep
+	}
+	
 	//add the body to the dynamics world
 	dynamicsWorld->addRigidBody(body);
 

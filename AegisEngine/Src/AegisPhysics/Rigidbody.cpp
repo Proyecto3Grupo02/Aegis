@@ -6,7 +6,7 @@
 #include "../checkML.h"
 
 RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, float m, bool useG, bool isK) :
-mass(m), useGravity(useG), isKinematic(isK) {
+	mass(m), useGravity(useG), isKinematic(isK) {
 	freezePosition = std::vector<bool>(3, false);
 	freezeRotation = std::vector<bool>(3, false);
 	createRigidBodyComponent(RigidBodyType::Box, pos, scale, bodyMeshName);
@@ -34,8 +34,8 @@ bool RigidBody::getUseGravity() { return useGravity; }
 void RigidBody::setKinematic(bool sK) { isKinematic = sK; }
 
 void RigidBody::setUsingGravity(bool uG) {
-	
-	if (uG)rigidBody->setGravity({0, -9.8, 0});
+
+	if (uG)rigidBody->setGravity({ 0, -9.8, 0 });
 	else rigidBody->clearGravity();
 }
 void RigidBody::setGravity(Vector3 vec) {
@@ -113,6 +113,14 @@ bool RigidBody::isActive() const
 
 void RigidBody::setActive(bool active)
 {
-	rigidBody->activate(active);
+	rigidBody->activate(true); // Equivalent to rigidbody->setActivationState(ACTIVE_TAG)
+	//std::cout << "Activation state " << rigidBody->getActivationState() << std::endl;
+
+	// What every activation state means
+	// ACTIVE_TAG 1
+	// ISLAND_SLEEPING 2
+	// WANTS_DEACTIVATION 3
+	// DISABLE_DEACTIVATION 4
+	// DISABLE_SIMULATION 5
 }
 

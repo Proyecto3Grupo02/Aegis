@@ -19,11 +19,8 @@ public:
 
 	virtual void init() override {};
 	virtual void update(float deltaTime) override {};
-	virtual void lateUpdate(float deltaTime) override { rigidbody->clearForces(); };
-	virtual void fixedUpdate() override {
-		if (!isActive())
-			rigidbody->setActive();
-	};
+	virtual void lateUpdate(float deltaTime) override;
+	virtual void fixedUpdate() override;
 	void SyncToTransform();
 
 	void AddForce(Vector3 force);
