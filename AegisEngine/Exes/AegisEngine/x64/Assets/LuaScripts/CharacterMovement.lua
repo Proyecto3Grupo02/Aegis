@@ -5,7 +5,7 @@ function table.GetNew(entity, params)
 	local data = component.data;
 	local transform = entity.transform;
     local funcs = component.funcs;
-    local rigidbod;
+    local rigidbody;
     local w; local a; local s; local d;
     data.initPos = transform.position;
 
@@ -33,20 +33,21 @@ function table.GetNew(entity, params)
 	function FixedUpdate() 
         -- print("Force Y Axis: " .. rigidbody:GetForce().y);
         -- MOVE CHARACTER:
-        if w then                
-            rigidbody:AddForce(Aegis.Maths.Vector3(0, 0, 0.5))
+        local force = 10;
+        if s then                
+            rigidbody:AddForce(Aegis.Maths.Vector3(0, 0, 0.5) * force)
             --rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(0,0, -0.05);                 
         end;
         if a then                
-            rigidbody:AddForce(Aegis.Maths.Vector3(-0.5, 0, 0))
+            rigidbody:AddForce(Aegis.Maths.Vector3(-0.5, 0, 0) * force)
             --rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(-0.05,0,0);   
         end;
-        if s then                
-            rigidbody:AddForce(Aegis.Maths.Vector3(0, 0, -0.5))
+        if w then                
+            rigidbody:AddForce(Aegis.Maths.Vector3(0, 0, -0.5) * force)
             --rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(0,0, 0.05);
         end;
         if d then                
-            rigidbody:AddForce(Aegis.Maths.Vector3(0.5, 0, 0))
+            rigidbody:AddForce(Aegis.Maths.Vector3(0.5, 0, 0) * force)
             -- rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(0.05,0,0); 
             --print("Force X Axis: " .. rigidbody:GetForce().x);  
         end;

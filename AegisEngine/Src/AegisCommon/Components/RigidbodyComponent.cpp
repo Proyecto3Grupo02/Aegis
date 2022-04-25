@@ -35,6 +35,11 @@ void RigidbodyComponent::SetIterator(std::list<RigidbodyComponent*>::iterator ph
 	this->physicsEntityIt = physicsEntityIt;
 }
 
+bool RigidbodyComponent::isActive() const
+{
+	return rigidbody->isActive();
+}
+
 void RigidbodyComponent::AddForce(Vector3 force) {
 	rigidbody->addForce(force);
 }
@@ -72,6 +77,7 @@ void RigidbodyComponent::ConvertToLua(lua_State* state)
 					addProperty("position", &RigidbodyComponent::GetPosition, &RigidbodyComponent::SetPosition).
 					addFunction("AddForce", &RigidbodyComponent::AddForce).
 					addFunction("GetForce", &RigidbodyComponent::GetForce).
+					addProperty("isActive", &RigidbodyComponent::isActive).
 				endClass().
 			endNamespace().
 		endNamespace();

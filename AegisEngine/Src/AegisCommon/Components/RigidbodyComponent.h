@@ -19,7 +19,11 @@ public:
 
 	virtual void init() override {};
 	virtual void update(float deltaTime) override {};
-	virtual void fixedUpdate() override {};
+	virtual void lateUpdate(float deltaTime) override { rigidbody->clearForces(); };
+	virtual void fixedUpdate() override {
+		if (!isActive())
+			rigidbody->setActive();
+	};
 	void SyncToTransform();
 
 	void AddForce(Vector3 force);
@@ -29,6 +33,8 @@ public:
 	//Vector4 getRotation();
 
 	void SetIterator(std::list<RigidbodyComponent*>::iterator physicsEntityIt);
+
+	bool isActive() const;
 
 	//LUA------------
 	static void ConvertToLua(lua_State* state);

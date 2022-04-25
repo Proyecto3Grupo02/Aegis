@@ -41,13 +41,13 @@ function table.GetNew(entity, params)
                 local y = mouseMotion.y * deltaTime * data.senstivity;
                 local x = mouseMotion.x * deltaTime * data.senstivity;
                 --transform.localEulerAngles =  transform.localEulerAngles - Aegis.Maths.Vector3(y, x, 0);
-                targetRotation = transform.localEulerAngles -  Aegis.Maths.Vector3(y, x, 0);
+                data.targetRotation = transform.localEulerAngles -  Aegis.Maths.Vector3(y, x, 0);
 
-                print("Mouse X: " .. mouseMotion.x .. " Mouse Y: " .. mouseMotion.y);
+                --print("Mouse X: " .. mouseMotion.x .. " Mouse Y: " .. mouseMotion.y);
             end;
 
         -- Lerp current Rotation to target rotation
-        transform.localEulerAngles = Vector3Lerp(transform.localEulerAngles, targetRotation, deltaTime * data.smoothStep);
+        transform.localEulerAngles = Vector3Lerp(transform.localEulerAngles, data.targetRotation, deltaTime * data.smoothStep);
     end;
 	function FixedUpdate() end;
 	function OnCollision(other) end;

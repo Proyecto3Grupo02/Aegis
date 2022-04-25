@@ -106,3 +106,13 @@ Vector4 RigidBody::getRotation()
 	return Vector4(quat.getX(), quat.getY(), quat.getZ(), quat.getW());
 }
 
+bool RigidBody::isActive() const
+{
+	return rigidBody->isActive();
+}
+
+void RigidBody::setActive(bool active)
+{
+	rigidBody->activate(active);
+}
+

@@ -39,6 +39,9 @@ public:
 
 	Vector4 getRotation();
 
+	bool isActive() const;
+	void setActive(bool active = true);
+
 	void setFreezeRotation(bool _x, bool _y, bool _z);
 
 protected:
