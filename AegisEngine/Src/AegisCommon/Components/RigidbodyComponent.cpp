@@ -48,6 +48,11 @@ void RigidbodyComponent::AddForce(Vector3 force) {
 	rigidbody->addForce(force);
 }
 
+void RigidbodyComponent::AddForceForward(float force) {
+	Vector3 rot = transform->GetForward();
+	AddForce(rot * force);
+}
+
 void RigidbodyComponent::AddTorque(Vector3 torque) {
 	rigidbody->addTorque(torque);
 }
@@ -80,14 +85,15 @@ void RigidbodyComponent::ConvertToLua(lua_State* state)
 	getGlobalNamespace(state).
 		beginNamespace("Aegis").
 		beginNamespace("NativeComponents").
-		addFunction("CreateRigidbody", CreateRigidbody).
-		deriveClass<RigidbodyComponent, AegisComponent>("Rigidbody").
-		addProperty("position", &RigidbodyComponent::GetPosition, &RigidbodyComponent::SetPosition).
-		addFunction("AddForce", &RigidbodyComponent::AddForce).
-		addFunction("GetForce", &RigidbodyComponent::GetForce).
-		addFunction("AddTorque", &RigidbodyComponent::AddTorque).
-		addProperty("isActive", &RigidbodyComponent::isActive).
-		endClass().
-		endNamespace().
+			addFunction("CreateRigidbody", CreateRigidbody).
+				deriveClass<RigidbodyComponent, AegisComponent>("Rigidbody").
+					addProperty("position", &RigidbodyComponent::GetPosition, &RigidbodyComponent::SetPosition).
+					addFunction("AddForce", &RigidbodyComponent::AddForce).
+					addFunction("GetForce", &RigidbodyComponent::GetForce).
+					addFunction("AddTorque", &RigidbodyComponent::AddTorque).
+					addFunction("AddForceForward", &RigidbodyComponent::AddForceForward).
+					addProperty("isActive", &RigidbodyComponent::isActive).
+				endClass().
+			endNamespace().
 		endNamespace();
 }

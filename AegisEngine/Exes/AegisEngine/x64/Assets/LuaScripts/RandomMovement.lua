@@ -28,7 +28,7 @@ function table.GetNew(entity, params)
 	function LateUpdate(deltaTime)
 	end;
 	function FixedUpdate() 
-		rigidbody:AddForce(Aegis.Maths.Vector3(0, 0, -5));
+		rigidbody:AddForceForward(5);
 		if canRoot then
 			rigidbody:AddTorque(Aegis.Maths.Vector3(0,root,0));
 			canRoot=false;

@@ -25,6 +25,7 @@ public:
 
 	void AddForce(Vector3 force);
 	void AddTorque(Vector3 torque);
+	void AddForceForward(float force);
 	Vector3 GetForce() const;
 	Vector3 GetPosition() const;
 	void SetPosition(Vector3 pos);
