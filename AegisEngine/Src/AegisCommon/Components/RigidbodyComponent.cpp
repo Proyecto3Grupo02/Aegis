@@ -48,6 +48,10 @@ void RigidbodyComponent::AddForce(Vector3 force) {
 	rigidbody->addForce(force);
 }
 
+void RigidbodyComponent::AddTorque(Vector3 torque) {
+	rigidbody->addTorque(torque);
+}
+
 Vector3 RigidbodyComponent::GetForce() const {
 	return rigidbody->getTotalForce();
 }
@@ -81,6 +85,7 @@ void RigidbodyComponent::ConvertToLua(lua_State* state)
 		addProperty("position", &RigidbodyComponent::GetPosition, &RigidbodyComponent::SetPosition).
 		addFunction("AddForce", &RigidbodyComponent::AddForce).
 		addFunction("GetForce", &RigidbodyComponent::GetForce).
+		addFunction("AddTorque", &RigidbodyComponent::AddTorque).
 		addProperty("isActive", &RigidbodyComponent::isActive).
 		endClass().
 		endNamespace().

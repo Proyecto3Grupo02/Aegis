@@ -24,6 +24,7 @@ public:
 	void SyncToTransform();
 
 	void AddForce(Vector3 force);
+	void AddTorque(Vector3 torque);
 	Vector3 GetForce() const;
 	Vector3 GetPosition() const;
 	void SetPosition(Vector3 pos);
