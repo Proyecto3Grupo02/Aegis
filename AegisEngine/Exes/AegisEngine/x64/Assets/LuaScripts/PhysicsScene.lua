@@ -15,7 +15,7 @@ local scene = {
 	{
 		type = "Entity",
 		name = "Cubo",
-		position = { y = 2},
+		position = {x = -5, y = 2},
 		components = {
 			{
 				type = "Renderer",
@@ -28,7 +28,7 @@ local scene = {
 				type = "Rigidbody",
 				data = 
 				{
-					useGravity = false,
+					-- useGravity = false,
 				}
 			},
 			{
