@@ -43,7 +43,7 @@ function table.GetNew(entity, params)
                 --transform.localEulerAngles =  transform.localEulerAngles - Aegis.Maths.Vector3(y, x, 0);
                 data.targetRotation = transform.localEulerAngles -  Aegis.Maths.Vector3(y, x, 0);
 
-                print("Mouse X: " .. mouseMotion.x .. " Mouse Y: " .. mouseMotion.y);
+                --print("Mouse X: " .. mouseMotion.x .. " Mouse Y: " .. mouseMotion.y);
             end;
 
         -- Lerp current Rotation to target rotation

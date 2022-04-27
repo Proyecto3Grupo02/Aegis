@@ -40,7 +40,7 @@ public:
     void removeRigidbody(btCollisionObject* rb);
     btTransform parseToBulletTransform(Vector3 pos, Vector3 rot);
     btTransform parseToBulletTransform(Vector3 pos, Vector4 rot);
-    btRigidBody* createRigidBody(RigidBody::RigidBodyType rbType, float _mass, Vector3 _dim, Vector3 _pos, std::string bodyMeshName = "", bool isConvex = true, bool isKinematic = false);
+    btRigidBody* createRigidBody(RigidBody::RigidBodyType rbType, float _mass, Vector3 _dim, Vector3 _pos, std::string bodyMeshName = "", bool isConvex = true, bool isKinematic = false, bool useGravity = true);
       
     const btVector3 parseToBulletVector(const Vector3& v) const;
     const Vector3 parseFromBulletVector(const btVector3& v) const;
@@ -48,7 +48,6 @@ public:
     //std::vector<Vector3> getVertexFromMesh(std::string meshName);
     //btCollisionShape* createShapeWithVertices(Vector3 _dim, std::string bodyMeshName, bool isConvex);
     btCollisionShape* createBodyShape(RigidBody::RigidBodyType rbType, Vector3 _dim, std::string bodyMeshName, bool isConvex);
-    
     void clear();
 };
 

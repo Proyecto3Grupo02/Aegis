@@ -3,9 +3,19 @@
 local NAME = "PhysicsScene";
 local scene = {
 	{
+		type = "MainCamera",
+		position = { z = 10 },
+		components = 
+		{
+			{
+				type = "CameraTest"
+			}
+		}
+	},
+	{
 		type = "Entity",
 		name = "Cubo",
-		position = { y = 2},
+		position = {x = -5, y = 2},
 		components = {
 			{
 				type = "Renderer",
@@ -18,10 +28,9 @@ local scene = {
 				type = "Rigidbody",
 				data = 
 				{
-					bodyName = "R1"
+					-- useGravity = false,
 				}
-			}
-			,
+			},
 			{
 				type = "CharacterMovement"				
 			}
@@ -29,24 +38,40 @@ local scene = {
 	},
 	{
 		type = "Entity",
-		name = "Suelo",
-		position = { y = -2 },
-		scale = { x = 5, y = 0.1, z = 5},
+		name = "Cubo2",
+		position = { y = 2, x = 2},
+		scale = { x = 0.5, y = 0.5, z = 0.5 },
 		components = {
 			{
 				type = "Renderer",
 				data = {
 					mesh = "Cube.mesh",
-					material= "aegis"
+					material= "yellow"
+				}
+			},
+			{
+				type = "Rigidbody",
+			},
+		}
+	},
+	{
+		type = "Entity",
+		name = "Suelo",
+		position = { y = -2 },
+		scale = { x = 50, y = 0.1, z = 50},
+		components = {
+			{
+				type = "Renderer",
+				data = {
+					mesh = "Cube.mesh",
+					material= "red"
 				}
 			},
 			{
 				type = "Rigidbody",
 				data = 
 				{
-					bodyName = "R2",
-					isKinematic = true,
-					useGravity = false
+					isKinematic = true
 				}
 			},
 			{
@@ -89,13 +114,10 @@ local scene = {
 					}
 			},
 			{
-				type = "Rigidbody",
-				data = 
-				{
-					bodyName = "R2",
-					isKinematic = true,
-					useGravity = false
-				}
+				type = "Rigidbody"
+			},
+			{
+				type = "RandomMovement"
 			}
 		}
 	}

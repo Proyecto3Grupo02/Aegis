@@ -19,16 +19,24 @@ public:
 
 	virtual void init() override {};
 	virtual void update(float deltaTime) override {};
-	virtual void fixedUpdate() override {};
+	virtual void lateUpdate(float deltaTime) override;
+	virtual void fixedUpdate() override;
 	void SyncToTransform();
-
-	void AddForce(Vector3 force);
-	Vector3 GetForce() const;
-	Vector3 GetPosition() const;
-	void SetPosition(Vector3 pos);
-	//Vector4 getRotation();
-
 	void SetIterator(std::list<RigidbodyComponent*>::iterator physicsEntityIt);
+
+	//GETS-------------------------------------------
+	bool isActive() const;
+	Vector3 GetPosition() const;
+	//Vector4 getRotation();
+	Vector3 GetForce() const;
+
+	//SETS------------------------------------------
+	void SetPosition(Vector3 pos);
+
+	//FORCES----------------------------------------
+	void AddForce(Vector3 force);
+	void AddTorque(Vector3 torque);
+	void AddForceForward(float force);
 
 	//LUA------------
 	static void ConvertToLua(lua_State* state);

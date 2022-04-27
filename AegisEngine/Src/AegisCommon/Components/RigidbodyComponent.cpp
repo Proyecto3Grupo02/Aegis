@@ -21,6 +21,10 @@ RigidbodyComponent::~RigidbodyComponent()
 	mEntity_->getScene()->RemovePhysicsEntity(this->physicsEntityIt);
 };
 
+void RigidbodyComponent::lateUpdate(float deltaTime) {}
+
+void RigidbodyComponent::fixedUpdate() {}
+
 void RigidbodyComponent::SyncToTransform()
 {
 	Vector3 updatedPos = rigidbody->getRbPosition();
@@ -35,15 +39,29 @@ void RigidbodyComponent::SetIterator(std::list<RigidbodyComponent*>::iterator ph
 	this->physicsEntityIt = physicsEntityIt;
 }
 
+bool RigidbodyComponent::isActive() const
+{
+	return rigidbody->isActive();
+}
+
 void RigidbodyComponent::AddForce(Vector3 force) {
 	rigidbody->addForce(force);
+}
+
+void RigidbodyComponent::AddForceForward(float force) {
+	Vector3 rot = transform->GetForward();
+	AddForce(rot * force);
+}
+
+void RigidbodyComponent::AddTorque(Vector3 torque) {
+	rigidbody->addTorque(torque);
 }
 
 Vector3 RigidbodyComponent::GetForce() const {
 	return rigidbody->getTotalForce();
 }
 
-Vector3 RigidbodyComponent::GetPosition() const{
+Vector3 RigidbodyComponent::GetPosition() const {
 	return rigidbody->getRbPosition();
 }
 
@@ -60,18 +78,21 @@ RigidbodyComponent* CreateRigidbody(Entity* ent, LuaRef args) //Doesn't belong t
 	bool isKinematic = LuaMngr()->ParseBool(args["isKinematic"], false);
 
 	return new RigidbodyComponent(ent, bodyName, mass, useGravity, isKinematic);
-}	
+}
 
 void RigidbodyComponent::ConvertToLua(lua_State* state)
 {
 	getGlobalNamespace(state).
 		beginNamespace("Aegis").
-			beginNamespace("NativeComponents").
-				addFunction("CreateRigidbody", CreateRigidbody).
+		beginNamespace("NativeComponents").
+			addFunction("CreateRigidbody", CreateRigidbody).
 				deriveClass<RigidbodyComponent, AegisComponent>("Rigidbody").
 					addProperty("position", &RigidbodyComponent::GetPosition, &RigidbodyComponent::SetPosition).
 					addFunction("AddForce", &RigidbodyComponent::AddForce).
 					addFunction("GetForce", &RigidbodyComponent::GetForce).
+					addFunction("AddTorque", &RigidbodyComponent::AddTorque).
+					addFunction("AddForceForward", &RigidbodyComponent::AddForceForward).
+					addProperty("isActive", &RigidbodyComponent::isActive).
 				endClass().
 			endNamespace().
 		endNamespace();

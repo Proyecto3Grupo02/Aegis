@@ -24,6 +24,7 @@
     <ClCompile Include="..\..\Src\AegisPhysics\Rigidbody.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Src\AegisPhysics\CollisionCallback.h" />
     <ClInclude Include="..\..\Src\AegisPhysics\MotionState.h" />
     <ClInclude Include="..\..\Src\AegisPhysics\PhysicsMain.h" />
     <ClInclude Include="..\..\Src\AegisPhysics\Rigidbody.h" />
