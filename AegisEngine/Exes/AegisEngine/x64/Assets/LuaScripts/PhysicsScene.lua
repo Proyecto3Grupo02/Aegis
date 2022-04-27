@@ -26,6 +26,10 @@ local scene = {
 			},
 			{
 				type = "Rigidbody",
+				data = 
+				{
+					useGravity = false,
+				}
 			},
 			{
 				type = "CharacterMovement"				

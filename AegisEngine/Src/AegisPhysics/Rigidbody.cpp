@@ -52,7 +52,7 @@ void RigidBody::setFreezeRotation(bool _x, bool _y, bool _z)
 
 void RigidBody::createRigidBodyComponent(RigidBodyType rbType, Vector3 pos, Vector3 scale, std::string bodyMeshName, bool isConvex)
 {
-	rigidBody = PhysicsSystem::getInstance()->createRigidBody(rbType, mass, scale, pos, bodyMeshName, isConvex, isKinematic);
+	rigidBody = PhysicsSystem::getInstance()->createRigidBody(rbType, mass, scale, pos, bodyMeshName, isConvex, isKinematic, useGravity);
 }
 
 void RigidBody::addForce(Vector3 vec) {

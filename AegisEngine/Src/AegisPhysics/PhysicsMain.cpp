@@ -174,7 +174,7 @@ btCollisionShape* PhysicsSystem::createBodyShape(RigidBody::RigidBodyType rbType
 	return rbShape;
 }
 
-btRigidBody* PhysicsSystem::createRigidBody(RigidBody::RigidBodyType rbType, float _mass, Vector3 _dim, Vector3 _pos, std::string bodyMeshName, bool isConvex, bool isKinematic) {
+btRigidBody* PhysicsSystem::createRigidBody(RigidBody::RigidBodyType rbType, float _mass, Vector3 _dim, Vector3 _pos, std::string bodyMeshName, bool isConvex, bool isKinematic, bool useGravity) {
 	btCollisionShape* rbShape = createBodyShape(rbType, _dim, bodyMeshName, isConvex);
 
 
@@ -206,6 +206,8 @@ btRigidBody* PhysicsSystem::createRigidBody(RigidBody::RigidBodyType rbType, flo
 	
 	//add the body to the dynamics world
 	dynamicsWorld->addRigidBody(body);
+	if(!useGravity)
+		body->setGravity({ 0,0,0 });
 
 	return body;
 }
