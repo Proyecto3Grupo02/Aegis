@@ -4,7 +4,7 @@
 
 #include <Ogre.h>
 #include "../Interfaces/ILuaObject.h"
-#include "../Interfaces/ILuaObject.h"
+
 
 struct Entity;
 
@@ -13,7 +13,7 @@ class Component : public ILuaObject {
        Component();
        Component(std::string componentName, Entity* entity);
 
-       virtual ~Component() {};
+       virtual ~Component()=default;
 
        inline Entity* getEntity() { return mEntity_; }
        //void SetEntity(Entity* entity) { mEntity_ = entity; }
