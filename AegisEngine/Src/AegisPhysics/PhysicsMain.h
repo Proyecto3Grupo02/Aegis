@@ -48,7 +48,6 @@ public:
     //std::vector<Vector3> getVertexFromMesh(std::string meshName);
     //btCollisionShape* createShapeWithVertices(Vector3 _dim, std::string bodyMeshName, bool isConvex);
     btCollisionShape* createBodyShape(RigidBody::RigidBodyType rbType, Vector3 _dim, std::string bodyMeshName, bool isConvex);
-    
     void clear();
 };
 

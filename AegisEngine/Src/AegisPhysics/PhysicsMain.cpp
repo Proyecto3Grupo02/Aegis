@@ -20,6 +20,7 @@ subject to the following restrictions:
 #include "Vector3.h"
 #include "Vector4.h"
 
+
 /// This is a Hello World program for running a basic Bullet physics simulation
 
 void PhysicsSystem::Init()
@@ -40,9 +41,17 @@ void PhysicsSystem::Init()
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, overlappingPairCache, solver, collisionConfiguration);
 
 	dynamicsWorld->setGravity(btVector3(0, -10, 0));
-
+	 
+	//Create lambda func for gContactAddedCallback
+	gContactAddedCallback = [](btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper* colObj1Wrap, int partId1, int index1)
+	{
+		std::cout << "Col\n";
+		return true;
+	};;
 	//fileLoader = new btBulletWorldImporter(dynamicsWorld);
 }
+
+
 
 /// Do some simulation
 void PhysicsSystem::update() {
@@ -188,7 +197,7 @@ btRigidBody* PhysicsSystem::createRigidBody(RigidBody::RigidBodyType rbType, flo
 	btRigidBody* body = new btRigidBody(rbInfo);
 
 	if (isKinematic)
-		body->setCollisionFlags(btCollisionObject::CF_DYNAMIC_OBJECT);
+		body->setCollisionFlags(btCollisionObject::CF_KINEMATIC_OBJECT);
 	else
 	{
 		body->setCollisionFlags(btCollisionObject::CF_DYNAMIC_OBJECT);

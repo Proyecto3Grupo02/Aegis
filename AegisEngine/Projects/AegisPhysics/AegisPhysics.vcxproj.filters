@@ -35,5 +35,8 @@
     <ClInclude Include="..\..\Src\AegisPhysics\Rigidbody.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\AegisPhysics\CollisionCallback.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
