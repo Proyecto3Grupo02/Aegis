@@ -54,10 +54,9 @@ void PhysicsSystem::Init()
 
 
 /// Do some simulation
-void PhysicsSystem::update() {
+void PhysicsSystem::update(float timeStep, int maxSteps) {
 	///-----stepsimulation_start-----
-	float timeStep = 1.f / 50.f;
-	dynamicsWorld->stepSimulation(timeStep, 10);
+	dynamicsWorld->stepSimulation(timeStep, maxSteps);
 	dynamicsWorld->clearForces();
 }
 

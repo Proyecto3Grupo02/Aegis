@@ -92,6 +92,9 @@ void Scene::FixedUpdate(float dt) {
 		for(RigidbodyComponent* rb : *physicsEntities)
 			rb->getEntity()->fixedUpdate();
 
+		Physics()->update(PHYSICS_STEP, MAX_PHYSICS_STEP_PER_FRAME);
+		SyncTransforms();
+
 		accumulator -= PHYSICS_STEP;
 		remainingSteps--;
 	}
@@ -118,8 +121,6 @@ void Scene::LateUpdate(float dt) {
 void Scene::UpdateScene(float dt) {
 	InitEntities();
 	FixedUpdate(dt);
-	Physics()->update();
-	SyncTransforms();
 	Update(dt);
 	LateUpdate(dt);
 	RemoveAndFreePendingEntities();
