@@ -1,10 +1,8 @@
 #include "RigidBody.h"
 #include "PhysicsMain.h"
-#include "Vector3.h"
 #include "Vector4.h"
 #include <btBulletDynamicsCommon.h>
 //#include "../checkML.h"
-#include "RigidbodyComponent.h"
 
 RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, RigidbodyComponent* r, float m, bool useG, bool isK) :
 	mass(m), useGravity(useG), isKinematic(isK) {
@@ -31,7 +29,10 @@ RigidBody::~RigidBody()
 void RigidBody::createRigidBodyComponent(RigidBodyType rbType, Vector3 pos, Vector3 scale, std::string bodyMeshName, bool isConvex)
 {
 	rigidBody = PhysicsSystem::getInstance()->createRigidBody(rbType, mass, scale, pos, bodyMeshName, isConvex, isKinematic, useGravity);
+	
+	rigidBody->setUserPointer(this);
 }
+
 
 //GETS--------------------------------------------------------------------------------------------------
 bool RigidBody::getKinematic() { return isKinematic; }

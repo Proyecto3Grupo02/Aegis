@@ -4,7 +4,7 @@
 #include <iostream>
 #include "Scripting.h"
 
-using namespace std;
+//using namespace std;
 
 namespace MathUtils
 {
@@ -37,7 +37,7 @@ namespace MathUtils
 
 	static float Clamp(float startValue, float endValue, float currentValue)
 	{
-		return  min(max(currentValue, startValue), endValue);
+		return  std::min(std::max(currentValue, startValue), endValue);
 	}
 
 	static float InverseLerp(float startValue, float endValue, float currentValue)
@@ -122,11 +122,11 @@ namespace MathUtils
 		float z = to.z;
 
 		if (x != 0)
-			a = -max((y + z) / x, (float)sign(x));
+			a = -std::max((y + z) / x, (float)sign(x));
 		else if (y != 0)
-			b = -max((x + z) / y, (float)sign(y));
+			b = -std::max((x + z) / y, (float)sign(y));
 		else if (z != 0)
-			c = -max((x + y) / z, (float)sign(z));
+			c = -std::max((x + y) / z, (float)sign(z));
 		else a = b = c = 0;
 
 		if (z == 0 && y == 0) return Vector3(0, -x, 0);

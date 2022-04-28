@@ -12,6 +12,7 @@ class SceneNode;
 class RigidbodyComponent;
 class OgreWrapper;
 
+
 class Scene : public ILuaObject, public IInitializable
 {
 private:

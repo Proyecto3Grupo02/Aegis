@@ -20,6 +20,8 @@ class Vector3;
 class Transform;
 class btTransform;
 class btVector3;
+class Entity;
+class RigidbodyComponent;
 
 class PhysicsSystem  : public  Singleton<PhysicsSystem>{
 
@@ -31,13 +33,13 @@ private:
     btSequentialImpulseConstraintSolver* solver;
 
 
-   
+    std::map<std::pair<RigidBody*, RigidBody*>, bool> contacts;
     //btBulletWorldImporter* fileLoader;
 public:
     PhysicsSystem();
     ~PhysicsSystem();
 
-    std::map<std::pair<RigidBody*, RigidBody*>, bool> contacts;
+    
     void Init();
     void update(float deltaTime, float timeStep, int maxSteps = 1);
     void remove();
@@ -53,9 +55,10 @@ public:
     //btCollisionShape* createShapeWithVertices(Vector3 _dim, std::string bodyMeshName, bool isConvex);
     btCollisionShape* createBodyShape(RigidBody::RigidBodyType rbType, Vector3 _dim, std::string bodyMeshName, bool isConvex);
     void clear();
-
-    //void checkCollision();
-    void CollisionEnterCallbacks(const std::pair<RigidBody*, RigidBody*>& col);
+    
+    void checkCollision();
+    void CollisionEnterCallbacks(std::pair<RigidBody*, RigidBody*>& col);
+    //void CollisionExitCallbacks(const std::pair<RigidBody*, RigidBody*>& col);
 
     friend class RigidBody;
 };

@@ -44,6 +44,7 @@ public:
 	void addForce(Vector3 vec);
 	void addTorque(Vector3 vec);
 	void clearForces();
+	//RigidbodyComponent* rbC;
 
 protected:
 	btRigidBody* rigidBody;

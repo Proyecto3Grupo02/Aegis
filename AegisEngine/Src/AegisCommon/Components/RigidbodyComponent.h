@@ -41,6 +41,8 @@ public:
 	//LUA------------
 	static void ConvertToLua(lua_State* state);
 
+	friend class PhysicsSystem;
+
 private:
 	Vector3 initialPos;
 	RigidBody* rigidbody = nullptr;

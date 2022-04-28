@@ -1,8 +1,5 @@
 #include "SoundEmitter.h"
 
-#include "../AegisCommon/Managers/DebugManager.h"
-#include "../AegisCommon/Utils/Vector3.h"
-#include <fmod.hpp>
 
 SoundEmitter::SoundEmitter() : emitterData(nullptr), pitch(0.0f), volume(0.0f)
 {

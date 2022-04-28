@@ -1,5 +1,4 @@
 #include "LuaManager.h"
-#include <iostream>
 
 LuaManager::LuaManager()
 {

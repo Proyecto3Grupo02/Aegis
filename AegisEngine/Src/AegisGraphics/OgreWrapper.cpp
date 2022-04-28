@@ -1,14 +1,9 @@
 #include "OgreWrapper.h"
 
-#include <OgreException.h>
 #include <OgreConfigFile.h>
 #include <OgreRenderWindow.h>
 #include <OgreTextureManager.h>
-#include <OgreSceneManager.h>
-#include <OgreCamera.h>
 #include <OgreViewport.h>
-#include <OgreEntity.h>
-#include <OgreSceneNode.h>
 
 #include <SDL_syswm.h>
 #include <OgreLogManager.h>
