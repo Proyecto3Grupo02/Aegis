@@ -5,6 +5,7 @@
 #include <vector>
 #include "../AegisCommon/Utils/Singleton.h"
 #include "Rigidbody.h"
+#include <map>
 
 class btDiscreteDynamicsWorld;
 class btDefaultCollisionConfiguration;
@@ -28,12 +29,15 @@ private:
     btCollisionDispatcher* dispatcher;
     btBroadphaseInterface* overlappingPairCache;
     btSequentialImpulseConstraintSolver* solver;
+
+
+   
     //btBulletWorldImporter* fileLoader;
 public:
     PhysicsSystem();
     ~PhysicsSystem();
 
-
+    std::map<std::pair<RigidBody*, RigidBody*>, bool> contacts;
     void Init();
     void update(float deltaTime, float timeStep, int maxSteps = 1);
     void remove();
@@ -49,6 +53,11 @@ public:
     //btCollisionShape* createShapeWithVertices(Vector3 _dim, std::string bodyMeshName, bool isConvex);
     btCollisionShape* createBodyShape(RigidBody::RigidBodyType rbType, Vector3 _dim, std::string bodyMeshName, bool isConvex);
     void clear();
+
+    void checkCollision();
+    void CollisionEnterCallbacks(const std::pair<RigidBody*, RigidBody*>& col);
+
+    friend class RigidBody;
 };
 
 inline PhysicsSystem* Physics()

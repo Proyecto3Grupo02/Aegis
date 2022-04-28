@@ -4,12 +4,13 @@
 #include "Vector4.h"
 #include <btBulletDynamicsCommon.h>
 #include "../checkML.h"
+#include "RigidbodyComponent.h"
 
-RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, float m, bool useG, bool isK) :
+RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, RigidbodyComponent* r, float m, bool useG, bool isK) :
 	mass(m), useGravity(useG), isKinematic(isK) {
 	freezePosition = std::vector<bool>(3, false);
 	freezeRotation = std::vector<bool>(3, false);
-	createRigidBodyComponent(RigidBodyType::Box, pos, scale, bodyMeshName);
+	createRigidBodyComponent(RigidBodyType::Box, pos, scale, bodyMeshName), rbC= r;
 }
 
 void RigidBody::init() {

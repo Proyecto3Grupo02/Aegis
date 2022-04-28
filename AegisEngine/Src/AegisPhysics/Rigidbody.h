@@ -12,12 +12,13 @@ class btQuaternion;
 class Transform;
 class Vector3;
 class Vector4;
+class RigidbodyComponent;
 
 class RigidBody {
 public:
 	enum RigidBodyType { Box, Sphere, CapsuleX, CapsuleZ, Custom };
 
-	RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, float m = 1, bool useG = true, bool isK = false);
+	RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, RigidbodyComponent* r, float m = 1, bool useG = true, bool isK = false);
 	void init();
 	~RigidBody();
 	//void fixedUpdate();
@@ -46,6 +47,7 @@ public:
 
 protected:
 	btRigidBody* rigidBody;
+	RigidbodyComponent* rbC;
 
 	float mass;
 	bool useGravity;
@@ -53,7 +55,10 @@ protected:
 	std::vector<bool> freezePosition;
 	std::vector<bool> freezeRotation;
 
+	
 	void createRigidBodyComponent(RigidBodyType rbType, Vector3 pos, Vector3 scale, std::string bodyMeshName = "", bool isConvex = true);
+	friend class PhysicsSystem;
+
 };
 
 #endif // ! RIGIDBODY_H
