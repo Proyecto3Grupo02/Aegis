@@ -22,27 +22,27 @@ public:
 	~RigidBody();
 	//void fixedUpdate();
 
-	void addForce(Vector3 vec);
-	void addTorque(Vector3 vec);
-	Vector3 getTotalForce();
-
+	//GETS-------------------------------------
+	bool isActive() const;
 	bool getKinematic();
 	bool getUseGravity();
+	Vector3 getRbPosition();
+	Vector3 getTotalForce();
+	Vector4 getRotation();
+
+	//SETS--------------------------------------
+	void setActive(bool active = true);
 	void setKinematic(bool sK);
 	void setUsingGravity(bool uG);
 	void setGravity(Vector3 vec);
-
-	Vector3 getRbPosition();
 	void setRbPosition(Vector3 vec);
 	void setRbRotation(Vector4 vec);
-	void clearForces();
-
-	Vector4 getRotation();
-
-	bool isActive() const;
-	void setActive(bool active = true);
-
 	void setFreezeRotation(bool _x, bool _y, bool _z);
+
+	//FORCES---------------------------------
+	void addForce(Vector3 vec);
+	void addTorque(Vector3 vec);
+	void clearForces();
 
 protected:
 	btRigidBody* rigidBody;
