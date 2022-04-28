@@ -11,19 +11,34 @@ enum UICallbacks { OnMouseOver, OnMouseExit, OnClickDown, OnClickReleased };
 
 
 struct UIElement;
-class UIComponent: public Component, public ILuaObject
+class UIComponent:
+	public Component, public ILuaObject
 {
 private:
-    /* data */
+	UIElement* mElement_;
+
+	LuaRef type = LuaMngr()->GetSharedEmptyLuaRef();
+	LuaRef funcs = LuaMngr()->GetNewEmptyTable();
+	LuaRef initFunc = LuaMngr()->GetSharedEmptyLuaRef();
+	LuaRef OnMouseFunc = LuaMngr()->GetSharedEmptyLuaRef();
+	LuaRef OnMouseExitFunc = LuaMngr()->GetSharedEmptyLuaRef();
+	LuaRef OnClickDownFunc = LuaMngr()->GetSharedEmptyLuaRef();
+	LuaRef OnClickUpFunc = LuaMngr()->GetSharedEmptyLuaRef();
+protected:
+	LuaRef data = LuaMngr()->GetNewEmptyTable();
+
+	template <class T>
+	void SetDataAsInnerType(T* component);
 public:
     UIComponent(std::string componentName, UIElement* ent);
     virtual ~UIComponent() = default;
 
-    virtual void render() = 0;
-    virtual void OnMouse()=0;
+	virtual void init() override;
+    virtual void render() override;
+    virtual void OnMouse();
 
-    virtual void OnClickDown()=0;
-    virtual void OnClickUp()=0;
+    virtual void OnClickDown();
+    virtual void OnClickUp();
 
 
     //Lua stuff
@@ -47,4 +62,31 @@ public:
 	void PrintErrorModifyingTables(std::string fieldName, std::string typeName, bool modifiableFields);
 
 };
+
 #endif
+template<class T>
+inline void UIComponent::CallLuaRefFunc(LuaRef func, T args)
+{
+#if defined _DEBUG
+	if (!func.isNil())
+	{
+		try {
+			func(args);
+		}
+		catch (LuaException const& e) {
+			std::cout << e.what() << "\n";
+		}
+
+	}
+#else
+	if (!func.isNil())
+		func(args);
+#endif
+}
+
+template<class T>
+inline void UIComponent::SetDataAsInnerType(T* component)
+{
+	SetType(LuaRef(LuaManager::getInstance()->GetState(), component));
+}
+
