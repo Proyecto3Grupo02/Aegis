@@ -92,9 +92,11 @@ void Scene::FixedUpdate(float dt) {
 		for(RigidbodyComponent* rb : *physicsEntities)
 			rb->getEntity()->fixedUpdate();
 
-		Physics()->update(PHYSICS_STEP, MAX_PHYSICS_STEP_PER_FRAME);
+		float timeBeforeUpdate = SDL_GetTicks();
+		Physics()->update(dt, PHYSICS_STEP, 1);
 		SyncTransforms();
 
+		dt = (SDL_GetTicks() - timeBeforeUpdate) / 1000.0f;
 		accumulator -= PHYSICS_STEP;
 		remainingSteps--;
 	}

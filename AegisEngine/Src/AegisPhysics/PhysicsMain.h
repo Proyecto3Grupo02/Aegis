@@ -35,7 +35,7 @@ public:
 
 
     void Init();
-    void update(float timeStep, int maxSteps = 10);
+    void update(float deltaTime, float timeStep, int maxSteps = 1);
     void remove();
     void removeRigidbody(btCollisionObject* rb);
     btTransform parseToBulletTransform(Vector3 pos, Vector3 rot);

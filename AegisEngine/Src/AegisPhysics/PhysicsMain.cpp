@@ -54,9 +54,9 @@ void PhysicsSystem::Init()
 
 
 /// Do some simulation
-void PhysicsSystem::update(float timeStep, int maxSteps) {
+void PhysicsSystem::update(float deltaTime, float timeStep, int maxSteps) {
 	///-----stepsimulation_start-----
-	dynamicsWorld->stepSimulation(timeStep, maxSteps);
+	dynamicsWorld->stepSimulation(deltaTime, maxSteps, timeStep);
 	dynamicsWorld->clearForces();
 }
 
