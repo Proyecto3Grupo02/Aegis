@@ -9,7 +9,7 @@ RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, fl
 {
 	transform = ent->GetTransform();
 	initialPos = transform->GetPosition();
-	rigidbody = new RigidBody(bodyMeshName, transform->GetPosition(), transform->GetScale(), m, useG, isK);
+	rigidbody = new RigidBody(bodyMeshName, transform->GetPosition(), transform->GetScale(),this, m, useG, isK);
 	mEntity_->getScene()->AddPhysicsEntity(this);
 
 	SetDataAsInnerType(this);

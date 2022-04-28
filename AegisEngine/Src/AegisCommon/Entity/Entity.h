@@ -13,7 +13,7 @@
 #include "../Components/AegisComponent.h"
 #include <Ogre.h>
 #include "../Interfaces/ILuaObject.h"
-#include "../../checkML.h"
+//#include "../../checkML.h"
 
 namespace Ogre {
     class SceneNode;

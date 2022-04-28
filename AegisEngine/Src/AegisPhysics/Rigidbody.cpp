@@ -3,7 +3,7 @@
 #include "Vector3.h"
 #include "Vector4.h"
 #include <btBulletDynamicsCommon.h>
-#include "../checkML.h"
+//#include "../checkML.h"
 #include "RigidbodyComponent.h"
 
 RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, RigidbodyComponent* r, float m, bool useG, bool isK) :

@@ -54,7 +54,7 @@ public:
     btCollisionShape* createBodyShape(RigidBody::RigidBodyType rbType, Vector3 _dim, std::string bodyMeshName, bool isConvex);
     void clear();
 
-    void checkCollision();
+    //void checkCollision();
     void CollisionEnterCallbacks(const std::pair<RigidBody*, RigidBody*>& col);
 
     friend class RigidBody;

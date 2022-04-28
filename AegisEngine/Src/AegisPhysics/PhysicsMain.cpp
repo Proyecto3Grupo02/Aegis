@@ -58,7 +58,7 @@ void PhysicsSystem::Init()
 void PhysicsSystem::update(float deltaTime, float timeStep, int maxSteps) {
 	///-----stepsimulation_start-----
 	dynamicsWorld->stepSimulation(deltaTime, maxSteps, timeStep);
-	checkCollision();
+	//checkCollision();
 	dynamicsWorld->clearForces();
 }
 
@@ -84,67 +84,67 @@ void PhysicsSystem::clear() {
 	}
 }
 
-void PhysicsSystem::checkCollision()
-{
-	std::map<std::pair<RigidBody*, RigidBody*>, bool> newContacts;
+//void PhysicsSystem::checkCollision()
+//{
+//	std::map<std::pair<RigidBody*, RigidBody*>, bool> newContacts;
+//
+//	int numManifolds = dynamicsWorld->getDispatcher()->getNumManifolds();
+//	for (int i = 0; i < numManifolds; i++)
+//	{
+//		btPersistentManifold* contactManifold = dynamicsWorld->getDispatcher()->getManifoldByIndexInternal(i);
+//		const btCollisionObject* obA = contactManifold->getBody0();
+//		const btCollisionObject* obB = contactManifold->getBody1();
+//
+//		int numContacts = contactManifold->getNumContacts();
+//		for (int j = 0; j < numContacts; j++)
+//		{
+//			btManifoldPoint& pt = contactManifold->getContactPoint(j);
+//			if (pt.getDistance() < 0.f)
+//			{
+//				RigidBody* rigidBodyA = (RigidBody*)obA->getUserPointer(), * rigibBodyB = (RigidBody*)obB->getUserPointer();
+//
+//				if (rigidBodyA != nullptr || rigibBodyB != nullptr && (rigidBodyA->isActive() && rigibBodyB->isActive()) )
+//				{
+//					std::pair<RigidBody*, RigidBody*> col = { rigidBodyA, rigibBodyB };
+//					newContacts[col] = true;
+//					
+//					
+//					//Llamamos al collisionEnter si no estaban registrados.
+//					if (contacts.find(col) == contacts.end())
+//						CollisionEnterCallbacks(col);
+//				}
+//				
+//				break;
+//			}
+//		}
+//	}
+//
+//
+//	for (auto it = contacts.begin(); it != contacts.end(); it++)
+//	{
+//		std::pair<RigidBody*, RigidBody*> col = (*it).first;
+//		if (newContacts.find(col) == newContacts.end())
+//			CollisionExitCallbacks(col);
+//	}
+//
+//	contacts = newContacts;
+//
+//
+//	
+//}
 
-	int numManifolds = dynamicsWorld->getDispatcher()->getNumManifolds();
-	for (int i = 0; i < numManifolds; i++)
-	{
-		btPersistentManifold* contactManifold = dynamicsWorld->getDispatcher()->getManifoldByIndexInternal(i);
-		const btCollisionObject* obA = contactManifold->getBody0();
-		const btCollisionObject* obB = contactManifold->getBody1();
-
-		int numContacts = contactManifold->getNumContacts();
-		for (int j = 0; j < numContacts; j++)
-		{
-			btManifoldPoint& pt = contactManifold->getContactPoint(j);
-			if (pt.getDistance() < 0.f)
-			{
-				RigidBody* rigidBodyA = (RigidBody*)obA->getUserPointer(), * rigibBodyB = (RigidBody*)obB->getUserPointer();
-
-				if (rigidBodyA != nullptr || rigibBodyB != nullptr && (rigidBodyA->isActive() && rigibBodyB->isActive()) )
-				{
-					std::pair<RigidBody*, RigidBody*> col = { rigidBodyA, rigibBodyB };
-					newContacts[col] = true;
-					
-					
-					//Llamamos al collisionEnter si no estaban registrados.
-					if (contacts.find(col) == contacts.end())
-						CollisionEnterCallbacks(col);
-				}
-				
-				break;
-			}
-		}
-	}
-
-
-	for (auto it = contacts.begin(); it != contacts.end(); it++)
-	{
-		std::pair<RigidBody*, RigidBody*> col = (*it).first;
-		if (newContacts.find(col) == newContacts.end())
-			CollisionExitCallbacks(col);
-	}
-
-	contacts = newContacts;
-
-
-	
-}
-
-void PhysicsSystem::CollisionEnterCallbacks(const std::pair<RigidBody*, RigidBody*>& col)
-{
-	
-
-	
-	Entity* goA = col.first->rigidBody., * goB = col.second->gameObject;
-
-	if (!aTrigger && !bTrigger) {
-		goA->onCollisionEnter(goB);
-		goB->onCollisionEnter(goA);
-	}
-}
+//void PhysicsSystem::CollisionEnterCallbacks(const std::pair<RigidBody*, RigidBody*>& col)
+//{
+//	
+//
+//	
+//	Entity* goA = col.first->rigidBody., * goB = col.second->gameObject;
+//
+//	if (!aTrigger && !bTrigger) {
+//		goA->onCollisionEnter(goB);
+//		goB->onCollisionEnter(goA);
+//	}
+//}
 
 void PhysicsSystem::remove() {
 	clear();
