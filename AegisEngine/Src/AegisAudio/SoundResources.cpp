@@ -1,7 +1,7 @@
 #include "SoundResources.h"
 //using namespace std;
 #include <dirent.h>
-
+#include "DebugManager.h"
 SoundResources::SoundResources()
 {
 	ParseDirectory(rutaArchivo);

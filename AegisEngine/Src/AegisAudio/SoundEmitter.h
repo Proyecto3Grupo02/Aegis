@@ -5,7 +5,7 @@
 
 
 #include "SoundSystem.h"
-#include "../../Dependencias/fmod/inc/fmod.hpp"
+#include "fmod.hpp"
 #include "../checkML.h"
 
 //namespace FMOD{

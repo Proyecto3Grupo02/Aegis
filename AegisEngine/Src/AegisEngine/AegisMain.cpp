@@ -12,6 +12,7 @@
 #include "../AegisCommon/Entity/Entity.h"
 #include "../AegisCommon/Managers/InputManager.h"
 #include "../AegisCommon/Managers/SceneManager.h"
+#include "../AegisCommon/Managers/DebugManager.h"
 #include "../AegisCommon/Scene/Scene.h"
 #include "../AegisGraphics/OgreWrapper.h"
 #include "../AegisPhysics/PhysicsMain.h"
