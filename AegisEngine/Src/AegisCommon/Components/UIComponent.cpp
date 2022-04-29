@@ -1,5 +1,5 @@
 #include "UIComponent.h"
-
+#include "../Entity/UIElement.h"
 UIComponent::UIComponent(std::string componentName, UIElement* ent):
 	Component(componentName,nullptr), mElement_(ent)
 {
@@ -85,7 +85,7 @@ void UIComponent::PrintErrorModifyingTables(std::string fieldName, std::string t
 {
 #if defined _DEBUG
 	std::string modifiable = modifiableFields ? "but you can modify its field\n" : "but you can read it\n";
-	std::cout << "Error on " << getEntity()->getName() << " " << GetComponentName() << "." << fieldName << ": ";
+	std::cout << "Error on " <<mElement_->getName() << " " << GetComponentName() << "." << fieldName << ": ";
 	std::cout << "You can't override this " << typeName << " with another one, " << modifiable;
 #endif
 }
