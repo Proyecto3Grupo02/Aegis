@@ -38,9 +38,9 @@ void Texture::cleanTexture() {
     }
 }
 
-void Texture::render(const SDL_Rect& rect, SDL_RendererFlip flip = SDL_FLIP_NONE)
+void Texture::render(const SDL_Rect& rect, SDL_RendererFlip flip = SDL_FLIP_NONE) const
 {
-    render(destRect, 0, 0, 0, flip);
+    render(rect, 0, 0, 0, flip);
 }
 
 void Texture::render(float posX, float posY, int widthMul, int heightMult, SDL_RendererFlip flip) const

@@ -35,7 +35,7 @@ public:
 
 	virtual void init() override;
     virtual void render() override;
-    virtual void OnMouse();
+    virtual void OnMouse(UIElement* other);
 
     virtual void OnClickDown();
     virtual void OnClickUp();
