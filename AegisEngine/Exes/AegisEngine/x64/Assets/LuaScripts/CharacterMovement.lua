@@ -6,7 +6,7 @@ function table.GetNew(entity, params)
 	local transform = entity.transform;
     local funcs = component.funcs;
     local rigidbody;
-    local w; local a; local s; local d;
+    local w; local a; local s; local d; local fishing;
     data.initPos = transform.position;
 
     function Init()
@@ -15,9 +15,13 @@ function table.GetNew(entity, params)
         a=false;
         s=false;
         d=false;
+        fishing = false;
      end;
 
 	function Update(deltaTime)
+        if(Input:IsKeyDown("Space"))
+            fishing = !fishing;
+        if (fishing) return;
         w = Input:IsKeyDown("w");
         a = Input:IsKeyDown("a");
         s = Input:IsKeyDown("s");
