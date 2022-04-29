@@ -210,6 +210,7 @@
     <ClCompile Include="..\..\Src\AegisCommon\Components\Transform.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\UIComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Entity\Entity.cpp" />
+    <ClCompile Include="..\..\Src\AegisCommon\Entity\UIElement.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Managers\ComponentManager.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Managers\DebugManager.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Managers\InputManager.cpp" />

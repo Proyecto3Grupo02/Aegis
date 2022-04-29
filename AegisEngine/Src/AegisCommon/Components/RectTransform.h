@@ -29,9 +29,6 @@ private:
     Vector2 mScale_;
     float mRotation_;
 
-    
-
-
 public:
     RectTransform(UIElement* elem, Vector2 pos, Vector2 scale, float rotation);
     ~RectTransform() = default;

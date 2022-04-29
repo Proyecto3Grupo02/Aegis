@@ -218,5 +218,8 @@
     <ClCompile Include="..\..\Src\AegisCommon\Components\RectTransform.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\AegisCommon\Entity\UIElement.cpp">
+      <Filter>Archivos de origen\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

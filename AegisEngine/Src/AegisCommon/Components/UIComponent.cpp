@@ -73,12 +73,7 @@ LuaRef UIComponent::GetFuncs() const
 }
 void UIComponent::ConvertToLua(lua_State* state)
 {
-	getGlobalNamespace(state).
-		beginNamespace("Aegis").
-		addFunction("CreateComponent", CreateComponent).
-		deriveClass<UIComponent, Component>("Component").
-				endClass().
-		endNamespace();
+
 }
 
 void UIComponent::PrintErrorModifyingTables(std::string fieldName, std::string typeName, bool modifiableFields)
