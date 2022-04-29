@@ -116,6 +116,20 @@ void RigidBody::addForce(Vector3 vec) {
 	rigidBody->applyForce(forc, btVector3());
 }
 
+
+Vector3 RigidBody::AccelerateTo(Vector3 targetVelocity, float deltaTime, float maxAcceleration)
+{
+	Vector3 deltaVelocity = targetVelocity - Physics()->parseFromBulletVector(rigidBody->getLinearVelocity());
+	Vector3 acceleration = deltaVelocity / deltaTime;
+
+	if (acceleration.magnitudeSquared() > maxAcceleration * maxAcceleration)
+		acceleration = acceleration.getNormalized() * maxAcceleration;
+
+	acceleration *= rigidBody->getMass();
+	addForce(acceleration);
+	return acceleration;
+}
+
 void RigidBody::addTorque(Vector3 vec)
 {
 	btVector3 torque = btVector3(vec.GetX(), vec.GetY(), vec.GetZ());

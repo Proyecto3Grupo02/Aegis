@@ -8,7 +8,7 @@
 
 class OgreWrapper;
 class SceneManager;
-class GameLoopData;
+class TimeManager;
 class LuaManager;
 
 class AegisMain : IInitializable
@@ -16,7 +16,7 @@ class AegisMain : IInitializable
 private:
     OgreWrapper* ogreWrap;
     SceneManager* sceneManager;
-    GameLoopData* gameLoopData;
+    TimeManager* gameLoopData;
 
     bool exit;
     //uint32_t frameTimeMS;

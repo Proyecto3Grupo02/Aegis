@@ -41,6 +41,7 @@ public:
 
 	//FORCES---------------------------------
 	void addForce(Vector3 vec);
+	Vector3 AccelerateTo(Vector3 targetVelocity, float deltaTime, float maxAcceleration);
 	void addTorque(Vector3 vec);
 	void clearForces();
 

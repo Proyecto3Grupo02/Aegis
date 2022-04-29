@@ -51,7 +51,7 @@ void AegisMain::GameLoop() {
 		while (!exit)
 		{
 			//Tiempo al inicio del frame
-			gameLoopData->frameStartTime = SDL_GetTicks();
+			Time()->frameStartTime = SDL_GetTicks();
 			Input()->UpdateState();
 			while (SDL_PollEvent(&eventHandler) != 0)
 			{
@@ -80,17 +80,17 @@ void AegisMain::GameLoop() {
 				}
 			}
 
-			sceneManager->UpdateCurrentScene(gameLoopData->deltaTime);
+			sceneManager->UpdateCurrentScene(Time()->deltaTime);
 			sceneManager->PreRenderScene();
 
 			ogreWrap->Render();
-			Uint32 frameTime = SDL_GetTicks() - gameLoopData->frameStartTime;
+			Uint32 frameTime = SDL_GetTicks() - Time()->frameStartTime;
 
 			if (frameTime < frameTimeMS)
 				SDL_Delay(frameTimeMS - frameTime);
 
 			// Actualiza deltaTime y timeSinceSceneStart
-			gameLoopData->UpdateTimeRegistry(SDL_GetTicks());
+			Time()->UpdateTimeRegistry(SDL_GetTicks());
 		}
 	}
 }
@@ -101,12 +101,12 @@ AegisMain::AegisMain() : IInitializable() {
 	ogreWrap->Init();
 	LuaMngr();
 
-	gameLoopData = new GameLoopData();
+	gameLoopData = new TimeManager();
 	sceneManager = new SceneManager(new Scene(ogreWrap));
 }
 
 AegisMain::~AegisMain() {
-	delete gameLoopData;
+	delete Time();
 	delete sceneManager;
 	delete ogreWrap;
 
