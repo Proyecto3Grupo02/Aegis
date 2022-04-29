@@ -58,7 +58,7 @@ public:
     
     void checkCollision();
     void CollisionEnterCallbacks(std::pair<RigidBody*, RigidBody*>& col);
-    //void CollisionExitCallbacks(const std::pair<RigidBody*, RigidBody*>& col);
+    void CollisionExitCallbacks(std::pair<RigidBody*, RigidBody*>& col);
 
    
 };

@@ -18,7 +18,7 @@ class RigidBody {
 public:
 	enum RigidBodyType { Box, Sphere, CapsuleX, CapsuleZ, Custom };
 
-	RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, RigidbodyComponent* r, float m = 1, bool useG = true, bool isK = false);
+	RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, RigidbodyComponent* r, float m = 1, bool useG = true, bool isK = false, bool t = false);
 	void init();
 	~RigidBody();
 	//void fixedUpdate();
@@ -32,6 +32,7 @@ public:
 	Vector4 getRotation();
 
 	//SETS--------------------------------------
+	bool isTrigger();
 	void setActive(bool active = true);
 	void setKinematic(bool sK);
 	void setUsingGravity(bool uG);
@@ -51,6 +52,7 @@ protected:
 	btRigidBody* rigidBody;
 	RigidbodyComponent* rbC;
 
+	bool trigger;
 	float mass;
 	bool useGravity;
 	bool isKinematic;

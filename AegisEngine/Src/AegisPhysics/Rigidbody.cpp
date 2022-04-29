@@ -4,11 +4,12 @@
 #include <btBulletDynamicsCommon.h>
 //#include "../checkML.h"
 
-RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, RigidbodyComponent* r, float m, bool useG, bool isK) :
+RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, RigidbodyComponent* r, float m, bool useG, bool isK, bool t) :
 	mass(m), useGravity(useG), isKinematic(isK) {
 	freezePosition = std::vector<bool>(3, false);
 	freezeRotation = std::vector<bool>(3, false);
-	createRigidBodyComponent(RigidBodyType::Box, pos, scale, bodyMeshName), rbC= r;
+	createRigidBodyComponent(RigidBodyType::Box, pos, scale, bodyMeshName); rbC = r;
+	if (t)rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
 }
 
 void RigidBody::init() {
@@ -61,6 +62,11 @@ Vector4 RigidBody::getRotation()
 bool RigidBody::isActive() const
 {
 	return rigidBody->isActive();
+}
+
+bool RigidBody::isTrigger()
+{
+	return trigger;
 }
 
 //SETS------------------------------------------------------------------------------------------------------

@@ -24,11 +24,14 @@ public:
 	void SyncToTransform();
 	void SetIterator(std::list<RigidbodyComponent*>::iterator physicsEntityIt);
 
+	
+
 	//GETS-------------------------------------------
 	bool isActive() const;
 	Vector3 GetPosition() const;
 	//Vector4 getRotation();
 	Vector3 GetForce() const;
+
 
 	//SETS------------------------------------------
 	void SetPosition(Vector3 pos);
@@ -45,6 +48,7 @@ public:
 	friend class PhysicsSystem;
 
 private:
+	
 	Vector3 initialPos;
 	RigidBody* rigidbody = nullptr;
 	Transform* transform = nullptr;

@@ -115,6 +115,9 @@ void PhysicsSystem::checkCollision()
 						//std::cout << "a";
 						CollisionEnterCallbacks(col);
 					}
+					else {
+						//CollisionStayCallbacks(col);
+					}
 				}
 				
 				break;
@@ -141,9 +144,30 @@ void PhysicsSystem::CollisionEnterCallbacks(std::pair<RigidBody*, RigidBody*>& c
 	
 	
 	Entity* goA = col.first->rbC->mEntity_, * goB = col.second->rbC->mEntity_;
-	goA->onCollision(goB);
-	goB->onCollision(goA);
+	 bool aTrigger = col.first->isTrigger() , bTrigger = col.second->isTrigger();
 	
+	 if (aTrigger || bTrigger) {
+		 if (aTrigger && bTrigger) {
+			 goA->onTrigger(goB);
+			 goB->onTrigger(goA);
+		 }
+		 else if (aTrigger && !bTrigger) {
+			 goA->onTrigger(goB);
+			 goB->onCollision(goA);
+		 }
+		 else if (!aTrigger && bTrigger) {
+			 goA->onCollision(goB);
+			 goB->onTrigger(goA);
+		 }
+	 }
+	 else {
+		 goA->onCollision(goB);
+		 goB->onCollision(goA);
+	 }
+}
+
+void PhysicsSystem::CollisionExitCallbacks(std::pair<RigidBody*, RigidBody*>& col)
+{
 }
 
 void PhysicsSystem::remove() {
@@ -239,7 +263,7 @@ btCollisionShape* PhysicsSystem::createBodyShape(RigidBody::RigidBodyType rbType
 
 btRigidBody* PhysicsSystem::createRigidBody(RigidBody::RigidBodyType rbType, float _mass, Vector3 _dim, Vector3 _pos, std::string bodyMeshName, bool isConvex, bool isKinematic, bool useGravity) {
 	btCollisionShape* rbShape = createBodyShape(rbType, _dim, bodyMeshName, isConvex);
-	rbShape->setMargin(0.05f);
+	rbShape->setMargin(0.0f);
 
 	btTransform groundTransform;
 	groundTransform.setIdentity();
