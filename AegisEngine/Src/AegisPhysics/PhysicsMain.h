@@ -3,7 +3,7 @@
 #define PHYSICS_MAIN_H
 
 #include <vector>
-#include "../AegisCommon/Utils/Singleton.h"
+#include "Singleton.h"
 #include "Rigidbody.h"
 #include <map>
 
@@ -60,7 +60,7 @@ public:
     void CollisionEnterCallbacks(std::pair<RigidBody*, RigidBody*>& col);
     //void CollisionExitCallbacks(const std::pair<RigidBody*, RigidBody*>& col);
 
-    friend class RigidBody;
+   
 };
 
 inline PhysicsSystem* Physics()
