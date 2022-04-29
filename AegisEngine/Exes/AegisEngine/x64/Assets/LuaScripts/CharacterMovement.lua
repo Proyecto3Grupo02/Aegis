@@ -19,9 +19,16 @@ function table.GetNew(entity, params)
      end;
 
 	function Update(deltaTime)
-        if(Input:IsKeyDown("Space"))
-            fishing = !fishing;
-        if (fishing) return;
+        if(Input:IsKeyDown("Space"))then
+            if fishing == true then
+                fishing = false;
+            else 
+                fishing = true;
+            end;
+        end;
+        if (fishing)then
+            return;
+        end;
         w = Input:IsKeyDown("w");
         a = Input:IsKeyDown("a");
         s = Input:IsKeyDown("s");
