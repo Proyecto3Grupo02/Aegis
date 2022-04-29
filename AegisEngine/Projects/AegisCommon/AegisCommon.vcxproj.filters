@@ -93,7 +93,7 @@
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Vector3.h">
       <Filter>Archivos de encabezado\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Utils\GameLoopData.h">
+    <ClInclude Include="..\..\Src\AegisCommon\Utils\Time().h">
       <Filter>Archivos de encabezado\Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Vector4.h">

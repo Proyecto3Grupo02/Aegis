@@ -2,7 +2,7 @@
 
 #include "Entity.h"
 #include <Scene.h>
-
+#include "../Utils/GameLoopData.h"
 
 RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m, bool useG, bool isK)
 	: AegisComponent("Rigidbody", ent)
@@ -48,6 +48,11 @@ void RigidbodyComponent::AddForce(Vector3 force) {
 	rigidbody->addForce(force);
 }
 
+Vector3 RigidbodyComponent::AccelerateTo(Vector3 targetVelocity, float maxAcceleration)
+{
+	return rigidbody->AccelerateTo(targetVelocity, Time()->deltaTime, maxAcceleration);
+}
+
 void RigidbodyComponent::AddForceForward(float force) {
 	Vector3 rot = transform->GetForward();
 	AddForce(rot * force);
@@ -90,6 +95,7 @@ void RigidbodyComponent::ConvertToLua(lua_State* state)
 					addProperty("position", &RigidbodyComponent::GetPosition, &RigidbodyComponent::SetPosition).
 					addFunction("AddForce", &RigidbodyComponent::AddForce).
 					addFunction("GetForce", &RigidbodyComponent::GetForce).
+					addFunction("AccelerateTo", &RigidbodyComponent::AccelerateTo).
 					addFunction("AddTorque", &RigidbodyComponent::AddTorque).
 					addFunction("AddForceForward", &RigidbodyComponent::AddForceForward).
 					addProperty("isActive", &RigidbodyComponent::isActive).
