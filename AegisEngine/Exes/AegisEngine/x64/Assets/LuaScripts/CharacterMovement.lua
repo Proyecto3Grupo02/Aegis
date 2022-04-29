@@ -8,6 +8,7 @@ function table.GetNew(entity, params)
     local rigidbody;
     local w; local a; local s; local d; local fishing;
     data.initPos = transform.position;
+    data.camera = "mainCam";
 
     function Init()
         rigidbody = component.entity:GetComponent("Rigidbody").type;
@@ -16,15 +17,13 @@ function table.GetNew(entity, params)
         s=false;
         d=false;
         fishing = false;
+        data.camera.transform:SetParent(entity)
      end;
 
 	function Update(deltaTime)
-        if(Input:IsKeyDown("Space"))then
-            if fishing == true then
-                fishing = false;
-            else 
-                fishing = true;
-            end;
+        if(Input:KeyWasPressed("Space"))then
+            fishing = not fishing;
+            print(fishing)
         end;
         if (fishing)then
             return;
