@@ -184,6 +184,7 @@
     <ClInclude Include="..\..\Src\AegisCommon\Managers\DebugManager.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Managers\InputManager.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Managers\SceneManager.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Scene\Canvas.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Scene\Scene.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Animation.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Utils\GameLoopData.h" />
@@ -215,6 +216,7 @@
     <ClCompile Include="..\..\Src\AegisCommon\Managers\DebugManager.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Managers\InputManager.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Managers\SceneManager.cpp" />
+    <ClCompile Include="..\..\Src\AegisCommon\Scene\Canvas.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Scene\Scene.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Utils\Vector3.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Utils\Vector4.cpp" />

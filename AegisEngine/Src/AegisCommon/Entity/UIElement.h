@@ -27,6 +27,9 @@ public:
     void render();
 
     template <typename T>
+    inline T* addComponent(const char* componentName);
+
+    template <typename T>
     inline T* getComponent(const char* componentName);
 
     inline void addComponentFromLua(UIComponent* component);
@@ -46,8 +49,3 @@ public:
     inline void setScene(Scene* scene) { mScene_ = scene; }
 };
 
-template<typename T>
-inline T* UIElement::getComponent(const char* componentName)
-{
-    return nullptr;
-}

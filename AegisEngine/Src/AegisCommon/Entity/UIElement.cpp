@@ -70,6 +70,10 @@ void UIElement::setRectTransform(RectTransform* tr)
 	mTransform_ = tr;
 }
 
+void UIElement::destroy()
+{
+}
+
 void UIElement::ConvertToLua(lua_State* state)
 {
 }

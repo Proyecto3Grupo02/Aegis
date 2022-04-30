@@ -147,7 +147,7 @@ void Scene::ConvertToLua(lua_State* state)
 	getGlobalNamespace(state).
 		beginNamespace("Aegis").
 			beginClass<Scene>("Scene").
-				addFunction("AddEntity", &Scene::AddEntity).
+			addFunction("AddEntity", &Scene::AddEntity).
 			endClass().
 		endNamespace();
 }

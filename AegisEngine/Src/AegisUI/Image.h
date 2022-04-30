@@ -3,3 +3,7 @@
 //#include "Component.h"
 #include <string>
 
+class Image {
+
+};
+
