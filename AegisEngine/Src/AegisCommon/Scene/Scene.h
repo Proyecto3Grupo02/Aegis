@@ -5,6 +5,7 @@
 #include <list>
 #include "../Interfaces/ILuaObject.h"
 #include "../Interfaces/IInitializable.h"
+
 #include <Ogre.h>
 
 struct Entity;

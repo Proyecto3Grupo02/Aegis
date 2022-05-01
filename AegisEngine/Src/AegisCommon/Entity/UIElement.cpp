@@ -2,8 +2,9 @@
 #include "../Utils/Vector2.h"
 #include "../Components/UIComponent.h"
 #include "../Components/RectTransform.h"
-UIElement::UIElement(Scene* scene, Vector2 pos):
-	mScene_(mScene_)
+#include "../Entity/Canvas.h"
+UIElement::UIElement(Canvas* scene, Vector2 pos):
+	mScene_(scene)
 {
 	mTransform_ = new RectTransform(this, pos, Vector2(1,1),0);
 	this->addComponentFromLua(mTransform_);

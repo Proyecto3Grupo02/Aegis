@@ -18,12 +18,12 @@ public:
     Canvas(OgreWrapper* wrap);
     ~Canvas();
 
+    void Init() override;
     void render();
     void update();
 
     void OnClickDown();
     void OnClickUp();
-
 
     void OnMouseOver();
     void OnMouseExit();

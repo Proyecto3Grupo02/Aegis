@@ -165,8 +165,8 @@
     <ClInclude Include="..\..\Src\AegisCommon\Components\AnimationComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\CameraComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\Component.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Components\Image.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\LightComponent.h" />
-    <ClInclude Include="..\..\Src\AegisCommon\Components\Material.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\RectTransform.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\RegisterComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\Renderer.h" />
@@ -202,6 +202,7 @@
     <ClCompile Include="..\..\Src\AegisCommon\Components\AnimationComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\CameraComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\Component.cpp" />
+    <ClCompile Include="..\..\Src\AegisCommon\Components\Image.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\LightComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\RectTransform.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\Renderer.cpp" />

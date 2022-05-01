@@ -13,14 +13,14 @@ struct UIElement:
 private:
     std::string mName_; //name of the entity, works like a tag, useful to debug
     RectTransform* mTransform_;
-    Scene* mScene_;
+    Canvas* mCanvas_;
 
 protected:
     std::unordered_map <std::string, UIComponent*> mComponents_; //list of all the components in scene
     std::vector<UIComponent*> mComponentsArray_; //list of all the components in scene
     bool active_; //bool to check if the entity is active or not
 public:
-    UIElement(Scene* scene, Vector2 pos);
+    UIElement(Canvas* scene, Vector2 pos);
     ~UIElement();
 
     void init();
@@ -51,7 +51,7 @@ public:
     std::string getName() const;
     void setName(std::string name);
 
-    inline Scene* getScene() { return mScene_; }
-    inline void setScene(Scene* scene) { mScene_ = scene; }
+    inline Canvas* getCanvas() const { return mCanvas_; }
+    inline void setCanvas(Canvas* canvas) { mCanvas_ = canvas; }
 };
 

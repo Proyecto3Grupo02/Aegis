@@ -6,15 +6,18 @@
 #include "../../AegisGraphics/OgreWrapper.h"
 #include "../../AegisGraphics/Components/Camera.h"
 #include "../Components/CameraComponent.h"
-
+#include "Canvas.h"
 using namespace luabridge;
 
 void Scene::InitEntities()
 {
+
 	for (Entity* entity : *uninitializedEntities)
 	{
 		entity->init();
 	}
+
+	mCanvas_->Init();
 
 	uninitializedEntities->clear();
 }
@@ -47,6 +50,7 @@ bool Scene::Init()
 	cameraEntity->addComponentFromLua(new CameraComponent(cameraEntity, camera));
 	ExportToLua(cameraEntity, "MainCamera");
 
+	mCanvas_ = new Canvas(ogreWrapper);
 	return true;
 }
 
@@ -132,6 +136,8 @@ void Scene::Render()
 {
 	for (Entity* entity : *entities)
 		entity->render();
+
+	mCanvas_->render();
 }
 
 //the ogreNode usually is the root scene node so we add this node as a child one

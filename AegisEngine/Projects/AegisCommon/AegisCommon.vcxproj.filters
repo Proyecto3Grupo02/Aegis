@@ -81,7 +81,7 @@
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Vector3.h">
       <Filter>Archivos de encabezado\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Utils\Time().h">
+    <ClInclude Include="..\..\Src\AegisCommon\Utils\GameLoopData.h">
       <Filter>Archivos de encabezado\Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Vector4.h">
@@ -101,9 +101,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Randomized.h">
       <Filter>Archivos de encabezado\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Components\Material.h">
-      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Animation.h">
       <Filter>Archivos de encabezado\Utils</Filter>
@@ -158,6 +155,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\AegisCommon\Scene\Canvas.h">
       <Filter>Archivos de encabezado\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisCommon\Components\Image.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -226,6 +226,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\AegisCommon\Scene\Canvas.cpp">
       <Filter>Archivos de origen\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AegisCommon\Components\Image.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -41,6 +41,10 @@ public:
     virtual void OnClickUp(UIElement* other);
 
 
+	inline UIElement* getElement() const { return mElement_; }
+
+
+
     //Lua stuff
 	void setCallbacks(LuaRef updateFunc);
 
