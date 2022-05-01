@@ -13,5 +13,78 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Archivos de encabezado\BTAgent">
+      <UniqueIdentifier>{6fbee158-c55f-48cd-8549-33732451ef26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\BTree">
+      <UniqueIdentifier>{66ccd588-a4c4-4804-88b4-779262eff3b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\BTNodes">
+      <UniqueIdentifier>{d3c07720-d2c1-4476-94a8-e2b6de9117b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\BTNodes\Composite">
+      <UniqueIdentifier>{06812073-2d52-4901-ab40-b215d6afcc5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\BTNodes\Decorators">
+      <UniqueIdentifier>{56d60dee-5052-42a3-82a3-01abad8147f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\BTNodes\Actions">
+      <UniqueIdentifier>{b837e27b-a45a-456a-bfbe-d45898edf21e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Composite">
+      <UniqueIdentifier>{c54f3c84-bc09-4334-b960-61677ec4b756}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Actions">
+      <UniqueIdentifier>{71b5ea09-6123-410a-bdf3-1cb97af6a830}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Src\AegisAI\BTUtils\AIAgent.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AegisAI\BTUtils\BTree.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AegisAI\BTNodes\BTNode.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AegisAI\BTNodes\Composite\Composite.cpp">
+      <Filter>Archivos de origen\Composite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AegisAI\BTNodes\Composite\Selector.cpp">
+      <Filter>Archivos de origen\Composite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AegisAI\BTNodes\Composite\Sequence.cpp">
+      <Filter>Archivos de origen\Composite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AegisAI\BTNodes\Actions\Action.cpp">
+      <Filter>Archivos de origen\Actions</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Src\AegisAI\BTUtils\AIAgent.h">
+      <Filter>Archivos de encabezado\BTAgent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisAI\BTUtils\BTree.h">
+      <Filter>Archivos de encabezado\BTree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisAI\BTNodes\BTNode.h">
+      <Filter>Archivos de encabezado\BTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisAI\BTUtils\BTNodeStatus.h">
+      <Filter>Archivos de encabezado\BTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisAI\BTNodes\Composite\Composite.h">
+      <Filter>Archivos de encabezado\BTNodes\Composite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisAI\BTNodes\Composite\Selector.h">
+      <Filter>Archivos de encabezado\BTNodes\Composite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisAI\BTNodes\Composite\Sequence.h">
+      <Filter>Archivos de encabezado\BTNodes\Composite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisAI\BTNodes\Actions\Action.h">
+      <Filter>Archivos de encabezado\BTNodes\Actions</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

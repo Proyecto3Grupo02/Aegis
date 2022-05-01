@@ -19,6 +19,7 @@ private:
 
     Ogre::RenderWindow* render = nullptr;
     SDL_Window* native = nullptr;
+    SDL_Renderer* renderer_ = nullptr;
 
     Ogre::SceneManager* mSceneMgr;
     Ogre::LogManager* lm;
@@ -34,6 +35,8 @@ public:
     virtual ~OgreWrapper();
     bool Init();
     Ogre::SceneNode* GetRootNode();
+
+    inline SDL_Renderer* getRenderer()const { return renderer_; }
 };
 
 #endif

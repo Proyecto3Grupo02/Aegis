@@ -26,6 +26,12 @@ public:
     void init();
     void render();
 
+    void OnClickUp();
+    void OnClickDown();
+    
+    void OnMouseOver();
+    void OnMouseExit();
+
     template <typename T>
     inline T* addComponent(const char* componentName);
 

@@ -35,6 +35,22 @@ void UIElement::render()
 	}
 }
 
+void UIElement::OnClickUp()
+{
+}
+
+void UIElement::OnClickDown()
+{
+}
+
+void UIElement::OnMouseOver()
+{
+}
+
+void UIElement::OnMouseExit()
+{
+}
+
 inline void UIElement::addComponentFromLua(UIComponent* component)
 {
 	std::string key = component->GetComponentName();

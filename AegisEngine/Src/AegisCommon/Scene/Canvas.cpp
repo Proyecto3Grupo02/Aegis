@@ -37,7 +37,7 @@ void Canvas::OnClickDown()
 void Canvas::OnClickUp()
 {
 	for (auto* elem : *mElems_) {
-		elem->render();
+		
 	}
 }
 
