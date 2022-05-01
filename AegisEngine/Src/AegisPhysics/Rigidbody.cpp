@@ -5,11 +5,11 @@
 #include <btBulletDynamicsCommon.h>
 #include "../checkML.h"
 
-RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, float m, bool useG, bool isK) :
+RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, Vector4 rotation, float m, bool useG, bool isK) :
 	mass(m), useGravity(useG), isKinematic(isK) {
 	freezePosition = std::vector<bool>(3, false);
 	freezeRotation = std::vector<bool>(3, false);
-	createRigidBodyComponent(RigidBodyType::Box, pos, scale, bodyMeshName);
+	createRigidBodyComponent(RigidBodyType::Box, pos, scale, rotation,  bodyMeshName);
 }
 
 void RigidBody::init() {
@@ -27,9 +27,9 @@ RigidBody::~RigidBody()
 	Physics()->removeRigidbody(this->rigidBody);
 }
 
-void RigidBody::createRigidBodyComponent(RigidBodyType rbType, Vector3 pos, Vector3 scale, std::string bodyMeshName, bool isConvex)
+void RigidBody::createRigidBodyComponent(RigidBodyType rbType, Vector3 pos, Vector3 scale, Vector4 rotation,  std::string bodyMeshName, bool isConvex)
 {
-	rigidBody = PhysicsSystem::getInstance()->createRigidBody(rbType, mass, scale, pos, bodyMeshName, isConvex, isKinematic, useGravity);
+	rigidBody = PhysicsSystem::getInstance()->createRigidBody(rbType, mass, scale, pos, rotation, bodyMeshName, isConvex, isKinematic, useGravity);
 }
 
 //GETS--------------------------------------------------------------------------------------------------
@@ -114,6 +114,20 @@ void RigidBody::setRbRotation(Vector4 vec)
 void RigidBody::addForce(Vector3 vec) {
 	btVector3 forc = btVector3(vec.GetX(), vec.GetY(), vec.GetZ());
 	rigidBody->applyForce(forc, btVector3());
+}
+
+
+Vector3 RigidBody::AccelerateTo(Vector3 targetVelocity, float deltaTime, float maxAcceleration)
+{
+	Vector3 deltaVelocity = targetVelocity - Physics()->parseFromBulletVector(rigidBody->getLinearVelocity());
+	Vector3 acceleration = deltaVelocity / deltaTime;
+
+	if (acceleration.magnitudeSquared() > maxAcceleration * maxAcceleration)
+		acceleration = acceleration.getNormalized() * maxAcceleration;
+
+	acceleration *= rigidBody->getMass();
+	addForce(acceleration);
+	return acceleration;
 }
 
 void RigidBody::addTorque(Vector3 vec)

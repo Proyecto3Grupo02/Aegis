@@ -161,6 +161,7 @@ funcs.TreatSpecialCase = function(object)
 		possibleEntity.transform.localEulerAngles = funcs.ParseVector3(object.rotation, 0);
 
 		funcs.AddComponents(possibleEntity, object.components);
+		return possibleEntity;
 	end;
 end;
 
@@ -170,7 +171,10 @@ funcs.ParseSceneObject = function(object)
 		local entity = funcs.ParseEntity(object);
 		entities[entity:GetName()] = entity;
 	else 
-		funcs.TreatSpecialCase(object);
+		local entity = funcs.TreatSpecialCase(object);
+		if entity ~= nil then
+			entities[entity:GetName()] = entity;
+		end;
 	end;
 end;
 

@@ -2,14 +2,16 @@
 
 #include "Entity.h"
 #include <Scene.h>
-
+#include "../Utils/GameLoopData.h"
 
 RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m, bool useG, bool isK)
 	: AegisComponent("Rigidbody", ent)
 {
 	transform = ent->GetTransform();
 	initialPos = transform->GetPosition();
-	rigidbody = new RigidBody(bodyMeshName, transform->GetPosition(), transform->GetScale(), m, useG, isK);
+	auto rot = transform->GetRotation();
+	Vector4 rotVec(rot.x, rot.y, rot.z, rot.w);
+	rigidbody = new RigidBody(bodyMeshName, transform->GetPosition(), transform->GetScale(), rotVec, m, useG, isK);
 	mEntity_->getScene()->AddPhysicsEntity(this);
 
 	SetDataAsInnerType(this);
@@ -46,6 +48,11 @@ bool RigidbodyComponent::isActive() const
 
 void RigidbodyComponent::AddForce(Vector3 force) {
 	rigidbody->addForce(force);
+}
+
+Vector3 RigidbodyComponent::AccelerateTo(Vector3 targetVelocity, float maxAcceleration)
+{
+	return rigidbody->AccelerateTo(targetVelocity, Time()->deltaTime, maxAcceleration);
 }
 
 void RigidbodyComponent::AddForceForward(float force) {
@@ -90,6 +97,7 @@ void RigidbodyComponent::ConvertToLua(lua_State* state)
 					addProperty("position", &RigidbodyComponent::GetPosition, &RigidbodyComponent::SetPosition).
 					addFunction("AddForce", &RigidbodyComponent::AddForce).
 					addFunction("GetForce", &RigidbodyComponent::GetForce).
+					addFunction("AccelerateTo", &RigidbodyComponent::AccelerateTo).
 					addFunction("AddTorque", &RigidbodyComponent::AddTorque).
 					addFunction("AddForceForward", &RigidbodyComponent::AddForceForward).
 					addProperty("isActive", &RigidbodyComponent::isActive).

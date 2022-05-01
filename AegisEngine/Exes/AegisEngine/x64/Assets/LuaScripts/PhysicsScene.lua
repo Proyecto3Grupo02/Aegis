@@ -4,9 +4,8 @@ local NAME = "PhysicsScene";
 local scene = {
 	{
 		type = "MainCamera",
-		position = { z = 10 },
-		components = 
-		{
+		position = { z = 10, y = 3  },
+		components = {
 			{
 				type = "CameraTest"
 			}
@@ -32,7 +31,11 @@ local scene = {
 				}
 			},
 			{
-				type = "CharacterMovement"				
+				type = "CharacterMovement",
+				data = 
+				{
+					camera = "@MainCamera"
+				}			
 			}
 		}
 	},
@@ -94,7 +97,7 @@ local scene = {
 					lightType = "DirLight",
 					color = { r = 0.8, g = 0.8, b = 0.8  },
 					spec = { r = 0.8, g = 0.8, b = 0.8 },
-					direction = { x = 0, y = 0.25, z = -0.75 }
+					direction = { x = 0, y = -0.5, z = -0.75 }
 				}
 			}
 		}

@@ -54,10 +54,9 @@ void PhysicsSystem::Init()
 
 
 /// Do some simulation
-void PhysicsSystem::update() {
+void PhysicsSystem::update(float deltaTime, float timeStep, int maxSteps) {
 	///-----stepsimulation_start-----
-	float timeStep = 1.f / 50.f;
-	dynamicsWorld->stepSimulation(timeStep, 10);
+	dynamicsWorld->stepSimulation(deltaTime, maxSteps, timeStep);
 	dynamicsWorld->clearForces();
 }
 
@@ -174,13 +173,15 @@ btCollisionShape* PhysicsSystem::createBodyShape(RigidBody::RigidBodyType rbType
 	return rbShape;
 }
 
-btRigidBody* PhysicsSystem::createRigidBody(RigidBody::RigidBodyType rbType, float _mass, Vector3 _dim, Vector3 _pos, std::string bodyMeshName, bool isConvex, bool isKinematic, bool useGravity) {
+btRigidBody* PhysicsSystem::createRigidBody(RigidBody::RigidBodyType rbType, float _mass, Vector3 _dim, Vector3 _pos, Vector4 rotation, std::string bodyMeshName, bool isConvex, bool isKinematic, bool useGravity) {
 	btCollisionShape* rbShape = createBodyShape(rbType, _dim, bodyMeshName, isConvex);
 
 
 	btTransform groundTransform;
 	groundTransform.setIdentity();
 	groundTransform.setOrigin(btVector3(_pos.GetX(), _pos.GetY(), _pos.GetZ()));
+	btQuaternion quat = btQuaternion(rotation.x, rotation.y, rotation.z, rotation.w);
+	groundTransform.setRotation(quat);
 	btScalar mass(_mass);
 
 	btVector3 localInertia(0, 0, 0);
