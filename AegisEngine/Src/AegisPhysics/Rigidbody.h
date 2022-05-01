@@ -17,7 +17,7 @@ class RigidBody {
 public:
 	enum RigidBodyType { Box, Sphere, CapsuleX, CapsuleZ, Custom };
 
-	RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, float m = 1, bool useG = true, bool isK = false);
+	RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, Vector4 rotation, float m = 1, bool useG = true, bool isK = false);
 	void init();
 	~RigidBody();
 	//void fixedUpdate();
@@ -54,7 +54,7 @@ protected:
 	std::vector<bool> freezePosition;
 	std::vector<bool> freezeRotation;
 
-	void createRigidBodyComponent(RigidBodyType rbType, Vector3 pos, Vector3 scale, std::string bodyMeshName = "", bool isConvex = true);
+	void createRigidBodyComponent(RigidBodyType rbType, Vector3 pos, Vector3 scale, Vector4 rotation, std::string bodyMeshName = "", bool isConvex = true);
 };
 
 #endif // ! RIGIDBODY_H
