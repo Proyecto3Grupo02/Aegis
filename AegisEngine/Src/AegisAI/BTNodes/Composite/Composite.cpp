@@ -1,5 +1,4 @@
 #include "Composite.h"
-#include "../../BTUtils/AIAgent.h"
 Composite::Composite():
 	BTNode()
 {

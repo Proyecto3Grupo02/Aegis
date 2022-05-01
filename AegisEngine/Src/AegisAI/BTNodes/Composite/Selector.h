@@ -8,4 +8,6 @@ public:
 	~Selector();
 
 	BTNodeStatus OnExecute(AIAgent agent) override;
+private:
+	int mIndex_;
 };

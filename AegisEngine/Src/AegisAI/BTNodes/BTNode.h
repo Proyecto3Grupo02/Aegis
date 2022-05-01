@@ -17,6 +17,7 @@ public:
     virtual void OnReset()=0;
     virtual void OnEnter(AIAgent agent) = 0;
     virtual void OnExit(AIAgent agent) = 0;
+    virtual BTNodeStatus OnExecute(AIAgent agent) = 0;
 
     virtual BTNodeStatus Run(AIAgent agent) =0;
 

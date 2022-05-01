@@ -3,7 +3,6 @@
 #define _COMPOSITE
 #include "../BTNode.h"
 #include <list>
-class AIAgent;
 class Composite: public BTNode {
 public:
 	Composite();
@@ -21,7 +20,7 @@ public:
 	void OnStart(AIAgent agent) override;
 
 
-	virtual BTNodeStatus OnExecute (AIAgent agent);
+	virtual BTNodeStatus OnExecute (AIAgent agent) override;
 
 
 protected:
