@@ -9,6 +9,7 @@ function table.GetNew(entity, params)
     local w; local a; local s; local d; local fishing;
     data.initPos = transform.position;
     data.camera = "mainCam";
+    data.bait = "Bait"; --ANZUELO------------------
     local cameraTf = nil;
 
     function Init()
@@ -19,6 +20,7 @@ function table.GetNew(entity, params)
         d=false;
         fishing = false;
         data.camera.transform:SetParent(entity)
+        data.bait.transform:SetParent(entity) --ANZUELO------------------
         cameraTf=data.camera.transform;
      end;
 

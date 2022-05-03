@@ -34,7 +34,8 @@ local scene = {
 				type = "CharacterMovement",
 				data = 
 				{
-					camera = "@MainCamera"
+					camera = "@MainCamera",
+					bait = "@Anzuelo"
 				}			
 			}
 		}
@@ -61,7 +62,7 @@ local scene = {
 			{
 				type = "Bait",
 				data={
-					player = "@Player"
+			--		player = "@Player"
 				}					
 			}
 		}

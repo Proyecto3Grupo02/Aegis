@@ -6,11 +6,11 @@ function table.GetNew(entity, params)
 	local transform = entity.transform;
     local funcs = component.funcs;
     local renderer = component.entity:GetComponent("Renderer").type;
-    data.player = "player";
+    --data.player = "player";
     function Init()
         local meshRenderer = component.entity:GetComponent("Renderer").type;
         -- renderer.visible=false;
-       
+      --  data.player.transform:SetParent(entity)
      end;
 
 	function Update(deltaTime)
