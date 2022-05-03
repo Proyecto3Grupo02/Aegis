@@ -3,28 +3,36 @@
 #ifndef _WAIT
 #define _WAIT
 
+#include <OgreTimer.h>
 #include "../BTNode.h"
 #include "Action.h"
 
 class AIAgent;
 
+// Wait is a node that waits for x ms and then executes a node
 class Wait : public Action
 {
+
 private:
-    float mDuration;
-    float mStartTime;
+    Ogre::Real mDuration;
+    Ogre::Real mStartTime;
+
 public:
-    Wait(/* args */){};
+    Wait(Ogre::Real waitTime){ mDuration = waitTime; };
     ~Wait() = default;
 
     virtual BTNodeStatus Run(AIAgent agent);
-    virtual void OnEnter(AIAgent agent){ mStartTime = Time.time; }
+    virtual void OnEnter(AIAgent agent){ 
+        mStartTime = Ogre::Timer::getMiliseconds();
+    };
 
+    // Failure is not an option; You either running or succeding
     virtual BTNodeStatus OnExecute(AIAgent agent){
-        float duration = 0;
-        if(Time.time < mStartTime + mDuration)
+        Ogre::Real duration = 0;
+        if(Ogre::Timer::getMiliseconds() < mStartTime + mDuration)
             return BTNodeStatus::Running;
-        return BTNodeStatus::Success;
+        else
+            return BTNodeStatus::Success;
     };
 };
 
