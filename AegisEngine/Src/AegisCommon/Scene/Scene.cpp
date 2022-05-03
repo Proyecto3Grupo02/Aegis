@@ -17,7 +17,6 @@ void Scene::InitEntities()
 		entity->init();
 	}
 
-	mCanvas_->Init();
 
 	uninitializedEntities->clear();
 }

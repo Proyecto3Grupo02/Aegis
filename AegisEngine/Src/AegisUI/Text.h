@@ -1,11 +1,10 @@
 #pragma once
 #include "Texture.h"
 #include "Font.h"
-class Text :
-	public Texture
+class Text : public Texture
 {
 public:
-	Text(SDL_Renderer* rend);
+	
 	Text(SDL_Renderer* rend, std::string text, Font* font, int longText);
 	void createText(Font* font, std::string text);
 

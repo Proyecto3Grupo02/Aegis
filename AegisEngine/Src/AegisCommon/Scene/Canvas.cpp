@@ -13,17 +13,13 @@ Canvas::~Canvas()
 
 }
 
-void Canvas::Init() {
-	UIElement* elem = new UIElement(this, Vector2());
-	//elem->addComponent<Image>("../Assets/Textures/panelfondo.png", 150,150);
-}
-
 void Canvas::render()
 {
 	SDL_RenderClear(ogreWrapper->getRenderer());
-
-	for (auto* elem : *mElems_) {
-		elem->render();
+	if (!mElems_->empty()) {
+		for (auto* elem : *mElems_) {
+			elem->render();
+		}
 	}
 
 	SDL_RenderPresent(ogreWrapper->getRenderer());

@@ -5,7 +5,7 @@
 #include "../Components/UIComponent.h"
 
 class RectTransform;
-class Scene;
+class Canvas;
 struct Vector2;
 struct UIElement: 
     public ILuaObject
@@ -52,6 +52,6 @@ public:
     void setName(std::string name);
 
     inline Canvas* getCanvas() const { return mCanvas_; }
-    inline void setCanvas(Canvas* canvas) { mCanvas_ = canvas; }
+    inline void setCanvas( Canvas* canvas) { mCanvas_ = canvas; }
 };
 

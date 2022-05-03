@@ -1,8 +1,6 @@
 #include "Text.h"
 
-Text::Text(SDL_Renderer* rend) : Texture(rend)
-{
-}
+
 
 Text::Text(SDL_Renderer* rend, std::string text, Font* font, int longText) : Texture(rend), text_(text), font_(font), longText_(longText)
 {

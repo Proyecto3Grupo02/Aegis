@@ -4,7 +4,7 @@
 #include "../Components/RectTransform.h"
 #include "../Entity/Canvas.h"
 UIElement::UIElement(Canvas* scene, Vector2 pos):
-	mScene_(scene)
+	mCanvas_(scene)
 {
 	mTransform_ = new RectTransform(this, pos, Vector2(1,1),0);
 	this->addComponentFromLua(mTransform_);

@@ -8,7 +8,7 @@
 struct UIElement;
 class OgreWrapper;
 
-class Canvas: public ILuaObject, public IInitializable
+class Canvas: public ILuaObject
 {
 private:
 	OgreWrapper* ogreWrapper;
@@ -18,9 +18,9 @@ public:
     Canvas(OgreWrapper* wrap);
     ~Canvas();
 
-    void Init() override;
+   
     void render();
-    void update();
+    
 
     void OnClickDown();
     void OnClickUp();
