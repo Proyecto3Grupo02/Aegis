@@ -7,8 +7,11 @@ function table.GetNew(entity, params)
     local funcs = component.funcs;
 	local rigidbody;
 	local canRoot;
+	local ray;
 	local root;
 	local acumulatedDT;
+	local acumulatedRay;
+	local cooldown = 5; 
 	
     function Init() 
         rigidbody = component.entity:GetComponent("Rigidbody").type;
@@ -16,6 +19,7 @@ function table.GetNew(entity, params)
 		lastTime=0;
 		acumulatedDT=0;
 		root = 0;	
+		ray = 0;
     end;
 	function Update(deltaTime) 
 		if acumulatedDT > lastTime + 1 then
@@ -23,6 +27,11 @@ function table.GetNew(entity, params)
 			root = math.random(-10,10);
 			lastTime = acumulatedDT;		
 		end;
+		if acumulatedRay > cooldown then
+			ray = true;
+			acumulatedRay = 0;
+		end;
+		acumulatedRay = acumulatedRay + deltaTime;
 		acumulatedDT = acumulatedDT + deltaTime;
 	end;
     
@@ -35,7 +44,7 @@ function table.GetNew(entity, params)
 			canRoot=false;
 		end;
 		--comprobacion de colision
-		if rigidbody:RaycastWorld(transform:GetForward()) then
+		if rigidbody:RaycastWorld(transform:GetForward()) and ray then
 			local random; random = rand() % 3; 
 			while (random == 1) do random = math:random(0,3); random= random - 1; end;
 			rigidbody->addTorque({ 0,float(random),0 });
