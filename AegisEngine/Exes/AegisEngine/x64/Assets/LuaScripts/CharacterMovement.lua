@@ -6,12 +6,13 @@ function table.GetNew(entity, params)
 	local transform = entity.transform;
     local funcs = component.funcs;
     local rigidbody;
+    local offset;
     local w; local a; local s; local d; local fishing;
     data.initPos = transform.position;
     data.camera = "mainCam";
     data.bait = "Bait"; --ANZUELO------------------
     local cameraTf = nil;
-    local tuputamadre
+    local forward
 
     function Init()
         rigidbody = component.entity:GetComponent("Rigidbody").type;
@@ -20,18 +21,13 @@ function table.GetNew(entity, params)
         s=false;
         d=false;
         fishing = false;
+        offset = Aegis.Maths.Vector3(0,1,-1)
         --data.camera.transform:SetParent(entity)
         data.bait.transform:SetParent(entity) --ANZUELO------------------
         cameraTf=data.camera.transform;
-        tuputamadre = cameraTf.forward;
-
      end;
 
 	function Update(deltaTime)
-        tuputamadre.y=0;
-        tuputamadre.x=60.0;
-        print(tuputamadre.x)
-
         cameraTf = data.camera.transform
         cameraTf.position = entity.transform.position
         if(Input:KeyWasPressed("Space"))then
@@ -61,6 +57,8 @@ function table.GetNew(entity, params)
         local force = 10;
         local targetSpeed = 100;
         local maxAcceleration = 50;
+        forward = cameraTf.forward;
+        forward.y = 0;
         if(fishing)then
             rigidbody:AccelerateTo(transform.forward*0, maxAcceleration);
         else
