@@ -13,8 +13,8 @@ local scene = {
 	},
 	{
 		type = "Entity",
-		name = "Cubo",
-		position = {x = -5, y = 2},
+		name = "Player",
+		position = {x = -5, y = -30},
 		components = {
 			{
 				type = "Renderer",
@@ -36,6 +36,33 @@ local scene = {
 				{
 					camera = "@MainCamera"
 				}			
+			}
+		}
+	},
+	{
+		type = "Entity",
+		name = "Anzuelo",
+		position = {x = -5, y = 3},
+		components = {
+			{
+				type = "Renderer",
+				data = {
+					mesh = "Cube.mesh",
+					material= "green"
+				}
+			},
+			{
+				type = "Rigidbody",
+				data = 
+				{
+					-- useGravity = false,
+				}
+			},
+			{
+				type = "Bait",
+				data={
+					player = "@Player"
+				}					
 			}
 		}
 	},
@@ -74,7 +101,7 @@ local scene = {
 				type = "DestroyTest",
 				data =
 				{
-					child = "@Cubo"
+					child = "@Player"
 				}
 			}
 		}

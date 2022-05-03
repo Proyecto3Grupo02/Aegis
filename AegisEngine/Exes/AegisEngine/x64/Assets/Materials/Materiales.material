@@ -82,3 +82,14 @@ material yellow // nombre
 		}
 	}
 }
+
+material green // nombre
+{
+	technique // al menos una
+	{
+		pass // al menos uno
+		{
+			diffuse 0.0 1.0 0.0
+		}
+	}
+}
