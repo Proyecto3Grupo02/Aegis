@@ -12,7 +12,7 @@ function table.GetNew(entity, params)
 	
     function Init() 
         rigidbody = component.entity:GetComponent("Rigidbody").type;
-		rigidbody:changeGravity(Aegis.Maths.Vector3(0,0,0));
+		rigidbody:ChangeGravity(Aegis.Maths.Vector3(0,0,0));
 		lastTime=0;
 		acumulatedDT=0;
 		root = 0;	
@@ -33,6 +33,12 @@ function table.GetNew(entity, params)
 		if canRoot then
 			rigidbody:AddTorque(Aegis.Maths.Vector3(0,root,0));
 			canRoot=false;
+		end;
+		--comprobacion de colision
+		if rigidbody:RaycastWorld(transform:GetForward()) then
+			local random; random = rand() % 3; 
+			while (random == 1) do random = math:random(0,3); random= random - 1; end;
+			rigidbody->addTorque({ 0,float(random),0 });
 		end;
 	end;
 

@@ -10,7 +10,7 @@ RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, Rigid
 	freezePosition = std::vector<bool>(3, false);
 	freezeRotation = std::vector<bool>(3, false);
 	createRigidBodyComponent(RigidBodyType::Box, pos, scale, bodyMeshName); rbC = r;
-	if (t)rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+	//if (t)rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
 }
 
 void RigidBody::init() {
