@@ -13,6 +13,7 @@ public:
     BTNode(/* args */);
     virtual ~BTNode()=default;
 
+    // All behaviour nodes overload this methods 
     virtual void OnStart(AIAgent agent)=0;
     virtual void OnReset()=0;
     virtual void OnEnter(AIAgent agent) = 0;

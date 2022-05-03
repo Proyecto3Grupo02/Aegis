@@ -1,6 +1,11 @@
 #pragma once
+#ifndef _ACTION
+#define _ACTION
+
 #include "../BTNode.h"
+
 class AIAgent;
+
 class Action: public BTNode
 {
 private:
@@ -11,6 +16,5 @@ public:
 
     virtual BTNodeStatus Run(AIAgent agent);
     
-
 };
-
+#endif
