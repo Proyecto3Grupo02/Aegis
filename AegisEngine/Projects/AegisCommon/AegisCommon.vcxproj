@@ -87,7 +87,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencias\fmod\inc;$(SolutionDir)Dependencias\Ogre\build\Components;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)\Dependencias\lua\src\include;$(SolutionDir)\Dependencias\LuaBridge;%(AdditionalIncludeDirectories);$(SolutionDir)\Dependencias;$(SolutionDir)\Dependencias\Libraries</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencias\fmod\inc;$(SolutionDir)Dependencias\Ogre\build\Components;$(SolutionDir)Dependencias\Ogre\build\include\SDL2;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)\Dependencias\lua\src\include;$(SolutionDir)\Dependencias\LuaBridge;%(AdditionalIncludeDirectories);$(SolutionDir)\Dependencias\Libraries</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
