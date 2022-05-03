@@ -204,6 +204,12 @@ namespace MathUtils
 		return result;
 	}
 
+	static Vector4 EulerToVec4(const Vector3& degreesVector) {
+		Ogre::Quaternion aux = EulerToOgreQuat(degreesVector);
+		Vector4 result = Vector4(aux.x, aux.y, aux.z, aux.w);
+		return result;
+	}
+
 	static Vector3 RotateVector3ByQuaternion(Ogre::Quaternion q, const Vector3& v)
 	{
 		// Using quaternions is easier to understand but uses way more CPU

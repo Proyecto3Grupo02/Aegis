@@ -13,6 +13,10 @@ function table.GetNew(entity, params)
     data.bait = "Bait"; --ANZUELO------------------
     local cameraTf = nil;
     local forward
+    data.targetRotation = transform.localEulerAngles;
+    data.senstivity = 4;
+    data.smoothStep = 1;
+
 
     function Init()
         rigidbody = component.entity:GetComponent("Rigidbody").type;
@@ -26,6 +30,7 @@ function table.GetNew(entity, params)
         data.bait.transform:SetParent(entity) --ANZUELO------------------
         cameraTf=data.camera.transform;
         forward = cameraTf.forward;
+        data.targetRotation = transform.localEulerAngles;
      end;
 
 	function Update(deltaTime)
@@ -50,8 +55,7 @@ function table.GetNew(entity, params)
         end;
     end;
 
-    function LateUpdate(deltaTime)
-    end;
+    function LateUpdate(deltaTime) end;
 
 	function FixedUpdate() 
         -- print("Force Y Axis: " .. rigidbody:GetForce().y);
@@ -94,6 +98,7 @@ function table.GetNew(entity, params)
 	funcs.init = Init;
     funcs.update = Update;
     funcs.fixedUpdate = FixedUpdate;
+    funcs.lateUpdate = LateUpdate;
 	return component;
 end;
 return table;
