@@ -47,7 +47,7 @@ function table.GetNew(entity, params)
             end;
 
         -- Lerp current Rotation to target rotation
-        transform.localEulerAngles = Vector3Lerp(transform.localEulerAngles, data.targetRotation, deltaTime * data.smoothStep);
+        transform.localEulerAngles = Aegis.Maths.Vector3Lerp(transform.localEulerAngles, data.targetRotation, deltaTime * data.smoothStep);
     end;
 	function FixedUpdate() end;
 	function OnCollision(other) end;

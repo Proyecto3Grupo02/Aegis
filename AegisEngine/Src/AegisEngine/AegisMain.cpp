@@ -34,6 +34,7 @@
 #include "../AegisCommon/Components/AnimationComponent.h"
 #include "../AegisCommon/Components/RigidbodyComponent.h"
 #include "../AegisCommon/Utils/Vector2.h"
+#include "../AegisCommon/Utils/LuaMaths.h"
 
 //using namespace luabridge;
 
@@ -159,7 +160,7 @@ void AegisMain::ConvertObjectToLua()
 	CameraComponent::ConvertToLua(state);
 	AnimationComponent::ConvertToLua(state);
 	RigidbodyComponent::ConvertToLua(state);
-	//MathUtils::ConvertToLua(state);
+	LuaMaths::ConvertToLua(state);
 
 	ExportToLua(sceneManager->GetCurrentScene(), "currentScene");
 	ExportToLua(Input(), "Input");

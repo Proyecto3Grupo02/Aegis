@@ -238,15 +238,4 @@ namespace MathUtils
 		return Vector3((vx * w2 + (y * vz - z * vy) * w + x * dot2), (vy * w2 + (z * vx - x * vz) * w + y * dot2),
 			(vz * w2 + (x * vy - y * vx) * w + z * dot2));
 	}
-
-	static void ConvertToLua(lua_State* state)
-	{
-		getGlobalNamespace(state).
-			beginNamespace("Aegis").
-			beginNamespace("Maths").
-			addFunction("Vector3Lerp", &MathUtils::Vector3Lerp).
-			endNamespace().
-			endNamespace().
-			endNamespace();
-	}
 }

@@ -183,6 +183,7 @@
     <ClInclude Include="..\..\Src\AegisCommon\Scene\Scene.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Animation.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Utils\GameLoopData.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Utils\LuaMaths.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Utils\MathUtils.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Quaternion.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Randomized.h" />
