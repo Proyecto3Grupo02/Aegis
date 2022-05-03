@@ -67,7 +67,8 @@ material blue // nombre
 	{
 		pass // al menos uno
 		{
-			diffuse 0.0 0.0 1.0
+			diffuse 0.0 0.39 0.9 0.5
+			scene_blend alpha_blend
 		}
 	}
 }
@@ -89,7 +90,48 @@ material green // nombre
 	{
 		pass // al menos uno
 		{
-			diffuse 0.0 1.0 0.0
+			diffuse 0.0 1.0 0.0 
+		}
+	}
+}
+
+material mountain // nombre
+{
+	technique // al menos una
+	{
+		pass // al menos uno
+		{
+			diffuse 0.63 0.5 0.38
+		}
+	}
+}
+
+material mountain2 // nombre
+{
+	technique // al menos una
+	{
+		pass // al menos uno
+		{
+			diffuse 0.42 0.23 0.16
+		}
+	}
+}
+
+
+material grass // nombre
+{
+	technique // al menos una
+	{
+		pass // al menos uno
+		{
+			diffuse 0.5 0.5 0.5
+			//diffuse vertexcolour
+
+			texture_unit
+			{
+				texture hierba.jpg
+				//colour_op modulate
+			}
 		}
 	}
 }

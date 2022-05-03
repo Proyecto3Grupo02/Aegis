@@ -96,7 +96,7 @@ local scene = {
 				type = "Renderer",
 				data = {
 					mesh = "Lago.mesh",
-					material= "red"
+					material= "mountain"
 				}
 			},
 			{
