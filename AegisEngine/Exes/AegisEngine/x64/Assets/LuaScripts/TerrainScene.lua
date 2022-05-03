@@ -43,7 +43,7 @@ local scene = {
 	{
 		type = "Entity",
 		name = "Anzuelo",
-		position = {x = 1, y = 0, Z =0},
+		position = {x = -5, y = -30},
 		scale = {x=0.2, y=0.2, z=0.2},
 		components = {
 			{
@@ -53,17 +53,17 @@ local scene = {
 					material= "green"
 				}
 			},
-			{
-				type = "Rigidbody",
-				data = 
-				{
-					useGravity = false,
-				}
-			},
+			-- {
+			-- 	type = "Rigidbody",
+			-- 	data = 
+			-- 	{
+			-- 		useGravity = false,
+			-- 	}
+			-- },
 			{
 				type = "Bait",
 				data={
-			--		player = "@Player"
+					player = "@Player"
 				}					
 			}
 		}

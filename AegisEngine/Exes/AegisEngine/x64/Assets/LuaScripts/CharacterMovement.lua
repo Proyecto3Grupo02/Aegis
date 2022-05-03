@@ -21,23 +21,25 @@ function table.GetNew(entity, params)
         s=false;
         d=false;
         fishing = false;
-        offset = Aegis.Maths.Vector3(0,1,-1)
+        offset = Aegis.Maths.Vector3(0, 5,10)
         --data.camera.transform:SetParent(entity)
         data.bait.transform:SetParent(entity) --ANZUELO------------------
         cameraTf=data.camera.transform;
+        forward = cameraTf.forward;
      end;
 
 	function Update(deltaTime)
         cameraTf = data.camera.transform
-        cameraTf.position = entity.transform.position
         if(Input:KeyWasPressed("Space"))then
             fishing = not fishing;
             print(fishing)
         end;
         if (fishing)then
+            cameraTf.position = entity.transform.position
             w=false; a=false; s=false; d=false;
             return;
         end;
+        cameraTf.position= entity.transform.position +offset;
         w = Input:IsKeyDown("w");
         a = Input:IsKeyDown("a");
         s = Input:IsKeyDown("s");
