@@ -5,11 +5,11 @@ local scene = {
 	{
 		type = "MainCamera",
 		position = { z = 10, y = 3  },
-		components = {
-			{
-				type = "CameraTest"
-			}
-		}
+		-- components = {
+		-- 	{
+		-- 		type = "CameraTest"
+		-- 	}
+		-- }
 	},
 	{
 		type = "Entity",

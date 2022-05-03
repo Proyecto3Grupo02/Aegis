@@ -7,7 +7,7 @@ function table.GetNew(entity, params)
     local funcs = component.funcs;
     local rigidbody;
     data.child = "Undefined";
-    data.senstivity = 40;
+    data.senstivity = 0.5;
     data.smoothStep = 10;
     data.targetRotation = transform.localEulerAngles;
 
@@ -25,12 +25,12 @@ function table.GetNew(entity, params)
             local y = mouseMotion.y * data.senstivity;
             local x = mouseMotion.x * data.senstivity;
             --transform.localEulerAngles =  transform.localEulerAngles - Aegis.Maths.Vector3(y, x, 0);
-            data.targetRotation = transform.localEulerAngles -  Aegis.Maths.Vector3(y, x, 0);
+            data.targetRotation = transform.localEulerAngles -  Aegis.Maths.Vector3(x, y, 0);
 
             print("MyfixedUpdate: Mouse X: " .. data.targetRotation.x .. " Mouse Y: " .. data.targetRotation.y);
         end;
         -- Lerp current Rotation to target rotation
-        rigidbody:SetRotationEuler(Aegis.Maths.Vector3(0, 45, 0));
+        rigidbody:SetRotationEuler(Aegis.Maths.Vector3(0, data.targetRotation.x, 0));
     end;
 	function OnCollision(other) end;
 	function OnTrigger(other) end;
