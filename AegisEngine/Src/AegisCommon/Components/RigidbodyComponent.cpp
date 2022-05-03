@@ -4,12 +4,12 @@
 #include <Scene.h>
 #include "../Utils/GameLoopData.h"
 
-RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m, bool useG, bool isK)
+RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m, bool useG, bool isK, bool ray)
 	: AegisComponent("Rigidbody", ent)
 {
 	transform = ent->GetTransform();
 	initialPos = transform->GetPosition();
-	rigidbody = new RigidBody(bodyMeshName, transform->GetPosition(), transform->GetScale(),this, m, useG, isK);
+	rigidbody = new RigidBody(bodyMeshName, transform->GetPosition(), transform->GetScale(),this, m, useG, isK, ray);
 	mEntity_->getScene()->AddPhysicsEntity(this);
 
 	SetDataAsInnerType(this);
@@ -23,7 +23,13 @@ RigidbodyComponent::~RigidbodyComponent()
 
 void RigidbodyComponent::lateUpdate(float deltaTime) {}
 
-void RigidbodyComponent::fixedUpdate() {}
+void RigidbodyComponent::fixedUpdate() {	
+	if (rigidbody->RaycastWorld(transform->GetForward())) {
+		std::cout << "a";
+		int random; random = rand() % 3; while (random == 1) random = rand() % 3; random--; random *= 20;
+		rigidbody->addTorque({ 0,float(random),0 });
+	}
+}
 
 void RigidbodyComponent::SyncToTransform()
 {
@@ -81,7 +87,7 @@ RigidbodyComponent* CreateRigidbody(Entity* ent, LuaRef args) //Doesn't belong t
 	float mass = LuaMngr()->ParseFloat(args["mass"], 1);
 	bool useGravity = LuaMngr()->ParseBool(args["useGravity"], true);
 	bool isKinematic = LuaMngr()->ParseBool(args["isKinematic"], false);
-
+	bool needRaycast = LuaMngr()->ParseBool(args["needRaycast"], false);
 	return new RigidbodyComponent(ent, bodyName, mass, useGravity, isKinematic);
 }
 
@@ -98,8 +104,14 @@ void RigidbodyComponent::ConvertToLua(lua_State* state)
 					addFunction("AccelerateTo", &RigidbodyComponent::AccelerateTo).
 					addFunction("AddTorque", &RigidbodyComponent::AddTorque).
 					addFunction("AddForceForward", &RigidbodyComponent::AddForceForward).
+					addFunction("changeGravity", &RigidbodyComponent::changeGravity).
 					addProperty("isActive", &RigidbodyComponent::isActive).
 				endClass().
 			endNamespace().
 		endNamespace();
+}
+
+void RigidbodyComponent::changeGravity(Vector3 acc)
+{
+	rigidbody->changeGravity(acc);
 }

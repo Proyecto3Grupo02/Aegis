@@ -40,12 +40,15 @@ public:
 	void setRbPosition(Vector3 vec);
 	void setRbRotation(Vector4 vec);
 	void setFreezeRotation(bool _x, bool _y, bool _z);
+	bool RaycastWorld(Vector3);
 
 	//FORCES---------------------------------
 	void addForce(Vector3 vec);
 	Vector3 AccelerateTo(Vector3 targetVelocity, float deltaTime, float maxAcceleration);
 	void addTorque(Vector3 vec);
 	void clearForces();
+	
+	void changeGravity(Vector3);
 	//RigidbodyComponent* rbC;
 
 protected:

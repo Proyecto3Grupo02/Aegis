@@ -2,6 +2,7 @@
 #include "PhysicsMain.h"
 #include "Vector4.h"
 #include <btBulletDynamicsCommon.h>
+#include <btBulletCollisionCommon.h>
 //#include "../checkML.h"
 
 RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, RigidbodyComponent* r, float m, bool useG, bool isK, bool t) :
@@ -103,6 +104,22 @@ void RigidBody::setFreezeRotation(bool _x, bool _y, bool _z)
 	freezeRotation[2] = _z;
 }
 
+bool RigidBody::RaycastWorld(Vector3 f) {
+	btTransform aux; btVector3 forward = Physics()->parseToBulletVector(f);
+	btVector3 posAct; rigidBody->getMotionState()->getWorldTransform(aux); posAct = aux.getOrigin();
+		btCollisionWorld::ClosestRayResultCallback RayCallback(posAct, posAct + forward*10);
+		
+		// Perform raycast
+		Physics()->dynamicsWorld->rayTest(posAct, posAct + forward * 10, RayCallback);
+		if (RayCallback.hasHit()) {
+
+			return true;
+		}
+	
+		return false;
+	//return false;
+}
+
 void RigidBody::setRbPosition(Vector3 vec)
 {
 	btTransform t = Physics()->parseToBulletTransform(vec, getRotation());
@@ -147,6 +164,11 @@ void RigidBody::addTorque(Vector3 vec)
 void RigidBody::clearForces()
 {
 	rigidBody->clearForces();
+}
+
+void RigidBody::changeGravity(Vector3 acc)
+{
+	rigidBody->setGravity(Physics()->parseToBulletVector(acc));
 }
 
 

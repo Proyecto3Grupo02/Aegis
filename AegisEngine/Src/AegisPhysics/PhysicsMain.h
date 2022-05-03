@@ -26,7 +26,7 @@ class RigidbodyComponent;
 class PhysicsSystem  : public  Singleton<PhysicsSystem>{
 
 private:
-    btDiscreteDynamicsWorld* dynamicsWorld;
+    //btDiscreteDynamicsWorld* dynamicsWorld;
     btDefaultCollisionConfiguration* collisionConfiguration;
     btCollisionDispatcher* dispatcher;
     btBroadphaseInterface* overlappingPairCache;
@@ -39,7 +39,7 @@ public:
     PhysicsSystem();
     ~PhysicsSystem();
 
-    
+    btDiscreteDynamicsWorld* dynamicsWorld;
     void Init();
     void update(float deltaTime, float timeStep, int maxSteps = 1);
     void remove();

@@ -14,7 +14,7 @@ class Entity;
 class RigidbodyComponent : public AegisComponent, public ILuaObject
 {
 public:
-	RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m = 1, bool useG = true, bool isK = false);
+	RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m = 1, bool useG = true, bool isK = false, bool ray= false);
 	virtual ~RigidbodyComponent();
 
 	virtual void init() override {};
@@ -44,7 +44,7 @@ public:
 
 	//LUA------------
 	static void ConvertToLua(lua_State* state);
-
+	void changeGravity(Vector3 acc);
 	friend class PhysicsSystem;
 
 private:
@@ -53,6 +53,9 @@ private:
 	RigidBody* rigidbody = nullptr;
 	Transform* transform = nullptr;
 	std::list<RigidbodyComponent*>::iterator physicsEntityIt;
+
+	int cooldown = 3000;
+
 };
 
 #endif // ! RIGIDBODY_H

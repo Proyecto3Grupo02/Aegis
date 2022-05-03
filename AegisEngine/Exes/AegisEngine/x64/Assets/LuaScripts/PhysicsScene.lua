@@ -4,7 +4,8 @@ local NAME = "PhysicsScene";
 local scene = {
 	{
 		type = "MainCamera",
-		position = { z = 10 },
+		position = { x = 10 , z = 20, y = 5 },
+		rotation = {y = 45},
 		components = 
 		{
 			{
@@ -39,7 +40,79 @@ local scene = {
 	{
 		type = "Entity",
 		name = "Cubo2",
-		position = { y = 2, x = 2},
+		position = { y = -2, x = -2},
+		scale = { x = 0.5, y = 0.5, z = 0.5 },
+		components = {
+			{
+				type = "Renderer",
+				data = {
+					mesh = "Cube.mesh",
+					material= "yellow"
+				}
+			},
+			{
+				type = "Rigidbody",
+			},
+		}
+	},
+	{
+		type = "Entity",
+		name = "Cubo3",
+		position = { y = -2, x = 2},
+		scale = { x = 0.5, y = 0.5, z = 0.5 },
+		components = {
+			{
+				type = "Renderer",
+				data = {
+					mesh = "Cube.mesh",
+					material= "yellow"
+				}
+			},
+			{
+				type = "Rigidbody",
+			},
+		}
+	},
+	{
+		type = "Entity",
+		name = "Cubo3",
+		position = { y = 2, x = -2},
+		scale = { x = 0.5, y = 0.5, z = 0.5 },
+		components = {
+			{
+				type = "Renderer",
+				data = {
+					mesh = "Cube.mesh",
+					material= "yellow"
+				}
+			},
+			{
+				type = "Rigidbody",
+			},
+		}
+	},
+	{
+		type = "Entity",
+		name = "Cubo4",
+		position = { y = 3, x = -1},
+		scale = { x = 0.5, y = 0.5, z = 0.5 },
+		components = {
+			{
+				type = "Renderer",
+				data = {
+					mesh = "Cube.mesh",
+					material= "yellow"
+				}
+			},
+			{
+				type = "Rigidbody",
+			},
+		}
+	},
+	{
+		type = "Entity",
+		name = "Cubo5",
+		position = { y = -3, x = -1},
 		scale = { x = 0.5, y = 0.5, z = 0.5 },
 		components = {
 			{
@@ -58,7 +131,7 @@ local scene = {
 		type = "Entity",
 		name = "Suelo",
 		position = { y = -2 },
-		scale = { x = 50, y = 0.1, z = 50},
+		scale = { x = 50, y = 1, z = 50},
 		components = {
 			{
 				type = "Renderer",
@@ -114,7 +187,10 @@ local scene = {
 					}
 			},
 			{
-				type = "Rigidbody"
+				type = "Rigidbody",
+				data = {
+					needRaycast = true
+				}
 			},
 			{
 				type = "RandomMovement"

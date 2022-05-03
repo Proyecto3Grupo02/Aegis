@@ -12,6 +12,7 @@ function table.GetNew(entity, params)
 	
     function Init() 
         rigidbody = component.entity:GetComponent("Rigidbody").type;
+		rigidbody:changeGravity(Aegis.Maths.Vector3(0,0,0));
 		lastTime=0;
 		acumulatedDT=0;
 		root = 0;	
