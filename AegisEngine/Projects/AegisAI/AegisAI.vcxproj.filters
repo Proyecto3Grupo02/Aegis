@@ -37,6 +37,9 @@
     <Filter Include="Archivos de origen\Actions">
       <UniqueIdentifier>{71b5ea09-6123-410a-bdf3-1cb97af6a830}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de origen\Decorators">
+      <UniqueIdentifier>{90b4cac7-2522-4ca3-928a-3615966f2542}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\AegisAI\BTUtils\AIAgent.cpp">
@@ -59,6 +62,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\AegisAI\BTNodes\Actions\Action.cpp">
       <Filter>Archivos de origen\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AegisAI\BTNodes\Decorators\RepeaterForever.cpp">
+      <Filter>Archivos de origen\Decorators</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AegisAI\BTNodes\Decorators\Decorator.cpp">
+      <Filter>Archivos de origen\Decorators</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +94,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\AegisAI\BTNodes\Actions\Action.h">
       <Filter>Archivos de encabezado\BTNodes\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisAI\BTNodes\Decorators\Decorator.h">
+      <Filter>Archivos de encabezado\BTNodes\Decorators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisAI\BTNodes\Decorators\RepeaterForever.h">
+      <Filter>Archivos de encabezado\BTNodes\Decorators</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

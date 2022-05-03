@@ -138,7 +138,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)Dependencias\Ogre\build\include\SDL2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)Dependencias\Ogre\build\include\SDL2;$(SolutionDir)\Dependencias\Libraries;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -153,11 +153,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\AegisUI\Font.cpp" />
+    <ClCompile Include="..\..\Src\AegisUI\ImageResources.cpp" />
     <ClCompile Include="..\..\Src\AegisUI\Text.cpp" />
     <ClCompile Include="..\..\Src\AegisUI\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AegisUI\Font.h" />
+    <ClInclude Include="..\..\Src\AegisUI\ImageResources.h" />
     <ClInclude Include="..\..\Src\AegisUI\SDL_image.h" />
     <ClInclude Include="..\..\Src\AegisUI\SDL_ttf.h" />
     <ClInclude Include="..\..\Src\AegisUI\Text.h" />

@@ -24,6 +24,9 @@
     <ClCompile Include="..\..\Src\AegisUI\Text.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\AegisUI\ImageResources.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AegisUI\Texture.h">
@@ -39,6 +42,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AegisUI\Text.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisUI\ImageResources.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

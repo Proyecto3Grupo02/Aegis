@@ -22,7 +22,7 @@ public:
 
     virtual BTNodeStatus Run(AIAgent agent) =0;
 
-    
+    BTNodeStatus getStatus() const { return mStatus_; }
 
 };
 

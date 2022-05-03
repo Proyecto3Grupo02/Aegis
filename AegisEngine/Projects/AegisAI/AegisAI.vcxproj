@@ -147,6 +147,8 @@
     <ClCompile Include="..\..\Src\AegisAI\BTNodes\Composite\Composite.cpp" />
     <ClCompile Include="..\..\Src\AegisAI\BTNodes\Composite\Selector.cpp" />
     <ClCompile Include="..\..\Src\AegisAI\BTNodes\Composite\Sequence.cpp" />
+    <ClCompile Include="..\..\Src\AegisAI\BTNodes\Decorators\Decorator.cpp" />
+    <ClCompile Include="..\..\Src\AegisAI\BTNodes\Decorators\RepeaterForever.cpp" />
     <ClCompile Include="..\..\Src\AegisAI\BTUtils\AIAgent.cpp" />
     <ClCompile Include="..\..\Src\AegisAI\BTUtils\BTree.cpp" />
   </ItemGroup>
@@ -156,6 +158,8 @@
     <ClInclude Include="..\..\Src\AegisAI\BTNodes\Composite\Composite.h" />
     <ClInclude Include="..\..\Src\AegisAI\BTNodes\Composite\Selector.h" />
     <ClInclude Include="..\..\Src\AegisAI\BTNodes\Composite\Sequence.h" />
+    <ClInclude Include="..\..\Src\AegisAI\BTNodes\Decorators\Decorator.h" />
+    <ClInclude Include="..\..\Src\AegisAI\BTNodes\Decorators\RepeaterForever.h" />
     <ClInclude Include="..\..\Src\AegisAI\BTUtils\AIAgent.h" />
     <ClInclude Include="..\..\Src\AegisAI\BTUtils\BTNodeStatus.h" />
     <ClInclude Include="..\..\Src\AegisAI\BTUtils\BTree.h" />
