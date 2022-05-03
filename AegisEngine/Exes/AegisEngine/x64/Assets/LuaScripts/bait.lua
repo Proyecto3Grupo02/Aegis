@@ -8,12 +8,14 @@ function table.GetNew(entity, params)
     local renderer = component.entity:GetComponent("Renderer").type;
     --data.player = "player";
     function Init()
-        local meshRenderer = component.entity:GetComponent("Renderer").type;
-        -- renderer.visible=false;
-      --  data.player.transform:SetParent(entity)
+       renderer.visible=false;
      end;
 
 	function Update(deltaTime)
+        if Input:KeyWasPressed("Space")then
+            renderer.visible = not renderer.visible;
+        end;
+
         -- transform.position= data.player.position
     end;
 

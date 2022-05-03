@@ -27,7 +27,7 @@ local scene = {
 				type = "Rigidbody",
 				data = 
 				{
-					-- useGravity = false,
+					useGravity = false,
 				}
 			},
 			{
@@ -43,7 +43,8 @@ local scene = {
 	{
 		type = "Entity",
 		name = "Anzuelo",
-		position = {x = -5, y = 3},
+		position = {x = 1, y = 0, Z =0},
+		scale = {x=0.2, y=0.2, z=0.2},
 		components = {
 			{
 				type = "Renderer",
@@ -56,7 +57,7 @@ local scene = {
 				type = "Rigidbody",
 				data = 
 				{
-					-- useGravity = false,
+					useGravity = false,
 				}
 			},
 			{
@@ -76,7 +77,7 @@ local scene = {
 			{
 				type = "Renderer",
 				data = {
-					mesh = "Cube.mesh",
+					mesh = "fish.mesh",
 					material= "yellow"
 				}
 			},
@@ -155,7 +156,7 @@ local scene = {
 			{
 				type = "Renderer",
 				data = {
-						mesh = "Cube.mesh",
+						mesh = "fish.mesh",
 						material= "yellow"
 					}
 			},
