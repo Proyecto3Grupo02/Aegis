@@ -78,7 +78,7 @@ local scene = {
 				type = "Renderer",
 				data = {
 					mesh = "fish.mesh",
-					material= "yellow"
+					material= "pez"
 				}
 			},
 			{

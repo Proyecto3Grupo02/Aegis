@@ -67,7 +67,7 @@ material blue // nombre
 	{
 		pass // al menos uno
 		{
-			diffuse 0.0 0.39 0.9 0.5
+			diffuse 0.0 0.39 0.9 0.4
 			scene_blend alpha_blend
 		}
 	}
@@ -132,6 +132,17 @@ material grass // nombre
 				texture hierba.jpg
 				//colour_op modulate
 			}
+		}
+	}
+}
+
+material pez // nombre
+{
+	technique // al menos una
+	{
+		pass // al menos uno
+		{
+			diffuse 0.5 0.9 1.0
 		}
 	}
 }
