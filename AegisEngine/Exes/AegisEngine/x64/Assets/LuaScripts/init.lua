@@ -12,6 +12,6 @@ Vector3Lerp = function(start_value, end_value, t)
 end
 
 local utility = require "Utils";
-local testScene = require "UIScene";
+local testScene = require "TerrainScene";
 math.randomseed(os.time());
 utility.ParseScene(testScene);
