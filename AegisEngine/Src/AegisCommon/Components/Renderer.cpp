@@ -58,7 +58,7 @@ void Renderer::constructoraRenderer(Entity* _ent, std::string meshName, std::str
 {
 	mesh = sceneMng->createEntity(meshName);
 	mesh->setMaterialName(matName);
-
+	std::cout << matName << "\n";
 	node = getEntity()->getNode();
 	node->attachObject(mesh);
 	setRendering(ir);

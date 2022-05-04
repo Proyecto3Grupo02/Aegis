@@ -40,6 +40,7 @@ public:
 	//FORCES----------------------------------------
 	void AddForce(Vector3 force);
 	Vector3 AccelerateTo(Vector3 targetVelocity, float maxAcceleration = 1000000000000);
+	Vector3 AccelerateToRand();
 	void AddTorque(Vector3 torque);
 	void AddForceForward(float force);
 

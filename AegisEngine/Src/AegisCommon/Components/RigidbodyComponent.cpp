@@ -58,6 +58,12 @@ Vector3 RigidbodyComponent::AccelerateTo(Vector3 targetVelocity, float maxAccele
 	return rigidbody->AccelerateTo(targetVelocity, Time()->deltaTime, maxAcceleration);
 }
 
+Vector3 RigidbodyComponent::AccelerateToRand()
+{
+	Vector3 vec(rand() % 10, 0 ,rand() % 10);
+	return rigidbody->AccelerateTo(vec, Time()->deltaTime, 100000000000);
+}
+
 void RigidbodyComponent::AddForceForward(float force) {
 	Vector3 rot = transform->GetForward();
 	AddForce(rot * force);
@@ -104,6 +110,7 @@ void RigidbodyComponent::ConvertToLua(lua_State* state)
 					addFunction("AddForce", &RigidbodyComponent::AddForce).
 					addFunction("GetForce", &RigidbodyComponent::GetForce).
 					addFunction("AccelerateTo", &RigidbodyComponent::AccelerateTo).
+					addFunction("AccelerateToRand", &RigidbodyComponent::AccelerateToRand).
 					addFunction("AddTorque", &RigidbodyComponent::AddTorque).
 					addFunction("AddForceForward", &RigidbodyComponent::AddForceForward).
 					addFunction("ChangeGravity", &RigidbodyComponent::changeGravity).

@@ -17,6 +17,7 @@
 #include "../AegisGraphics/OgreWrapper.h"
 #include "../AegisPhysics/PhysicsMain.h"
 #include "GameLoopData.h"
+#include "LuaMaths.h"
 
 //using namespace luabridge;
 

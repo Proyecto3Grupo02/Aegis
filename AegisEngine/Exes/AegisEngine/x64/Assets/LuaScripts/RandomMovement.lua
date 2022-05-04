@@ -15,14 +15,14 @@ function table.GetNew(entity, params)
 	
     function Init() 
         rigidbody = component.entity:GetComponent("Rigidbody").type;
-		rigidbody:ChangeGravity(Aegis.Maths.Vector3(0,0,0));
 		lastTime=0;
 		acumulatedDT=0;
+		acumulatedRay=0;
 		root = 0;	
-		ray = 0;
+		ray = false;
     end;
 	function Update(deltaTime) 
-		if acumulatedDT > lastTime + 1 then
+		if acumulatedDT > lastTime + 3 then
 			canRoot=true;
 			root = math.random(-10,10);
 			lastTime = acumulatedDT;		
@@ -38,17 +38,20 @@ function table.GetNew(entity, params)
 	function LateUpdate(deltaTime)
 	end;
 	function FixedUpdate() 
-		rigidbody:AddForceForward(5);
+		--rigidbody:AccelerateTo(Aegis.Maths.Vector3(0,0,0), 0);
 		if canRoot then
-			rigidbody:AddTorque(Aegis.Maths.Vector3(0,root,0));
+			
+			rigidbody:AccelerateToRand();
+			--rigidbody:AddTorque(Aegis.Maths.Vector3(0,root,0));
 			canRoot=false;
 		end;
 		--comprobacion de colision
-		if ray and rigidbody:RaycastWorld(transform:GetForward())  then
-			local random; random = math:random(0,3); 
-			while (random == 1) do random = math:random(0,3); random= random - 1; end;
-			rigidbody:addTorque({ 0,float(random),0 });
-		end;
+		-- if ray and rigidbody:RayCastWorld()  then
+		-- 	ray = false;
+		-- 	local random; random = math:random(0,3); 
+		-- 	while (random == 1) do random = math:random(0,3); random= random - 1; end;
+		-- 	rigidbody:addTorque({ 0,float(random),0 });
+		-- end;
 	end;
 
 	function OnCollision(other) end;
