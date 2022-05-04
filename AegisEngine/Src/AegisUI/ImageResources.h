@@ -9,7 +9,6 @@
 #include <sys/stat.h>
 #include <filesystem>
 #include <map>
-#include "../AegisCommon/Managers/DebugManager.h"
 
 typedef std::string image;
 
@@ -17,7 +16,7 @@ class ImageResources
 {
 private:
     std::map<image,std::string> mapImage;
-    std::string route = "../Assets/Audios";
+    std::string route = "../Assets/Textures";
 public:
     ImageResources();
     ~ImageResources();

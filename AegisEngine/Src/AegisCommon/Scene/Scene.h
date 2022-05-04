@@ -125,6 +125,7 @@ public:
 	void UpdateScene(float dt);
 	
 	void Render();
+	void RenderUI();
 
 	Ogre::SceneNode* GetNewNode();
 	Ogre::SceneManager* GetOgreManager();

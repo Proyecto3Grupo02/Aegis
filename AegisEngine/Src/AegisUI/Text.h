@@ -20,5 +20,6 @@ public:
 protected:
 	std::string text_ = "";
 	Font* font_ = nullptr;
+
 	int longText_ = 10;
 };

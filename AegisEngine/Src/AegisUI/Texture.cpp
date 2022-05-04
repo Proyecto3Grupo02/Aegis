@@ -38,15 +38,15 @@ void Texture::cleanTexture() {
     }
 }
 
-void Texture::render(const SDL_Rect& rect, SDL_RendererFlip flip = SDL_FLIP_NONE) const
+void Texture::render(const SDL_Rect& rect, SDL_RendererFlip flip) const
 {
-    render(rect, 0, 0, 0, flip);
+    render(rect, flip);
 }
 
 void Texture::render(float posX, float posY, int widthMul, int heightMult, SDL_RendererFlip flip) const
 {
     SDL_Rect rect = { posX, posY, width * widthMul, height * heightMult };
-    render(rect, 0, 0, 0, flip);
+    render(rect, flip);
 }
 
 // SDL render

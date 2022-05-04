@@ -18,7 +18,7 @@ protected:
 	int nCols = 0, nRows = 0;       // number of rows and cols for tiled texture
 
 public:
-
+    Texture(SDL_Renderer* nRenderer): mRenderer(nRenderer){}
     Texture(SDL_Renderer* nRenderer, std::string filename,int cols,int rows) 
         : mRenderer(nRenderer) {  load(filename,cols,rows);   };
     ~Texture();

@@ -25,7 +25,7 @@ void Text::createText(Font* font, std::string text)
 			height = surface->h;
 			fWidth = width;
 			fHeight = height;
-			texture = SDL_CreateTextureFromSurface(renderer, surface);
+			mTexture = SDL_CreateTextureFromSurface(mRenderer, surface);
 			SDL_FreeSurface(surface);
 		}
 	}
