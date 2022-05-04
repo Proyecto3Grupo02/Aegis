@@ -14,13 +14,13 @@ local scene = {
 	{
 		type = "Entity",
 		name = "Player",
-		position = {x = -5, y = -30},
+		position = {x = -5, y = -50},
 		components = {
 			{
 				type = "Renderer",
 				data = {
 					mesh = "Cube.mesh",
-					material= "blue"
+					material= "playerMat"
 				}
 			},
 			{
@@ -43,7 +43,7 @@ local scene = {
 	{
 		type = "Entity",
 		name = "Anzuelo",
-		position = {x = 1, y = 0, Z =0},
+		position = {x = -5, y = -30},
 		scale = {x=0.2, y=0.2, z=0.2},
 		components = {
 			{
@@ -53,17 +53,17 @@ local scene = {
 					material= "green"
 				}
 			},
-			{
-				type = "Rigidbody",
-				data = 
-				{
-					useGravity = false,
-				}
-			},
+			-- {
+			-- 	type = "Rigidbody",
+			-- 	data = 
+			-- 	{
+			-- 		useGravity = false,
+			-- 	}
+			-- },
 			{
 				type = "Bait",
 				data={
-			--		player = "@Player"
+					player = "@Player"
 				}					
 			}
 		}
@@ -78,7 +78,7 @@ local scene = {
 				type = "Renderer",
 				data = {
 					mesh = "fish.mesh",
-					material= "yellow"
+					material= "pez"
 				}
 			},
 			{
@@ -96,7 +96,7 @@ local scene = {
 				type = "Renderer",
 				data = {
 					mesh = "Lago.mesh",
-					material= "red"
+					material= "mountain"
 				}
 			},
 			{
@@ -121,6 +121,63 @@ local scene = {
 					material= "blue"
 				}
 			},
+		}
+	},
+	{
+		type = "Entity",
+		name = "ParedFrontal",
+		position = { y = -50, z = 30 },
+		scale = { x = 100, y = 50, z = 5},
+		components = 
+		{
+			{
+				type = "Rigidbody",
+				data = 
+				{
+					isKinematic = true
+				}
+			}
+		}
+	},
+	{
+		type = "Entity",
+		name = "ParedLateral",
+		position = { y = -50, x = 30 },
+		scale = { x = 5, y = 50, z = 100},
+		components = 
+		{
+			{
+				type = "Rigidbody",
+				data = 
+				{
+					isKinematic = true
+				}
+			}
+		}
+	},
+	{
+		type = "Entity",
+		name = "ParedTrasera",
+		position = { y = -50, z = -30 },
+		scale = { x = 100, y = 50, z = 5},
+		components = 
+		{
+			{
+				type = "Rigidbody",
+				data = 
+				{
+					isKinematic = true
+				}
+			}
+		}
+	},
+	{
+		type = "Entity",
+		name = "ParedIzquierda",
+		position = { y = -50, x = -30 },
+		scale = { x = 5, y = 50, z = 100},
+		components = 
+		{
 			{
 				type = "Rigidbody",
 				data = 

@@ -49,11 +49,23 @@
     <Filter Include="Archivos de origen\Utils">
       <UniqueIdentifier>{735ab698-df16-4390-9f03-9e0ac6b8d8a7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de encabezado\Components\NativeComponents">
-      <UniqueIdentifier>{00f874f5-74ca-4a65-a60c-a6fb1cb1dab3}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Src\AegisCommon\Components\AegisComponent.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisCommon\Components\Component.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisCommon\Components\RegisterComponent.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisCommon\Components\Renderer.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisCommon\Components\Transform.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Src\AegisCommon\Entity\Entity.h">
       <Filter>Archivos de encabezado\Entity</Filter>
     </ClInclude>
@@ -81,9 +93,6 @@
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Vector3.h">
       <Filter>Archivos de encabezado\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Utils\GameLoopData.h">
-      <Filter>Archivos de encabezado\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Vector4.h">
       <Filter>Archivos de encabezado\Utils</Filter>
     </ClInclude>
@@ -96,68 +105,44 @@
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Quaternion.h">
       <Filter>Archivos de encabezado\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\AegisCommon\Components\LightComponent.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Src\AegisCommon\Utils\MathUtils.h">
       <Filter>Archivos de encabezado\Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Randomized.h">
       <Filter>Archivos de encabezado\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\AegisCommon\Components\CameraComponent.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisCommon\Components\Material.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisCommon\Components\SoundEmitterComponent.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisCommon\Components\SoundListenerComponent.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Animation.h">
       <Filter>Archivos de encabezado\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisCommon\Components\AnimationComponent.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisCommon\Components\RigidbodyComponent.h">
+      <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Vector2.h">
       <Filter>Archivos de encabezado\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Components\UITransform.h">
+    <ClInclude Include="..\..\Src\AegisCommon\Utils\GameLoopData.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Components\AegisComponent.h">
-      <Filter>Archivos de encabezado\Components\NativeComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Components\AnimationComponent.h">
-      <Filter>Archivos de encabezado\Components\NativeComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Components\CameraComponent.h">
-      <Filter>Archivos de encabezado\Components\NativeComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Components\Component.h">
-      <Filter>Archivos de encabezado\Components\NativeComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Components\LightComponent.h">
-      <Filter>Archivos de encabezado\Components\NativeComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Components\RegisterComponent.h">
-      <Filter>Archivos de encabezado\Components\NativeComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Components\Renderer.h">
-      <Filter>Archivos de encabezado\Components\NativeComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Components\RigidbodyComponent.h">
-      <Filter>Archivos de encabezado\Components\NativeComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Components\SoundEmitterComponent.h">
-      <Filter>Archivos de encabezado\Components\NativeComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Components\SoundListenerComponent.h">
-      <Filter>Archivos de encabezado\Components\NativeComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Components\Transform.h">
-      <Filter>Archivos de encabezado\Components\NativeComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Components\RectTransform.h">
-      <Filter>Archivos de encabezado\Components\NativeComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Components\UIComponent.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Entity\UIElement.h">
-      <Filter>Archivos de encabezado\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Scene\Canvas.h">
-      <Filter>Archivos de encabezado\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Components\Image.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="..\..\Src\AegisCommon\Utils\LuaMaths.h">
+      <Filter>Archivos de encabezado\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -203,6 +188,9 @@
     <ClCompile Include="..\..\Src\AegisCommon\Components\CameraComponent.cpp">
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\AegisCommon\Components\Material.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Src\AegisCommon\Components\SoundEmitterComponent.cpp">
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
@@ -214,21 +202,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\AegisCommon\Components\RigidbodyComponent.cpp">
       <Filter>Archivos de origen\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\AegisCommon\Components\UIComponent.cpp">
-      <Filter>Archivos de origen\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\AegisCommon\Components\RectTransform.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\AegisCommon\Entity\UIElement.cpp">
-      <Filter>Archivos de origen\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\AegisCommon\Scene\Canvas.cpp">
-      <Filter>Archivos de origen\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\AegisCommon\Components\Image.cpp">
-      <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

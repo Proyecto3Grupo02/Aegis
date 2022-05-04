@@ -30,10 +30,16 @@ void Transform::SetParent(Entity* ent)
 	parentEntity = ent;
 	
 	if (oldParentEntity != ent && oldParentEntity != nullptr)
+	{
 		oldParentEntity->GetTransform()->RemoveChild(GetEntity());
+		oldParentEntity->RemoveChild(GetEntity());
+	}
 
 	if (parentEntity != nullptr)
+	{
 		parentEntity->GetTransform()->AddChild(this->GetEntity());
+		parentEntity->AddChild(this->GetEntity());
+	}
 
 	oldParent->removeChild(mNode);
 	parentNode->addChild(mNode);

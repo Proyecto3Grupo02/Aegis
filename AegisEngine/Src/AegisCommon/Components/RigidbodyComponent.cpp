@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include <Scene.h>
 #include "../Utils/GameLoopData.h"
+#include "../Utils/MathUtils.h"
 
 RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m, bool useG, bool isK)
 	: AegisComponent("Rigidbody", ent)
@@ -13,7 +14,6 @@ RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, fl
 	Vector4 rotVec(rot.x, rot.y, rot.z, rot.w);
 	rigidbody = new RigidBody(bodyMeshName, transform->GetPosition(), transform->GetScale(), rotVec, m, useG, isK);
 	mEntity_->getScene()->AddPhysicsEntity(this);
-
 	SetDataAsInnerType(this);
 }
 
@@ -70,12 +70,16 @@ Vector3 RigidbodyComponent::GetForce() const {
 
 Vector3 RigidbodyComponent::GetPosition() const {
 	return rigidbody->getRbPosition();
-}
+} 
 
 void RigidbodyComponent::SetPosition(Vector3 pos) {
 	rigidbody->setRbPosition(pos);
 }
 
+void RigidbodyComponent::SetRotationEuler(Vector3 rot) {
+	Vector4 eulerRot = MathUtils::EulerToVec4(rot);
+	rigidbody->setRbRotation(eulerRot);
+}
 //LUA-------------------------------------------------------------------------------------------------------
 RigidbodyComponent* CreateRigidbody(Entity* ent, LuaRef args) //Doesn't belong to this class
 {
@@ -100,6 +104,7 @@ void RigidbodyComponent::ConvertToLua(lua_State* state)
 					addFunction("AccelerateTo", &RigidbodyComponent::AccelerateTo).
 					addFunction("AddTorque", &RigidbodyComponent::AddTorque).
 					addFunction("AddForceForward", &RigidbodyComponent::AddForceForward).
+					addFunction("SetRotationEuler", &RigidbodyComponent::SetRotationEuler).
 					addProperty("isActive", &RigidbodyComponent::isActive).
 				endClass().
 			endNamespace().

@@ -34,7 +34,7 @@
 #include "../AegisCommon/Components/AnimationComponent.h"
 #include "../AegisCommon/Components/RigidbodyComponent.h"
 #include "../AegisCommon/Utils/Vector2.h"
-#include "../AegisCommon/Components/SoundEmitterComponent.h"
+#include "../AegisCommon/Utils/LuaMaths.h"
 
 //using namespace luabridge;
 
@@ -47,7 +47,7 @@ void AegisMain::GameLoop() {
 	{
 		SDL_Event eventHandler;
 
-		
+		Audio()->playMusic("clin");
 		//SDL_EnableKeyRepeat(0, 0);
 		while (!exit)
 		{
@@ -160,8 +160,7 @@ void AegisMain::ConvertObjectToLua()
 	CameraComponent::ConvertToLua(state);
 	AnimationComponent::ConvertToLua(state);
 	RigidbodyComponent::ConvertToLua(state);
-	//MathUtils::ConvertToLua(state);
-	SoundEmitterComponent::ConvertToLua(state);
+	LuaMaths::ConvertToLua(state);
 
 	ExportToLua(sceneManager->GetCurrentScene(), "currentScene");
 	ExportToLua(Input(), "Input");
