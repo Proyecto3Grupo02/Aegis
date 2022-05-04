@@ -32,6 +32,7 @@ public:
 
 	//SETS------------------------------------------
 	void SetPosition(Vector3 pos);
+	void SetRotationEuler(Vector3 rot);
 
 	//FORCES----------------------------------------
 	void AddForce(Vector3 force);

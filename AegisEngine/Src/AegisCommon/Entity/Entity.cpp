@@ -90,7 +90,7 @@ void Entity::DestroyNode()
 	auto mParent = mNode_ == nullptr ? nullptr : mNode_->getParentSceneNode();
 	if (mParent != nullptr)
 		mParent->removeAndDestroyChild(mNode_);
-}
+	 }
 
 inline void Entity::addComponentFromLua(AegisComponent* component)
 {

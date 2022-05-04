@@ -107,7 +107,13 @@ void RigidBody::setRbPosition(Vector3 vec)
 
 void RigidBody::setRbRotation(Vector4 vec)
 {
-	rigidBody->getMotionState()->setWorldTransform(Physics()->parseToBulletTransform(getRbPosition(), vec));
+	Vector3 vvv(0, -2, 0);
+	btTransform t = Physics()->parseToBulletTransform(getRbPosition(), vec);
+	rigidBody->setWorldTransform(t);
+	rigidBody->setLinearVelocity({ 0, 0, 0 });
+	rigidBody->setAngularVelocity({ 0, 0, 0 });
+	rigidBody->clearForces();
+	//rigidBody->getMotionState()->setWorldTransform(Physics()->parseToBulletTransform(getRbPosition(), vec));
 }
 
 //FORCES---------------------------------------------------------------------------------------------------------
