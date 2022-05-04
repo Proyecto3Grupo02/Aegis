@@ -10,12 +10,12 @@ enum UICallbacks { OnMouseOver, OnMouseExit, OnClickDown, OnClickReleased };
 #define LuaRefDefault LuaManager::getInstance()->GetSharedEmptyLuaRef());
 
 
-//class UIElement;
+class UIElement;
 class UIComponent:
 	public Component, public ILuaObject
 {
 private:
-	//UIElement* mElement_;
+	UIElement* mElement_;
 
 	LuaRef type = LuaMngr()->GetSharedEmptyLuaRef();
 	LuaRef funcs = LuaMngr()->GetNewEmptyTable();
@@ -41,7 +41,7 @@ public:
  //   virtual void OnClickDown(UIElement* other);
  //   virtual void OnClickUp(UIElement* other);
 
-	//inline UIElement* getElement() const { return mElement_; }
+	inline UIElement* getElement() const { return mElement_; }
 
     //Lua stuff
 	void setCallbacks(LuaRef updateFunc);

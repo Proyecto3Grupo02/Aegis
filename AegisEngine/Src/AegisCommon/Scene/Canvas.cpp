@@ -10,19 +10,19 @@ Canvas::Canvas(OgreWrapper* wrap): ogreWrapper(wrap)
 
 Canvas::~Canvas()
 {
-	//for (UIElement* elem : *mElems_)
-	//	delete mElems_;
+	for (UIElement* elem : *mElems_)
+		delete mElems_;
 
 }
 
 void Canvas::render()
 {
 	SDL_RenderClear(ogreWrapper->getRenderer());
-	//if (!mElems_->empty()) {
-	//	for (auto* elem : *mElems_) {
-	//		elem->render();
-	//	}
-	//}
+	if (!mElems_->empty()) {
+		for (auto* elem : *mElems_) {
+			elem->render();
+		}
+	}
 
 	SDL_RenderPresent(ogreWrapper->getRenderer());
 	
@@ -58,10 +58,10 @@ void Canvas::render()
 //	}
 //}
 
-//void* Canvas::addUIElement(UIElement* elem)
-//{
-//	//this->mElems_->push_back(elem);
-//}
+void* Canvas::addUIElement(UIElement* elem)
+{
+	this->mElems_->push_back(elem);
+}
 
 void Canvas::ConvertToLua(lua_State* state)
 {

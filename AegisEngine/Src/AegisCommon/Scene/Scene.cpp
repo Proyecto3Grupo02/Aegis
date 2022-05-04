@@ -141,8 +141,8 @@ void Scene::Render()
 
 void Scene::RenderUI()
 {
-	//if (mCanvas_ != nullptr)
-	//	mCanvas_->render();
+	if (mCanvas_ != nullptr)
+		mCanvas_->render();
 }
 
 //the ogreNode usually is the root scene node so we add this node as a child one
@@ -157,7 +157,7 @@ Ogre::SceneManager* Scene::GetOgreManager()
 }
 void Scene::CreateCanvas()
 {
-	//mCanvas_ = new Canvas(ogreWrapper);
+	mCanvas_ = new Canvas(ogreWrapper);
 }
 void Scene::ConvertToLua(lua_State* state)
 {
