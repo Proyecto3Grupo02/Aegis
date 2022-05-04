@@ -45,6 +45,8 @@ public:
 	void AddForceForward(float force);
 
 	void SetAngular() { rigidbody->SetAngularFactor(); }
+	//FREEZE ROT------------------------------------
+	void FreezeRot(bool _x, bool _y, bool _z);
 
 	//LUA------------
 	static void ConvertToLua(lua_State* state);

@@ -14,17 +14,18 @@ function table.GetNew(entity, params)
     local cameraTf = nil;
     local forward
     local euAng;
-    data.senstivity = 0.2;
+    data.sensitivity = 0.2;
 
     function Init()
         rigidbody = component.entity:GetComponent("Rigidbody").type;
         w=false; a=false; s=false; d=false; fishing = false;
         offset = Aegis.Maths.Vector3(0, 5,10)
         data.camera.transform:SetParent(entity)
-        data.bait.transform:SetParent(entity) --ANZUELO------------------
+        data.bait.transform:SetParent(entity)
         cameraTf=data.camera.transform;
         forward = cameraTf.forward;
         euAng = transform.localEulerAngles;
+        rigidbody:FreezeRot(true,true,true)
      end;
 
 	function Update(deltaTime)
@@ -34,18 +35,19 @@ function table.GetNew(entity, params)
         end;
         if (fishing)then
             cameraTf.position = Aegis.Maths.Vector3(0,0,0)
-            w=false; a=false; s=false; d=false;
-            return;
-        end;
-        cameraTf.position= offset;
-        w = Input:IsKeyDown("w");
-        a = Input:IsKeyDown("a");
-        s = Input:IsKeyDown("s");
-        d = Input:IsKeyDown("d");
-    -- IF key is f then set rigidbody pos to init pos
-        if Input:IsKeyDown("f") then
+            data.sensitivity=0.01
+        else   
+            data.sensitivity = 0.2
+            cameraTf.position= offset;
+            w = Input:IsKeyDown("w");
+            a = Input:IsKeyDown("a");
+            s = Input:IsKeyDown("s");
+            d = Input:IsKeyDown("d");
+            -- IF key is f then set rigidbody pos to init pos
+            if Input:IsKeyDown("f") then
             rigidbody.position = data.initPos; 
-        end;
+            end;
+        end;   
     end;
 
     function LateUpdate(deltaTime) end;
@@ -53,7 +55,7 @@ function table.GetNew(entity, params)
 	function FixedUpdate()
         local mouseMotion = Input:GetMouseMotion();
         if mouseMotion.x ~= 0 and mouseMotion.y ~= 0 then
-            local x = mouseMotion.x * data.senstivity;
+            local x = mouseMotion.x * data.sensitivity;
             euAng = (transform.localEulerAngles -  Aegis.Maths.Vector3(0, x, 0));
         end;
         -- Lerp current Rotation to target rotation
@@ -70,25 +72,16 @@ function table.GetNew(entity, params)
             rigidbody:AccelerateTo(transform.forward*0, maxAcceleration);
         else
             if s then                
-                --rigidbody:AddForce(Aegis.Maths.Vector3(0, 0, 0.5) * force)
-                rigidbody:AccelerateTo(transform.forward* targetSpeed, maxAcceleration);
-                --rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(0,0, -0.05);                 
+                rigidbody:AccelerateTo(transform.forward* targetSpeed, maxAcceleration);           
             end;
             if a then                
-                --rigidbody:AddForce(Aegis.Maths.Vector3(-0.5, 0, 0) * force)
-                rigidbody:AccelerateTo(transform.right * -1 * targetSpeed, maxAcceleration);
-                --rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(-0.05,0,0);   
+                rigidbody:AccelerateTo(transform.right * -1 * targetSpeed, maxAcceleration); 
             end;
             if w then                
-                --rigidbody:AddForce(Aegis.Maths.Vector3(0, 0, -0.5) * force)
                 rigidbody:AccelerateTo(transform.forward * -1 * targetSpeed, maxAcceleration);
-                --rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(0,0, 0.05);
             end;
             if d then                
-                --rigidbody:AddForce(Aegis.Maths.Vector3(0.5, 0, 0) * force)
-                rigidbody:AccelerateTo(transform.right * targetSpeed, maxAcceleration);
-                -- rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(0.05,0,0); 
-                --print("Force X Axis: " .. rigidbody:GetForce().x);  
+                rigidbody:AccelerateTo(transform.right * targetSpeed, maxAcceleration); 
             end;
         end;
     end;

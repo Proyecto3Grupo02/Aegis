@@ -90,6 +90,12 @@ void RigidbodyComponent::SetRotationEuler(Vector3 rot) {
 	Vector4 eulerRot = MathUtils::EulerToVec4(rot);
 	rigidbody->setRbRotation(eulerRot);
 }
+
+//FREEZE ROT------------------------------------
+void RigidbodyComponent::FreezeRot (bool _x, bool _y, bool _z) {
+	rigidbody->setFreezeRotation(_x, _y, _z);
+}
+
 //LUA-------------------------------------------------------------------------------------------------------
 RigidbodyComponent* CreateRigidbody(Entity* ent, LuaRef args) //Doesn't belong to this class
 {
@@ -119,6 +125,7 @@ void RigidbodyComponent::ConvertToLua(lua_State* state)
 					addFunction("RayCastWorld", &RigidbodyComponent::Raycast).
 					addFunction("SetRotationEuler", &RigidbodyComponent::SetRotationEuler).
 					addFunction("SetAngular", &RigidbodyComponent::SetAngular).
+					addFunction("FreezeRot", &RigidbodyComponent::FreezeRot).
 					addProperty("isActive", &RigidbodyComponent::isActive).
 					
 				endClass().
