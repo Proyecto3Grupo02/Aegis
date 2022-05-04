@@ -19,8 +19,6 @@ function table.GetNew(entity, params)
         local mouseMotion = Input:GetMouseMotion();
         if mouseMotion.x ~= 0 and mouseMotion.y ~= 0 then
             local x = mouseMotion.x * data.senstivity;
-            --transform.localEulerAngles =  transform.localEulerAngles - Aegis.Maths.Vector3(y, x, 0);
-            -- data.targetRotation = transform.localEulerAngles -  Aegis.Maths.Vector3(x, 0, 0);
             euAng = (transform.localEulerAngles +  Aegis.Maths.Vector3(0, x, 0));
         end;
         -- Lerp current Rotation to target rotation
