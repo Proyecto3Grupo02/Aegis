@@ -63,14 +63,20 @@ material VertexColor
 
 material blue // nombre
 {
+	material blue // nombre
+{
 	technique // al menos una
 	{
 		pass // al menos uno
 		{
-			diffuse 0.0 0.39 0.9 0.4
-			scene_blend alpha_blend
+			ambient 0.616687 0.90461 1 0.7
+			diffuse 0.616687 0.90461 1 0.7
+			specular 1 1 1 1 20
+			depth_write off
+			scene_blend alpha_blend	
 		}
 	}
+}
 }
 
 material yellow // nombre
