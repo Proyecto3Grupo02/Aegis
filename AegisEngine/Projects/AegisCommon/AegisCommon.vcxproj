@@ -175,7 +175,6 @@
     <ClInclude Include="..\..\Src\AegisCommon\Components\SoundListenerComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\Transform.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\UIComponent.h" />
-    <ClInclude Include="..\..\Src\AegisCommon\Components\UITransform.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Entity\Entity.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Entity\UIElement.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Interfaces\IInitializable.h" />
