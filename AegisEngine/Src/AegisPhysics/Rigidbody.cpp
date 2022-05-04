@@ -5,12 +5,19 @@
 #include <btBulletCollisionCommon.h>
 //#include "../checkML.h"
 
+
+//--------------------------------------
 RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, RigidbodyComponent* r, float m, bool useG, bool isK) :
 	mass(m), useGravity(useG), isKinematic(isK) {
 	freezePosition = std::vector<bool>(3, false);
 	freezeRotation = std::vector<bool>(3, false);
 	createRigidBodyComponent(RigidBodyType::Box, pos, scale, bodyMeshName); rbC = r;
 	//if (t)rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, Vector4 rotation, float m, bool useG, bool isK) :
+	mass(m), useGravity(useG), isKinematic(isK) {
+	freezePosition = std::vector<bool>(3, false);
+	freezeRotation = std::vector<bool>(3, false);
+	createRigidBodyComponent(RigidBodyType::Box, pos, scale, rotation,  bodyMeshName);
 }
 
 void RigidBody::init() {
@@ -28,11 +35,13 @@ RigidBody::~RigidBody()
 	Physics()->removeRigidbody(this->rigidBody);
 }
 
-void RigidBody::createRigidBodyComponent(RigidBodyType rbType, Vector3 pos, Vector3 scale, std::string bodyMeshName, bool isConvex)
+void RigidBody::createRigidBodyComponent(RigidBodyType rbType, Vector3 pos, Vector3 scale, Vector4 rotation,  std::string bodyMeshName, bool isConvex)
 {
+	//------------------------------------
 	rigidBody = PhysicsSystem::getInstance()->createRigidBody(rbType, mass, scale, pos, bodyMeshName, isConvex, isKinematic, useGravity);
 	
 	rigidBody->setUserPointer(this);
+	rigidBody = PhysicsSystem::getInstance()->createRigidBody(rbType, mass, scale, pos, rotation, bodyMeshName, isConvex, isKinematic, useGravity);
 }
 
 
@@ -132,7 +141,13 @@ void RigidBody::setRbPosition(Vector3 vec)
 
 void RigidBody::setRbRotation(Vector4 vec)
 {
-	rigidBody->getMotionState()->setWorldTransform(Physics()->parseToBulletTransform(getRbPosition(), vec));
+	Vector3 vvv(0, -2, 0);
+	btTransform t = Physics()->parseToBulletTransform(getRbPosition(), vec);
+	rigidBody->setWorldTransform(t);
+	rigidBody->setLinearVelocity({ 0, 0, 0 });
+	rigidBody->setAngularVelocity({ 0, 0, 0 });
+	rigidBody->clearForces();
+	//rigidBody->getMotionState()->setWorldTransform(Physics()->parseToBulletTransform(getRbPosition(), vec));
 }
 
 //FORCES---------------------------------------------------------------------------------------------------------
