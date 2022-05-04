@@ -44,10 +44,10 @@ function table.GetNew(entity, params)
 			canRoot=false;
 		end;
 		--comprobacion de colision
-		if rigidbody:RaycastWorld(transform:GetForward()) and ray then
-			local random; random = rand() % 3; 
+		if ray and rigidbody:RaycastWorld(transform:GetForward())  then
+			local random; random = math:random(0,3); 
 			while (random == 1) do random = math:random(0,3); random= random - 1; end;
-			rigidbody->addTorque({ 0,float(random),0 });
+			rigidbody:addTorque({ 0,float(random),0 });
 		end;
 	end;
 

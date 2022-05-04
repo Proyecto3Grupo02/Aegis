@@ -18,8 +18,8 @@ class RigidBody {
 public:
 	enum RigidBodyType { Box, Sphere, CapsuleX, CapsuleZ, Custom };
 
-	RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, RigidbodyComponent* r, float m = 1, bool useG = true, bool isK = false);
-	RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, Vector4 rotation, float m = 1, bool useG = true, bool isK = false);
+
+	RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, Vector4 rotation, RigidbodyComponent* r, float m = 1, bool useG = true, bool isK = false);
 	void init();
 	~RigidBody();
 	//void fixedUpdate();
@@ -51,6 +51,8 @@ public:
 	
 	void changeGravity(Vector3);
 	//RigidbodyComponent* rbC;
+
+	friend class PhysicsSystem;
 
 protected:
 	btRigidBody* rigidBody;

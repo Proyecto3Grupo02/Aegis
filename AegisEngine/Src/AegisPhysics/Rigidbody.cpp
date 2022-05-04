@@ -6,17 +6,13 @@
 //#include "../checkML.h"
 
 
-//--------------------------------------
-RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, RigidbodyComponent* r, float m, bool useG, bool isK) :
-	mass(m), useGravity(useG), isKinematic(isK) {
-	freezePosition = std::vector<bool>(3, false);
-	freezeRotation = std::vector<bool>(3, false);
-	createRigidBodyComponent(RigidBodyType::Box, pos, scale, bodyMeshName); rbC = r;
+
 	//if (t)rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
-RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, Vector4 rotation, float m, bool useG, bool isK) :
+RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, Vector4 rotation, RigidbodyComponent * r, float m, bool useG, bool isK) :
 	mass(m), useGravity(useG), isKinematic(isK) {
 	freezePosition = std::vector<bool>(3, false);
 	freezeRotation = std::vector<bool>(3, false);
+	rbC = r;
 	createRigidBodyComponent(RigidBodyType::Box, pos, scale, rotation,  bodyMeshName);
 }
 
@@ -37,11 +33,10 @@ RigidBody::~RigidBody()
 
 void RigidBody::createRigidBodyComponent(RigidBodyType rbType, Vector3 pos, Vector3 scale, Vector4 rotation,  std::string bodyMeshName, bool isConvex)
 {
-	//------------------------------------
-	rigidBody = PhysicsSystem::getInstance()->createRigidBody(rbType, mass, scale, pos, bodyMeshName, isConvex, isKinematic, useGravity);
 	
-	rigidBody->setUserPointer(this);
 	rigidBody = PhysicsSystem::getInstance()->createRigidBody(rbType, mass, scale, pos, rotation, bodyMeshName, isConvex, isKinematic, useGravity);
+	rigidBody->setUserPointer(this);
+
 }
 
 

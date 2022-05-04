@@ -10,12 +10,10 @@ RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, fl
 {
 	transform = ent->GetTransform();
 	initialPos = transform->GetPosition();
-
-	//pasarle al rb yo como componente
-	rigidbody = new RigidBody(bodyMeshName, transform->GetPosition(), transform->GetScale(),this, m, useG, isK);
+	
 	auto rot = transform->GetRotation();
 	Vector4 rotVec(rot.x, rot.y, rot.z, rot.w);
-	rigidbody = new RigidBody(bodyMeshName, transform->GetPosition(), transform->GetScale(), rotVec, m, useG, isK);
+	rigidbody = new RigidBody(bodyMeshName, transform->GetPosition(), transform->GetScale(), rotVec,this, m, useG, isK);
 	mEntity_->getScene()->AddPhysicsEntity(this);
 	SetDataAsInnerType(this);
 }
