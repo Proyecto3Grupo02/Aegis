@@ -14,7 +14,7 @@ local scene = {
 	{
 		type = "Entity",
 		name = "Player",
-		position = {x = -5, y = -30},
+		position = {x = -5, y = -50},
 		components = {
 			{
 				type = "Renderer",
@@ -121,6 +121,63 @@ local scene = {
 					material= "blue"
 				}
 			},
+		}
+	},
+	{
+		type = "Entity",
+		name = "ParedFrontal",
+		position = { y = -50, z = 30 },
+		scale = { x = 100, y = 50, z = 5},
+		components = 
+		{
+			{
+				type = "Rigidbody",
+				data = 
+				{
+					isKinematic = true
+				}
+			}
+		}
+	},
+	{
+		type = "Entity",
+		name = "ParedLateral",
+		position = { y = -50, x = 30 },
+		scale = { x = 5, y = 50, z = 100},
+		components = 
+		{
+			{
+				type = "Rigidbody",
+				data = 
+				{
+					isKinematic = true
+				}
+			}
+		}
+	},
+	{
+		type = "Entity",
+		name = "ParedTrasera",
+		position = { y = -50, z = -30 },
+		scale = { x = 100, y = 50, z = 5},
+		components = 
+		{
+			{
+				type = "Rigidbody",
+				data = 
+				{
+					isKinematic = true
+				}
+			}
+		}
+	},
+	{
+		type = "Entity",
+		name = "ParedIzquierda",
+		position = { y = -50, x = -30 },
+		scale = { x = 5, y = 50, z = 100},
+		components = 
+		{
 			{
 				type = "Rigidbody",
 				data = 
