@@ -60,7 +60,6 @@ function table.GetNew(entity, params)
         rigidbody:SetRotationEuler(euAng);
         ------------------------------------------------------
 
-        -- print("Force Y Axis: " .. rigidbody:GetForce().y);
         -- MOVE CHARACTER:
         local force = 10;
         local targetSpeed = 1000;

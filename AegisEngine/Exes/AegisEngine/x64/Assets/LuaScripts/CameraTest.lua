@@ -5,6 +5,7 @@ function table.GetNew(entity, params)
 	local data = component.data;
 	local transform = entity.transform;
     local funcs = component.funcs;
+    local clampedAngle = 90
     data.child = "Undefined";
     data.senstivity = 40;
     data.smoothStep = 10;
@@ -42,11 +43,18 @@ function table.GetNew(entity, params)
                 local x = mouseMotion.x * deltaTime * data.senstivity;
                 --transform.localEulerAngles =  transform.localEulerAngles - Aegis.Maths.Vector3(y, x, 0);
                 data.targetRotation = transform.localEulerAngles -  Aegis.Maths.Vector3(y, 0, 0); -- solo rota por libre en el eje y
-
-                --print("Mouse X: " .. mouseMotion.x .. " Mouse Y: " .. mouseMotion.y);
             end;
 
         -- Lerp current Rotation to target rotation
+        if(data.targetRotation.x >= clampedAngle) then
+            local vecAux = Aegis.Maths.Vector3(clampedAngle, data.targetRotation.y, data.targetRotation.z)
+            data.targetRotation = vecAux
+        end;
+        if(data.targetRotation.x <= -clampedAngle) then
+            local vecAux = Aegis.Maths.Vector3(-clampedAngle, data.targetRotation.y, data.targetRotation.z)
+            data.targetRotation = vecAux
+        end;
+        print("X: "..data.targetRotation.x.."Y: "..data.targetRotation.y .. "Z: ".. data.targetRotation.z)
         transform.localEulerAngles = Aegis.Maths.Vector3Lerp(transform.localEulerAngles, data.targetRotation, deltaTime * data.smoothStep);
     end;
 	function FixedUpdate() end;
