@@ -84,6 +84,7 @@
     <OutDir>$(SolutionDir)Exes\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <IncludePath>$(SolutionDir)\Dependencias\Ogre\src\OgreMain\include;$(IncludePath)</IncludePath>
+    <SourcePath>$(SolutionDir)Exes\$(Platform)\$(Configuration)\</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

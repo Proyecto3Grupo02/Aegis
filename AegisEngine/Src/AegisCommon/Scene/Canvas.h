@@ -21,11 +21,14 @@ public:
    
     void render();
     
-
     void OnClickDown();
     void OnClickUp();
 
     void OnMouseOver();
     void OnMouseExit();
+
+   void* addUIElement(UIElement* elem);
+
+    static void ConvertToLua(lua_State* state);
 
 };

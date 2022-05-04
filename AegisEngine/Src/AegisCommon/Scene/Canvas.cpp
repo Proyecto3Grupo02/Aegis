@@ -55,3 +55,18 @@ void Canvas::OnMouseExit()
 		elem->OnMouseExit();
 	}
 }
+
+void* Canvas::addUIElement(UIElement* elem)
+{
+	this->mElems_->push_back(elem);
+}
+
+void Canvas::ConvertToLua(lua_State* state)
+{
+	getGlobalNamespace(state).
+		beginNamespace("Aegis").
+		beginClass<Canvas>("Canvas").
+		addFunction("AddUIElement", &Canvas::addUIElement).
+		endClass().
+		endNamespace();
+}
