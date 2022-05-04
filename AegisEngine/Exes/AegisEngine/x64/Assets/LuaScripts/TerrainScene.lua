@@ -68,24 +68,24 @@ local scene = {
 			}
 		}
 	},
-	{
-		type = "Entity",
-		name = "Cubo2",
-		position = { y = 2, x = 2},
-		scale = { x = 0.5, y = 0.5, z = 0.5 },
-		components = {
-			{
-				type = "Renderer",
-				data = {
-					mesh = "fish.mesh",
-					material= "pez"
-				}
-			},
-			{
-				type = "Rigidbody",
-			},
-		}
-	},
+	-- {
+	-- 	type = "Entity",
+	-- 	name = "Cubo2",
+	-- 	position = { y = 2, x = 2},
+	-- 	scale = { x = 0.5, y = 0.5, z = 0.5 },
+	-- 	components = {
+	-- 		{
+	-- 			type = "Renderer",
+	-- 			data = {
+	-- 				mesh = "fish.mesh",
+	-- 				material= "pez"
+	-- 			}
+	-- 		},
+	-- 		{
+	-- 			type = "Rigidbody",
+	-- 		},
+	-- 	}
+	-- },
 	{
 		type = "Entity",
 		name = "Suelo",
@@ -231,7 +231,7 @@ local scene = {
 	{
 		type = "Entity",
 		name = "RandomFish",
-		position = { y = 1.1, z =1.01 },
+		position = { y = -55, z =1.01 },
 		scale = {x = 0.5, y = 0.5, z =0.5},
 		components = {
 			{
@@ -242,7 +242,11 @@ local scene = {
 					}
 			},
 			{
-				type = "Rigidbody"
+				type = "Rigidbody",
+				data = 
+				{
+					useGravity = false,
+				}
 			},
 			{
 				type = "RandomMovement"
