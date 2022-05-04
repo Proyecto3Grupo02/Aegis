@@ -88,11 +88,14 @@ void RigidBody::setGravity(Vector3 vec) {
 	rigidBody->setGravity(grav);
 }
 
-void RigidBody::setFreezeRotation(bool _x, bool _y, bool _z)
-{
+void RigidBody::setFreezeRotation(bool _x, bool _y, bool _z) {
 	freezeRotation[0] = _x;
 	freezeRotation[1] = _y;
 	freezeRotation[2] = _z;
+
+	rigidBody->setLinearFactor(btVector3(_x, _y, _z));
+	rigidBody->setAngularFactor(btVector3(!_x, !_y, !_z));
+
 }
 
 void RigidBody::setRbPosition(Vector3 vec)

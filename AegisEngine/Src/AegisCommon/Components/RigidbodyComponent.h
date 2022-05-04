@@ -40,6 +40,9 @@ public:
 	void AddTorque(Vector3 torque);
 	void AddForceForward(float force);
 
+	//FREEZE ROT------------------------------------
+	void FreezeRot(bool _x, bool _y, bool _z);
+
 	//LUA------------
 	static void ConvertToLua(lua_State* state);
 

@@ -25,6 +25,7 @@ function table.GetNew(entity, params)
         cameraTf=data.camera.transform;
         forward = cameraTf.forward;
         euAng = transform.localEulerAngles;
+        rigidbody:FreezeRot(true,true,true)
      end;
 
 	function Update(deltaTime)
@@ -70,25 +71,16 @@ function table.GetNew(entity, params)
             rigidbody:AccelerateTo(transform.forward*0, maxAcceleration);
         else
             if s then                
-                --rigidbody:AddForce(Aegis.Maths.Vector3(0, 0, 0.5) * force)
-                rigidbody:AccelerateTo(transform.forward* targetSpeed, maxAcceleration);
-                --rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(0,0, -0.05);                 
+                rigidbody:AccelerateTo(transform.forward* targetSpeed, maxAcceleration);           
             end;
             if a then                
-                --rigidbody:AddForce(Aegis.Maths.Vector3(-0.5, 0, 0) * force)
-                rigidbody:AccelerateTo(transform.right * -1 * targetSpeed, maxAcceleration);
-                --rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(-0.05,0,0);   
+                rigidbody:AccelerateTo(transform.right * -1 * targetSpeed, maxAcceleration); 
             end;
             if w then                
-                --rigidbody:AddForce(Aegis.Maths.Vector3(0, 0, -0.5) * force)
                 rigidbody:AccelerateTo(transform.forward * -1 * targetSpeed, maxAcceleration);
-                --rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(0,0, 0.05);
             end;
             if d then                
-                --rigidbody:AddForce(Aegis.Maths.Vector3(0.5, 0, 0) * force)
-                rigidbody:AccelerateTo(transform.right * targetSpeed, maxAcceleration);
-                -- rigidbody.position= rigidbody.position + Aegis.Maths.Vector3(0.05,0,0); 
-                --print("Force X Axis: " .. rigidbody:GetForce().x);  
+                rigidbody:AccelerateTo(transform.right * targetSpeed, maxAcceleration); 
             end;
         end;
     end;
