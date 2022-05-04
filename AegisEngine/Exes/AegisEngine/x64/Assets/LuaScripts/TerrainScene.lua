@@ -189,6 +189,30 @@ local scene = {
 	},
 	{
 		type = "Entity",
+		name = "Columna",
+		position = { x = 6, y = -55, z = 19 },
+		scale = { x = 3.5, y = 20, z = 3.5},
+		components = 
+		{
+			{
+				type = "Rigidbody",
+				data = 
+				{
+					isKinematic = true
+				}
+			}
+			-- ,
+			-- {
+			-- 	type = "Renderer",
+			-- 	data = {
+			-- 			mesh = "Cube.mesh",
+			-- 			material= "yellow"
+			-- 		}
+			-- }
+		}
+	},
+	{
+		type = "Entity",
 		name = "light",
 		position = { x = 0, y = 4, z = 0},
 		components = {
