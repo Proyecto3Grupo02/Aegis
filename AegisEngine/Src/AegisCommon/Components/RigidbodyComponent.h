@@ -14,7 +14,7 @@ class Entity;
 class RigidbodyComponent : public AegisComponent, public ILuaObject
 {
 public:
-	RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m = 1, bool useG = true, bool isK = false);
+	RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m = 1, bool useG = true, bool isK = false, bool isStatic = false);
 	virtual ~RigidbodyComponent();
 
 	virtual void init() override {};
@@ -44,11 +44,15 @@ public:
 	void AddTorque(Vector3 torque);
 	void AddForceForward(float force);
 
+	void SetAngular() { rigidbody->SetAngularFactor(); }
+
 	//LUA------------
 	static void ConvertToLua(lua_State* state);
 	void changeGravity(Vector3 acc);
 	void Raycast();
 	friend class PhysicsSystem;
+
+	
 
 private:
 	

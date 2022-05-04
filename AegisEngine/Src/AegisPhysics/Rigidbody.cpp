@@ -8,12 +8,13 @@
 
 
 	//if (t)rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
-RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, Vector4 rotation, RigidbodyComponent * r, float m, bool useG, bool isK) :
+RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, Vector4 rotation, RigidbodyComponent * r, float m, bool useG, bool isK, bool isStatic) :
 	mass(m), useGravity(useG), isKinematic(isK) {
 	freezePosition = std::vector<bool>(3, false);
 	freezeRotation = std::vector<bool>(3, false);
 	rbC = r;
 	createRigidBodyComponent(RigidBodyType::Box, pos, scale, rotation,  bodyMeshName);
+	if(isStatic) rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_STATIC_OBJECT);
 }
 
 void RigidBody::init() {
@@ -179,5 +180,11 @@ void RigidBody::changeGravity(Vector3 acc)
 	rigidBody->setGravity(Physics()->parseToBulletVector(acc));
 }
 
-
-
+void RigidBody::SetAngularFactor() {
+	rigidBody->setAngularFactor(btVector3(0, 0, 0));
+}
+ 
+void RigidBody::setLinearVelocity() {
+	btVector3 velocity = rigidBody->getAngularVelocity();
+	rigidBody->setAngularFactor({velocity.getX(), 0, velocity.getZ()});
+}

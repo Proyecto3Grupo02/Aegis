@@ -11,25 +11,35 @@ function table.GetNew(entity, params)
 	local root;
 	local acumulatedDT;
 	local acumulatedRay;
-	local cooldown = 5; 
+	local lastTimeRay; 
+	local random; 
 	
     function Init() 
         rigidbody = component.entity:GetComponent("Rigidbody").type;
 		lastTime=0;
+		lastTimeRay = 0;
 		acumulatedDT=0;
 		acumulatedRay=0;
-		root = 0;	
+		root = 0;			
 		ray = false;
+		random = 0;
+		rigidbody:SetAngular();
     end;
 	function Update(deltaTime) 
-		if acumulatedDT > lastTime + 3 then
+		if acumulatedDT > lastTime + 0.5 then
 			canRoot=true;
 			root = math.random(-10,10);
 			lastTime = acumulatedDT;		
 		end;
-		if acumulatedRay > cooldown then
+		if acumulatedRay > lastTimeRay + 1 then
 			ray = true;
-			acumulatedRay = 0;
+			
+			random = math.random(0,3); 
+			while (random == 1) do 
+				random = math.random(0,3); 
+				random= random - 1; 
+			end;
+			lastTimeRay = acumulatedRay;
 		end;
 		acumulatedRay = acumulatedRay + deltaTime;
 		acumulatedDT = acumulatedDT + deltaTime;
@@ -46,12 +56,10 @@ function table.GetNew(entity, params)
 			canRoot=false;
 		end;
 		--comprobacion de colision
-		-- if ray and rigidbody:RayCastWorld()  then
-		-- 	ray = false;
-		-- 	local random; random = math:random(0,3); 
-		-- 	while (random == 1) do random = math:random(0,3); random= random - 1; end;
-		-- 	rigidbody:addTorque({ 0,float(random),0 });
-		-- end;
+		if ray and rigidbody:RayCastWorld()  then
+			ray = false;			
+			rigidbody:AccelerateToRand();
+		end;
 	end;
 
 	function OnCollision(other) end;

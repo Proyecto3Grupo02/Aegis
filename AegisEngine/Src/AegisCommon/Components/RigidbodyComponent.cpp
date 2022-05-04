@@ -5,7 +5,7 @@
 #include "../Utils/GameLoopData.h"
 #include "../Utils/MathUtils.h"
 
-RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m, bool useG, bool isK)
+RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m, bool useG, bool isK, bool isStatic)
 	: AegisComponent("Rigidbody", ent)
 {
 	transform = ent->GetTransform();
@@ -13,7 +13,7 @@ RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, fl
 	
 	auto rot = transform->GetRotation();
 	Vector4 rotVec(rot.x, rot.y, rot.z, rot.w);
-	rigidbody = new RigidBody(bodyMeshName, transform->GetPosition(), transform->GetScale(), rotVec,this, m, useG, isK);
+	rigidbody = new RigidBody(bodyMeshName, transform->GetPosition(), transform->GetScale(), rotVec,this, m, useG, isK, isStatic);
 	mEntity_->getScene()->AddPhysicsEntity(this);
 	SetDataAsInnerType(this);
 }
@@ -62,6 +62,7 @@ Vector3 RigidbodyComponent::AccelerateToRand()
 {
 	Vector3 vec(rand() % 10, 0 ,rand() % 10);
 	return rigidbody->AccelerateTo(vec, Time()->deltaTime, 100000000000);
+	rigidbody->setLinearVelocity();
 }
 
 void RigidbodyComponent::AddForceForward(float force) {
@@ -95,8 +96,9 @@ RigidbodyComponent* CreateRigidbody(Entity* ent, LuaRef args) //Doesn't belong t
 	std::string bodyName = ent->getName();
 	float mass = LuaMngr()->ParseFloat(args["mass"], 1);
 	bool useGravity = LuaMngr()->ParseBool(args["useGravity"], true);
-	bool isKinematic = LuaMngr()->ParseBool(args["isKinematic"], false);	
-	return new RigidbodyComponent(ent, bodyName, mass, useGravity, isKinematic);
+	bool isKinematic = LuaMngr()->ParseBool(args["isKinematic"], false);
+	bool isStatic = LuaMngr()->ParseBool(args["isStatic"], false);
+	return new RigidbodyComponent(ent, bodyName, mass, useGravity, isKinematic,isStatic);
 }
 
 void RigidbodyComponent::ConvertToLua(lua_State* state)
@@ -116,7 +118,9 @@ void RigidbodyComponent::ConvertToLua(lua_State* state)
 					addFunction("ChangeGravity", &RigidbodyComponent::changeGravity).
 					addFunction("RayCastWorld", &RigidbodyComponent::Raycast).
 					addFunction("SetRotationEuler", &RigidbodyComponent::SetRotationEuler).
+					addFunction("SetAngular", &RigidbodyComponent::SetAngular).
 					addProperty("isActive", &RigidbodyComponent::isActive).
+					
 				endClass().
 			endNamespace().
 		endNamespace();

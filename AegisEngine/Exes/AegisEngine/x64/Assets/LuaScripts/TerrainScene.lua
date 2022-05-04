@@ -181,7 +181,8 @@ local scene = {
 				type = "Rigidbody",
 				data = 
 				{
-					isKinematic = true
+					--isKinematic = true
+					isStatic = true;
 				}
 			}
 			-- ,
@@ -228,7 +229,7 @@ local scene = {
                 type = "Rigidbody",
                 data = 
                 {
-					isKinematic = true,
+					--isKinematic = true,
                     useGravity = false
                 }
             },
