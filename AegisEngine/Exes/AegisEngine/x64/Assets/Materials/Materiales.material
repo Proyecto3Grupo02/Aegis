@@ -63,8 +63,6 @@ material VertexColor
 
 material blue // nombre
 {
-	material blue // nombre
-{
 	technique // al menos una
 	{
 		pass // al menos uno
@@ -76,7 +74,6 @@ material blue // nombre
 			scene_blend alpha_blend	
 		}
 	}
-}
 }
 
 material yellow // nombre
