@@ -24,7 +24,7 @@ private:
 	std::list<std::list<Entity*>::iterator> entitiesToDelete;
 	Ogre::SceneNode* ogreNode;
 	OgreWrapper* ogreWrapper;
-	Canvas* mCanvas_;
+	//Canvas* mCanvas_;
 	// Fixed Update arguments
 
 	// Este parametro quizas sea mejor a la clase application cuando la tengamos

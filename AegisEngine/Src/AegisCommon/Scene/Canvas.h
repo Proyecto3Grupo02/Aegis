@@ -5,32 +5,30 @@
 #include "../Interfaces/ILuaObject.h"
 #include "../Interfaces/IInitializable.h"
 
-struct UIElement;
+//class UIElement;
 class OgreWrapper;
 
-class Canvas: public ILuaObject
+class Canvas : public ILuaObject
 {
 private:
 	OgreWrapper* ogreWrapper;
-   std::list<UIElement*>* mElems_;
-   std::list<std::list<UIElement*>::iterator> elemsToDelete;
+	//std::list<UIElement*>* mElems_;
+	//std::list<std::list<UIElement*>::iterator> elemsToDelete;
 public:
-    Canvas(OgreWrapper* wrap);
-    ~Canvas();
+	Canvas(OgreWrapper* wrap);
+	~Canvas();
 
-   
-    void render();
-    
-    void OnClickDown();
-    void OnClickUp();
 
-    void OnMouseOver();
-    void OnMouseExit();
+	void render();
 
-   void* addUIElement(UIElement* elem);
+	//void OnClickDown();
+	//void OnClickUp();
 
-   
+	//void OnMouseOver();
+	//void OnMouseExit();
 
-    static void ConvertToLua(lua_State* state);
+	//void* addUIElement(UIElement* elem);
+
+	static void ConvertToLua(lua_State* state);
 
 };

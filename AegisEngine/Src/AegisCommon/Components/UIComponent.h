@@ -10,12 +10,12 @@ enum UICallbacks { OnMouseOver, OnMouseExit, OnClickDown, OnClickReleased };
 #define LuaRefDefault LuaManager::getInstance()->GetSharedEmptyLuaRef());
 
 
-struct UIElement;
+//class UIElement;
 class UIComponent:
 	public Component, public ILuaObject
 {
 private:
-	UIElement* mElement_;
+	//UIElement* mElement_;
 
 	LuaRef type = LuaMngr()->GetSharedEmptyLuaRef();
 	LuaRef funcs = LuaMngr()->GetNewEmptyTable();
@@ -30,20 +30,18 @@ protected:
 	template <class T>
 	void SetDataAsInnerType(T* component);
 public:
-    UIComponent(std::string componentName, UIElement* ent);
+    UIComponent(std::string componentName);
+    //UIComponent(std::string componentName, UIElement* ent);
     virtual ~UIComponent() = default;
 
 	virtual void init() override;
     virtual void render() override;
-    virtual void OnMouse(UIElement* other);
+ //   virtual void OnMouse(UIElement* other);
 
-    virtual void OnClickDown(UIElement* other);
-    virtual void OnClickUp(UIElement* other);
+ //   virtual void OnClickDown(UIElement* other);
+ //   virtual void OnClickUp(UIElement* other);
 
-
-	inline UIElement* getElement() const { return mElement_; }
-
-
+	//inline UIElement* getElement() const { return mElement_; }
 
     //Lua stuff
 	void setCallbacks(LuaRef updateFunc);
@@ -64,33 +62,6 @@ public:
 	void CallLuaRefFunc(LuaRef func, T args = 0);
 	// Soy consciente de que todos los cout deber�an llamarse desde otro lado, pero por ahora aqui
 	void PrintErrorModifyingTables(std::string fieldName, std::string typeName, bool modifiableFields);
-
 };
 
 #endif
-template<class T>
-inline void UIComponent::CallLuaRefFunc(LuaRef func, T args)
-{
-#if defined _DEBUG
-	if (!func.isNil())
-	{
-		try {
-			func(args);
-		}
-		catch (LuaException const& e) {
-			std::cout << e.what() << "\n";
-		}
-
-	}
-#else
-	if (!func.isNil())
-		func(args);
-#endif
-}
-
-template<class T>
-inline void UIComponent::SetDataAsInnerType(T* component)
-{
-	SetType(LuaRef(LuaManager::getInstance()->GetState(), component));
-}
-
