@@ -146,3 +146,14 @@ material pez // nombre
 		}
 	}
 }
+
+material playerMat // nombre
+{
+	technique // al menos una
+	{
+		pass // al menos uno
+		{
+			diffuse 1.0 1.0 0.0
+		}
+	}
+}
