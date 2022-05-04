@@ -8,13 +8,13 @@
 
 
 	//if (t)rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
-RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, Vector4 rotation, RigidbodyComponent * r, float m, bool useG, bool isK, bool isStatic) :
+RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, Vector4 rotation, RigidbodyComponent * r, float m, bool useG, bool isK) :
 	mass(m), useGravity(useG), isKinematic(isK) {
 	freezePosition = std::vector<bool>(3, false);
 	freezeRotation = std::vector<bool>(3, false);
 	rbC = r;
 	createRigidBodyComponent(RigidBodyType::Box, pos, scale, rotation,  bodyMeshName);
-	if(isStatic) rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_STATIC_OBJECT);
+	
 }
 
 void RigidBody::init() {

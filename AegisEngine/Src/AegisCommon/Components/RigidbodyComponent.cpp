@@ -5,7 +5,7 @@
 #include "../Utils/GameLoopData.h"
 #include "../Utils/MathUtils.h"
 
-RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m, bool useG, bool isK, bool isStatic)
+RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m, bool useG, bool isK)
 	: AegisComponent("Rigidbody", ent)
 {
 	transform = ent->GetTransform();
@@ -13,7 +13,7 @@ RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, fl
 	
 	auto rot = transform->GetRotation();
 	Vector4 rotVec(rot.x, rot.y, rot.z, rot.w);
-	rigidbody = new RigidBody(bodyMeshName, transform->GetPosition(), transform->GetScale(), rotVec,this, m, useG, isK, isStatic);
+	rigidbody = new RigidBody(bodyMeshName, transform->GetPosition(), transform->GetScale(), rotVec,this, m, useG, isK);
 	mEntity_->getScene()->AddPhysicsEntity(this);
 	SetDataAsInnerType(this);
 }
@@ -103,8 +103,8 @@ RigidbodyComponent* CreateRigidbody(Entity* ent, LuaRef args) //Doesn't belong t
 	float mass = LuaMngr()->ParseFloat(args["mass"], 1);
 	bool useGravity = LuaMngr()->ParseBool(args["useGravity"], true);
 	bool isKinematic = LuaMngr()->ParseBool(args["isKinematic"], false);
-	bool isStatic = LuaMngr()->ParseBool(args["isStatic"], false);
-	return new RigidbodyComponent(ent, bodyName, mass, useGravity, isKinematic,isStatic);
+	
+	return new RigidbodyComponent(ent, bodyName, mass, useGravity, isKinematic);
 }
 
 void RigidbodyComponent::ConvertToLua(lua_State* state)

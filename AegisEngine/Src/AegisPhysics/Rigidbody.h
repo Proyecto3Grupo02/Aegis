@@ -19,7 +19,7 @@ public:
 	enum RigidBodyType { Box, Sphere, CapsuleX, CapsuleZ, Custom };
 
 
-	RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, Vector4 rotation, RigidbodyComponent* r, float m = 1, bool useG = true, bool isK = false, bool isStatic = false);
+	RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, Vector4 rotation, RigidbodyComponent* r, float m = 1, bool useG = true, bool isK = false);
 	void init();
 	~RigidBody();
 	//void fixedUpdate();

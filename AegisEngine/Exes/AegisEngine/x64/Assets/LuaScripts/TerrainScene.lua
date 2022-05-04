@@ -135,7 +135,8 @@ local scene = {
 				type = "Rigidbody",
 				data = 
 				{
-					isKinematic = true
+					mass = 0;
+					--isKinematic = true
 				}
 			}
 		}
@@ -151,7 +152,8 @@ local scene = {
 				type = "Rigidbody",
 				data = 
 				{
-					isKinematic = true
+					mass = 0;
+					--isKinematic = true
 				}
 			}
 		}
@@ -167,7 +169,8 @@ local scene = {
 				type = "Rigidbody",
 				data = 
 				{
-					isKinematic = true
+					mass = 0;
+					--isKinematic = true
 				}
 			}
 		}
@@ -183,12 +186,14 @@ local scene = {
 				type = "Rigidbody",
 				data = 
 				{
-					isKinematic = true
+					mass = 0;
+					--isKinematic = true
 				}
 			}
 		}
 	},
 	{
+		
 		type = "Entity",
 		name = "Columna",
 		position = { x = 6, y = -55, z = 19 },
@@ -199,8 +204,9 @@ local scene = {
 				type = "Rigidbody",
 				data = 
 				{
+					mass = 0;
 					--isKinematic = true
-					isStatic = true;
+					--isStatic = true;
 				}
 			}
 			-- ,

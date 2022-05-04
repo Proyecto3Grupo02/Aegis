@@ -14,7 +14,7 @@ class Entity;
 class RigidbodyComponent : public AegisComponent, public ILuaObject
 {
 public:
-	RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m = 1, bool useG = true, bool isK = false, bool isStatic = false);
+	RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m = 1, bool useG = true, bool isK = false);
 	virtual ~RigidbodyComponent();
 
 	virtual void init() override {};
