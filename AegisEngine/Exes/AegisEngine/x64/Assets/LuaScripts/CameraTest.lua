@@ -41,7 +41,7 @@ function table.GetNew(entity, params)
                 local y = mouseMotion.y * deltaTime * data.senstivity;
                 local x = mouseMotion.x * deltaTime * data.senstivity;
                 --transform.localEulerAngles =  transform.localEulerAngles - Aegis.Maths.Vector3(y, x, 0);
-                data.targetRotation = transform.localEulerAngles -  Aegis.Maths.Vector3(y, x, 0);
+                data.targetRotation = transform.localEulerAngles -  Aegis.Maths.Vector3(y, 0, 0); -- solo rota por libre en el eje y
 
                 --print("Mouse X: " .. mouseMotion.x .. " Mouse Y: " .. mouseMotion.y);
             end;

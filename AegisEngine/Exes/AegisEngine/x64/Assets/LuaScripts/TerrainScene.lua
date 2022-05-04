@@ -20,7 +20,7 @@ local scene = {
 				type = "Renderer",
 				data = {
 					mesh = "Cube.mesh",
-					material= "blue"
+					material= "playerMat"
 				}
 			},
 			{
