@@ -1,6 +1,6 @@
 #include "SoundSystem.h"
 #include <fmod_errors.h>
-
+#include "DebugManager.h"
 SoundSystem::SoundSystem() :
 	system(nullptr), 
 	listener(nullptr), 
