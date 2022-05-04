@@ -14,13 +14,13 @@ local scene = {
 	{
 		type = "Entity",
 		name = "Player",
-		position = {x = -5, y = -30},
+		position = {x = -5, y = -50},
 		components = {
 			{
 				type = "Renderer",
 				data = {
 					mesh = "Cube.mesh",
-					material= "blue"
+					material= "playerMat"
 				}
 			},
 			{
@@ -121,6 +121,15 @@ local scene = {
 					material= "blue"
 				}
 			},
+		}
+	},
+	{
+		type = "Entity",
+		name = "ParedFrontal",
+		position = { y = -50, z = 30 },
+		scale = { x = 100, y = 50, z = 5},
+		components = 
+		{
 			{
 				type = "Rigidbody",
 				data = 
@@ -128,6 +137,78 @@ local scene = {
 					isKinematic = true
 				}
 			}
+		}
+	},
+	{
+		type = "Entity",
+		name = "ParedLateral",
+		position = { y = -50, x = 30 },
+		scale = { x = 5, y = 50, z = 100},
+		components = 
+		{
+			{
+				type = "Rigidbody",
+				data = 
+				{
+					isKinematic = true
+				}
+			}
+		}
+	},
+	{
+		type = "Entity",
+		name = "ParedTrasera",
+		position = { y = -50, z = -30 },
+		scale = { x = 100, y = 50, z = 5},
+		components = 
+		{
+			{
+				type = "Rigidbody",
+				data = 
+				{
+					isKinematic = true
+				}
+			}
+		}
+	},
+	{
+		type = "Entity",
+		name = "ParedIzquierda",
+		position = { y = -50, x = -30 },
+		scale = { x = 5, y = 50, z = 100},
+		components = 
+		{
+			{
+				type = "Rigidbody",
+				data = 
+				{
+					isKinematic = true
+				}
+			}
+		}
+	},
+	{
+		type = "Entity",
+		name = "Columna",
+		position = { x = 6, y = -55, z = 19 },
+		scale = { x = 3.5, y = 20, z = 3.5},
+		components = 
+		{
+			{
+				type = "Rigidbody",
+				data = 
+				{
+					isKinematic = true
+				}
+			}
+			-- ,
+			-- {
+			-- 	type = "Renderer",
+			-- 	data = {
+			-- 			mesh = "Cube.mesh",
+			-- 			material= "yellow"
+			-- 		}
+			-- }
 		}
 	},
 	{

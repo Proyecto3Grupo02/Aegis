@@ -93,9 +93,6 @@
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Vector3.h">
       <Filter>Archivos de encabezado\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Utils\Time().h">
-      <Filter>Archivos de encabezado\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Vector4.h">
       <Filter>Archivos de encabezado\Utils</Filter>
     </ClInclude>
@@ -139,6 +136,12 @@
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Vector2.h">
+      <Filter>Archivos de encabezado\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisCommon\Utils\GameLoopData.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisCommon\Utils\LuaMaths.h">
       <Filter>Archivos de encabezado\Utils</Filter>
     </ClInclude>
   </ItemGroup>
