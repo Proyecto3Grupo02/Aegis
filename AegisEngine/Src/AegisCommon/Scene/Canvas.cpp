@@ -10,6 +10,8 @@ Canvas::Canvas(OgreWrapper* wrap): ogreWrapper(wrap)
 
 Canvas::~Canvas()
 {
+	for (UIElement* elem : *mElems_)
+		delete mElems_;
 
 }
 

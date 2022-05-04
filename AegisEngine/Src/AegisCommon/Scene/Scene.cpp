@@ -34,6 +34,7 @@ Scene::~Scene() {
 	
 	RemoveAndFreePendingEntities();
 
+	delete this->mCanvas_;
 	delete this->entities;
 	delete this->uninitializedEntities;
 	delete this->physicsEntities;
@@ -49,7 +50,6 @@ bool Scene::Init()
 	cameraEntity->addComponentFromLua(new CameraComponent(cameraEntity, camera));
 	ExportToLua(cameraEntity, "MainCamera");
 
-	mCanvas_ = new Canvas(ogreWrapper);
 	return true;
 }
 
@@ -149,12 +149,16 @@ Ogre::SceneManager* Scene::GetOgreManager()
 {
 	return ogreNode->getCreator();
 }
-
+void Scene::CreateCanvas()
+{
+	mCanvas_ = new Canvas(ogreWrapper);
+}
 void Scene::ConvertToLua(lua_State* state)
 {
 	getGlobalNamespace(state).
 		beginNamespace("Aegis").
 			beginClass<Scene>("Scene").
+			addFunction("CreateCanvas", &Scene::CreateCanvas).
 			addFunction("AddEntity", &Scene::AddEntity).
 			endClass().
 		endNamespace();

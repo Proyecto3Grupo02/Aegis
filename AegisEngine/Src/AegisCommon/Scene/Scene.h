@@ -129,6 +129,8 @@ public:
 	Ogre::SceneNode* GetNewNode();
 	Ogre::SceneManager* GetOgreManager();
 
+	void CreateCanvas();
+
 	static void ConvertToLua(lua_State* state);
 };
 

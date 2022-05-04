@@ -133,8 +133,7 @@ void OgreWrapper::CreateWindowNative()
 	if (!SDL_WasInit(SDL_INIT_VIDEO)) SDL_InitSubSystem(SDL_INIT_VIDEO);
 
 	native = SDL_CreateWindow("Aegis Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, flags);
-	renderer_= SDL_CreateRenderer(native, -1, SDL_RENDERER_ACCELERATED);
-
+	
 	SDL_SysWMinfo wmInfo;
 	SDL_VERSION(&wmInfo.version);
 	if (SDL_GetWindowWMInfo(native, &wmInfo) == SDL_FALSE) {

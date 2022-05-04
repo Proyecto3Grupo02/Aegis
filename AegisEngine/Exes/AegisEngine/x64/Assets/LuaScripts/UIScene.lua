@@ -14,6 +14,14 @@ local scene = {
     },
 
 	{
+		type= "Canvas",
+		elements={
+			
+		}
+
+	},
+
+	{
 		type = "Entity",
 		name = "Cubo",
 		position = { y = 2},

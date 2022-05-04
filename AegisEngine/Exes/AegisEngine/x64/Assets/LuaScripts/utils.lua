@@ -177,15 +177,17 @@ funcs.ParseSceneObject = function(object)
 	end;
 	 if object.type=="Canvas" then
 		local canvas= funcs.ParseCanvas(object);
-		mCanvas=canvas;
+		if canvas ~=nil then
+			mCanvas=canvas;
 
 	end;
 
-	local entity = funcs.TreatSpecialCase(object);
+	else
+		local entity = funcs.TreatSpecialCase(object);
 		if entity ~= nil then
 			entities[entity:GetName()] = entity;
 		end;
-	
+	end;
 end;
 
 funcs.ParseScene = function(scene)
@@ -202,9 +204,8 @@ end;
 funcs.ParseCanvas= function (object)
 	print("creating canvas");
 
-	local canvas= Aegis.CreateCanvas(currentScene);
+	local canvas= Aegis.CreateCanvas();
 
-	currentScene:AddCanvas(object);
 	funcs.AddElems(canvas, object.elements);
 
 
