@@ -8,20 +8,31 @@ function table.GetNew(entity, params)
     local funcs = component.funcs;
     local renderer = component.entity:GetComponent("Renderer").type;
     local offset;
+    local ready;
     data.player = "player";
     function Init()
-        -- rigidbody = component.entity:GetComponent("Rigidbody").type;
+        rigidbody = component.entity:GetComponent("Rigidbody").type;
         renderer.visible=false;
         offset = Aegis.Maths.Vector3(0,-0.5,-2);
-        -- data.player.transform.forward * 3 + 
         transform.position = offset; 
+        ready = false;
      end;
 
 	function Update(deltaTime)
         if Input:KeyWasPressed("Space")then
-             renderer.visible = not renderer.visible;
-        end;            
-        transform.position = offset; 
+            renderer.visible = not renderer.visible;  
+            ready = not ready         
+        end;   
+        if ready then
+            if Input:KeyWasPressed("y")then
+                rigidbody:AddForce(Aegis.Maths.Vector3(0,-20,-100))
+            end;   
+        else 
+            rigidbody.position = offset
+        end 
+
+
+   
     end;
 
     function LateUpdate(deltaTime) end;

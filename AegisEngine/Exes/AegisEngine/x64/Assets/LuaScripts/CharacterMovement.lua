@@ -14,14 +14,14 @@ function table.GetNew(entity, params)
     local cameraTf = nil;
     local forward
     local euAng;
-    data.senstivity = 0.2;
+    data.sensitivity = 0.2;
 
     function Init()
         rigidbody = component.entity:GetComponent("Rigidbody").type;
         w=false; a=false; s=false; d=false; fishing = false;
         offset = Aegis.Maths.Vector3(0, 5,10)
         data.camera.transform:SetParent(entity)
-        data.bait.transform:SetParent(entity) --ANZUELO------------------
+        data.bait.transform:SetParent(entity)
         cameraTf=data.camera.transform;
         forward = cameraTf.forward;
         euAng = transform.localEulerAngles;
@@ -35,18 +35,19 @@ function table.GetNew(entity, params)
         end;
         if (fishing)then
             cameraTf.position = Aegis.Maths.Vector3(0,0,0)
-            w=false; a=false; s=false; d=false;
-            return;
-        end;
-        cameraTf.position= offset;
-        w = Input:IsKeyDown("w");
-        a = Input:IsKeyDown("a");
-        s = Input:IsKeyDown("s");
-        d = Input:IsKeyDown("d");
-    -- IF key is f then set rigidbody pos to init pos
-        if Input:IsKeyDown("f") then
+            data.sensitivity=0.01
+        else   
+            data.sensitivity = 0.2
+            cameraTf.position= offset;
+            w = Input:IsKeyDown("w");
+            a = Input:IsKeyDown("a");
+            s = Input:IsKeyDown("s");
+            d = Input:IsKeyDown("d");
+            -- IF key is f then set rigidbody pos to init pos
+            if Input:IsKeyDown("f") then
             rigidbody.position = data.initPos; 
-        end;
+            end;
+        end;   
     end;
 
     function LateUpdate(deltaTime) end;
@@ -54,7 +55,7 @@ function table.GetNew(entity, params)
 	function FixedUpdate()
         local mouseMotion = Input:GetMouseMotion();
         if mouseMotion.x ~= 0 and mouseMotion.y ~= 0 then
-            local x = mouseMotion.x * data.senstivity;
+            local x = mouseMotion.x * data.sensitivity;
             euAng = (transform.localEulerAngles -  Aegis.Maths.Vector3(0, x, 0));
         end;
         -- Lerp current Rotation to target rotation

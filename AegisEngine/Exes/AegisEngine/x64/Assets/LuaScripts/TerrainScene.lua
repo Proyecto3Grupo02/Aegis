@@ -53,13 +53,13 @@ local scene = {
 					material= "green"
 				}
 			},
-			-- {
-			-- 	type = "Rigidbody",
-			-- 	data = 
-			-- 	{
-			-- 		useGravity = false,
-			-- 	}
-			-- },
+			{
+				type = "Rigidbody",
+				data = 
+				{
+					useGravity = false,
+				}
+			},
 			{
 				type = "Bait",
 				data={
