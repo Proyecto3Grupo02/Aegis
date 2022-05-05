@@ -13,13 +13,13 @@ local scene = {
         }
     },
 
-	{
-		type= "Canvas",
-		elements={
+	-- {
+	-- 	type= "Canvas",
+	-- 	elements={
 			
-		}
+	-- 	}
 
-	},
+	-- },
 
 	{
 		type = "Entity",
