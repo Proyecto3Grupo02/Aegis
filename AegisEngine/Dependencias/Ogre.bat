@@ -34,8 +34,8 @@ msbuild %OGRE_BUILD_SOL%  /t:ALL_BUILD /p:platform=x64 /p:configuration=Release
 echo OGRE compiled correctly
 
 echo compiling SDL2...
-msbuild %OGRE_BUILD_SOL%  /t:ALL_BUILD /p:platform=x64 /p:configuration=Debug
-msbuild %OGRE_BUILD_SOL%  /t:ALL_BUILD /p:platform=x64 /p:configuration=Release
+msbuild %SDL2_BUILD_SOL%  /t:ALL_BUILD /p:platform=x64 /p:configuration=Debug
+msbuild %SDL2_BUILD_SOL%  /t:ALL_BUILD /p:platform=x64 /p:configuration=Release
 echo SDL2 compiled correctly
 
 goto end
