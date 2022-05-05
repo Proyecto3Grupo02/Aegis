@@ -29,7 +29,7 @@ Aegis cuenta con las siguientes Fatures:
 * **Gestión de sonido** (FMOD)
 
 La solución del motor viene estructurada en proyectos, cada uno encargado de realizar una función concreta. Los proyectos más básicos se encargan de la comunicación entre Aegis y las librerías que hemos usado (Ogre, Bullet, etc). Estos  proyectos son a su vez la base de proyectos mas generales encargados de gestionar las escenas, entidades, y componentes.
-### Jeraquía de los Proyectos:
+### Jerarquía de los Proyectos:
 ![Copia de Diagrama Proyectos drawio](https://user-images.githubusercontent.com/62613312/166907813-8cf4b186-e33c-48e4-bfd6-7b55c57cdfdd.png)
 
 ### Organización de los Proyectos:
