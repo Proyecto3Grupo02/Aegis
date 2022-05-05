@@ -326,6 +326,16 @@ local scene = {
 				type = "RandomMovement"
 			}
 		}
-	}
+	},
+	{
+		type = "Entity",
+		name = "Spawner",
+		components = {	
+			
+			{
+				type = "Spawner"
+			}
+		}
+	},
 };
 return scene;
