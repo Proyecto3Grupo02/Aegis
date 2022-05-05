@@ -12,6 +12,7 @@ Documento de diseño de motor
 * [**Pivotal Tracker**](https://www.pivotaltracker.com/n/projects/2555675)
 * [**Repositorio**](https://github.com/Proyecto3Grupo02)
 * [**Scripting API**](Aegis_Arquitecture/LuaScriptingApi.md)
+* [**Documentación del juego**](https://github.com/Proyecto3Grupo02/ThrowTheLine/blob/main/README.md)
 
 ## Intro
 Aegis es un motor de videojuegos desarrollado por Kirin Studios en C++ con el fin de proporcionar un soporte para programar juegos usando LUA como lenguaje de scripting. ([**Consultar la documentación de la API**](Aegis_Arquitecture/LuaScriptingApi.md))
@@ -30,10 +31,10 @@ Aegis cuenta con las siguientes Fatures:
 
 La solución del motor viene estructurada en proyectos, cada uno encargado de realizar una función concreta. Los proyectos más básicos se encargan de la comunicación entre Aegis y las librerías que hemos usado (Ogre, Bullet, etc). Estos  proyectos son a su vez la base de proyectos mas generales encargados de gestionar las escenas, entidades, y componentes.
 ### Jerarquía de los Proyectos:
-![Copia de Diagrama Proyectos drawio](https://user-images.githubusercontent.com/62613312/166907813-8cf4b186-e33c-48e4-bfd6-7b55c57cdfdd.png)
+![Copia de Diagrama Proyectos](https://user-images.githubusercontent.com/62613312/166960800-33933d06-c510-432e-8fba-342dd802cd41.jpg)
 
 ### Organización de los Proyectos:
-![Untitled Diagram drawio (1)](https://user-images.githubusercontent.com/62613312/166905829-daa6b99f-3b6d-4542-920b-b787ae5e749f.png)
+![Diagrama Proyectos drawio](https://user-images.githubusercontent.com/62613312/166960843-3bf62eb9-0eb1-4a19-92b1-00195deb26d9.png)
 
 ## Organización del directorio:
 Aegis Engine  (carpeta principal)
