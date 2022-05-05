@@ -31,15 +31,15 @@ protected:
 	void SetDataAsInnerType(T* component);
 public:
     UIComponent(std::string componentName);
-    //UIComponent(std::string componentName, UIElement* ent);
+    UIComponent(std::string componentName, UIElement* ent);
     virtual ~UIComponent() = default;
 
 	virtual void init() override;
     virtual void render() override;
- //   virtual void OnMouse(UIElement* other);
+    virtual void OnMouse(UIElement* other);
 
- //   virtual void OnClickDown(UIElement* other);
- //   virtual void OnClickUp(UIElement* other);
+    virtual void OnClickDown(UIElement* other);
+    virtual void OnClickUp(UIElement* other);
 
 	inline UIElement* getElement() const { return mElement_; }
 
