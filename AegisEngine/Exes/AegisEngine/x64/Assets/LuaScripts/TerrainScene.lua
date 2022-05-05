@@ -19,7 +19,7 @@ local scene = {
 			{
 				type = "Renderer",
 				data = {
-					mesh = "Cube.mesh",
+					mesh = "character.mesh",
 					material= "playerMat"
 				}
 			},
@@ -50,7 +50,7 @@ local scene = {
 			{
 				type = "Renderer",
 				data = {
-					mesh = "Cube.mesh",
+					mesh = "hook.mesh",
 					material= "green"
 				}
 			},
@@ -78,7 +78,7 @@ local scene = {
 	-- 		{
 	-- 			type = "Renderer",
 	-- 			data = {
-	-- 				mesh = "fish.mesh",
+	-- 				mesh = "pez2.mesh",
 	-- 				material= "pez"
 	-- 			}
 	-- 		},
@@ -295,7 +295,7 @@ local scene = {
 			{
 				type = "Renderer",
 				data = {
-						mesh = "fish.mesh",
+						mesh = "pezBetta.mesh",
 						material= "yellow"
 					}
 			},
