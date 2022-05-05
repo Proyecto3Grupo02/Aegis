@@ -19,7 +19,7 @@ function table.GetNew(entity, params)
     function Init()
         rigidbody = component.entity:GetComponent("Rigidbody").type;
         w=false; a=false; s=false; d=false; fishing = false;
-        offset = Aegis.Maths.Vector3(0, 5,10)
+        offset = Aegis.Maths.Vector3(0, 10,20)
         data.camera.transform:SetParent(entity)
         data.bait.transform:SetParent(entity)
         cameraTf=data.camera.transform;
@@ -31,7 +31,6 @@ function table.GetNew(entity, params)
 	function Update(deltaTime)
         if(Input:KeyWasPressed("Space"))then
             fishing = not fishing;
-            print(fishing)
         end;
         if (fishing)then
             cameraTf.position = Aegis.Maths.Vector3(0,0,0)
