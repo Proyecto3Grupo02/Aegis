@@ -81,13 +81,16 @@
     <OutDir>$(SolutionDir)Exes\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <SourcePath>$(SolutionDir)src\;$(SolutionDir)Exes\$(Platform)\$(Configuration)\;$(SourcePath)</SourcePath>
+    <LibraryPath>$(SolutionDir)SDL2_image-2.0.1\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)SDL2_image-2.0.1\include;$(SolutionDir)\Dependencias\Ogre\src\OgreMain\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IntDir>$(SolutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)Exes\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
-    <IncludePath>$(SolutionDir)\Dependencias\Ogre\src\OgreMain\include</IncludePath>
+    <IncludePath>$(SolutionDir)SDL2_image-2.0.1\include;$(SolutionDir)\Dependencias\Ogre\src\OgreMain\include;$(SolutionDir)\Dependencias\Ogre\src\OgreMain\include</IncludePath>
     <SourcePath>$(SolutionDir)src\;$(SolutionDir)Exes\$(Platform)\$(Configuration)\;$(SourcePath)</SourcePath>
+    <LibraryPath>$(SolutionDir)SDL2_image-2.0.1\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
