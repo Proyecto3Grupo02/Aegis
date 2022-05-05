@@ -74,8 +74,8 @@ local scene = {
 	{
 		type = "Entity",
 		name = "Canya",
-		position = {y = -4, z = -1},
-		scale = {x=0.2, y=0.2, z=0.2},
+		position = {x = 0.5, y = -2, z = -2},
+		scale = {x=0.1, y=0.1, z=0.1},
 		components = {
 			{
 				type = "Renderer",
