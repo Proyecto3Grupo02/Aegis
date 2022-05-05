@@ -1,9 +1,10 @@
 #include "UIComponent.h"
 #include "../Entity/UIElement.h"
-//UIComponent::UIComponent(std::string componentName, UIElement* ent):
-//	Component(componentName,nullptr), mElement_(ent)
-//{
-//}
+
+UIComponent::UIComponent(std::string componentName, UIElement* ent):
+	Component(componentName,nullptr), mElement_(ent)
+{
+}
 
 UIComponent::UIComponent(std::string componentName) :
 	Component(componentName, nullptr)
@@ -18,20 +19,20 @@ void UIComponent::render()
 {
 }
 
-//void UIComponent::OnMouse(UIElement* other)
-//{
-//	CallLuaRefFunc(OnMouseFunc, other);
-//}
-//
-//void UIComponent::OnClickDown(UIElement* other)
-//{
-//	CallLuaRefFunc(OnClickDownFunc, other);
-//}
-//
-//void UIComponent::OnClickUp(UIElement* other)
-//{
-//	CallLuaRefFunc(OnClickUpFunc, other);
-//}
+void UIComponent::OnMouse(UIElement* other)
+{
+	CallLuaRefFunc(OnMouseFunc, other);
+}
+
+void UIComponent::OnClickDown(UIElement* other)
+{
+	CallLuaRefFunc(OnClickDownFunc, other);
+}
+
+void UIComponent::OnClickUp(UIElement* other)
+{
+	CallLuaRefFunc(OnClickUpFunc, other);
+}
 
 void UIComponent::setCallbacks(LuaRef updateFunc)
 {
@@ -90,10 +91,10 @@ void UIComponent::PrintErrorModifyingTables(std::string fieldName, std::string t
 //#endif
 }
 
-//UIComponent* CreateComponent(std::string componentName, UIElement* elem)
-//{
-//	return new UIComponent(componentName, elem);
-//}
+UIComponent* CreateComponent(std::string componentName, UIElement* elem)
+{
+	return new UIComponent(componentName, elem);
+}
 
 template<class T>
 void UIComponent::CallLuaRefFunc(LuaRef func, T args)
