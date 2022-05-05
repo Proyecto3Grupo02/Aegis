@@ -2,23 +2,15 @@
 #include "Texture.h"
 
 
-//Texture::Texture(SDL_Renderer* rend, const std::string& filename, double width, double height):
-//	mRenderer_(rend), mWidth_(width), mHeight_(height)
-//{
-//	SDL_Surface* surface = IMG_Load(filename.c_str());
-//	if (surface != nullptr) {
-//		mTexture_ = SDL_CreateTextureFromSurface(mRenderer_, surface);
-//	}
-//}
-//
-//Texture::Texture(SDL_Renderer* rend, const std::string& filename, double width, double height, float angle):
-//	mRenderer_(rend), mWidth_(width), mHeight_(height), mRotation_(angle)
-//{
-//	SDL_Surface* surface = IMG_Load(filename.c_str());
-//	if (surface != nullptr) {
-//		mTexture_ = SDL_CreateTextureFromSurface(mRenderer_, surface);
-//	}
-//}
+Texture::Texture(SDL_Renderer* rend, const std::string& filename, double width, double height):
+	mRenderer_(rend), mWidth_(width), mHeight_(height), mTexture_(nullptr), mRotation_(0)
+{
+	SDL_Surface* surface = IMG_Load(filename.c_str());
+	if (surface != nullptr) {
+		mTexture_ = SDL_CreateTextureFromSurface(mRenderer_, surface);
+	}
+}
+
 void Texture::render(int x, int y)
 {
 	SDL_Rect dest = { x, y, mWidth_, mHeight_ };

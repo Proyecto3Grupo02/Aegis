@@ -72,6 +72,11 @@ void RigidbodyComponent::AddForceForward(float force) {
 	AddForce(rot * force);
 }
 
+void RigidbodyComponent::ResetForce()
+{
+	rigidbody->clearForces();
+}
+
 void RigidbodyComponent::AddTorque(Vector3 torque) {
 	rigidbody->addTorque(torque);
 }
@@ -99,11 +104,11 @@ void RigidbodyComponent::FreezeRot (bool _x, bool _y, bool _z) {
 }
 
 //GRAVITY----------------------------------------------------------------------------------------------------
-bool RigidbodyComponent::GetGravity()const {
+bool RigidbodyComponent::GetUsingGravity()const {
 	return rigidbody->getUseGravity();
 }
 
-void RigidbodyComponent::SetGravity(bool g_) {
+void RigidbodyComponent::SetUsingGravity(bool g_) {
 	rigidbody->setUsingGravity(g_);
 }
 
@@ -128,9 +133,10 @@ void RigidbodyComponent::ConvertToLua(lua_State* state)
 			addFunction("CreateRigidbody", CreateRigidbody).
 				deriveClass<RigidbodyComponent, AegisComponent>("Rigidbody").
 					addProperty("position", &RigidbodyComponent::GetPosition, &RigidbodyComponent::SetPosition).
-					addProperty("gravity", &RigidbodyComponent::GetGravity, &RigidbodyComponent::SetGravity).
+					addProperty("useGravity", &RigidbodyComponent::GetUsingGravity, &RigidbodyComponent::SetUsingGravity).
 					addFunction("AddForce", &RigidbodyComponent::AddForce).
 					addFunction("GetForce", &RigidbodyComponent::GetForce).
+					addFunction("ClearForce", &RigidbodyComponent::ResetForce).
 					addFunction("AccelerateTo", &RigidbodyComponent::AccelerateTo).
 					addFunction("AccelerateToRand", &RigidbodyComponent::AccelerateToRand).
 					addFunction("AddTorque", &RigidbodyComponent::AddTorque).

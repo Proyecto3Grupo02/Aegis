@@ -20,7 +20,7 @@ local scene = {
 			{
 				type = "Renderer",
 				data = {
-					mesh = "Cube.mesh",
+					mesh = "character.mesh",
 					material= "playerMat"
 				}
 			},
@@ -36,7 +36,8 @@ local scene = {
 				data = 
 				{
 					camera = "@MainCamera",
-					bait = "@Anzuelo"
+					bait = "@Anzuelo",
+					canya = "@Canya"
 				}			
 			}
 		}
@@ -46,12 +47,14 @@ local scene = {
 		name = "Anzuelo",
 		position = {x = -5, y = -30},
 		scale = {x=0.2, y=0.2, z=0.2},
+		rotation = {x = 0, y = 45, z =0},
+		--scale = {x=2, y=2, z=2},--Meitin necesita ver el anzuelo
 		components = {
 			{
 				type = "Renderer",
 				data = {
-					mesh = "Cube.mesh",
-					material= "green"
+					mesh = "hook.mesh",
+					material= "red"
 				}
 			},
 			{
@@ -70,6 +73,26 @@ local scene = {
 			}
 		}
 	},
+	{
+		type = "Entity",
+		name = "Canya",
+		position = {x = 0.3, y = -2, z = -2},
+		scale = {x=0.1, y=0.1, z=0.1},
+		rotation = {x = 0, y = 45, z =0},
+		components = {
+			{
+				type = "Renderer",
+				data = {
+					mesh = "fishingRod.mesh",
+					material= "green"
+				}
+				
+			},
+			{
+				type = "Rod"
+			},
+		}
+	},
 	-- {
 	-- 	type = "Entity",
 	-- 	name = "Cubo2",
@@ -79,7 +102,7 @@ local scene = {
 	-- 		{
 	-- 			type = "Renderer",
 	-- 			data = {
-	-- 				mesh = "fish.mesh",
+	-- 				mesh = "pez2.mesh",
 	-- 				material= "pez"
 	-- 			}
 	-- 		},
@@ -128,7 +151,7 @@ local scene = {
 	{
 		type = "Entity",
 		name = "ParedFrontal",
-		position = { y = -50, z = 30 },
+		position = { y = -70, z = 30 },
 		scale = { x = 100, y = 50, z = 5},
 		components = 
 		{
@@ -140,12 +163,20 @@ local scene = {
 					--isKinematic = true
 				}
 			}
+			--  ,
+			-- {
+			-- 	type = "Renderer",
+			-- 	data = {
+			-- 			mesh = "Cube.mesh",
+			-- 			material= "yellow"
+			-- 		}			
+			-- }
 		}
 	},
 	{
 		type = "Entity",
 		name = "ParedLateral",
-		position = { y = -50, x = 30 },
+		position = { y = -70, x = 30 },
 		scale = { x = 5, y = 50, z = 100},
 		components = 
 		{
@@ -157,12 +188,20 @@ local scene = {
 					--isKinematic = true
 				}
 			}
+			-- ,
+			-- {
+			-- 	type = "Renderer",
+			-- 	data = {
+			-- 			mesh = "Cube.mesh",
+			-- 			material= "yellow"
+			-- 		}			
+			-- }
 		}
 	},
 	{
 		type = "Entity",
 		name = "ParedTrasera",
-		position = { y = -50, z = -30 },
+		position = { y = -70, z = -25 },
 		scale = { x = 100, y = 50, z = 5},
 		components = 
 		{
@@ -174,12 +213,20 @@ local scene = {
 					--isKinematic = true
 				}
 			}
+			-- ,
+			-- {
+			-- 	type = "Renderer",
+			-- 	data = {
+			-- 			mesh = "Cube.mesh",
+			-- 			material= "yellow"
+			-- 		}			
+			-- }
 		}
 	},
 	{
 		type = "Entity",
 		name = "ParedIzquierda",
-		position = { y = -50, x = -30 },
+		position = { y = -70, x = -25 },
 		scale = { x = 5, y = 50, z = 100},
 		components = 
 		{
@@ -191,13 +238,21 @@ local scene = {
 					--isKinematic = true
 				}
 			}
+			-- ,
+			-- {
+			-- 	type = "Renderer",
+			-- 	data = {
+			-- 			mesh = "Cube.mesh",
+			-- 			material= "yellow"
+			-- 		}			
+			-- }
 		}
 	},
 	{
 		
 		type = "Entity",
 		name = "Columna",
-		position = { x = 6, y = -55, z = 19 },
+		position = { x = 6, y = -58, z = 19 },
 		scale = { x = 3.5, y = 20, z = 3.5},
 		components = 
 		{
@@ -217,6 +272,30 @@ local scene = {
 			-- 			mesh = "Cube.mesh",
 			-- 			material= "yellow"
 			-- 		}
+			-- }
+		}
+	},
+	
+	{
+		type = "Entity",
+		name = "FondoLago",
+		position = { y = -63, x = 0 },
+		scale = { x = 80, y = 5, z = 80},
+		components = 
+		{
+			{
+				type = "Rigidbody",
+				data = 
+				{
+					isKinematic = true
+				}
+			},
+			-- {
+			-- 	type = "Renderer",
+			-- 	data = {
+			-- 			mesh = "Cube.mesh",
+			-- 			material= "yellow"
+			-- 		}			
 			-- }
 		}
 	},
@@ -246,7 +325,7 @@ local scene = {
 			{
 				type = "Renderer",
 				data = {
-						mesh = "pez1.mesh",
+						mesh = "pezBetta.mesh",
 						material= "yellow"
 					}
 			},
@@ -261,6 +340,15 @@ local scene = {
 				type = "RandomMovement"
 			}
 		}
-	}
+	},
+	{
+		type = "Entity",
+		name = "Spawner",
+		components = {	
+			{
+				type = "Spawner"
+			}
+		}
+	},
 };
 return scene;

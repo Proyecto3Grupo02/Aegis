@@ -6,6 +6,7 @@ material red
 		pass 
 		{
 			diffuse 1.0 0.0 0.0
+			ambient 1.0 0.0 0.0
 		}
 	}
 }
@@ -15,6 +16,7 @@ material LagoMat {
     technique {
         pass {
             diffuse 0.8 0.8 0.8 1.0
+			ambient 0.8 0.8 0.8 1.0
             specular 0.512 0.512 0.512 1.0 64.0
             alpha_to_coverage off
             colour_write on
@@ -84,6 +86,7 @@ material yellow // nombre
 		pass // al menos uno
 		{
 			diffuse 1.0 1.0 0.0
+			ambient 1.0 1.0 0.0
 		}
 	}
 }
@@ -95,6 +98,7 @@ material green // nombre
 		pass // al menos uno
 		{
 			diffuse 0.0 1.0 0.0 
+			ambient 0.0 1.0 0.0
 		}
 	}
 }
@@ -106,6 +110,7 @@ material mountain // nombre
 		pass // al menos uno
 		{
 			diffuse 0.63 0.5 0.38
+			ambient 0.63 0.5 0.38
 		}
 	}
 }
@@ -117,6 +122,7 @@ material mountain2 // nombre
 		pass // al menos uno
 		{
 			diffuse 0.42 0.23 0.16
+			ambient 0.42 0.23 0.16
 		}
 	}
 }
@@ -129,6 +135,7 @@ material grass // nombre
 		pass // al menos uno
 		{
 			diffuse 0.5 0.5 0.5
+			ambient 0.5 0.5 0.5
 			//diffuse vertexcolour
 
 			texture_unit
@@ -147,6 +154,7 @@ material pez // nombre
 		pass // al menos uno
 		{
 			diffuse 0.5 0.9 1.0
+			ambient 0.5 0.9 1.0
 		}
 	}
 }
@@ -158,6 +166,7 @@ material playerMat // nombre
 		pass // al menos uno
 		{
 			diffuse 1.0 1.0 0.0
+			ambient 1.0 1.0 0.0
 		}
 	}
 }
