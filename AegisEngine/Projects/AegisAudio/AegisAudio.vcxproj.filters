@@ -24,6 +24,9 @@
     <ClInclude Include="..\..\Src\AegisAudio\SoundResources.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\AegisAudio\SoundListener.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\AegisAudio\SoundSystem.cpp">
@@ -33,6 +36,9 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\AegisAudio\SoundResources.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AegisAudio\SoundListener.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>

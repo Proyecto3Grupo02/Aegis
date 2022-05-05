@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Interfacse">
-      <UniqueIdentifier>{2b0ccc15-e6ff-4e9d-a4bb-bc48567be410}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Structs">
-      <UniqueIdentifier>{555bd5c5-5782-4846-ac65-24709688796f}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\AegisEngine\AegisMain.cpp">

@@ -1,1 +1,0 @@
-//here I have to write a macro scripting for an auto self register of the components

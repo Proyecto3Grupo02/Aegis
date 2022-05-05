@@ -4,11 +4,11 @@
 #include "../AegisCommon/Utils/Vector3.h"
 #include <fmod.hpp>
 
-SoundEmitter::SoundEmitter() : emitterData(nullptr), pitch(0.0f), volume(0.0f)
+SoundEmitter::SoundEmitter() : emitterData_(nullptr), pitch(0.0f), volume(0.0f)
 {
 	SoundSystem* soundSystem = SoundSystem::getInstance();
 	this->pos = Vector3(0);
-	emitterData = soundSystem->createEmitter(&pos);
+	emitterData_ = soundSystem->createEmitter(&pos);
 	pitch = 1.0f;
 	volume = 1.0f;
 }
@@ -16,40 +16,40 @@ SoundEmitter::SoundEmitter() : emitterData(nullptr), pitch(0.0f), volume(0.0f)
 SoundEmitter::~SoundEmitter()
 {
 	SoundSystem* soundSystem = SoundSystem::getInstance();
-	soundSystem->removeEmitter(emitterData);
+	soundSystem->removeEmitter(emitterData_);
 }
 
 void SoundEmitter::playSound(const std::string& soundName, bool reverb)
 {
 	stop(soundName);
-	emitterData->position = &pos;
-	emitterData->channels[soundName]->channel = SoundSystem::getInstance()->playSound(soundName);
-	setUpChannel(emitterData->channels[soundName]->channel, reverb);
+	emitterData_->position = &pos;
+	emitterData_->channels[soundName]->channel = SoundSystem::getInstance()->playSound(soundName);
+	setUpChannel(emitterData_->channels[soundName]->channel, reverb);
 }
 
 void SoundEmitter::playMusic(const std::string& soundName, bool reverb)
 {
 	stop(soundName);	
-	emitterData->position = &pos;
-	emitterData->channels[soundName]->channel = SoundSystem::getInstance()->playMusic(soundName);
-	setUpChannel(emitterData->channels[soundName]->channel, reverb);
+	emitterData_->position = &pos;
+	emitterData_->channels[soundName]->channel = SoundSystem::getInstance()->playMusic(soundName);
+	setUpChannel(emitterData_->channels[soundName]->channel, reverb);
 }
 
 void SoundEmitter::stop(const std::string& sound)
 {
-	auto it = emitterData->channels.find(sound);
-	if (it != emitterData->channels.end()) {
+	auto it = emitterData_->channels.find(sound);
+	if (it != emitterData_->channels.end()) {
 		it->second->channel->stop();
 		delete it->second;
-		emitterData->channels.erase(it);
+		emitterData_->channels.erase(it);
 	}
 }
 
 void SoundEmitter::pause(const std::string& sound)
 {
 	bool p;
-	auto it = emitterData->channels.find(sound);
-	if (it != emitterData->channels.end()) {
+	auto it = emitterData_->channels.find(sound);
+	if (it != emitterData_->channels.end()) {
 		Channel* Channel = (*it).second->channel;
 		
 		Channel->getPaused(&p);
@@ -63,8 +63,8 @@ void SoundEmitter::pause(const std::string& sound)
 void SoundEmitter::resume(const std::string& sound)
 {
 	bool p;
-	auto it = emitterData->channels.find(sound);
-	if (it != emitterData->channels.end()) {
+	auto it = emitterData_->channels.find(sound);
+	if (it != emitterData_->channels.end()) {
 		Channel* Channel = (*it).second->channel;
 		Channel->getPaused(&p);
 		if (p) {
@@ -76,55 +76,55 @@ void SoundEmitter::resume(const std::string& sound)
 
 void SoundEmitter::stopAll()
 {
-	for (auto it = emitterData->channels.begin(); it != emitterData->channels.end();)
+	for (auto it = emitterData_->channels.begin(); it != emitterData_->channels.end();)
 		stop((*it++).first);
 }
 
 void SoundEmitter::pauseAll()
 {
-	for (auto it = emitterData->channels.begin(); it != emitterData->channels.end(); it++)
+	for (auto it = emitterData_->channels.begin(); it != emitterData_->channels.end(); it++)
 		pause((*it).first);
 }
 
 void SoundEmitter::resumeAll()
 {
-	for (auto it = emitterData->channels.begin(); it != emitterData->channels.end(); it++)
+	for (auto it = emitterData_->channels.begin(); it != emitterData_->channels.end(); it++)
 		resume((*it).first);
 }
 
 void SoundEmitter::setVolume(float volume)
 {
 	this->volume = volume;
-	for (auto it = emitterData->channels.begin(); it != emitterData->channels.end(); it++)
+	for (auto it = emitterData_->channels.begin(); it != emitterData_->channels.end(); it++)
 		setVolume(volume, (*it).first);
 }
 
 void SoundEmitter::setVolume(float volume, const std::string& sound)
 {
-	auto it = emitterData->channels.find(sound);
-	if (it != emitterData->channels.end()) 
+	auto it = emitterData_->channels.find(sound);
+	if (it != emitterData_->channels.end()) 
 		(*it).second->channel->setVolume(volume);
 }
 
 void SoundEmitter::setPitch(float pitch)
 {
 	this->pitch = pitch;
-	for (auto it = emitterData->channels.begin(); it != emitterData->channels.end(); it++)
+	for (auto it = emitterData_->channels.begin(); it != emitterData_->channels.end(); it++)
 		setPitch(pitch, (*it).first);
 }
 
 void SoundEmitter::setPitch(float pitch, const std::string& sound)
 {
-	auto it = emitterData->channels.find(sound);
-	if (it != emitterData->channels.end())
+	auto it = emitterData_->channels.find(sound);
+	if (it != emitterData_->channels.end())
 		(*it).second->channel->setPitch(pitch);
 }
 
 bool SoundEmitter::isPlaying(const std::string& soundName) const
 {
 	bool playing = false;
-	auto it = emitterData->channels.find(soundName);
-	if (it != emitterData->channels.end())
+	auto it = emitterData_->channels.find(soundName);
+	if (it != emitterData_->channels.end())
 		(*it).second->channel->isPlaying(&playing);
 	return playing;
 }

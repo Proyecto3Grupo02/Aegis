@@ -35,6 +35,7 @@
 #include "../AegisCommon/Components/RigidbodyComponent.h"
 #include "../AegisCommon/Utils/Vector2.h"
 #include "../AegisCommon/Utils/LuaMaths.h"
+#include "../AegisCommon/Components/SoundEmitterComponent.h"
 
 //using namespace luabridge;
 
@@ -85,6 +86,8 @@ void AegisMain::GameLoop() {
 			sceneManager->PreRenderScene();
 
 			ogreWrap->Render();
+
+			sceneManager->RenderUI();
 			Uint32 frameTime = SDL_GetTicks() - Time()->frameStartTime;
 
 			if (frameTime < frameTimeMS)
@@ -160,6 +163,7 @@ void AegisMain::ConvertObjectToLua()
 	CameraComponent::ConvertToLua(state);
 	AnimationComponent::ConvertToLua(state);
 	RigidbodyComponent::ConvertToLua(state);
+	SoundEmitterComponent::ConvertToLua(state);
 	LuaMaths::ConvertToLua(state);
 
 	ExportToLua(sceneManager->GetCurrentScene(), "currentScene");

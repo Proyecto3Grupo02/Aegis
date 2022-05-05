@@ -7,7 +7,7 @@ function table.GetNew(entity, params)
     local funcs = component.funcs;
     local clampedAngle = 90
     data.child = "Undefined";
-    data.senstivity = 40;
+    data.senstivity = 100;
     data.smoothStep = 10;
     data.targetRotation = transform.localEulerAngles;
 

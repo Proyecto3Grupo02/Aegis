@@ -1,9 +1,10 @@
 #include "SoundEmitterComponent.h"
 
 SoundEmitterComponent::SoundEmitterComponent(Entity* ent, std::string sound):
-	AegisComponent("SoundEmmiter", ent), mSound_(sound)
+	AegisComponent("SoundEmitter", ent), mSound_(sound)
 {
 	mEmmiter_ = new SoundEmitter();
+	mEmmiter_->playMusic(mSound_);
 }
 
 SoundEmitterComponent::~SoundEmitterComponent()
@@ -67,7 +68,7 @@ void SoundEmitterComponent::ConvertToLua(lua_State* state)
 		beginNamespace("Aegis").
 		beginNamespace("NativeComponents").
 		addFunction("createSoundEmitter", createSoundEmitter).
-		deriveClass<SoundEmitterComponent, AegisComponent>("SoundEmmiter").
+		deriveClass<SoundEmitterComponent, AegisComponent>("SoundEmitter").
 		addProperty("sound", &SoundEmitterComponent::getSound, &SoundEmitterComponent::setSound).
 		endClass().
 		endNamespace().

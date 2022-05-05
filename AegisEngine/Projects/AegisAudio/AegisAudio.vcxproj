@@ -20,11 +20,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AegisAudio\SoundEmitter.h" />
+    <ClInclude Include="..\..\Src\AegisAudio\SoundListener.h" />
     <ClInclude Include="..\..\Src\AegisAudio\SoundResources.h" />
     <ClInclude Include="..\..\Src\AegisAudio\SoundSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\AegisAudio\SoundEmitter.cpp" />
+    <ClCompile Include="..\..\Src\AegisAudio\SoundListener.cpp" />
     <ClCompile Include="..\..\Src\AegisAudio\SoundResources.cpp" />
     <ClCompile Include="..\..\Src\AegisAudio\SoundSystem.cpp" />
   </ItemGroup>
