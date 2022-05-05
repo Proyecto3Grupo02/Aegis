@@ -152,7 +152,7 @@ void RigidbodyComponent::changeGravity(Vector3 acc)
 	rigidbody->changeGravity(acc);
 }
 
-void RigidbodyComponent::Raycast()
+int RigidbodyComponent::Raycast()
 {
-	rigidbody->RaycastWorld(transform->GetForward());
+	return rigidbody->RaycastWorld(transform->GetForward());
 }

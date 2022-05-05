@@ -115,6 +115,7 @@ void RigidBody::setFreezeRotation(bool _x, bool _y, bool _z) {
 }
 
 int RigidBody::RaycastWorld(Vector3 f) {
+	f = f * -1;
 	btTransform aux; btVector3 forward = Physics()->parseToBulletVector(f);
 	btVector3 posAct; rigidBody->getMotionState()->getWorldTransform(aux); posAct = aux.getOrigin();
 		btCollisionWorld::ClosestRayResultCallback RayCallback(posAct, posAct + forward*10);
@@ -122,7 +123,7 @@ int RigidBody::RaycastWorld(Vector3 f) {
 		// Perform raycast
 		Physics()->dynamicsWorld->rayTest(posAct, posAct + forward * 10, RayCallback);
 		if (RayCallback.hasHit()) {
-
+			std::cout << "a";
 			RigidBody* rb = (RigidBody*)RayCallback.m_collisionObject->getUserPointer();
 			if (!rb->rigidBody->getInvMass()) 			
 				return 1;
@@ -192,7 +193,7 @@ void RigidBody::changeGravity(Vector3 acc)
 }
 
 void RigidBody::SetAngularFactor() {
-	rigidBody->setAngularFactor(btVector3(0, 0, 0));
+	rigidBody->setAngularFactor(btVector3(0,0 , 0));
 }
 
 void RigidBody::disableCol()

@@ -246,7 +246,7 @@ local scene = {
 			{
 				type = "Renderer",
 				data = {
-						mesh = "fish.mesh",
+						mesh = "pez1.mesh",
 						material= "yellow"
 					}
 			},

@@ -31,38 +31,30 @@ function table.GetNew(entity, params)
 		if acumulatedDT > lastTime + 1 then
 			canRoot=true;
 			root = math.random(-10,10);
-			lastTime = acumulatedDT;		
+			lastTime = acumulatedDT;	
+			ray = true;		
 		end;
-		if acumulatedRay > lastTimeRay + 1 then
-			ray = true;
-			
-			random = math.random(0,3); 
-			random2 = math.random(0,3)
-			-- while (random == 1) do 
-			-- 	random = math.random(0,3); 
-			-- 	random= random - 1; 
-			-- end;
-			lastTimeRay = acumulatedRay;
-		end;
-		acumulatedRay = acumulatedRay + deltaTime;
+		-- if acumulatedRay > lastTimeRay + 1 then
+		-- 	ray = true;			
+		-- 	random = math.random(-10,10); 			
+		-- end;
+		--acumulatedRay = acumulatedRay + deltaTime;
 		acumulatedDT = acumulatedDT + deltaTime;
 	end;
     
 	function LateUpdate(deltaTime)
 	end;
 	function FixedUpdate() 
-		rigidbody:AccelerateTo(Aegis.Maths.Vector3(0,0,0), 0);
-		if canRoot then
-			--rigidbody:SetRotationEuler(transform.localEulerAngles + Aegis.Maths.Vector3(0,random*3,0));
-			rigidbody:AccelerateTo(Aegis.Maths.Vector3(random*3,0,random2*3), 100000000);			
-			--rigidbody:AccelerateToRand();
-			--rigidbody:AddTorque(Aegis.Maths.Vector3(0,root,0));
-			canRoot=false;
-		end;
-		--comprobacion de colision
-		if ray and rigidbody:RayCastWorld()  then
+		
+		rigidbody:SetRotationEuler(transform.localEulerAngles + Aegis.Maths.Vector3(0,root / 10,0));
+			rigidbody:AccelerateTo(transform.forward * -1 * 7, 10000000);
+		
+		if ray and rigidbody:RayCastWorld() == 1 then
+			--print("a");
 			ray = false;			
-			rigidbody:AccelerateToRand();
+			rigidbody:SetRotationEuler(transform.localEulerAngles + Aegis.Maths.Vector3(0,180,0));
+			rigidbody:AccelerateTo(transform.forward * -1 * 7, 10000000);
+			--rigidbody:AccelerateToRand();
 		end;
 	end;
 
