@@ -41,5 +41,11 @@
     <ClInclude Include="..\..\Src\AegisUI\ImageResources.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\AegisUI\SDL_image.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisUI\SDL_ttf.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

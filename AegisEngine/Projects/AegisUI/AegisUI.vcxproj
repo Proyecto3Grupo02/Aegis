@@ -81,16 +81,16 @@
     <OutDir>$(SolutionDir)Exes\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <SourcePath>$(SolutionDir)src\;$(SolutionDir)Exes\$(Platform)\$(Configuration)\;$(SourcePath)</SourcePath>
-    <LibraryPath>$(SolutionDir)Dependencias\SDL2_image-2.0.1\lib\$(Platform);$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)Dependencias\SDL2_image-2.0.1\include;$(SolutionDir)\Dependencias\Ogre\src\OgreMain\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependencias\SDL2_ttf-2.0.14\lib\$(Platform);$(SolutionDir)Dependencias\SDL2_image-2.0.1\lib\$(Platform);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Dependencias\SDL2_ttf-2.0.14\include;$(SolutionDir)Dependencias\SDL2_image-2.0.1\include;$(SolutionDir)\Dependencias\Ogre\src\OgreMain\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IntDir>$(SolutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)Exes\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
-    <IncludePath>$(SolutionDir)Dependencias\SDL2_image-2.0.1\include;$(SolutionDir)\Dependencias\Ogre\src\OgreMain\include</IncludePath>
+    <IncludePath>$(SolutionDir)Dependencias\SDL2_ttf-2.0.14\include;$(SolutionDir)Dependencias\SDL2_image-2.0.1\include;$(SolutionDir)\Dependencias\Ogre\src\OgreMain\include;</IncludePath>
     <SourcePath>$(SolutionDir)src\;$(SolutionDir)Exes\$(Platform)\$(Configuration)\;$(SourcePath)</SourcePath>
-    <LibraryPath>$(SolutionDir)Dependencias\SDL2_image-2.0.1\lib\x86;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Dependencias\SDL2_ttf-2.0.14\lib\$(Platform);$(SolutionDir)Dependencias\SDL2_image-2.0.1\lib\$(Platform);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -134,10 +134,7 @@
       <AdditionalDependencies>SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>OgreMain_d.lib;
-SDL2.lib
-;SDL2main.lib;
-RenderSystem_GL_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OgreMain_d.lib;SDL2.lib;SDL2main.lib;RenderSystem_GL_d.lib;SDL2_ttf.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencias\Ogre\Build\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
@@ -159,8 +156,8 @@ RenderSystem_GL_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalDependencies>SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>OgreMain.lib;SDL2.lib;SDL2main.lib;RenderSystem_GL.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencias\Ogre\Build\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OgreMain.lib;SDL2.lib;SDL2main.lib;RenderSystem_GL.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencias\SDL2_ttf-2.0.14\lib\$(Platform);$(SolutionDir)Dependencias\SDL2_image-2.0.1\lib\$(Platform);$(SolutionDir)Dependencias\Ogre\Build\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -172,6 +169,8 @@ RenderSystem_GL_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AegisUI\Font.h" />
     <ClInclude Include="..\..\Src\AegisUI\ImageResources.h" />
+    <ClInclude Include="..\..\Src\AegisUI\SDL_image.h" />
+    <ClInclude Include="..\..\Src\AegisUI\SDL_ttf.h" />
     <ClInclude Include="..\..\Src\AegisUI\Text.h" />
     <ClInclude Include="..\..\Src\AegisUI\Texture.h" />
   </ItemGroup>

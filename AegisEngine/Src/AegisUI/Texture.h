@@ -10,7 +10,7 @@ class Texture
 public:
 	Texture() = default;
 	Texture(SDL_Renderer* rend, const std::string& filename, double width, double height);
-	//Texture(SDL_Renderer* rend, const std::string& filename, double width, double height, float angle);
+	Texture(SDL_Renderer* rend, const std::string& filename, double width, double height, float angle);
 	
 	virtual ~Texture(){
 		SDL_DestroyTexture(mTexture_);
@@ -20,6 +20,7 @@ public:
 	void render(const SDL_Rect& src, const SDL_Rect& dest, double angle, const SDL_Point* p = nullptr, SDL_RendererFlip flip = SDL_FLIP_NONE) {
 		SDL_RenderCopyEx(mRenderer_, mTexture_, &src, &dest, angle, p, flip);
 	}
+
 	void render(const SDL_Rect& src, const SDL_Rect& dest) {
 		SDL_RenderCopy(mRenderer_, mTexture_, &src, &dest);
 	}
