@@ -19,6 +19,7 @@ function table.GetNew(entity, params)
 
     function Init()
         rigidbody = component.entity:GetComponent("Rigidbody").type;
+        renderer = component.entity:GetComponent("Renderer").type;
         w=false; a=false; s=false; d=false; fishing = false;
         offset = Aegis.Maths.Vector3(0, 10,20)
         ---- OBEJTOS HIJOS
@@ -30,11 +31,13 @@ function table.GetNew(entity, params)
         forward = cameraTf.forward;
         euAng = transform.localEulerAngles;
         rigidbody:FreezeRot(true,true,true)
+        renderer.visible=true;
      end;
 
 	function Update(deltaTime)
         if(Input:KeyWasPressed("Space"))then
             fishing = not fishing;
+            renderer.visible = not renderer.visible;
         end;
         if (fishing)then
             cameraTf.position = Aegis.Maths.Vector3(0,0,0)
