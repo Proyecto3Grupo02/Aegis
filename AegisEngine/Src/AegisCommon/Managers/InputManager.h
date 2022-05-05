@@ -17,7 +17,14 @@ private:
 		bool down;
 		bool wasReleased;
 	};
+
+	struct MouseButton
+	{
+		key right, left, middle;
+	};
+
 	std::vector<key> keys;
+	MouseButton mouseButtonState;
 	std::pair<Sint32, Sint32> mousePos_;
 	int keyNums;
 	bool KEY_WAS_PRESSED = false;
@@ -53,10 +60,15 @@ public:
 
 	static void ConvertToLua(lua_State* state);
 
+	void OnMouseButtonDown(SDL_MouseButtonEvent buttonEvent);
+	void OnMouseButtonUp(SDL_MouseButtonEvent buttonEvent);
+
+	bool IsMouseButtonDownLua(int button);
+	bool IsMouseButtonPressedLua(int button);
+	bool IsMouseButtonReleasedLua(int button);
+
 	void SetMouseMotion(Vector2 motion);
 	Vector2 GetMouseMotion() const;
-
-	Vector2 getMousePosition() const;
 };
 
 

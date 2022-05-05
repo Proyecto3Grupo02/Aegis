@@ -72,6 +72,12 @@ void AegisMain::GameLoop() {
 					//std::cout << "KeyUp (" << eventHandler.type << "): ";
 					Input()->OnKeyUp(key);
 					break;
+				case SDL_MOUSEBUTTONDOWN:
+					Input()->OnMouseButtonDown(eventHandler.button);
+					break;
+				case SDL_MOUSEBUTTONUP:
+					Input()->OnMouseButtonUp(eventHandler.button);
+					break;
 				case SDL_MOUSEMOTION:
 					// This is usually implemented as a callback but for now it will be this way, just for testing...
 					Input()->SetMouseMotion(Vector2(eventHandler.motion.xrel, eventHandler.motion.yrel));
