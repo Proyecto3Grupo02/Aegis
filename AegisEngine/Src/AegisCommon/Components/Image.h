@@ -10,7 +10,7 @@ public:
 	Image(UIElement* elem, SDL_Renderer* rend,std::string filename, float w, float h, float angle);
 	virtual ~Image();
 
-	//void render() override;
+	void render() override;
 protected:
 	Texture* mTexture_;
 	RectTransform* rect_;
