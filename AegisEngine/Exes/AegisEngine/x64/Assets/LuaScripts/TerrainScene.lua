@@ -45,7 +45,7 @@ local scene = {
 		type = "Entity",
 		name = "Anzuelo",
 		position = {x = -5, y = -30},
-		scale = {x=0.2, y=0.2, z=0.2},
+		scale = {x=0.1, y=0.1, z=0.1},
 		rotation = {x = 0, y = 45, z =0},
 		--scale = {x=2, y=2, z=2},--Meitin necesita ver el anzuelo
 		components = {
