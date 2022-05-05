@@ -5,7 +5,7 @@ local scene = {
 	{
 		type = "MainCamera",
 		position = { z = 10, y = 3  },
-		rotation = { x = -45, y = -20},
+		rotation = { x = -25},
 		components = {
 			{
 				type = "CameraTest"
@@ -58,7 +58,8 @@ local scene = {
 				type = "Rigidbody",
 				data = 
 				{
-					useGravity = false,
+					isTrigger = true,
+					useGravity = false
 				}
 			},
 			{

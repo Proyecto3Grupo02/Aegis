@@ -19,7 +19,7 @@ public:
 	enum RigidBodyType { Box, Sphere, CapsuleX, CapsuleZ, Custom };
 
 
-	RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, Vector4 rotation, RigidbodyComponent* r, float m = 1, bool useG = true, bool isK = false);
+	RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, Vector4 rotation, RigidbodyComponent* r, float m = 1, bool useG = true, bool isK = false,bool isT=false);
 	void init();
 	~RigidBody();
 	//void fixedUpdate();
@@ -41,7 +41,7 @@ public:
 	void setRbPosition(Vector3 vec);
 	void setRbRotation(Vector4 vec);
 	void setFreezeRotation(bool _x, bool _y, bool _z);
-	bool RaycastWorld(Vector3);
+	int RaycastWorld(Vector3);
 
 	//FORCES---------------------------------
 	void addForce(Vector3 vec);
@@ -56,6 +56,10 @@ public:
 	friend class RigidbodyComponent;
 	void SetAngularFactor()  ;
 	void setLinearVelocity();
+
+	//void setRot(Vector3);
+	void disableCol();
+	
 protected:
 	btRigidBody* rigidBody;
 	RigidbodyComponent* rbC;
