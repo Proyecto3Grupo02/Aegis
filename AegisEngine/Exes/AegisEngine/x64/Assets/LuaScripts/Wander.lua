@@ -1,11 +1,14 @@
 local NAME= "Wander"
 local table={};
+
 function table.GetNew(entity, params)
-    local component= Aegis.CreateComponent(NAME, entity);
-    local data= component.data;
-    local transform= entity.transform;
+
+    -- Lua Component Creation
+    local component = Aegis.CreateComponent(NAME, entity);
+    -- Lua Component Data for local handling
+    local data = component.data;
+    local transform = entity.transform;
     local funcs = component.funcs;
-	
 
     local rb;
     local maxSpeed;
@@ -15,26 +18,26 @@ function table.GetNew(entity, params)
     local maxRotation;
     local rotTime;
     local lastTime;
+
     function Init()
+
         rb= component.entity:GetComponent("Rigidbody").type;
         lastTime=0;         
         rotTime=5;
 
-    
     end;
 
     function Update(deltaTime)
-        
-        
-        velocity= maxSpeed* transform.rotation; 
-        if lastTime >rotTime then
-        rotation= RandomBinomial() * maxRotation; 
-        lastTime= rotTime;
-        rotTime=rotTime + deltaTime;
-        transform.rotation=rotation;
+
+        velocity = maxSpeed * transform.rotation; 
+        if lastTime > rotTime then
+        rotation = RandomBinomial() * maxRotation;  --tenemos que implementar escalar por quaternion?
+        lastTime = rotTime;
+        rotTime = rotTime + deltaTime;
+        transform.rotation = rotation;
         end;
 
-        rb:AddForceForward(velocity);
+        rb:AddForce(velocity.forward);  --con el forward no es necesario el addforceforward en el componente
 
         --Ian Millington pseudocode
         -- result.velocity= maxSpeed* character.orientationAsVector(look vector)
