@@ -140,8 +140,8 @@ void Scene::Render()
 
 void Scene::RenderUI()
 {
-	if (mCanvas_ != nullptr)
-		mCanvas_->render();
+	/*if (mCanvas_ != nullptr)
+		mCanvas_->render();*/
 }
 
 //the ogreNode usually is the root scene node so we add this node as a child one
