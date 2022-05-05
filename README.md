@@ -15,13 +15,13 @@ Documento de diseño de motor
 * [**Scripting API**](Aegis_Arquitecture/LuaScriptingApi.md)
 
 ## Intro
-Aegis es un motor de videojuegos hecho por G.Q.P.L.C.E (Grupo Que Presenta La Célula Eucariota) GQPLPCS (Gente que pesca los PeCeS) diseñado para crear juegos en C++ y LUA como lenguaje de scripting en el uso de blueprints.
+Aegis es un motor de videojuegos hecho por Kirin Studios diseñado para crear juegos en C++ y LUA como lenguaje de scripting en el uso de blueprints.
 
 ### Features
 * Renderizado en 3D con shaders (OGRE)
 * Animaciones, partículas (OGRE)
 * Manejo de eventos por teclado y gamepads(SDL)
-* Uso de física (PhysX)
+* Uso de física (Bullet)
 * Gestión de sonido (FMOD)
 
 ## Arquitectura
