@@ -26,6 +26,7 @@ Scene::Scene(OgreWrapper* wrap) :
 	accumulator(0), entities(new std::list<Entity*>()), entitiesToDelete(std::list<std::list<Entity*>::iterator>()) , ogreNode(wrap->GetRootNode()), uninitializedEntities(new std::list<Entity*>()),
 	physicsEntities(new std::list<RigidbodyComponent*>()), ogreWrapper(wrap)
 {
+	mCanvas_ = new Canvas(wrap);
 }
 
 Scene::~Scene() {
@@ -135,8 +136,6 @@ void Scene::Render()
 {
 	for (Entity* entity : *entities)
 		entity->render();
-
-	
 }
 
 void Scene::RenderUI()

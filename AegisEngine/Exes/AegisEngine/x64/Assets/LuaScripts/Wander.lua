@@ -39,10 +39,11 @@ function table.GetNew(entity, params)
 
         rb:AddForce(velocity.forward);  --con el forward no es necesario el addforceforward en el componente
 
-        --Ian Millington pseudocode
+        --Ian Millington pseudocode-------------------------------------------------------------------------------
         -- result.velocity= maxSpeed* character.orientationAsVector(look vector)
         --result.rotation=randomBinomial* maxRotation --just added a time to decide when rotate as a plus
         --return result
+        ----------------------------------------------------------------------------------------------------------
 
     end;
 

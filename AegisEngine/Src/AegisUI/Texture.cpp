@@ -1,56 +1,34 @@
 #pragma once
 #include "Texture.h"
 
-void Texture::load(std::string filename, int cols, int rows) {
-    SDL_Surface* tempSurface;
-    tempSurface = IMG_Load(filename.c_str());
-    //puede fallar incluir debug
-    //if (tempSurface == nullptr)
-        //throw AssetsExceptions::TextureException("Unable to load texture: ", filename);
-    //else {
-    cleanTexture();
-    mTexture = SDL_CreateTextureFromSurface(mRenderer, tempSurface);
-    //assert(texture == nullptr); // For debugging
 
-    nCols = cols;
-    nRows = rows;
-    width = tempSurface->w;
-    height = tempSurface->h;
-    fWidth = width / cols;
-    fHeight = height / rows;
-
-    SDL_FreeSurface(tempSurface);
-    //}
-}
-
-void Texture::setColor(SDL_Color col) {
-    SDL_SetTextureColorMod(mTexture, col.r, col.g, col.b);
-    SDL_SetTextureAlphaMod(mTexture, col.a);
-}
-
-void Texture::cleanTexture() {
-    if (mTexture != nullptr) {
-        SDL_DestroyTexture(mTexture); // delete current texture
-        //posible debug necesario
-        mTexture = nullptr;
-        width = 0;
-        height = 0;
-    }
-}
-
-void Texture::render(const SDL_Rect& rect, SDL_RendererFlip flip) const
+//Texture::Texture(SDL_Renderer* rend, const std::string& filename, double width, double height):
+//	mRenderer_(rend), mWidth_(width), mHeight_(height)
+//{
+//	SDL_Surface* surface = IMG_Load(filename.c_str());
+//	if (surface != nullptr) {
+//		mTexture_ = SDL_CreateTextureFromSurface(mRenderer_, surface);
+//	}
+//}
+//
+//Texture::Texture(SDL_Renderer* rend, const std::string& filename, double width, double height, float angle):
+//	mRenderer_(rend), mWidth_(width), mHeight_(height), mRotation_(angle)
+//{
+//	SDL_Surface* surface = IMG_Load(filename.c_str());
+//	if (surface != nullptr) {
+//		mTexture_ = SDL_CreateTextureFromSurface(mRenderer_, surface);
+//	}
+//}
+void Texture::render(int x, int y)
 {
-    render(rect, flip);
+	SDL_Rect dest = { x, y, mWidth_, mHeight_ };
+	render(dest);
 }
 
-void Texture::render(float posX, float posY, int widthMul, int heightMult, SDL_RendererFlip flip) const
+void Texture::render(const SDL_Rect& dest, float rotation)
 {
-    SDL_Rect rect = { posX, posY, width * widthMul, height * heightMult };
-    render(rect, flip);
+	SDL_Rect src = { 0, 0, mWidth_, mHeight_ };
+	render(src, dest, rotation);
 }
 
-// SDL render
-void Texture::render(const SDL_Rect& srcRect, const SDL_Rect& destRect, int angle, SDL_RendererFlip flip) const
-{
-    SDL_RenderCopyEx(mRenderer, mTexture, &srcRect, &destRect, angle, 0, flip);
-}
+

@@ -32,8 +32,7 @@ public:
 	void OnMouseOver();
 	void OnMouseExit();
 
-	template <typename T>
-	inline T* addComponent(const char* componentName);
+	void addComponent(UIComponent* component);
 
 	template <typename T>
 	inline T* getComponent(const char* componentName);
