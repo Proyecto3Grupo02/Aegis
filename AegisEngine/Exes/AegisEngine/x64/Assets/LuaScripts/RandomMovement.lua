@@ -49,12 +49,20 @@ function table.GetNew(entity, params)
 		rigidbody:SetRotationEuler(transform.localEulerAngles + Aegis.Maths.Vector3(0,root / 10,0));
 			rigidbody:AccelerateTo(transform.forward * -1 * 7, 10000000);
 		
-		if ray and rigidbody:RayCastWorld() == 1 then
-			--print("a");
-			ray = false;			
+		if ray then
+			local type = rigidbody:RayCastWorld();
+			if type == 1 then
+				ray = false;			
 			rigidbody:SetRotationEuler(transform.localEulerAngles + Aegis.Maths.Vector3(0,180,0));
 			rigidbody:AccelerateTo(transform.forward * -1 * 7, 10000000);
-			--rigidbody:AccelerateToRand();
+			end;
+			if type == 2 then
+				
+			end;
+			
+			
+			
+			
 		end;
 	end;
 

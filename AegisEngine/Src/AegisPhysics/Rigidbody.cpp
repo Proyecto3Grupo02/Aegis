@@ -114,7 +114,7 @@ void RigidBody::setFreezeRotation(bool _x, bool _y, bool _z) {
 
 }
 
-int RigidBody::RaycastWorld(Vector3 f) {
+int RigidBody::RayCast(Vector3 f, Vector3 &obj) {
 	f = f * -1;
 	btTransform aux; btVector3 forward = Physics()->parseToBulletVector(f);
 	btVector3 posAct; rigidBody->getMotionState()->getWorldTransform(aux); posAct = aux.getOrigin();
@@ -127,13 +127,15 @@ int RigidBody::RaycastWorld(Vector3 f) {
 			RigidBody* rb = (RigidBody*)RayCallback.m_collisionObject->getUserPointer();
 			if (!rb->rigidBody->getInvMass()) 			
 				return 1;
-			if (!rb->isTrigger())
-				return 3;
-			return 2;
+			if (!rb->isTrigger()) {
+				obj = rb->getRbPosition();
+				return 2;
+			}				
+			return 3;
 
 		}
 	
-		return false;
+		return 0;
 	//return false;
 }
 
