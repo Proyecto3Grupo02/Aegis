@@ -61,6 +61,7 @@ public:
 	static void ConvertToLua(lua_State* state);
 
 	void OnMouseButtonDown(SDL_MouseButtonEvent buttonEvent);
+	void OnMouseButtonUp(SDL_MouseButtonEvent buttonEvent);
 
 	bool IsMouseButtonDownLua(int button);
 	bool IsMouseButtonPressedLua(int button);

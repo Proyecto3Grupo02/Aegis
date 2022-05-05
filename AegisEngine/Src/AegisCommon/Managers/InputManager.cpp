@@ -25,21 +25,21 @@ void InputSystem::UpdateState() {
 	if (mouseButtonState.left.wasPressed)
 	{
 		mouseButtonState.left.wasPressed = false;
-		mouseButtonState.left.wasReleased = true;
+		mouseButtonState.left.down = true;
 	}
 
 	mouseButtonState.right.wasReleased = false;
 	if (mouseButtonState.right.wasPressed)
 	{
 		mouseButtonState.right.wasPressed = false;
-		mouseButtonState.right.wasReleased = true;
+		mouseButtonState.right.down = true;
 	}
 
 	mouseButtonState.middle.wasReleased = false;
 	if (mouseButtonState.middle.wasPressed)
 	{
 		mouseButtonState.middle.wasPressed = false;
-		mouseButtonState.middle.wasReleased = true;
+		mouseButtonState.middle.down = true;
 	}
 
 	for (int i = 0; i < keyNums; i++) {
@@ -92,49 +92,7 @@ void InputSystem::OnKeyUp(SDL_Keycode key) {
 	KEY_WAS_RELEASED = true;
 }
 
-//CONSULTA GLOBAL----------------------------
-bool InputSystem::oneKeyWasPressed() {
-	return KEY_WAS_PRESSED;
-}
-
-bool InputSystem::oneKeyIsDown()
-{
-	return KEY_DOWN;
-}
-
-bool InputSystem::oneKeyWasReleased()
-{
-	return KEY_WAS_RELEASED;
-}
-
-//CONSULT KEY STATE------------------------------------------------------------
-bool InputSystem::keyWasPressed(SDL_Keycode key) {
-	int i = getId(key);
-	return keys[i].wasPressed;
-}
-
-bool InputSystem::isKeyDown(SDL_Keycode key) {
-	int i = getId(key);
-	return keys[i].down;
-}
-
-bool InputSystem::keyWasReleased(SDL_Keycode key) {
-	int i = getId(key);
-	return keys[i].wasReleased;
-}
-
-//LUA-----------------------------------------------------
-bool InputSystem::keyWasPressedLua(const char* key) {
-	return keyWasPressed(SDL_GetKeyFromName(key));
-}
-
-bool InputSystem::isKeyDownLua(const char* key) {
-	return isKeyDown(SDL_GetKeyFromName(key));
-}
-
-bool InputSystem::keyWasReleasedLua(const char* key) {
-	return keyWasReleased(SDL_GetKeyFromName(key));
-}
+// MOUSE
 
 void InputSystem::SetMouseMotion(Vector2 motion)
 {
@@ -151,19 +109,43 @@ void InputSystem::OnMouseButtonDown(SDL_MouseButtonEvent buttonEvent)
 	switch (buttonEvent.button)
 	{
 	case SDL_BUTTON_LEFT:
-		if (!mouseButtonState.left.wasPressed && mouseButtonState.left.down) {
+		if (!mouseButtonState.left.wasPressed && !mouseButtonState.left.down) {
 			mouseButtonState.left.wasPressed = true;
 		}
 		break;
 	case SDL_BUTTON_RIGHT:
-		if (!mouseButtonState.right.wasPressed && mouseButtonState.right.down) {
+		if (!mouseButtonState.right.wasPressed && !mouseButtonState.right.down) {
 			mouseButtonState.right.wasPressed = true;
 		}
 		break;
 	case SDL_BUTTON_MIDDLE:
-		if (!mouseButtonState.middle.wasPressed && mouseButtonState.middle.down) {
+		if (!mouseButtonState.middle.wasPressed && !mouseButtonState.middle.down) {
 			mouseButtonState.middle.wasPressed = true;
 		}
+		break;
+	default:
+		break;
+	}
+}
+
+void InputSystem::OnMouseButtonUp(SDL_MouseButtonEvent buttonEvent)
+{
+	switch (buttonEvent.button)
+	{
+	case SDL_BUTTON_LEFT:
+		mouseButtonState.left.down = false;
+		mouseButtonState.left.wasPressed = false;
+		mouseButtonState.left.wasReleased = true;
+		break;
+	case SDL_BUTTON_RIGHT:
+		mouseButtonState.right.down = false;
+		mouseButtonState.right.wasPressed = false;
+		mouseButtonState.right.wasReleased = true;
+		break;
+	case SDL_BUTTON_MIDDLE:
+		mouseButtonState.middle.down = false;
+		mouseButtonState.middle.wasPressed = false;
+		mouseButtonState.middle.wasReleased = true;
 		break;
 	default:
 		break;
@@ -227,6 +209,50 @@ bool InputSystem::IsMouseButtonReleasedLua(int button)
 	}
 }
 
+//CONSULTA GLOBAL----------------------------
+bool InputSystem::oneKeyWasPressed() {
+	return KEY_WAS_PRESSED;
+}
+
+bool InputSystem::oneKeyIsDown()
+{
+	return KEY_DOWN;
+}
+
+bool InputSystem::oneKeyWasReleased()
+{
+	return KEY_WAS_RELEASED;
+}
+
+//CONSULT KEY STATE------------------------------------------------------------
+bool InputSystem::keyWasPressed(SDL_Keycode key) {
+	int i = getId(key);
+	return keys[i].wasPressed;
+}
+
+bool InputSystem::isKeyDown(SDL_Keycode key) {
+	int i = getId(key);
+	return keys[i].down;
+}
+
+bool InputSystem::keyWasReleased(SDL_Keycode key) {
+	int i = getId(key);
+	return keys[i].wasReleased;
+}
+
+//LUA-----------------------------------------------------
+bool InputSystem::keyWasPressedLua(const char* key) {
+	return keyWasPressed(SDL_GetKeyFromName(key));
+}
+
+bool InputSystem::isKeyDownLua(const char* key) {
+	return isKeyDown(SDL_GetKeyFromName(key));
+}
+
+bool InputSystem::keyWasReleasedLua(const char* key) {
+	return keyWasReleased(SDL_GetKeyFromName(key));
+}
+
 void InputSystem::ConvertToLua(lua_State* state)
 {
 	getGlobalNamespace(state).
@@ -240,8 +266,8 @@ void InputSystem::ConvertToLua(lua_State* state)
 		addFunction("AnyKeyWasReleased", &InputSystem::oneKeyWasReleased).
 		addFunction("GetMouseMotion", &InputSystem::GetMouseMotion).
 		addFunction("IsMouseButtonDown", &InputSystem::IsMouseButtonDownLua).
-		addFunction("IsMouseButtonPressed", &InputSystem::IsMouseButtonPressedLua).
-		addFunction("IsMouseButtonReleased", &InputSystem::IsMouseButtonReleasedLua).
+		addFunction("MouseButtonWasPressed", &InputSystem::IsMouseButtonPressedLua).
+		addFunction("MouseButtonWasReleased", &InputSystem::IsMouseButtonReleasedLua).
 		endClass().
 		endNamespace();
 }
