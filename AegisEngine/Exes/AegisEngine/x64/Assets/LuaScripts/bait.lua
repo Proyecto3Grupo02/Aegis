@@ -11,6 +11,7 @@ function table.GetNew(entity, params)
     local offset;
     local ready;
     local throwForce;
+    local maxForce;
     data.player = "player";
     function Init()
         renderer = component.entity:GetComponent("Renderer").type;
@@ -20,6 +21,7 @@ function table.GetNew(entity, params)
         transform.position = offset; 
         ready = false;
         rigidbody:FreezeRot(true,true,true)
+        maxForce = 5;
      end;
 
 	function Update(deltaTime)
@@ -32,8 +34,8 @@ function table.GetNew(entity, params)
                throwForce = throwForce + deltaTime * 3
             end
             if Input:MouseButtonWasReleased(0)then
-                if throwForce>5 then
-                    throwForce = 5
+                if throwForce>maxForce then
+                    throwForce = maxForce
                 end;
                 rigidbody:AddForce(Aegis.Maths.Vector3(0,throwForce*20,throwForce*-150))
                 rigidbody.useGravity=true

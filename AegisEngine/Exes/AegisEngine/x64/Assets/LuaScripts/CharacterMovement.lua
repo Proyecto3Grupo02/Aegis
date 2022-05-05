@@ -11,6 +11,7 @@ function table.GetNew(entity, params)
     data.initPos = transform.position;
     data.camera = "mainCam";
     data.bait = "Bait"; --ANZUELO------------------
+    data.canya = "Canya"; --CAÑA DE PESCAR------------------------
     local cameraTf = nil;
     local forward
     local euAng;
@@ -20,8 +21,11 @@ function table.GetNew(entity, params)
         rigidbody = component.entity:GetComponent("Rigidbody").type;
         w=false; a=false; s=false; d=false; fishing = false;
         offset = Aegis.Maths.Vector3(0, 10,20)
+        ---- OBEJTOS HIJOS
         data.camera.transform:SetParent(entity)
         data.bait.transform:SetParent(entity)
+        data.canya.transform:SetParent(entity)
+        ---- TRANSFORM CAMARA
         cameraTf=data.camera.transform;
         forward = cameraTf.forward;
         euAng = transform.localEulerAngles;

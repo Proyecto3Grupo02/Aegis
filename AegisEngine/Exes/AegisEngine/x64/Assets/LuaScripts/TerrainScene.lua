@@ -35,7 +35,8 @@ local scene = {
 				data = 
 				{
 					camera = "@MainCamera",
-					bait = "@Anzuelo"
+					bait = "@Anzuelo",
+					canya = "@Canya"
 				}			
 			}
 		}
@@ -68,6 +69,21 @@ local scene = {
 					player = "@Player"
 				}					
 			}
+		}
+	},
+	{
+		type = "Entity",
+		name = "Canya",
+		position = {y = -4, z = -1},
+		scale = {x=0.2, y=0.2, z=0.2},
+		components = {
+			{
+				type = "Renderer",
+				data = {
+					mesh = "fishingRod.mesh",
+					material= "green"
+				}
+			},
 		}
 	},
 	-- {
