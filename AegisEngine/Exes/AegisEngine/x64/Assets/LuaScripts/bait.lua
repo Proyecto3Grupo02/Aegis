@@ -5,18 +5,21 @@ function table.GetNew(entity, params)
 	local component = Aegis.CreateComponent(NAME, entity);
 	local data = component.data;
 	local transform = entity.transform;
+    local renderer;
     local rigidbody;
     local funcs = component.funcs;
-    local renderer = component.entity:GetComponent("Renderer").type;
     local offset;
     local ready;
+    local throwForce;
     data.player = "player";
     function Init()
-        rigidbody = component.entity:GetComponent("Rigidbody").type;
+        renderer = component.entity:GetComponent("Renderer").type;
         renderer.visible=false;
+        rigidbody = component.entity:GetComponent("Rigidbody").type;        
         offset = Aegis.Maths.Vector3(0,-0.5,-2);
         transform.position = offset; 
         ready = false;
+        rigidbody:FreezeRot(true,true,true)
      end;
 
 	function Update(deltaTime)
@@ -25,11 +28,18 @@ function table.GetNew(entity, params)
             ready = not ready         
         end;   
         if ready then
-            if Input:KeyWasPressed("y")then
-                rigidbody:AddForce(Aegis.Maths.Vector3(0,WATER_Y,-150))
-                rigidbody.useGravity=true
+            if Input:IsMouseButtonDown(0)then
+               throwForce = throwForce + deltaTime * 3
             end
+            if Input:MouseButtonWasReleased(0)then
+                if throwForce>5 then
+                    throwForce = 5
+                end;
+                rigidbody:AddForce(Aegis.Maths.Vector3(0,throwForce*20,throwForce*-150))
+                rigidbody.useGravity=true
+            end;
         else 
+            throwForce=0
             rigidbody.useGravity=false
             rigidbody:ClearForce();
             rigidbody.position = offset
@@ -37,8 +47,7 @@ function table.GetNew(entity, params)
 
         if rigidbody.position.y < WATER_Y and rigidbody.useGravity then
             rigidbody.useGravity=false;
-            rigidbody:ClearForce(); 
-
+            rigidbody:ClearForce();
         end;
     end;
 
