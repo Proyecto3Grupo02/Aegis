@@ -76,6 +76,9 @@ void AegisMain::GameLoop() {
 					// This is usually implemented as a callback but for now it will be this way, just for testing...
 					Input()->SetMouseMotion(Vector2(eventHandler.motion.xrel, eventHandler.motion.yrel));
 					break;
+				case SDL_MOUSEBUTTONDOWN:
+					Input()->OnMouseButtonDown(eventHandler.button);
+					break;
 				default:
 					//std::cout << "Default (" << eventHandler.type << ")\n";
 					break;
