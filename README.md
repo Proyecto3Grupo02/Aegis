@@ -18,15 +18,15 @@ Aegis es un motor de videojuegos desarrollado por Kirin Studios en C++ con el fi
 
 ## Arquitectura
 El motor esta estructurado mediante la política de Entity-Component:
-* Entidades: Equivalentes a los gameobject en Unity. Se les puede asociar Componentes para dotarles funciones y/o comportamientos especificos.
-* Componentes: Hay dos tipos. El programador que use Aegis puede o bien utilizar componentes proporcionados por el propio motor (Ejemplos: Tranform, Renderer, Rigidbody), o bien programar en LUA sus propios componentes que doten a la entidad de distintos comportamientos.
+* **Entidades:** Equivalentes a los gameobject en Unity. Se les puede asociar Componentes para dotarles funciones y/o comportamientos especificos.
+* **Componentes:** Hay dos tipos. El programador que use Aegis puede o bien utilizar componentes proporcionados por el propio motor (Ejemplos: Tranform, Renderer, Rigidbody), o bien programar en LUA sus propios componentes que doten a la entidad de distintos comportamientos.
 
 Aegis cuenta con las siguientes Fatures:
-* Renderizado en 3D con shaders (OGRE)
-* Manejo de eventos por teclado y gamepads(SDL)
-* Uso de física (Bullet)
-* Gestión de colisiones (Bullet)
-* Gestión de sonido (FMOD)
+* **Renderizado en 3D con shaders** (OGRE)
+* **Manejo de eventos por teclado y ratón** (SDL)
+* **Uso de física** (Bullet)
+* **Gestión de colisiones** (Bullet)
+* **Gestión de sonido** (FMOD)
 
 La solución del motor viene estructurada en proyectos, cada uno encargado de realizar una función concreta. Los proyectos más básicos se encargan de la comunicación entre Aegis y las librerías que hemos usado (Ogre, Bullet, etc). Estos  proyectos son a su vez la base de proyectos mas generales encargados de gestionar las escenas, entidades, y componentes.
 ### Jeraquía de los Proyectos:
