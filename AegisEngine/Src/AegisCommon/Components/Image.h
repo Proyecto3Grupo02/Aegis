@@ -1,14 +1,17 @@
 #pragma once
-#include "../../AegisUI/Texture.h"
+
 #include "UIComponent.h"
 #include <string>
-
+#include "../../AegisUI/Texture.h"
+class UIElement;
+class Texture;
+class SDL_Renderer;
 class RectTransform;
 class Image: 
 	public UIComponent {
 public:
-	Image(UIElement* elem, SDL_Renderer* rend,std::string filename, float w, float h, float angle);
-	virtual ~Image();
+	Image(UIElement* elem, SDL_Renderer* rend,std::string& filename, float w, float h, float angle);
+	 ~Image();
 
 	void render() override;
 protected:

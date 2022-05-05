@@ -1,7 +1,6 @@
 #include "Transform.h"
 
 #include "Entity.h"
-#include <OgreMatrix3.h>
 #include "../Utils/MathUtils.h"
 
 using namespace MathUtils;

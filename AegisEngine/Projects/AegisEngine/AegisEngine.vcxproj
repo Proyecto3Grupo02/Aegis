@@ -55,7 +55,7 @@
     <IntDir>$(SolutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)Exes\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <SourcePath>$(SolutionDir)Exes\$(Platform)\$(Configuration)\;$(SolutionDir)Src\;$(SourcePath)</SourcePath>
-    <IncludePath>$(SolutionDir)\Dependencias\Ogre\src\OgreMain\include;$(SolutionDir)Dependencias\Bullet\src\src</IncludePath>
+    <IncludePath>$(SolutionDir)\Dependencias\Ogre\src\OgreMain\include;$(SolutionDir)Dependencias\Bullet\src\src;$(SolutionDir)Dependencias\SDL2_image-2.0.1\include</IncludePath>
     <PostBuildEventUseInBuild>Si</PostBuildEventUseInBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -63,7 +63,7 @@
     <IntDir>$(SolutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)Exes\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <SourcePath>$(SolutionDir)Exes\$(Platform)\$(Configuration)\;$(SolutionDir)Src\;$(SourcePath)</SourcePath>
-    <IncludePath>$(SolutionDir)\Dependencias\Ogre\src\OgreMain\include;$(SolutionDir)Dependencias\Bullet\src\src</IncludePath>
+    <IncludePath>$(SolutionDir)\Dependencias\Ogre\src\OgreMain\include;$(SolutionDir)Dependencias\Bullet\src\src;$(SolutionDir)Dependencias\SDL2_image-2.0.1\include</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -71,14 +71,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)Src\Aegis\Entity;$(SolutionDir)Src\Aegis\Interfaces;$(SolutionDir)Src\Aegis\Wrappers;$(SolutionDir)Src\Aegis\Structs;$(SolutionDir)Src\Aegis\Scene;$(SolutionDir)Src\Aegis\Managers;$(SolutionDir)Src\Aegis\Component;$(SolutionDir)\Dependencias\lua\src\include;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)\Dependencias\Libraries;$(SolutionDir)\Dependencias\Libraries;$(SolutionDir)\Dependencias\fmod\inc;$(SolutionDir)\Src\AegisCommon\Utils;$(SolutionDir)Dependencias\Bullet\build\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)Src\Aegis\Entity;$(SolutionDir)Src\Aegis\Interfaces;$(SolutionDir)Src\Aegis\Wrappers;$(SolutionDir)Src\Aegis\Structs;$(SolutionDir)Src\Aegis\Scene;$(SolutionDir)Src\Aegis\Managers;$(SolutionDir)Src\Aegis\Component;$(SolutionDir)\Dependencias\lua\src\include;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)\Dependencias\Libraries;$(SolutionDir)\Dependencias\fmod\inc;$(SolutionDir)\Src\AegisCommon\Utils;$(SolutionDir)Src\AegisUI\Texture.h;$(SolutionDir)Dependencias\Bullet\build\src</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)\Exes\AegisGraphics\x64\Debug;$(SolutionDir)\Exes\AegisCommon\x64\Debug;$(SolutionDir)\Exes\AegisPhysics\x64\Debug;$(SolutionDir)\Exes\AegisScripting\x64\Debug;$(SolutionDir)Dependencias\Ogre\Build\lib\$(Configuration)\;$(SolutionDir)\Exes\AegisAudio\x64\Debug;%(AdditionalLibraryDirectories);$(SolutionDir)\Dependencias\fmod\lib\x64</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OgreMain_d.lib;SDL2.lib;SDL2main.lib;RenderSystem_GL_d.lib;AegisCommon.lib;AegisGraphics.lib;AegisScripting.lib;AegisAudio.lib;AegisPhysics.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\jonat\OneDrive\Escritorio\Aegis\AegisEngine\Dependencias\SDL2_image-2.0.1\lib\x64;$(SolutionDir)Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)\Exes\AegisGraphics\x64\Debug;$(SolutionDir)\Exes\AegisCommon\x64\Debug;$(SolutionDir)\Exes\AegisPhysics\x64\Debug;$(SolutionDir)\Exes\AegisScripting\x64\Debug;$(SolutionDir)Dependencias\Ogre\Build\lib\$(Configuration)\;$(SolutionDir)\Exes\AegisAudio\x64\Debug;%(AdditionalLibraryDirectories);$(SolutionDir)\Dependencias\fmod\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2_image.lib;OgreMain_d.lib;SDL2.lib;SDL2main.lib;RenderSystem_GL_d.lib;AegisCommon.lib;AegisGraphics.lib;AegisScripting.lib;AegisAudio.lib;AegisPhysics.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <DelayLoadDLLs>fmod.dll</DelayLoadDLLs>
     </Link>
     <PostBuildEvent>
@@ -103,7 +103,7 @@ xcopy /y /d "$(SolutionDir)"\Dependencias\fmod\lib\x64\fmod.dll "$(OutDir)"</Com
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)Src\Aegis\Entity;$(SolutionDir)Src\Aegis\Interfaces;$(SolutionDir)Src\Aegis\Wrappers;$(SolutionDir)Src\Aegis\Structs;$(SolutionDir)Src\Aegis\Scene;$(SolutionDir)Src\Aegis\Managers;$(SolutionDir)Src\Aegis\Component;$(SolutionDir)\Dependencias\lua\src\include;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)\Dependencias\Libraries;$(SolutionDir)\Dependencias\Libraries;$(SolutionDir)\Dependencias\fmod\inc;$(SolutionDir)\Src\AegisCommon\Utils;$(SolutionDir)Dependencias\Bullet\build\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)Src\Aegis\Entity;$(SolutionDir)Src\Aegis\Interfaces;$(SolutionDir)Src\Aegis\Wrappers;$(SolutionDir)Src\Aegis\Structs;$(SolutionDir)Src\Aegis\Scene;$(SolutionDir)Src\Aegis\Managers;$(SolutionDir)Src\Aegis\Component;$(SolutionDir)\Dependencias\lua\src\include;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)\Dependencias\Libraries;$(SolutionDir)\Dependencias\fmod\inc;$(SolutionDir)\Src\AegisCommon\Utils;$(SolutionDir)Src\AegisUI\Texture.h;$(SolutionDir)Dependencias\Bullet\build\src</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -111,8 +111,8 @@ xcopy /y /d "$(SolutionDir)"\Dependencias\fmod\lib\x64\fmod.dll "$(OutDir)"</Com
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencias\Ogre\Build\lib\$(Configuration)\;$(SolutionDir)\Exes\AegisCommon\x64\Release;$(SolutionDir)\Exes\AegisGraphics\x64\Release;$(SolutionDir)\Exes\AegisScripting\x64\Release;$(SolutionDir)\Exes\AegisPhysics\x64\Release;$(SolutionDir)\Exes\AegisAudio\x64\Release;%(AdditionalLibraryDirectories);$(SolutionDir)\Dependencias\fmod\lib\x64</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OgreMain.lib;SDL2.lib;SDL2main.lib;RenderSystem_GL.lib;AegisCommon.lib;AegisGraphics.lib;AegisScripting.lib;AegisAudio.lib;AegisPhysics.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\jonat\OneDrive\Escritorio\Aegis\AegisEngine\Dependencias\SDL2_image-2.0.1\lib\x64;$(SolutionDir)Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencias\Ogre\Build\lib\$(Configuration)\;$(SolutionDir)\Exes\AegisCommon\x64\Release;$(SolutionDir)\Exes\AegisGraphics\x64\Release;$(SolutionDir)\Exes\AegisScripting\x64\Release;$(SolutionDir)\Exes\AegisPhysics\x64\Release;$(SolutionDir)\Exes\AegisAudio\x64\Release;%(AdditionalLibraryDirectories);$(SolutionDir)\Dependencias\fmod\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2_image.lib;OgreMain.lib;SDL2.lib;SDL2main.lib;RenderSystem_GL.lib;AegisCommon.lib;AegisGraphics.lib;AegisScripting.lib;AegisAudio.lib;AegisPhysics.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <DelayLoadDLLs>fmod.dll</DelayLoadDLLs>
     </Link>
     <PostBuildEvent>

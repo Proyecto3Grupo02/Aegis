@@ -3,7 +3,6 @@
 //OGRE
 
 
-#include "../AegisAudio/SoundSystem.h"
 #include "../AegisCommon/Components/AnimationComponent.h"
 #include "../AegisCommon/Components/CameraComponent.h"
 #include "../AegisCommon/Components/LightComponent.h"
@@ -16,22 +15,9 @@
 #include "../AegisCommon/Scene/Scene.h"
 #include "../AegisGraphics/OgreWrapper.h"
 #include "../AegisPhysics/PhysicsMain.h"
+#include "../AegisCommon/Components/Transform.h"
 #include "GameLoopData.h"
 #include "LuaMaths.h"
-#include "../AegisCommon/Scene/Scene.h"
- #include "../AegisCommon/Utils/GameLoopData.h"
- #include "../AegisCommon/Entity/Entity.h"
- #include "../AegisCommon/Components/AegisComponent.h"
- #include "../AegisCommon/Components/Transform.h"
- #include "../AegisCommon/Components/Renderer.h"
- #include "../AegisCommon/Utils/Quaternion.h"
- #include "../AegisAudio/SoundSystem.h"
- #include "../AegisCommon/Components/LightComponent.h"
- #include "../AegisCommon/Components/CameraComponent.h"
- #include "../AegisCommon/Components/AnimationComponent.h"
- #include "../AegisCommon/Components/RigidbodyComponent.h"
- #include "../AegisCommon/Utils/Vector2.h"
- #include "../AegisCommon/Utils/LuaMaths.h"
  #include "../AegisCommon/Components/SoundEmitterComponent.h"
 
 using namespace luabridge;

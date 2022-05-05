@@ -1,15 +1,17 @@
 #pragma once
-#include "SDL.h"
+
 
 #include <iostream> // File reading??
 #include <string>
 
 #include <SDL_image.h>
+#undef Texture
+
 class Texture
 {
 public:
-	Texture() = default;
-	Texture(SDL_Renderer* rend, const std::string& filename, double width, double height);
+	//Texture() {};
+	Texture(SDL_Renderer* rend, std::string& filename, float width, float height, float angle);
 	//Texture(SDL_Renderer* rend, const std::string& filename, double width, double height, float angle);
 	
 	virtual ~Texture(){

@@ -1,7 +1,5 @@
 ﻿#include "Entity.h"
-#include "Component.h"
 #include "Transform.h"
-#include "../Components/Renderer.h"
 #include "../Scene/Scene.h"
 
 Entity::Entity(Scene* scene, Ogre::SceneNode* node) :

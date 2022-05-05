@@ -83,10 +83,10 @@
       <AdditionalDependencies>$(SolutionDir)Dependencias\fmod\lib\$(PlatformShortName)\fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>$(SolutionDir)Dependencias\fmod\lib\$(PlatformShortName)\fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)Dependencias\fmod\lib\$(PlatformShortName)\fmod_vc.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)\Exes\AegisCommon\$(PlatformShortName)\$(Configuration);$(SolutionDir)\Dependencias\fmod\lib\$(PlatformShortName)\$(Arch);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\Exes\AegisCommon\$(PlatformShortName)\$(Configuration);$(SolutionDir)Dependencias\SDL2_image-2.0.1\lib\x64\;$(SolutionDir)\Dependencias\fmod\lib\$(PlatformShortName)\$(Arch);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -109,10 +109,10 @@
       <AdditionalLibraryDirectories>$(SolutionDir)\Exes\AegisCommon\$(PlatformShortName)\$(Configuration);$(SolutionDir)\Dependencias\fmod\lib\$(PlatformShortName)\$(Arch)</AdditionalLibraryDirectories>
     </Link>
     <Lib>
-      <AdditionalDependencies>$(SolutionDir)Dependencias\fmod\lib\$(PlatformShortName)\fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)Dependencias\fmod\lib\$(PlatformShortName)\fmod_vc.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)\Exes\AegisCommon\$(PlatformShortName)\$(Configuration);$(SolutionDir)\Dependencias\fmod\lib\$(PlatformShortName)\$(Arch);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\Exes\AegisCommon\$(PlatformShortName)\$(Configuration);$(SolutionDir)Dependencias\SDL2_image-2.0.1\lib\x64\;$(SolutionDir)\Dependencias\fmod\lib\$(PlatformShortName)\$(Arch);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -63,7 +63,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencias\fmod\inc;$(SolutionDir)Dependencias\Ogre\build\Components;$(SolutionDir)Dependencias\Ogre\build\include\SDL2;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)\Dependencias\lua\src\include;$(SolutionDir)\Dependencias\LuaBridge;%(AdditionalIncludeDirectories);$(SolutionDir)\Dependencias\Libraries</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\SDL2_image-2.0.1\include;$(SolutionDir)\Dependencias\fmod\inc;$(SolutionDir)Dependencias\Ogre\build\Components;$(SolutionDir)Dependencias\Ogre\build\include\SDL2;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)\Dependencias\lua\src\include;$(SolutionDir)Dependencias\LuaBridge;%(AdditionalIncludeDirectories);$(SolutionDir)Dependencias\Libraries</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -73,11 +73,14 @@
       <AdditionalDependencies>OgreMain_d.lib;SDL2.lib;SDL2main.lib;RenderSystem_GL_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\jonat\OneDrive\Escritorio\Aegis\AegisEngine\Dependencias\SDL2_image-2.0.1\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <Verbose>false</Verbose>
     </Lib>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -87,7 +90,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencias\fmod\inc;$(SolutionDir)Dependencias\Ogre\build\Components;$(SolutionDir)Dependencias\Ogre\build\include\SDL2;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)\Dependencias\lua\src\include;$(SolutionDir)\Dependencias\LuaBridge;%(AdditionalIncludeDirectories);$(SolutionDir)\Dependencias\Libraries</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\SDL2_image-2.0.1\include;$(SolutionDir)\Dependencias\fmod\inc;$(SolutionDir)Dependencias\Ogre\build\Components;$(SolutionDir)Dependencias\Ogre\build\include\SDL2;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)\Dependencias\lua\src\include;$(SolutionDir)Dependencias\LuaBridge;%(AdditionalIncludeDirectories);$(SolutionDir)Dependencias\Libraries</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -98,6 +101,12 @@
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\lib\$(Configuration)\;$(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>OgreMain.lib;SDL2.lib;SDL2main.lib;RenderSystem_GL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <Lib>
+      <AdditionalDependencies>SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>C:\Users\jonat\OneDrive\Escritorio\Aegis\AegisEngine\Dependencias\SDL2_image-2.0.1\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AegisCommon\Components\AegisComponent.h" />
