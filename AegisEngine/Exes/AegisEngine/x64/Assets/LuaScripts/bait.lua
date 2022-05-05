@@ -1,6 +1,7 @@
 local NAME = "Bait";
 local table = {};
 function table.GetNew(entity, params)
+    local WATER_Y = -5
 	local component = Aegis.CreateComponent(NAME, entity);
 	local data = component.data;
 	local transform = entity.transform;
@@ -25,13 +26,20 @@ function table.GetNew(entity, params)
         end;   
         if ready then
             if Input:KeyWasPressed("y")then
-                rigidbody:AddForce(Aegis.Maths.Vector3(0,200,-300))
-                rigidbody.gravity=true
-            end;   
+                rigidbody:AddForce(Aegis.Maths.Vector3(0,WATER_Y,-150))
+                rigidbody.useGravity=true
+            end
         else 
-            rigidbody.gravity=false
+            rigidbody.useGravity=false
+            rigidbody:ClearForce();
             rigidbody.position = offset
-        end 
+        end
+
+        if rigidbody.position.y < WATER_Y and rigidbody.useGravity then
+            rigidbody.useGravity=false;
+            rigidbody:ClearForce(); 
+
+        end;
     end;
 
     function LateUpdate(deltaTime) end;

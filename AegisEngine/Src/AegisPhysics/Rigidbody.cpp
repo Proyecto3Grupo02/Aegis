@@ -78,9 +78,9 @@ void RigidBody::setActive(bool active)
 void RigidBody::setKinematic(bool sK) { isKinematic = sK; }
 
 void RigidBody::setUsingGravity(bool uG) {
-
+	useGravity = uG;
 	if (uG)rigidBody->setGravity({ 0, -9.8, 0 });
-	else rigidBody->clearGravity();
+	else rigidBody->setGravity({ 0,0,0 });
 }
 
 void RigidBody::setGravity(Vector3 vec) {

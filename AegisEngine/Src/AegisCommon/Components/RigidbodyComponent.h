@@ -46,8 +46,8 @@ public:
 	void FreezeRot(bool _x, bool _y, bool _z);
 
 	//GRAVITY---------------------------------------
-	bool GetGravity()const;
-	void SetGravity(bool g_);
+	bool GetUsingGravity()const;
+	void SetUsingGravity(bool g_);
 
 	//LUA------------
 	static void ConvertToLua(lua_State* state);
