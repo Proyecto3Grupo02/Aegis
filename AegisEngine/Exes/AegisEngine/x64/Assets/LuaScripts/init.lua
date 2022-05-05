@@ -2,6 +2,6 @@
 --it's called from c++ just before starting the game loop
 
 local utility = require "Utils";
-local testScene = require "UIScene";
+local testScene = require "TerrainScene";
 math.randomseed(os.time());
 utility.ParseScene(testScene);
