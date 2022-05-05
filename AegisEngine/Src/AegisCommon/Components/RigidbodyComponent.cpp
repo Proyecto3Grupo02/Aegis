@@ -60,6 +60,11 @@ void RigidbodyComponent::AddForceForward(float force) {
 	AddForce(rot * force);
 }
 
+void RigidbodyComponent::ResetForce()
+{
+	rigidbody->clearForces();
+}
+
 void RigidbodyComponent::AddTorque(Vector3 torque) {
 	rigidbody->addTorque(torque);
 }
@@ -119,6 +124,7 @@ void RigidbodyComponent::ConvertToLua(lua_State* state)
 					addProperty("gravity", &RigidbodyComponent::GetGravity, &RigidbodyComponent::SetGravity).
 					addFunction("AddForce", &RigidbodyComponent::AddForce).
 					addFunction("GetForce", &RigidbodyComponent::GetForce).
+					addFunction("ClearForce", &RigidbodyComponent::ResetForce).
 					addFunction("AccelerateTo", &RigidbodyComponent::AccelerateTo).
 					addFunction("AddTorque", &RigidbodyComponent::AddTorque).
 					addFunction("AddForceForward", &RigidbodyComponent::AddForceForward).

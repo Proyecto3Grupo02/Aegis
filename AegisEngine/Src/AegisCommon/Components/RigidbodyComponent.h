@@ -40,6 +40,8 @@ public:
 	void AddTorque(Vector3 torque);
 	void AddForceForward(float force);
 
+	void ResetForce();
+
 	//FREEZE ROT------------------------------------
 	void FreezeRot(bool _x, bool _y, bool _z);
 
