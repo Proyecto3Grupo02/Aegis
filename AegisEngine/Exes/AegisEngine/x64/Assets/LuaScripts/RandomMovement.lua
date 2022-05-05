@@ -13,6 +13,7 @@ function table.GetNew(entity, params)
 	local acumulatedRay;
 	local lastTimeRay; 
 	local random; 
+	local random2; 
 	
     function Init() 
         rigidbody = component.entity:GetComponent("Rigidbody").type;
@@ -23,10 +24,11 @@ function table.GetNew(entity, params)
 		root = 0;			
 		ray = false;
 		random = 0;
+		random2 = 0;
 		rigidbody:SetAngular();
     end;
 	function Update(deltaTime) 
-		if acumulatedDT > lastTime + 0.5 then
+		if acumulatedDT > lastTime + 1 then
 			canRoot=true;
 			root = math.random(-10,10);
 			lastTime = acumulatedDT;		
@@ -35,10 +37,11 @@ function table.GetNew(entity, params)
 			ray = true;
 			
 			random = math.random(0,3); 
-			while (random == 1) do 
-				random = math.random(0,3); 
-				random= random - 1; 
-			end;
+			random2 = math.random(0,3)
+			-- while (random == 1) do 
+			-- 	random = math.random(0,3); 
+			-- 	random= random - 1; 
+			-- end;
 			lastTimeRay = acumulatedRay;
 		end;
 		acumulatedRay = acumulatedRay + deltaTime;
@@ -48,10 +51,11 @@ function table.GetNew(entity, params)
 	function LateUpdate(deltaTime)
 	end;
 	function FixedUpdate() 
-		--rigidbody:AccelerateTo(Aegis.Maths.Vector3(0,0,0), 0);
+		rigidbody:AccelerateTo(Aegis.Maths.Vector3(0,0,0), 0);
 		if canRoot then
-			
-			rigidbody:AccelerateToRand();
+			--rigidbody:SetRotationEuler(transform.localEulerAngles + Aegis.Maths.Vector3(0,random*3,0));
+			rigidbody:AccelerateTo(Aegis.Maths.Vector3(random*3,0,random2*3), 100000000);			
+			--rigidbody:AccelerateToRand();
 			--rigidbody:AddTorque(Aegis.Maths.Vector3(0,root,0));
 			canRoot=false;
 		end;

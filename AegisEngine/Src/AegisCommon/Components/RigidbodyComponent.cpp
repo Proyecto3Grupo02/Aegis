@@ -55,7 +55,9 @@ void RigidbodyComponent::AddForce(Vector3 force) {
 
 Vector3 RigidbodyComponent::AccelerateTo(Vector3 targetVelocity, float maxAcceleration)
 {
+	
 	return rigidbody->AccelerateTo(targetVelocity, Time()->deltaTime, maxAcceleration);
+
 }
 
 Vector3 RigidbodyComponent::AccelerateToRand()
