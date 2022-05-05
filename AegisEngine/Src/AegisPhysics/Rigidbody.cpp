@@ -145,6 +145,8 @@ void RigidBody::addTorque(Vector3 vec)
 
 void RigidBody::clearForces()
 {
+	rigidBody->setLinearVelocity({ 0, 0, 0 });
+	rigidBody->setAngularVelocity({ 0, 0, 0 });
 	rigidBody->clearForces();
 }
 

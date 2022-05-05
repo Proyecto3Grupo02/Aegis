@@ -44,7 +44,8 @@ local scene = {
 		type = "Entity",
 		name = "Anzuelo",
 		position = {x = -5, y = -30},
-		scale = {x=0.2, y=0.2, z=0.2},
+		scale = {x=0.2, y=0.2, z=0.2},--ruben
+		--scale = {x=2, y=2, z=2},--Meitin necesita ver el anzuelo
 		components = {
 			{
 				type = "Renderer",
@@ -126,7 +127,7 @@ local scene = {
 	{
 		type = "Entity",
 		name = "ParedFrontal",
-		position = { y = -50, z = 30 },
+		position = { y = -70, z = 30 },
 		scale = { x = 100, y = 50, z = 5},
 		components = 
 		{
@@ -137,12 +138,20 @@ local scene = {
 					isKinematic = true
 				}
 			}
+			--  ,
+			-- {
+			-- 	type = "Renderer",
+			-- 	data = {
+			-- 			mesh = "Cube.mesh",
+			-- 			material= "yellow"
+			-- 		}			
+			-- }
 		}
 	},
 	{
 		type = "Entity",
 		name = "ParedLateral",
-		position = { y = -50, x = 30 },
+		position = { y = -70, x = 30 },
 		scale = { x = 5, y = 50, z = 100},
 		components = 
 		{
@@ -153,12 +162,20 @@ local scene = {
 					isKinematic = true
 				}
 			}
+			-- ,
+			-- {
+			-- 	type = "Renderer",
+			-- 	data = {
+			-- 			mesh = "Cube.mesh",
+			-- 			material= "yellow"
+			-- 		}			
+			-- }
 		}
 	},
 	{
 		type = "Entity",
 		name = "ParedTrasera",
-		position = { y = -50, z = -30 },
+		position = { y = -70, z = -25 },
 		scale = { x = 100, y = 50, z = 5},
 		components = 
 		{
@@ -169,12 +186,20 @@ local scene = {
 					isKinematic = true
 				}
 			}
+			-- ,
+			-- {
+			-- 	type = "Renderer",
+			-- 	data = {
+			-- 			mesh = "Cube.mesh",
+			-- 			material= "yellow"
+			-- 		}			
+			-- }
 		}
 	},
 	{
 		type = "Entity",
 		name = "ParedIzquierda",
-		position = { y = -50, x = -30 },
+		position = { y = -70, x = -25 },
 		scale = { x = 5, y = 50, z = 100},
 		components = 
 		{
@@ -185,12 +210,20 @@ local scene = {
 					isKinematic = true
 				}
 			}
+			-- ,
+			-- {
+			-- 	type = "Renderer",
+			-- 	data = {
+			-- 			mesh = "Cube.mesh",
+			-- 			material= "yellow"
+			-- 		}			
+			-- }
 		}
 	},
 	{
 		type = "Entity",
 		name = "Columna",
-		position = { x = 6, y = -55, z = 19 },
+		position = { x = 6, y = -58, z = 19 },
 		scale = { x = 3.5, y = 20, z = 3.5},
 		components = 
 		{
@@ -209,6 +242,31 @@ local scene = {
 			-- 			material= "yellow"
 			-- 		}
 			-- }
+		}
+	},
+	
+	{
+		type = "Entity",
+		name = "FondoLago",
+		position = { y = -63, x = 0 },
+		scale = { x = 80, y = 5, z = 80},
+		components = 
+		{
+			{
+				type = "Rigidbody",
+				data = 
+				{
+					isKinematic = true
+				}
+			}
+			,
+			{
+				type = "Renderer",
+				data = {
+						mesh = "Cube.mesh",
+						material= "yellow"
+					}			
+			}
 		}
 	},
 	{
