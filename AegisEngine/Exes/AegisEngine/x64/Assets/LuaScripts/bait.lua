@@ -25,14 +25,13 @@ function table.GetNew(entity, params)
         end;   
         if ready then
             if Input:KeyWasPressed("y")then
-                rigidbody:AddForce(Aegis.Maths.Vector3(0,-20,-100))
+                rigidbody:AddForce(Aegis.Maths.Vector3(0,200,-300))
+                rigidbody.gravity=true
             end;   
         else 
+            rigidbody.gravity=false
             rigidbody.position = offset
         end 
-
-
-   
     end;
 
     function LateUpdate(deltaTime) end;

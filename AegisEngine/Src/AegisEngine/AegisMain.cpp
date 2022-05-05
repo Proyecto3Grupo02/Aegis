@@ -18,6 +18,21 @@
 #include "../AegisPhysics/PhysicsMain.h"
 #include "GameLoopData.h"
 #include "LuaMaths.h"
+#include "../AegisCommon/Scene/Scene.h"
+// #include "../AegisCommon/Utils/GameLoopData.h"
+// #include "../AegisCommon/Entity/Entity.h"
+// #include "../AegisCommon/Components/AegisComponent.h"
+// #include "../AegisCommon/Components/Transform.h"
+// #include "../AegisCommon/Components/Renderer.h"
+// #include "../AegisCommon/Utils/Quaternion.h"
+// #include "../AegisAudio/SoundSystem.h"
+// #include "../AegisCommon/Components/LightComponent.h"
+// #include "../AegisCommon/Components/CameraComponent.h"
+// #include "../AegisCommon/Components/AnimationComponent.h"
+// #include "../AegisCommon/Components/RigidbodyComponent.h"
+// #include "../AegisCommon/Utils/Vector2.h"
+// #include "../AegisCommon/Utils/LuaMaths.h"
+// #include "../AegisCommon/Components/SoundEmitterComponent.h"
 
 //using namespace luabridge;
 
@@ -54,6 +69,12 @@ void AegisMain::GameLoop() {
 					//std::cout << "KeyUp (" << eventHandler.type << "): ";
 					Input()->OnKeyUp(key);
 					break;
+				case SDL_MOUSEBUTTONDOWN:
+					Input()->OnMouseButtonDown(eventHandler.button);
+					break;
+				case SDL_MOUSEBUTTONUP:
+					Input()->OnMouseButtonUp(eventHandler.button);
+					break;
 				case SDL_MOUSEMOTION:
 					// This is usually implemented as a callback but for now it will be this way, just for testing...
 					Input()->SetMouseMotion(Vector2(eventHandler.motion.xrel, eventHandler.motion.yrel));
@@ -68,6 +89,8 @@ void AegisMain::GameLoop() {
 			sceneManager->PreRenderScene();
 
 			ogreWrap->Render();
+
+			sceneManager->RenderUI();
 			Uint32 frameTime = SDL_GetTicks() - Time()->frameStartTime;
 
 			if (frameTime < frameTimeMS)
@@ -143,6 +166,7 @@ void AegisMain::ConvertObjectToLua()
 	CameraComponent::ConvertToLua(state);
 	AnimationComponent::ConvertToLua(state);
 	RigidbodyComponent::ConvertToLua(state);
+	SoundEmitterComponent::ConvertToLua(state);
 	LuaMaths::ConvertToLua(state);
 
 	ExportToLua(sceneManager->GetCurrentScene(), "currentScene");

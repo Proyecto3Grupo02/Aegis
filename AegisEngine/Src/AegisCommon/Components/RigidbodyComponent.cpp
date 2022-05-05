@@ -91,10 +91,21 @@ void RigidbodyComponent::SetRotationEuler(Vector3 rot) {
 	rigidbody->setRbRotation(eulerRot);
 }
 
-//FREEZE ROT------------------------------------
+//FREEZE ROT------------------------------------------------------------------------------------------------
 void RigidbodyComponent::FreezeRot (bool _x, bool _y, bool _z) {
 	rigidbody->setFreezeRotation(_x, _y, _z);
 }
+
+//GRAVITY----------------------------------------------------------------------------------------------------
+bool RigidbodyComponent::GetGravity()const {
+	return rigidbody->getUseGravity();
+}
+
+void RigidbodyComponent::SetGravity(bool g_) {
+	rigidbody->setUsingGravity(g_);
+}
+
+
 
 //LUA-------------------------------------------------------------------------------------------------------
 RigidbodyComponent* CreateRigidbody(Entity* ent, LuaRef args) //Doesn't belong to this class
@@ -115,6 +126,7 @@ void RigidbodyComponent::ConvertToLua(lua_State* state)
 			addFunction("CreateRigidbody", CreateRigidbody).
 				deriveClass<RigidbodyComponent, AegisComponent>("Rigidbody").
 					addProperty("position", &RigidbodyComponent::GetPosition, &RigidbodyComponent::SetPosition).
+					addProperty("gravity", &RigidbodyComponent::GetGravity, &RigidbodyComponent::SetGravity).
 					addFunction("AddForce", &RigidbodyComponent::AddForce).
 					addFunction("GetForce", &RigidbodyComponent::GetForce).
 					addFunction("AccelerateTo", &RigidbodyComponent::AccelerateTo).

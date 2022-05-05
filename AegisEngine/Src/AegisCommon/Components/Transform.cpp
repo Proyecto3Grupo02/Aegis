@@ -1,6 +1,5 @@
 #include "Transform.h"
 
-#include"RegisterComponent.h"
 #include "Entity.h"
 #include <OgreMatrix3.h>
 #include "../Utils/MathUtils.h"

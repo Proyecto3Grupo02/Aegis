@@ -12,7 +12,7 @@ local scene = {
 				type = "CameraTest"
 			}
 		}
-	},
+	},	
 	{
 		type = "Entity",
 		name = "Cubo",

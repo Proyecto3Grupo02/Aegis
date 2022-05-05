@@ -48,6 +48,10 @@ public:
 	//FREEZE ROT------------------------------------
 	void FreezeRot(bool _x, bool _y, bool _z);
 
+	//GRAVITY---------------------------------------
+	bool GetGravity()const;
+	void SetGravity(bool g_);
+
 	//LUA------------
 	static void ConvertToLua(lua_State* state);
 	void changeGravity(Vector3 acc);
