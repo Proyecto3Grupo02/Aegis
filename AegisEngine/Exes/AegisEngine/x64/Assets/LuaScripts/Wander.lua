@@ -31,15 +31,16 @@ function table.GetNew(entity, params)
         rotation= RandomBinomial() * maxRotation; 
         lastTime= rotTime;
         rotTime=rotTime + deltaTime;
-        transform.rotation=rotation;
+        rb:SetRotationEuler(rotation);
         end;
 
         rb:AddForceForward(velocity);
 
-        --Ian Millington pseudocode
+        --Ian Millington pseudocode-------------------------------------------------------------------------------
         -- result.velocity= maxSpeed* character.orientationAsVector(look vector)
         --result.rotation=randomBinomial* maxRotation --just added a time to decide when rotate as a plus
         --return result
+        ----------------------------------------------------------------------------------------------------------
 
     end;
 

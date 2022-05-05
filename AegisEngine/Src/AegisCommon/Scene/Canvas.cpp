@@ -6,6 +6,9 @@
 #include "../Components/Image.h"
 Canvas::Canvas(OgreWrapper* wrap): ogreWrapper(wrap)
 {
+	UIElement* elem = new UIElement(this, Vector2());
+	Image* im= new Image(elem, wrap->getRenderer(), "../Assets/Textures/logo_aegis.png", 150, 150,0);
+	elem->addComponentFromLua(im);
 }
 
 Canvas::~Canvas()

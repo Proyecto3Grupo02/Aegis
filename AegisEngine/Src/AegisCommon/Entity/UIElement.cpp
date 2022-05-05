@@ -58,7 +58,7 @@ inline void UIElement::addComponentFromLua(UIComponent* component)
 
 	if (mComponents_.count(key) == 0) { //si no est� lo a�adimos
 		//component->SetEntity(this);
-
+		
 		mComponentsArray_.push_back(component);
 		mComponents_[key] = component;
 	}
@@ -105,10 +105,11 @@ void UIElement::setName(std::string name)
 	mName_ = name;
 }
 
-template<typename T>
-inline T* UIElement::addComponent(const char* componentName)
+
+inline void UIElement::addComponent(UIComponent* component)
 {
-	return nullptr;
+	std::string key = component->GetComponentName();
+
 }
 
 template<typename T>
