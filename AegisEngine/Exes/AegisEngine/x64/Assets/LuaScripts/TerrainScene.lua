@@ -331,7 +331,6 @@ local scene = {
 		type = "Entity",
 		name = "Spawner",
 		components = {	
-			
 			{
 				type = "Spawner"
 			}
