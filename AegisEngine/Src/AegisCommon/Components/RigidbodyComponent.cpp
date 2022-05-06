@@ -158,7 +158,8 @@ void RigidbodyComponent::changeGravity(Vector3 acc)
 	rigidbody->changeGravity(acc);
 }
 
-int RigidbodyComponent::Raycast(Vector3& obj)
+int RigidbodyComponent::Raycast(Vector3 origin, Vector3& dir, float distance)
 {
-	return rigidbody->RayCast(transform->GetForward(), obj);
+	dir = origin + dir.getNormalized() * distance;
+	return rigidbody->RayCast(origin, dir);
 }

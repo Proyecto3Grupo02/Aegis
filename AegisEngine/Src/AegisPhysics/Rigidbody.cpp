@@ -8,15 +8,15 @@
 
 
 	//if (t)rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
-RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, Vector4 rotation, RigidbodyComponent * r, float m, bool useG, bool isK,bool isT) :
+RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, Vector4 rotation, RigidbodyComponent* r, float m, bool useG, bool isK, bool isT) :
 	mass(m), useGravity(useG), isKinematic(isK) {
 	freezePosition = std::vector<bool>(3, false);
 	freezeRotation = std::vector<bool>(3, false);
 	rbC = r;
-	trigger = isT;	
-	createRigidBodyComponent(RigidBodyType::Box, pos, scale, rotation,  bodyMeshName);
+	trigger = isT;
+	createRigidBodyComponent(RigidBodyType::Box, pos, scale, rotation, bodyMeshName);
 	if (trigger)rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
-	
+
 }
 
 void RigidBody::init() {
@@ -34,9 +34,9 @@ RigidBody::~RigidBody()
 	Physics()->removeRigidbody(this->rigidBody);
 }
 
-void RigidBody::createRigidBodyComponent(RigidBodyType rbType, Vector3 pos, Vector3 scale, Vector4 rotation,  std::string bodyMeshName, bool isConvex)
+void RigidBody::createRigidBodyComponent(RigidBodyType rbType, Vector3 pos, Vector3 scale, Vector4 rotation, std::string bodyMeshName, bool isConvex)
 {
-	
+
 	rigidBody = PhysicsSystem::getInstance()->createRigidBody(rbType, mass, scale, pos, rotation, bodyMeshName, isConvex, isKinematic, useGravity);
 	rigidBody->setUserPointer(this);
 
@@ -114,28 +114,26 @@ void RigidBody::setFreezeRotation(bool _x, bool _y, bool _z) {
 
 }
 
-int RigidBody::RayCast(Vector3 f, Vector3 &obj) {
-	f = f * -1;
-	btTransform aux; btVector3 forward = Physics()->parseToBulletVector(f);
-	btVector3 posAct; rigidBody->getMotionState()->getWorldTransform(aux); posAct = aux.getOrigin();
-		btCollisionWorld::ClosestRayResultCallback RayCallback(posAct, posAct + forward*10);
-		
-		// Perform raycast
-		Physics()->dynamicsWorld->rayTest(posAct, posAct + forward * 10, RayCallback);
-		if (RayCallback.hasHit()) {
-			std::cout << "a";
-			RigidBody* rb = (RigidBody*)RayCallback.m_collisionObject->getUserPointer();
-			if (!rb->rigidBody->getInvMass()) 			
-				return 1;
-			if (!rb->isTrigger()) {
-				obj = rb->getRbPosition();
-				return 2;
-			}				
-			return 3;
+int RigidBody::RayCast(Vector3 origin, Vector3& dest) {
+	btVector3 _origin = Physics()->parseToBulletVector(origin);
+	btVector3 _dest = Physics()->parseToBulletVector(dest);
+	btCollisionWorld::ClosestRayResultCallback RayCallback(_origin, _dest);
 
+	// Perform raycast
+	Physics()->dynamicsWorld->rayTest(_origin, _dest, RayCallback);
+	if (RayCallback.hasHit()) {
+		std::cout << "a";
+		RigidBody* rb = (RigidBody*)RayCallback.m_collisionObject->getUserPointer();
+		if (!rb->rigidBody->getInvMass())
+			return 1;
+		if (!rb->isTrigger()) {
+			dest = rb->getRbPosition();
+			return 2;
 		}
-	
-		return 0;
+		return 3;
+	}
+
+	return 0;
 	//return false;
 }
 
@@ -197,15 +195,15 @@ void RigidBody::changeGravity(Vector3 acc)
 }
 
 void RigidBody::SetAngularFactor() {
-	rigidBody->setAngularFactor(btVector3(0,0 , 0));
+	rigidBody->setAngularFactor(btVector3(0, 0, 0));
 }
 
 void RigidBody::disableCol()
 {
 	rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
 }
- 
+
 void RigidBody::setLinearVelocity() {
 	btVector3 velocity = rigidBody->getAngularVelocity();
-	rigidBody->setAngularFactor({velocity.getX(), 0, velocity.getZ()});
+	rigidBody->setAngularFactor({ velocity.getX(), 0, velocity.getZ() });
 }

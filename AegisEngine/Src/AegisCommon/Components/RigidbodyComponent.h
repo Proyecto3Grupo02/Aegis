@@ -57,7 +57,7 @@ public:
 	//LUA------------
 	static void ConvertToLua(lua_State* state);
 	void changeGravity(Vector3 acc);
-	int Raycast(Vector3 &obj);
+	int Raycast(Vector3 origin, Vector3 &dest, float distance);
 	friend class PhysicsSystem;
 
 	

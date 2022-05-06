@@ -160,7 +160,7 @@ local scene = {
 				data = 
 				{
 					mass = 0;
-					--isKinematic = true
+					isKinematic = true
 				}
 			}
 			--  ,
@@ -185,7 +185,7 @@ local scene = {
 				data = 
 				{
 					mass = 0;
-					--isKinematic = true
+					isKinematic = true
 				}
 			}
 			-- ,
@@ -210,7 +210,7 @@ local scene = {
 				data = 
 				{
 					mass = 0;
-					--isKinematic = true
+					isKinematic = true
 				}
 			}
 			-- ,
@@ -235,7 +235,7 @@ local scene = {
 				data = 
 				{
 					mass = 0;
-					--isKinematic = true
+					isKinematic = true
 				}
 			}
 			-- ,
@@ -341,14 +341,14 @@ local scene = {
 			}
 		}
 	},
-	{
-		type = "Entity",
-		name = "Spawner",
-		components = {	
-			{
-				type = "Spawner"
-			}
-		}
-	},
+	-- {
+	-- 	type = "Entity",
+	-- 	name = "Spawner",
+	-- 	components = {	
+	-- 		{
+	-- 			type = "Spawner"
+	-- 		}
+	-- 	}
+	-- },
 };
 return scene;

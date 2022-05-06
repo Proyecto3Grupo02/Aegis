@@ -77,7 +77,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\jonat\OneDrive\Escritorio\Aegis\AegisEngine\Dependencias\SDL2_image-2.0.1\lib\x64;$(SolutionDir)Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)\Exes\AegisGraphics\x64\Debug;$(SolutionDir)\Exes\AegisCommon\x64\Debug;$(SolutionDir)\Exes\AegisPhysics\x64\Debug;$(SolutionDir)\Exes\AegisScripting\x64\Debug;$(SolutionDir)Dependencias\Ogre\Build\lib\$(Configuration)\;$(SolutionDir)\Exes\AegisAudio\x64\Debug;%(AdditionalLibraryDirectories);$(SolutionDir)\Dependencias\fmod\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\SDL2_image-2.0.1\lib\x64;$(SolutionDir)Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)\Exes\AegisGraphics\x64\Debug;$(SolutionDir)\Exes\AegisCommon\x64\Debug;$(SolutionDir)\Exes\AegisPhysics\x64\Debug;$(SolutionDir)\Exes\AegisScripting\x64\Debug;$(SolutionDir)Dependencias\Ogre\Build\lib\$(Configuration)\;$(SolutionDir)\Exes\AegisAudio\x64\Debug;%(AdditionalLibraryDirectories);$(SolutionDir)\Dependencias\fmod\lib\x64</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2_image.lib;OgreMain_d.lib;SDL2.lib;SDL2main.lib;RenderSystem_GL_d.lib;AegisCommon.lib;AegisGraphics.lib;AegisScripting.lib;AegisAudio.lib;AegisPhysics.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <DelayLoadDLLs>fmod.dll</DelayLoadDLLs>
     </Link>
@@ -111,7 +111,7 @@ xcopy /y /d "$(SolutionDir)"\Dependencias\fmod\lib\x64\fmod.dll "$(OutDir)"</Com
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\jonat\OneDrive\Escritorio\Aegis\AegisEngine\Dependencias\SDL2_image-2.0.1\lib\x64;$(SolutionDir)Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencias\Ogre\Build\lib\$(Configuration)\;$(SolutionDir)\Exes\AegisCommon\x64\Release;$(SolutionDir)\Exes\AegisGraphics\x64\Release;$(SolutionDir)\Exes\AegisScripting\x64\Release;$(SolutionDir)\Exes\AegisPhysics\x64\Release;$(SolutionDir)\Exes\AegisAudio\x64\Release;%(AdditionalLibraryDirectories);$(SolutionDir)\Dependencias\fmod\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\SDL2_image-2.0.1\lib\x64;$(SolutionDir)Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencias\Ogre\Build\lib\$(Configuration)\;$(SolutionDir)\Exes\AegisCommon\x64\Release;$(SolutionDir)\Exes\AegisGraphics\x64\Release;$(SolutionDir)\Exes\AegisScripting\x64\Release;$(SolutionDir)\Exes\AegisPhysics\x64\Release;$(SolutionDir)\Exes\AegisAudio\x64\Release;%(AdditionalLibraryDirectories);$(SolutionDir)\Dependencias\fmod\lib\x64</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2_image.lib;OgreMain.lib;SDL2.lib;SDL2main.lib;RenderSystem_GL.lib;AegisCommon.lib;AegisGraphics.lib;AegisScripting.lib;AegisAudio.lib;AegisPhysics.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <DelayLoadDLLs>fmod.dll</DelayLoadDLLs>
     </Link>
