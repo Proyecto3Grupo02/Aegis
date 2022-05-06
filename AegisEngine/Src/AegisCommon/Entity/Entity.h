@@ -68,6 +68,10 @@ public:
 	void SetParent(Entity* ent);
 
 	void Destroy();
+	void SetNodeDestroyed(bool isDestroyed) { nodeDestroyed = isDestroyed;  };
+
+	void AddChild(Entity* ent) { mChildren_.push_back(ent); };
+	void RemoveChild(Entity* ent) { mChildren_.remove(ent); };
 
 	static void ConvertToLua(lua_State* state);
 protected:
@@ -82,9 +86,10 @@ protected:
 
 
 private:
-	std::string mName_; //name of the entity, works like a tag, useful to debug
-	Transform* transform;
+	std::string mName_;			//name of the entity
+	Transform* transform;		//native transform
 	std::list<Entity*>::iterator entityIterator;
+	bool nodeDestroyed;
 };
 
 #endif //

@@ -1,6 +1,6 @@
 #include "SoundSystem.h"
 #include <fmod_errors.h>
-
+#include "DebugManager.h"
 SoundSystem::SoundSystem() :
 	system(nullptr), 
 	listener(nullptr), 
@@ -217,16 +217,21 @@ void SoundSystem::removeListener()
 void SoundSystem::update(float deltaTime)
 {
 	Vector3 pos, forward, up;
+	// Listener position and quaternion update
 	if (listener != nullptr)
 	{
 		pos = *listener->position;
-		float z = listener->position->GetZ();
-		float y = listener->position->GetY();
 
+		//float z = listener->position->GetZ();
+		//float y = listener->position->GetY();
+		
+		float z = listener->quaternion->GetZ();
+		float y = listener->quaternion->GetY();
 		forward = Vector3 { 0, 0, z }; //Vector3 Forward
 		up = Vector3 { 0, y ,0 }; // Vector3 Up
 		setListenerAttributes(pos, forward, up);
 	}
+	// Emitters position update
 	FMOD_VECTOR emitterPosition, zero;
 	zero = { 0,0,0 };
 	for (int i = 0; i < emitters.size(); i++)

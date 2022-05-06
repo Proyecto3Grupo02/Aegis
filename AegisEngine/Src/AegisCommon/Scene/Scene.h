@@ -5,6 +5,7 @@
 #include <list>
 #include "../Interfaces/ILuaObject.h"
 #include "../Interfaces/IInitializable.h"
+
 #include <Ogre.h>
 
 struct Entity;
@@ -12,6 +13,7 @@ class SceneNode;
 class RigidbodyComponent;
 class OgreWrapper;
 
+class Canvas;
 
 class Scene : public ILuaObject, public IInitializable
 {
@@ -22,6 +24,7 @@ private:
 	std::list<std::list<Entity*>::iterator> entitiesToDelete;
 	Ogre::SceneNode* ogreNode;
 	OgreWrapper* ogreWrapper;
+	Canvas* mCanvas_;
 	// Fixed Update arguments
 
 	// Este parametro quizas sea mejor a la clase application cuando la tengamos
@@ -122,9 +125,12 @@ public:
 	void UpdateScene(float dt);
 	
 	void Render();
+	void RenderUI();
 
 	Ogre::SceneNode* GetNewNode();
 	Ogre::SceneManager* GetOgreManager();
+
+	void CreateCanvas();
 
 	static void ConvertToLua(lua_State* state);
 };

@@ -63,7 +63,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencias\fmod\inc;$(SolutionDir)Dependencias\Ogre\build\Components;$(SolutionDir)Dependencias\Ogre\build\include\SDL2;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)\Dependencias\lua\src\include;$(SolutionDir)\Dependencias\LuaBridge;%(AdditionalIncludeDirectories);$(SolutionDir)\Dependencias\Libraries</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\SDL2_image-2.0.1\include;$(SolutionDir)\Dependencias\fmod\inc;$(SolutionDir)Dependencias\Ogre\build\Components;$(SolutionDir)Dependencias\Ogre\build\include\SDL2;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)\Dependencias\lua\src\include;$(SolutionDir)Dependencias\LuaBridge;%(AdditionalIncludeDirectories);$(SolutionDir)Dependencias\Libraries</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -73,11 +73,14 @@
       <AdditionalDependencies>OgreMain_d.lib;SDL2.lib;SDL2main.lib;RenderSystem_GL_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\jonat\OneDrive\Escritorio\Aegis\AegisEngine\Dependencias\SDL2_image-2.0.1\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <Verbose>false</Verbose>
     </Lib>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -87,7 +90,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencias\fmod\inc;$(SolutionDir)Dependencias\Ogre\build\Components;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)\Dependencias\lua\src\include;$(SolutionDir)\Dependencias\LuaBridge;%(AdditionalIncludeDirectories);$(SolutionDir)\Dependencias;$(SolutionDir)\Dependencias\Libraries</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\SDL2_image-2.0.1\include;$(SolutionDir)\Dependencias\fmod\inc;$(SolutionDir)Dependencias\Ogre\build\Components;$(SolutionDir)Dependencias\Ogre\build\include\SDL2;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)\Dependencias\lua\src\include;$(SolutionDir)Dependencias\LuaBridge;%(AdditionalIncludeDirectories);$(SolutionDir)Dependencias\Libraries</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -98,30 +101,41 @@
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\x64\lib\$(Configuration)\;$(SolutionDir)Dependencias\Ogre\Build\x64\SDL2-build\RelWithDebInfo;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>OgreMain.lib;SDL2.lib;SDL2main.lib;RenderSystem_GL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <Lib>
+      <AdditionalDependencies>SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>C:\Users\jonat\OneDrive\Escritorio\Aegis\AegisEngine\Dependencias\SDL2_image-2.0.1\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AegisCommon\Components\AegisComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\AnimationComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\CameraComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\Component.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Components\Image.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\LightComponent.h" />
-    <ClInclude Include="..\..\Src\AegisCommon\Components\Material.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Components\RectTransform.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\RegisterComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\Renderer.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\RigidbodyComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\SoundEmitterComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\SoundListenerComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\Transform.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Components\UIComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Entity\Entity.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Entity\UIElement.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Interfaces\IInitializable.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Interfaces\ILuaObject.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Managers\ComponentManager.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Managers\DebugManager.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Managers\InputManager.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Managers\SceneManager.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Scene\Canvas.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Scene\Scene.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Animation.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Utils\GameLoopData.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Utils\LuaMaths.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Utils\MathUtils.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Quaternion.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Randomized.h" />
@@ -136,18 +150,22 @@
     <ClCompile Include="..\..\Src\AegisCommon\Components\AnimationComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\CameraComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\Component.cpp" />
+    <ClCompile Include="..\..\Src\AegisCommon\Components\Image.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\LightComponent.cpp" />
-    <ClCompile Include="..\..\Src\AegisCommon\Components\Material.cpp" />
+    <ClCompile Include="..\..\Src\AegisCommon\Components\RectTransform.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\Renderer.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\RigidbodyComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\SoundEmitterComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\SoundListenerComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\Transform.cpp" />
+    <ClCompile Include="..\..\Src\AegisCommon\Components\UIComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Entity\Entity.cpp" />
+    <ClCompile Include="..\..\Src\AegisCommon\Entity\UIElement.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Managers\ComponentManager.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Managers\DebugManager.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Managers\InputManager.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Managers\SceneManager.cpp" />
+    <ClCompile Include="..\..\Src\AegisCommon\Scene\Canvas.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Scene\Scene.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Utils\Vector3.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Utils\Vector4.cpp" />

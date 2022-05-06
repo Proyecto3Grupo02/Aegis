@@ -6,7 +6,7 @@
 
 #include "SoundSystem.h"
 #include "fmod.hpp"
-#include "../checkML.h"
+//#include "../checkML.h"
 
 //namespace FMOD{
 //	class Channel;
@@ -19,7 +19,7 @@ class SoundEmitter
 {
 
 private:
-	SoundSystem::EmitterData* emitterData;
+	SoundSystem::EmitterData* emitterData_;
 	float pitch;
 	float volume;
 

@@ -1,6 +1,4 @@
 #include "DebugManager.h"
-#include <iostream>
-#include <OgreColourValue.h>
 
 DebugManager::DebugManager(): 
 	Singleton()

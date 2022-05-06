@@ -4,8 +4,8 @@
 #define SOUNDEMITTER_H
 #include "AegisComponent.h"
 #include "../../AegisAudio/SoundEmitter.h"
-class SoundEmitterComponent: 
-    public AegisComponent
+
+class SoundEmitterComponent : public AegisComponent
 {
 private:
     std::string mSound_;

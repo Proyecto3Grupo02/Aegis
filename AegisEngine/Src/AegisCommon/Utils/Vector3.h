@@ -16,8 +16,8 @@ public:
 	float GetZ() const { return z; }
 
 	void SetX(float _x) { x = _x; }
-	void SetY(float _y) { x = _y; }
-	void SetZ(float _z) { x = _z; }
+	void SetY(float _y) { y = _y; }
+	void SetZ(float _z) { z = _z; }
 
 	Vector3 divide(Vector3 const& b) const { return Vector3(x / b.x, y / b.y, z / b.z); }
 	Vector3 scalarMult(Vector3 const& b) const { return Vector3(x * b.x, y * b.y, z * b.z); }

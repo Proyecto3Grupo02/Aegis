@@ -1,5 +1,7 @@
 local NAME = "Utils";
 local funcs = {};
+
+
 funcs.ParseEntity = function(object)
 	local entity = Aegis.CreateEntity(currentScene, funcs.ParseVector3(object.position));
 	entity.transform.scale = funcs.ParseVector3(object.scale, 1);
@@ -161,16 +163,30 @@ funcs.TreatSpecialCase = function(object)
 		possibleEntity.transform.localEulerAngles = funcs.ParseVector3(object.rotation, 0);
 
 		funcs.AddComponents(possibleEntity, object.components);
+		return possibleEntity;
 	end;
 end;
 
 local entities = {};
+local mCanvas=nil;
 funcs.ParseSceneObject = function(object)
 	if object.type == "Entity" then
 		local entity = funcs.ParseEntity(object);
 		entities[entity:GetName()] = entity;
-	else 
-		funcs.TreatSpecialCase(object);
+	
+	end;
+	 if object.type=="Canvas" then
+		local canvas= funcs.ParseCanvas(object);
+		if canvas ~=nil then
+			mCanvas=canvas;
+
+	end;
+
+	else
+		local entity = funcs.TreatSpecialCase(object);
+		if entity ~= nil then
+			entities[entity:GetName()] = entity;
+		end;
 	end;
 end;
 
@@ -184,6 +200,31 @@ funcs.ParseScene = function(scene)
     print("-------------------");
 	funcs.ResolveDependencies(scene, entities);
 end;
+
+funcs.ParseCanvas= function (object)
+	print("creating canvas");
+
+	local canvas= Aegis.CreateCanvas();
+
+	funcs.AddElems(canvas, object.elements);
+
+
+	return canvas;
+	--local entity = Aegis.CreateEntity(currentScene, funcs.ParseVector3(object.position));
+	--entity.transform.scale = funcs.ParseVector3(object.scale, 1);
+	--entity.transform.localEulerAngles = funcs.ParseVector3(object.rotation, 0);
+	
+	--entity:SetName(object.name);
+	--funcs.AddComponents(entity, object.components);
+	--currentScene:AddEntity(entity);
+	--return entity;
+
+end
+
+funcs.CreateUIElem=function (canvas)
+	
+end
+
 
 return funcs;
 

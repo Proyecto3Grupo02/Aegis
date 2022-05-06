@@ -204,6 +204,12 @@ namespace MathUtils
 		return result;
 	}
 
+	static Vector4 EulerToVec4(const Vector3& degreesVector) {
+		Ogre::Quaternion aux = EulerToOgreQuat(degreesVector);
+		Vector4 result = Vector4(aux.x, aux.y, aux.z, aux.w);
+		return result;
+	}
+
 	static Vector3 RotateVector3ByQuaternion(Ogre::Quaternion q, const Vector3& v)
 	{
 		// Using quaternions is easier to understand but uses way more CPU
@@ -237,16 +243,5 @@ namespace MathUtils
 		const float dot2 = (x * vx + y * vy + z * vz);
 		return Vector3((vx * w2 + (y * vz - z * vy) * w + x * dot2), (vy * w2 + (z * vx - x * vz) * w + y * dot2),
 			(vz * w2 + (x * vy - y * vx) * w + z * dot2));
-	}
-
-	static void ConvertToLua(lua_State* state)
-	{
-		getGlobalNamespace(state).
-			beginNamespace("Aegis").
-			beginNamespace("Maths").
-			addFunction("Vector3Lerp", &MathUtils::Vector3Lerp).
-			endNamespace().
-			endNamespace().
-			endNamespace();
 	}
 }

@@ -1,11 +1,9 @@
 ﻿#include "Entity.h"
-#include "Component.h"
 #include "Transform.h"
-#include "../Components/Renderer.h"
 #include "../Scene/Scene.h"
 
 Entity::Entity(Scene* scene, Ogre::SceneNode* node) :
-	mNode_(node == nullptr ?  scene->GetNewNode() : node), active_(true), mScene_(scene)
+	mNode_(node == nullptr ?  scene->GetNewNode() : node), active_(true), mScene_(scene), nodeDestroyed(false)
 {
 	//Componente obligatorio para todas las entidades
 	transform = new Transform(Vector3(0,0,0), Ogre::Quaternion(), Vector3(1.0f, 1.0f, 1.0f), getNode(), this);
@@ -14,7 +12,7 @@ Entity::Entity(Scene* scene, Ogre::SceneNode* node) :
 
 
 Entity::Entity(Scene* scene, Vector3 pos) :
-	mNode_(scene->GetNewNode()), active_(true), mScene_(scene)
+	mNode_(scene->GetNewNode()), active_(true), mScene_(scene), nodeDestroyed(false)
 {
 	transform = new Transform(pos, Ogre::Quaternion(), Vector3(1.0f, 1.0f, 1.0f), getNode(), this);
 	this->addComponentFromLua(transform);
@@ -28,9 +26,13 @@ Entity::~Entity()
 	mComponentsArray_.clear();
 	mComponents_.clear();
 
-	mChildren_.clear();
+	if(!nodeDestroyed)
+		DestroyNode();
 	
-	DestroyNode();
+	for (auto c : mChildren_)
+		c->SetNodeDestroyed(true);
+
+	mChildren_.clear();
 }
 
 template<typename T>
@@ -86,11 +88,10 @@ void Entity::render() {
 
 void Entity::DestroyNode()
 {
-	//Node can be null if a parent destroys a child before the child destroys itself
 	auto mParent = mNode_ == nullptr ? nullptr : mNode_->getParentSceneNode();
-	if (mParent != nullptr)
+	if (mParent != nullptr && mParent->getCreator	() != nullptr)
 		mParent->removeAndDestroyChild(mNode_);
-}
+	 }
 
 inline void Entity::addComponentFromLua(AegisComponent* component)
 {

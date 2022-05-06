@@ -16,7 +16,6 @@
     <ClCompile Include="..\..\Src\AegisPhysics\Rigidbody.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Src\AegisPhysics\CollisionCallback.h" />
     <ClInclude Include="..\..\Src\AegisPhysics\MotionState.h" />
     <ClInclude Include="..\..\Src\AegisPhysics\PhysicsMain.h" />
     <ClInclude Include="..\..\Src\AegisPhysics\Rigidbody.h" />
@@ -64,7 +63,7 @@
     <LinkIncremental>false</LinkIncremental>
     <IntDir>$(SolutionDir)Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)Exes\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
-    <IncludePath>$(SolutionDir)Dependencias\Bullet\src\src;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\Dependencias\Ogre\src\OgreMain\include;$(SolutionDir)Dependencias\Bullet\src\src;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -92,7 +91,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Src\AegisCommon\Entity;$(SolutionDir)Src\AegisCommon\Utils;$(SolutionDir)Src\AegisCommon\Managers;$(SolutionDir)Src\AegisPhysics;$(SolutionDir)Src\AegisCommon\Components;$(SolutionDir)Dependencias\Bullet\build\src;$(SolutionDir)Dependencias\Lua\src\include;$(SolutionDir)\Dependencias\Libraries;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)Src\AegisCommon\Entity;$(SolutionDir)Src\AegisCommon\Utils;$(SolutionDir)Src\AegisCommon\Managers;$(SolutionDir)Src\AegisPhysics;$(SolutionDir)Src\AegisCommon\Components;$(SolutionDir)Dependencias\Bullet\build\src;$(SolutionDir)Dependencias\Lua\src\include;$(SolutionDir)\Dependencias\Libraries;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>

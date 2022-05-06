@@ -1,8 +1,6 @@
 #include "Transform.h"
 
-#include"RegisterComponent.h"
 #include "Entity.h"
-#include <OgreMatrix3.h>
 #include "../Utils/MathUtils.h"
 
 using namespace MathUtils;
@@ -31,10 +29,16 @@ void Transform::SetParent(Entity* ent)
 	parentEntity = ent;
 	
 	if (oldParentEntity != ent && oldParentEntity != nullptr)
+	{
 		oldParentEntity->GetTransform()->RemoveChild(GetEntity());
+		oldParentEntity->RemoveChild(GetEntity());
+	}
 
 	if (parentEntity != nullptr)
+	{
 		parentEntity->GetTransform()->AddChild(this->GetEntity());
+		parentEntity->AddChild(this->GetEntity());
+	}
 
 	oldParent->removeChild(mNode);
 	parentNode->addChild(mNode);

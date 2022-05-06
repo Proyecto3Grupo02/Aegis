@@ -3,7 +3,6 @@
 //OGRE
 
 
-#include "../AegisAudio/SoundSystem.h"
 #include "../AegisCommon/Components/AnimationComponent.h"
 #include "../AegisCommon/Components/CameraComponent.h"
 #include "../AegisCommon/Components/LightComponent.h"
@@ -16,9 +15,12 @@
 #include "../AegisCommon/Scene/Scene.h"
 #include "../AegisGraphics/OgreWrapper.h"
 #include "../AegisPhysics/PhysicsMain.h"
+#include "../AegisCommon/Components/Transform.h"
 #include "GameLoopData.h"
+#include "LuaMaths.h"
+ #include "../AegisCommon/Components/SoundEmitterComponent.h"
 
-//using namespace luabridge;
+using namespace luabridge;
 
 void AegisMain::GameLoop() {
 
@@ -34,7 +36,7 @@ void AegisMain::GameLoop() {
 		while (!exit)
 		{
 			//Tiempo al inicio del frame
-			gameLoopData->frameStartTime = SDL_GetTicks();
+			Time()->frameStartTime = SDL_GetTicks();
 			Input()->UpdateState();
 			while (SDL_PollEvent(&eventHandler) != 0)
 			{
@@ -53,6 +55,12 @@ void AegisMain::GameLoop() {
 					//std::cout << "KeyUp (" << eventHandler.type << "): ";
 					Input()->OnKeyUp(key);
 					break;
+				case SDL_MOUSEBUTTONDOWN:
+					Input()->OnMouseButtonDown(eventHandler.button);
+					break;
+				case SDL_MOUSEBUTTONUP:
+					Input()->OnMouseButtonUp(eventHandler.button);
+					break;
 				case SDL_MOUSEMOTION:
 					// This is usually implemented as a callback but for now it will be this way, just for testing...
 					Input()->SetMouseMotion(Vector2(eventHandler.motion.xrel, eventHandler.motion.yrel));
@@ -63,17 +71,19 @@ void AegisMain::GameLoop() {
 				}
 			}
 
-			sceneManager->UpdateCurrentScene(gameLoopData->deltaTime);
+			sceneManager->UpdateCurrentScene(Time()->deltaTime);
 			sceneManager->PreRenderScene();
 
 			ogreWrap->Render();
-			Uint32 frameTime = SDL_GetTicks() - gameLoopData->frameStartTime;
+
+			sceneManager->RenderUI();
+			Uint32 frameTime = SDL_GetTicks() - Time()->frameStartTime;
 
 			if (frameTime < frameTimeMS)
 				SDL_Delay(frameTimeMS - frameTime);
 
 			// Actualiza deltaTime y timeSinceSceneStart
-			gameLoopData->UpdateTimeRegistry(SDL_GetTicks());
+			Time()->UpdateTimeRegistry(SDL_GetTicks());
 		}
 	}
 }
@@ -84,12 +94,12 @@ AegisMain::AegisMain() : IInitializable() {
 	ogreWrap->Init();
 	LuaMngr();
 
-	gameLoopData = new GameLoopData();
+	gameLoopData = new TimeManager();
 	sceneManager = new SceneManager(new Scene(ogreWrap));
 }
 
 AegisMain::~AegisMain() {
-	delete gameLoopData;
+	delete Time();
 	delete sceneManager;
 	delete ogreWrap;
 
@@ -142,7 +152,8 @@ void AegisMain::ConvertObjectToLua()
 	CameraComponent::ConvertToLua(state);
 	AnimationComponent::ConvertToLua(state);
 	RigidbodyComponent::ConvertToLua(state);
-	//MathUtils::ConvertToLua(state);
+	SoundEmitterComponent::ConvertToLua(state);
+	LuaMaths::ConvertToLua(state);
 
 	ExportToLua(sceneManager->GetCurrentScene(), "currentScene");
 	ExportToLua(Input(), "Input");

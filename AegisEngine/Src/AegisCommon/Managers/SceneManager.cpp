@@ -24,6 +24,11 @@ void SceneManager::PreRenderScene() {
 	currentScene->Render();
 }
 
+void SceneManager::RenderUI()
+{
+	currentScene->RenderUI();
+}
+
 Scene* SceneManager::GetCurrentScene()
 {
 	return currentScene;
