@@ -41,7 +41,7 @@ public:
 	void setRbPosition(Vector3 vec);
 	void setRbRotation(Vector4 vec);
 	void setFreezeRotation(bool _x, bool _y, bool _z);
-	int RayCast(Vector3, Vector3&);
+	int RayCast(Vector3 origin, Vector3& dest);
 
 	//FORCES---------------------------------
 	void addForce(Vector3 vec);

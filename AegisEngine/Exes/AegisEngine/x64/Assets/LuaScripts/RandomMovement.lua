@@ -17,7 +17,7 @@ function table.GetNew(entity, params)
 	
     function Init() 
         rigidbody = component.entity:GetComponent("Rigidbody").type;
-		lastTime=0;
+		lastTime=1;
 		lastTimeRay = 0;
 		acumulatedDT=0;
 		acumulatedRay=0;
@@ -28,10 +28,10 @@ function table.GetNew(entity, params)
 		rigidbody:SetAngular();
     end;
 	function Update(deltaTime) 
-		if acumulatedDT > lastTime + 1 then
+		if acumulatedDT > lastTime then
 			canRoot=true;
 			root = math.random(-10,10);
-			lastTime = acumulatedDT;	
+			acumulatedDT = acumulatedDT - lastTime;	
 			ray = true;		
 		end;
 		-- if acumulatedRay > lastTimeRay + 1 then
@@ -47,22 +47,24 @@ function table.GetNew(entity, params)
 	function FixedUpdate() 
 		
 		rigidbody:SetRotationEuler(transform.localEulerAngles + Aegis.Maths.Vector3(0,root / 10,0));
-			rigidbody:AccelerateTo(transform.forward * -1 * 7, 10000000);
+		rigidbody:AccelerateTo(transform.forward * -1 * 7, 10000000);
 		
 		if ray then
-			local type = rigidbody:RayCastWorld();
-			if type == 1 then
+			local dest = transform.forward * -1;
+			local origin = transform.position;
+			local rayCastResult = rigidbody:RayCastWorld(origin, dest, 10);
+			print(rayCastResult)
+			-- print("Forward " .. transform.forward.x .. " " .. transform.forward.y .. " " .. transform.forward.z);
+			-- print("Dest " .. dest.x .. " " .. dest.y .. " " .. dest.z);
+			
+			if rayCastResult == 1 then
 				ray = false;			
 			rigidbody:SetRotationEuler(transform.localEulerAngles + Aegis.Maths.Vector3(0,180,0));
 			rigidbody:AccelerateTo(transform.forward * -1 * 7, 10000000);
 			end;
-			if type == 2 then
+			if rayCastResult == 2 then
 				
 			end;
-			
-			
-			
-			
 		end;
 	end;
 
