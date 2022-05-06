@@ -53,7 +53,7 @@ function table.GetNew(entity, params)
 			local dest = transform.forward * -1;
 			local origin = transform.position;
 			local rayCastResult = rigidbody:RayCastWorld(origin, dest, 10);
-			print(rayCastResult)
+			--print(rayCastResult)
 			-- print("Forward " .. transform.forward.x .. " " .. transform.forward.y .. " " .. transform.forward.z);
 			-- print("Dest " .. dest.x .. " " .. dest.y .. " " .. dest.z);
 			

@@ -20,7 +20,7 @@ local scene = {
 			{
 				type = "Renderer",
 				data = {
-					mesh = "character.mesh",
+					mesh = "boat.mesh",
 					material= "playerMat"
 				}
 			},
@@ -84,7 +84,7 @@ local scene = {
 				type = "Renderer",
 				data = {
 					mesh = "fishingRod.mesh",
-					material= "green"
+					material= "pez"
 				}
 				
 			},
@@ -341,14 +341,14 @@ local scene = {
 			}
 		}
 	},
-	-- {
-	-- 	type = "Entity",
-	-- 	name = "Spawner",
-	-- 	components = {	
-	-- 		{
-	-- 			type = "Spawner"
-	-- 		}
-	-- 	}
-	-- },
+	{
+		type = "Entity",
+		name = "Spawner",
+		components = {	
+			{
+				type = "Spawner"
+			}
+		}
+	},
 };
 return scene;

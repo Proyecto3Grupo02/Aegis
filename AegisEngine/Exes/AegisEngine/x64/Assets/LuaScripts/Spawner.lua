@@ -18,9 +18,9 @@ function table.GetNew(entity, params)
     end;
 	function Update(deltaTime) 
 		if acumulatedDT > lastTime and data.currFish < maxFish then
-            lastTime = acumulatedDT +10;
-            print(lastTime);
-            print(acumulatedDT);
+            acumulatedDT = acumulatedDT - lastTime;
+            --print("Spawning fesh");
+            --print(acumulatedDT);
                 local fish = utility.ParseEntity(prefabs[math.random(#prefabs)]);
                 local rbFish = fish:GetComponent("Rigidbody").type;
                 rbFish.position = Aegis.Maths.Vector3(0,-55,0);
