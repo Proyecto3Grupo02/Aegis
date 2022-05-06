@@ -15,10 +15,10 @@ subject to the following restrictions:
 
 ///-----includes_start-----
 #include "btBulletDynamicsCommon.h"
-#include <stdio.h>
 #include "PhysicsMain.h"
-#include "Vector3.h"
 #include "Vector4.h"
+#include "Entity.h"
+#include "RigidbodyComponent.h"
 
 
 /// This is a Hello World program for running a basic Bullet physics simulation
@@ -57,6 +57,7 @@ void PhysicsSystem::Init()
 void PhysicsSystem::update(float deltaTime, float timeStep, int maxSteps) {
 	///-----stepsimulation_start-----
 	dynamicsWorld->stepSimulation(deltaTime, maxSteps, timeStep);
+	checkCollision();
 	dynamicsWorld->clearForces();
 }
 
@@ -80,6 +81,93 @@ void PhysicsSystem::clear() {
 		dynamicsWorld->removeCollisionObject(obj);
 		delete obj;
 	}
+}
+
+void PhysicsSystem::checkCollision()
+{
+
+	std::map<std::pair<RigidBody*, RigidBody*>, bool> newContacts;
+
+	int numManifolds = dynamicsWorld->getDispatcher()->getNumManifolds();
+	for (int i = 0; i < numManifolds; i++)
+	{
+		btPersistentManifold* contactManifold = dynamicsWorld->getDispatcher()->getManifoldByIndexInternal(i);
+		const btCollisionObject* obA = contactManifold->getBody0();
+		const btCollisionObject* obB = contactManifold->getBody1();
+
+		int numContacts = contactManifold->getNumContacts();
+		for (int j = 0; j < numContacts; j++)
+		{
+			btManifoldPoint& pt = contactManifold->getContactPoint(j);
+			if (pt.getDistance() < 0.f)
+			{
+				RigidBody* rigidBodyA = (RigidBody*)obA->getUserPointer(), * rigibBodyB = (RigidBody*)obB->getUserPointer();
+
+				if (rigidBodyA != nullptr || rigibBodyB != nullptr && (rigidBodyA->isActive() && rigibBodyB->isActive()) )
+				{
+					if (rigidBodyA > rigibBodyB) std::swap(rigidBodyA, rigibBodyB);
+					std::pair<RigidBody*, RigidBody*> col = { rigidBodyA, rigibBodyB };
+					newContacts[col] = true;
+					
+					
+					//Llamamos al collisionEnter si no estaban registrados.
+					if (contacts.find(col) == contacts.end()) {
+						//std::cout << "a";
+						CollisionEnterCallbacks(col);
+					}
+					else {
+						//CollisionStayCallbacks(col);
+					}
+				}
+				
+				break;
+			}
+		}
+	}
+
+
+	for (auto it = contacts.begin(); it != contacts.end(); it++)
+	{
+		std::pair<RigidBody*, RigidBody*> col = (*it).first;
+		if (newContacts.find(col) == newContacts.end());
+			//CollisionExitCallbacks(col);
+	}
+
+	contacts = newContacts;
+
+
+	
+}
+
+void PhysicsSystem::CollisionEnterCallbacks(std::pair<RigidBody*, RigidBody*>& col)
+{
+	
+	
+	Entity* goA = col.first->rbC->mEntity_, * goB = col.second->rbC->mEntity_;
+	 bool aTrigger = col.first->isTrigger() , bTrigger = col.second->isTrigger();
+	
+	 if (aTrigger || bTrigger) {
+		 if (aTrigger && bTrigger) {
+			 goA->onTrigger(goB);
+			 goB->onTrigger(goA);
+		 }
+		 else if (aTrigger && !bTrigger) {
+			 goA->onTrigger(goB);
+			 goB->onCollision(goA);
+		 }
+		 else if (!aTrigger && bTrigger) {
+			 goA->onCollision(goB);
+			 goB->onTrigger(goA);
+		 }
+	 }
+	 else {
+		 goA->onCollision(goB);
+		 goB->onCollision(goA);
+	 }
+}
+
+void PhysicsSystem::CollisionExitCallbacks(std::pair<RigidBody*, RigidBody*>& col)
+{
 }
 
 void PhysicsSystem::remove() {
@@ -175,7 +263,7 @@ btCollisionShape* PhysicsSystem::createBodyShape(RigidBody::RigidBodyType rbType
 
 btRigidBody* PhysicsSystem::createRigidBody(RigidBody::RigidBodyType rbType, float _mass, Vector3 _dim, Vector3 _pos, Vector4 rotation, std::string bodyMeshName, bool isConvex, bool isKinematic, bool useGravity) {
 	btCollisionShape* rbShape = createBodyShape(rbType, _dim, bodyMeshName, isConvex);
-
+	rbShape->setMargin(0.0f);
 
 	btTransform groundTransform;
 	groundTransform.setIdentity();

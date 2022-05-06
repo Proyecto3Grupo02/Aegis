@@ -1,10 +1,12 @@
 #pragma once
-#include "SDL.h"
+
 
 #include <iostream> // File reading??
 #include <string>
 
 #include <SDL_image.h>
+#undef Texture
+
 class Texture
 {
 public:

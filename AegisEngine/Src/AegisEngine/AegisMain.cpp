@@ -1,43 +1,26 @@
 #include "AegisMain.h"
 
 //OGRE
-#include <OgreException.h>
-#include <OgreConfigFile.h>
-#include <OgreRenderWindow.h>
-#include <OgreTextureManager.h>
-#include <OgreSceneManager.h>
-#include <OgreCamera.h>
-#include <OgreViewport.h>
-#include <OgreEntity.h>
-#include <OgreSceneNode.h>
-#include <SDL.h>
 
-#include <iostream>
-#include <fstream>
 
-#include "../AegisCommon/Managers/SceneManager.h"
-#include "../AegisCommon/Managers/InputManager.h"
-#include "../AegisCommon/Managers/DebugManager.h"
-#include "../AegisGraphics/OgreWrapper.h"
-#include "../AegisScripting/Manager/LuaManager.h"
-#include "../AegisPhysics/PhysicsMain.h"
-#include "../AegisCommon/Scene/Scene.h"
-#include "../AegisCommon/Utils/GameLoopData.h"
-#include "../AegisCommon/Entity/Entity.h"
-#include "../AegisCommon/Components/AegisComponent.h"
-#include "../AegisCommon/Components/Transform.h"
-#include "../AegisCommon/Components/Renderer.h"
-#include "../AegisCommon/Utils/Quaternion.h"
-#include "../AegisAudio/SoundSystem.h"
-#include "../AegisCommon/Components/LightComponent.h"
-#include "../AegisCommon/Components/CameraComponent.h"
 #include "../AegisCommon/Components/AnimationComponent.h"
+#include "../AegisCommon/Components/CameraComponent.h"
+#include "../AegisCommon/Components/LightComponent.h"
+#include "../AegisCommon/Components/Renderer.h"
 #include "../AegisCommon/Components/RigidbodyComponent.h"
-#include "../AegisCommon/Utils/Vector2.h"
-#include "../AegisCommon/Utils/LuaMaths.h"
-#include "../AegisCommon/Components/SoundEmitterComponent.h"
+#include "../AegisCommon/Entity/Entity.h"
+#include "../AegisCommon/Managers/InputManager.h"
+#include "../AegisCommon/Managers/SceneManager.h"
+#include "../AegisCommon/Managers/DebugManager.h"
+#include "../AegisCommon/Scene/Scene.h"
+#include "../AegisGraphics/OgreWrapper.h"
+#include "../AegisPhysics/PhysicsMain.h"
+#include "../AegisCommon/Components/Transform.h"
+#include "GameLoopData.h"
+#include "LuaMaths.h"
+ #include "../AegisCommon/Components/SoundEmitterComponent.h"
 
-//using namespace luabridge;
+using namespace luabridge;
 
 void AegisMain::GameLoop() {
 

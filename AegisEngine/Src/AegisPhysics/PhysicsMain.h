@@ -3,8 +3,9 @@
 #define PHYSICS_MAIN_H
 
 #include <vector>
-#include "../AegisCommon/Utils/Singleton.h"
+#include "Singleton.h"
 #include "Rigidbody.h"
+#include <map>
 
 class btDiscreteDynamicsWorld;
 class btDefaultCollisionConfiguration;
@@ -19,21 +20,26 @@ class Vector3;
 class Transform;
 class btTransform;
 class btVector3;
+class Entity;
+class RigidbodyComponent;
 
 class PhysicsSystem  : public  Singleton<PhysicsSystem>{
 
 private:
-    btDiscreteDynamicsWorld* dynamicsWorld;
+    //btDiscreteDynamicsWorld* dynamicsWorld;
     btDefaultCollisionConfiguration* collisionConfiguration;
     btCollisionDispatcher* dispatcher;
     btBroadphaseInterface* overlappingPairCache;
     btSequentialImpulseConstraintSolver* solver;
+
+
+    std::map<std::pair<RigidBody*, RigidBody*>, bool> contacts;
     //btBulletWorldImporter* fileLoader;
 public:
     PhysicsSystem();
     ~PhysicsSystem();
 
-
+    btDiscreteDynamicsWorld* dynamicsWorld;
     void Init();
     void update(float deltaTime, float timeStep, int maxSteps = 1);
     void remove();
@@ -49,6 +55,12 @@ public:
     //btCollisionShape* createShapeWithVertices(Vector3 _dim, std::string bodyMeshName, bool isConvex);
     btCollisionShape* createBodyShape(RigidBody::RigidBodyType rbType, Vector3 _dim, std::string bodyMeshName, bool isConvex);
     void clear();
+    
+    void checkCollision();
+    void CollisionEnterCallbacks(std::pair<RigidBody*, RigidBody*>& col);
+    void CollisionExitCallbacks(std::pair<RigidBody*, RigidBody*>& col);
+
+   
 };
 
 inline PhysicsSystem* Physics()

@@ -1,5 +1,4 @@
 #include "UIComponent.h"
-#include "../Entity/UIElement.h"
 
 UIComponent::UIComponent(std::string componentName, UIElement* ent):
 	Component(componentName,nullptr), mElement_(ent)

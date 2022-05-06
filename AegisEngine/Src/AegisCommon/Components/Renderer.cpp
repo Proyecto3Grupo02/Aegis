@@ -1,10 +1,7 @@
 #include "Renderer.h"
 #include "../Entity/Entity.h"
 //#include "OgreWrapper.h"
-#include "Transform.h"
 
-#include "../Utils/Vector3.h"
-#include "../Utils/Vector4.h"
 #include "../Utils/MathUtils.h"
 
 using namespace MathUtils;
@@ -58,7 +55,7 @@ void Renderer::constructoraRenderer(Entity* _ent, std::string meshName, std::str
 {
 	mesh = sceneMng->createEntity(meshName);
 	mesh->setMaterialName(matName);
-
+	//std::cout << matName << "\n";
 	node = getEntity()->getNode();
 	node->attachObject(mesh);
 	setRendering(ir);

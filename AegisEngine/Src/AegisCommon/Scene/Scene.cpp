@@ -1,10 +1,8 @@
 #include "Scene.h"
 #include "Entity.h"
-#include "Scripting.h"
 #include "../../AegisPhysics/PhysicsMain.h"
 #include "../Components/RigidbodyComponent.h"
 #include "../../AegisGraphics/OgreWrapper.h"
-#include "../../AegisGraphics/Components/Camera.h"
 #include "../Components/CameraComponent.h"
 #include "Canvas.h"
 using namespace luabridge;

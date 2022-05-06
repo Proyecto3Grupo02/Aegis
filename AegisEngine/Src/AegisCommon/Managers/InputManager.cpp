@@ -1,5 +1,4 @@
 #include "InputManager.h"
-#include <iostream>
 
 InputSystem::InputSystem() {
 

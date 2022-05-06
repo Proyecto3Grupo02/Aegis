@@ -14,7 +14,7 @@ class Entity;
 class RigidbodyComponent : public AegisComponent, public ILuaObject
 {
 public:
-	RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m = 1, bool useG = true, bool isK = false);
+	RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m = 1, bool useG = true, bool isK = false,bool isT =false);
 	virtual ~RigidbodyComponent();
 
 	virtual void init() override {};
@@ -24,11 +24,14 @@ public:
 	void SyncToTransform();
 	void SetIterator(std::list<RigidbodyComponent*>::iterator physicsEntityIt);
 
+	
+
 	//GETS-------------------------------------------
 	bool isActive() const;
 	Vector3 GetPosition() const;
 	//Vector4 getRotation();
 	Vector3 GetForce() const;
+
 
 	//SETS------------------------------------------
 	void SetPosition(Vector3 pos);
@@ -37,9 +40,11 @@ public:
 	//FORCES----------------------------------------
 	void AddForce(Vector3 force);
 	Vector3 AccelerateTo(Vector3 targetVelocity, float maxAcceleration = 1000000000000);
+	Vector3 AccelerateToRand();
 	void AddTorque(Vector3 torque);
 	void AddForceForward(float force);
 
+	void SetAngular() { rigidbody->SetAngularFactor(); }
 	void ResetForce();
 
 	//FREEZE ROT------------------------------------
@@ -51,12 +56,21 @@ public:
 
 	//LUA------------
 	static void ConvertToLua(lua_State* state);
+	void changeGravity(Vector3 acc);
+	int Raycast(Vector3 origin, Vector3 &dest, float distance);
+	friend class PhysicsSystem;
+
+	
 
 private:
+	
 	Vector3 initialPos;
 	RigidBody* rigidbody = nullptr;
 	Transform* transform = nullptr;
 	std::list<RigidbodyComponent*>::iterator physicsEntityIt;
+
+	int cooldown = 3000;
+
 };
 
 #endif // ! RIGIDBODY_H

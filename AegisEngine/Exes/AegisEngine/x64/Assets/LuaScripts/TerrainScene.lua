@@ -5,6 +5,7 @@ local scene = {
 	{
 		type = "MainCamera",
 		position = { z = 10, y = 3  },
+		rotation = { x = -25},
 		components = {
 			{
 				type = "CameraTest"
@@ -19,7 +20,7 @@ local scene = {
 			{
 				type = "Renderer",
 				data = {
-					mesh = "character.mesh",
+					mesh = "boat.mesh",
 					material= "playerMat"
 				}
 			},
@@ -60,7 +61,8 @@ local scene = {
 				type = "Rigidbody",
 				data = 
 				{
-					useGravity = false,
+					isTrigger = true,
+					useGravity = false
 				}
 			},
 			{
@@ -82,7 +84,7 @@ local scene = {
 				type = "Renderer",
 				data = {
 					mesh = "fishingRod.mesh",
-					material= "green"
+					material= "pez"
 				}
 				
 			},
@@ -157,6 +159,7 @@ local scene = {
 				type = "Rigidbody",
 				data = 
 				{
+					mass = 0;
 					isKinematic = true
 				}
 			}
@@ -181,6 +184,7 @@ local scene = {
 				type = "Rigidbody",
 				data = 
 				{
+					mass = 0;
 					isKinematic = true
 				}
 			}
@@ -205,6 +209,7 @@ local scene = {
 				type = "Rigidbody",
 				data = 
 				{
+					mass = 0;
 					isKinematic = true
 				}
 			}
@@ -229,6 +234,7 @@ local scene = {
 				type = "Rigidbody",
 				data = 
 				{
+					mass = 0;
 					isKinematic = true
 				}
 			}
@@ -243,6 +249,7 @@ local scene = {
 		}
 	},
 	{
+		
 		type = "Entity",
 		name = "Columna",
 		position = { x = 6, y = -58, z = 19 },
@@ -253,7 +260,9 @@ local scene = {
 				type = "Rigidbody",
 				data = 
 				{
-					isKinematic = true
+					mass = 0;
+					--isKinematic = true
+					--isStatic = true;
 				}
 			}
 			-- ,

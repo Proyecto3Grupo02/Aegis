@@ -8,9 +8,13 @@ set SDL2_BUILD_SOL=.\Ogre\build\SDL-build\SDL2.sln
 set CMAKE_EXE=.\Cmake\bin\cmake.exe
 
 if not exist %BUILD_DIR% mkdir %BUILD_DIR%
-if exist %OGRE_BUILD_SOL% goto done
+if exist %OGRE_BUILD_SOL% goto next
 
 :: Configurations of cmake
+
+:next
+if exist %SDL2_BUILD_SOL% goto done
+
 
 %CMAKE_EXE% -S %SRC_DIR% -B %BUILD_DIR% 
             -D CMAKE_CONFIGURATION_TYPES:STRING 
@@ -28,10 +32,13 @@ if exist %OGRE_BUILD_SOL% goto done
 
 echo OGRE and SDL2 build generated
 
+
 echo compiling OGRE...
 msbuild %OGRE_BUILD_SOL%  /t:ALL_BUILD /p:platform=x64 /p:configuration=Debug
 msbuild %OGRE_BUILD_SOL%  /t:ALL_BUILD /p:platform=x64 /p:configuration=Release
 echo OGRE compiled correctly
+
+
 
 echo compiling SDL2...
 msbuild %SDL2_BUILD_SOL%  /t:ALL_BUILD /p:platform=x64 /p:configuration=Debug

@@ -7,8 +7,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AegisGraphics", "Projects\A
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AegisPhysics", "Projects\AegisPhysics\AegisPhysics.vcxproj", "{F6C75DA0-8CD3-4743-9B7A-2F35A977F3EA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AegisUI", "Projects\AegisUI\AegisUI.vcxproj", "{DC58C599-C3C4-4385-92C7-2854A2BCF15E}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AegisAudio", "Projects\AegisAudio\AegisAudio.vcxproj", "{7017AA9A-2F78-4115-AE2D-2491F3113A04}"
 	ProjectSection(ProjectDependencies) = postProject
 		{097FBBDF-2E57-4FB9-B6B9-01966D4AE4A0} = {097FBBDF-2E57-4FB9-B6B9-01966D4AE4A0}
@@ -19,9 +17,15 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AegisEngine", "Projects\AegisEngine\AegisEngine.vcxproj", "{03500F0B-060B-4948-BB90-8693691CEFEB}"
 	ProjectSection(ProjectDependencies) = postProject
 		{F6C75DA0-8CD3-4743-9B7A-2F35A977F3EA} = {F6C75DA0-8CD3-4743-9B7A-2F35A977F3EA}
+		{0FFCF2F0-CE9E-4E21-8B2C-C003A91C4C36} = {0FFCF2F0-CE9E-4E21-8B2C-C003A91C4C36}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AegisCommon", "Projects\AegisCommon\AegisCommon.vcxproj", "{0FFCF2F0-CE9E-4E21-8B2C-C003A91C4C36}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DC58C599-C3C4-4385-92C7-2854A2BCF15E} = {DC58C599-C3C4-4385-92C7-2854A2BCF15E}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AegisUI", "Projects\AegisUI\AegisUI.vcxproj", "{DC58C599-C3C4-4385-92C7-2854A2BCF15E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,10 +41,6 @@ Global
 		{F6C75DA0-8CD3-4743-9B7A-2F35A977F3EA}.Debug|x64.Build.0 = Debug|x64
 		{F6C75DA0-8CD3-4743-9B7A-2F35A977F3EA}.Release|x64.ActiveCfg = Release|x64
 		{F6C75DA0-8CD3-4743-9B7A-2F35A977F3EA}.Release|x64.Build.0 = Release|x64
-		{DC58C599-C3C4-4385-92C7-2854A2BCF15E}.Debug|x64.ActiveCfg = Debug|x64
-		{DC58C599-C3C4-4385-92C7-2854A2BCF15E}.Debug|x64.Build.0 = Debug|x64
-		{DC58C599-C3C4-4385-92C7-2854A2BCF15E}.Release|x64.ActiveCfg = Release|x64
-		{DC58C599-C3C4-4385-92C7-2854A2BCF15E}.Release|x64.Build.0 = Release|x64
 		{7017AA9A-2F78-4115-AE2D-2491F3113A04}.Debug|x64.ActiveCfg = Debug|x64
 		{7017AA9A-2F78-4115-AE2D-2491F3113A04}.Debug|x64.Build.0 = Debug|x64
 		{7017AA9A-2F78-4115-AE2D-2491F3113A04}.Release|x64.ActiveCfg = Release|x64
@@ -57,6 +57,10 @@ Global
 		{0FFCF2F0-CE9E-4E21-8B2C-C003A91C4C36}.Debug|x64.Build.0 = Debug|x64
 		{0FFCF2F0-CE9E-4E21-8B2C-C003A91C4C36}.Release|x64.ActiveCfg = Release|x64
 		{0FFCF2F0-CE9E-4E21-8B2C-C003A91C4C36}.Release|x64.Build.0 = Release|x64
+		{DC58C599-C3C4-4385-92C7-2854A2BCF15E}.Debug|x64.ActiveCfg = Debug|x64
+		{DC58C599-C3C4-4385-92C7-2854A2BCF15E}.Debug|x64.Build.0 = Debug|x64
+		{DC58C599-C3C4-4385-92C7-2854A2BCF15E}.Release|x64.ActiveCfg = Release|x64
+		{DC58C599-C3C4-4385-92C7-2854A2BCF15E}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,9 +1,6 @@
 #include "SoundSystem.h"
 #include <fmod_errors.h>
-#include "../AegisCommon/Utils/Vector4.h"
-#include "../AegisCommon/Managers/DebugManager.h"
-#include "../checkML.h"
-
+#include "DebugManager.h"
 SoundSystem::SoundSystem() :
 	system(nullptr), 
 	listener(nullptr), 

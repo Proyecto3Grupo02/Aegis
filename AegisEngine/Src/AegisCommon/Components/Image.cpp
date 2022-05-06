@@ -1,7 +1,8 @@
 #include "Image.h"
 #include "../Entity/UIElement.h"
+
 #include "RectTransform.h"
-Image::Image(UIElement* elem, SDL_Renderer* rend, std::string filename, float w, float h, float angle):
+Image::Image(UIElement* elem, SDL_Renderer* rend, std::string& filename, float w, float h, float angle):
 	UIComponent("RenderImage")
 {
 	mTexture_ = new Texture(rend, filename,w,h,angle);

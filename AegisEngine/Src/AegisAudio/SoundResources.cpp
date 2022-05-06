@@ -1,8 +1,7 @@
 #include "SoundResources.h"
-using namespace std;
-#include <cstdio>
+//using namespace std;
 #include <dirent.h>
-
+#include "DebugManager.h"
 SoundResources::SoundResources()
 {
 	ParseDirectory(rutaArchivo);
@@ -12,7 +11,7 @@ SoundResources::~SoundResources()
 {
 }
 
-void SoundResources::ParseDirectory(string dir)
+void SoundResources::ParseDirectory(std::string dir)
 {
 	DIR* dirp;
 	struct dirent* dp;
@@ -30,7 +29,7 @@ void SoundResources::ParseDirectory(string dir)
 		{
 			if (strcmp(dp->d_name, ".") != 0 && strcmp(dp->d_name, "..") != 0)
 			{
-				string subdir = dir + "/" + dp->d_name;
+				std::string subdir = dir + "/" + dp->d_name;
 				ParseDirectory(subdir);
 			}
 		}

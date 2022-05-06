@@ -1,14 +1,18 @@
-#pragma once
+
 #include "Texture.h"
+#include <SDL_image.h>
+#include <SDL.h>
+//Texture::Texture(SDL_Renderer* rend,  std::string& filename, float width, float height, float angle):
+//	mRenderer_(rend), mWidth_(width), mHeight_(height), mTexture_(nullptr), mRotation_()
+//{
+//	/*SDL_Surface* surface = IMG_Load(filename.c_str());
+//	if (surface != nullptr) {
+//		mTexture_ = SDL_CreateTextureFromSurface(mRenderer_, surface);
+//	}*/
+//}
 
-
-Texture::Texture(SDL_Renderer* rend, const std::string& filename, double width, double height):
-	mRenderer_(rend), mWidth_(width), mHeight_(height), mTexture_(nullptr), mRotation_(0)
+Texture::Texture(SDL_Renderer* rend, const std::string& filename, double width, double height)
 {
-	SDL_Surface* surface = IMG_Load(filename.c_str());
-	if (surface != nullptr) {
-		mTexture_ = SDL_CreateTextureFromSurface(mRenderer_, surface);
-	}
 }
 
 Texture::Texture(SDL_Renderer* rend, const std::string& filename, double width, double height, float angle):

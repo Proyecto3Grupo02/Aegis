@@ -54,6 +54,7 @@ function table.GetNew(entity, params)
             local vecAux = Aegis.Maths.Vector3(-clampedAngle, data.targetRotation.y, data.targetRotation.z)
             data.targetRotation = vecAux
         end;
+        --print("X: "..data.targetRotation.x.."Y: "..data.targetRotation.y .. "Z: ".. data.targetRotation.z)
         transform.localEulerAngles = Aegis.Maths.Vector3Lerp(transform.localEulerAngles, data.targetRotation, deltaTime * data.smoothStep);
     end;
 	function FixedUpdate() end;
