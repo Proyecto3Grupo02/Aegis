@@ -59,6 +59,7 @@ public:
 
 	//void setRot(Vector3);
 	void disableCol();
+	void enableCol();
 	
 protected:
 	btRigidBody* rigidBody;

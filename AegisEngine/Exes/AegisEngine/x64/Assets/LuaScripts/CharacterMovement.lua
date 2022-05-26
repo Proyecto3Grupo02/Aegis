@@ -93,7 +93,7 @@ function table.GetNew(entity, params)
     end;
 
 	function OnCollision(other)
-        print("WATAFAAAAAAAAAAAAAK: ");
+        print("Colision general character");
 	end;
 	function OnTrigger(other) end;
 

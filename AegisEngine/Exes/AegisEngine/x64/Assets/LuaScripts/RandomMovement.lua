@@ -14,8 +14,7 @@ function table.GetNew(entity, params)
 	local lastTimeRay; 
 	local random; 
 	local random2; 
-	data.bait = "bait"
-	
+	data.bait = "Bait"
     function Init() 
         rigidbody = component.entity:GetComponent("Rigidbody").type;
 		lastTime=1;
@@ -70,9 +69,10 @@ function table.GetNew(entity, params)
 	end;
 
 	function OnCollision(other)
-		print("Colisión de un pescaou")
+		print("Colisión general pez");
 		if other == data.bait.entity then
-			entity:Destroy();
+			--entity:Destroy();
+			print("Colisión de un pez con el anzuelo");
 		end;
 	end;
 	function OnTrigger(other) end;

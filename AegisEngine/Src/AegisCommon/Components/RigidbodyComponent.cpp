@@ -5,7 +5,7 @@
 #include "../Utils/GameLoopData.h"
 #include "../Utils/MathUtils.h"
 
-RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m, bool useG, bool isK, bool isT)
+RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m, bool useG, bool isK, bool isT,float scale)
 	: AegisComponent("Rigidbody", ent)
 {
 	transform = ent->GetTransform();
@@ -13,7 +13,7 @@ RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, fl
 	
 	auto rot = transform->GetRotation();
 	Vector4 rotVec(rot.x, rot.y, rot.z, rot.w);
-	rigidbody = new RigidBody(bodyMeshName, transform->GetPosition(), transform->GetScale(), rotVec,this, m, useG, isK,isT);
+	rigidbody = new RigidBody(bodyMeshName, transform->GetPosition(), transform->GetScale()*scale, rotVec,this, m, useG, isK,isT);
 	mEntity_->getScene()->AddPhysicsEntity(this);
 	SetDataAsInnerType(this);
 }
@@ -122,7 +122,16 @@ RigidbodyComponent* CreateRigidbody(Entity* ent, LuaRef args) //Doesn't belong t
 	bool useGravity = LuaMngr()->ParseBool(args["useGravity"], true);
 	bool isKinematic = LuaMngr()->ParseBool(args["isKinematic"], false);
 	bool isTrigger = LuaMngr()->ParseBool(args["isTrigger"], false);
-	return new RigidbodyComponent(ent, bodyName, mass, useGravity, isKinematic,isTrigger);
+	float scale = LuaMngr()->ParseFloat(args["scale"], 1);
+	return new RigidbodyComponent(ent, bodyName, mass, useGravity, isKinematic,isTrigger,scale);
+}
+
+void RigidbodyComponent::enableCollision(bool enable_) {
+	if (enable_)
+	{
+		rigidbody->enableCol();
+	}
+	else rigidbody->disableCol();
 }
 
 void RigidbodyComponent::ConvertToLua(lua_State* state)
@@ -147,6 +156,7 @@ void RigidbodyComponent::ConvertToLua(lua_State* state)
 					addFunction("SetAngular", &RigidbodyComponent::SetAngular).
 					addFunction("FreezeRot", &RigidbodyComponent::FreezeRot).
 					addProperty("isActive", &RigidbodyComponent::isActive).
+					addFunction("EnableCol", &RigidbodyComponent::enableCollision).
 					
 				endClass().
 			endNamespace().

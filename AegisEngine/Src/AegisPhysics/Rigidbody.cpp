@@ -198,6 +198,11 @@ void RigidBody::SetAngularFactor() {
 	rigidBody->setAngularFactor(btVector3(0, 0, 0));
 }
 
+void RigidBody::enableCol()
+{
+	//rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() ^ btCollisionObject::CF_NO_CONTACT_RESPONSE);
+	rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() & (~btCollisionObject::CF_NO_CONTACT_RESPONSE));
+}
 void RigidBody::disableCol()
 {
 	rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);

@@ -38,6 +38,7 @@ function table.GetNew(entity, params)
                     throwForce = maxForce
                 end;
                 rigidbody:AddForce(Aegis.Maths.Vector3(0,throwForce*20,throwForce*-150))
+                rigidbody:EnableCol(false);
                 rigidbody.useGravity=true
             end;
         else 
@@ -49,6 +50,7 @@ function table.GetNew(entity, params)
 
         if rigidbody.position.y < WATER_Y and rigidbody.useGravity then
             rigidbody.useGravity=false;
+            rigidbody:EnableCol(true);
             rigidbody:ClearForce();
         end;
     end;
@@ -59,12 +61,14 @@ function table.GetNew(entity, params)
 
     end;
 
-	function OnCollision(other) end;
-	function OnTrigger(other) end;
+	function OnCollision(other)
+        print("hola");
+    end;
 
 	funcs.init = Init;
     funcs.update = Update;
     funcs.fixedUpdate = FixedUpdate;
+    funcs.onCollisionEnter = OnCollision;
 	return component;
 end;
 return table;

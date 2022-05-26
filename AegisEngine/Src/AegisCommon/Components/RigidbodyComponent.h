@@ -14,7 +14,7 @@ class Entity;
 class RigidbodyComponent : public AegisComponent, public ILuaObject
 {
 public:
-	RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m = 1, bool useG = true, bool isK = false,bool isT =false);
+	RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m = 1, bool useG = true, bool isK = false,bool isT =false,float scale = 1);
 	virtual ~RigidbodyComponent();
 
 	virtual void init() override {};
@@ -60,7 +60,8 @@ public:
 	int Raycast(Vector3 origin, Vector3 &dest, float distance);
 	friend class PhysicsSystem;
 
-	
+	//Activar o desactivar collider
+	void enableCollision(bool enable_);
 
 private:
 	

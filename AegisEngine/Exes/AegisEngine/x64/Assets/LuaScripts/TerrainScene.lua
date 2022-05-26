@@ -29,6 +29,7 @@ local scene = {
 				data = 
 				{
 					useGravity = false,
+					scale = 5
 				}
 			},
 			{
@@ -61,13 +62,13 @@ local scene = {
 				type = "Rigidbody",
 				data = 
 				{
-					isTrigger = true,
-					useGravity = false
+					useGravity = false,
+					scale = 2
 				}
 			},
 			{
 				type = "Bait",
-				data={
+				data = {
 					player = "@Player"
 				}					
 			}
@@ -337,7 +338,11 @@ local scene = {
 				}
 			},
 			{
-				type = "RandomMovement"
+				type = "RandomMovement",
+				data =
+				{
+					bait = "@Anzuelo"
+				}
 			}
 		}
 	},
