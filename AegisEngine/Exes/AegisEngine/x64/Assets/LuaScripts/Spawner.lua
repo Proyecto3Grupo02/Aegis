@@ -23,7 +23,7 @@ function table.GetNew(entity, params)
             --print(acumulatedDT);
                 local fish = utility.ParseEntity(prefabs[math.random(#prefabs)]);
                 local rbFish = fish:GetComponent("Rigidbody").type;
-                rbFish.position = Aegis.Maths.Vector3(0,-55,0);
+                rbFish.position = Aegis.Maths.Vector3(0,-57,0);
                 data.currFish = data.currFish+1;
 		end;
 		acumulatedDT = acumulatedDT + deltaTime;

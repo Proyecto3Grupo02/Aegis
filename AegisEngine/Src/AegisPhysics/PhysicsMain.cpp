@@ -284,7 +284,7 @@ btRigidBody* PhysicsSystem::createRigidBody(RigidBody::RigidBodyType rbType, flo
 	btDefaultMotionState* myMotionState = new btDefaultMotionState(groundTransform);
 	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, rbShape, localInertia);
 	btRigidBody* body = new btRigidBody(rbInfo);
-
+	
 	if (isKinematic)
 		body->setCollisionFlags(btCollisionObject::CF_KINEMATIC_OBJECT);
 	else

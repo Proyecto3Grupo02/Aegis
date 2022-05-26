@@ -14,6 +14,7 @@ function table.GetNew(entity, params)
 	local lastTimeRay; 
 	local random; 
 	local random2; 
+	data.bait = "bait"
 	
     function Init() 
         rigidbody = component.entity:GetComponent("Rigidbody").type;
@@ -68,12 +69,18 @@ function table.GetNew(entity, params)
 		end;
 	end;
 
-	function OnCollision(other) end;
+	function OnCollision(other)
+		print("Colisión de un pescaou")
+		if other == data.bait.entity then
+			entity:Destroy();
+		end;
+	end;
 	function OnTrigger(other) end;
 
 	funcs.init = Init;
     funcs.update = Update;
     funcs.fixedUpdate = FixedUpdate;
+    funcs.onCollisionEnter = OnCollision;
 	return component;
 end;
 return table;

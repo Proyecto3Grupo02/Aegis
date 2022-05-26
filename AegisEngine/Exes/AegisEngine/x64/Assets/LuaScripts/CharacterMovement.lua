@@ -92,13 +92,16 @@ function table.GetNew(entity, params)
         end;
     end;
 
-	function OnCollision(other) end;
+	function OnCollision(other)
+        print("WATAFAAAAAAAAAAAAAK: ");
+	end;
 	function OnTrigger(other) end;
 
 	funcs.init = Init;
     funcs.update = Update;
     funcs.fixedUpdate = FixedUpdate;
     funcs.lateUpdate = LateUpdate;
+    funcs.onCollisionEnter = OnCollision;
 	return component;
 end;
 return table;

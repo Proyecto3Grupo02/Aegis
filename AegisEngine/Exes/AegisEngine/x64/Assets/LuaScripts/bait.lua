@@ -1,7 +1,7 @@
 local NAME = "Bait";
 local table = {};
 function table.GetNew(entity, params)
-    local WATER_Y = -3.5
+    local WATER_Y = -2.5
 	local component = Aegis.CreateComponent(NAME, entity);
 	local data = component.data;
 	local transform = entity.transform;
