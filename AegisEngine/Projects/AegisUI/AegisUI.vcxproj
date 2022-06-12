@@ -65,7 +65,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)Dependencias\Ogre\build\include\SDL2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\build\include\SDL2;$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)SDL2_image-2.0.1\include;$(SolutionDir)Src\AegisUI;$(SolutionDir)\Src\AegisCommon\Utils;$(SolutionDir)\Src\AegisGraphics</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -74,7 +75,7 @@
     </Link>
     <Lib>
       <AdditionalDependencies>OgreMain_d.lib;SDL2.lib;SDL2main.lib;RenderSystem_GL_d.lib;SDL2_ttf.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencias\Ogre\Build\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencias\Ogre\build\lib\$(Configuration);$(SolutionDir)Dependencias\SDL2_image-2.0.1\lib\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -85,7 +86,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)SDL2_image-2.0.1\lib\x86;$(SolutionDir)Dependencias\Ogre\build\include\SDL2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\build\include\SDL2;$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)SDL2_image-2.0.1\include;$(SolutionDir)Src\AegisUI;$(SolutionDir)\Src\AegisCommon\Utils;$(SolutionDir)\Src\AegisGraphics</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -104,6 +105,8 @@
     <ClCompile Include="..\..\Src\AegisUI\ImageResources.cpp" />
     <ClCompile Include="..\..\Src\AegisUI\Text.cpp" />
     <ClCompile Include="..\..\Src\AegisUI\Texture.cpp" />
+    <ClCompile Include="..\..\Src\AegisUI\UIMain.cpp" />
+    <ClCompile Include="..\..\Src\AegisUI\UIObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AegisUI\Font.h" />
@@ -112,6 +115,8 @@
     <ClInclude Include="..\..\Src\AegisUI\SDL_ttf.h" />
     <ClInclude Include="..\..\Src\AegisUI\Text.h" />
     <ClInclude Include="..\..\Src\AegisUI\Texture.h" />
+    <ClInclude Include="..\..\Src\AegisUI\UIMain.h" />
+    <ClInclude Include="..\..\Src\AegisUI\UIObject.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

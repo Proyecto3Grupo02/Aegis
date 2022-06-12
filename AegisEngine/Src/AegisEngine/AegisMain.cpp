@@ -1,8 +1,6 @@
 #include "AegisMain.h"
 
 //OGRE
-
-
 #include "../AegisCommon/Components/AnimationComponent.h"
 #include "../AegisCommon/Components/CameraComponent.h"
 #include "../AegisCommon/Components/LightComponent.h"
@@ -18,12 +16,13 @@
 #include "../AegisCommon/Components/Transform.h"
 #include "GameLoopData.h"
 #include "LuaMaths.h"
- #include "../AegisCommon/Components/SoundEmitterComponent.h"
+#include "../AegisCommon/Components/SoundEmitterComponent.h"
+
+#include "../AegisUI/UIMain.h"
 
 using namespace luabridge;
 
 void AegisMain::GameLoop() {
-
 	uint32_t frameTimeMS = (uint32_t)floor((1 / TARGET_FRAME_RATE) * 1000);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 
@@ -31,7 +30,8 @@ void AegisMain::GameLoop() {
 	{
 		SDL_Event eventHandler;
 
-		Audio()->playMusic("clin");
+		//Audio()->playMusic("clin"); //Esto hay q quitarlo
+		
 		//SDL_EnableKeyRepeat(0, 0);
 		while (!exit)
 		{
@@ -75,7 +75,9 @@ void AegisMain::GameLoop() {
 			sceneManager->PreRenderScene();
 
 			ogreWrap->Render();
-
+			//El renderizado de la UI se superpone ahora mismo al del gameplay
+			//hay que comprobar los buffers
+			//UIs()->Render();
 			sceneManager->RenderUI();
 			Uint32 frameTime = SDL_GetTicks() - Time()->frameStartTime;
 
@@ -102,7 +104,6 @@ AegisMain::~AegisMain() {
 	delete Time();
 	delete sceneManager;
 	delete ogreWrap;
-
 	Debug()->deleteInstance();
 	Input()->deleteInstance();
 	Audio()->close();
@@ -124,6 +125,7 @@ bool AegisMain::Init()
 	Input()->Init();
 	Audio()->Init();
 	Physics()->Init();
+	UIs()->Init(ogreWrap->getNativeWindow());
 	ConvertObjectToLua();
 	sceneManager->GetCurrentScene()->Init();
 	LuaMngr()->Execute("init.lua");

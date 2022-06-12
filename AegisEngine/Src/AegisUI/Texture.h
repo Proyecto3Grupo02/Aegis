@@ -1,10 +1,8 @@
 #pragma once
-
-
 #include <iostream> // File reading??
 #include <string>
 
-#include <SDL_image.h>
+#include "SDL_image.h"
 #undef Texture
 
 class Texture
@@ -26,6 +24,7 @@ public:
 	void render(const SDL_Rect& src, const SDL_Rect& dest) {
 		SDL_RenderCopy(mRenderer_, mTexture_, &src, &dest);
 	}
+
 	inline void render(const SDL_Rect& dest) {
 		SDL_Rect src = { 0, 0, mWidth_, mHeight_ };
 		render(src, dest);

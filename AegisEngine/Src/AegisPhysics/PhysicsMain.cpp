@@ -25,7 +25,6 @@ subject to the following restrictions:
 
 void PhysicsSystem::Init()
 {
-
 	///collision configuration contains default setup for memory, collision setup. Advanced users can create their own configuration.
 	collisionConfiguration = new btDefaultCollisionConfiguration();
 
