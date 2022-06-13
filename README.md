@@ -6,7 +6,8 @@ Documento de diseño de motor
 
 **Grupo 2 - Kirin Studios**
 
-*Jonathan Sebastián Andrade Gordillo | Álvaro Cuerva Hernández | Rubén González Ortiz | Sergio Alberto Luis Cano | Javier Meitín Moreno | Nicolás Rosa Caballero | Amparo Rubio Bellón | Rodrigo Tobar Guillén | Jorge Zurdo Izquierdo*
+|Jonathan Sebastián Andrade Gordillo|Rubén González Ortiz | Álvaro Cuerva Hernández |Sergio Alberto Luis Cano |Javier Meitín Moreno| Nicolás Rosa Caballero | Amparo Rubio Bellón |Rodrigo Tobar Guillén|Jorge Zurdo Izquierdo|
+|--|--|--|--|--|--|--|--|--|
 
 ## **Páginas de interés**
 * [**Pivotal Tracker**](https://www.pivotaltracker.com/n/projects/2555675)
@@ -59,8 +60,19 @@ El repositorio de GitHub incluiye:
 * Se une esta rama a la principal y se finaliza la historia.
 
 ## Licencias
-Ogre3D (Copyright (c) 2000-2013 Torus Knot Software Ltd)
-SDL 2.0 (Copyright (c) SDL Community)??
-Bullet
-FMOD
-imgui???
+
+Aegis Engine ha sido diseñado y creado por **Kirin Studios**
+
+**Ogre3D** (Copyright (c) 2000-2013 [Torus Knot Software Ltd](https://www.ogre3d.org/))
+
+**Bullet Continuous Collision Detection and Physics Library** (Copyright (c) 2003-2006 [Erwin Coumans](https://pybullet.org/Bullet/phpBB3/))
+
+**FMOD Studio** (Copyright (c)[Firelight Technologies Pty Ltd](https://www.fmod.com/))
+
+**SDL 2.0** (Copyright (c) [SDL Community](https://github.com/libsdl-org/SDL))
+
+**CEGUI** (Copyright (c) [The CEGUI Team](http://cegui.org.uk/wiki/))
+
+**Lua** (Copyright (c) [The Lua Team](https://www.lua.org/))
+
+**LuaBridge** (Copyright (c) [Vinnie Falco](https://github.com/vinniefalco/LuaBridge))
