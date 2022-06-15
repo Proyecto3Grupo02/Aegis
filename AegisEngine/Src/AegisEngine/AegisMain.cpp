@@ -121,11 +121,10 @@ bool AegisMain::Init()
 {
 	Debug()->Log("Aegis loaded\n");
 	std::cout << '\n';
-
 	Input()->Init();
 	Audio()->Init();
 	Physics()->Init();
-	UIs()->Init(ogreWrap->getNativeWindow());
+	UIs()->Init(ogreWrap->getSceneManager());
 	ConvertObjectToLua();
 	sceneManager->GetCurrentScene()->Init();
 	LuaMngr()->Execute("init.lua");

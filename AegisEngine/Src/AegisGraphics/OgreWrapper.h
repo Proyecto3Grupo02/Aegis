@@ -42,6 +42,8 @@ public:
 			return native;
 		else throw "ERROR: native window from Ogre is nullptr";
 	}
+
+	inline Ogre::SceneManager* getSceneManager() { return mSceneMgr; }
 };
 
 #endif

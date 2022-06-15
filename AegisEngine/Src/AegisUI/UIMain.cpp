@@ -3,13 +3,25 @@
 #include "UIObject.h"
 #include "SDL_Image.h"
 #include "SDL_render.h"
+#include "OgreOverlay.h"
+#include "OgreOverlayPrerequisites.h"
+#include "OgreTextAreaOverlayElement.h"
+#include "OgreFontManager.h"
+#include "OgreOverlayContainer.h"
+#include "OgreOverlayElement.h"
+#include "OgreOverlayManager.h"
+#include "OgreSceneManager.h"
+#include "OgreOverlaySystem.h"
 
-
-void UISystem::Init(SDL_Window* native) {
-	std::cout << "SUUUUUUpuUUUU\n";
-	rend = SDL_CreateRenderer(native, -1, SDL_RENDERER_ACCELERATED);
-	//BORRAR (tanto la llamada como la declaración del método)
-	metodoDePrueba();	
+void UISystem::Init(Ogre::SceneManager* mScene) {
+	
+	overlaySys = new Ogre::OverlaySystem();
+	overlayMng = Ogre::OverlayManager::getSingletonPtr();
+	overlay = overlayMng->create("UI");
+	//num = 0;
+	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
+	mScene->addRenderQueueListener(overlaySys);
+	
 }
 
 void UISystem::CreateUIObject(const std::string& filename, double textWidth, double textHeight, double x_, double y_, double w_, double h_){
