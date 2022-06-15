@@ -87,6 +87,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\build\include\SDL2;$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)Dependencias\Ogre\src\Components\Overlay\include;$(SolutionDir)Dependencias\Ogre\src\OgreMain\include;$(SolutionDir)SDL2_image-2.0.1\include;$(SolutionDir)Src\AegisUI;$(SolutionDir)Src\AegisCommon\Utils;$(SolutionDir)Src\AegisGraphics</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
