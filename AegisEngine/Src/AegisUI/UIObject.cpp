@@ -5,21 +5,16 @@
 #include "OgreOverlayElement.h"
 #include "OgreOverlayContainer.h"
 
-UIObject::UIObject(const std::string& n, int order) {
+UIObject::UIObject(const std::string& n, int order, Ogre::Overlay* o) {
 	name = n;
+	overlay = o;
 	overlayMng = Ogre::OverlayManager::getSingletonPtr();
-
 	overlayCont = static_cast<Ogre::OverlayContainer*>(overlayMng->createOverlayElement("Panel", " PanelName" + std::to_string(order)));
-	overlayCont->setMetricsMode(Ogre::GMM_PIXELS);
-	overlayCont->setDimensions(500, 500);
-	overlayCont->setPosition(100, 100);
-
+	overlayCont->setMetricsMode(Ogre::GMM_RELATIVE);
+	overlayCont->setDimensions(0.1, 0.1);
+	overlayCont->setPosition(0.5, 0.5);
 	overlay = overlayMng->create(name + std::to_string(order));
-	overlay->add2D(overlayCont);
-	//set material
-	//overlayCont->show(); //especifico de las imagenes?
 
-	//overlaySys =
 }
 
 UIObject::~UIObject() {

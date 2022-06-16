@@ -129,7 +129,7 @@ bool AegisMain::Init()
 	sceneManager->GetCurrentScene()->Init();
 	LuaMngr()->Execute("init.lua");
 
-	UIs()->CreateUIImage("ramon", 0, "grass");
+
 	GameLoop();
 	return true;
 }

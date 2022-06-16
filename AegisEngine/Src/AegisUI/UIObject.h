@@ -28,7 +28,7 @@ private:
 
 
 public:
-	UIObject(const std::string& n, int order);
+	UIObject(const std::string& n, int order, Ogre::Overlay* o);
 	virtual ~UIObject();
 
 	void show();

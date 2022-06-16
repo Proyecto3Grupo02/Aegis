@@ -27,7 +27,7 @@ material LagoMat {
             light_scissor off
             normalise_normals off
             polygon_mode solid
-	    scene_blend alpha_blend	
+	    	scene_blend alpha_blend	
             scene_blend_op add
             shading gouraud
             transparent_sorting on

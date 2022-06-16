@@ -27,6 +27,7 @@ public:
 
 	void CreateUIImage(const std::string& name, int order, std::string material);
 	void DeleteUIObject(const UIObject* obj_);
+	void Renderer();
 };
 
 inline UISystem* UIs()
