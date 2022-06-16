@@ -120,6 +120,8 @@ xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\build\bin\debug\OgreOverlay_d.dll
     <PostBuildEvent>
       <Command>xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\bin\$(Configuration)\OgreMain.dll "$(OutDir)"
 
+xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\bin\$(Configuration)\OgreOverlay.dll "$(OutDir)"
+
 xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\bin\$(Configuration)\OgreMain.pdb "$(OutDir)"
 
 xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo\SDL2.dll "$(OutDir)"

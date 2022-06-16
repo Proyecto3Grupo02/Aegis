@@ -4,10 +4,7 @@
 
 class OgreOverlay;
 class SDL_Image; 
-struct SDL_Renderer;
 class UIObject;
-struct SDL_Window;
-
 
 namespace Ogre {
 	class OverlayManager;
@@ -21,19 +18,14 @@ private:
 	Ogre::OverlayManager* overlayMng;
 	Ogre::OverlaySystem* overlaySys;
 	Ogre::Overlay* overlay;
-	//std::vector<UIElement*> _overlayElements;
-
 
 	std::vector<UIObject*>ui_objects;
+
 	void AddUIObject(UIObject* object_);
-	SDL_Renderer* rend;
 public:
 	void Init(Ogre::SceneManager* mScene);
-	//void update(float deltaTime, float timeStep, int maxSteps = 1);
-	void Render();
-	void CreateUIObject(const std::string& filename, double textWidth, double textHeight,
-						double x_, double y_, double w_, double h_);
-	void metodoDePrueba();
+
+	void CreateUIImage(const std::string& name, int order, std::string material);
 	void DeleteUIObject(const UIObject* obj_);
 };
 
