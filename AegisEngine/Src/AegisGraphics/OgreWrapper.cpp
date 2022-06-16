@@ -115,18 +115,18 @@ void OgreWrapper::CreateWindowNative()
 	mRoot->restoreConfig();
 	mRoot->initialise(false);
 
-	uint32_t w, h;
-	Ogre::ConfigOptionMap ropts = mRoot->getRenderSystem()->getConfigOptions();
+	//uint32_t w, h;
+	//Ogre::ConfigOptionMap ropts = mRoot->getRenderSystem()->getConfigOptions();
 
-	std::istringstream mode(ropts["Video Mode"].currentValue);
-	Ogre::String token;
-	mode >> w; // width
-	mode >> token; // 'x' as seperator between width and height
-	mode >> h; // height
+	//std::istringstream mode(ropts["Video Mode"].currentValue);
+	//Ogre::String token;
+	//mode >> w; // width
+	//mode >> token; // 'x' as seperator between width and height
+	//mode >> h; // height
 	Uint32 flags = SDL_WINDOW_RESIZABLE;
 	if (!SDL_WasInit(SDL_INIT_VIDEO)) SDL_InitSubSystem(SDL_INIT_VIDEO);
 
-	native = SDL_CreateWindow("Aegis Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, flags);
+	native = SDL_CreateWindow("Aegis Window", 100,100, 1920, 1080, flags);
 	
 	SDL_SysWMinfo wmInfo;
 	SDL_VERSION(&wmInfo.version);
@@ -146,5 +146,6 @@ void OgreWrapper::CreateWindowNative()
 	// assign the NSWindow pointer to the parentWindowHandle parameter
 	params.insert(std::make_pair("parentWindowHandle", winHandle));
 
-	render = mRoot->createRenderWindow("myWindowTitle", w, h, false, &params);
+	render = mRoot->createRenderWindow("myWindowTitle", 1920,1080,false, &params);
+	
 }
