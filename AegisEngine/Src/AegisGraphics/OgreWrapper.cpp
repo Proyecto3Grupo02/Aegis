@@ -101,7 +101,6 @@ AegisCamera* OgreWrapper::CreateCamera(Ogre::SceneNode* node)
 	ogreCam->setAspectRatio(
 		Ogre::Real(vp->getActualWidth()) /
 		Ogre::Real(vp->getActualHeight()));
-
 	return mCamera;
 }
 

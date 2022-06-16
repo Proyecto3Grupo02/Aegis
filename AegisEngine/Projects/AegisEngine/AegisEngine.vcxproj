@@ -71,14 +71,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)Src\Aegis\Entity;$(SolutionDir)Src\Aegis\Interfaces;$(SolutionDir)Src\Aegis\Wrappers;$(SolutionDir)Src\Aegis\Structs;$(SolutionDir)Src\Aegis\Scene;$(SolutionDir)Src\Aegis\Managers;$(SolutionDir)Src\Aegis\Component;$(SolutionDir)\Dependencias\lua\src\include;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)\Dependencias\Libraries;$(SolutionDir)\Dependencias\fmod\inc;$(SolutionDir)\Src\AegisCommon\Utils;$(SolutionDir)Src\AegisUI\Texture.h;$(SolutionDir)Dependencias\Bullet\build\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)Dependencias\Ogre\src\Components\Overlay\include;$(SolutionDir)Dependencias\Ogre\src\OgreMain\include;$(SolutionDir)\Dependencias\lua\src\include;$(SolutionDir)\Dependencias\Libraries;$(SolutionDir)Dependencias\Bullet\build\src;$(SolutionDir)\Dependencias\fmod\inc;$(SolutionDir)Src\Aegis\Entity;$(SolutionDir)Src\Aegis\Interfaces;$(SolutionDir)Src\Aegis\Wrappers;$(SolutionDir)Src\Aegis\Structs;$(SolutionDir)Src\Aegis\Scene;$(SolutionDir)Src\Aegis\Managers;$(SolutionDir)Src\Aegis\Component;$(SolutionDir)\Src\AegisCommon\Utils</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\SDL2_image-2.0.1\lib\x64;$(SolutionDir)Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)Exes\AegisGraphics\x64\Debug;$(SolutionDir)Exes\AegisCommon\x64\Debug;$(SolutionDir)Exes\AegisPhysics\x64\Debug;$(SolutionDir)Exes\AegisScripting\x64\Debug;$(SolutionDir)Exes\AegisUI\x64\Debug;$(SolutionDir)Exes\AegisAudio\x64\Debug;$(SolutionDir)Dependencias\Ogre\Build\lib\$(Configuration)\;$(SolutionDir)\Dependencias\fmod\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2_image.lib;OgreMain_d.lib;SDL2.lib;SDL2main.lib;RenderSystem_GL_d.lib;AegisCommon.lib;AegisGraphics.lib;AegisScripting.lib;AegisAudio.lib;AegisPhysics.lib;AegisUI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\SDL2_image-2.0.1\lib\x64;$(SolutionDir)Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)Exes\AegisGraphics\$(Platform)\$(Configuration);$(SolutionDir)Exes\AegisCommon\$(Platform)\$(Configuration);$(SolutionDir)Exes\AegisPhysics\$(Platform)\$(Configuration);$(SolutionDir)Exes\AegisScripting\$(Platform)\$(Configuration);$(SolutionDir)Exes\AegisUI\$(Platform)\$(Configuration);$(SolutionDir)Exes\AegisAudio\x64\Debug;$(SolutionDir)Dependencias\Ogre\build\lib\$(Configuration);$(SolutionDir)Dependencias\fmod\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2_image.lib;OgreMain_d.lib;OgreOverlay_d.lib;SDL2.lib;SDL2main.lib;RenderSystem_GL_d.lib;AegisCommon.lib;AegisGraphics.lib;AegisScripting.lib;AegisAudio.lib;AegisPhysics.lib;AegisUI.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <DelayLoadDLLs>fmod.dll</DelayLoadDLLs>
     </Link>
     <PostBuildEvent>
@@ -93,7 +93,8 @@ xcopy /y /d "$(SolutionDir)"\Dependencias\SDL2_image-2.0.1\lib\x64\zlib1.dll "$(
 xcopy /y /d "$(SolutionDir)"\Dependencias\SDL2_image-2.0.1\lib\x64\libwebp-4.dll "$(OutDir)"
 xcopy /y /d "$(SolutionDir)"\Dependencias\SDL2_image-2.0.1\lib\x64\libtiff-5.dll "$(OutDir)"
 xcopy /y /d "$(SolutionDir)"\Dependencias\SDL2_image-2.0.1\lib\x64\libpng16-16.dll "$(OutDir)"
-xcopy /y /d "$(SolutionDir)"\Dependencias\SDL2_image-2.0.1\lib\x64\libjpeg-9.dll "$(OutDir)"</Command>
+xcopy /y /d "$(SolutionDir)"\Dependencias\SDL2_image-2.0.1\lib\x64\libjpeg-9.dll "$(OutDir)"
+xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\build\bin\debug\OgreOverlay_d.dll "$(OutDir)" </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -104,7 +105,7 @@ xcopy /y /d "$(SolutionDir)"\Dependencias\SDL2_image-2.0.1\lib\x64\libjpeg-9.dll
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)Src\Aegis\Entity;$(SolutionDir)Src\Aegis\Interfaces;$(SolutionDir)Src\Aegis\Wrappers;$(SolutionDir)Src\Aegis\Structs;$(SolutionDir)Src\Aegis\Scene;$(SolutionDir)Src\Aegis\Managers;$(SolutionDir)Src\Aegis\Component;$(SolutionDir)\Dependencias\lua\src\include;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)\Dependencias\Libraries;$(SolutionDir)\Dependencias\fmod\inc;$(SolutionDir)\Src\AegisCommon\Utils;$(SolutionDir)Src\AegisUI\Texture.h;$(SolutionDir)Dependencias\Bullet\build\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)Src\Aegis\Entity;$(SolutionDir)Src\Aegis\Interfaces;$(SolutionDir)Src\Aegis\Wrappers;$(SolutionDir)Src\Aegis\Structs;$(SolutionDir)Src\Aegis\Scene;$(SolutionDir)Src\Aegis\Managers;$(SolutionDir)Src\Aegis\Component;$(SolutionDir)\Dependencias\lua\src\include;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)\Dependencias\Libraries;$(SolutionDir)\Dependencias\fmod\inc;$(SolutionDir)\Src\AegisCommon\Utils;$(SolutionDir)Src\AegisUI\Texture.h;$(SolutionDir)Dependencias\Bullet\build\src;$(SolutionDir)Dependencias\Ogre\src\Components\Overlay\include;$(SolutionDir)Dependencias\Ogre\src\OgreMain\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -112,12 +113,14 @@ xcopy /y /d "$(SolutionDir)"\Dependencias\SDL2_image-2.0.1\lib\x64\libjpeg-9.dll
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\SDL2_image-2.0.1\lib\x64;$(SolutionDir)Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencias\Ogre\Build\lib\$(Configuration)\;$(SolutionDir)\Exes\AegisCommon\x64\Release;$(SolutionDir)\Exes\AegisGraphics\x64\Release;$(SolutionDir)\Exes\AegisScripting\x64\Release;$(SolutionDir)\Exes\AegisPhysics\x64\Release;$(SolutionDir)\Exes\AegisAudio\x64\Release;%(AdditionalLibraryDirectories);$(SolutionDir)\Dependencias\fmod\lib\x64</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2_image.lib;OgreMain.lib;SDL2.lib;SDL2main.lib;RenderSystem_GL.lib;AegisCommon.lib;AegisGraphics.lib;AegisScripting.lib;AegisAudio.lib;AegisPhysics.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\SDL2_image-2.0.1\lib\x64;$(SolutionDir)Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencias\Ogre\Build\lib\$(Configuration)\;$(SolutionDir)\Exes\AegisCommon\x64\Release;$(SolutionDir)\Exes\AegisGraphics\x64\Release;$(SolutionDir)\Exes\AegisScripting\x64\Release;$(SolutionDir)\Exes\AegisPhysics\x64\Release;$(SolutionDir)\Exes\AegisAudio\x64\Release;$(SolutionDir)Exes\AegisUI\$(Platform)\$(Configuration);%(AdditionalLibraryDirectories);$(SolutionDir)\Dependencias\fmod\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2_image.lib;OgreMain.lib;OgreOverlay.lib;SDL2.lib;SDL2main.lib;RenderSystem_GL.lib;AegisCommon.lib;AegisGraphics.lib;AegisScripting.lib;AegisAudio.lib;AegisPhysics.lib;AegisUI.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <DelayLoadDLLs>fmod.dll</DelayLoadDLLs>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\bin\$(Configuration)\OgreMain.dll "$(OutDir)"
+
+xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\bin\$(Configuration)\OgreOverlay.dll "$(OutDir)"
 
 xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\bin\$(Configuration)\OgreMain.pdb "$(OutDir)"
 

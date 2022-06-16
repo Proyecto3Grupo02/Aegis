@@ -65,7 +65,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\build\include\SDL2;$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)SDL2_image-2.0.1\include;$(SolutionDir)Src\AegisUI;$(SolutionDir)\Src\AegisCommon\Utils;$(SolutionDir)\Src\AegisGraphics</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\build\include\SDL2;$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)Dependencias\Ogre\src\Components\Overlay\include;$(SolutionDir)Dependencias\Ogre\src\OgreMain\include;$(SolutionDir)SDL2_image-2.0.1\include;$(SolutionDir)Src\AegisUI;$(SolutionDir)Src\AegisCommon\Utils;$(SolutionDir)Src\AegisGraphics</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -86,7 +86,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\build\include\SDL2;$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)SDL2_image-2.0.1\include;$(SolutionDir)Src\AegisUI;$(SolutionDir)\Src\AegisCommon\Utils;$(SolutionDir)\Src\AegisGraphics</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\build\include\SDL2;$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)Dependencias\Ogre\src\Components\Overlay\include;$(SolutionDir)Dependencias\Ogre\src\OgreMain\include;$(SolutionDir)SDL2_image-2.0.1\include;$(SolutionDir)Src\AegisUI;$(SolutionDir)Src\AegisCommon\Utils;$(SolutionDir)Src\AegisGraphics</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -102,6 +103,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\AegisUI\Font.cpp" />
+    <ClCompile Include="..\..\Src\AegisUI\Image.cpp" />
     <ClCompile Include="..\..\Src\AegisUI\ImageResources.cpp" />
     <ClCompile Include="..\..\Src\AegisUI\Text.cpp" />
     <ClCompile Include="..\..\Src\AegisUI\Texture.cpp" />
@@ -110,6 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AegisUI\Font.h" />
+    <ClInclude Include="..\..\Src\AegisUI\Image.h" />
     <ClInclude Include="..\..\Src\AegisUI\ImageResources.h" />
     <ClInclude Include="..\..\Src\AegisUI\SDL_image.h" />
     <ClInclude Include="..\..\Src\AegisUI\SDL_ttf.h" />

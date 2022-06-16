@@ -1,23 +1,78 @@
 #include "UIObject.h"
+#include <iostream>
+#include "OgreOverlay.h"
+#include "OgreOverlayManager.h"
+#include "OgreOverlayElement.h"
+#include "OgreOverlayContainer.h"
 
-UIObject::UIObject(SDL_Renderer* rend, const std::string& filename, double textWidth, double textHeight, double x_, double y_, double w_, double h_) {
-	texture = new Texture(rend, filename, textWidth, textHeight,0.0f);
+UIObject::UIObject(const std::string& n, int order, Ogre::Overlay* o) {
+	name = n;
+	overlay = o;
+	overlayMng = Ogre::OverlayManager::getSingletonPtr();
+	overlayCont = static_cast<Ogre::OverlayContainer*>(overlayMng->createOverlayElement("Panel", " PanelName" + std::to_string(order)));
+	overlayCont->setMetricsMode(Ogre::GMM_RELATIVE);
+	overlayCont->setDimensions(0.1, 0.1);
+	overlayCont->setPosition(0.5, 0.5);
+	overlay = overlayMng->create(name + std::to_string(order));
+
+}
+
+UIObject::~UIObject() {
+
+}
+
+void UIObject::show() {
+	overlay->show();
+}
+
+void UIObject::hide() {
+	overlay->hide();
+}
+
+//void UIObject::setMetricsMode(MetricsMode mmode) {
+//	switch (mmode) {
+//	case GMM_PIXELS:
+//		_overlayCont->setMetricsMode(Ogre::GMM_PIXELS);
+//		break;
+//	case GMM_RELATIVE:
+//		_overlayCont->setMetricsMode(Ogre::GMM_RELATIVE);
+//		break;
+//	case GMM_RELATIVE_ASPECT_ADJUSTED:
+//		_overlayCont->setMetricsMode(Ogre::GMM_RELATIVE_ASPECT_ADJUSTED);
+//	}
+//}
+
+void UIObject::setPosition(int x_, int y_) {
+	overlayCont->setPosition(x_, y_);
+
 	x = x_;
 	y = y_;
+}
+
+//void UIObject::setDimensions(int dx, int dy) {
+//	_overlayCont->setDimensions(dx, dy);
+//}
+
+void UIObject::setSize(int w_, int h_) {
+	overlayCont->setWidth(w_);
+	overlayCont->setHeight(h_);
+
 	w = w_;
 	h = h_;
 }
 
-UIObject::UIObject(double x_, double y_,double w_, double h_, Texture* texture_) {
-	texture = texture_;
-	x = x_;
-	y = y_;
-	w = w_;
-	h = h_;
+void UIObject::setMaterial(std::string m) {
+	overlayCont->setMaterialName(m);
+
+	material = m;
 }
 
-
-void UIObject::render() {
-	SDL_Rect dest = { x,y,w,h };
-	texture->render(dest);
+void UIObject::setRenderDepth(int d) {
+	if (overlay != nullptr)overlay->setZOrder(d);
+	else std::cout << "OVERLAY EN UIOBJECT NO ESTA INICIALIZADO\n";
 }
+
+void UIObject::setName(std::string n) {
+	name = n;
+}
+
