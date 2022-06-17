@@ -59,7 +59,7 @@ material VertexColor
 	{
 		pass
 		{
-			vertex_colour_source true
+			//vertex_colour_source true
 		}
 	}
 }
@@ -97,7 +97,7 @@ material green // nombre
 	{
 		pass // al menos uno
 		{
-			diffuse 0.0 1.0 0.0 
+			diffuse 1.0 0.0 0.0 
 			ambient 0.0 1.0 0.0
 		}
 	}
@@ -134,14 +134,14 @@ material grass // nombre
 	{
 		pass // al menos uno
 		{
-			diffuse 0.5 0.5 0.5
+			
+			diffuse 0.5 0.5 0.5 
 			ambient 0.5 0.5 0.5
-			//diffuse vertexcolour
-
+			
 			texture_unit
 			{
 				texture hierba.jpg
-				//colour_op modulate
+				colour_op modulate
 			}
 		}
 	}

@@ -23,7 +23,7 @@ void UISystem::Init(Ogre::SceneManager* mScene, InputSystem* input) {
 
 	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 	mScene->addRenderQueueListener(overlaySys);
-	CreateUIButton("ramon", 0, "aegis");
+	CreateUIButton("ramon", 0, "grass");
 	
 }
 

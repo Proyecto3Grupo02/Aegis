@@ -44,7 +44,7 @@ bool OgreWrapper::Init() {
 	#if defined _DEBUG
 		writeInConsole = true;
 	#endif
-	lm->createLog("./Logs/AegisOgreLog.txt", true, false, false);
+	lm->createLog("./Logs/AegisOgreLog.txt", true, writeInConsole, false);
 
 	mRoot = new Ogre::Root(mPluginsCfg);
 
