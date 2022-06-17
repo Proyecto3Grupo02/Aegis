@@ -9,6 +9,8 @@
 #include <OgreLogManager.h>
 #include "./Components/Camera.h"
 
+#include "WindowManager.h"
+
 OgreWrapper::OgreWrapper() : mRoot(0),
 mResourcesCfg(Ogre::BLANKSTRING),
 mPluginsCfg(Ogre::BLANKSTRING)
@@ -21,6 +23,7 @@ AegisCamera* OgreWrapper::GetCamera()
 }
 
 bool OgreWrapper::Render() {
+	windowMan->update();
 	return mRoot->renderOneFrame();
 }
 
@@ -83,6 +86,8 @@ bool OgreWrapper::Init() {
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
 
 	mCamera = CreateCamera();
+	windowMan->setCamera(mCamera);
+	windowMan->setRenderer(render);
 }
 
 AegisCamera* OgreWrapper::CreateCamera(Ogre::SceneNode* node)
@@ -126,8 +131,10 @@ void OgreWrapper::CreateWindowNative()
 	Uint32 flags = SDL_WINDOW_RESIZABLE;
 	if (!SDL_WasInit(SDL_INIT_VIDEO)) SDL_InitSubSystem(SDL_INIT_VIDEO);
 
-	native = SDL_CreateWindow("Aegis Window", 100,100, 1920, 1080, flags);
 	
+	windowMan = new WindowManager("WindowManager", 1280, 720, false, flags);
+	native = windowMan->getWindow();
+
 	SDL_SysWMinfo wmInfo;
 	SDL_VERSION(&wmInfo.version);
 	if (SDL_GetWindowWMInfo(native, &wmInfo) == SDL_FALSE) {

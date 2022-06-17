@@ -30,6 +30,9 @@
     <ClCompile Include="..\..\Src\AegisGraphics\Components\Light.cpp">
       <Filter>Archivos de origen\Component</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\AegisGraphics\WindowManager.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AegisGraphics\OgreWrapper.h">
@@ -40,6 +43,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\AegisGraphics\Components\Camera.h">
       <Filter>Archivos de encabezado\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisGraphics\WindowManager.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -22,8 +22,8 @@ private:
 	
 
 public:
-    WindowManager(std::string gameTittle, int w, int h, bool fullScreen, Uint32 flag, Ogre::RenderWindow* rend, AegisCamera* cam);
-    WindowManager(const char* gameTittle, int w, int h, bool fullScreen, Uint32 flag, Ogre::RenderWindow* rend, AegisCamera* cam);
+    WindowManager(std::string gameTittle, int w, int h, bool fullScreen, Uint32 flag);
+    WindowManager(const char* gameTittle, int w, int h, bool fullScreen, Uint32 flag);
     
     ~WindowManager();
 
@@ -31,6 +31,10 @@ public:
 
     int getWidth() const;
     int getHeight() const;
+    SDL_Window* getWindow() const;
+
+    void setRenderer(Ogre::RenderWindow* rend);
+    void setCamera(AegisCamera* cam);
 
     void update();
 

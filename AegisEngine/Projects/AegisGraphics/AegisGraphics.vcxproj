@@ -14,11 +14,13 @@
     <ClCompile Include="..\..\Src\AegisGraphics\Components\Camera.cpp" />
     <ClCompile Include="..\..\Src\AegisGraphics\Components\Light.cpp" />
     <ClCompile Include="..\..\Src\AegisGraphics\OgreWrapper.cpp" />
+    <ClCompile Include="..\..\Src\AegisGraphics\WindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AegisGraphics\Components\Camera.h" />
     <ClInclude Include="..\..\Src\AegisGraphics\Components\Light.h" />
     <ClInclude Include="..\..\Src\AegisGraphics\OgreWrapper.h" />
+    <ClInclude Include="..\..\Src\AegisGraphics\WindowManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
