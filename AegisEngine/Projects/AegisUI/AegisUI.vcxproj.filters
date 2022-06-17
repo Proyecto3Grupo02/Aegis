@@ -36,6 +36,9 @@
     <ClCompile Include="..\..\Src\AegisUI\Image.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\AegisUI\Button.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AegisUI\Font.h">
@@ -63,6 +66,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AegisUI\Image.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisUI\Button.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

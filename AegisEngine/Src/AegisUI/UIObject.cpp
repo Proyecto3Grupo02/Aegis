@@ -5,14 +5,18 @@
 #include "OgreOverlayElement.h"
 #include "OgreOverlayContainer.h"
 
-UIObject::UIObject(const std::string& n, int order, Ogre::Overlay* o) {
+UIObject::UIObject(const std::string& n, int order, Ogre::Overlay* o, float x_, float y_, float w_, float h_) {
 	name = n;
+	x = x_;
+	y = y_;
+	w = w_;
+	h = h_;
 	overlay = o;
 	overlayMng = Ogre::OverlayManager::getSingletonPtr();
 	overlayCont = static_cast<Ogre::OverlayContainer*>(overlayMng->createOverlayElement("Panel", " PanelName" + std::to_string(order)));
 	overlayCont->setMetricsMode(Ogre::GMM_RELATIVE);
-	overlayCont->setDimensions(0.1, 0.1);
-	overlayCont->setPosition(0.5, 0.5);
+	overlayCont->setDimensions(w, h);
+	overlayCont->setPosition(x, y);
 	overlay = overlayMng->create(name + std::to_string(order));
 
 }
@@ -42,7 +46,7 @@ void UIObject::hide() {
 //	}
 //}
 
-void UIObject::setPosition(int x_, int y_) {
+void UIObject::setPosition(float x_, float y_) {
 	overlayCont->setPosition(x_, y_);
 
 	x = x_;
@@ -53,7 +57,7 @@ void UIObject::setPosition(int x_, int y_) {
 //	_overlayCont->setDimensions(dx, dy);
 //}
 
-void UIObject::setSize(int w_, int h_) {
+void UIObject::setSize(float w_, float h_) {
 	overlayCont->setWidth(w_);
 	overlayCont->setHeight(h_);
 

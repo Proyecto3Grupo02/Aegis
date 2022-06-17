@@ -10,21 +10,25 @@
 #include "OgreOverlayManager.h"
 #include "OgreSceneManager.h"
 #include "OgreOverlaySystem.h"
-#include "Image.h"
+#include "Button.h"
 
-void UISystem::Init(Ogre::SceneManager* mScene) {
+
+
+void UISystem::Init(Ogre::SceneManager* mScene, InputSystem* input) {
+	inputSystem = input; //boton
+
 	overlaySys = new Ogre::OverlaySystem();
 	overlayMng = Ogre::OverlayManager::getSingletonPtr();
 	overlay = overlayMng->create("UI");
 
 	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 	mScene->addRenderQueueListener(overlaySys);
-	CreateUIImage("ramon", 0, "aegis");
+	CreateUIButton("ramon", 0, "aegis");
 	
 }
 
-void UISystem::CreateUIImage(const std::string& name, int order, std::string material){
-	Image* obj = new Image(name, order, material, overlay);
+void UISystem::CreateUIButton(const std::string& name, int order, std::string material){
+	Button* obj = new Button(inputSystem, name, order, material, overlay, 0.5, 0.5, 0.1, 0.1);
 	AddUIObject(obj); //necesario????????????
 }
 

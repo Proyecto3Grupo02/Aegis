@@ -1,10 +1,12 @@
 #pragma once
 #include "Singleton.h"
 #include <vector>
+#include "../AegisCommon/Managers/InputManager.h"
 
 class OgreOverlay;
 class SDL_Image; 
 class UIObject;
+
 
 namespace Ogre {
 	class OverlayManager;
@@ -15,6 +17,7 @@ namespace Ogre {
 
 class UISystem : public Singleton<UISystem> {
 private:
+	InputSystem* inputSystem = nullptr; 
 	Ogre::OverlayManager* overlayMng;
 	Ogre::OverlaySystem* overlaySys;
 	Ogre::Overlay* overlay;
@@ -23,9 +26,9 @@ private:
 
 	void AddUIObject(UIObject* object_);
 public:
-	void Init(Ogre::SceneManager* mScene);
+	void Init(Ogre::SceneManager* mScene, InputSystem* input);
 
-	void CreateUIImage(const std::string& name, int order, std::string material);
+	void CreateUIButton(const std::string& name, int order, std::string material);
 	void DeleteUIObject(const UIObject* obj_);
 	void Renderer();
 };
