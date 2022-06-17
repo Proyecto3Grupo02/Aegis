@@ -18,11 +18,10 @@ protected:
 	Ogre::OverlayManager* overlayMng =nullptr;
 	Ogre::OverlayContainer* overlayCont = nullptr;
 	Ogre::Overlay* overlay = nullptr;
-
 	Ogre::OverlaySystem* overlaySys = nullptr; //no esta inicializado
+	float x, y, w, h;
 private:
 
-	float x, y, w, h;
 	std::string material;
 	std::string name;
 

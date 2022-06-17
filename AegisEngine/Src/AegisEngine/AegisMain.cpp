@@ -29,7 +29,6 @@ void AegisMain::GameLoop() {
 	while (!exit)
 	{
 		SDL_Event eventHandler;
-
 		//Audio()->playMusic("clin"); //Esto hay q quitarlo
 		
 		//SDL_EnableKeyRepeat(0, 0);
@@ -75,9 +74,6 @@ void AegisMain::GameLoop() {
 			sceneManager->PreRenderScene();
 
 			ogreWrap->Render();
-			//El renderizado de la UI se superpone ahora mismo al del gameplay
-			//hay que comprobar los buffers
-			//UIs()->Render();
 			sceneManager->RenderUI();
 			Uint32 frameTime = SDL_GetTicks() - Time()->frameStartTime;
 

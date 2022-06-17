@@ -28,7 +28,7 @@ void UISystem::Init(Ogre::SceneManager* mScene, InputSystem* input) {
 }
 
 void UISystem::CreateUIButton(const std::string& name, int order, std::string material){
-	Button* obj = new Button(inputSystem, name, order, material, overlay, 0.5, 0.5, 0.1, 0.1);
+	Button* obj = new Button(inputSystem, name, order, material, overlay, 10, 10, 40, 20);
 	AddUIObject(obj); //necesario????????????
 }
 
@@ -43,6 +43,10 @@ void UISystem::DeleteUIObject(const UIObject* obj_) {
 	it = ui_objects.erase(it);	
 }
 
-void UISystem::Renderer() {	
+void UISystem::Update(float deltaTime) {
+	for (auto obj : ui_objects) {
+		auto button = static_cast<Button*>(obj);
+		if (button != nullptr)button->wasClicked();
+	}
 }
 

@@ -208,6 +208,12 @@ bool InputSystem::IsMouseButtonReleasedLua(int button)
 	}
 }
 
+Vector2 InputSystem::GetMousePosition() {
+	int x, y;
+	SDL_GetMouseState(&x, &y);
+	return Vector2(x, y);
+}
+
 //CONSULTA GLOBAL----------------------------
 bool InputSystem::oneKeyWasPressed() {
 	return KEY_WAS_PRESSED;

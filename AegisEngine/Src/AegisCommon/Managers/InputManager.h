@@ -69,6 +69,7 @@ public:
 
 	void SetMouseMotion(Vector2 motion);
 	Vector2 GetMouseMotion() const;
+	Vector2 GetMousePosition();
 };
 
 

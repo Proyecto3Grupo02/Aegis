@@ -7,16 +7,13 @@
 
 UIObject::UIObject(const std::string& n, int order, Ogre::Overlay* o, float x_, float y_, float w_, float h_) {
 	name = n;
-	x = x_;
-	y = y_;
-	w = w_;
-	h = h_;
+	x = x_; y = y_; w = w_;	h = h_;
 	overlay = o;
 	overlayMng = Ogre::OverlayManager::getSingletonPtr();
 	overlayCont = static_cast<Ogre::OverlayContainer*>(overlayMng->createOverlayElement("Panel", " PanelName" + std::to_string(order)));
-	overlayCont->setMetricsMode(Ogre::GMM_RELATIVE);
-	overlayCont->setDimensions(w, h);
+	overlayCont->setMetricsMode(Ogre::GMM_PIXELS);
 	overlayCont->setPosition(x, y);
+	overlayCont->setDimensions(w, h);
 	overlay = overlayMng->create(name + std::to_string(order));
 
 }
