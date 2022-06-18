@@ -173,15 +173,8 @@ funcs.ParseSceneObject = function(object)
 	if object.type == "Entity" then
 		local entity = funcs.ParseEntity(object);
 		entities[entity:GetName()] = entity;
-	
-	end;
-	 if object.type=="Canvas" then
-		local canvas= funcs.ParseCanvas(object);
-		if canvas ~=nil then
-			mCanvas=canvas;
-
-	end;
-
+	elseif object.type == "UI" then
+		funcs.ParseUI(object);
 	else
 		local entity = funcs.TreatSpecialCase(object);
 		if entity ~= nil then
@@ -201,30 +194,8 @@ funcs.ParseScene = function(scene)
 	funcs.ResolveDependencies(scene, entities);
 end;
 
-funcs.ParseCanvas= function (object)
-	print("creating canvas");
-
-	local canvas= Aegis.CreateCanvas();
-
-	funcs.AddElems(canvas, object.elements);
-
-
-	return canvas;
-	--local entity = Aegis.CreateEntity(currentScene, funcs.ParseVector3(object.position));
-	--entity.transform.scale = funcs.ParseVector3(object.scale, 1);
-	--entity.transform.localEulerAngles = funcs.ParseVector3(object.rotation, 0);
-	
-	--entity:SetName(object.name);
-	--funcs.AddComponents(entity, object.components);
-	--currentScene:AddEntity(entity);
-	--return entity;
-
+funcs.ParseUI = function (object)
+	UISystem:CreateUIElem(object.data);
 end
-
-funcs.CreateUIElem=function (canvas)
-	
-end
-
 
 return funcs;
-

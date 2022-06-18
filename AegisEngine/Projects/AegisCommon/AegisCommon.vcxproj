@@ -111,7 +111,6 @@
   <ItemGroup>
     <ClInclude Include="..\..\Src\AegisCommon\Components\AegisComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\AnimationComponent.h" />
-    <ClInclude Include="..\..\Src\AegisCommon\Components\ButtonComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\CameraComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\Component.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\Image.h" />
@@ -149,7 +148,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\Src\AegisCommon\Components\AegisComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\AnimationComponent.cpp" />
-    <ClCompile Include="..\..\Src\AegisCommon\Components\ButtonComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\CameraComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\Component.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\Image.cpp" />

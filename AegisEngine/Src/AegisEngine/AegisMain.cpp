@@ -18,6 +18,7 @@
 #include "LuaMaths.h"
 #include "SoundEmitterComponent.h"
 #include "ButtonComponent.h"
+#include "../AegisUI/Button.h"
 
 #include "UIMain.h"
 
@@ -72,7 +73,7 @@ void AegisMain::GameLoop() {
 				}
 			}
 
-			//UIs()->Update(10); //boton
+			UIs()->Update(Time()->deltaTime); //boton
 
 			sceneManager->UpdateCurrentScene(Time()->deltaTime);
 			sceneManager->PreRenderScene();
@@ -156,9 +157,10 @@ void AegisMain::ConvertObjectToLua()
 	AnimationComponent::ConvertToLua(state);
 	RigidbodyComponent::ConvertToLua(state);
 	SoundEmitterComponent::ConvertToLua(state);
-	ButtonComponent::ConvertToLua(state);
+	UISystem::ConvertToLua(state);
 	LuaMaths::ConvertToLua(state);
 
 	ExportToLua(sceneManager->GetCurrentScene(), "currentScene");
+	ExportToLua(UIs(), "UISystem");
 	ExportToLua(Input(), "Input");
 }

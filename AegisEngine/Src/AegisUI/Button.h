@@ -4,6 +4,11 @@
 #include "OgreOverlay.h"
 #include "Image.h"
 #include "InputManager.h"
+
+//class Entity;
+
+static int id = 0;
+
 class Button : public Image
 {
 private:
@@ -15,4 +20,8 @@ public:
 	~Button() {};
 	bool wasClicked();
 	void update();
+	static Button* CreateButton(LuaRef args);
+
+	//LUA------------
+	//static void ConvertToLua(lua_State* state);
 };

@@ -9,7 +9,7 @@
 #include <string>
 
 class Entity;
-static int id = 0;
+//static int id = 0;
 
 class ButtonComponent : public AegisComponent, public ILuaObject
 {

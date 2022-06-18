@@ -43,25 +43,20 @@ local scene = {
 			}
 		}
 	},
-	-- {
-	-- 	type = "Entity",
-	-- 	name = "Boton1",
-	-- 	components = {
-	-- 		{
-	-- 			type = "Button",
-	-- 			data = 
-	-- 			{
-	-- 				nombre = "Boton",
-	-- 				order = 1,
-	-- 				material = "grass",
-	-- 				x = 1,
-	-- 				y = 1,
-	-- 				width =50,
-	-- 				height = 50
-	-- 			}			
-	-- 		}
-	-- 	}
-	-- },
+	{
+		type = "UI",
+		data = 
+			{
+				type = "Button",
+				nombre = "Boton",
+				order = 0,
+				material = "grass",
+				x = 1,
+				y = 1,
+				width =50,
+				height = 50
+			},
+	},
 	{
 		type = "Entity",
 		name = "Anzuelo",

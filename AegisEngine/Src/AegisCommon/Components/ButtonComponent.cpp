@@ -8,7 +8,7 @@ ButtonComponent::ButtonComponent(Entity* ent, const std::string& name, int order
 	: AegisComponent("Button", ent) {
 
 	boton = new Button(name, order, material, x, y, w, h);
-	id++; //necesitamos que cada boton tenga un nombre distinto
+	//id++; //necesitamos que cada boton tenga un nombre distinto
 	//mEntity_->getScene()->AddPhysicsEntity(this);
 	SetDataAsInnerType(this);
 }
@@ -32,7 +32,7 @@ bool ButtonComponent::isActive() const {
 ButtonComponent* CreateButton(Entity* ent, LuaRef args) //Doesn't belong to this class
 {//const std::string& name, int order, std::string material, float x, float y, float w, float h
 	//std::string bodyName = ent->getName();
-	std::string name = LuaMngr()->ParseString(args["name"], "Boton"+id); //PETA SI HAY MAS DE 1 CON EL MISMO NOMBRE ==> CUIDADO
+	std::string name = LuaMngr()->ParseString(args["name"], "Boton"); //PETA SI HAY MAS DE 1 CON EL MISMO NOMBRE ==> CUIDADO
 	int order = LuaMngr()->ParseFloat(args["order"], 1);
 	std::string material = LuaMngr()->ParseString(args["material"], "grass");
 	float x = LuaMngr()->ParseFloat(args["x"], 1);

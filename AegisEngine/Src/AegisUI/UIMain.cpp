@@ -5,6 +5,7 @@
 #include "OgreOverlaySystem.h"
 #include "Button.h"
 
+
 void UISystem::Init(Ogre::SceneManager* mScene, InputSystem* input) {
 	inputSystem = input; //boton
 
@@ -26,10 +27,6 @@ InputSystem* UISystem::getInputSystem() {
 	return inputSystem;
 }
 
-void UISystem::CreateUIButton(const std::string& name, int order, std::string material){
-	//Button* obj = new Button(name, order, material, 10, 10, 40, 20);
-	//AddUIObject(obj); //necesario????????????
-}
 
 void UISystem::AddUIObject(UIObject* object_) {
 	ui_objects.push_back(object_);
@@ -43,9 +40,38 @@ void UISystem::DeleteUIObject(const UIObject* obj_) {
 }
 
 void UISystem::Update(float deltaTime) {
-	//for (auto obj : ui_objects) {
-	//	auto button = dynamic_cast<Button*>(obj);
-	//	if (button != nullptr)button->update();
-	//}
+	for (auto obj : ui_objects) {
+		auto button = dynamic_cast<Button*>(obj);
+		if (button != nullptr)button->update();
+	}
 }
 
+void UISystem::CreateUIElem(luabridge::LuaRef luaref) {
+	std::string type = LuaMngr()->ParseString(luaref["type"], "nil");
+	UIObject* uiObject = nullptr;
+	if (type == "nil") 
+		return;
+	else if (type == "Button") {
+		uiObject = Button::CreateButton(luaref);
+	}
+	
+
+	if (uiObject != nullptr)
+		AddUIObject(uiObject);
+}
+
+//LUA----------------
+void UISystem::ConvertToLua(lua_State* state) {
+	getGlobalNamespace(state).
+		beginNamespace("Aegis").
+		beginNamespace("UI").
+		beginClass<UISystem>("UISystem").
+		addFunction("CreateUIElem", &UISystem::CreateUIElem).
+		//deriveClass<ButtonComponent, AegisComponent>("Button").
+		//addProperty("position", &RigidbodyComponent::GetPosition, &RigidbodyComponent::SetPosition).		
+		//addFunction("wasClicked", &ButtonComponent::wasClicked).
+		//addProperty("isActive", &ButtonComponent::isActive).
+		endClass().
+		endNamespace().
+		endNamespace();
+}

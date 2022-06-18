@@ -15,7 +15,6 @@ UIObject::UIObject(const std::string& n, int order,float x_, float y_, float w_,
 	overlayCont->setPosition(x, y);
 	overlayCont->setDimensions(w, h);
 	overlay = overlayMng->create(name + std::to_string(order));
-
 }
 
 UIObject::~UIObject() {
