@@ -9,8 +9,8 @@ ButtonComponent::ButtonComponent(Entity* ent, const std::string& name, int order
 
 	boton = new Button(name, order, material, x, y, w, h);
 	id++; //necesitamos que cada boton tenga un nombre distinto
-	/*mEntity_->getScene()->AddPhysicsEntity(this);
-	SetDataAsInnerType(this);*/
+	//mEntity_->getScene()->AddPhysicsEntity(this);
+	SetDataAsInnerType(this);
 }
 
 ButtonComponent::~ButtonComponent() {
@@ -48,7 +48,7 @@ bool ButtonComponent::wasClicked() {
 	return boton->wasClicked();
 }
 
-static void ConvertToLua(lua_State* state) {
+void ButtonComponent::ConvertToLua(lua_State* state) {
 	getGlobalNamespace(state).
 		beginNamespace("Aegis").
 		beginNamespace("NativeComponents").
@@ -57,7 +57,6 @@ static void ConvertToLua(lua_State* state) {
 		//addProperty("position", &RigidbodyComponent::GetPosition, &RigidbodyComponent::SetPosition).		
 		addFunction("wasClicked", &ButtonComponent::wasClicked).
 		addProperty("isActive", &ButtonComponent::isActive).
-
 		endClass().
 		endNamespace().
 		endNamespace();

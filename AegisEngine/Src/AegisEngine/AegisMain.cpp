@@ -17,6 +17,7 @@
 #include "GameLoopData.h"
 #include "LuaMaths.h"
 #include "SoundEmitterComponent.h"
+#include "ButtonComponent.h"
 
 #include "UIMain.h"
 
@@ -155,6 +156,7 @@ void AegisMain::ConvertObjectToLua()
 	AnimationComponent::ConvertToLua(state);
 	RigidbodyComponent::ConvertToLua(state);
 	SoundEmitterComponent::ConvertToLua(state);
+	ButtonComponent::ConvertToLua(state);
 	LuaMaths::ConvertToLua(state);
 
 	ExportToLua(sceneManager->GetCurrentScene(), "currentScene");
