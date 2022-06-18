@@ -1,5 +1,5 @@
 #include "LightComponent.h"
-#include "../Entity/Entity.h"
+#include "Entity.h"
 
 LightComponent::LightComponent(Entity* ent, LuaRef args) :
 	AegisComponent("Light", ent), mLight_(new AegisLight(ent->getNode(), ent->getNode()->getCreator()))

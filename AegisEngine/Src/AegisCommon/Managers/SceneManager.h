@@ -3,7 +3,7 @@
 #define SCENE_MANAGER_H
 
 #include <string>
-#include "../Interfaces/ILuaObject.h"
+#include "ILuaObject.h"
 
 class Scene;
 

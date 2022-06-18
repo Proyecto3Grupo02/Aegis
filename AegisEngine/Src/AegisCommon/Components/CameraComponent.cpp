@@ -1,5 +1,5 @@
 #include "CameraComponent.h"
-#include "../Entity/Entity.h"
+#include "Entity.h"
 CameraComponent::CameraComponent(Entity* ent, LuaRef args):
 	AegisComponent("Camera", ent), mCamera_(nullptr), isMainCam_(args["isMainCam"])
 {

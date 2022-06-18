@@ -3,7 +3,7 @@
 #ifndef SOUNDEMITTER_H
 #define SOUNDEMITTER_H
 #include "AegisComponent.h"
-#include "../../AegisAudio/SoundEmitter.h"
+#include "SoundEmitter.h"
 
 class SoundEmitterComponent : public AegisComponent
 {

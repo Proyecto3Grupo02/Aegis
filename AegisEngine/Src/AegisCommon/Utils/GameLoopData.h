@@ -1,6 +1,6 @@
 #pragma once
 #include <SDL_stdinc.h>
-#include "../Utils/Singleton.h"
+#include "Singleton.h"
  //BASURA
 
 struct TimeManager : public Singleton<TimeManager>

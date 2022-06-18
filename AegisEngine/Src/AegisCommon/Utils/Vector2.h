@@ -1,7 +1,7 @@
 #pragma once
 #ifndef VECTOR2_H 
 #define VECTOR2_H
-#include "../Interfaces/ILuaObject.h"
+#include "ILuaObject.h"
 
 class Vector2
 {

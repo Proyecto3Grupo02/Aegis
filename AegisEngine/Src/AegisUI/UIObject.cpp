@@ -2,7 +2,6 @@
 #include <iostream>
 #include "OgreOverlay.h"
 #include "OgreOverlayManager.h"
-#include "OgreOverlayElement.h"
 #include "OgreOverlayContainer.h"
 
 UIObject::UIObject(const std::string& n, int order, Ogre::Overlay* o, float x_, float y_, float w_, float h_) {

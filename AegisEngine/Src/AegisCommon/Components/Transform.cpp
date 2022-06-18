@@ -1,7 +1,7 @@
 #include "Transform.h"
 
 #include "Entity.h"
-#include "../Utils/MathUtils.h"
+#include "MathUtils.h"
 
 using namespace MathUtils;
 

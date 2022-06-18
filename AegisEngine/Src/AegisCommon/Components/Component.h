@@ -3,7 +3,7 @@
 #define COMPONENT_H
 
 #include "Ogre.h"
-#include "../Interfaces/ILuaObject.h"
+#include "ILuaObject.h"
 
 
 struct Entity;

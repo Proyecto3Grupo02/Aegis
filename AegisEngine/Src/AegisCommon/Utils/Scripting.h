@@ -1,5 +1,5 @@
 #pragma once
 
-#include "../../AegisScripting/Manager/LuaManager.h"
+#include "LuaManager.h"
 
 using namespace luabridge;

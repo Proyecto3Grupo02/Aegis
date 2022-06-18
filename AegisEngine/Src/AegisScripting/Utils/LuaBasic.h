@@ -2,7 +2,7 @@
 
 #ifndef LUA_BASIC_H
 #define LUA_BASIC_H
-#include "../../AegisCommon/Utils/Singleton.h"
+#include "Singleton.h"
 
 #ifdef __cplusplus
 #include <lua.hpp>
@@ -12,6 +12,6 @@
 #include <lualib.h>
 #include <lauxlib.h>
 
-#include "../../../Dependencias/LuaBridge/LuaBridge.h"
+#include "LuaBridge.h"
 #endif
 #endif

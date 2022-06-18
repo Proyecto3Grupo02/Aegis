@@ -1,7 +1,7 @@
 #pragma once
 #include "Singleton.h"
 #include <vector>
-#include "../AegisCommon/Managers/InputManager.h"
+#include "InputManager.h"
 
 class OgreOverlay;
 class SDL_Image; 

@@ -2,8 +2,8 @@
 
 #ifndef LUA_MANAGER
 #define LUA_MANAGER
-#include "../../AegisCommon/Utils/Singleton.h"
-#include "../Utils/LuaBasic.h"
+#include "Singleton.h"
+#include "LuaBasic.h"
 
 //EXPLICACION LUA (29 de marzo): 
 //* EN \Exes\AegisEngine\x64\Assets\LuaScripts teneis archivos LUA. 

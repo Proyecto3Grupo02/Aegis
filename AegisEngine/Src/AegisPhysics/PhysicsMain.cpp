@@ -16,7 +16,6 @@ subject to the following restrictions:
 ///-----includes_start-----
 #include "btBulletDynamicsCommon.h"
 #include "PhysicsMain.h"
-#include "Vector4.h"
 #include "Entity.h"
 #include "RigidbodyComponent.h"
 

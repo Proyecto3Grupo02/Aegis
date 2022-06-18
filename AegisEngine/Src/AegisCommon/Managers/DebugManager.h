@@ -3,9 +3,9 @@
 #ifndef DEBUG
 #define DEBUG
 
-#include "../Utils/Singleton.h"
-#include "../Interfaces/IInitializable.h"
-#include "../Utils/Vector3.h"
+#include "Singleton.h"
+#include "IInitializable.h"
+#include "Vector3.h"
  //BASURA
 #include <string>
 #include<vector>

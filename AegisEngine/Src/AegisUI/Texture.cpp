@@ -1,7 +1,5 @@
 
 #include "Texture.h"
-#include <SDL_image.h>
-#include <SDL.h>
 //Texture::Texture(SDL_Renderer* rend,  std::string& filename, float width, float height, float angle):
 //	mRenderer_(rend), mWidth_(width), mHeight_(height), mTexture_(nullptr), mRotation_()
 //{

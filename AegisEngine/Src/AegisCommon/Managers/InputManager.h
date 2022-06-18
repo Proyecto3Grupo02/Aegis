@@ -2,12 +2,12 @@
 #ifndef INPUT_SYSTEM_H 
 #define INPUT_SYSTEM_H
 
-#include "../Utils/Singleton.h"
+#include "Singleton.h"
  //BASURA
 #include <vector>
 #include<SDL.h>
-#include "../Interfaces/ILuaObject.h"
-#include "../Utils/Vector2.h"
+#include "ILuaObject.h"
+#include "Vector2.h"
 
 class InputSystem : public Singleton<InputSystem>, public ILuaObject {
 private:

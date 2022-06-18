@@ -1,12 +1,5 @@
 #include <iostream>
 #include "UIMain.h"
-#include "UIObject.h"
-#include "OgreOverlay.h"
-#include "OgreOverlayPrerequisites.h"
-#include "OgreTextAreaOverlayElement.h"
-#include "OgreFontManager.h"
-#include "OgreOverlayContainer.h"
-#include "OgreOverlayElement.h"
 #include "OgreOverlayManager.h"
 #include "OgreSceneManager.h"
 #include "OgreOverlaySystem.h"

@@ -3,7 +3,7 @@
 #define AEGIS_COMPONENT
 
 #include "Component.h"
-#include "../Interfaces/ILuaObject.h"
+#include "ILuaObject.h"
 #include <functional>
 
 enum Callbacks { Update, LateUpdate, FixedUpdate, OnCollisionEnter, OnTriggerEnter };

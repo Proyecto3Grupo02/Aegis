@@ -1,9 +1,6 @@
 #include "Canvas.h"
-#include <sdl.h>
 #include "../../AegisGraphics/OgreWrapper.h"
 #include "../Entity/UIElement.h"
-#include "../Utils/Vector2.h"
-#include "../Components/Image.h"
 Canvas::Canvas(OgreWrapper* wrap): ogreWrapper(wrap)
 {
 	//UIElement* elem = new UIElement(this, Vector2());

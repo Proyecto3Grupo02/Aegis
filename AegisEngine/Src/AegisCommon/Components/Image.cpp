@@ -1,5 +1,5 @@
 #include "Image.h"
-#include "../Entity/UIElement.h"
+#include "UIElement.h"
 
 #include "RectTransform.h"
 Image::Image(UIElement* elem, SDL_Renderer* rend, std::string& filename, float w, float h, float angle):

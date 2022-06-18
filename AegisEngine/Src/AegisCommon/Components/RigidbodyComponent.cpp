@@ -2,8 +2,8 @@
 
 #include "Entity.h"
 #include <Scene.h>
-#include "../Utils/GameLoopData.h"
-#include "../Utils/MathUtils.h"
+#include "GameLoopData.h"
+#include "MathUtils.h"
 
 RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m, bool useG, bool isK, bool isT,float scale)
 	: AegisComponent("Rigidbody", ent)

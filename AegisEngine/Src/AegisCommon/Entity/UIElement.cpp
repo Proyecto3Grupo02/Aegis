@@ -1,5 +1,5 @@
 ﻿#include "UIElement.h"
-#include "../Components/RectTransform.h"
+#include "RectTransform.h"
 UIElement::UIElement(Canvas* scene, Vector2 pos):
 	mCanvas_(scene)
 {

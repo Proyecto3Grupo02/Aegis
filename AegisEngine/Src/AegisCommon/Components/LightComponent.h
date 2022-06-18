@@ -5,9 +5,9 @@
 #include "AegisComponent.h"
 #include "Transform.h"
 
-#include "../../AegisCommon/Utils/Vector3.h"
+#include "Vector3.h"
 
-#include "../../AegisGraphics/Components/Light.h"
+#include "Light.h"
 
 
 class LightComponent: public AegisComponent

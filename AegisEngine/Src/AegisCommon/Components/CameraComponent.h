@@ -4,8 +4,8 @@
 #define CAMERA_H
 
 #include "AegisComponent.h"
-#include "../Utils/Quaternion.h"
-#include "../../AegisGraphics/Components/Camera.h"
+#include "Quaternion.h"
+#include "Camera.h"
 #include "Transform.h"
 
 enum SpaceReference{LOCAL, PARENT, WORLD};

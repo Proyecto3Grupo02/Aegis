@@ -3,7 +3,7 @@
 #define SOUND_SYSTEM_H
 
 // AegisCommon
-#include "../AegisCommon/Utils/Singleton.h"
+#include "Singleton.h"
 
 // Dependencies\Fmod
 #include <fmod.hpp>

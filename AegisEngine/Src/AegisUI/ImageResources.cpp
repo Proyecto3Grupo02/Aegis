@@ -1,6 +1,5 @@
 #include "ImageResources.h"
-#include <cstdio>
-#include "../../Dependencias/Libraries/dirent.h"
+#include "dirent.h"
 using namespace std;
 
 ImageResources::ImageResources()

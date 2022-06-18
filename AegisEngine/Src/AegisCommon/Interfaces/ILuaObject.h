@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Utils/Scripting.h"
+#include "Scripting.h"
 
 struct ILuaObject
 {

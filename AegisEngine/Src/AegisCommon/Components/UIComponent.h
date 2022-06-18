@@ -2,7 +2,7 @@
 #ifndef UI_COMPONENT
 #define UI_COMPONENT
 
-#include "../Interfaces/ILuaObject.h"
+#include "ILuaObject.h"
 #include "Component.h"
 
 enum UICallbacks { OnMouseOver, OnMouseExit, OnClickDown, OnClickReleased };

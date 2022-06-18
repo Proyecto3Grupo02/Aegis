@@ -1,7 +1,7 @@
 #pragma once
 #include "AegisComponent.h"
-#include "../Interfaces/ILuaObject.h"
-#include "../Utils/Animation.h"
+#include "ILuaObject.h"
+#include "Animation.h"
 
 class Transform;
 

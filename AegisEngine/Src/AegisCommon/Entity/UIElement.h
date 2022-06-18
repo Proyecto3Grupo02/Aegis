@@ -1,8 +1,8 @@
 #pragma once 
 
-#include "../Interfaces/ILuaObject.h"
+#include "ILuaObject.h"
 #include <unordered_map>
-#include "../Components/UIComponent.h"
+#include "UIComponent.h"
 
 class RectTransform;
 class Canvas;

@@ -4,7 +4,7 @@
 
 #include <OgreRoot.h>
 #include <SDL.h>
-#include "../checkML.h"
+#include "checkML.h"
 
 class AegisCamera;
 //BASURA

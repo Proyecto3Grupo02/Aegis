@@ -3,9 +3,10 @@
 #ifndef SOUND_LISTENER_H
 #define SOUND_LISTENER_
 
-#include "../../AegisAudio/SoundEmitter.h"
+#include "SoundEmitter.h"
 #include "AegisComponent.h"
-#include "../Interfaces/ILuaObject.h"
+#include "ILuaObject.h"
+#include "SoundListener.h"
 
 class SoundListenerComponent: public AegisComponent
 {

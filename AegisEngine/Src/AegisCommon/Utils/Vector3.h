@@ -1,7 +1,7 @@
 #pragma once
 #ifndef VECTOR3_H 
 #define VECTOR3_H
-#include "../Interfaces/ILuaObject.h"
+#include "ILuaObject.h"
 
 enum Vector3Mode { RGB, XYZ };
 

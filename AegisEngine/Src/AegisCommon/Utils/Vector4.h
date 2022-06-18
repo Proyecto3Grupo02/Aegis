@@ -3,7 +3,7 @@
 #define VECTOR4_H
 
 #include "Vector3.h"
-#include "../Interfaces/ILuaObject.h"
+#include "ILuaObject.h"
 
 struct Vector4 : public Vector3, public ILuaObject {
 public:

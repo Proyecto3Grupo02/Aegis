@@ -1,6 +1,6 @@
 ﻿#include "Entity.h"
 #include "Transform.h"
-#include "../Scene/Scene.h"
+#include "Scene.h"
 
 Entity::Entity(Scene* scene, Ogre::SceneNode* node) :
 	mNode_(node == nullptr ?  scene->GetNewNode() : node), active_(true), mScene_(scene), nodeDestroyed(false)

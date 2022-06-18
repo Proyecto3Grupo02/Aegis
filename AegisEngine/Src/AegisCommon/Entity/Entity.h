@@ -4,15 +4,15 @@
 
 
 
-#include "../Managers/ComponentManager.h"
+#include "ComponentManager.h"
 
 #include <vector>
 #include <list>
 #include <string>
-#include "../Managers/ComponentManager.h"
-#include "../Components/AegisComponent.h"
+#include "ComponentManager.h"
+#include "AegisComponent.h"
 #include <Ogre.h>
-#include "../Interfaces/ILuaObject.h"
+#include "ILuaObject.h"
 //#include "../../checkML.h"
 
 namespace Ogre {

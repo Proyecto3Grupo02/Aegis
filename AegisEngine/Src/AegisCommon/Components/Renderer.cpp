@@ -1,8 +1,8 @@
 #include "Renderer.h"
-#include "../Entity/Entity.h"
+#include "Entity.h"
 //#include "OgreWrapper.h"
 
-#include "../Utils/MathUtils.h"
+#include "MathUtils.h"
 
 using namespace MathUtils;
 

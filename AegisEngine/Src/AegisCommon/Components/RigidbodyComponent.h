@@ -5,8 +5,8 @@
 
 #include <string>
 #include "AegisComponent.h"
-#include "../Interfaces/ILuaObject.h"
-#include "../../AegisPhysics/Rigidbody.h"
+#include "ILuaObject.h"
+#include "Rigidbody.h"
 #include "Transform.h"
 
 class Entity;

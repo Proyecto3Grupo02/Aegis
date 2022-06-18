@@ -7,7 +7,7 @@
 
 #include <SDL_syswm.h>
 #include <OgreLogManager.h>
-#include "./Components/Camera.h"
+#include "Camera.h"
 
 OgreWrapper::OgreWrapper() : mRoot(0),
 mResourcesCfg(Ogre::BLANKSTRING),

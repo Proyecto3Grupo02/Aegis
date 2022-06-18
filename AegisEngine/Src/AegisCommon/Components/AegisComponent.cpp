@@ -1,5 +1,5 @@
 #include "AegisComponent.h"
-#include "../Entity/Entity.h"
+#include "Entity.h"
 
 AegisComponent* CreateComponent(std::string componentName, Entity* entity)
 {

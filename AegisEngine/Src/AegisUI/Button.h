@@ -3,7 +3,7 @@
 #include <string>
 #include "OgreOverlay.h"
 #include "Image.h"
-#include "../AegisCommon/Managers/InputManager.h"
+#include "InputManager.h"
 class Button : public Image
 {
 private:

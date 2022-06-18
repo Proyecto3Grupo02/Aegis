@@ -1,9 +1,7 @@
 #include "Image.h"
 
 #include "OgreOverlay.h"
-#include "OgreOverlayManager.h"
 #include "OgreOverlayContainer.h"
-#include "OgreTextAreaOverlayElement.h"
 
 #include<iostream>
 

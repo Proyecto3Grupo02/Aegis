@@ -65,7 +65,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\build\include\SDL2;$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)Dependencias\Ogre\src\Components\Overlay\include;$(SolutionDir)Dependencias\Ogre\src\OgreMain\include;$(SolutionDir)SDL2_image-2.0.1\include;$(SolutionDir)Src\AegisUI;$(SolutionDir)Src\AegisCommon\Utils;$(SolutionDir)Src\AegisGraphics;$(SolutionDir)Src\AegisScripting\Utils;$(SolutionDir)Dependencias\Lua\src\include;$(SolutionDir)Dependencias\Libraries</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Libraries;$(SolutionDir)Src\AegisScripting\Manager;$(SolutionDir)Dependencias\Ogre\build\include\SDL2;$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)Dependencias\Ogre\src\Components\Overlay\include;$(SolutionDir)Dependencias\Ogre\src\OgreMain\include;$(SolutionDir)SDL2_image-2.0.1\include;$(SolutionDir)Src\AegisUI;$(SolutionDir)Src\AegisCommon\Managers;$(SolutionDir)Src\AegisCommon\Interfaces;$(SolutionDir)Src\AegisCommon\Utils;$(SolutionDir)Src\AegisGraphics;$(SolutionDir)Src\AegisScripting\Utils;$(SolutionDir)Dependencias\Lua\src\include;$(SolutionDir)Dependencias\Libraries</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -86,7 +86,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\build\include\SDL2;$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)Dependencias\Ogre\src\Components\Overlay\include;$(SolutionDir)Dependencias\Ogre\src\OgreMain\include;$(SolutionDir)SDL2_image-2.0.1\include;$(SolutionDir)Src\AegisUI;$(SolutionDir)Src\AegisCommon\Utils;$(SolutionDir)Src\AegisGraphics;$(SolutionDir)Src\AegisScripting\Utils;$(SolutionDir)Dependencias\Libraries;$(SolutionDir)Dependencias\Lua\src\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Libraries;$(SolutionDir)Src\AegisScripting\Manager;$(SolutionDir)Dependencias\Ogre\build\include\SDL2;$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)Dependencias\Ogre\src\Components\Overlay\include;$(SolutionDir)Dependencias\Ogre\src\OgreMain\include;$(SolutionDir)SDL2_image-2.0.1\include;$(SolutionDir)Src\AegisUI;$(SolutionDir)Src\AegisCommon\Managers;$(SolutionDir)Src\AegisCommon\Interfaces;$(SolutionDir)Src\AegisCommon\Utils;$(SolutionDir)Src\AegisGraphics;$(SolutionDir)Src\AegisScripting\Utils;$(SolutionDir)Dependencias\Libraries;$(SolutionDir)Dependencias\Lua\src\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>

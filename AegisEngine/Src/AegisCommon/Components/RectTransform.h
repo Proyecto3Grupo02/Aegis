@@ -5,7 +5,7 @@
 
 #include "UIComponent.h"
 
-#include "../Utils/Vector2.h"
+#include "Vector2.h"
 enum Aligment{
     TopLeft,
     MidLeft,

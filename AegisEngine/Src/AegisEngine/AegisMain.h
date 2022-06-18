@@ -3,7 +3,7 @@
 #ifndef AEGIS_MAIN_H 
 #define AEGIS_MAIN_H
 
-#include "../AegisCommon/Interfaces/IInitializable.h" //Da error en el cpp
+#include "IInitializable.h" //Da error en el cpp
 //#include "../checkML.h"
 
 class OgreWrapper;

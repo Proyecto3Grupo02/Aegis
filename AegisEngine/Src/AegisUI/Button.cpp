@@ -1,6 +1,5 @@
 #include "Button.h"
 
-#include "Image.h"
 
 Button::Button(InputSystem* input, const std::string& name, int order, std::string material, Ogre::Overlay* o, float x, float y, float w, float h)
 	: Image(name, order, material, o, x, y, w, h) {

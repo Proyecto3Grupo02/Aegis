@@ -2,8 +2,8 @@
 
 
 #include <list>
-#include "../Interfaces/ILuaObject.h"
-#include "../Interfaces/IInitializable.h"
+#include "ILuaObject.h"
+#include "IInitializable.h"
 
 class UIElement;
 class OgreWrapper;
