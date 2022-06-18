@@ -2,7 +2,7 @@
 #ifndef  COMPONENT_H 
 #define COMPONENT_H
 
-#include "Ogre.h"
+#include <Ogre.h>
 #include "ILuaObject.h"
 
 

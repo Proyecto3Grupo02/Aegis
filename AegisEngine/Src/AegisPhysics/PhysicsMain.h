@@ -22,6 +22,11 @@ class btTransform;
 class btVector3;
 class Entity;
 class RigidbodyComponent;
+class OgreDebugDrawer;
+
+namespace Ogre {
+    class SceneManager;
+}
 
 class PhysicsSystem  : public  Singleton<PhysicsSystem>{
 
@@ -31,16 +36,18 @@ private:
     btCollisionDispatcher* dispatcher;
     btBroadphaseInterface* overlappingPairCache;
     btSequentialImpulseConstraintSolver* solver;
-
+    Ogre::SceneManager* scene = nullptr;    
 
     std::map<std::pair<RigidBody*, RigidBody*>, bool> contacts;
     //btBulletWorldImporter* fileLoader;
+
+    OgreDebugDrawer* mDebugDrawer;
 public:
     PhysicsSystem();
     ~PhysicsSystem();
 
     btDiscreteDynamicsWorld* dynamicsWorld;
-    void Init();
+    void Init(Ogre::SceneManager* mScene);
     void update(float deltaTime, float timeStep, int maxSteps = 1);
     void remove();
     void removeRigidbody(btCollisionObject* rb);

@@ -24,6 +24,9 @@
     <ClCompile Include="..\..\Src\AegisPhysics\Rigidbody.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\AegisPhysics\DebugDrawer.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AegisPhysics\MotionState.h">
@@ -33,6 +36,12 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AegisPhysics\Rigidbody.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisPhysics\DebugDrawer.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AegisPhysics\OgreBulletUtils.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

@@ -28,8 +28,8 @@ local scene = {
 				type = "Rigidbody",
 				data = 
 				{
-					useGravity = false,
-					scale = 5
+					scale = 5,
+					useGravity = false
 				}
 			},
 			{
@@ -350,7 +350,8 @@ local scene = {
 				type = "Rigidbody",
 				data = 
 				{
-					useGravity = false,
+					scale = 3,
+					useGravity = false
 				}
 			},
 			{

@@ -124,7 +124,7 @@ bool AegisMain::Init()
 	std::cout << '\n';
 	Input()->Init();
 	Audio()->Init();
-	Physics()->Init();
+	Physics()->Init(ogreWrap->getSceneManager());
 	UIs()->Init(ogreWrap->getSceneManager(), Input());
 	ConvertObjectToLua();
 	sceneManager->GetCurrentScene()->Init();

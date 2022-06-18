@@ -18,12 +18,16 @@ subject to the following restrictions:
 #include "PhysicsMain.h"
 #include "Entity.h"
 #include "RigidbodyComponent.h"
+#include "DebugDrawer.h"
+#include "OgreWrapper.h"
+#include "OgreSceneManager.h"
 
 
 /// This is a Hello World program for running a basic Bullet physics simulation
 
-void PhysicsSystem::Init()
+void PhysicsSystem::Init(Ogre::SceneManager* mScene)
 {
+	scene = mScene;
 	///collision configuration contains default setup for memory, collision setup. Advanced users can create their own configuration.
 	collisionConfiguration = new btDefaultCollisionConfiguration();
 
@@ -47,6 +51,11 @@ void PhysicsSystem::Init()
 		return true;
 	};;
 	//fileLoader = new btBulletWorldImporter(dynamicsWorld);
+
+
+	mDebugDrawer = new OgreDebugDrawer(scene);
+	mDebugDrawer->setDebugMode(btIDebugDraw::DBG_DrawWireframe);
+	dynamicsWorld->setDebugDrawer(mDebugDrawer);
 }
 
 
@@ -59,6 +68,10 @@ void PhysicsSystem::update(float deltaTime, float timeStep, int maxSteps) {
 	auto a = dynamicsWorld->getDebugDrawer();
 	//btIDebugDraw::drawBox(btVector3(0, 0, 0), btVector3(20, 20, 20), btVector3(1, 0, 0));
 	dynamicsWorld->clearForces();
+#if defined _DEBUG
+	dynamicsWorld->debugDrawWorld();
+#endif
+	
 }
 
 ///-----stepsimulation_end-----
