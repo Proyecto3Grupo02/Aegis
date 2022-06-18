@@ -18,6 +18,8 @@ subject to the following restrictions:
 #include "PhysicsMain.h"
 #include "Entity.h"
 #include "RigidbodyComponent.h"
+#include "DebugDrawer.h"
+#include <OgreWrapper.h>
 
 
 /// This is a Hello World program for running a basic Bullet physics simulation
@@ -47,6 +49,11 @@ void PhysicsSystem::Init()
 		return true;
 	};;
 	//fileLoader = new btBulletWorldImporter(dynamicsWorld);
+
+
+	mDebugDrawer = new OgreDebugDrawer(OgreWrapper::getSceneManager());
+	mDebugDrawer->setDebugMode(btIDebugDraw::DBG_DrawWireframe);
+	dynamicsWorld->setDebugDrawer(mDebugDrawer);
 }
 
 
@@ -57,6 +64,8 @@ void PhysicsSystem::update(float deltaTime, float timeStep, int maxSteps) {
 	dynamicsWorld->stepSimulation(deltaTime, maxSteps, timeStep);
 	checkCollision();
 	dynamicsWorld->clearForces();
+
+	dynamicsWorld->debugDrawWorld();
 }
 
 ///-----stepsimulation_end-----

@@ -22,6 +22,7 @@ class btTransform;
 class btVector3;
 class Entity;
 class RigidbodyComponent;
+class OgreDebugDrawer;
 
 class PhysicsSystem  : public  Singleton<PhysicsSystem>{
 
@@ -35,6 +36,8 @@ private:
 
     std::map<std::pair<RigidBody*, RigidBody*>, bool> contacts;
     //btBulletWorldImporter* fileLoader;
+
+    OgreDebugDrawer* mDebugDrawer;
 public:
     PhysicsSystem();
     ~PhysicsSystem();
