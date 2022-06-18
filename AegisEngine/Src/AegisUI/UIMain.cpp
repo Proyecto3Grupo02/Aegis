@@ -53,8 +53,7 @@ void UISystem::CreateUIElem(luabridge::LuaRef luaref) {
 		return;
 	else if (type == "Button") {
 		uiObject = Button::CreateButton(luaref);
-	}
-	
+	}	
 
 	if (uiObject != nullptr)
 		AddUIObject(uiObject);

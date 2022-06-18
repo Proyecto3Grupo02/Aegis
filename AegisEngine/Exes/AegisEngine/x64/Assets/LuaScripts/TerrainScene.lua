@@ -54,7 +54,10 @@ local scene = {
 				x = 1,
 				y = 1,
 				width =50,
-				height = 50
+				height = 50,
+				callback = function()
+					print("Button was clicked in LUA");
+				end 
 			},
 	},
 	{
