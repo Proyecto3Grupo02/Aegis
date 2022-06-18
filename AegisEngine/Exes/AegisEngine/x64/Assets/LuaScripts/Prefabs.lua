@@ -16,7 +16,10 @@ local scene =
 					}
 			},
 			{
-				type = "Rigidbody"
+				type = "Rigidbody",
+				data= {
+					scale = 3
+				}
 			},
 			{
 				type = "RandomMovement"
@@ -36,7 +39,10 @@ local scene =
 					}
 			},
 			{
-				type = "Rigidbody"
+				type = "Rigidbody",
+				data= {
+					scale = 3
+				}
 			},
 			{
 				type = "RandomMovement"
@@ -56,7 +62,10 @@ local scene =
 					}
 			},
 			{
-				type = "Rigidbody"
+				type = "Rigidbody",
+				data= {
+					scale = 3
+				}
 			},
 			{
 				type = "RandomMovement"
@@ -76,7 +85,10 @@ local scene =
 					}
 			},
 			{
-				type = "Rigidbody"
+				type = "Rigidbody",
+				data= {
+					scale = 3
+				}
 			},
 			{
 				type = "RandomMovement"
@@ -96,7 +108,10 @@ local scene =
 					}
 			},
 			{
-				type = "Rigidbody"
+				type = "Rigidbody",
+				data= {
+					scale = 3
+				}
 			},
 			{
 				type = "RandomMovement"
@@ -116,7 +131,10 @@ local scene =
 					}
 			},
 			{
-				type = "Rigidbody"
+				type = "Rigidbody",
+				data= {
+					scale = 3
+				}
 			},
 			{
 				type = "RandomMovement"
@@ -136,7 +154,10 @@ local scene =
 					}
 			},
 			{
-				type = "Rigidbody"
+				type = "Rigidbody",
+				data= {
+					scale = 3
+				}
 			},
 			{
 				type = "RandomMovement"
@@ -156,7 +177,10 @@ local scene =
 					}
 			},
 			{
-				type = "Rigidbody"
+				type = "Rigidbody",
+				data = {
+					scale = 3
+				}
 			},
 			{
 				type = "RandomMovement"

@@ -74,7 +74,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)Dependencias\Ogre\build\include\SDL2;$(SolutionDir)Src;$(SolutionDir)Src\AegisScripting\Utils;$(SolutionDir)Src\AegisScripting\Manager;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)Src\AegisCommon\Interfaces;$(SolutionDir)Src\AegisCommon\Entity;$(SolutionDir)Src\AegisCommon\Utils;$(SolutionDir)Src\AegisCommon\Managers;$(SolutionDir)Src\AegisPhysics;$(SolutionDir)Src\AegisCommon\Components;$(SolutionDir)Dependencias\Bullet\build\src;$(SolutionDir)Dependencias\Lua\src\include;$(SolutionDir)\Dependencias\Libraries;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\src\OgreMain\include;$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)Dependencias\Ogre\build\include\SDL2;$(SolutionDir)Src;$(SolutionDir)Src\AegisScripting\Utils;$(SolutionDir)Src\AegisScripting\Manager;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)Src\AegisCommon\Interfaces;$(SolutionDir)Src\AegisCommon\Entity;$(SolutionDir)Src\AegisCommon\Utils;$(SolutionDir)Src\AegisCommon\Managers;$(SolutionDir)Src\AegisPhysics;$(SolutionDir)Src\AegisCommon\Components;$(SolutionDir)Dependencias\Bullet\build\src;$(SolutionDir)Dependencias\Lua\src\include;$(SolutionDir)\Dependencias\Libraries;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -83,7 +83,7 @@
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencias\Ogre\build\lib\$(Configuration);$(SolutionDir)Dependencias\Bullet\build\lib\Debug;$(SolutionDir)Exes\AegisGraphics\$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>AegisGraphics.lib;LinearMath_Debug.lib;BulletDynamics_Debug.lib;Bullet3Common_Debug.lib;BulletCollision_Debug.lib;OgreMain_d.lib;SDL2.lib;SDL2main.lib;RenderSystem_GL_d.lib</AdditionalDependencies>
+      <AdditionalDependencies>LinearMath_Debug.lib;BulletDynamics_Debug.lib;Bullet3Common_Debug.lib;BulletCollision_Debug.lib;OgreMain_d.lib;AegisGraphics.lib;SDL2.lib;SDL2main.lib;RenderSystem_GL_d.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -94,7 +94,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)Dependencias\Ogre\build\include\SDL2;$(SolutionDir)Src;$(SolutionDir)Src\AegisScripting\Utils;$(SolutionDir)Src\AegisScripting\Manager;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)Src\AegisCommon\Interfaces;$(SolutionDir)Src\AegisCommon\Entity;$(SolutionDir)Src\AegisCommon\Utils;$(SolutionDir)Src\AegisCommon\Managers;$(SolutionDir)Src\AegisPhysics;$(SolutionDir)Src\AegisCommon\Components;$(SolutionDir)Dependencias\Bullet\build\src;$(SolutionDir)Dependencias\Lua\src\include;$(SolutionDir)\Dependencias\Libraries;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencias\Ogre\src\OgreMain\include;$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)Dependencias\Ogre\build\include\SDL2;$(SolutionDir)Src;$(SolutionDir)Src\AegisScripting\Utils;$(SolutionDir)Src\AegisScripting\Manager;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)Src\AegisCommon\Interfaces;$(SolutionDir)Src\AegisCommon\Entity;$(SolutionDir)Src\AegisCommon\Utils;$(SolutionDir)Src\AegisCommon\Managers;$(SolutionDir)Src\AegisPhysics;$(SolutionDir)Src\AegisCommon\Components;$(SolutionDir)Dependencias\Bullet\build\src;$(SolutionDir)Dependencias\Lua\src\include;$(SolutionDir)\Dependencias\Libraries;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -104,7 +104,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencias\Ogre\Build\lib\$(Configuration);$(SolutionDir)Dependencias\Bullet\build\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencias\Ogre\Build\lib\$(Configuration);$(SolutionDir)Dependencias\Bullet\build\lib\Release;$(SolutionDir)Exes\AegisGraphics\$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>AegisGraphics.lib;LinearMath.lib;BulletDynamics.lib;Bullet3Common.lib;BulletCollision.lib;OgreMain.lib;SDL2.lib;SDL2main.lib;RenderSystem_GL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
