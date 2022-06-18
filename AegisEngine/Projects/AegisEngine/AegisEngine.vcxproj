@@ -125,7 +125,7 @@ xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\bin\$(Configuration)\OgreOv
 
 xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\bin\$(Configuration)\OgreMain.pdb "$(OutDir)"
 
-xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\bin\$(Configuration)\Codec_STBI_d.dll "$(OutDir)"
+xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\bin\$(Configuration)\Codec_STBI.dll "$(OutDir)"
 
 xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo\SDL2.dll "$(OutDir)"
 
