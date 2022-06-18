@@ -50,11 +50,13 @@ local scene = {
 				type = "Button",
 				nombre = "Boton",
 				order = 0,
-				material = "grass",
+				material = "avestruz",
 				x = 1,
 				y = 1,
-				width =50,
+				width = 100,
 				height = 50,
+				dimensionx=200,
+				dimensiony=50,
 				callback = function()
 					print("Button was clicked in LUA");
 				end 

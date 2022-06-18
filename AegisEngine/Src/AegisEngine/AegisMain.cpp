@@ -18,9 +18,9 @@
 #include "LuaMaths.h"
 #include "SoundEmitterComponent.h"
 #include "ButtonComponent.h"
-#include "../AegisUI/Button.h"
+#include "Button.h"
 
-#include "UIMain.h"
+#include "UISystem.h"
 
 using namespace luabridge;
 

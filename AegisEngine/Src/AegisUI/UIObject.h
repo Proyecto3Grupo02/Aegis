@@ -19,7 +19,7 @@ protected:
 	Ogre::OverlayContainer* overlayCont = nullptr;
 	Ogre::Overlay* overlay = nullptr;
 	Ogre::OverlaySystem* overlaySys = nullptr; //no esta inicializado
-	float x, y, w, h;
+	float x, y, w, h, dx, dy;
 	bool isActive = true;
 
 private:
@@ -28,7 +28,7 @@ private:
 	std::string name;
 
 public:
-	UIObject(const std::string& n, int order, float x_, float y_, float w_, float h_);
+	UIObject(const std::string& n, int order, float x_, float y_, float w_, float h_, float dx_, float dy_);
 	virtual ~UIObject();
 
 	void show();

@@ -1,17 +1,15 @@
 #include "Button.h"
-#include "UIMain.h"
-//#include "../AegisCommon/Entity/Entity.h"
+#include "UISystem.h"
 #include <iostream>
 
-Button::Button(const std::string& name, int order, std::string material, float x, float y, float w, float h, luabridge::LuaRef call)
-	: Image(name, order, material, x, y, w, h) {
+Button::Button(const std::string& name, int order, std::string material, float x, float y, float w, float h, float dx, float dy, luabridge::LuaRef call)
+	: Image(name, order, material, x, y, w, h, dx, dy) {
 	inputSystem = UIs()->getInputSystem();
 	callback = call;
 	id++;
 }
 
 void Button::update() {
-	//wasClicked_ = false;
 	if (isActive) {
 
 		//comprobar que la posicion del raton (inputSystem) cae dentro de la imagen (metodos getpos y getsize)
@@ -19,8 +17,7 @@ void Button::update() {
 		Vector2 mouseMotion = inputSystem->GetMousePosition();
 		if ((mouseMotion.x >= x && mouseMotion.x <= x + w) && mouseMotion.y >= y && mouseMotion.y <= y + h
 			&& inputSystem->IsMouseButtonPressedLua(0)) {
-			std::cout << "Button was clicked in C++\n";
-			//wasClicked_ = true;
+			std::cout << "- Button was clicked in C++\n";
 
 			//PARA DEPURAR ==> CAPTURAR LA EXCEPCION PARA QUE TE DIGA DONDE FALLO EN LUA
 			#if defined _DEBUG
@@ -53,6 +50,8 @@ Button* Button::CreateButton(LuaRef args) //Doesn't belong to this class
 	float y = LuaMngr()->ParseFloat(args["y"], 1);
 	float w = LuaMngr()->ParseFloat(args["width"], 1);
 	float h = LuaMngr()->ParseFloat(args["height"], 1);
+	float dx = LuaMngr()->ParseFloat(args["dimensionx"], 1920);
+	float dy = LuaMngr()->ParseFloat(args["dimensiony"], 1080);
 	
-	return new Button(name, order, material, x, y, w, h, args["callback"]);
+	return new Button(name, order, material, x, y, w, h, dx, dy, args["callback"]);
 }

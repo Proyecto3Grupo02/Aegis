@@ -1,5 +1,5 @@
 #include <iostream>
-#include "UIMain.h"
+#include "UISystem.h"
 #include "OgreOverlayManager.h"
 #include "OgreSceneManager.h"
 #include "OgreOverlaySystem.h"

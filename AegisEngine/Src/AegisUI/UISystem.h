@@ -2,7 +2,7 @@
 #include "Singleton.h"
 #include <vector>
 #include "InputManager.h"
-#include "../AegisScripting/Manager/LuaManager.h"
+#include "LuaManager.h"
 
 class OgreOverlay;
 class SDL_Image; 

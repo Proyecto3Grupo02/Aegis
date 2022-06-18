@@ -1,19 +1,22 @@
 #include "UIObject.h"
 #include <iostream>
-#include "UIMain.h"
+#include "UISystem.h"
 #include "OgreOverlay.h"
 #include "OgreOverlayManager.h"
 #include "OgreOverlayContainer.h"
 
-UIObject::UIObject(const std::string& n, int order,float x_, float y_, float w_, float h_) {
+UIObject::UIObject(const std::string& n, int order,float x_, float y_, float w_, float h_, float dx_, float dy_) {
 	UIs()->getOverlay();
 	name = n;
-	x = x_; y = y_; w = w_;	h = h_;
+	x = x_; y = y_; w = w_;	h = h_; dx = dx_; dy = dy_;
 	overlayMng = Ogre::OverlayManager::getSingletonPtr();
 	overlayCont = static_cast<Ogre::OverlayContainer*>(overlayMng->createOverlayElement("Panel", " PanelName" + std::to_string(order)));
 	overlayCont->setMetricsMode(Ogre::GMM_PIXELS);
 	overlayCont->setPosition(x, y);
-	overlayCont->setDimensions(w, h);
+	overlayCont->setDimensions(dx, dy); //1920 x 1080
+	overlayCont->setWidth(w);
+	overlayCont->setWidth(h);
+
 	overlay = overlayMng->create(name + std::to_string(order));
 }
 

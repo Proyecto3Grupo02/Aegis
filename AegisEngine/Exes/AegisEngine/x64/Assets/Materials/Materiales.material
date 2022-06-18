@@ -147,6 +147,25 @@ material grass // nombre
 	}
 }
 
+material avestruz // nombre
+{
+	technique // al menos una
+	{
+		pass // al menos uno
+		{
+			
+			diffuse 0.5 0.5 0.5 
+			ambient 0.5 0.5 0.5
+			
+			texture_unit
+			{
+				texture avestruz.jpg
+				colour_op modulate
+			}
+		}
+	}
+}
+
 material pez // nombre
 {
 	technique // al menos una
