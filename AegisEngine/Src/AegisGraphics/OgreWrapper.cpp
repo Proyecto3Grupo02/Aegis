@@ -9,6 +9,8 @@
 #include <OgreLogManager.h>
 #include "Camera.h"
 
+#include "WindowManager.h"
+
 OgreWrapper::OgreWrapper() : mRoot(0),
 mResourcesCfg(Ogre::BLANKSTRING),
 mPluginsCfg(Ogre::BLANKSTRING)
@@ -21,6 +23,7 @@ AegisCamera* OgreWrapper::GetCamera()
 }
 
 bool OgreWrapper::Render() {
+	windowMan->update();
 	return mRoot->renderOneFrame();
 }
 
@@ -83,6 +86,8 @@ bool OgreWrapper::Init() {
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
 
 	mCamera = CreateCamera();
+	windowMan->setCamera(mCamera);
+	windowMan->setRenderer(render);
 }
 
 AegisCamera* OgreWrapper::CreateCamera(Ogre::SceneNode* node)
@@ -115,19 +120,21 @@ void OgreWrapper::CreateWindowNative()
 	mRoot->restoreConfig();
 	mRoot->initialise(false);
 
-	uint32_t w, h;
-	Ogre::ConfigOptionMap ropts = mRoot->getRenderSystem()->getConfigOptions();
+	//uint32_t w, h;
+	//Ogre::ConfigOptionMap ropts = mRoot->getRenderSystem()->getConfigOptions();
 
-	std::istringstream mode(ropts["Video Mode"].currentValue);
-	Ogre::String token;
-	mode >> w; // width
-	mode >> token; // 'x' as seperator between width and height
-	mode >> h; // height
+	//std::istringstream mode(ropts["Video Mode"].currentValue);
+	//Ogre::String token;
+	//mode >> w; // width
+	//mode >> token; // 'x' as seperator between width and height
+	//mode >> h; // height
 	Uint32 flags = SDL_WINDOW_RESIZABLE;
 	if (!SDL_WasInit(SDL_INIT_VIDEO)) SDL_InitSubSystem(SDL_INIT_VIDEO);
 
-	native = SDL_CreateWindow("Aegis Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, flags);
 	
+	windowMan = new WindowManager("WindowManager", 1280, 720, false, flags);
+	native = windowMan->getWindow();
+
 	SDL_SysWMinfo wmInfo;
 	SDL_VERSION(&wmInfo.version);
 	if (SDL_GetWindowWMInfo(native, &wmInfo) == SDL_FALSE) {
@@ -146,5 +153,6 @@ void OgreWrapper::CreateWindowNative()
 	// assign the NSWindow pointer to the parentWindowHandle parameter
 	params.insert(std::make_pair("parentWindowHandle", winHandle));
 
-	render = mRoot->createRenderWindow("myWindowTitle", w, h, false, &params);
+	render = mRoot->createRenderWindow("myWindowTitle", 1920,1080,false, &params);
+	
 }

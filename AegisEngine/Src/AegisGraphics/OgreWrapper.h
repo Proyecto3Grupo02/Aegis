@@ -7,6 +7,7 @@
 //#include "checkML.h"
 
 class AegisCamera;
+class WindowManager;
 //BASURA
 
 class OgreWrapper
@@ -25,6 +26,8 @@ private:
 	Ogre::LogManager* lm;
 
 	AegisCamera* mCamera;
+
+	WindowManager* windowMan;
 
 	void CreateWindowNative();
 	AegisCamera* CreateCamera(Ogre::SceneNode* node = nullptr);
