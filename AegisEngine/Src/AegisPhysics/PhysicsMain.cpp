@@ -55,7 +55,9 @@ void PhysicsSystem::Init()
 void PhysicsSystem::update(float deltaTime, float timeStep, int maxSteps) {
 	///-----stepsimulation_start-----
 	dynamicsWorld->stepSimulation(deltaTime, maxSteps, timeStep);
-	checkCollision();
+	dynamicsWorld->debugDrawWorld();
+	auto a = dynamicsWorld->getDebugDrawer();
+	//btIDebugDraw::drawBox(btVector3(0, 0, 0), btVector3(20, 20, 20), btVector3(1, 0, 0));
 	dynamicsWorld->clearForces();
 }
 
@@ -137,12 +139,9 @@ void PhysicsSystem::checkCollision()
 	
 }
 
-void PhysicsSystem::CollisionEnterCallbacks(std::pair<RigidBody*, RigidBody*>& col)
-{
-	
-	
+void PhysicsSystem::CollisionEnterCallbacks(std::pair<RigidBody*, RigidBody*>& col) {
 	Entity* goA = col.first->rbC->mEntity_, * goB = col.second->rbC->mEntity_;
-	 bool aTrigger = col.first->isTrigger() , bTrigger = col.second->isTrigger();
+	bool aTrigger = col.first->isTrigger() , bTrigger = col.second->isTrigger();
 	
 	 if (aTrigger || bTrigger) {
 		 if (aTrigger && bTrigger) {

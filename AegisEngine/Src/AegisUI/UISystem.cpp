@@ -14,9 +14,7 @@ void UISystem::Init(Ogre::SceneManager* mScene, InputSystem* input) {
 	overlay = overlayMng->create("UI");
 
 	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
-	mScene->addRenderQueueListener(overlaySys);
-	//CreateUIButton("ramon", 0, "grass");
-	
+	mScene->addRenderQueueListener(overlaySys);	
 }
 
 Ogre::Overlay* UISystem::getOverlay() {
@@ -54,7 +52,9 @@ void UISystem::CreateUIElem(luabridge::LuaRef luaref) {
 	else if (type == "Button") {
 		uiObject = Button::CreateButton(luaref);
 	}	
-
+	else if (type == "Image") {
+		uiObject = Image::CreateImage(luaref);
+	}
 	if (uiObject != nullptr)
 		AddUIObject(uiObject);
 }

@@ -52,6 +52,6 @@ Button* Button::CreateButton(LuaRef args) //Doesn't belong to this class
 	float h = LuaMngr()->ParseFloat(args["height"], 1);
 	float dx = LuaMngr()->ParseFloat(args["dimensionx"], 1920);
 	float dy = LuaMngr()->ParseFloat(args["dimensiony"], 1080);
-	
+	id++;
 	return new Button(name, order, material, x, y, w, h, dx, dy, args["callback"]);
 }
