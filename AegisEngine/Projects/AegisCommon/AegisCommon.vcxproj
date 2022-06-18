@@ -63,7 +63,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Src\AegisScripting\Utils;$(SolutionDir)Src;$(SolutionDir)Src\AegisScripting\Manager;$(SolutionDir)Dependencias\SDL2_image-2.0.1\include;$(SolutionDir)\Dependencias\fmod\inc;$(SolutionDir)Dependencias\Ogre\build\Components;$(SolutionDir)Dependencias\Ogre\build\include\SDL2;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)\Dependencias\lua\src\include;$(SolutionDir)Dependencias\LuaBridge;$(SolutionDir)Src\AegisCommon\Utils;$(SolutionDir)Src\AegisAudio\Components;$(SolutionDir)Src\AegisCommon\Interfaces;$(SolutionDir)Src\AegisGraphics\Components;$(SolutionDir)Src\AegisAudio;$(SolutionDir)Src\AegisPhysics;$(SolutionDir)Src\AegisScripting\Manager\;$(SolutionDir)Src\AegisGraphics;$(SolutionDir)Dependencias\Libraries</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Src\AegisScripting\Utils;$(SolutionDir)Src;$(SolutionDir)Src\AegisScripting\Manager;$(SolutionDir)Dependencias\Ogre\src\Components\Overlay\include;$(SolutionDir)Dependencias\SDL2_image-2.0.1\include;$(SolutionDir)\Dependencias\fmod\inc;$(SolutionDir)Dependencias\Ogre\build\Components;$(SolutionDir)Dependencias\Ogre\build\include\SDL2;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)\Dependencias\lua\src\include;$(SolutionDir)Dependencias\LuaBridge;$(SolutionDir)Src\AegisCommon\Utils;$(SolutionDir)Src\AegisAudio\Components;$(SolutionDir)Src\AegisCommon\Interfaces;$(SolutionDir)Src\AegisGraphics\Components;$(SolutionDir)Src\AegisAudio;$(SolutionDir)Src\AegisPhysics;$(SolutionDir)Src\AegisScripting\Manager\;$(SolutionDir)Src\AegisGraphics;$(SolutionDir)Dependencias\Libraries</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -90,7 +90,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Src\AegisScripting\Utils;$(SolutionDir)Src;$(SolutionDir)Src\AegisScripting\Manager;$(SolutionDir)Dependencias\SDL2_image-2.0.1\include;$(SolutionDir)\Dependencias\fmod\inc;$(SolutionDir)Dependencias\Ogre\build\Components;$(SolutionDir)Dependencias\Ogre\build\include\SDL2;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)\Dependencias\lua\src\include;$(SolutionDir)Dependencias\LuaBridge;$(SolutionDir)Src\AegisCommon\Utils;$(SolutionDir)Src\AegisAudio\Components;$(SolutionDir)Src\AegisCommon\Interfaces;$(SolutionDir)Src\AegisGraphics\Components;$(SolutionDir)Src\AegisAudio;$(SolutionDir)Src\AegisPhysics;$(SolutionDir)Src\AegisScripting\Manager\;$(SolutionDir)Src\AegisGraphics;$(SolutionDir)Dependencias\Libraries</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Src\AegisScripting\Utils;$(SolutionDir)Src;$(SolutionDir)Dependencias\Ogre\src\Components\Overlay\include;$(SolutionDir)Src\AegisScripting\Manager;$(SolutionDir)Dependencias\SDL2_image-2.0.1\include;$(SolutionDir)\Dependencias\fmod\inc;$(SolutionDir)Dependencias\Ogre\build\Components;$(SolutionDir)Dependencias\Ogre\build\include\SDL2;$(SolutionDir)Dependencias\Ogre\build\include;$(SolutionDir)Dependencias\Ogre\build\SDL2-2.0.20\include;$(SolutionDir)\Dependencias\lua\src\include;$(SolutionDir)Dependencias\LuaBridge;$(SolutionDir)Src\AegisCommon\Utils;$(SolutionDir)Src\AegisAudio\Components;$(SolutionDir)Src\AegisCommon\Interfaces;$(SolutionDir)Src\AegisGraphics\Components;$(SolutionDir)Src\AegisAudio;$(SolutionDir)Src\AegisPhysics;$(SolutionDir)Src\AegisScripting\Manager\;$(SolutionDir)Src\AegisGraphics;$(SolutionDir)Dependencias\Libraries</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -111,6 +111,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\Src\AegisCommon\Components\AegisComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\AnimationComponent.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Components\ButtonComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\CameraComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\Component.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\Image.h" />
@@ -148,6 +149,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\Src\AegisCommon\Components\AegisComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\AnimationComponent.cpp" />
+    <ClCompile Include="..\..\Src\AegisCommon\Components\ButtonComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\CameraComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\Component.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\Image.cpp" />

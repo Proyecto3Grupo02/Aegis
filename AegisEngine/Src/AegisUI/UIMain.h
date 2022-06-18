@@ -31,6 +31,8 @@ public:
 	void CreateUIButton(const std::string& name, int order, std::string material);
 	void DeleteUIObject(const UIObject* obj_);
 	void Update(float deltaTime);
+	InputSystem* getInputSystem();
+	Ogre::Overlay* getOverlay();
 };
 
 inline UISystem* UIs()

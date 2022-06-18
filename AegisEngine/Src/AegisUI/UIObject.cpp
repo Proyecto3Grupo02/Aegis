@@ -1,13 +1,14 @@
 #include "UIObject.h"
 #include <iostream>
+#include "UIMain.h"
 #include "OgreOverlay.h"
 #include "OgreOverlayManager.h"
 #include "OgreOverlayContainer.h"
 
-UIObject::UIObject(const std::string& n, int order, Ogre::Overlay* o, float x_, float y_, float w_, float h_) {
+UIObject::UIObject(const std::string& n, int order,float x_, float y_, float w_, float h_) {
+	UIs()->getOverlay();
 	name = n;
 	x = x_; y = y_; w = w_;	h = h_;
-	overlay = o;
 	overlayMng = Ogre::OverlayManager::getSingletonPtr();
 	overlayCont = static_cast<Ogre::OverlayContainer*>(overlayMng->createOverlayElement("Panel", " PanelName" + std::to_string(order)));
 	overlayCont->setMetricsMode(Ogre::GMM_PIXELS);
@@ -41,6 +42,10 @@ void UIObject::hide() {
 //		_overlayCont->setMetricsMode(Ogre::GMM_RELATIVE_ASPECT_ADJUSTED);
 //	}
 //}
+
+void UIObject::setActive(bool active) {
+	isActive = active;
+}
 
 void UIObject::setPosition(float x_, float y_) {
 	overlayCont->setPosition(x_, y_);

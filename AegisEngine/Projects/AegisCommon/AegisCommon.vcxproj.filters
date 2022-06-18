@@ -156,6 +156,9 @@
     <ClInclude Include="..\..\Src\AegisCommon\Scene\Canvas.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\AegisCommon\Components\ButtonComponent.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\AegisCommon\Components\Component.cpp">
@@ -226,6 +229,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\AegisCommon\Scene\Canvas.cpp">
       <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AegisCommon\Components\ButtonComponent.cpp">
+      <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

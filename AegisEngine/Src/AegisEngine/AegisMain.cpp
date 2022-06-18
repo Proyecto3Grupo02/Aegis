@@ -24,7 +24,7 @@ using namespace luabridge;
 
 void AegisMain::GameLoop() {
 	uint32_t frameTimeMS = (uint32_t)floor((1 / TARGET_FRAME_RATE) * 1000);
-	SDL_SetRelativeMouseMode(SDL_TRUE);
+	//SDL_SetRelativeMouseMode(SDL_TRUE); //comentar para que funcione el boton
 
 	while (!exit)
 	{
@@ -37,6 +37,7 @@ void AegisMain::GameLoop() {
 			//Tiempo al inicio del frame
 			Time()->frameStartTime = SDL_GetTicks();
 			Input()->UpdateState();
+			
 			while (SDL_PollEvent(&eventHandler) != 0)
 			{
 				auto key = eventHandler.key.keysym.sym;
@@ -69,6 +70,8 @@ void AegisMain::GameLoop() {
 					break;
 				}
 			}
+
+			//UIs()->Update(10); //boton
 
 			sceneManager->UpdateCurrentScene(Time()->deltaTime);
 			sceneManager->PreRenderScene();

@@ -8,10 +8,11 @@ class Button : public Image
 {
 private:
 	InputSystem* inputSystem = nullptr;
+	bool wasClicked_ = false;
 
 public:
-	Button(InputSystem* input, const std::string& name, int order, std::string material, Ogre::Overlay* o, float x, float y, float w, float h);
+	Button(const std::string& name, int order, std::string material, float x, float y, float w, float h);
 	~Button() {};
 	bool wasClicked();
-
+	void update();
 };
