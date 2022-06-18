@@ -21,7 +21,7 @@ private:
 	SDL_Window* native = nullptr;
 	SDL_Renderer* renderer_ = nullptr;
 
-	static Ogre::SceneManager* mSceneMgr;
+	Ogre::SceneManager* mSceneMgr;
 	Ogre::LogManager* lm;
 
 	AegisCamera* mCamera;
@@ -43,7 +43,7 @@ public:
 		else throw "ERROR: native window from Ogre is nullptr";
 	}
 
-	static inline Ogre::SceneManager* getSceneManager() { return mSceneMgr; }
+	inline Ogre::SceneManager* getSceneManager() { return mSceneMgr; }
 };
 
 #endif
