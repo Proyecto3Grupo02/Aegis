@@ -343,7 +343,7 @@ local scene = {
 				type = "Renderer",
 				data = {
 						mesh = "pezBetta.mesh",
-						material= "yellow"
+						material="yellow"
 					}
 			},
 			{

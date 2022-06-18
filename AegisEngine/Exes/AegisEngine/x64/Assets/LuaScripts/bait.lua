@@ -62,7 +62,7 @@ function table.GetNew(entity, params)
     end;
 
 	function OnCollision(other)
-        print("hola");
+        print("Colision del anzuelo con algo");
     end;
 
 	funcs.init = Init;

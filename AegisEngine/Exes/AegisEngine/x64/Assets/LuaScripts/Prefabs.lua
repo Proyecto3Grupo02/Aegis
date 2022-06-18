@@ -3,32 +3,9 @@
 local NAME = "Prefabs";
 local scene = 
 {
-	{
-		type = "Entity",
-		name = "PrefabFish0",
-		scale = {x = 0.5, y = 0.5, z =0.5},
-		components = {
-			{
-				type = "Renderer",
-				data = {
-						mesh = "fish.mesh",
-						material= "yellow"
-					}
-			},
-			{
-				type = "Rigidbody",
-				data= {
-					scale = 3
-				}
-			},
-			{
-				type = "RandomMovement"
-			}
-		}
-    },
     {
         type = "Entity",
-		name = "PrefabFish1",
+		name = "PrefabFish0",
 		scale = {x = 0.5, y = 0.5, z =0.5},
 		components = {
 			{
@@ -51,7 +28,7 @@ local scene =
     },
     {
         type = "Entity",
-		name = "PrefabFish2",
+		name = "PrefabFish1",
 		scale = {x = 0.5, y = 0.5, z =0.5},
 		components = {
 			{
@@ -74,7 +51,7 @@ local scene =
     },
     {
         type = "Entity",
-		name = "PrefabFish3",
+		name = "PrefabFish2",
 		scale = {x = 0.5, y = 0.5, z =0.5},
 		components = {
 			{

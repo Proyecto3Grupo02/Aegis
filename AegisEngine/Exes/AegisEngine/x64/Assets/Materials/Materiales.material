@@ -191,3 +191,15 @@ material playerMat // nombre
 		}
 	}
 }
+material Material.001 // nombre
+{
+	technique // al menos una
+	{
+		pass // al menos uno
+		{
+			diffuse 1.0 1.0 0.0
+			ambient 1.0 1.0 0.0
+		}
+	}
+}
+

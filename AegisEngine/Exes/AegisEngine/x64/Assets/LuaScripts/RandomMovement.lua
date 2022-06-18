@@ -28,6 +28,9 @@ function table.GetNew(entity, params)
 		rigidbody:SetAngular();
     end;
 	function Update(deltaTime) 
+		if rigidbody.position.y > -40 then
+			rigidbody:SetPosition(Aegis.Maths.Vector3(0,-57,0));
+		end;
 		if acumulatedDT > lastTime then
 			canRoot=true;
 			root = math.random(-10,10);
@@ -48,6 +51,10 @@ function table.GetNew(entity, params)
 		
 		rigidbody:SetRotationEuler(transform.localEulerAngles + Aegis.Maths.Vector3(0,root / 10,0));
 		rigidbody:AccelerateTo(transform.forward * -1 * 7, 10000000);
+		if rigidbody.position.y > -40 then
+			print(rigidbody.position.y);
+			rigidbody:SetPosition(Aegis.Maths.Vector3(0,-57,0));
+		end;
 		
 		if ray then
 			local dest = transform.forward * -1;
@@ -69,10 +76,10 @@ function table.GetNew(entity, params)
 	end;
 
 	function OnCollision(other)
-		print("Colisión general pez");
+		print("Colision general pez");
 		if other == data.bait.entity then
 			--entity:Destroy();
-			print("Colisión de un pez con el anzuelo");
+			print("Colision de un pez con el anzuelo");
 		end;
 	end;
 	function OnTrigger(other) end;
