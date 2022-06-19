@@ -47,20 +47,30 @@ local scene = {
 		type = "UI",
 		data = 
 			{
-				type = "Button",--Button/Image
-				nombre = "Boton",
+				type = "Text",--Button/Image
+				nombre = "TextoPrueba",
 				order = 0,
-				material = "avestruz",
 				x = 1,
 				y = 1,
 				width = 100,
 				height = 50,
 				dimensionx=200,
 				dimensiony=50,
-				--ESPECIFICO DE LOS BOTONES ==> QUITAR AL USAR IMAGEN
-				callback = function()
-					print("Button was clicked in LUA");
-				end 
+			},
+	},
+	{
+		type = "UI",
+		data = 
+			{
+				type = "Text",--Button/Image
+				nombre = "TextoPrueba2",
+				order = 0,
+				x = 100,
+				y = 100,
+				width = 100,
+				height = 50,
+				dimensionx=200,
+				dimensiony=50,
 			},
 	},
 	{
@@ -75,7 +85,7 @@ local scene = {
 				type = "Renderer",
 				data = {
 					mesh = "hook.mesh",
-					material= "red"
+					material= "blue"
 				}
 			},
 			{
@@ -83,7 +93,7 @@ local scene = {
 				data = 
 				{
 					useGravity = false,
-					scale = 2
+					scale = 20
 				}
 			},
 			{

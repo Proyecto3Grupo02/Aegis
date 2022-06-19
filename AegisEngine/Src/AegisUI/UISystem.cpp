@@ -4,6 +4,8 @@
 #include "OgreSceneManager.h"
 #include "OgreOverlaySystem.h"
 #include "Button.h"
+#include "Text.h"
+#include "OgreFontManager.h"
 
 UISystem::UISystem() {
 
@@ -23,9 +25,15 @@ void UISystem::Init(Ogre::SceneManager* mScene, InputSystem* input) {
 	overlaySys = new Ogre::OverlaySystem();
 	overlayMng = Ogre::OverlayManager::getSingletonPtr();
 	overlay = overlayMng->create("UI");
-
 	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 	mScene->addRenderQueueListener(overlaySys);	
+
+	//LOADING FONTS
+	Ogre::FontPtr pFont = Ogre::FontManager::getSingletonPtr()->create("Font1", "General");
+	pFont->setType(Ogre::FT_TRUETYPE);
+	pFont->setSource("WaterGalon.ttf");
+	pFont->setTrueTypeSize(206);
+	pFont->load();
 }
 
 
@@ -67,6 +75,9 @@ void UISystem::CreateUIElem(luabridge::LuaRef luaref) {
 	}	
 	else if (type == "Image") {
 		uiObject = Image::CreateImage(luaref);
+	}
+	else if (type == "Text") {
+		uiObject = Text::CreateText(luaref);
 	}
 
 	if (uiObject != nullptr)

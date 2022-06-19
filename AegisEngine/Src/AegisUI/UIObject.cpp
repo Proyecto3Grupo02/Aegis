@@ -11,14 +11,15 @@ UIObject::UIObject(const std::string& n, int order,float x_, float y_, float w_,
 	orden = order;
 	x = x_; y = y_; w = w_;	h = h_; dx = dx_; dy = dy_;
 	overlayMng = Ogre::OverlayManager::getSingletonPtr();
-	overlayCont = static_cast<Ogre::OverlayContainer*>(overlayMng->createOverlayElement("Panel", " PanelName" + std::to_string(order)));
+	overlayCont = static_cast<Ogre::OverlayContainer*>(overlayMng->createOverlayElement("Panel", " PanelName" + std::to_string(num_ui_obj)));
 	overlayCont->setMetricsMode(Ogre::GMM_PIXELS);
 	overlayCont->setPosition(x, y);
 	overlayCont->setDimensions(dx, dy); //1920 x 1080
 	overlayCont->setWidth(w);
 	overlayCont->setWidth(h);
 
-	overlay = overlayMng->create(name + std::to_string(order));
+	overlay = overlayMng->create(name + std::to_string(num_ui_obj));
+	num_ui_obj++;
 }
 
 UIObject::~UIObject() {

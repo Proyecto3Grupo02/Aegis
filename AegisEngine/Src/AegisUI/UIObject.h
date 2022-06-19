@@ -15,7 +15,7 @@ namespace Ogre {
 }
 
 //enum de metricas?
-
+static int num_ui_obj = 0;
 
 class UIObject {
 protected:
