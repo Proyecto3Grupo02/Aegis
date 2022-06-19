@@ -4,7 +4,6 @@
 #include "RigidbodyComponent.h"
 #include "OgreWrapper.h"
 #include "CameraComponent.h"
-#include "Canvas.h"
 using namespace luabridge;
 
 void Scene::InitEntities() {
@@ -20,7 +19,6 @@ Scene::Scene(OgreWrapper* wrap) :
 	accumulator(0), entities(new std::list<Entity*>()), entitiesToDelete(std::list<std::list<Entity*>::iterator>()) , ogreNode(wrap->GetRootNode()), uninitializedEntities(new std::list<Entity*>()),
 	physicsEntities(new std::list<RigidbodyComponent*>()), ogreWrapper(wrap)
 {
-	mCanvas_ = new Canvas(wrap);
 }
 
 Scene::~Scene() {
@@ -29,7 +27,6 @@ Scene::~Scene() {
 	
 	RemoveAndFreePendingEntities();
 
-	//delete this->mCanvas_;
 	delete this->entities;
 	delete this->uninitializedEntities;
 	delete this->physicsEntities;
@@ -132,12 +129,6 @@ void Scene::Render()
 		entity->render();
 }
 
-void Scene::RenderUI()
-{
-	/*if (mCanvas_ != nullptr)
-		mCanvas_->render();*/
-}
-
 //the ogreNode usually is the root scene node so we add this node as a child one
 Ogre::SceneNode* Scene::GetNewNode()
 {
@@ -148,16 +139,12 @@ Ogre::SceneManager* Scene::GetOgreManager()
 {
 	return ogreNode->getCreator();
 }
-void Scene::CreateCanvas()
-{
-	mCanvas_ = new Canvas(ogreWrapper);
-}
+
 void Scene::ConvertToLua(lua_State* state)
 {
 	getGlobalNamespace(state).
 		beginNamespace("Aegis").
 			beginClass<Scene>("Scene").
-			addFunction("CreateCanvas", &Scene::CreateCanvas).
 			addFunction("AddEntity", &Scene::AddEntity).
 			endClass().
 		endNamespace();

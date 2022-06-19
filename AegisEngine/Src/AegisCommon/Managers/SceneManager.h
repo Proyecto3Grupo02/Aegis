@@ -19,7 +19,6 @@ public:
 
 	void UpdateCurrentScene(float deltaTime);
 	void PreRenderScene();
-	void RenderUI();
 	void ChangeScene(std::string sceneName);
 	Scene* GetCurrentScene();
 	static void ConvertToLua(lua_State* state);
