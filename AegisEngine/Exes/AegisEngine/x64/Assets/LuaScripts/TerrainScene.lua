@@ -47,7 +47,7 @@ local scene = {
 		type = "UI",
 		data = 
 			{
-				type = "Image",
+				type = "Button",--Button/Image
 				nombre = "Boton",
 				order = 0,
 				material = "avestruz",
@@ -57,6 +57,10 @@ local scene = {
 				height = 50,
 				dimensionx=200,
 				dimensiony=50,
+				--ESPECIFICO DE LOS BOTONES ==> QUITAR AL USAR IMAGEN
+				callback = function()
+					print("Button was clicked in LUA");
+				end 
 			},
 	},
 	{
