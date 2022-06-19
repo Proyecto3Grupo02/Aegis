@@ -38,7 +38,7 @@ Scene::~Scene() {
 bool Scene::Init()
 {
 	// Create entity with camera, default entity every scene has
-	auto camera = ogreWrapper->GetCamera();
+	auto camera = ogreWrapper->GetCamera(); //AegisCamera* 
 	Entity* cameraEntity = new Entity(this, camera->GetNode());
 	cameraEntity->setName("MainCamera");
 	AddEntity(cameraEntity);

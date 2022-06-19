@@ -29,6 +29,7 @@ bool OgreWrapper::Render() {
 
 
 OgreWrapper::~OgreWrapper() {
+    delete mCamera; 
 	render->destroy();
 	mSceneMgr->clearScene();
 	delete mRoot;
@@ -93,7 +94,7 @@ bool OgreWrapper::Init() {
 AegisCamera* OgreWrapper::CreateCamera(Ogre::SceneNode* node)
 {
 	auto ogreCamNode = node == nullptr ? mSceneMgr->getRootSceneNode()->createChildSceneNode() : node;
-	auto mCamera = new AegisCamera("MainCamera", ogreCamNode);
+	auto mCamera = new AegisCamera("MainCamera", ogreCamNode); ///-------------------------------------------------------
 	auto ogreCam = mCamera->GetCamera();
 	Ogre::Viewport* vp = render->addViewport(ogreCam);
 	

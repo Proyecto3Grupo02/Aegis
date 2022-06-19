@@ -20,11 +20,14 @@ public:
 	Ogre::Camera* GetCamera();
 	Ogre::SceneNode* GetNode();
 
+	void free();
+
 private:
 	Ogre::Camera* mCamera_;
 	Ogre::SceneManager* mngr;
 	Ogre::SceneNode* mNode_;
 	bool isMainCam_;
+
 };
 
 # endif

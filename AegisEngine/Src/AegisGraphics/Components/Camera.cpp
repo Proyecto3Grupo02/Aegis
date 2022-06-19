@@ -13,8 +13,15 @@ AegisCamera::AegisCamera(std::string camName,Ogre::SceneNode* node, bool maincam
 
 AegisCamera::~AegisCamera()
 {
-	mNode_->detachAllObjects();
-	mngr->destroyCamera(mCamera_);
+	free();
+}
+
+void AegisCamera::free() {
+	if (mNode_ != nullptr) {
+		mNode_->detachAllObjects(); /// error al hacer delete de camera en OgreWrapper
+		mngr->destroyCamera(mCamera_);
+		mNode_ = nullptr;
+	}
 }
 
 Ogre::Matrix4 AegisCamera::getProjectionMatrix()

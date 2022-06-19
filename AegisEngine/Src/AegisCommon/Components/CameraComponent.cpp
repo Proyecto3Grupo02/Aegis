@@ -1,6 +1,7 @@
 #include "CameraComponent.h"
 #include "Entity.h"
 
+//CONSTRUCTORA DE LUA ==> NO LA USAMOS
 CameraComponent::CameraComponent(Entity* ent, LuaRef args):
 	AegisComponent("Camera", ent), mCamera_(nullptr), isMainCam_(args["isMainCam"])
 {
@@ -9,6 +10,7 @@ CameraComponent::CameraComponent(Entity* ent, LuaRef args):
 	// deberiamos poner la camara principal como variable global? :think:
 }
 
+//CONSTRUCTURA DE LA ESCENA DE C++ (AegisCamera de OGREWRAPPER)
 CameraComponent::CameraComponent(Entity* ent, AegisCamera* cam) : AegisComponent("Camera", ent), mCamera_(cam), isMainCam_(true)
 {
 	SetDataAsInnerType(this);
@@ -16,7 +18,11 @@ CameraComponent::CameraComponent(Entity* ent, AegisCamera* cam) : AegisComponent
 
 CameraComponent::~CameraComponent()
 {
-	delete mCamera_;
+	//delete mCamera_;
+	if (mCamera_ != nullptr) {
+		mCamera_->free();
+		mCamera_ = nullptr;
+	}
 }
 
 //void CameraComponent::lookAt(float x, float y, float z,SpaceReference mRef)
