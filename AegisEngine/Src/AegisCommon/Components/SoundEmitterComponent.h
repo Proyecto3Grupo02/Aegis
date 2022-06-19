@@ -2,6 +2,7 @@
 
 #ifndef SOUNDEMITTER_H
 #define SOUNDEMITTER_H
+
 #include "AegisComponent.h"
 #include "SoundEmitter.h"
 
@@ -28,8 +29,6 @@ public:
     void setPitch(float pitch);
 
     static void ConvertToLua(lua_State* state);
-
-
 };
 
 #endif

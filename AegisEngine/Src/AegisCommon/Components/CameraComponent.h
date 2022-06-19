@@ -1,7 +1,7 @@
 #pragma once 
 
-#ifndef CAMERA_H
-#define CAMERA_H
+#ifndef CAMERA_COMPONENT_H
+#define CAMERA_COMPONENT_H
 
 #include "AegisComponent.h"
 #include "Quaternion.h"

@@ -5,7 +5,6 @@
 #include "OgreOverlaySystem.h"
 #include "Button.h"
 
-
 void UISystem::Init(Ogre::SceneManager* mScene, InputSystem* input) {
 	inputSystem = input; //boton
 
@@ -25,7 +24,6 @@ InputSystem* UISystem::getInputSystem() {
 	return inputSystem;
 }
 
-
 void UISystem::AddUIObject(UIObject* object_) {
 	ui_objects.push_back(object_);
 }
@@ -44,9 +42,11 @@ void UISystem::Update(float deltaTime) {
 	}
 }
 
+//LUA----------------------------------------------------------------------------------
 void UISystem::CreateUIElem(luabridge::LuaRef luaref) {
 	std::string type = LuaMngr()->ParseString(luaref["type"], "nil");
 	UIObject* uiObject = nullptr;
+
 	if (type == "nil") 
 		return;
 	else if (type == "Button") {
@@ -55,11 +55,11 @@ void UISystem::CreateUIElem(luabridge::LuaRef luaref) {
 	else if (type == "Image") {
 		uiObject = Image::CreateImage(luaref);
 	}
+
 	if (uiObject != nullptr)
 		AddUIObject(uiObject);
 }
 
-//LUA----------------
 void UISystem::ConvertToLua(lua_State* state) {
 	getGlobalNamespace(state).
 		beginNamespace("Aegis").

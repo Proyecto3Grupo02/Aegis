@@ -31,6 +31,7 @@ private:
 
 	void CreateWindowNative();
 	AegisCamera* CreateCamera(Ogre::SceneNode* node = nullptr);
+
 public:
 	OgreWrapper();
 	AegisCamera* GetCamera();

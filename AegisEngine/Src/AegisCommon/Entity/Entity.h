@@ -1,17 +1,14 @@
 #pragma once
+
 #ifndef ENTITY_H 
 #define ENTITY_H
 
-
-
-#include "ComponentManager.h"
-
+#include <Ogre.h>
 #include <vector>
 #include <list>
 #include <string>
-#include "ComponentManager.h"
+
 #include "AegisComponent.h"
-#include <Ogre.h>
 #include "ILuaObject.h"
 //#include "../../checkML.h"
 
@@ -43,7 +40,6 @@ public:
 
 	inline std::string getName() { return mName_; }
 	inline void setName(std::string name) { mName_ = name; }
-
 
 	inline Ogre::SceneNode* getNode() { return mNode_; }
 

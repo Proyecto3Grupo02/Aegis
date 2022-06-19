@@ -2,8 +2,7 @@
 #ifndef  RENDERER_H 
 #define RENDERER_H
 
-
-#include "AegisComponent.h" //Da error en el cpp
+#include "AegisComponent.h" 
 #include "ILuaObject.h"
 
 class OgreWrapper;

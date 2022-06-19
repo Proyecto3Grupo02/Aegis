@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef LIGHT_H
+#define LIGHT_H
+
 #include <OgreLight.h>
 enum LightType { NONE, DIRLIGHT, POINTLIGHT, SPOTLIGHT };
 class AegisLight {
@@ -105,3 +109,5 @@ private:
 	Ogre::Light* mLight_;
 	Ogre::SceneManager* mngr_;
 };
+
+# endif

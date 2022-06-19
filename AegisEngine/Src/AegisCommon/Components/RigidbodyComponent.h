@@ -24,14 +24,11 @@ public:
 	void SyncToTransform();
 	void SetIterator(std::list<RigidbodyComponent*>::iterator physicsEntityIt);
 
-	
-
 	//GETS-------------------------------------------
 	bool isActive() const;
 	Vector3 GetPosition() const;
 	//Vector4 getRotation();
 	Vector3 GetForce() const;
-
 
 	//SETS------------------------------------------
 	void SetPosition(Vector3 pos);
@@ -71,7 +68,6 @@ private:
 	std::list<RigidbodyComponent*>::iterator physicsEntityIt;
 
 	int cooldown = 3000;
-
 };
 
 #endif // ! RIGIDBODY_H

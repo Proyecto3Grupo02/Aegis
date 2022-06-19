@@ -57,9 +57,6 @@
     <ClInclude Include="..\..\Src\AegisCommon\Components\Component.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Components\RegisterComponent.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\AegisCommon\Components\Renderer.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
@@ -71,9 +68,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\AegisCommon\Interfaces\IInitializable.h">
       <Filter>Archivos de encabezado\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Managers\ComponentManager.h">
-      <Filter>Archivos de encabezado\Managers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AegisCommon\Managers\DebugManager.h">
       <Filter>Archivos de encabezado\Managers</Filter>
@@ -141,9 +135,6 @@
     <ClInclude Include="..\..\Src\AegisCommon\Utils\LuaMaths.h">
       <Filter>Archivos de encabezado\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Components\Image.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\AegisCommon\Components\RectTransform.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -169,9 +160,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\AegisCommon\Entity\Entity.cpp">
       <Filter>Archivos de origen\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\AegisCommon\Managers\ComponentManager.cpp">
-      <Filter>Archivos de origen\Managers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\AegisCommon\Managers\DebugManager.cpp">
       <Filter>Archivos de origen\Managers</Filter>
@@ -211,9 +199,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\AegisCommon\Components\RigidbodyComponent.cpp">
       <Filter>Archivos de origen\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\AegisCommon\Components\Image.cpp">
-      <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\AegisCommon\Components\RectTransform.cpp">
       <Filter>Archivos de origen</Filter>

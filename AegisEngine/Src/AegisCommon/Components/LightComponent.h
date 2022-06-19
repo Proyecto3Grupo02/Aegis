@@ -1,14 +1,12 @@
 #pragma once 
 
-#ifndef LIGHT_H
-#define LIGHT_H
+#ifndef LIGHT_COMPONENT_H
+#define LIGHT_COMPONENT_H
+
 #include "AegisComponent.h"
 #include "Transform.h"
-
 #include "Vector3.h"
-
 #include "Light.h"
-
 
 class LightComponent: public AegisComponent
 {
@@ -46,12 +44,6 @@ public:
     void setDirection(Vector3 dir);
 
     static void ConvertToLua(lua_State* state);
-
-
 };
-
-
-
-
 
 #endif

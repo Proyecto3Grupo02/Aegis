@@ -1,4 +1,7 @@
 #pragma once
+#ifndef IMAGE_H
+#define IMAGE_H
+
 #include "UIObject.h"
 #include "InputManager.h"
 #include "LuaManager.h"
@@ -13,3 +16,4 @@ public: //las imagenes necesitan recibir un material, no una imagen jpg/png
 	static Image* CreateImage(LuaRef args);
 };
 
+# endif

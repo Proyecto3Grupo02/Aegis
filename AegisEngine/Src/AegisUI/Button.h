@@ -1,5 +1,9 @@
 
 #pragma once
+
+#ifndef BUTTON_H
+#define BUTTON_H
+
 #include <string>
 #include "OgreOverlay.h"
 #include "Image.h"
@@ -20,3 +24,5 @@ public:
 	void update();
 	static Button* CreateButton(LuaRef args);
 };
+
+# endif

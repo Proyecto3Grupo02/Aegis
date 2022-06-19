@@ -12,6 +12,7 @@ class SceneManager : public ILuaObject
 private:
 	Scene* currentScene;
 	void LoadScene(std::string sceneName);
+
 public:
 	SceneManager(Scene* scene);
 	~SceneManager();

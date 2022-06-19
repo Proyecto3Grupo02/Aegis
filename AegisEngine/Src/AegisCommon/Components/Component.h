@@ -5,7 +5,6 @@
 #include <Ogre.h>
 #include "ILuaObject.h"
 
-
 struct Entity;
 
 class Component : public ILuaObject {
@@ -55,8 +54,7 @@ class Component : public ILuaObject {
     protected:
         Entity* mEntity_;
         bool isActive_;
-        std::string componentName;
-        
+        std::string componentName;  
 };
 
 #endif // ! COMPONENT_H

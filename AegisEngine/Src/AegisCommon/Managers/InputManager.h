@@ -2,10 +2,11 @@
 #ifndef INPUT_SYSTEM_H 
 #define INPUT_SYSTEM_H
 
-#include "Singleton.h"
  //BASURA
 #include <vector>
 #include<SDL.h>
+
+#include "Singleton.h"
 #include "ILuaObject.h"
 #include "Vector2.h"
 
@@ -31,8 +32,8 @@ private:
 	bool KEY_DOWN = false;
 	bool KEY_WAS_RELEASED = false;
 	Vector2 mouseMotion;
-public:
 
+public:
 	InputSystem();
 	~InputSystem();
 	void Init();

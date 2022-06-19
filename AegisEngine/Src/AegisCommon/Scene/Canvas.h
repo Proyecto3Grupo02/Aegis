@@ -1,5 +1,7 @@
 #pragma once 
 
+#ifndef CANVAS_HANIMATION_COMPONENT
+#define CANVAS_H
 
 #include <list>
 #include "ILuaObject.h"
@@ -32,3 +34,5 @@ public:
 	static void ConvertToLua(lua_State* state);
 
 };
+
+# endif

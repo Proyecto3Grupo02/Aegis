@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef ANIMATION_COMPONENT
+#define ANIMATION_COMPONENT
+
 #include "AegisComponent.h"
 #include "ILuaObject.h"
 #include "Animation.h"
@@ -16,3 +20,4 @@ public:
 	virtual void update(float dt);
 	static void ConvertToLua(lua_State* state);
 };
+# endif

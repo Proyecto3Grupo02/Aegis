@@ -1,5 +1,8 @@
 #pragma once 
 
+#ifndef UI_ELEMENT
+#define UI_ELEMENT
+
 #include "ILuaObject.h"
 #include <unordered_map>
 #include "UIComponent.h"
@@ -54,3 +57,4 @@ public:
 	inline void setCanvas(Canvas* canvas) { mCanvas_ = canvas; }
 };
 
+# endif

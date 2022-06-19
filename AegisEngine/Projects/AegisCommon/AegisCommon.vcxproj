@@ -113,10 +113,8 @@
     <ClInclude Include="..\..\Src\AegisCommon\Components\AnimationComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\CameraComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\Component.h" />
-    <ClInclude Include="..\..\Src\AegisCommon\Components\Image.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\LightComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\RectTransform.h" />
-    <ClInclude Include="..\..\Src\AegisCommon\Components\RegisterComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\Renderer.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\RigidbodyComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\SoundEmitterComponent.h" />
@@ -127,7 +125,6 @@
     <ClInclude Include="..\..\Src\AegisCommon\Entity\UIElement.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Interfaces\IInitializable.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Interfaces\ILuaObject.h" />
-    <ClInclude Include="..\..\Src\AegisCommon\Managers\ComponentManager.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Managers\DebugManager.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Managers\InputManager.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Managers\SceneManager.h" />
@@ -150,7 +147,6 @@
     <ClCompile Include="..\..\Src\AegisCommon\Components\AnimationComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\CameraComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\Component.cpp" />
-    <ClCompile Include="..\..\Src\AegisCommon\Components\Image.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\LightComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\RectTransform.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\Renderer.cpp" />
@@ -161,7 +157,6 @@
     <ClCompile Include="..\..\Src\AegisCommon\Components\UIComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Entity\Entity.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Entity\UIElement.cpp" />
-    <ClCompile Include="..\..\Src\AegisCommon\Managers\ComponentManager.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Managers\DebugManager.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Managers\InputManager.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Managers\SceneManager.cpp" />

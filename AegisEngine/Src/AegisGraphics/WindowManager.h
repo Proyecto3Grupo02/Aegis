@@ -2,6 +2,7 @@
 
 #ifndef WINDOW_MNGR
 #define WINDOW_MNGR
+
 #include <SDL.h>
 #include <string>
 #include <OgreRoot.h>
@@ -18,8 +19,7 @@ private:
 
     SDL_Window* mWindow_ = nullptr;
     Ogre::RenderWindow* render;
-    AegisCamera* mCamera;
-	
+    AegisCamera* mCamera;	
 
 public:
     WindowManager(std::string gameTittle, int w, int h, bool fullScreen, Uint32 flag);
@@ -37,9 +37,6 @@ public:
     void setCamera(AegisCamera* cam);
 
     void update();
-
-
 };
-
 
 #endif

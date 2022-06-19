@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef UI_OBJECT_H
+#define UI_OBJECT_H
+
 #include <string>
 //Imágenes renderizadas a partir de una textura
 //En esta clase se añade la posición x e y
@@ -54,3 +58,4 @@ public:
 	//void render();
 };
 
+# endif

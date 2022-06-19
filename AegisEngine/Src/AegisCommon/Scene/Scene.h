@@ -2,11 +2,10 @@
 #ifndef SCENE_H 
 #define SCENE_H
 
+#include <Ogre.h>
 #include <list>
 #include "ILuaObject.h"
 #include "IInitializable.h"
-
-#include <Ogre.h>
 
 struct Entity;
 class SceneNode;
@@ -89,6 +88,7 @@ private:
 	/// This allows to call "awake" for entities that are added in runtime
 	/// </summary>
 	void InitEntities();
+
 public:
 	Scene(OgreWrapper* wrap);
 

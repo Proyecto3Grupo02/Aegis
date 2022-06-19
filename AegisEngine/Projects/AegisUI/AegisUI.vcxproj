@@ -106,8 +106,6 @@
     <ClCompile Include="..\..\Src\AegisUI\Font.cpp" />
     <ClCompile Include="..\..\Src\AegisUI\Image.cpp" />
     <ClCompile Include="..\..\Src\AegisUI\ImageResources.cpp" />
-    <ClCompile Include="..\..\Src\AegisUI\Text.cpp" />
-    <ClCompile Include="..\..\Src\AegisUI\Texture.cpp" />
     <ClCompile Include="..\..\Src\AegisUI\UISystem.cpp" />
     <ClCompile Include="..\..\Src\AegisUI\UIObject.cpp" />
   </ItemGroup>
@@ -116,10 +114,6 @@
     <ClInclude Include="..\..\Src\AegisUI\Font.h" />
     <ClInclude Include="..\..\Src\AegisUI\Image.h" />
     <ClInclude Include="..\..\Src\AegisUI\ImageResources.h" />
-    <ClInclude Include="..\..\Src\AegisUI\SDL_image.h" />
-    <ClInclude Include="..\..\Src\AegisUI\SDL_ttf.h" />
-    <ClInclude Include="..\..\Src\AegisUI\Text.h" />
-    <ClInclude Include="..\..\Src\AegisUI\Texture.h" />
     <ClInclude Include="..\..\Src\AegisUI\UISystem.h" />
     <ClInclude Include="..\..\Src\AegisUI\UIObject.h" />
   </ItemGroup>

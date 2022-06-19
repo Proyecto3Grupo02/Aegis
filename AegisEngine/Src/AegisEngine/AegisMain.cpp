@@ -17,7 +17,6 @@
 #include "GameLoopData.h"
 #include "LuaMaths.h"
 #include "SoundEmitterComponent.h"
-#include "ButtonComponent.h"
 #include "Button.h"
 
 #include "UISystem.h"

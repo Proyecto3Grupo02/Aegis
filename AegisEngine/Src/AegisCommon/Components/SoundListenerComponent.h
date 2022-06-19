@@ -20,13 +20,5 @@ public:
     static void ConvertToLua(lua_State* state);
 };
 
-SoundListenerComponent::SoundListenerComponent(/* args */)
-{
-}
-
-SoundListenerComponent::~SoundListenerComponent()
-{
-}
-
 
 #endif

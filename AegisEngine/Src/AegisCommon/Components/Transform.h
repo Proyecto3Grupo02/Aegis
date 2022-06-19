@@ -51,6 +51,7 @@ public:
 	void AddChild(Entity* child);
 	void RemoveChild(Entity* child);
 	void DestroyChilds();
+
 protected:
 	Ogre::SceneNode* mNode;
 	Vector3 position;
@@ -58,6 +59,7 @@ protected:
 	Vector3 scale;
 	Ogre::SceneNode* parentNode;
 	Entity* parentEntity;
+
 private:
 	std::list<Entity*> childs;
 };

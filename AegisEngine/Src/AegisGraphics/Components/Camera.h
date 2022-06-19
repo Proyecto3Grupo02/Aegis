@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef CAMERA_H
+#define CAMERA_H
+
 #include <OgreCamera.h>
 class AegisCamera
 {
@@ -15,10 +19,12 @@ public:
 	void setClipDistances(double near, double far);
 	Ogre::Camera* GetCamera();
 	Ogre::SceneNode* GetNode();
+
 private:
 	Ogre::Camera* mCamera_;
 	Ogre::SceneManager* mngr;
 	Ogre::SceneNode* mNode_;
 	bool isMainCam_;
-
 };
+
+# endif

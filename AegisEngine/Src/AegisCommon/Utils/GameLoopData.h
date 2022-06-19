@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef TIMER_H
+#define TIMER_H
+
 #include <SDL_stdinc.h>
 #include "Singleton.h"
  //BASURA
@@ -22,3 +26,5 @@ inline TimeManager* Time()
 {
 	return TimeManager::getInstance();
 }
+
+# endif

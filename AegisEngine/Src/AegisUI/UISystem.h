@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef UI_SYSTEM_H
+#define UI_SYSTEM_H
+
 #include "Singleton.h"
 #include <vector>
 #include "InputManager.h"
@@ -7,7 +11,6 @@
 class OgreOverlay;
 class SDL_Image; 
 class UIObject;
-
 
 namespace Ogre {
 	class OverlayManager;
@@ -41,3 +44,5 @@ inline UISystem* UIs()
 {
 	return UISystem::getInstance();
 }
+
+# endif
