@@ -20,7 +20,7 @@ private:
 
 public:
 	Button(const std::string& name, int order, std::string material, float x, float y, float w, float h, float dx, float dy, luabridge::LuaRef call);
-	~Button() {};
+	~Button();
 	void update();
 	static Button* CreateButton(LuaRef args);
 };

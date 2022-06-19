@@ -14,17 +14,18 @@ subject to the following restrictions:
 */
 
 ///-----includes_start-----
-#include "btBulletDynamicsCommon.h"
 #include "PhysicsMain.h"
+#include "btBulletDynamicsCommon.h"
 #include "Entity.h"
 #include "RigidbodyComponent.h"
 #include "DebugDrawer.h"
 #include "OgreWrapper.h"
 #include "OgreSceneManager.h"
 
+PhysicsSystem::PhysicsSystem() {
+}
 
 /// This is a Hello World program for running a basic Bullet physics simulation
-
 void PhysicsSystem::Init(Ogre::SceneManager* mScene)
 {
 	scene = mScene;
@@ -58,22 +59,24 @@ void PhysicsSystem::Init(Ogre::SceneManager* mScene)
 	dynamicsWorld->setDebugDrawer(mDebugDrawer);
 }
 
-
-
-/// Do some simulation
-void PhysicsSystem::update(float deltaTime, float timeStep, int maxSteps) {
-	///-----stepsimulation_start-----
-	dynamicsWorld->stepSimulation(deltaTime, maxSteps, timeStep);
-	dynamicsWorld->debugDrawWorld();
-	auto a = dynamicsWorld->getDebugDrawer();
-	//btIDebugDraw::drawBox(btVector3(0, 0, 0), btVector3(20, 20, 20), btVector3(1, 0, 0));
-	dynamicsWorld->clearForces();
-#if defined _DEBUG
-	dynamicsWorld->debugDrawWorld();
-#endif
-	
+PhysicsSystem::~PhysicsSystem() {
+	remove(); 
 }
 
+
+void PhysicsSystem::remove() {
+	clear();
+
+	//delete dynamics world
+	delete dynamicsWorld; //SALTA ERROR DE EJECUCION---------------------
+	//delete solver
+	delete solver;
+	//delete broadphase
+	delete overlappingPairCache;
+	//delete dispatcher
+	delete dispatcher;
+	delete collisionConfiguration;
+}
 ///-----stepsimulation_end-----
 
 //cleanup in the reverse order of creation/initialization
@@ -96,9 +99,22 @@ void PhysicsSystem::clear() {
 	}
 }
 
+/// Do some simulation
+void PhysicsSystem::update(float deltaTime, float timeStep, int maxSteps) {
+	///-----stepsimulation_start-----
+	dynamicsWorld->stepSimulation(deltaTime, maxSteps, timeStep);
+	dynamicsWorld->debugDrawWorld();
+	auto a = dynamicsWorld->getDebugDrawer();
+	//btIDebugDraw::drawBox(btVector3(0, 0, 0), btVector3(20, 20, 20), btVector3(1, 0, 0));
+	dynamicsWorld->clearForces();
+#if defined _DEBUG
+	dynamicsWorld->debugDrawWorld();
+#endif
+	
+}
+
 void PhysicsSystem::checkCollision()
 {
-
 	std::map<std::pair<RigidBody*, RigidBody*>, bool> newContacts;
 
 	int numManifolds = dynamicsWorld->getDispatcher()->getNumManifolds();
@@ -139,17 +155,13 @@ void PhysicsSystem::checkCollision()
 	}
 
 
-	for (auto it = contacts.begin(); it != contacts.end(); it++)
-	{
+	for (auto it = contacts.begin(); it != contacts.end(); it++) 	{
 		std::pair<RigidBody*, RigidBody*> col = (*it).first;
 		if (newContacts.find(col) == newContacts.end());
 			//CollisionExitCallbacks(col);
 	}
 
 	contacts = newContacts;
-
-
-	
 }
 
 void PhysicsSystem::CollisionEnterCallbacks(std::pair<RigidBody*, RigidBody*>& col) {
@@ -180,26 +192,8 @@ void PhysicsSystem::CollisionExitCallbacks(std::pair<RigidBody*, RigidBody*>& co
 {
 }
 
-void PhysicsSystem::remove() {
-	clear();
 
-	//delete dynamics world
-	delete dynamicsWorld;
-
-	//delete solver
-	delete solver;
-
-	//delete broadphase
-	delete overlappingPairCache;
-
-	//delete dispatcher
-	delete dispatcher;
-
-	delete collisionConfiguration;
-}
-
-void PhysicsSystem::removeRigidbody(btCollisionObject* rb)
-{
+void PhysicsSystem::removeRigidbody(btCollisionObject* rb) {
 	//remove the rigidbodies from the dynamics world and delete them
 
 	btCollisionObject* obj = dynamicsWorld->getCollisionObjectArray()[rb->getWorldArrayIndex()];
@@ -212,8 +206,7 @@ void PhysicsSystem::removeRigidbody(btCollisionObject* rb)
 	delete obj;
 }
 
-btTransform PhysicsSystem::parseToBulletTransform(Vector3 pos, Vector3 rot)
-{
+btTransform PhysicsSystem::parseToBulletTransform(Vector3 pos, Vector3 rot) {
 	btTransform t;
 	t.setIdentity();
 	t.setOrigin({ btScalar(pos.GetX()), btScalar(pos.GetY()), btScalar(pos.GetZ()) });
@@ -222,8 +215,7 @@ btTransform PhysicsSystem::parseToBulletTransform(Vector3 pos, Vector3 rot)
 	return t;
 }
 
-btTransform PhysicsSystem::parseToBulletTransform(Vector3 pos, Vector4 rot)
-{
+btTransform PhysicsSystem::parseToBulletTransform(Vector3 pos, Vector4 rot) {
 	btTransform t;
 	t.setIdentity();
 	t.setOrigin({ btScalar(pos.GetX()), btScalar(pos.GetY()), btScalar(pos.GetZ()) });
@@ -312,10 +304,3 @@ btRigidBody* PhysicsSystem::createRigidBody(RigidBody::RigidBodyType rbType, flo
 }
 
 
-PhysicsSystem::PhysicsSystem()
-{
-}
-
-PhysicsSystem::~PhysicsSystem()
-{
-}

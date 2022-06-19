@@ -19,11 +19,11 @@ namespace Ogre {
 
 class UIObject {
 protected:
+	//Ogre::OverlaySystem* overlaySys = nullptr; //no esta inicializado
 	Ogre::OverlayManager* overlayMng =nullptr;
 	Ogre::OverlayContainer* overlayCont = nullptr;
 	Ogre::Overlay* overlay = nullptr;
-	Ogre::OverlaySystem* overlaySys = nullptr; //no esta inicializado
-	float x, y, w, h, dx, dy;
+	float x, y, w, h, dx, dy, orden;
 	bool isActive = true;
 
 private:

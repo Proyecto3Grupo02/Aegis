@@ -5,6 +5,18 @@
 #include "OgreOverlaySystem.h"
 #include "Button.h"
 
+UISystem::UISystem() {
+
+}
+
+UISystem::~UISystem() {
+	std::vector<UIObject*>::iterator it = ui_objects.begin();
+
+	while (!ui_objects.empty()) {
+		it = ui_objects.erase(it);
+	}	
+}
+
 void UISystem::Init(Ogre::SceneManager* mScene, InputSystem* input) {
 	inputSystem = input; //boton
 
@@ -15,6 +27,7 @@ void UISystem::Init(Ogre::SceneManager* mScene, InputSystem* input) {
 	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 	mScene->addRenderQueueListener(overlaySys);	
 }
+
 
 Ogre::Overlay* UISystem::getOverlay() {
 	return overlay;

@@ -14,6 +14,9 @@ Image::Image(const std::string& name, int order, std::string material, float x, 
 	//std::cout << "imagen";
 }
 
+Image::~Image() {
+}
+
 Image* Image::CreateImage(LuaRef args) //Doesn't belong to this class
 {//const std::string& name, int order, std::string material, float x, float y, float w, float h
 	//std::string bodyName = ent->getName();

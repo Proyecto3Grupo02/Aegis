@@ -9,6 +9,10 @@ Button::Button(const std::string& name, int order, std::string material, float x
 	id++;
 }
 
+Button::~Button() {
+
+}
+
 void Button::update() {
 	if (isActive) {
 

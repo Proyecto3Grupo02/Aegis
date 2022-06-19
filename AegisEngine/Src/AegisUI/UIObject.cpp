@@ -6,8 +6,9 @@
 #include "OgreOverlayContainer.h"
 
 UIObject::UIObject(const std::string& n, int order,float x_, float y_, float w_, float h_, float dx_, float dy_) {
-	UIs()->getOverlay();
+	//UIs()->getOverlay();
 	name = n;
+	orden = order;
 	x = x_; y = y_; w = w_;	h = h_; dx = dx_; dy = dy_;
 	overlayMng = Ogre::OverlayManager::getSingletonPtr();
 	overlayCont = static_cast<Ogre::OverlayContainer*>(overlayMng->createOverlayElement("Panel", " PanelName" + std::to_string(order)));
@@ -21,7 +22,10 @@ UIObject::UIObject(const std::string& n, int order,float x_, float y_, float w_,
 }
 
 UIObject::~UIObject() {
-
+	//Destruye Overlay
+	overlayMng->destroy(name + std::to_string(orden));	
+	//Destruye container
+	overlayMng->destroyOverlayElement(overlayCont);
 }
 
 void UIObject::show() {

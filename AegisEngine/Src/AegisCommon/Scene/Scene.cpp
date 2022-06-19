@@ -7,14 +7,10 @@
 #include "Canvas.h"
 using namespace luabridge;
 
-void Scene::InitEntities()
-{
-
-	for (Entity* entity : *uninitializedEntities)
-	{
+void Scene::InitEntities() {
+	for (Entity* entity : *uninitializedEntities) {
 		entity->init();
 	}
-
 
 	uninitializedEntities->clear();
 }
@@ -53,7 +49,7 @@ bool Scene::Init()
 }
 
 void Scene::RemoveAndFreeEntity(std::list<Entity*>::iterator entity) {
-	delete *entity;
+	delete *entity; //Destroy()
 	this->entities->erase(entity);
 }
 

@@ -23,6 +23,29 @@
 
 using namespace luabridge;
 
+AegisMain::AegisMain() : IInitializable() {
+	exit = (false);
+	ogreWrap = new OgreWrapper();
+	ogreWrap->Init();
+	LuaMngr();
+
+	gameLoopData = new TimeManager();
+	sceneManager = new SceneManager(new Scene(ogreWrap));
+}
+
+AegisMain::~AegisMain() {
+	delete gameLoopData; //Time()
+	delete sceneManager;
+	delete ogreWrap;
+	Debug()->deleteInstance();
+	Input()->deleteInstance();
+	Audio()->close();
+	Audio()->deleteInstance();
+	Physics()->deleteInstance();
+	LuaMngr()->deleteInstance();
+	UIs()->deleteInstance();
+}
+
 void AegisMain::GameLoop() {
 	uint32_t frameTimeMS = (uint32_t)floor((1 / TARGET_FRAME_RATE) * 1000);
 	//SDL_SetRelativeMouseMode(SDL_TRUE); //comentar para que funcione el boton
@@ -90,28 +113,6 @@ void AegisMain::GameLoop() {
 	}
 }
 
-AegisMain::AegisMain() : IInitializable() {
-	exit = (false);
-	ogreWrap = new OgreWrapper();
-	ogreWrap->Init();
-	LuaMngr();
-
-	gameLoopData = new TimeManager();
-	sceneManager = new SceneManager(new Scene(ogreWrap));
-}
-
-AegisMain::~AegisMain() {
-	delete Time();
-	delete sceneManager;
-	delete ogreWrap;
-	Debug()->deleteInstance();
-	Input()->deleteInstance();
-	Audio()->close();
-	Audio()->deleteInstance();
-	Physics()->remove();
-	Physics()->deleteInstance();
-	LuaMngr()->deleteInstance();
-}
 
 /// <summary>
 /// Inicializa todos los wrappers (Ogre, Input, Imgui...)

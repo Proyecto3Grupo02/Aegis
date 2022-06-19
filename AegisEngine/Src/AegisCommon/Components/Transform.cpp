@@ -125,7 +125,10 @@ void Transform::Roll(float degrees)
 	rotation = mNode->getOrientation();
 }
 
-Transform::~Transform() {}
+Transform::~Transform() {
+	/*for (Entity* child : childs)
+		delete child;*/
+}
 
 void Transform::update(float deltaTime) {}
 
