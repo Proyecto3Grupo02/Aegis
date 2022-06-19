@@ -34,6 +34,7 @@ OgreWrapper::~OgreWrapper() {
 	mSceneMgr->clearScene();
 	delete mRoot;
 	delete lm;
+	delete windowMan; //
 }
 
 bool OgreWrapper::Init() {
