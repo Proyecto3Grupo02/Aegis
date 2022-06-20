@@ -6,11 +6,12 @@
 
 #include<iostream>
 
-Image::Image(const std::string& name, int order, std::string material, float x, float y, float w, float h)
-	: UIObject(name, order, x, y, w, h) {
+Image::Image(const std::string& name, int order, std::string material, float x, float y, float w, float h, bool isVisible_)
+	: UIObject(name, order, x, y, w, h, isVisible_) {
 	overlayCont->setMaterialName(material);
 	overlay->add2D(overlayCont);
-	overlay->show(); 
+	if (isVisible) overlay->show();
+	else overlay->hide();
 }
 
 Image::~Image() {
@@ -26,6 +27,7 @@ Image* Image::CreateImage(LuaRef args) //Doesn't belong to this class
 	float y = LuaMngr()->ParseFloat(args["y"], 1);
 	float w = LuaMngr()->ParseFloat(args["width"], 1);
 	float h = LuaMngr()->ParseFloat(args["height"], 1);
+	bool isActive = LuaMngr()->ParseBool(args["visible"], true);
 	id_img++;
-	return new Image(name, order, material, x, y, w, h);
+	return new Image(name, order, material, x, y, w, h, isActive);
 }

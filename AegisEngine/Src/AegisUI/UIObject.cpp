@@ -6,28 +6,31 @@
 #include "OgreOverlayContainer.h"
 
 
-UIObject::UIObject(const std::string& n, int order_, float x_, float y_) {
+UIObject::UIObject(const std::string& n, int order_, float x_, float y_, bool visble) {
+	isVisible = visble;
 	_id = num_ui_obj;
 	overlayMng = Ogre::OverlayManager::getSingletonPtr();
 	overlayCont = static_cast<Ogre::OverlayContainer*>(overlayMng->createOverlayElement("Panel", " PanelName" + std::to_string(num_ui_obj)));
 	overlayCont->setMetricsMode(Ogre::GMM_RELATIVE);
 
-	name = n; orden = order_;
+	name = n; zOrder = order_;
 	
 	setPosition(x_, y_);
 	w = h = 0;
 
 	overlay = overlayMng->create(name + std::to_string(num_ui_obj));
 	num_ui_obj++;
+	
 }
 
-UIObject::UIObject(const std::string& n, int order, float x_, float y_, float w_, float h_) {
+UIObject::UIObject(const std::string& n, int order, float x_, float y_, float w_, float h_, bool visible) {
+	isVisible = visible;
 	_id = num_ui_obj;
 	overlayMng = Ogre::OverlayManager::getSingletonPtr();
 	overlayCont = static_cast<Ogre::OverlayContainer*>(overlayMng->createOverlayElement("Panel", " PanelName" + std::to_string(num_ui_obj)));
 	overlayCont->setMetricsMode(Ogre::GMM_RELATIVE);
 
-	name = n; orden = order;
+	name = n; zOrder = order;
 	
 	//The setPosition() depends on w and h, so the first method must be setDimensions
 	setDimensions(w_, h_); //dimension (1,1) = fullscreen
@@ -52,8 +55,10 @@ void UIObject::hide() {
 	overlay->hide();
 }
 
-void UIObject::setActive(bool active) {
-	isActive = active;
+void UIObject::setVisible(bool visble_) {
+	isVisible = visble_;
+	if (isVisible) show();
+	else hide();
 }
 
 void UIObject::setPosition(float x_, float y_) {

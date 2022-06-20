@@ -2,8 +2,8 @@
 #include "UISystem.h"
 #include <iostream>
 
-Button::Button(const std::string& name, int order, std::string material, float x, float y, float w, float h, luabridge::LuaRef call)
-	: Image(name, order, material, x, y, w, h) {
+Button::Button(const std::string& name, int order, std::string material, float x, float y, float w, float h, bool isActive, luabridge::LuaRef call)
+	: Image(name, order, material, x, y, w, h, isActive) {
 	inputSystem = UIs()->getInputSystem();
 	callback = call;
 	id++;
@@ -14,7 +14,7 @@ Button::~Button() {
 }
 
 void Button::update() {
-	if (isActive) {
+	if (isVisible) {
 
 		//comprobar que la posicion del raton (inputSystem) cae dentro de la imagen (metodos getpos y getsize)
 		//este metodo tendria que ser llamado desde algun sitio siempre que se detecta click
@@ -54,6 +54,7 @@ Button* Button::CreateButton(LuaRef args) //Doesn't belong to this class
 	float y = LuaMngr()->ParseFloat(args["y"], 1);
 	float w = LuaMngr()->ParseFloat(args["width"], 1);
 	float h = LuaMngr()->ParseFloat(args["height"], 1);
+	bool isActive = LuaMngr()->ParseBool(args["visible"], true);
 	id++;
-	return new Button(name, order, material, x, y, w, h, args["callback"]);
+	return new Button(name, order, material, x, y, w, h, isActive, args["callback"]);
 }

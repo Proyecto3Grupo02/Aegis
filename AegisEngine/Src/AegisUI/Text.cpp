@@ -8,9 +8,8 @@
 #include<iostream>
 
 
-Text::Text(const std::string name, int order, const std::string font, float charHeight, float x, float y, 
-	const std::string text = "Example text") : UIObject(name, order, x, y) {
-	//HAY QUE BORRAR EL TEXT AREA
+Text::Text(const std::string name, int order, const std::string font, float charHeight, float x, float y, bool visible,
+	const std::string text = "Example text") : UIObject(name, order, x, y, visible) {
 	textArea = static_cast<Ogre::TextAreaOverlayElement*>(overlayMng->createOverlayElement("TextArea", "text"+ std::to_string(_id)));
 	textArea->setCaption(text);
 	textArea->setMetricsMode(Ogre::GMM_RELATIVE);
@@ -18,7 +17,8 @@ Text::Text(const std::string name, int order, const std::string font, float char
 	textArea->setCharHeight(charHeight);
 	overlay->add2D(overlayCont);
 	overlayCont->addChild(textArea);
-	overlay->show();
+	if (isVisible) overlay->show();
+	else overlay->hide();
 }
 
 Text::~Text() {
@@ -58,7 +58,8 @@ Text* Text::CreateText(LuaRef args) //Doesn't belong to this class
 	float x = LuaMngr()->ParseFloat(args["x"], 1);
 	float y = LuaMngr()->ParseFloat(args["y"], 1);
 	float charHeight = LuaMngr()->ParseFloat(args["charheight"], 0.05f);
+	bool isActive = LuaMngr()->ParseBool(args["visible"], true);
 	std::string text = LuaMngr()->ParseString(args["text"], "Example text");
 	num_text++;
-	return new Text(name, order, font, charHeight, x, y, text);
+	return new Text(name, order, font, charHeight, x, y, isActive, text);
 }

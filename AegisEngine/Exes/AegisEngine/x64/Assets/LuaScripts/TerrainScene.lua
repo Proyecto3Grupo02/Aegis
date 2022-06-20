@@ -67,7 +67,8 @@ local scene = {
 				x = 0.025,
 				y = 0.025,
 				charheight = 0.1,
-				text = "10"	
+				visible = true,
+				text = "10",
 			},
 	},
 	{

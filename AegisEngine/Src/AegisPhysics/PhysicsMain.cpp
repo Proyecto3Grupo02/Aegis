@@ -44,7 +44,7 @@ void PhysicsSystem::Init(Ogre::SceneManager* mScene)
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, overlappingPairCache, solver, collisionConfiguration);
 
 	dynamicsWorld->setGravity(btVector3(0, -10, 0));
-	 
+
 	//Create lambda func for gContactAddedCallback
 	gContactAddedCallback = [](btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper* colObj1Wrap, int partId1, int index1)
 	{
@@ -53,22 +53,23 @@ void PhysicsSystem::Init(Ogre::SceneManager* mScene)
 	};
 	//fileLoader = new btBulletWorldImporter(dynamicsWorld);
 
-
+#ifdef _DEBUG
 	mDebugDrawer = new OgreDebugDrawer(scene);
 	mDebugDrawer->setDebugMode(btIDebugDraw::DBG_DrawWireframe);
 	dynamicsWorld->setDebugDrawer(mDebugDrawer);
+#endif // DEBUG	 
 }
 
 PhysicsSystem::~PhysicsSystem() {
-	delete mDebugDrawer;
-	remove(); 	
+	if (mDebugDrawer != nullptr) delete mDebugDrawer;
+	remove();
 }
 
 void PhysicsSystem::remove() {
 	clear();
 
 	//delete dynamics world
-	delete dynamicsWorld; 
+	delete dynamicsWorld;
 	//delete solver
 	delete solver;
 	//delete broadphase
@@ -110,7 +111,7 @@ void PhysicsSystem::update(float deltaTime, float timeStep, int maxSteps) {
 #if defined _DEBUG
 	dynamicsWorld->debugDrawWorld();
 #endif
-	
+
 }
 
 void PhysicsSystem::checkCollision()
@@ -132,13 +133,13 @@ void PhysicsSystem::checkCollision()
 			{
 				RigidBody* rigidBodyA = (RigidBody*)obA->getUserPointer(), * rigibBodyB = (RigidBody*)obB->getUserPointer();
 
-				if (rigidBodyA != nullptr || rigibBodyB != nullptr && (rigidBodyA->isActive() && rigibBodyB->isActive()) )
+				if (rigidBodyA != nullptr || rigibBodyB != nullptr && (rigidBodyA->isActive() && rigibBodyB->isActive()))
 				{
 					if (rigidBodyA > rigibBodyB) std::swap(rigidBodyA, rigibBodyB);
 					std::pair<RigidBody*, RigidBody*> col = { rigidBodyA, rigibBodyB };
 					newContacts[col] = true;
-					
-					
+
+
 					//Llamamos al collisionEnter si no estaban registrados.
 					if (contacts.find(col) == contacts.end()) {
 						//std::cout << "a";
@@ -148,17 +149,17 @@ void PhysicsSystem::checkCollision()
 						//CollisionStayCallbacks(col);
 					}
 				}
-				
+
 				break;
 			}
 		}
 	}
 
 
-	for (auto it = contacts.begin(); it != contacts.end(); it++) 	{
+	for (auto it = contacts.begin(); it != contacts.end(); it++) {
 		std::pair<RigidBody*, RigidBody*> col = (*it).first;
 		if (newContacts.find(col) == newContacts.end());
-			//CollisionExitCallbacks(col);
+		//CollisionExitCallbacks(col);
 	}
 
 	contacts = newContacts;
@@ -166,26 +167,26 @@ void PhysicsSystem::checkCollision()
 
 void PhysicsSystem::CollisionEnterCallbacks(std::pair<RigidBody*, RigidBody*>& col) {
 	Entity* goA = col.first->rbC->mEntity_, * goB = col.second->rbC->mEntity_;
-	bool aTrigger = col.first->isTrigger() , bTrigger = col.second->isTrigger();
-	
-	 if (aTrigger || bTrigger) {
-		 if (aTrigger && bTrigger) {
-			 goA->onTrigger(goB);
-			 goB->onTrigger(goA);
-		 }
-		 else if (aTrigger && !bTrigger) {
-			 goA->onTrigger(goB);
-			 goB->onCollision(goA);
-		 }
-		 else if (!aTrigger && bTrigger) {
-			 goA->onCollision(goB);
-			 goB->onTrigger(goA);
-		 }
-	 }
-	 else {
-		 goA->onCollision(goB);
-		 goB->onCollision(goA);
-	 }
+	bool aTrigger = col.first->isTrigger(), bTrigger = col.second->isTrigger();
+
+	if (aTrigger || bTrigger) {
+		if (aTrigger && bTrigger) {
+			goA->onTrigger(goB);
+			goB->onTrigger(goA);
+		}
+		else if (aTrigger && !bTrigger) {
+			goA->onTrigger(goB);
+			goB->onCollision(goA);
+		}
+		else if (!aTrigger && bTrigger) {
+			goA->onCollision(goB);
+			goB->onTrigger(goA);
+		}
+	}
+	else {
+		goA->onCollision(goB);
+		goB->onCollision(goA);
+	}
 }
 
 void PhysicsSystem::CollisionExitCallbacks(std::pair<RigidBody*, RigidBody*>& col)
@@ -281,12 +282,12 @@ btRigidBody* PhysicsSystem::createRigidBody(RigidBody::RigidBodyType rbType, flo
 		rbShape->calculateLocalInertia(mass, localInertia);
 	else
 		mass = 0;
-	
+
 	//using motionstate is optional, it provides interpolation capabilities, and only synchronizes 'active' objects
 	btDefaultMotionState* myMotionState = new btDefaultMotionState(groundTransform);
 	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, rbShape, localInertia);
 	btRigidBody* body = new btRigidBody(rbInfo);
-	
+
 	if (isKinematic)
 		body->setCollisionFlags(btCollisionObject::CF_KINEMATIC_OBJECT);
 	else
@@ -294,10 +295,10 @@ btRigidBody* PhysicsSystem::createRigidBody(RigidBody::RigidBodyType rbType, flo
 		body->setCollisionFlags(btCollisionObject::CF_DYNAMIC_OBJECT);
 		body->setActivationState(DISABLE_DEACTIVATION); //Never sleep
 	}
-	
+
 	//add the body to the dynamics world
 	dynamicsWorld->addRigidBody(body);
-	if(!useGravity)
+	if (!useGravity)
 		body->setGravity({ 0,0,0 });
 
 	return body;
