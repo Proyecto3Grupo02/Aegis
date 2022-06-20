@@ -4,7 +4,7 @@
 int main() {
 	// Agrega checkML.h al proyecto e inclúyelo en todos los módulos del proyecto 
 	// Escribe el siguiente comando al inicio de la función main
-#ifdef DEBUG
+#ifdef _DEBUG
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif // DEBUG	 
 

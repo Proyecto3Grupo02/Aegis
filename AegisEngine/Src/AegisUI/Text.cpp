@@ -11,7 +11,7 @@
 Text::Text(const std::string name, int order, const std::string font, float charHeight, float x, float y, 
 	const std::string text = "Example text") : UIObject(name, order, x, y) {
 	//HAY QUE BORRAR EL TEXT AREA
-	textArea = static_cast<Ogre::TextAreaOverlayElement*>(overlayMng->createOverlayElement("TextArea", "text"+ std::to_string(num_text)));
+	textArea = static_cast<Ogre::TextAreaOverlayElement*>(overlayMng->createOverlayElement("TextArea", "text"+ std::to_string(_id)));
 	textArea->setCaption(text);
 	textArea->setMetricsMode(Ogre::GMM_RELATIVE);
 	setFontType(font);
@@ -23,7 +23,7 @@ Text::Text(const std::string name, int order, const std::string font, float char
 
 Text::~Text() {
 	//Destruye TextArea
-	overlayMng->destroy("text" + std::to_string(orden));
+	//overlayMng->destroy("text" + std::to_string(_id));
 }
 
 void Text::setText(const std::string& text_) {

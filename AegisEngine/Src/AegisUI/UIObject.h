@@ -25,6 +25,7 @@ protected:
 	Ogre::Overlay* overlay = nullptr;
 	float x, y, w, h, orden;
 	bool isActive = true;
+	int _id;
 
 private:
 

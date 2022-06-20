@@ -73,7 +73,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Src\AegisCommon\Managers;$(SolutionDir)Src\AegisCommon\Components;$(SolutionDir)Src\AegisCommon\Utils;$(SolutionDir)Dependencias\fmod\inc;$(SolutionDir)Dependencias\Lua\src\include;$(SolutionDir)Dependencias\Libraries;$(SolutionDir)Src\AegisCommon\Interfaces;$(SolutionDir)Src\AegisScripting\Manager;$(SolutionDir)Src\AegisScripting\Utils</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Src\AegisCommon\Managers;$(SolutionDir)Src\AegisCommon\Components;$(SolutionDir)Src\AegisCommon\Utils;$(SolutionDir)Dependencias\fmod\inc;$(SolutionDir)Dependencias\Lua\src\include;$(SolutionDir)Dependencias\Libraries;$(SolutionDir)Src\AegisCommon\Interfaces;$(SolutionDir)Src\AegisScripting\Manager;$(SolutionDir)Src\AegisScripting\Utils;$(SolutionDir)Src</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>

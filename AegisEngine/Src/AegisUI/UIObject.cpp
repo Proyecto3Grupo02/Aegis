@@ -7,6 +7,7 @@
 
 
 UIObject::UIObject(const std::string& n, int order_, float x_, float y_) {
+	_id = num_ui_obj;
 	overlayMng = Ogre::OverlayManager::getSingletonPtr();
 	overlayCont = static_cast<Ogre::OverlayContainer*>(overlayMng->createOverlayElement("Panel", " PanelName" + std::to_string(num_ui_obj)));
 	overlayCont->setMetricsMode(Ogre::GMM_RELATIVE);
@@ -21,6 +22,7 @@ UIObject::UIObject(const std::string& n, int order_, float x_, float y_) {
 }
 
 UIObject::UIObject(const std::string& n, int order, float x_, float y_, float w_, float h_) {
+	_id = num_ui_obj;
 	overlayMng = Ogre::OverlayManager::getSingletonPtr();
 	overlayCont = static_cast<Ogre::OverlayContainer*>(overlayMng->createOverlayElement("Panel", " PanelName" + std::to_string(num_ui_obj)));
 	overlayCont->setMetricsMode(Ogre::GMM_RELATIVE);
@@ -37,7 +39,7 @@ UIObject::UIObject(const std::string& n, int order, float x_, float y_, float w_
 
 UIObject::~UIObject() {
 	//Destruye Overlay
-	overlayMng->destroy(name + std::to_string(orden));
+	overlayMng->destroy(name + std::to_string(_id));
 	//Destruye container
 	overlayMng->destroyOverlayElement(overlayCont);
 }
