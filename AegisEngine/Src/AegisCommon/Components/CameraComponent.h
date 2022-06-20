@@ -5,7 +5,7 @@
 
 #include "AegisComponent.h"
 #include "Quaternion.h"
-#include "Camera.h"
+#include "AegisCamera.h"
 #include "Transform.h"
 
 enum SpaceReference{LOCAL, PARENT, WORLD};

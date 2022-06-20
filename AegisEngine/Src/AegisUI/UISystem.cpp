@@ -17,6 +17,8 @@ UISystem::~UISystem() {
 	while (!ui_objects.empty()) {
 		it = ui_objects.erase(it);
 	}	
+
+	delete overlaySys;
 }
 
 void UISystem::Init(Ogre::SceneManager* mScene, InputSystem* input) {

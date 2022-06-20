@@ -1,5 +1,5 @@
 #include "WindowManager.h"
-#include  "Components/Camera.h"
+#include  "AegisCamera.h"
 #include <OgreRenderWindow.h>
 #include <iostream>
 

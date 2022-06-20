@@ -3,5 +3,6 @@
 
 local utility = require "Utils";
 local testScene = require "TerrainScene";
+--local testScene = require "RotScene"; --"TerrainScene";
 math.randomseed(os.time());
 utility.ParseScene(testScene);

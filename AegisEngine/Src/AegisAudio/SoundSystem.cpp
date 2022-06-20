@@ -13,6 +13,21 @@ SoundSystem::SoundSystem() :
 
 SoundSystem::~SoundSystem()
 {
+	close();
+}
+
+/// <summary>
+/// Se llamara al cerrar el juego, descarta los emisores y el receptor
+/// </summary>
+void SoundSystem::close() {
+	for (EmitterData* emitter : emitters)
+		removeEmitter(emitter);
+
+	removeListener();
+
+	system->close();
+	system->release();
+	delete SR;
 }
 
 void SoundSystem::Init()
@@ -40,23 +55,6 @@ void SoundSystem::Init()
 	ERRCHECK(result);
 
 	Debug()->Log("SOUND SYSTEM: System started");
-	
-	
-}
-/// <summary>
-/// Se llamara al cerrar el juego, descarta los emisores y el receptor
-/// </summary>
-void SoundSystem::close()
-{
-	for (EmitterData* emitter : emitters)
-		removeEmitter(emitter);
-
-	removeListener();
-
-	system->close();
-	system->release();
-	delete SR;
-
 }
 /// <summary>
 /// Devuelve el tipo sonido si no da fallo al cargarlo

@@ -1,5 +1,5 @@
 
-#include "Camera.h"
+#include "AegisCamera.h"
 #include <OgreSceneManager.h>
 #include <OgreViewport.h>
 

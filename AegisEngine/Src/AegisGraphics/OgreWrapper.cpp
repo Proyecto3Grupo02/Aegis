@@ -7,7 +7,7 @@
 
 #include <SDL_syswm.h>
 #include <OgreLogManager.h>
-#include "Camera.h"
+#include "AegisCamera.h"
 
 #include "WindowManager.h"
 
