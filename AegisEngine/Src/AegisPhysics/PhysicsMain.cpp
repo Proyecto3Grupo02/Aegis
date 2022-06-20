@@ -50,7 +50,7 @@ void PhysicsSystem::Init(Ogre::SceneManager* mScene)
 	{
 		std::cout << "Col\n";
 		return true;
-	};;
+	};
 	//fileLoader = new btBulletWorldImporter(dynamicsWorld);
 
 
@@ -60,7 +60,9 @@ void PhysicsSystem::Init(Ogre::SceneManager* mScene)
 }
 
 PhysicsSystem::~PhysicsSystem() {
+	delete mDebugDrawer;
 	remove(); 
+	
 }
 
 

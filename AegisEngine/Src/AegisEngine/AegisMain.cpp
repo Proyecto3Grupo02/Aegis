@@ -34,14 +34,15 @@ AegisMain::AegisMain() : IInitializable() {
 }
 
 AegisMain::~AegisMain() {
+	
+	Physics()->deleteInstance();
 	delete gameLoopData; //Time()
 	delete sceneManager;
 	delete ogreWrap;
 	Debug()->deleteInstance();
 	Input()->deleteInstance();
 	Audio()->close();
-	Audio()->deleteInstance();
-	Physics()->deleteInstance();
+	Audio()->deleteInstance();	
 	LuaMngr()->deleteInstance();
 	UIs()->deleteInstance();
 }
