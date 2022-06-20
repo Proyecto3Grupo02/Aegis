@@ -47,30 +47,25 @@ local scene = {
 		type = "UI",
 		data = 
 			{
-				type = "Text",--Button/Image
-				nombre = "TextoPrueba",
+				type = "Button",--Button/Image
+				nombre = "HomeButton",
+				material = "home_button_material",
 				order = 0,
 				x = 1,
-				y = 1,
-				width = 100,
-				height = 50,
-				dimensionx=200,
-				dimensiony=50,
+				y = 0,
+				width = 0.1,
+				height = 0.1,
 			},
 	},
 	{
 		type = "UI",
 		data = 
 			{
-				type = "Text",--Button/Image
+				type = "Text",
 				nombre = "TextoPrueba2",
 				order = 0,
-				x = 100,
-				y = 100,
-				width = 100,
-				height = 50,
-				dimensionx=200,
-				dimensiony=50,
+				x = 0.025,
+				y = 0.025
 			},
 	},
 	{

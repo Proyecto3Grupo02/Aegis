@@ -8,11 +8,11 @@
 #include<iostream>
 
 
-Text::Text(const std::string name, int order, const std::string font,float charHeight, float x, float y, float w,
-	float h, float dx, float dy, const std::string text = "Example text") : UIObject(name, order, x, y, w, h, dx, dy) {
+Text::Text(const std::string name, int order, const std::string font, float charHeight, float x, float y, 
+	const std::string text = "Example text") : UIObject(name, order, x, y) {
+	//HAY QUE BORRAR EL TEXT AREA
 	textArea = static_cast<Ogre::TextAreaOverlayElement*>(overlayMng->createOverlayElement("TextArea", "text"+ std::to_string(num_text)));
 	textArea->setCaption(text);
-	textArea->setDimensions(dx, dy);
 	textArea->setMetricsMode(Ogre::GMM_RELATIVE);
 	setFontType(font);
 	textArea->setCharHeight(charHeight);
@@ -22,7 +22,8 @@ Text::Text(const std::string name, int order, const std::string font,float charH
 }
 
 Text::~Text() {
-
+	//Destruye TextArea
+	overlayMng->destroy("text" + std::to_string(orden));
 }
 
 void Text::setText(const std::string& text_) {
@@ -33,7 +34,10 @@ void Text::setFontType(const std::string& font_) {
 	try {
 		textArea->setFontName(font_, "General");
 	}
-	catch (...) { std::cout << "ERROR: Text::setFontType(): font_ " << font_ << " does not exist\n"; };
+	catch (...) { 
+		std::cout << "ERROR: Text::setFontType(): font_ " << font_ << " does not exist\n";
+		textArea->setFontName("Font1", "General");
+	};
 }
 
 void Text::setTextCharHeight(float ch_) {
@@ -53,11 +57,7 @@ Text* Text::CreateText(LuaRef args) //Doesn't belong to this class
 	std::string font = LuaMngr()->ParseString(args["material"], "Font1");
 	float x = LuaMngr()->ParseFloat(args["x"], 1);
 	float y = LuaMngr()->ParseFloat(args["y"], 1);
-	float w = LuaMngr()->ParseFloat(args["width"], 1);
-	float h = LuaMngr()->ParseFloat(args["height"], 1);
-	float dx = LuaMngr()->ParseFloat(args["dimensionx"], 1920);
-	float dy = LuaMngr()->ParseFloat(args["dimensiony"], 1080);
 	float charHeight = LuaMngr()->ParseFloat(args["charheight"], 0.05f);
 	num_text++;
-	return new Text(name, order, font, charHeight, x, y, w, h, dx, dy);
+	return new Text(name, order, font, charHeight, x, y);
 }

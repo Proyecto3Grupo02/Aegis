@@ -2,8 +2,8 @@
 #include "UISystem.h"
 #include <iostream>
 
-Button::Button(const std::string& name, int order, std::string material, float x, float y, float w, float h, float dx, float dy, luabridge::LuaRef call)
-	: Image(name, order, material, x, y, w, h, dx, dy) {
+Button::Button(const std::string& name, int order, std::string material, float x, float y, float w, float h, luabridge::LuaRef call)
+	: Image(name, order, material, x, y, w, h) {
 	inputSystem = UIs()->getInputSystem();
 	callback = call;
 	id++;
@@ -54,8 +54,6 @@ Button* Button::CreateButton(LuaRef args) //Doesn't belong to this class
 	float y = LuaMngr()->ParseFloat(args["y"], 1);
 	float w = LuaMngr()->ParseFloat(args["width"], 1);
 	float h = LuaMngr()->ParseFloat(args["height"], 1);
-	float dx = LuaMngr()->ParseFloat(args["dimensionx"], 1920);
-	float dy = LuaMngr()->ParseFloat(args["dimensiony"], 1080);
 	id++;
-	return new Button(name, order, material, x, y, w, h, dx, dy, args["callback"]);
+	return new Button(name, order, material, x, y, w, h, args["callback"]);
 }

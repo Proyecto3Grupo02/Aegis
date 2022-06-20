@@ -23,7 +23,7 @@ protected:
 	Ogre::OverlayManager* overlayMng =nullptr;
 	Ogre::OverlayContainer* overlayCont = nullptr;
 	Ogre::Overlay* overlay = nullptr;
-	float x, y, w, h, dx, dy, orden;
+	float x, y, w, h, orden;
 	bool isActive = true;
 
 private:
@@ -32,7 +32,8 @@ private:
 	std::string name;
 
 public:
-	UIObject(const std::string& n, int order, float x_, float y_, float w_, float h_, float dx_, float dy_);
+	UIObject(const std::string& n, int order, float x_, float y_, float w_, float h_);
+	UIObject(const std::string& n, int order, float x_, float y_);
 	virtual ~UIObject();
 
 	void show();
@@ -40,9 +41,8 @@ public:
 
 	//void setMetricsMode(MetricsMode mmode);
 	void setActive(bool active);
-	void setPosition(float x, float y);
-	void setScale(float x, float y);
-	void setSize(float w, float h);
+	void setPosition(float x_, float y_);
+	void setDimensions(float w_, float h_);
 	void setMaterial(std::string m);
 	void setRenderDepth(int d); //PROFUNDIDAD
 	void setName(std::string n);
