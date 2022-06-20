@@ -35,9 +35,9 @@ AegisMain::AegisMain() : IInitializable() {
 
 AegisMain::~AegisMain() {
 	
-	Physics()->deleteInstance();
+	delete sceneManager; //me sale error de ejecucion al cerrar si deleteo la escena despues de fisicas
+	Physics()->deleteInstance(); //fisicas tiene que hacer delete lo primero para no dejar 5 leaks
 	delete gameLoopData; //Time()
-	delete sceneManager;
 	delete ogreWrap;
 	Debug()->deleteInstance();
 	Input()->deleteInstance();

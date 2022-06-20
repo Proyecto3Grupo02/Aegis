@@ -61,16 +61,14 @@ void PhysicsSystem::Init(Ogre::SceneManager* mScene)
 
 PhysicsSystem::~PhysicsSystem() {
 	delete mDebugDrawer;
-	remove(); 
-	
+	remove(); 	
 }
-
 
 void PhysicsSystem::remove() {
 	clear();
 
 	//delete dynamics world
-	delete dynamicsWorld; //SALTA ERROR DE EJECUCION---------------------
+	delete dynamicsWorld; 
 	//delete solver
 	delete solver;
 	//delete broadphase
