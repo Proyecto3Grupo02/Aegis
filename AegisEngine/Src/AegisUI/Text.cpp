@@ -58,6 +58,7 @@ Text* Text::CreateText(LuaRef args) //Doesn't belong to this class
 	float x = LuaMngr()->ParseFloat(args["x"], 1);
 	float y = LuaMngr()->ParseFloat(args["y"], 1);
 	float charHeight = LuaMngr()->ParseFloat(args["charheight"], 0.05f);
+	std::string text = LuaMngr()->ParseString(args["text"], "Example text");
 	num_text++;
-	return new Text(name, order, font, charHeight, x, y);
+	return new Text(name, order, font, charHeight, x, y, text);
 }

@@ -65,7 +65,9 @@ local scene = {
 				nombre = "TextoPrueba2",
 				order = 0,
 				x = 0.025,
-				y = 0.025
+				y = 0.025,
+				charheight = 0.1,
+				text = "10"	
 			},
 	},
 	{
