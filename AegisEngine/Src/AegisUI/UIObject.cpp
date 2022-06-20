@@ -88,6 +88,13 @@ void UIObject::setDimensions(float w_, float h_) {
 void UIObject::setMaterial(std::string m) {
 	overlayCont->setMaterialName(m);
 	material = m;
+	try {
+		overlayCont->setMaterialName(m);
+		material = m;
+	}
+	catch (...) {
+		std::cout << " UIObject::setMaterial(): std::string m " << m << " does not exist. So material does not change\n";
+	};
 }
 
 void UIObject::setRenderDepth(int d) {
