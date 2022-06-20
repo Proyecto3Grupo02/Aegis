@@ -4,6 +4,7 @@
 #define UI_OBJECT_H
 
 #include <string>
+#include "LuaManager.h"
 //Imágenes renderizadas a partir de una textura
 //En esta clase se añade la posición x e y
 
@@ -28,12 +29,18 @@ protected:
 	bool isVisible = true;
 	int _id;
 
+	template <class T>
+	void SetDataAsInnerType(T* component)
+	{
+		setType(luabridge::LuaRef(LuaManager::getInstance()->GetState(), component));
+	};
 private:
 
 	std::string material;
 	std::string name;
 	void show();
 	void hide();
+	luabridge::LuaRef type = LuaMngr()->GetSharedEmptyLuaRef();
 
 public:
 	UIObject(const std::string& n, int order, float x_, float y_, float w_, float h_, bool isActive = true);
@@ -48,12 +55,15 @@ public:
 	void setMaterial(std::string m);
 	void setRenderDepth(int d); //PROFUNDIDAD
 	void setName(std::string n);
+	void setType(luabridge::LuaRef t);
+	luabridge::LuaRef getType() const;
 
 	bool getVisible() { return isVisible; };
 	std::string getName() { return name; };
 	std::pair<float, float> getPosition() { return { x, y }; }
 	std::pair<float, float> getSize() { return { w, h }; }
 	std::string getMaterial() { return  material; }
+	static void ConvertToLua(lua_State* state);
 };
 
 # endif

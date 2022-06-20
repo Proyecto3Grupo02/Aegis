@@ -12,6 +12,7 @@ Image::Image(const std::string& name, int order, std::string material, float x, 
 	overlay->add2D(overlayCont);
 	if (isVisible) overlay->show();
 	else overlay->hide();
+	SetDataAsInnerType(this);
 }
 
 Image::~Image() {
@@ -30,4 +31,15 @@ Image* Image::CreateImage(LuaRef args) //Doesn't belong to this class
 	bool isActive = LuaMngr()->ParseBool(args["visible"], true);
 	id_img++;
 	return new Image(name, order, material, x, y, w, h, isActive);
+}
+
+void Image::ConvertToLua(lua_State* state)
+{
+	getGlobalNamespace(state).
+		beginNamespace("Aegis").
+		beginNamespace("UI").
+		deriveClass<Image, UIObject>("UIImage").
+		endClass().
+		endNamespace().
+		endNamespace();
 }

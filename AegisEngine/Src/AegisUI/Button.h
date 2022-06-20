@@ -23,6 +23,7 @@ public:
 	~Button();
 	void update();
 	static Button* CreateButton(LuaRef args);
+	static void ConvertToLua(lua_State* state);
 };
 
 # endif

@@ -7,6 +7,7 @@ Button::Button(const std::string& name, int order, std::string material, float x
 	inputSystem = UIs()->getInputSystem();
 	callback = call;
 	id++;
+	SetDataAsInnerType(this);
 }
 
 Button::~Button() {
@@ -57,4 +58,15 @@ Button* Button::CreateButton(LuaRef args) //Doesn't belong to this class
 	bool isActive = LuaMngr()->ParseBool(args["visible"], true);
 	id++;
 	return new Button(name, order, material, x, y, w, h, isActive, args["callback"]);
+}
+
+void Button::ConvertToLua(lua_State* state)
+{
+	getGlobalNamespace(state).
+		beginNamespace("Aegis").
+		beginNamespace("UI").
+		deriveClass<Button, Image>("UIButton").
+		endClass().
+		endNamespace().
+		endNamespace();
 }

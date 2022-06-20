@@ -1,4 +1,4 @@
--- Example of scene, it's just a table with list of entities
+--Example of scene, it's just a table with list of entities
 
 local NAME = "TerrainScene";
 local scene = {
@@ -73,11 +73,22 @@ local scene = {
 	},
 	{
 		type = "Entity",
+		name = "UITestEnt",
+		components = {
+			{
+				type = "UITextTest",
+				data = {
+					text = "@TextoPrueba2"
+				}
+			},
+		}
+	},
+	{
+		type = "Entity",
 		name = "Anzuelo",
 		position = {x = -5, y = -30},
 		scale = {x=0.2, y=0.2, z=0.2},
 		rotation = {x = 0, y = 45, z =0},
-		--scale = {x=2, y=2, z=2},--Meitin necesita ver el anzuelo
 		components = {
 			{
 				type = "Renderer",
@@ -122,24 +133,6 @@ local scene = {
 			},
 		}
 	},
-	-- {
-	-- 	type = "Entity",
-	-- 	name = "Cubo2",
-	-- 	position = { y = 2, x = 2},
-	-- 	scale = { x = 0.5, y = 0.5, z = 0.5 },
-	-- 	components = {
-	-- 		{
-	-- 			type = "Renderer",
-	-- 			data = {
-	-- 				mesh = "pez2.mesh",
-	-- 				material= "pez"
-	-- 			}
-	-- 		},
-	-- 		{
-	-- 			type = "Rigidbody",
-	-- 		},
-	-- 	}
-	-- },
 	{
 		type = "Entity",
 		name = "Suelo",
@@ -192,14 +185,6 @@ local scene = {
 					isKinematic = true
 				}
 			}
-			--  ,
-			-- {
-			-- 	type = "Renderer",
-			-- 	data = {
-			-- 			mesh = "Cube.mesh",
-			-- 			material= "yellow"
-			-- 		}			
-			-- }
 		}
 	},
 	{
@@ -217,14 +202,6 @@ local scene = {
 					isKinematic = true
 				}
 			}
-			-- ,
-			-- {
-			-- 	type = "Renderer",
-			-- 	data = {
-			-- 			mesh = "Cube.mesh",
-			-- 			material= "yellow"
-			-- 		}			
-			-- }
 		}
 	},
 	{
@@ -242,14 +219,6 @@ local scene = {
 					isKinematic = true
 				}
 			}
-			-- ,
-			-- {
-			-- 	type = "Renderer",
-			-- 	data = {
-			-- 			mesh = "Cube.mesh",
-			-- 			material= "yellow"
-			-- 		}			
-			-- }
 		}
 	},
 	{
@@ -267,14 +236,6 @@ local scene = {
 					isKinematic = true
 				}
 			}
-			-- ,
-			-- {
-			-- 	type = "Renderer",
-			-- 	data = {
-			-- 			mesh = "Cube.mesh",
-			-- 			material= "yellow"
-			-- 		}			
-			-- }
 		}
 	},
 	{
@@ -290,18 +251,8 @@ local scene = {
 				data = 
 				{
 					mass = 0;
-					--isKinematic = true
-					--isStatic = true;
 				}
 			}
-			-- ,
-			-- {
-			-- 	type = "Renderer",
-			-- 	data = {
-			-- 			mesh = "Cube.mesh",
-			-- 			material= "yellow"
-			-- 		}
-			-- }
 		}
 	},
 	
@@ -319,13 +270,6 @@ local scene = {
 					isKinematic = true
 				}
 			},
-			-- {
-			-- 	type = "Renderer",
-			-- 	data = {
-			-- 			mesh = "Cube.mesh",
-			-- 			material= "yellow"
-			-- 		}			
-			-- }
 		}
 	},
 	{
@@ -343,7 +287,6 @@ local scene = {
 				}
 			}
 		}
-		
 	},
 	{
 		type = "Entity",

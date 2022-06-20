@@ -19,10 +19,12 @@ public:
 	~Text();
 
 	void setText(const std::string& text_);
+	std::string getText();
 	void setFontType(const std::string& font_);
 	void setTextCharHeight(float ch_);
 	void setFontColor(float r, float g, float b);
 	static Text* CreateText(LuaRef args);
+	static void ConvertToLua(lua_State* state);
 };
 
 

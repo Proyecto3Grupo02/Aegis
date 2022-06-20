@@ -32,7 +32,7 @@ private:
 public:
 	UISystem();
 	~UISystem();
-	void CreateUIElem(luabridge::LuaRef luaref);
+	UIObject* CreateUIElem(luabridge::LuaRef luaref);
 	void Init(Ogre::SceneManager* mScene, InputSystem* input);
 	void DeleteUIObject(const UIObject* obj_);
 	void Update(float deltaTime);

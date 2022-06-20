@@ -68,12 +68,12 @@ void UISystem::Update(float deltaTime) {
 }
 
 //LUA----------------------------------------------------------------------------------
-void UISystem::CreateUIElem(luabridge::LuaRef luaref) {
+UIObject* UISystem::CreateUIElem(luabridge::LuaRef luaref) {
 	std::string type = LuaMngr()->ParseString(luaref["type"], "nil");
 	UIObject* uiObject = nullptr;
 
 	if (type == "nil")
-		return;
+		return nullptr;
 	else if (type == "Button") {
 		uiObject = Button::CreateButton(luaref);
 	}
@@ -86,6 +86,8 @@ void UISystem::CreateUIElem(luabridge::LuaRef luaref) {
 
 	if (uiObject != nullptr)
 		AddUIObject(uiObject);
+
+	return uiObject;
 }
 
 void UISystem::ConvertToLua(lua_State* state) {
@@ -94,11 +96,12 @@ void UISystem::ConvertToLua(lua_State* state) {
 		beginNamespace("UI").
 		beginClass<UISystem>("UISystem").
 		addFunction("CreateUIElem", &UISystem::CreateUIElem).
-		//deriveClass<ButtonComponent, AegisComponent>("Button").
-		//addProperty("position", &RigidbodyComponent::GetPosition, &RigidbodyComponent::SetPosition).		
-		//addFunction("wasClicked", &ButtonComponent::wasClicked).
-		//addProperty("isActive", &ButtonComponent::isActive).
 		endClass().
 		endNamespace().
 		endNamespace();
+
+	UIObject::ConvertToLua(state);
+	Image::ConvertToLua(state);
+	Text::ConvertToLua(state);
+	Button::ConvertToLua(state);
 }

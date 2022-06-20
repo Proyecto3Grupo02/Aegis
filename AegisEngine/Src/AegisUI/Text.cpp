@@ -19,6 +19,8 @@ Text::Text(const std::string name, int order, const std::string font, float char
 	overlayCont->addChild(textArea);
 	if (isVisible) overlay->show();
 	else overlay->hide();
+
+	SetDataAsInnerType(this);
 }
 
 Text::~Text() {
@@ -28,6 +30,11 @@ Text::~Text() {
 
 void Text::setText(const std::string& text_) {
 	textArea->setCaption(text_);
+}
+
+std::string Text::getText()
+{
+	return textArea->getCaption();
 }
 
 void Text::setFontType(const std::string& font_) {
@@ -62,4 +69,18 @@ Text* Text::CreateText(LuaRef args) //Doesn't belong to this class
 	std::string text = LuaMngr()->ParseString(args["text"], "Example text");
 	num_text++;
 	return new Text(name, order, font, charHeight, x, y, isActive, text);
+}
+
+void Text::ConvertToLua(lua_State* state)
+{
+	getGlobalNamespace(state).
+		beginNamespace("Aegis").
+		beginNamespace("UI").
+		deriveClass<Text, UIObject>("UIText").
+		addFunction("GetText", &Text::getText).
+		addFunction("SetText", &Text::setText).
+		addFunction("SetColor", &Text::setFontColor).
+		endClass().
+		endNamespace().
+		endNamespace();
 }

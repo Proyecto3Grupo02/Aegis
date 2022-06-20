@@ -174,7 +174,8 @@ funcs.ParseSceneObject = function(object)
 		local entity = funcs.ParseEntity(object);
 		entities[entity:GetName()] = entity;
 	elseif object.type == "UI" then
-		funcs.ParseUI(object);
+		local uiObject = funcs.ParseUI(object);
+		entities[object.data.nombre] = uiObject.type;
 	else
 		local entity = funcs.TreatSpecialCase(object);
 		if entity ~= nil then
@@ -195,7 +196,7 @@ funcs.ParseScene = function(scene)
 end;
 
 funcs.ParseUI = function (object)
-	UISystem:CreateUIElem(object.data);
+	return UISystem:CreateUIElem(object.data);
 end
 
 return funcs;

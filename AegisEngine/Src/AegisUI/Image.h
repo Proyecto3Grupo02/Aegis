@@ -14,6 +14,7 @@ public: //las imagenes necesitan recibir un material, no una imagen jpg/png
 	Image(const std::string& name, int order, std::string material, float x, float y, float w, float h, bool isActive);
 	~Image();
 	static Image* CreateImage(LuaRef args);
+	static void ConvertToLua(lua_State* state);
 };
 
 # endif

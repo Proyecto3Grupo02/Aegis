@@ -113,3 +113,27 @@ void UIObject::setName(std::string n) {
 	name = n;
 }
 
+void UIObject::setType(luabridge::LuaRef t)
+{
+	this->type = t;
+}
+
+luabridge::LuaRef UIObject::getType() const
+{
+	return type;
+}
+
+void UIObject::ConvertToLua(lua_State* state)
+{
+	getGlobalNamespace(state).
+		beginNamespace("Aegis").
+			beginNamespace("UI").
+				beginClass<UIObject>("UIObject").
+					addFunction("SetVisible", &UIObject::setVisible).
+					addFunction("GetName", &UIObject::getName).
+					addProperty("type", &UIObject::getType, &UIObject::setType).
+				endClass().
+			endNamespace().
+		endNamespace();
+}
+
