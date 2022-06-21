@@ -15,7 +15,6 @@ class Component : public ILuaObject {
 
        virtual ~Component()=default;
 
-       inline Entity* getEntity() { return mEntity_; }
        Entity* getEntity() const 
        { 
            return mEntity_; 
@@ -35,20 +34,10 @@ class Component : public ILuaObject {
        void setActive(bool active) { isActive_ = active; }
 
        std::string getComponentName() const { return componentName; };
-       void setComponentNameLua(std::string name) 
-       { 
-           std::cout << "You can't override component name, but you can read it.";
-           std::cout << "Component name can only be ser through Aegis.CreateComponent\n";
-       };
+
        void setComponentName(std::string name)
        {
            this->componentName = name;
-       };
-
-       void setEntityLua(Entity* entity)
-       { 
-           std::cout << "You can't override component entity, but you can read it.";
-           std::cout << "Component entity can only be ser through Aegis.CreateComponent\n";
        };
        
        static void ConvertToLua(lua_State* state);

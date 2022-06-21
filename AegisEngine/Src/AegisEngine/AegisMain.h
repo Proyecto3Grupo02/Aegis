@@ -15,8 +15,6 @@ class AegisMain : IInitializable
 {
 private:
     OgreWrapper* ogreWrap;
-    SceneManager* sceneManager;
-    GameLoopData* gameLoopData;
 
     bool exit;
     //uint32_t frameTimeMS;

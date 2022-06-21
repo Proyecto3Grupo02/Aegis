@@ -56,14 +56,14 @@ void RigidbodyComponent::addForce(Vector3 force) {
 Vector3 RigidbodyComponent::accelerateTo(Vector3 targetVelocity, float maxAcceleration)
 {
 	
-	return rigidbody->accelerateTo(targetVelocity, Time()->deltaTime, maxAcceleration);
+	return rigidbody->accelerateTo(targetVelocity, GameTime()->getDeltaTime(), maxAcceleration);
 
 }
 
 Vector3 RigidbodyComponent::accelerateToRand()
 {
 	Vector3 vec(rand() % 10, 0 ,rand() % 10);
-	return rigidbody->accelerateTo(vec, Time()->deltaTime, 100000000000);
+	return rigidbody->accelerateTo(vec, GameTime()->getDeltaTime(), 100000000000);
 	rigidbody->setLinearVelocity();
 }
 

@@ -1,10 +1,10 @@
 #include "SceneManager.h"
+#include "SceneManager.h"
 #include "Scene.h"
 
-SceneManager::SceneManager(Scene* scene)
+SceneManager::SceneManager()
 {
 	//LoadScene(sceneName);
-	currentScene = scene;
 }
 
 SceneManager::~SceneManager() {
@@ -14,6 +14,13 @@ SceneManager::~SceneManager() {
 void SceneManager::loadScene(std::string sceneName)
 {
 	//currentScene = new Scene();
+}
+
+void SceneManager::init(Scene* scene)
+{
+	currentScene = scene;
+	scene->init();
+	exportToLua(scene, "currentScene");
 }
 
 void SceneManager::updateCurrentScene(float deltaTime) {

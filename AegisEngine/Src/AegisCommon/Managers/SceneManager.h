@@ -4,23 +4,31 @@
 
 #include <string>
 #include "ILuaObject.h"
+#include <Singleton.h>
 
 class Scene;
 
-class SceneManager : public ILuaObject
+class SceneManager : public Singleton<SceneManager>, public ILuaObject
 {
 private:
 	Scene* currentScene;
 	void loadScene(std::string sceneName);
 
 public:
-	SceneManager(Scene* scene);
+	SceneManager();
 	~SceneManager();
 
+	void init(Scene* scene);
 	void updateCurrentScene(float deltaTime);
 	void preRenderScene();
 	void changeScene(std::string sceneName);
 	Scene* getCurrentScene();
 	static void ConvertToLua(lua_State* state);
 };
+
+inline SceneManager* SceneMngr()
+{
+	return SceneManager::getInstance();
+}
+
 #endif

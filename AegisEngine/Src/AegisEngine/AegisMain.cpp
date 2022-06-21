@@ -28,17 +28,14 @@ AegisMain::AegisMain() : IInitializable() {
 	ogreWrap = new OgreWrapper();
 	ogreWrap->init();
 	LuaMngr();
-
-	gameLoopData = new GameLoopData();
-	sceneManager = new SceneManager(new Scene(ogreWrap));
 }
 
 AegisMain::~AegisMain() {
 	
-	delete sceneManager; //me sale error de ejecucion al cerrar si deleteo la escena despues de fisicas
+	SceneMngr()->deleteInstance(); //me sale error de ejecucion al cerrar si deleteo la escena despues de fisicas
 	Physics()->deleteInstance(); //fisicas tiene que hacer delete lo primero o explota
 	UIs()->deleteInstance(); //UI tiene que ser delete al principio o explota
-	delete gameLoopData; //Time()
+	GameTime()->deleteInstance();
 	delete ogreWrap;
 	Debug()->deleteInstance();
 	Input()->deleteInstance();
@@ -59,7 +56,7 @@ void AegisMain::gameLoop() {
 		while (!exit)
 		{
 			//Tiempo al inicio del frame
-			Time()->frameStartTime = SDL_GetTicks();
+			GameTime()->setFrameStartTime(SDL_GetTicks());
 			Input()->updateState();
 			
 			while (SDL_PollEvent(&eventHandler) != 0)
@@ -95,19 +92,19 @@ void AegisMain::gameLoop() {
 				}
 			}
 
-			UIs()->update(Time()->deltaTime); //boton
+			UIs()->update(GameTime()->getDeltaTime()); //boton
 
-			sceneManager->updateCurrentScene(Time()->deltaTime);
-			sceneManager->preRenderScene();
+			SceneMngr()->updateCurrentScene(GameTime()->getDeltaTime());
+			SceneMngr()->preRenderScene();
 
 			ogreWrap->render();
-			Uint32 frameTime = SDL_GetTicks() - Time()->frameStartTime;
+			Uint32 frameTime = SDL_GetTicks() - GameTime()->getFrameStartTime();
 
 			if (frameTime < frameTimeMS)
 				SDL_Delay(frameTimeMS - frameTime);
 
 			// Actualiza deltaTime y timeSinceSceneStart
-			Time()->UpdateTimeRegistry(SDL_GetTicks());
+			GameTime()->UpdateTimeRegistry(SDL_GetTicks());
 		}
 	}
 }
@@ -126,9 +123,8 @@ bool AegisMain::init()
 	Physics()->init(ogreWrap->getSceneManager());
 	UIs()->init(ogreWrap->getSceneManager(), Input());
 	convertObjectToLua();
-	sceneManager->getCurrentScene()->init();
+	SceneMngr()->init(new Scene(ogreWrap));
 	LuaMngr()->execute("init.lua");
-
 
 	gameLoop();
 	return true;
@@ -159,7 +155,6 @@ void AegisMain::convertObjectToLua()
 	UISystem::ConvertToLua(state);
 	LuaMaths::ConvertToLua(state);
 
-	exportToLua(sceneManager->getCurrentScene(), "currentScene");
 	exportToLua(UIs(), "UISystem");
 	exportToLua(Input(), "Input");
 }
