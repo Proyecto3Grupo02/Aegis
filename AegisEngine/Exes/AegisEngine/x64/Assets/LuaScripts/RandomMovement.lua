@@ -14,7 +14,10 @@ function table.GetNew(entity, params)
 	local lastTimeRay; 
 	local random; 
 	local random2; 
+	local scoreManagerScrpit;
 	data.bait = "Bait"
+	data.score = "Score"
+
     function Init() 
         rigidbody = component.entity:GetComponent("Rigidbody").type;
 		lastTime=1;
@@ -26,7 +29,9 @@ function table.GetNew(entity, params)
 		random = 0;
 		random2 = 0;
 		rigidbody:SetAngular();
+		print(data.bait:GetName());
     end;
+
 	function Update(deltaTime) 
 		if rigidbody.position.y > -40 then
 			rigidbody:SetPosition(Aegis.Maths.Vector3(0,-57,0));
@@ -37,16 +42,12 @@ function table.GetNew(entity, params)
 			acumulatedDT = acumulatedDT - lastTime;	
 			ray = true;		
 		end;
-		-- if acumulatedRay > lastTimeRay + 1 then
-		-- 	ray = true;			
-		-- 	random = math.random(-10,10); 			
-		-- end;
-		--acumulatedRay = acumulatedRay + deltaTime;
 		acumulatedDT = acumulatedDT + deltaTime;
 	end;
     
 	function LateUpdate(deltaTime)
 	end;
+
 	function FixedUpdate() 
 		
 		rigidbody:SetRotationEuler(transform.localEulerAngles + Aegis.Maths.Vector3(0,root / 10,0));
@@ -63,7 +64,6 @@ function table.GetNew(entity, params)
 			--print(rayCastResult)
 			-- print("Forward " .. transform.forward.x .. " " .. transform.forward.y .. " " .. transform.forward.z);
 			-- print("Dest " .. dest.x .. " " .. dest.y .. " " .. dest.z);
-			
 			if rayCastResult == 1 then
 				ray = false;			
 			rigidbody:SetRotationEuler(transform.localEulerAngles + Aegis.Maths.Vector3(0,180,0));
@@ -77,11 +77,13 @@ function table.GetNew(entity, params)
 
 	function OnCollision(other)
 		print("Colision general pez");
-		if other == data.bait.entity then
-			--entity:Destroy();
+		if other == data.bait then
 			print("Colision de un pez con el anzuelo");
+			data.score.funcs.updateScore();
+			entity:Destroy();			
 		end;
 	end;
+	
 	function OnTrigger(other) end;
 
 	funcs.init = Init;

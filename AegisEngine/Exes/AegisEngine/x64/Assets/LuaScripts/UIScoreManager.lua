@@ -1,4 +1,4 @@
-local NAME = "UITextTest";
+local NAME = "UIScoreManager";
 local table = {};
 function table.GetNew(entity, params)
 	local component = Aegis.CreateComponent(NAME, entity);
@@ -6,15 +6,14 @@ function table.GetNew(entity, params)
 	local transform = entity.transform;
     local funcs = component.funcs;
     data.text = "nil"
-
-    function Init() end;
+    local numFish;
+    function Init()
+        numFish = 10;
+    end;
 	function Update(deltaTime) 
     if  Input:AnyKeyWasPressed() then -- GENERIC CHECK BEFORE CHECKING INDIVIDUAL KEY ==> NECESSARY
         if Input:KeyWasPressed("l") then
-            print(data.text:GetName());
-            local textNum = data.text:GetText();
-            textNum = textNum + 1;
-            data.text:SetText(textNum);
+            updateScore();
         end;
     end        
 
@@ -24,8 +23,17 @@ function table.GetNew(entity, params)
 	function OnCollision(other) end;
 	function OnTrigger(other) end;
 
+    function UpdateScore()
+        print(data.text:GetName());
+        if numFish > 0 then
+            numFish = numFish -1;
+            data.text:SetText(numFish);
+        end;
+    end; 
+
 	funcs.init = Init;
     funcs.update = Update;
+    funcs.updateScore = UpdateScore;
 	return component;
 end;
 return table;
