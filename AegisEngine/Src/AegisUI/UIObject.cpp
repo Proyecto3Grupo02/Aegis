@@ -44,6 +44,10 @@ UIObject::~UIObject() {
 	overlayMng->destroy(name + std::to_string(_id));
 	//Destruye container
 	overlayMng->destroyOverlayElement(overlayCont);
+
+	overlay = nullptr;
+	overlayCont = nullptr;
+	overlayMng = nullptr;
 }
 
 void UIObject::show() {

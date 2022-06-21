@@ -27,6 +27,7 @@ RigidBody::~RigidBody()
 {
 	delete rigidBody->getCollisionShape();
 	Physics()->removeRigidbody(this->rigidBody);
+	rigidBody = nullptr;
 }
 
 void RigidBody::createRigidBodyComponent(RigidBodyType rbType, Vector3 pos, Vector3 scale, Vector4 rotation, std::string bodyMeshName, bool isConvex)

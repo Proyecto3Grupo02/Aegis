@@ -35,6 +35,13 @@ OgreWrapper::~OgreWrapper() {
 	delete mRoot;
 	delete lm;
 	delete windowMan; //
+
+	mCamera = nullptr;
+	render_ = nullptr;
+	mSceneMgr = nullptr;
+	mRoot = nullptr;
+	lm = nullptr;
+	windowMan = nullptr;
 }
 
 bool OgreWrapper::init() {

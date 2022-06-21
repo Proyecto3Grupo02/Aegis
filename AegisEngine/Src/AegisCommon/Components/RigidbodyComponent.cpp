@@ -23,6 +23,7 @@ RigidbodyComponent::~RigidbodyComponent()
 {
 	delete rigidbody;
 	mEntity_->getScene()->removePhysicsEntity(this->physicsEntityIt);
+	rigidbody = nullptr;
 };
 
 void RigidbodyComponent::lateUpdate(float deltaTime) {}

@@ -7,7 +7,7 @@ ImageResources::ImageResources()
 
 ImageResources::~ImageResources()
 {
-	struct dirent* dp;
+	//struct dirent* dp;
 }
 
 void ImageResources::parseDirectory(std::string dir)

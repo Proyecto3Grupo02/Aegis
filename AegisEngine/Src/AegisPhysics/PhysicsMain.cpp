@@ -61,7 +61,10 @@ void PhysicsSystem::init(Ogre::SceneManager* mScene)
 }
 
 PhysicsSystem::~PhysicsSystem() {
-	if (mDebugDrawer != nullptr) delete mDebugDrawer;
+	if (mDebugDrawer != nullptr) {
+		delete mDebugDrawer;
+		mDebugDrawer = nullptr;
+	}
 	remove();
 }
 
@@ -77,6 +80,12 @@ void PhysicsSystem::remove() {
 	//delete dispatcher
 	delete dispatcher;
 	delete collisionConfiguration;
+	//
+	dynamicsWorld = nullptr;
+	solver = nullptr;
+	overlappingPairCache = nullptr;
+	dispatcher = nullptr;
+	collisionConfiguration = nullptr;
 }
 ///-----stepsimulation_end-----
 
@@ -97,6 +106,7 @@ void PhysicsSystem::clear() {
 		}
 		dynamicsWorld->removeCollisionObject(obj);
 		delete obj;
+		obj = nullptr;
 	}
 }
 

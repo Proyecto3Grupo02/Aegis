@@ -9,6 +9,7 @@ SceneManager::SceneManager()
 
 SceneManager::~SceneManager() {
 	delete currentScene;
+	currentScene = nullptr;
 }
 
 void SceneManager::loadScene(std::string sceneName)

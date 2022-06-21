@@ -10,6 +10,7 @@ SoundEmitterComponent::SoundEmitterComponent(Entity* ent, std::string sound):
 SoundEmitterComponent::~SoundEmitterComponent()
 {
 	delete mEmmiter_;
+	mEmmiter_ = nullptr;
 }
 
 void SoundEmitterComponent::playSound(const std::string& soundname, bool reverb)

@@ -21,14 +21,19 @@ Scene::Scene(OgreWrapper* wrap) :
 }
 
 Scene::~Scene() {
-	for (Entity* entity : *entities)
+	for (Entity* entity : *entities) {
 		delete entity;
+		entity = nullptr;
+	}
 	
 	removeAndFreePendingEntities();
 
-	delete this->entities;
-	delete this->uninitializedEntities;
+	delete this->entities; 
+	delete this->uninitializedEntities; 
 	delete this->physicsEntities;
+	this->entities = nullptr;
+	this->uninitializedEntities = nullptr;
+	this->physicsEntities = nullptr;
 }
 
 bool Scene::init()

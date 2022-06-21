@@ -21,6 +21,7 @@ LightComponent::LightComponent(Entity* ent, LuaRef args) :
 LightComponent::~LightComponent()
 {
 	delete mLight_;
+	mLight_ = nullptr;
 }
 
 LightComponent* CreateLight(Entity* ent, LuaRef ref) {
