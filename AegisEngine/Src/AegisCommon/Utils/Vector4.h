@@ -11,9 +11,9 @@ public:
 	Vector4(float _all) : Vector3(_all), w(_all) {};
 	Vector4() : Vector3(), w(1.0f) {};
 
-	float GetW() const { return w; }
-	void SetW(float _w) { w = _w; }
-	Vector3 GetForwardVector(Vector4 quaternion) {
+	float getW() const { return w; }
+	void setW(float _w) { w = _w; }
+	Vector3 getForwardVector(Vector4 quaternion) {
 		return(Vector3(0, 0, quaternion.z));
 	}
 
@@ -32,7 +32,7 @@ public:
 			beginNamespace("Maths").
 			deriveClass<Vector4, Vector3>("Vector4").
 			addConstructor<void(*)(float, float, float,float)>().
-			addProperty("w", &Vector4::GetW, &Vector4::SetW).
+			addProperty("w", &Vector4::getW, &Vector4::setW).
 			endClass().
 			endNamespace().
 			endNamespace();

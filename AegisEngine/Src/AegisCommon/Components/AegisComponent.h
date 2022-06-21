@@ -26,42 +26,42 @@ public:
 	//Lua stuff
 	void setCallbacks(LuaRef updateFunc);
 
-	void SetData(LuaRef luaRef);
-	LuaRef GetData() const;
+	void setData(LuaRef luaRef);
+	LuaRef getData() const;
 
-	void SetType(LuaRef luaRef);
-	void SetTypeLua(LuaRef luaRef);
-	LuaRef GetType() const;
+	void setType(LuaRef luaRef);
+	void setTypeLua(LuaRef luaRef);
+	LuaRef getType() const;
 
-	void SetFuncs(LuaRef luaRef);
-	LuaRef GetFuncs() const;
+	void setFuncs(LuaRef luaRef);
+	LuaRef getFuncs() const;
 
 	static void ConvertToLua(lua_State* state);
 
 	template <class T>
-	void CallLuaRefFunc(LuaRef func, T args = 0);
+	void callLuaRefFunc(LuaRef func, T args = 0);
 	// Soy consciente de que todos los cout deber�an llamarse desde otro lado, pero por ahora aqui
-	void PrintErrorModifyingTables(std::string fieldName, std::string typeName, bool modifiableFields);
+	void printErrorModifyingTables(std::string fieldName, std::string typeName, bool modifiableFields);
 protected:
-	LuaRef data =LuaMngr()->GetNewEmptyTable();
+	LuaRef data =LuaMngr()->getNewEmptyTable();
 private:
-	LuaRef type =LuaMngr()->GetSharedEmptyLuaRef();
-	LuaRef funcs =LuaMngr()->GetNewEmptyTable();
-	LuaRef initFunc =LuaMngr()->GetSharedEmptyLuaRef();
-	LuaRef updateFunc =LuaMngr()->GetSharedEmptyLuaRef();
-	LuaRef lateUpdateFunc =LuaMngr()->GetSharedEmptyLuaRef();
-	LuaRef fixedUpdateFunc =LuaMngr()->GetSharedEmptyLuaRef();
-	LuaRef onCollisionEnterFunc =LuaMngr()->GetSharedEmptyLuaRef();
-	LuaRef onTriggerEnterFunc =LuaMngr()->GetSharedEmptyLuaRef();
+	LuaRef type =LuaMngr()->getSharedEmptyLuaRef();
+	LuaRef funcs =LuaMngr()->getNewEmptyTable();
+	LuaRef initFunc =LuaMngr()->getSharedEmptyLuaRef();
+	LuaRef updateFunc =LuaMngr()->getSharedEmptyLuaRef();
+	LuaRef lateUpdateFunc =LuaMngr()->getSharedEmptyLuaRef();
+	LuaRef fixedUpdateFunc =LuaMngr()->getSharedEmptyLuaRef();
+	LuaRef onCollisionEnterFunc =LuaMngr()->getSharedEmptyLuaRef();
+	LuaRef onTriggerEnterFunc =LuaMngr()->getSharedEmptyLuaRef();
 
 protected:
 	template <class T>
-	void SetDataAsInnerType(T* component);
+	void setDataAsInnerType(T* component);
 };
 #endif
 
 template<class T>
-inline void AegisComponent::CallLuaRefFunc(LuaRef func, T args)
+inline void AegisComponent::callLuaRefFunc(LuaRef func, T args)
 {
 #if defined _DEBUG
 	if (!func.isNil())
@@ -81,7 +81,7 @@ inline void AegisComponent::CallLuaRefFunc(LuaRef func, T args)
 }
 
 template<class T>
-inline void AegisComponent::SetDataAsInnerType(T* component)
+inline void AegisComponent::setDataAsInnerType(T* component)
 {
-	SetType(LuaRef(LuaManager::getInstance()->GetState(), component));
+	setType(LuaRef(LuaManager::getInstance()->getState(), component));
 }

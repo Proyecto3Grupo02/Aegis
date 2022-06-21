@@ -12,7 +12,7 @@ LuaManager::~LuaManager() {
 	lua_close(state);
 }
 
-void LuaManager::Execute(const char* filename) {
+void LuaManager::execute(const char* filename) {
 	// ESTO ES TEMPORAL
 	std::string name = ".\\..\\Assets\\LuaScripts\\";
 	name.append(filename);
@@ -21,7 +21,7 @@ void LuaManager::Execute(const char* filename) {
 	int result = luaL_loadfile(state, name.c_str());
 
 	if (result != LUA_OK) {
-		PrintError(state);
+		printError(state);
 		return;
 	}
 
@@ -30,12 +30,12 @@ void LuaManager::Execute(const char* filename) {
 	result = lua_pcall(state, 0, LUA_MULTRET, 0);
 
 	if (result != LUA_OK) {
-		PrintError(state);
+		printError(state);
 		return;
 	}
 }
 
-void LuaManager::PrintError(lua_State* state) {
+void LuaManager::printError(lua_State* state) {
 	// The error message is on top of the stack.
 	// Fetch it, print it and then pop it off the stack.
 	const char* message = lua_tostring(state, -1);
@@ -43,26 +43,26 @@ void LuaManager::PrintError(lua_State* state) {
 	lua_pop(state, 1);
 }
 
-float LuaManager::ParseFloat(luabridge::LuaRef ref, float defaultValue)
+float LuaManager::parseFloat(luabridge::LuaRef ref, float defaultValue)
 {
 	return ref.isNil() ? defaultValue : ref.cast<float>();
 }
 
-std::string LuaManager::ParseString(luabridge::LuaRef ref, std::string defaultString)
+std::string LuaManager::parseString(luabridge::LuaRef ref, std::string defaultString)
 {
 	return ref.isNil() ? defaultString : ref.cast<std::string>();
 }
 
-bool LuaManager::ParseBool(luabridge::LuaRef ref, bool defaultBool)
+bool LuaManager::parseBool(luabridge::LuaRef ref, bool defaultBool)
 {
 	return ref.isNil() ? defaultBool : ref.cast<bool>();
 }
 
-void LuaManager::RegisterFunction(lua_CFunction function, const char* functionName) {
+void LuaManager::registerFunction(lua_CFunction function, const char* functionName) {
 	lua_register(state, functionName, function);
 }
 
-lua_State* LuaManager::GetState()
+lua_State* LuaManager::getState()
 {
 	return this->state;
 }
@@ -82,12 +82,12 @@ int LuaManager::setLuaPath(lua_State* L, const char* path)
 	return 0; // all done!
 }
 
-luabridge::LuaRef LuaManager::GetSharedEmptyLuaRef()
+luabridge::LuaRef LuaManager::getSharedEmptyLuaRef()
 {
 	return empty;
 }
 
-luabridge::LuaRef LuaManager::GetNewEmptyTable()
+luabridge::LuaRef LuaManager::getNewEmptyTable()
 {
 	return luabridge::newTable(state);
 }

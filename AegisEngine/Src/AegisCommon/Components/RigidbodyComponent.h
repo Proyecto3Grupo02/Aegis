@@ -21,40 +21,40 @@ public:
 	virtual void update(float deltaTime) override {};
 	virtual void lateUpdate(float deltaTime) override;
 	virtual void fixedUpdate() override;
-	void SyncToTransform();
-	void SetIterator(std::list<RigidbodyComponent*>::iterator physicsEntityIt);
+	void syncToTransform();
+	void setIterator(std::list<RigidbodyComponent*>::iterator physicsEntityIt);
 
 	//GETS-------------------------------------------
 	bool isActive() const;
-	Vector3 GetPosition() const;
+	Vector3 getPosition() const;
 	//Vector4 getRotation();
-	Vector3 GetForce() const;
+	Vector3 getForce() const;
 
 	//SETS------------------------------------------
-	void SetPosition(Vector3 pos);
-	void SetRotationEuler(Vector3 rot);
+	void setPosition(Vector3 pos);
+	void setRotationEuler(Vector3 rot);
 
 	//FORCES----------------------------------------
-	void AddForce(Vector3 force);
-	Vector3 AccelerateTo(Vector3 targetVelocity, float maxAcceleration = 1000000000000);
-	Vector3 AccelerateToRand();
-	void AddTorque(Vector3 torque);
-	void AddForceForward(float force);
+	void addForce(Vector3 force);
+	Vector3 accelerateTo(Vector3 targetVelocity, float maxAcceleration = 1000000000000);
+	Vector3 accelerateToRand();
+	void addTorque(Vector3 torque);
+	void addForceForward(float force);
 
-	void SetAngular() { rigidbody->SetAngularFactor(); }
-	void ResetForce();
+	void setAngular() { rigidbody->setAngularFactor(); }
+	void resetForce();
 
 	//FREEZE ROT------------------------------------
-	void FreezeRot(bool _x, bool _y, bool _z);
+	void freezeRot(bool _x, bool _y, bool _z);
 
 	//GRAVITY---------------------------------------
-	bool GetUsingGravity()const;
-	void SetUsingGravity(bool g_);
+	bool getUsingGravity()const;
+	void setUsingGravity(bool g_);
 
 	//LUA------------
 	static void ConvertToLua(lua_State* state);
 	void changeGravity(Vector3 acc);
-	int Raycast(Vector3 origin, Vector3 &dest, float distance);
+	int raycast(Vector3 origin, Vector3 &dest, float distance);
 	friend class PhysicsSystem;
 
 	//Activar o desactivar collider

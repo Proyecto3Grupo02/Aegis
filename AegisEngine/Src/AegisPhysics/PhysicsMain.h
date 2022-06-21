@@ -47,7 +47,7 @@ public:
     ~PhysicsSystem();
 
     btDiscreteDynamicsWorld* dynamicsWorld;
-    void Init(Ogre::SceneManager* mScene);
+    void init(Ogre::SceneManager* mScene);
     void update(float deltaTime, float timeStep, int maxSteps = 1);
     void remove();
     void removeRigidbody(btCollisionObject* rb);

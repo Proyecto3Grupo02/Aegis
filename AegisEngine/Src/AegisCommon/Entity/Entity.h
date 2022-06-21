@@ -43,7 +43,7 @@ public:
 
 	inline Ogre::SceneNode* getNode() { return mNode_; }
 
-	void DestroyNode();
+	void destroyNode();
 
 	inline void addComponentFromLua(AegisComponent* component);
 	AegisComponent* getComponentLua(std::string componentName);
@@ -53,21 +53,21 @@ public:
 
 	inline Scene* getScene() { return mScene_; }
 	inline void setScene(Scene* scene) { mScene_ = scene; }
-	void SetIterator(std::list<Entity*>::iterator entityIterator);
+	void setIterator(std::list<Entity*>::iterator entityIterator);
 
 	//doubt
 	void onCollision(Entity* other);
 	void onTrigger(Entity* other);
 
-	Transform* GetTransform() const;
-	void SetTransform(Transform* transform);
-	void SetParent(Entity* ent);
+	Transform* getTransform() const;
+	void setTransform(Transform* transform);
+	void setParent(Entity* ent);
 
-	void Destroy();
-	void SetNodeDestroyed(bool isDestroyed) { nodeDestroyed = isDestroyed;  };
+	void destroy();
+	void setNodeDestroyed(bool isDestroyed) { nodeDestroyed = isDestroyed;  };
 
-	void AddChild(Entity* ent) { mChildren_.push_back(ent); };
-	void RemoveChild(Entity* ent) { mChildren_.remove(ent); };
+	void addChild(Entity* ent) { mChildren_.push_back(ent); };
+	void removeChild(Entity* ent) { mChildren_.remove(ent); };
 
 	static void ConvertToLua(lua_State* state);
 protected:

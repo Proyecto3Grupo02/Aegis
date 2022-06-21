@@ -9,7 +9,7 @@ int main() {
 #endif // DEBUG	 
 
 	AegisMain a;
-	a.Init();
+	a.init();
 
 	return 0;
 }

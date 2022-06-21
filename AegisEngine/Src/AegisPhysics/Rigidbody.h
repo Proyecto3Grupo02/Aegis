@@ -41,11 +41,11 @@ public:
 	void setRbPosition(Vector3 vec);
 	void setRbRotation(Vector4 vec);
 	void setFreezeRotation(bool _x, bool _y, bool _z);
-	int RayCast(Vector3 origin, Vector3& dest);
+	int rayCast(Vector3 origin, Vector3& dest);
 
 	//FORCES---------------------------------
 	void addForce(Vector3 vec);
-	Vector3 AccelerateTo(Vector3 targetVelocity, float deltaTime, float maxAcceleration);
+	Vector3 accelerateTo(Vector3 targetVelocity, float deltaTime, float maxAcceleration);
 	void addTorque(Vector3 vec);
 	void clearForces();
 	
@@ -54,7 +54,7 @@ public:
 
 	friend class PhysicsSystem;
 	friend class RigidbodyComponent;
-	void SetAngularFactor()  ;
+	void setAngularFactor()  ;
 	void setLinearVelocity();
 
 	//void setRot(Vector3);

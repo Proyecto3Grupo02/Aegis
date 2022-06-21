@@ -11,7 +11,7 @@ Renderer::Renderer(Entity* _ent, std::string meshName, std::string matName, Ogre
 	AegisComponent("Renderer", _ent)
 {
 	isVisible = ir;
-	SetDataAsInnerType(this);
+	setDataAsInnerType(this);
 	constructoraRenderer(_ent, meshName,matName, sceneMng, ir);
 }
 
@@ -19,15 +19,15 @@ Renderer::Renderer(Entity* _ent, std::string meshName, std::string matName) :
 	AegisComponent("Renderer", _ent)
 {
 	isVisible = true;
-	SetDataAsInnerType(this);
+	setDataAsInnerType(this);
 	constructoraRenderer(_ent, meshName, matName,_ent->getNode()->getCreator(), true);
 }
 
 Renderer::Renderer()
 {
 	isVisible = true;
-	SetDataAsInnerType(this);
-	SetComponentName("Renderer");
+	setDataAsInnerType(this);
+	setComponentName("Renderer");
 }
 
 void Renderer::render()
@@ -60,7 +60,7 @@ void Renderer::constructoraRenderer(Entity* _ent, std::string meshName, std::str
 	node->attachObject(mesh);
 	setRendering(ir);
 
-	transform = getEntity()->GetTransform();
+	transform = getEntity()->getTransform();
 	if (transform == nullptr) throw "ENTITY WITHOUT TRANSFORM"; //Pulir excepcion
 }
 

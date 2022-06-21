@@ -35,10 +35,8 @@ RigidBody::~RigidBody()
 
 void RigidBody::createRigidBodyComponent(RigidBodyType rbType, Vector3 pos, Vector3 scale, Vector4 rotation, std::string bodyMeshName, bool isConvex)
 {
-
 	rigidBody = PhysicsSystem::getInstance()->createRigidBody(rbType, mass, scale, pos, rotation, bodyMeshName, isConvex, isKinematic, useGravity);
 	rigidBody->setUserPointer(this);
-
 }
 
 
@@ -99,7 +97,7 @@ void RigidBody::setUsingGravity(bool uG) {
 }
 
 void RigidBody::setGravity(Vector3 vec) {
-	btVector3 grav = btVector3(vec.GetX(), vec.GetY(), vec.GetZ());
+	btVector3 grav = btVector3(vec.getX(), vec.getY(), vec.getZ());
 	rigidBody->setGravity(grav);
 }
 
@@ -113,7 +111,7 @@ void RigidBody::setFreezeRotation(bool _x, bool _y, bool _z) {
 
 }
 
-int RigidBody::RayCast(Vector3 origin, Vector3& dest) {
+int RigidBody::rayCast(Vector3 origin, Vector3& dest) {
 	btVector3 _origin = Physics()->parseToBulletVector(origin);
 	btVector3 _dest = Physics()->parseToBulletVector(dest);
 	btCollisionWorld::ClosestRayResultCallback RayCallback(_origin, _dest);
@@ -157,12 +155,12 @@ void RigidBody::setRbRotation(Vector4 vec)
 
 //FORCES---------------------------------------------------------------------------------------------------------
 void RigidBody::addForce(Vector3 vec) {
-	btVector3 forc = btVector3(vec.GetX(), vec.GetY(), vec.GetZ());
+	btVector3 forc = btVector3(vec.getX(), vec.getY(), vec.getZ());
 	rigidBody->applyForce(forc, btVector3());
 }
 
 
-Vector3 RigidBody::AccelerateTo(Vector3 targetVelocity, float deltaTime, float maxAcceleration)
+Vector3 RigidBody::accelerateTo(Vector3 targetVelocity, float deltaTime, float maxAcceleration)
 {
 	Vector3 deltaVelocity = targetVelocity - Physics()->parseFromBulletVector(rigidBody->getLinearVelocity());
 	Vector3 acceleration = deltaVelocity / deltaTime;
@@ -177,7 +175,7 @@ Vector3 RigidBody::AccelerateTo(Vector3 targetVelocity, float deltaTime, float m
 
 void RigidBody::addTorque(Vector3 vec)
 {
-	btVector3 torque = btVector3(vec.GetX(), vec.GetY(), vec.GetZ());
+	btVector3 torque = btVector3(vec.getX(), vec.getY(), vec.getZ());
 	rigidBody->applyTorque(torque);
 }
 
@@ -193,7 +191,7 @@ void RigidBody::changeGravity(Vector3 acc)
 	rigidBody->setGravity(Physics()->parseToBulletVector(acc));
 }
 
-void RigidBody::SetAngularFactor() {
+void RigidBody::setAngularFactor() {
 	rigidBody->setAngularFactor(btVector3(0, 0, 0));
 }
 

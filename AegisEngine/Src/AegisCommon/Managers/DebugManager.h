@@ -16,20 +16,20 @@ public:
     virtual ~DebugManager();
 
     //write in console info
-    void Log(const std::string& msg);
+    void log(const std::string& msg);
     
     //write in console an error
-    void LogError(const std::string& error);
+    void logError(const std::string& error);
 
     //write in console a warning
-    void LogWarning(const std::string& error);
+    void logWarning(const std::string& error);
 
     //shows delta time, num of entities... 
     void showInfo();
 
     
 
-    bool Init();
+    bool init();
 
 protected:
 };

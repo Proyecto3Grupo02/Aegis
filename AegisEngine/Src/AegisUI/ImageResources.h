@@ -21,7 +21,7 @@ public:
     ImageResources();
     ~ImageResources();
 
-    void ParseDirectory(std::string dir);
+    void parseDirectory(std::string dir);
 	std::string getImage(std::string image_);
 };
 #endif

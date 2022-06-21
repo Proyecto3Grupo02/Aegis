@@ -3,7 +3,7 @@
 #include "Scene.h"
 
 Entity::Entity(Scene* scene, Ogre::SceneNode* node) :
-	mNode_(node == nullptr ?  scene->GetNewNode() : node), active_(true), mScene_(scene), nodeDestroyed(false)
+	mNode_(node == nullptr ?  scene->getNewNode() : node), active_(true), mScene_(scene), nodeDestroyed(false)
 {
 	//Componente obligatorio para todas las entidades
 	transform = new Transform(Vector3(0,0,0), Ogre::Quaternion(), Vector3(1.0f, 1.0f, 1.0f), getNode(), this);
@@ -12,7 +12,7 @@ Entity::Entity(Scene* scene, Ogre::SceneNode* node) :
 
 
 Entity::Entity(Scene* scene, Vector3 pos) :
-	mNode_(scene->GetNewNode()), active_(true), mScene_(scene), nodeDestroyed(false)
+	mNode_(scene->getNewNode()), active_(true), mScene_(scene), nodeDestroyed(false)
 {
 	transform = new Transform(pos, Ogre::Quaternion(), Vector3(1.0f, 1.0f, 1.0f), getNode(), this);
 	this->addComponentFromLua(transform);
@@ -27,10 +27,10 @@ Entity::~Entity()
 	mComponents_.clear();
 
 	if(!nodeDestroyed)
-		DestroyNode();
+		destroyNode();
 	
 	for (auto c : mChildren_)
-		c->SetNodeDestroyed(true);
+		c->setNodeDestroyed(true);
 
 	mChildren_.clear();
 }
@@ -86,7 +86,7 @@ void Entity::render() {
 	}
 }
 
-void Entity::DestroyNode()
+void Entity::destroyNode()
 {
 	auto mParent = mNode_ == nullptr ? nullptr : mNode_->getParentSceneNode();
 	if (mParent != nullptr && mParent->getCreator() != nullptr) {
@@ -97,7 +97,7 @@ void Entity::DestroyNode()
 
 inline void Entity::addComponentFromLua(AegisComponent* component)
 {
-	std::string key = component->GetComponentName();
+	std::string key = component->getComponentName();
 
 	if (mComponents_.count(key) == 0) { //si no est� lo a�adimos
 		//component->SetEntity(this);
@@ -119,7 +119,7 @@ AegisComponent* Entity::getComponentLua(std::string componentName)
 	else return  mComponents_[componentName];
 }
 
-void Entity::SetIterator(std::list<Entity*>::iterator entityIterator)
+void Entity::setIterator(std::list<Entity*>::iterator entityIterator)
 {
 	this->entityIterator = entityIterator;
 }
@@ -140,31 +140,31 @@ void Entity::onTrigger(Entity* other)
 	}
 }
 
-Transform* Entity::GetTransform() const
+Transform* Entity::getTransform() const
 {
 	return transform;
 }
 
-void Entity::SetTransform(Transform* transform)
+void Entity::setTransform(Transform* transform)
 {
-	transform->PrintErrorModifyingTables("transform", "Transform", true);
+	transform->printErrorModifyingTables("transform", "Transform", true);
 }
 
-void Entity::SetParent(Entity* ent)
+void Entity::setParent(Entity* ent)
 {
 	if (transform != nullptr)
-		transform->SetParent(ent);
+		transform->setParent(ent);
 	else
 		std::cout << "ERROR: For some reason transform is null in entity " << getName() << "\n";
 }
 
-void Entity::Destroy()
+void Entity::destroy()
 {
-	GetTransform()->DestroyChilds();
-	mScene_->DestroyEntity(entityIterator);
+	getTransform()->destroyChilds();
+	mScene_->destroyEntity(entityIterator);
 }
 
-Entity* CreateEntity(Scene* scene, Vector3 pos)
+Entity* createEntity(Scene* scene, Vector3 pos)
 {
 	return new Entity(scene, pos);;
 }
@@ -173,7 +173,7 @@ void Entity::ConvertToLua(lua_State* state)
 {
 	getGlobalNamespace(state).
 		beginNamespace("Aegis").
-		addFunction("CreateEntity", CreateEntity).
+		addFunction("CreateEntity", createEntity).
 
 		beginClass<Entity>("Entity").
 		addFunction("AddComponent", &Entity::addComponentFromLua).
@@ -183,9 +183,9 @@ void Entity::ConvertToLua(lua_State* state)
 		addFunction("GetName", &Entity::getName).
 		addFunction("SetName", &Entity::setName).
 		addFunction("GetScene", &Entity::getScene).
-		addFunction("SetParent", &Entity::SetParent).
-		addFunction("Destroy", &Entity::Destroy).
-		addProperty("transform", &Entity::GetTransform, &Entity::SetTransform).
+		addFunction("SetParent", &Entity::setParent).
+		addFunction("Destroy", &Entity::destroy).
+		addProperty("transform", &Entity::getTransform, &Entity::setTransform).
 		endClass().
 		endNamespace();
 }

@@ -13,11 +13,11 @@ public:
 	Vector2(): x(0), y(0) {}
     ~Vector2() {};
 
-    float GetX() const{return x;}    
-    float GetY() const{return y;}
+    float getX() const{return x;}    
+    float getY() const{return y;}
 
-    void SetX(float _x){x=_x;}
-    void SetY(float _y){y=_y;}
+    void setX(float _x){x=_x;}
+    void setY(float _y){y=_y;}
 
     Vector2 operator+(Vector2 const& v){ return Vector2(x+v.x, y + v.y);}
     Vector2 operator-(Vector2 const& v){ return Vector2(x-v.x, y - v.y);}
@@ -32,8 +32,8 @@ public:
         beginNamespace("Maths").
         beginClass<Vector2>("Vector2").
         addConstructor<void(*)(float, float)>().
-        addProperty("x", &Vector2::GetX, &Vector2::SetX).
-        addProperty("y", &Vector2::GetY, &Vector2::SetY).
+        addProperty("x", &Vector2::getX, &Vector2::setX).
+        addProperty("y", &Vector2::getY, &Vector2::setY).
         addFunction("__add", &Vector2::operator+).
         addFunction("__sub", &Vector2::operator-).
         addFunction("__mul", &Vector2::operator*).

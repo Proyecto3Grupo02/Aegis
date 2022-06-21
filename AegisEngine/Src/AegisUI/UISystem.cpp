@@ -23,7 +23,7 @@ UISystem::~UISystem() {
 	delete overlaySys;
 }
 
-void UISystem::Init(Ogre::SceneManager* mScene, InputSystem* input) {
+void UISystem::init(Ogre::SceneManager* mScene, InputSystem* input) {
 	inputSystem = input; //boton
 
 	overlaySys = new Ogre::OverlaySystem();
@@ -49,18 +49,18 @@ InputSystem* UISystem::getInputSystem() {
 	return inputSystem;
 }
 
-void UISystem::AddUIObject(UIObject* object_) {
+void UISystem::addUIObject(UIObject* object_) {
 	ui_objects.push_back(object_);
 }
 
-void UISystem::DeleteUIObject(const UIObject* obj_) {
+void UISystem::deleteUIObject(const UIObject* obj_) {
 	std::vector<UIObject*>::iterator it = ui_objects.begin();
 
 	while (it != ui_objects.end() && *it != obj_) ++it;
 	it = ui_objects.erase(it);
 }
 
-void UISystem::Update(float deltaTime) {
+void UISystem::update(float deltaTime) {
 	for (auto obj : ui_objects) {
 		auto button = dynamic_cast<Button*>(obj);
 		if (button != nullptr)button->update();
@@ -68,8 +68,8 @@ void UISystem::Update(float deltaTime) {
 }
 
 //LUA----------------------------------------------------------------------------------
-UIObject* UISystem::CreateUIElem(luabridge::LuaRef luaref) {
-	std::string type = LuaMngr()->ParseString(luaref["type"], "nil");
+UIObject* UISystem::createUIElem(luabridge::LuaRef luaref) {
+	std::string type = LuaMngr()->parseString(luaref["type"], "nil");
 	UIObject* uiObject = nullptr;
 
 	if (type == "nil")
@@ -85,7 +85,7 @@ UIObject* UISystem::CreateUIElem(luabridge::LuaRef luaref) {
 	}
 
 	if (uiObject != nullptr)
-		AddUIObject(uiObject);
+		addUIObject(uiObject);
 
 	return uiObject;
 }
@@ -95,7 +95,7 @@ void UISystem::ConvertToLua(lua_State* state) {
 		beginNamespace("Aegis").
 		beginNamespace("UI").
 		beginClass<UISystem>("UISystem").
-		addFunction("CreateUIElem", &UISystem::CreateUIElem).
+		addFunction("CreateUIElem", &UISystem::createUIElem).
 		endClass().
 		endNamespace().
 		endNamespace();

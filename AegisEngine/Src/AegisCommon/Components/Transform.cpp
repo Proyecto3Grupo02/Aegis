@@ -5,22 +5,22 @@
 
 using namespace MathUtils;
 
-Vector3 Transform::GetPosition() const
+Vector3 Transform::getPosition() const
 {
 	return position;
 }
 
-Ogre::Quaternion Transform::GetRotation() const
+Ogre::Quaternion Transform::getRotation() const
 {
 	return rotation;
 }
 
-Vector3 Transform::GetScale() const
+Vector3 Transform::getScale() const
 {
 	return scale;
 }
 
-void Transform::SetParent(Entity* ent)
+void Transform::setParent(Entity* ent)
 {
 	auto root = mNode->getCreator()->getRootSceneNode();
 	auto oldParent = parentNode;
@@ -30,14 +30,14 @@ void Transform::SetParent(Entity* ent)
 	
 	if (oldParentEntity != ent && oldParentEntity != nullptr)
 	{
-		oldParentEntity->GetTransform()->RemoveChild(GetEntity());
-		oldParentEntity->RemoveChild(GetEntity());
+		oldParentEntity->getTransform()->removeChild(getEntity());
+		oldParentEntity->removeChild(getEntity());
 	}
 
 	if (parentEntity != nullptr)
 	{
-		parentEntity->GetTransform()->AddChild(this->GetEntity());
-		parentEntity->AddChild(this->GetEntity());
+		parentEntity->getTransform()->addChild(this->getEntity());
+		parentEntity->addChild(this->getEntity());
 	}
 
 	oldParent->removeChild(mNode);
@@ -68,58 +68,58 @@ void Transform::SetParent(Entity* ent)
 	rotation = newParentRotation.Inverse() * rotation;
 }
 
-void Transform::SetPosition(Vector3 newPos) {
+void Transform::setPosition(Vector3 newPos) {
 	position = newPos;
 }
 
-void Transform::SetRotation(Ogre::Quaternion newRot)
+void Transform::setRotation(Ogre::Quaternion newRot)
 {
 	rotation = newRot;
 }
 
-Vector3 Transform::GetRotationEuler() const
+Vector3 Transform::getRotationEuler() const
 {
 	return OgreQuatEuler(rotation);
 }
 
-void Transform::SetRotationEuler(Vector3 newRot)
+void Transform::setRotationEuler(Vector3 newRot)
 {
 	rotation = EulerToOgreQuat(newRot);
 }
 
-void Transform::SetScale(Vector3 newScale)
+void Transform::setScale(Vector3 newScale)
 {
 	scale = newScale;
 }
 
-Vector3 Transform::GetForward() const
+Vector3 Transform::getForward() const
 {
 	return RotateQuaternion(rotation, Vector3(0, 0, 1));
 }
 
-Vector3 Transform::GetRight() const
+Vector3 Transform::getRight() const
 {
 	return RotateQuaternion(rotation, Vector3(1, 0, 0));
 }
 
-Vector3 Transform::GetUp() const
+Vector3 Transform::getUp() const
 {
 	return RotateQuaternion(rotation, Vector3(0, 1, 0));
 }
 
-void Transform::Yaw(float degrees)
+void Transform::yaw(float degrees)
 {
 	mNode->yaw(Ogre::Degree(degrees));
 	rotation = mNode->getOrientation();
 }
 
-void Transform::Pitch(float degrees)
+void Transform::pitch(float degrees)
 {
 	mNode->pitch(Ogre::Degree(degrees));
 	rotation = mNode->getOrientation();
 }
 
-void Transform::Roll(float degrees)
+void Transform::roll(float degrees)
 {
 	mNode->roll(Ogre::Degree(degrees));
 	rotation = mNode->getOrientation();
@@ -145,36 +145,36 @@ void Transform::ConvertToLua(lua_State* state)
 		beginNamespace("Aegis").
 		beginNamespace("NativeComponents").
 		beginClass<Transform>("Transform").
-		addProperty("position", &Transform::GetPosition, &Transform::SetPosition).
-		addProperty("scale", &Transform::GetScale, &Transform::SetScale).
-		addProperty("rotation", &Transform::GetRotation, &Transform::SetRotation).
-		addProperty("localEulerAngles", &Transform::GetRotationEuler, &Transform::SetRotationEuler).
-		addFunction("SetParent", &Transform::SetParent).
-		addProperty("forward", &Transform::GetForward, &Transform::SetFoo).
-		addProperty("right", &Transform::GetRight, &Transform::SetFoo).
-		addProperty("up", &Transform::GetUp, &Transform::SetFoo).
-		addFunction("Yaw", &Transform::Yaw).
-		addFunction("Pitch", &Transform::Pitch).
-		addFunction("Roll", &Transform::Roll).
+		addProperty("position", &Transform::getPosition, &Transform::setPosition).
+		addProperty("scale", &Transform::getScale, &Transform::setScale).
+		addProperty("rotation", &Transform::getRotation, &Transform::setRotation).
+		addProperty("localEulerAngles", &Transform::getRotationEuler, &Transform::setRotationEuler).
+		addFunction("SetParent", &Transform::setParent).
+		addProperty("forward", &Transform::getForward, &Transform::setFoo).
+		addProperty("right", &Transform::getRight, &Transform::setFoo).
+		addProperty("up", &Transform::getUp, &Transform::setFoo).
+		addFunction("Yaw", &Transform::yaw).
+		addFunction("Pitch", &Transform::pitch).
+		addFunction("Roll", &Transform::roll).
 		endClass().
 		endNamespace().
 		endNamespace();
 }
 
-void Transform::AddChild(Entity* child)
+void Transform::addChild(Entity* child)
 {
 	childs.push_back(child);
 }
 
-void Transform::RemoveChild(Entity* child)
+void Transform::removeChild(Entity* child)
 {
 	childs.remove(child);
 }
 
-void Transform::DestroyChilds()
+void Transform::destroyChilds()
 {
 	//Destroys every child calling its Destroy function
 	for (Entity* child : childs)
-		child->Destroy();
+		child->destroy();
 }
 

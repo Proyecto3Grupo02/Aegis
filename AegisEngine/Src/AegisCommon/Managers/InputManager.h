@@ -36,14 +36,14 @@ private:
 public:
 	InputSystem();
 	~InputSystem();
-	void Init();
-	void UpdateState();
-	void ClearState();
+	void init();
+	void updateState();
+	void clearState();
 	int getId(SDL_Keycode key); //keycode
 
 	//UPDATE KEY STATE
-	void OnKeyDown(SDL_Keycode key);
-	void OnKeyUp(SDL_Keycode key);
+	void onKeyDown(SDL_Keycode key);
+	void onKeyUp(SDL_Keycode key);
 
 	//CONSULT KEY STATE
 	bool keyWasPressed(SDL_Keycode key);
@@ -61,16 +61,16 @@ public:
 
 	static void ConvertToLua(lua_State* state);
 
-	void OnMouseButtonDown(SDL_MouseButtonEvent buttonEvent);
-	void OnMouseButtonUp(SDL_MouseButtonEvent buttonEvent);
+	void onMouseButtonDown(SDL_MouseButtonEvent buttonEvent);
+	void onMouseButtonUp(SDL_MouseButtonEvent buttonEvent);
 
-	bool IsMouseButtonDownLua(int button);
-	bool IsMouseButtonPressedLua(int button);
-	bool IsMouseButtonReleasedLua(int button);
+	bool isMouseButtonDownLua(int button);
+	bool isMouseButtonPressedLua(int button);
+	bool isMouseButtonReleasedLua(int button);
 
-	void SetMouseMotion(Vector2 motion);
-	Vector2 GetMouseMotion() const;
-	Vector2 GetMousePosition();
+	void setMouseMotion(Vector2 motion);
+	Vector2 getMouseMotion() const;
+	Vector2 getMousePosition();
 };
 
 

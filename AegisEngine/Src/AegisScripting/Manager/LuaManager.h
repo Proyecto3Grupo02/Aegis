@@ -15,25 +15,25 @@
 //}
 
 template <typename T>
-extern void ExportToLua(T item, const char* name);
+extern void exportToLua(T item, const char* name);
 
 class LuaManager : public Singleton<LuaManager> {
 public:
 	LuaManager();
 	virtual ~LuaManager();
-	void Execute(const char* filename);
-	void PrintError(lua_State* state);
-	void RegisterFunction(lua_CFunction function, const char* functionName);
-	lua_State* GetState();
+	void execute(const char* filename);
+	void printError(lua_State* state);
+	void registerFunction(lua_CFunction function, const char* functionName);
+	lua_State* getState();
 	int setLuaPath(lua_State* L, const char* path);
-	luabridge::LuaRef GetSharedEmptyLuaRef();
-	luabridge::LuaRef GetNewEmptyTable();
+	luabridge::LuaRef getSharedEmptyLuaRef();
+	luabridge::LuaRef getNewEmptyTable();
 	
-	float ParseFloat(luabridge::LuaRef ref, float defaultValue = 0);
-	std::string ParseString(luabridge::LuaRef ref, std::string defaultString = "");
+	float parseFloat(luabridge::LuaRef ref, float defaultValue = 0);
+	std::string parseString(luabridge::LuaRef ref, std::string defaultString = "");
 
 	//if nil, it returns false
-	bool ParseBool(luabridge::LuaRef ref, bool defaultBool = false);
+	bool parseBool(luabridge::LuaRef ref, bool defaultBool = false);
 private:
 	lua_State* state;
 	luabridge::LuaRef empty = luabridge::LuaRef(state);

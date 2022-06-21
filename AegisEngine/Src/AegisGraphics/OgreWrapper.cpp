@@ -17,12 +17,12 @@ mPluginsCfg(Ogre::BLANKSTRING)
 {
 }
 
-AegisCamera* OgreWrapper::GetCamera()
+AegisCamera* OgreWrapper::getCamera()
 {
 	return mCamera;
 }
 
-bool OgreWrapper::Render() {
+bool OgreWrapper::render() {
 	windowMan->update();
 	return mRoot->renderOneFrame();
 }
@@ -30,14 +30,14 @@ bool OgreWrapper::Render() {
 
 OgreWrapper::~OgreWrapper() {
     delete mCamera; 
-	render->destroy();
+	render_->destroy();
 	mSceneMgr->clearScene();
 	delete mRoot;
 	delete lm;
 	delete windowMan; //
 }
 
-bool OgreWrapper::Init() {
+bool OgreWrapper::init() {
 	//files that contains the resources that ogre will use and the plugins used, specifically, Gl and D3D11 are
 //added in order to have a render winow
 
@@ -77,7 +77,7 @@ bool OgreWrapper::Init() {
 	if (!(mRoot->restoreConfig() || mRoot->showConfigDialog(nullptr)))
 		return false;
 
-	CreateWindowNative();
+	createWindowNative();
 	Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
 
 	//initialise all resources found by ogre
@@ -87,17 +87,17 @@ bool OgreWrapper::Init() {
 
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
 
-	mCamera = CreateCamera();
+	mCamera = createCamera();
 	windowMan->setCamera(mCamera);
-	windowMan->setRenderer(render);
+	windowMan->setRenderer(render_);
 }
 
-AegisCamera* OgreWrapper::CreateCamera(Ogre::SceneNode* node)
+AegisCamera* OgreWrapper::createCamera(Ogre::SceneNode* node)
 {
 	auto ogreCamNode = node == nullptr ? mSceneMgr->getRootSceneNode()->createChildSceneNode() : node;
 	auto mCamera = new AegisCamera("MainCamera", ogreCamNode); ///-------------------------------------------------------
-	auto ogreCam = mCamera->GetCamera();
-	Ogre::Viewport* vp = render->addViewport(ogreCam);
+	auto ogreCam = mCamera->getCamera();
+	Ogre::Viewport* vp = render_->addViewport(ogreCam);
 	
 	ogreCamNode->setPosition(0, 0, 10);
 	ogreCamNode->lookAt(Ogre::Vector3(0, 0, -300), Ogre::Node::TS_WORLD);
@@ -111,13 +111,13 @@ AegisCamera* OgreWrapper::CreateCamera(Ogre::SceneNode* node)
 	return mCamera;
 }
 
-Ogre::SceneNode* OgreWrapper::GetRootNode()
+Ogre::SceneNode* OgreWrapper::getRootNode()
 {
 	return mSceneMgr->getRootSceneNode();
 }
 
 
-void OgreWrapper::CreateWindowNative()
+void OgreWrapper::createWindowNative()
 {
 	mRoot->restoreConfig();
 	mRoot->initialise(false);
@@ -155,6 +155,6 @@ void OgreWrapper::CreateWindowNative()
 	// assign the NSWindow pointer to the parentWindowHandle parameter
 	params.insert(std::make_pair("parentWindowHandle", winHandle));
 
-	render = mRoot->createRenderWindow("myWindowTitle", 1920,1080,false, &params);
+	render_ = mRoot->createRenderWindow("myWindowTitle", 1920,1080,false, &params);
 	
 }

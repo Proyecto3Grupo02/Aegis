@@ -135,15 +135,6 @@
     <ClInclude Include="..\..\Src\AegisCommon\Utils\LuaMaths.h">
       <Filter>Archivos de encabezado\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Components\RectTransform.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Components\UIComponent.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Entity\UIElement.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\AegisCommon\Components\Component.cpp">
@@ -196,15 +187,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\AegisCommon\Components\RigidbodyComponent.cpp">
       <Filter>Archivos de origen\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\AegisCommon\Components\RectTransform.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\AegisCommon\Components\UIComponent.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\AegisCommon\Entity\UIElement.cpp">
-      <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

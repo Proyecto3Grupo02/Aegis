@@ -1,38 +1,45 @@
 #include "SceneManager.h"
+#include "SceneManager.h"
 #include "Scene.h"
 
-SceneManager::SceneManager(Scene* scene)
+SceneManager::SceneManager()
 {
 	//LoadScene(sceneName);
-	currentScene = scene;
 }
 
 SceneManager::~SceneManager() {
 	delete currentScene;
 }
 
-void SceneManager::LoadScene(std::string sceneName)
+void SceneManager::loadScene(std::string sceneName)
 {
 	//currentScene = new Scene();
 }
 
-void SceneManager::UpdateCurrentScene(float deltaTime) {
-	currentScene->UpdateScene(deltaTime);
+void SceneManager::init(Scene* scene)
+{
+	currentScene = scene;
+	scene->init();
+	exportToLua(scene, "currentScene");
 }
 
-void SceneManager::PreRenderScene() {
-	currentScene->Render();
+void SceneManager::updateCurrentScene(float deltaTime) {
+	currentScene->updateScene(deltaTime);
 }
 
-Scene* SceneManager::GetCurrentScene()
+void SceneManager::preRenderScene() {
+	currentScene->render();
+}
+
+Scene* SceneManager::getCurrentScene()
 {
 	return currentScene;
 }
 
-void SceneManager::ChangeScene(std::string sceneName)
+void SceneManager::changeScene(std::string sceneName)
 {
 	delete currentScene;
-	LoadScene(sceneName);
+	loadScene(sceneName);
 }
 
 void SceneManager::ConvertToLua(lua_State* state)
