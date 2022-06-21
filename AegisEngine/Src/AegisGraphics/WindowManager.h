@@ -18,8 +18,8 @@ private:
     Uint32 flags;
 
     SDL_Window* mWindow_ = nullptr;
-    Ogre::RenderWindow* render;
-    AegisCamera* mCamera;	
+    Ogre::RenderWindow* render = nullptr;
+    AegisCamera* mCamera = nullptr;
 
 public:
     WindowManager(std::string gameTittle, int w, int h, bool fullScreen, Uint32 flag);

@@ -15,12 +15,12 @@ class OgreWrapper;
 class Scene : public ILuaObject, public IInitializable
 {
 private:
-	std::list<Entity*>* entities;
-	std::list<RigidbodyComponent*>* physicsEntities;
-	std::list<Entity*>* uninitializedEntities;
+	std::list<Entity*>* entities = nullptr;
+	std::list<RigidbodyComponent*>* physicsEntities = nullptr;
+	std::list<Entity*>* uninitializedEntities = nullptr;
 	std::list<std::list<Entity*>::iterator> entitiesToDelete;
-	Ogre::SceneNode* ogreNode;
-	OgreWrapper* ogreWrapper;
+	Ogre::SceneNode* ogreNode = nullptr;
+	OgreWrapper* ogreWrapper = nullptr;
 	// Fixed Update arguments
 
 	// Este parametro quizas sea mejor a la clase application cuando la tengamos

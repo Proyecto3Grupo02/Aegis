@@ -10,7 +10,7 @@ class SoundEmitterComponent : public AegisComponent
 {
 private:
     std::string mSound_;
-    SoundEmitter* mEmmiter_;
+    SoundEmitter* mEmmiter_ = nullptr;
 public:
     SoundEmitterComponent(Entity* ent, std::string sound);
     ~SoundEmitterComponent();

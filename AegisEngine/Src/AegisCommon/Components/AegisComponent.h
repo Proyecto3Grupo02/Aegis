@@ -44,6 +44,8 @@ public:
 
 protected:
 	LuaRef data =LuaMngr()->getNewEmptyTable();
+	template <class T>
+	void setDataAsInnerType(T* component);
 
 private:
 	LuaRef type =LuaMngr()->getSharedEmptyLuaRef();
@@ -54,10 +56,6 @@ private:
 	LuaRef fixedUpdateFunc =LuaMngr()->getSharedEmptyLuaRef();
 	LuaRef onCollisionEnterFunc =LuaMngr()->getSharedEmptyLuaRef();
 	LuaRef onTriggerEnterFunc =LuaMngr()->getSharedEmptyLuaRef();
-
-protected:
-	template <class T>
-	void setDataAsInnerType(T* component);
 };
 #endif
 

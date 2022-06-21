@@ -11,7 +11,7 @@ class WindowManager;
 class OgreWrapper
 {
 private:
-	Ogre::Root* mRoot;
+	Ogre::Root* mRoot = nullptr;
 
 	Ogre::String mResourcesCfg;
 	Ogre::String mPluginsCfg;
@@ -20,12 +20,12 @@ private:
 	SDL_Window* native = nullptr;
 	SDL_Renderer* renderer_ = nullptr;
 
-	Ogre::SceneManager* mSceneMgr;
-	Ogre::LogManager* lm;
+	Ogre::SceneManager* mSceneMgr = nullptr;
+	Ogre::LogManager* lm = nullptr;
 
-	AegisCamera* mCamera;
+	AegisCamera* mCamera = nullptr;
 
-	WindowManager* windowMan;
+	WindowManager* windowMan = nullptr;
 
 	void createWindowNative();
 	AegisCamera* createCamera(Ogre::SceneNode* node = nullptr);

@@ -11,7 +11,7 @@
 class SoundListenerComponent: public AegisComponent
 {
 private:
-    SoundListener* mListener_;
+    SoundListener* mListener_ = nullptr;
     
 public:
     SoundListenerComponent(/* args */);

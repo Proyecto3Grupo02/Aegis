@@ -35,7 +35,7 @@ public:
 	//if nil, it returns false
 	bool parseBool(luabridge::LuaRef ref, bool defaultBool = false);
 private:
-	lua_State* state;
+	lua_State* state = nullptr;
 	luabridge::LuaRef empty = luabridge::LuaRef(state);
 };
 

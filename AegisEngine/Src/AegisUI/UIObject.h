@@ -34,8 +34,8 @@ protected:
 	{
 		setType(luabridge::LuaRef(LuaManager::getInstance()->getState(), component));
 	};
-private:
 
+private:
 	std::string material;
 	std::string name;
 	void show();
@@ -46,7 +46,6 @@ public:
 	UIObject(const std::string& n, int order, float x_, float y_, float w_, float h_, bool isActive = true);
 	UIObject(const std::string& n, int order, float x_, float y_, bool isActive = true);
 	virtual ~UIObject();
-
 	
 	//void setMetricsMode(MetricsMode mmode);
 	void setVisible(bool visible);

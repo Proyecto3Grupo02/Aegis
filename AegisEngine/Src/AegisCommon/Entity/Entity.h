@@ -72,12 +72,12 @@ public:
 	static void ConvertToLua(lua_State* state);
 
 protected:
-	Scene* mScene_; //scene pointer 
+	Scene* mScene_ = nullptr; //scene pointer 
 	std::unordered_map <std::string, AegisComponent*> mComponents_; //list of all the components in scene
 	std::vector<AegisComponent*> mComponentsArray_; //list of all the components in scene
 	bool active_; //bool to check if the entity is active or not
 
-	Ogre::SceneNode* mNode_;
+	Ogre::SceneNode* mNode_ = nullptr;
 
 	std::list<Entity*> mChildren_;
 

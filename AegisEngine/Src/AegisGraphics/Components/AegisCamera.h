@@ -23,9 +23,9 @@ public:
 	void free();
 
 private:
-	Ogre::Camera* mCamera_;
-	Ogre::SceneManager* mngr;
-	Ogre::SceneNode* mNode_;
+	Ogre::Camera* mCamera_ = nullptr;
+	Ogre::SceneManager* mngr = nullptr;
+	Ogre::SceneNode* mNode_ = nullptr;
 	bool isMainCam_;
 
 };

@@ -107,9 +107,9 @@ public:
 
 private:
 	std::string mType;
-	Ogre::SceneNode* mNode_;
-	Ogre::Light* mLight_;
-	Ogre::SceneManager* mngr_;
+	Ogre::SceneNode* mNode_ = nullptr;
+	Ogre::Light* mLight_ = nullptr;
+	Ogre::SceneManager* mngr_ = nullptr;
 };
 
 # endif

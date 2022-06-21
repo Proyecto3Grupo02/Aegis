@@ -22,9 +22,9 @@ namespace Ogre {
 class UISystem : public Singleton<UISystem> {
 private:
 	InputSystem* inputSystem = nullptr; 
-	Ogre::OverlayManager* overlayMng;
-	Ogre::OverlaySystem* overlaySys;
-	Ogre::Overlay* overlay;
+	Ogre::OverlayManager* overlayMng = nullptr;
+	Ogre::OverlaySystem* overlaySys = nullptr;
+	Ogre::Overlay* overlay = nullptr;
 
 	std::vector<UIObject*>ui_objects;
 

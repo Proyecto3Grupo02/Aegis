@@ -53,12 +53,12 @@ public:
 	void destroyChilds();
 
 protected:
-	Ogre::SceneNode* mNode;
+	Ogre::SceneNode* mNode = nullptr;
 	Vector3 position;
 	Ogre::Quaternion rotation;
 	Vector3 scale;
-	Ogre::SceneNode* parentNode;
-	Entity* parentEntity;
+	Ogre::SceneNode* parentNode = nullptr;
+	Entity* parentEntity = nullptr;
 
 private:
 	std::list<Entity*> childs;

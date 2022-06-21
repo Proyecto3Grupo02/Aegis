@@ -29,10 +29,10 @@ protected:
 	void constructoraRenderer(Entity* _ent, std::string meshName, std::string matName, Ogre::SceneManager* sceneMng, bool ir);
 	void constructoraRendererLua(Entity* _ent, std::string meshName, std::string matName);
 
-	Ogre::SceneNode* node;
-	TransformComponent* transform;
-	Ogre::Entity* mesh;
-	bool isVisible;
+	Ogre::SceneNode* node = nullptr;
+	TransformComponent* transform = nullptr;
+	Ogre::Entity* mesh = nullptr;
+	bool isVisible = true;
 };
 
 

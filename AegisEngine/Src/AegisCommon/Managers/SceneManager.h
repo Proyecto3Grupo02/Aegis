@@ -12,8 +12,8 @@ class OgreWrapper;
 class SceneManager : public Singleton<SceneManager>, public ILuaObject
 {
 private:
-	Scene* currentScene;
-	OgreWrapper* ogreWrapper;
+	Scene* currentScene = nullptr;
+	OgreWrapper* ogreWrapper = nullptr;
 	void loadScene(luabridge::LuaRef scene);
 
 public:
