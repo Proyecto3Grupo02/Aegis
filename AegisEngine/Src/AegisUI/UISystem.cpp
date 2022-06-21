@@ -8,24 +8,7 @@
 #include "OgreFontManager.h"
 #include <iostream>
 
-UISystem::UISystem() {
-
-}
-
-UISystem::~UISystem() {
-	for (auto uiObject : ui_objects)
-	{
-		delete uiObject;
-		uiObject = nullptr;
-	}
-
-	ui_objects.clear();
-
-	delete overlaySys;
-	overlaySys = nullptr;
-}
-
-void UISystem::init(Ogre::SceneManager* mScene, InputSystem* input) {
+UISystem::UISystem(Ogre::SceneManager* mScene, InputSystem* input) {
 	inputSystem = input; //boton
 
 	overlaySys = new Ogre::OverlaySystem();
@@ -42,6 +25,18 @@ void UISystem::init(Ogre::SceneManager* mScene, InputSystem* input) {
 	pFont->load();
 }
 
+UISystem::~UISystem() {
+	for (auto uiObject : ui_objects)
+	{
+		delete uiObject;
+		uiObject = nullptr;
+	}
+
+	ui_objects.clear();
+
+	delete overlaySys;
+	overlaySys = nullptr;
+}
 
 Ogre::Overlay* UISystem::getOverlay() {
 	return overlay;

@@ -30,10 +30,9 @@ private:
 
 	void addUIObject(UIObject* object_);
 public:
-	UISystem();
+	UISystem(Ogre::SceneManager* mScene, InputSystem* input);
 	~UISystem();
 	UIObject* createUIElem(luabridge::LuaRef luaref);
-	void init(Ogre::SceneManager* mScene, InputSystem* input);
 	void deleteUIObject(const UIObject* obj_);
 	void update(float deltaTime);
 	InputSystem* getInputSystem();

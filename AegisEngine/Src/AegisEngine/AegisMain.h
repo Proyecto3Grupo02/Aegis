@@ -15,12 +15,12 @@ private:
 
     void gameLoop();
     void convertObjectToLua();
+    void free();
 
 public:
     AegisMain();
     virtual ~AegisMain();
     virtual bool init() override;
-
     const float TARGET_FRAME_RATE = 60.0f;
     };
 #endif //

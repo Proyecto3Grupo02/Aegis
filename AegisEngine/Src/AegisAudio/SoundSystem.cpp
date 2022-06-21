@@ -2,35 +2,11 @@
 #include <fmod_errors.h>
 #include "DebugManager.h"
 SoundSystem::SoundSystem() :
-	system(nullptr), 
-	listener(nullptr), 
-	music(nullptr), 
+	system(nullptr),
+	listener(nullptr),
+	music(nullptr),
 	soundEffects(nullptr),
 	SR(new SoundResources())
-{
-	
-}
-
-SoundSystem::~SoundSystem()
-{
-	close();
-}
-
-/// <summary>
-/// Se llamara al cerrar el juego, descarta los emisores y el receptor
-/// </summary>
-void SoundSystem::close() {
-	for (EmitterData* emitter : emitters)
-		removeEmitter(emitter);
-
-	removeListener();
-
-	system->close();
-	system->release();
-	delete SR;
-}
-
-void SoundSystem::init()
 {
 	generalVolume = 1;
 	musicVolume = 1;
@@ -56,13 +32,34 @@ void SoundSystem::init()
 
 	Debug()->log("SOUND SYSTEM: System started");
 }
+
+SoundSystem::~SoundSystem()
+{
+	close();
+}
+
+/// <summary>
+/// Se llamara al cerrar el juego, descarta los emisores y el receptor
+/// </summary>
+void SoundSystem::close() {
+	for (EmitterData* emitter : emitters)
+		removeEmitter(emitter);
+
+	removeListener();
+
+	system->close();
+	system->release();
+	if (SR != nullptr)
+		delete SR;
+}
+
 /// <summary>
 /// Devuelve el tipo sonido si no da fallo al cargarlo
 /// </summary>
 /// <param name="name"> Nombre del efecto </param>
 /// <param name="mode"> Modo de sonido (Loop, default etc) </param>
 /// <returns></returns>
-Sound* SoundSystem::createSound(const std::string& name,  SoundMode mode)
+Sound* SoundSystem::createSound(const std::string& name, SoundMode mode)
 {
 	Sound* sound;
 	if (system->createSound(name.c_str(), mode, nullptr, &sound) == FMOD_RESULT::FMOD_OK)
@@ -158,7 +155,7 @@ void SoundSystem::setGeneralVolume(float volume)
 /// <param name="position"> Camera/Player Position </param>
 /// <param name="forward"> Vector on X axis "points forward" </param>
 /// <param name="up"> Vector on Y axis "points up" </param>
-void SoundSystem::setListenerAttributes(Vector3& position,  Vector3& forward,  Vector3& up)
+void SoundSystem::setListenerAttributes(Vector3& position, Vector3& forward, Vector3& up)
 {
 	FMOD_VECTOR pos, vel, forwardTmp, upTmp;
 	pos = { float(position.getX()) ,float(position.getY()) ,float(position.getZ()) };
@@ -204,8 +201,11 @@ void SoundSystem::removeEmitter(EmitterData* emitter)
 /// </summary>
 void SoundSystem::removeListener()
 {
-	delete listener;
-	listener = nullptr;
+	if (listener != nullptr)
+	{
+		delete listener;
+		listener = nullptr;
+	}
 }
 
 /// <summary>
@@ -222,11 +222,11 @@ void SoundSystem::update(float deltaTime)
 
 		//float z = listener->position->GetZ();
 		//float y = listener->position->GetY();
-		
+
 		float z = listener->quaternion->getZ();
 		float y = listener->quaternion->getY();
-		forward = Vector3 { 0, 0, z }; //Vector3 Forward
-		up = Vector3 { 0, y ,0 }; // Vector3 Up
+		forward = Vector3{ 0, 0, z }; //Vector3 Forward
+		up = Vector3{ 0, y ,0 }; // Vector3 Up
 		setListenerAttributes(pos, forward, up);
 	}
 	// Emitters position update
@@ -267,7 +267,7 @@ SoundSystem::EmitterData* SoundSystem::createEmitter(const Vector3* position)
 /// <param name="position"> Necesita ubicancia </param>
 /// <param name="quaternion"> Necesita orientacion </param>
 /// <returns></returns>
-SoundSystem::ListenerData* SoundSystem::createListener(Vector3* position,  Vector4* quaternion)
+SoundSystem::ListenerData* SoundSystem::createListener(Vector3* position, Vector4* quaternion)
 {
 	if (listener != nullptr)
 		delete listener;
@@ -322,10 +322,10 @@ void SoundSystem::ERRCHECK(FMOD_RESULT result) const
 /// </summary>
 /// <param name="name"></param>
 /// <returns></returns>
-Sound* SoundSystem::getSound(const std::string& name) 
+Sound* SoundSystem::getSound(const std::string& name)
 {
-	
-	Sound* sound = createSound(SR->getSong(name),FMOD_DEFAULT);
+
+	Sound* sound = createSound(SR->getSong(name), FMOD_DEFAULT);
 	if (sound == nullptr) return nullptr;
 
 	// Wait till loaded
@@ -350,8 +350,11 @@ Sound* SoundSystem::getSound(const std::string& name)
 /// </summary>
 SoundSystem::SoundChannel::~SoundChannel()
 {
-	delete channel;
-	channel = nullptr;
+	if (channel != nullptr)
+	{
+		delete channel;
+		channel = nullptr;
+	}
 }
 
 /// <summary>

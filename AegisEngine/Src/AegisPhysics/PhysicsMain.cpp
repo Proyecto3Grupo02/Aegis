@@ -1,3 +1,4 @@
+#include "PhysicsMain.h"
 /*
 Bullet Continuous Collision Detection and Physics Library
 Copyright (c) 2003-2007 Erwin Coumans  https://bulletphysics.org
@@ -22,12 +23,7 @@ subject to the following restrictions:
 #include "OgreWrapper.h"
 #include "OgreSceneManager.h"
 
-PhysicsSystem::PhysicsSystem() {
-}
-
-/// This is a Hello World program for running a basic Bullet physics simulation
-void PhysicsSystem::init(Ogre::SceneManager* mScene)
-{
+PhysicsSystem::PhysicsSystem(Ogre::SceneManager* mScene) {
 	scene = mScene;
 	///collision configuration contains default setup for memory, collision setup. Advanced users can create their own configuration.
 	collisionConfiguration = new btDefaultCollisionConfiguration();
@@ -57,7 +53,7 @@ void PhysicsSystem::init(Ogre::SceneManager* mScene)
 	mDebugDrawer = new OgreDebugDrawer(scene);
 	mDebugDrawer->setDebugMode(btIDebugDraw::DBG_DrawWireframe);
 	dynamicsWorld->setDebugDrawer(mDebugDrawer);
-#endif // DEBUG	 
+#endif // DEBUG	
 }
 
 PhysicsSystem::~PhysicsSystem() {

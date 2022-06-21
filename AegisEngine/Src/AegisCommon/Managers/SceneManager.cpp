@@ -1,10 +1,14 @@
 #include "SceneManager.h"
 #include "SceneManager.h"
 #include "Scene.h"
+#include "OgreWrapper.h"
 
-SceneManager::SceneManager()
+SceneManager::SceneManager(OgreWrapper* ogreWrap)
 {
 	//LoadScene(sceneName);
+	currentScene = new Scene(ogreWrap);
+	currentScene->init();
+	exportToLua(SceneMngr()->getCurrentScene(), "currentScene");
 }
 
 SceneManager::~SceneManager() {
@@ -15,13 +19,6 @@ SceneManager::~SceneManager() {
 void SceneManager::loadScene(std::string sceneName)
 {
 	//currentScene = new Scene();
-}
-
-void SceneManager::init(Scene* scene)
-{
-	currentScene = scene;
-	scene->init();
-	exportToLua(scene, "currentScene");
 }
 
 void SceneManager::updateCurrentScene(float deltaTime) {

@@ -86,7 +86,7 @@ private:
 
 public:
 	SoundSystem();
-	~SoundSystem();
+	virtual ~SoundSystem();
 
 	// Setters y getters
 	void setMusicVolume(float volume);
@@ -98,7 +98,6 @@ public:
 	float getMusicVolume() const;
 	float getSoundVolume() const;
 
-	void init();
 	void close();
 	Channel* playSound(const std::string& name);
 	Channel* playMusic(const std::string& name);
@@ -106,8 +105,6 @@ private:
 	
 
 	Sound* createSound(const std::string& name,  SoundMode mode);
-
-
 
 	void update(float deltaTime);
 	void setListenerAttributes(Vector3& position, Vector3& forward, Vector3& up);

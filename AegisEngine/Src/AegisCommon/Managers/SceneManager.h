@@ -7,6 +7,7 @@
 #include <Singleton.h>
 
 class Scene;
+class OgreWrapper;
 
 class SceneManager : public Singleton<SceneManager>, public ILuaObject
 {
@@ -15,10 +16,9 @@ private:
 	void loadScene(std::string sceneName);
 
 public:
-	SceneManager();
+	SceneManager(OgreWrapper* ogreWrap);
 	~SceneManager();
 
-	void init(Scene* scene);
 	void updateCurrentScene(float deltaTime);
 	void preRenderScene();
 	void changeScene(std::string sceneName);

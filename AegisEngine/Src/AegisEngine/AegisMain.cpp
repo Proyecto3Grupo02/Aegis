@@ -27,22 +27,53 @@
 
 AegisMain::AegisMain() : IInitializable() {
 	exit = (false);
+}
+
+/// <summary>
+/// Inicializa todos los wrappers (Ogre, Input, Imgui...)
+/// </summary>
+/// <returns></returns>
+bool AegisMain::init()
+{
 	ogreWrap = new OgreWrapper();
 	ogreWrap->init();
-	LuaMngr();
+	//Audio()->tryCreateInstance();
+	SoundSystem::tryCreateInstance();
+	PhysicsSystem::tryCreateInstance(ogreWrap->getSceneManager());
+	UISystem::tryCreateInstance(ogreWrap->getSceneManager(), Input());
+	GameLoopData::tryCreateInstance();
+	DebugManager::tryCreateInstance();
+	InputSystem::tryCreateInstance();
+	
+	// Esto esta intercalado asi por ciertos motivos
+	// Cuando se haga la separacion motor-juego ya se podra crear SceneManager antes que lua
+	LuaManager::tryCreateInstance();
+	convertObjectToLua();
+	SceneManager::tryCreateInstance(ogreWrap);
+	LuaMngr()->execute("init.lua");
+
+	Debug()->log("Aegis loaded\n");
+	std::cout << '\n';
+
+	gameLoop();
+	return true;
 }
 
 AegisMain::~AegisMain() {
-	
-	SceneMngr()->deleteInstance(); //me sale error de ejecucion al cerrar si deleteo la escena despues de fisicas
-	Physics()->deleteInstance(); //fisicas tiene que hacer delete lo primero o explota
-	UIs()->deleteInstance(); //UI tiene que ser delete al principio o explota
-	GameTime()->deleteInstance();
+	free();
+}
+
+void AegisMain::free()
+{
+	SceneManager::tryDeleteInstance();
+	PhysicsSystem::tryDeleteInstance();
+	UISystem::tryDeleteInstance();
+	GameLoopData::tryDeleteInstance();
 	delete ogreWrap;
-	Debug()->deleteInstance();
-	Input()->deleteInstance();
-	Audio()->deleteInstance();	
-	LuaMngr()->deleteInstance();
+	DebugManager::tryDeleteInstance();
+	InputSystem::tryDeleteInstance();
+	SoundSystem::tryDeleteInstance();
+	LuaManager::tryDeleteInstance();
 }
 
 void AegisMain::gameLoop() {
@@ -109,27 +140,6 @@ void AegisMain::gameLoop() {
 			GameTime()->UpdateTimeRegistry(SDL_GetTicks());
 		}
 	}
-}
-
-
-/// <summary>
-/// Inicializa todos los wrappers (Ogre, Input, Imgui...)
-/// </summary>
-/// <returns></returns>
-bool AegisMain::init()
-{
-	Debug()->log("Aegis loaded\n");
-	std::cout << '\n';
-	Input()->init();
-	Audio()->init();
-	Physics()->init(ogreWrap->getSceneManager());
-	UIs()->init(ogreWrap->getSceneManager(), Input());
-	convertObjectToLua();
-	SceneMngr()->init(new Scene(ogreWrap));
-	LuaMngr()->execute("init.lua");
-
-	gameLoop();
-	return true;
 }
 
 void AegisMain::convertObjectToLua()

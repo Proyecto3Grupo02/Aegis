@@ -36,7 +36,6 @@ private:
 public:
 	InputSystem();
 	~InputSystem();
-	void init();
 	void updateState();
 	void clearState();
 	int getId(SDL_Keycode key); //keycode

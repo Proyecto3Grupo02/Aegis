@@ -1,16 +1,12 @@
 #include "InputManager.h"
 
 InputSystem::InputSystem() {
-
+	keyNums = 322;
+	keys = std::vector<key>(keyNums, { false, false, false });
 }
 
 InputSystem::~InputSystem() {
 
-}
-
-void InputSystem::init() {
-	keyNums = 322;
-	keys = std::vector<key>(keyNums, { false, false, false });
 }
 
 void InputSystem::updateState() {
