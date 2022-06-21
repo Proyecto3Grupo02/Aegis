@@ -67,6 +67,7 @@ public:
 	bool keyWasPressedLua(const char* key);
 	bool isKeyDownLua(const char* key);
 	bool keyWasReleasedLua(const char* key);
+	void blockMouseLua(bool b);
 
 	static void ConvertToLua(lua_State* state);
 };

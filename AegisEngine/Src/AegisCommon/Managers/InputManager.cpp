@@ -242,6 +242,9 @@ bool InputSystem::keyWasReleased(SDL_Keycode key) {
 	return keys[i].wasReleased;
 }
 
+
+
+
 //LUA-----------------------------------------------------
 bool InputSystem::keyWasPressedLua(const char* key) {
 	return keyWasPressed(SDL_GetKeyFromName(key));
@@ -253,6 +256,11 @@ bool InputSystem::isKeyDownLua(const char* key) {
 
 bool InputSystem::keyWasReleasedLua(const char* key) {
 	return keyWasReleased(SDL_GetKeyFromName(key));
+}
+
+void InputSystem::blockMouseLua(bool b) {
+	if (b) SDL_SetRelativeMouseMode(SDL_TRUE);
+	else SDL_SetRelativeMouseMode(SDL_FALSE);
 }
 
 void InputSystem::ConvertToLua(lua_State* state)
@@ -270,6 +278,7 @@ void InputSystem::ConvertToLua(lua_State* state)
 		addFunction("IsMouseButtonDown", &InputSystem::isMouseButtonDownLua).
 		addFunction("MouseButtonWasPressed", &InputSystem::isMouseButtonPressedLua).
 		addFunction("MouseButtonWasReleased", &InputSystem::isMouseButtonReleasedLua).
+		addFunction("BlockMouse", &InputSystem::blockMouseLua).
 		endClass().
 		endNamespace();
 }

@@ -47,7 +47,7 @@ AegisMain::~AegisMain() {
 
 void AegisMain::gameLoop() {
 	uint32_t frameTimeMS = (uint32_t)floor((1 / TARGET_FRAME_RATE) * 1000);
-	//SDL_SetRelativeMouseMode(SDL_TRUE); //comentar para que funcione el boton
+	
 
 	while (!exit)
 	{
