@@ -18,14 +18,16 @@ SoundSystem::SoundSystem() :
 	ERRCHECK(result);
 	result = system->init(128, FMOD_INIT_NORMAL, 0);
 	ERRCHECK(result);
+	
 	result = system->createChannelGroup("music", &music);
 	ERRCHECK(result);
-	FMOD::ChannelGroup* master;
+	result = system->createChannelGroup("soundEffect", &soundEffects);
+	ERRCHECK(result);
+
+	ChannelGroup* master;
 	result = system->getMasterChannelGroup(&master);
 	ERRCHECK(result);
 	result = master->addGroup(music);
-	ERRCHECK(result);
-	result = system->createChannelGroup("soundEffect", &soundEffects);
 	ERRCHECK(result);
 	result = master->addGroup(soundEffects);
 	ERRCHECK(result);
@@ -206,6 +208,30 @@ void SoundSystem::removeListener()
 		delete listener;
 		listener = nullptr;
 	}
+}
+
+void SoundSystem::stopMusic(const std::string& name)
+{
+	Channel* channel;
+	Sound* sound = getSound(name);
+	if (sound == nullptr) return;
+
+	FMOD_RESULT result = system->playSound(sound, soundEffects, false, &channel);
+	ERRCHECK(result);
+	channel->setPaused(true);
+
+}
+
+void SoundSystem::stopSound(const std::string& name)
+{
+	Channel* channel;
+	Sound* sound = getSound(name);
+	if (sound == nullptr) return;
+
+	FMOD_RESULT result = system->playSound(sound, soundEffects, false, &channel);
+	ERRCHECK(result);
+	channel->setPaused(true);
+
 }
 
 /// <summary>
@@ -410,4 +436,18 @@ bool SoundSystem::EmitterData::isPaused()
 	}
 
 	return paused;
+}
+
+void SoundSystem::ConvertToLua(lua_State* state) {
+	getGlobalNamespace(state).
+		beginNamespace("Aegis").
+		beginClass<SoundSystem>("SoundManagerClass").
+		addProperty("generalVolume", &SoundSystem::getGeneralVolume, &SoundSystem::setGeneralVolume).
+		addProperty("musicVolume", &SoundSystem::getMusicVolume, &SoundSystem::setMusicVolume).
+		addProperty("SFXVolume", &SoundSystem::getSoundVolume, &SoundSystem::setSoundEffectsVolume).
+		endClass().
+		endNamespace();
+
+	exportToLua(SoundSystem::getInstance(), "SoundManager");
+
 }

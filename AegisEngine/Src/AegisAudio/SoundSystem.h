@@ -4,6 +4,7 @@
 
 // AegisCommon
 #include "Singleton.h"
+#include "ILuaObject.h"
 
 // Dependencies\Fmod
 #include <fmod.hpp>
@@ -27,7 +28,7 @@ typedef FMOD::ChannelGroup ChannelGroup;	// Common groups for utility
 
 
 // Singleton Class
-class SoundSystem : public Singleton<SoundSystem>
+class SoundSystem : public Singleton<SoundSystem>, public ILuaObject
 {
 	// Basic classes for fmod functionality
 	friend class Core;
@@ -101,6 +102,11 @@ public:
 	void close();
 	Channel* playSound(const std::string& name);
 	Channel* playMusic(const std::string& name);
+
+	void stopMusic(const std::string& name);
+	void stopSound(const std::string& name);
+
+	static void ConvertToLua(lua_State* state);
 private:
 	
 

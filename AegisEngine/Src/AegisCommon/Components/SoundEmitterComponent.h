@@ -4,31 +4,24 @@
 #define SOUNDEMITTER_H
 
 #include "AegisComponent.h"
-#include "SoundEmitter.h"
 
 class SoundEmitterComponent : public AegisComponent
 {
-private:
-    std::string mSound_;
-    SoundEmitter* mEmmiter_ = nullptr;
-public:
-    SoundEmitterComponent(Entity* ent, std::string sound);
-    ~SoundEmitterComponent();
+	public:
 
-    void playSound(const std::string& soundname,bool reverb = false);
-    void playMusic(const std::string& soundname, bool reverb = false);
+		SoundEmitterComponent(Entity* ent, std::string sound);
+		~SoundEmitterComponent();
+		void playMusic();
+		void playSound();
+		void stopMusic();
+		void stopSound();
 
-    std::string getSound() const;
-    void setSound(std::string sound);
+		std::string getSound() const;
+		void setSound(std::string name);
 
-    void stop();
-    void pause();
-    void resume();
-
-    void setVolume(float vol);
-    void setPitch(float pitch);
-
-    static void ConvertToLua(lua_State* state);
+		static void ConvertToLua(lua_State* state);
+	private:
+		std::string soundName;
 };
 
 #endif

@@ -1,66 +1,48 @@
 #include "SoundEmitterComponent.h"
+#include "SoundSystem.h"
 
 SoundEmitterComponent::SoundEmitterComponent(Entity* ent, std::string sound):
-	AegisComponent("SoundEmitter", ent), mSound_(sound)
+	AegisComponent("SoundEmitter", ent),soundName(sound)
 {
-	mEmmiter_ = new SoundEmitter();
-	mEmmiter_->playMusic(mSound_);
+	setDataAsInnerType(this);
 }
 
 SoundEmitterComponent::~SoundEmitterComponent()
 {
-	delete mEmmiter_;
-	mEmmiter_ = nullptr;
 }
 
-void SoundEmitterComponent::playSound(const std::string& soundname, bool reverb)
+void SoundEmitterComponent::playMusic()
 {
-	mEmmiter_->playSound(soundname, reverb);
+	SoundSystem::getInstance()->playMusic(soundName);
 }
 
-void SoundEmitterComponent::playMusic(const std::string& soundname, bool reverb)
+void SoundEmitterComponent::playSound()
 {
-	mEmmiter_->playMusic(mSound_, reverb);
+	SoundSystem::getInstance()->playSound(soundName);
+}
+
+void SoundEmitterComponent::stopMusic()
+{
+	SoundSystem::getInstance()->stopMusic(soundName);
+}
+
+void SoundEmitterComponent::stopSound()
+{
+	SoundSystem::getInstance()->stopSound(soundName);
 }
 
 std::string SoundEmitterComponent::getSound() const
 {
-	return mSound_;
+	return soundName;
 }
 
-void SoundEmitterComponent::setSound(std::string sound)
+void SoundEmitterComponent::setSound(std::string name)
 {
-	mSound_ = sound;
+	soundName = name;
 }
 
-void SoundEmitterComponent::stop()
-{
-	mEmmiter_->stop(mSound_);
-}
-
-void SoundEmitterComponent::pause()
-{
-	mEmmiter_->pause(mSound_);
-}
-
-void SoundEmitterComponent::resume()
-{
-	mEmmiter_->resume(mSound_);
-}
-
-void SoundEmitterComponent::setVolume(float vol)
-{
-	mEmmiter_->setVolume(vol);
-}
-
-void SoundEmitterComponent::setPitch(float pitch)
-{
-	mEmmiter_->setPitch(pitch);
-}
-
-SoundEmitterComponent* createSoundEmitter(Entity* ent, std::string sound) {
-
-	return new SoundEmitterComponent(ent, sound);
+inline SoundEmitterComponent* createSoundEmitter(Entity* ent, std::string sound) {
+	return new SoundEmitterComponent(ent,sound);
 }
 
 void SoundEmitterComponent::ConvertToLua(lua_State* state)
