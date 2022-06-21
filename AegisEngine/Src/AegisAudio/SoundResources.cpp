@@ -4,21 +4,21 @@
 #include "DebugManager.h"
 SoundResources::SoundResources()
 {
-	ParseDirectory(rutaArchivo);
+	parseDirectory(rutaArchivo);
 }
 
 SoundResources::~SoundResources()
 {
 }
 
-void SoundResources::ParseDirectory(std::string dir)
+void SoundResources::parseDirectory(std::string dir)
 {
 	DIR* dirp;
 	struct dirent* dp;
 	dirp = opendir(dir.c_str());
 	if (dirp == NULL)
 	{
-		Debug()->Log("Error al abrir el directorio");
+		Debug()->log("Error al abrir el directorio");
 		return;
 	}
 
@@ -30,7 +30,7 @@ void SoundResources::ParseDirectory(std::string dir)
 			if (strcmp(dp->d_name, ".") != 0 && strcmp(dp->d_name, "..") != 0)
 			{
 				std::string subdir = dir + "/" + dp->d_name;
-				ParseDirectory(subdir);
+				parseDirectory(subdir);
 			}
 		}
 		else
@@ -43,7 +43,7 @@ void SoundResources::ParseDirectory(std::string dir)
 				std::fstream todo;
 				todo.open(path, std::ios::in);
 				if (!todo) {
-					Debug()->Log("El archivo " + file + " no existe");
+					Debug()->log("El archivo " + file + " no existe");
 				}
 				auto e = std::make_pair(file.substr(0, file.find_last_of(".")), path);
 				mapSound.insert(e);

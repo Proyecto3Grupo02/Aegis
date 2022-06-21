@@ -30,9 +30,9 @@ protected:
 	int _id;
 
 	template <class T>
-	void SetDataAsInnerType(T* component)
+	void setDataAsInnerType(T* component)
 	{
-		setType(luabridge::LuaRef(LuaManager::getInstance()->GetState(), component));
+		setType(luabridge::LuaRef(LuaManager::getInstance()->getState(), component));
 	};
 private:
 
@@ -40,7 +40,7 @@ private:
 	std::string name;
 	void show();
 	void hide();
-	luabridge::LuaRef type = LuaMngr()->GetSharedEmptyLuaRef();
+	luabridge::LuaRef type = LuaMngr()->getSharedEmptyLuaRef();
 
 public:
 	UIObject(const std::string& n, int order, float x_, float y_, float w_, float h_, bool isActive = true);

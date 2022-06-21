@@ -26,7 +26,7 @@ PhysicsSystem::PhysicsSystem() {
 }
 
 /// This is a Hello World program for running a basic Bullet physics simulation
-void PhysicsSystem::Init(Ogre::SceneManager* mScene)
+void PhysicsSystem::init(Ogre::SceneManager* mScene)
 {
 	scene = mScene;
 	///collision configuration contains default setup for memory, collision setup. Advanced users can create their own configuration.
@@ -210,8 +210,8 @@ void PhysicsSystem::removeRigidbody(btCollisionObject* rb) {
 btTransform PhysicsSystem::parseToBulletTransform(Vector3 pos, Vector3 rot) {
 	btTransform t;
 	t.setIdentity();
-	t.setOrigin({ btScalar(pos.GetX()), btScalar(pos.GetY()), btScalar(pos.GetZ()) });
-	btQuaternion quat = (btQuaternion(btScalar(rot.GetZ()) * SIMD_RADS_PER_DEG, btScalar(rot.GetY()) * SIMD_RADS_PER_DEG, btScalar(rot.GetX()) * SIMD_RADS_PER_DEG)); quat.normalize();
+	t.setOrigin({ btScalar(pos.getX()), btScalar(pos.getY()), btScalar(pos.getZ()) });
+	btQuaternion quat = (btQuaternion(btScalar(rot.getZ()) * SIMD_RADS_PER_DEG, btScalar(rot.getY()) * SIMD_RADS_PER_DEG, btScalar(rot.getX()) * SIMD_RADS_PER_DEG)); quat.normalize();
 	t.setRotation(quat);
 	return t;
 }
@@ -219,7 +219,7 @@ btTransform PhysicsSystem::parseToBulletTransform(Vector3 pos, Vector3 rot) {
 btTransform PhysicsSystem::parseToBulletTransform(Vector3 pos, Vector4 rot) {
 	btTransform t;
 	t.setIdentity();
-	t.setOrigin({ btScalar(pos.GetX()), btScalar(pos.GetY()), btScalar(pos.GetZ()) });
+	t.setOrigin({ btScalar(pos.getX()), btScalar(pos.getY()), btScalar(pos.getZ()) });
 	btQuaternion quat = btQuaternion(rot.x, rot.y, rot.z, rot.w);
 	quat.normalize();
 	t.setRotation(quat);
@@ -228,7 +228,7 @@ btTransform PhysicsSystem::parseToBulletTransform(Vector3 pos, Vector4 rot) {
 
 const btVector3 PhysicsSystem::parseToBulletVector(const Vector3& v) const
 {
-	return btVector3(btScalar(v.GetX()), btScalar(v.GetY()), btScalar(v.GetZ()));
+	return btVector3(btScalar(v.getX()), btScalar(v.getY()), btScalar(v.getZ()));
 }
 
 const Vector3 PhysicsSystem::parseFromBulletVector(const btVector3& v) const
@@ -241,10 +241,10 @@ btCollisionShape* PhysicsSystem::createBodyShape(RigidBody::RigidBodyType rbType
 	btCollisionShape* rbShape = nullptr;
 	switch (rbType) {
 	case RigidBody::RigidBodyType::Box:
-		rbShape = new btBoxShape(btVector3(btScalar(_dim.GetX() / 2.0f), btScalar(_dim.GetY() / 2.0f), btScalar(_dim.GetZ() / 2.0f)));
+		rbShape = new btBoxShape(btVector3(btScalar(_dim.getX() / 2.0f), btScalar(_dim.getY() / 2.0f), btScalar(_dim.getZ() / 2.0f)));
 		break;
 	case RigidBody::RigidBodyType::Sphere:
-		rbShape = new btSphereShape(btScalar(_dim.GetX() / 2.0f));
+		rbShape = new btSphereShape(btScalar(_dim.getX() / 2.0f));
 		break;
 	case RigidBody::RigidBodyType::Custom:
 		//char fileName[100];
@@ -253,10 +253,10 @@ btCollisionShape* PhysicsSystem::createBodyShape(RigidBody::RigidBodyType rbType
 		//rbShape = createShapeWithVertices(_dim, bodyMeshName, isConvex);
 		break;
 	case RigidBody::RigidBodyType::CapsuleX:
-		rbShape = new btCapsuleShapeX(btScalar(_dim.GetZ() / 2.0f), btScalar(_dim.GetX()));
+		rbShape = new btCapsuleShapeX(btScalar(_dim.getZ() / 2.0f), btScalar(_dim.getX()));
 		break;
 	case RigidBody::RigidBodyType::CapsuleZ:
-		rbShape = new btCapsuleShapeZ(btScalar(_dim.GetX() / 2.0f), btScalar(_dim.GetZ()));
+		rbShape = new btCapsuleShapeZ(btScalar(_dim.getX() / 2.0f), btScalar(_dim.getZ()));
 		break;
 	default: break;
 	}
@@ -270,7 +270,7 @@ btRigidBody* PhysicsSystem::createRigidBody(RigidBody::RigidBodyType rbType, flo
 
 	btTransform groundTransform;
 	groundTransform.setIdentity();
-	groundTransform.setOrigin(btVector3(_pos.GetX(), _pos.GetY(), _pos.GetZ()));
+	groundTransform.setOrigin(btVector3(_pos.getX(), _pos.getY(), _pos.getZ()));
 	btQuaternion quat = btQuaternion(rotation.x, rotation.y, rotation.z, rotation.w);
 	groundTransform.setRotation(quat);
 	btScalar mass(_mass);

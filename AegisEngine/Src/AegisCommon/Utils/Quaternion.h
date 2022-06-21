@@ -18,7 +18,7 @@ public:
 	};
 	~Quaternion() {};
 
-	Vector3 GetEulerAngles() const {
+	Vector3 getEulerAngles() const {
 		// if the input quaternion is normalized, this is exactly one. Otherwise, this acts as a correction factor for the quaternion's not-normalizedness
 		Vector3 res;
 		float rx = 0;
@@ -57,10 +57,10 @@ public:
 		float cosZOver2 = cos(zOver2);
 
 		Quaternion result;
-		result.SetX(cosYOver2 * sinXOver2 * cosZOver2 + sinYOver2 * cosXOver2 * sinZOver2);
-		result.SetY(sinYOver2 * cosXOver2 * cosZOver2 - cosYOver2 * sinXOver2 * sinZOver2);
-		result.SetZ(cosYOver2 * cosXOver2 * sinZOver2 - sinYOver2 * sinXOver2 * cosZOver2);
-		result.SetW(cosYOver2 * cosXOver2 * cosZOver2 + sinYOver2 * sinXOver2 * sinZOver2);
+		result.setX(cosYOver2 * sinXOver2 * cosZOver2 + sinYOver2 * cosXOver2 * sinZOver2);
+		result.setY(sinYOver2 * cosXOver2 * cosZOver2 - cosYOver2 * sinXOver2 * sinZOver2);
+		result.setZ(cosYOver2 * cosXOver2 * sinZOver2 - sinYOver2 * sinXOver2 * cosZOver2);
+		result.setW(cosYOver2 * cosXOver2 * cosZOver2 + sinYOver2 * sinXOver2 * sinZOver2);
 
 		return result;
 	}
@@ -86,22 +86,22 @@ public:
 		const float vy = 2.0f * v.y;
 		const float vz = 2.0f * v.z;
 		const float w2 = w * w - 0.5f;
-		const float dot2 = (GetX() * vx + GetY() * vy + GetZ() * vz);
-		return Vector3((vx * w2 + (GetY() * vz - GetZ() * vy) * GetW() + GetX() * dot2),
-			(vy * w2 + (GetZ() * vx - GetX() * vz) * GetW() + GetY() * dot2),
-			(vz * w2 + (vy - GetY() * vx) * GetW() + GetZ() * dot2));
+		const float dot2 = (getX() * vx + getY() * vy + getZ() * vz);
+		return Vector3((vx * w2 + (getY() * vz - getZ() * vy) * getW() + getX() * dot2),
+			(vy * w2 + (getZ() * vx - getX() * vz) * getW() + getY() * dot2),
+			(vz * w2 + (vy - getY() * vx) * getW() + getZ() * dot2));
 	}
 
 
-	inline float GetX()const { return x; }
-	inline float GetY()const { return y; }
-	inline float GetZ()const { return z; }
-	inline float GetW()const { return w; }
+	inline float getX()const { return x; }
+	inline float getY()const { return y; }
+	inline float getZ()const { return z; }
+	inline float getW()const { return w; }
 
-	inline void SetX(float x) { this->x = x; return; }
-	inline void SetY(float y) { this->y = y; return; }
-	inline void SetZ(float z) { this->z = z; return; }
-	inline void SetW(float w) { this->w = w; return; }
+	inline void setX(float x) { this->x = x; return; }
+	inline void setY(float y) { this->y = y; return; }
+	inline void setZ(float z) { this->z = z; return; }
+	inline void setW(float w) { this->w = w; return; }
 
 
 	Quaternion operator+(Quaternion const& b) { return Quaternion(x + b.x, y + b.y, z + b.z, w + b.w); }
@@ -120,11 +120,11 @@ public:
 			beginNamespace("Maths").
 			beginClass<Quaternion>("Quaternion").
 			addConstructor<void(*)(float, float, float, float)>().
-			addProperty("x", &Quaternion::GetX, &Quaternion::SetX).
-			addProperty("y", &Quaternion::GetY, &Quaternion::SetY).
-			addProperty("z", &Quaternion::GetZ, &Quaternion::SetZ).
-			addProperty("w", &Quaternion::GetW, &Quaternion::SetW).
-			addFunction("ToEuler", &Quaternion::GetEulerAngles).
+			addProperty("x", &Quaternion::getX, &Quaternion::setX).
+			addProperty("y", &Quaternion::getY, &Quaternion::setY).
+			addProperty("z", &Quaternion::getZ, &Quaternion::setZ).
+			addProperty("w", &Quaternion::getW, &Quaternion::setW).
+			addFunction("ToEuler", &Quaternion::getEulerAngles).
 			addFunction("GetAngle", &Quaternion::getAngle).
 			addFunction("Rotate", &Quaternion::rotate).
 			addStaticFunction("EulerToQuaternion", &Quaternion::eulerToQuaternion).

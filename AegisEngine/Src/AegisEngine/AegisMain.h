@@ -8,7 +8,7 @@
 
 class OgreWrapper;
 class SceneManager;
-class TimeManager;
+class GameLoopData;
 class LuaManager;
 
 class AegisMain : IInitializable
@@ -16,17 +16,17 @@ class AegisMain : IInitializable
 private:
     OgreWrapper* ogreWrap;
     SceneManager* sceneManager;
-    TimeManager* gameLoopData;
+    GameLoopData* gameLoopData;
 
     bool exit;
     //uint32_t frameTimeMS;
 
-        void GameLoop();
-        void ConvertObjectToLua();
+        void gameLoop();
+        void convertObjectToLua();
     public:
         AegisMain();
         virtual ~AegisMain();
-        virtual bool Init() override;
+        virtual bool init() override;
 
         const float TARGET_FRAME_RATE = 60.0f;
     };

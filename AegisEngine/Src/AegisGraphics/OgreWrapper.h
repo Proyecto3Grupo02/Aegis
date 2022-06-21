@@ -18,7 +18,7 @@ private:
 	Ogre::String mResourcesCfg;
 	Ogre::String mPluginsCfg;
 
-	Ogre::RenderWindow* render = nullptr;
+	Ogre::RenderWindow* render_ = nullptr;
 	SDL_Window* native = nullptr;
 	SDL_Renderer* renderer_ = nullptr;
 
@@ -29,16 +29,16 @@ private:
 
 	WindowManager* windowMan;
 
-	void CreateWindowNative();
-	AegisCamera* CreateCamera(Ogre::SceneNode* node = nullptr);
+	void createWindowNative();
+	AegisCamera* createCamera(Ogre::SceneNode* node = nullptr);
 
 public:
 	OgreWrapper();
-	AegisCamera* GetCamera();
-	bool Render();
+	AegisCamera* getCamera();
+	bool render();
 	virtual ~OgreWrapper();
-	bool Init();
-	Ogre::SceneNode* GetRootNode();
+	bool init();
+	Ogre::SceneNode* getRootNode();
 
 	inline SDL_Renderer* getRenderer()const { return renderer_; }
 	inline SDL_Window* getNativeWindow()const {

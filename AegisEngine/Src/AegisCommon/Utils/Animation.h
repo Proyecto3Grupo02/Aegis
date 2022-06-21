@@ -21,17 +21,17 @@ struct Animation {
 		frames.push_back(frame);
 	}
 
-	Vector3 GetInterpolatedPos()
+	Vector3 getInterpolatedPos()
 	{
 		return MathUtils::Vector3Lerp(getCurrentKeyFrame().pos, getFrame(currentKeyFrame + 1).pos, getNormalizedTime());
 	}
 
-	Vector3 GetInterpolatedScale()
+	Vector3 getInterpolatedScale()
 	{
 		return MathUtils::Vector3Lerp(getCurrentKeyFrame().scale, getFrame(currentKeyFrame + 1).scale, getNormalizedTime());
 	}
 
-	Vector3 GetInterpolatedEulerAngles()
+	Vector3 getInterpolatedEulerAngles()
 	{
 		return MathUtils::Vector3Lerp(getCurrentKeyFrame().degrees, getFrame(currentKeyFrame + 1).degrees, getNormalizedTime());
 	}

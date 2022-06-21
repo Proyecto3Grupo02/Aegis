@@ -11,13 +11,13 @@ public:
 	Vector3(float _all) : x(_all), y(_all), z(_all) {};
 	Vector3() : x(0.0f), y(0.0f), z(0.0f) {};
 
-	float GetX() const { return x; }
-	float GetY() const { return y; }
-	float GetZ() const { return z; }
+	float getX() const { return x; }
+	float getY() const { return y; }
+	float getZ() const { return z; }
 
-	void SetX(float _x) { x = _x; }
-	void SetY(float _y) { y = _y; }
-	void SetZ(float _z) { z = _z; }
+	void setX(float _x) { x = _x; }
+	void setY(float _y) { y = _y; }
+	void setZ(float _z) { z = _z; }
 
 	Vector3 divide(Vector3 const& b) const { return Vector3(x / b.x, y / b.y, z / b.z); }
 	Vector3 scalarMult(Vector3 const& b) const { return Vector3(x * b.x, y * b.y, z * b.z); }
@@ -38,7 +38,7 @@ public:
 		*this = getNormalized();
 		return *this;
 	}
-	Vector3 Inverse() { return Vector3(-x, -y, -z); }
+	Vector3 inverse() { return Vector3(-x, -y, -z); }
 
 	friend Vector3 operator*(float s, Vector3 v) { return v*= s; }
 	Vector3 operator+(Vector3 const& b) { return Vector3(x + b.x, y + b.y, z + b.z); }
@@ -65,7 +65,7 @@ public:
 	static Vector3 ParseVector3(LuaRef vector3Ref, Vector3Mode mode = Vector3Mode::XYZ)
 	{
 		std::string keys = (mode == Vector3Mode::XYZ ? "xyz" : "rgb");
-		return Vector3(LuaMngr()->ParseFloat(vector3Ref[keys[0]]), LuaMngr()->ParseFloat(vector3Ref[keys[1]]), LuaMngr()->ParseFloat(vector3Ref[keys[2]]));
+		return Vector3(LuaMngr()->parseFloat(vector3Ref[keys[0]]), LuaMngr()->parseFloat(vector3Ref[keys[1]]), LuaMngr()->parseFloat(vector3Ref[keys[2]]));
 	}
 
 	static void ConvertToLua(lua_State* state)
@@ -75,9 +75,9 @@ public:
 			beginNamespace("Maths").
 			beginClass<Vector3>("Vector3").
 			addConstructor<void(*)(float, float, float)>().
-			addProperty("x", &Vector3::GetX, &Vector3::SetX).
-			addProperty("y", &Vector3::GetY, &Vector3::SetY).
-			addProperty("z", &Vector3::GetZ, &Vector3::SetZ).
+			addProperty("x", &Vector3::getX, &Vector3::setX).
+			addProperty("y", &Vector3::getY, &Vector3::setY).
+			addProperty("z", &Vector3::getZ, &Vector3::setZ).
 			addFunction("Normalize", &Vector3::normalize).
 			addFunction("GetNormalized", &Vector3::getNormalized).
 			addFunction("__add", &Vector3::operator+).

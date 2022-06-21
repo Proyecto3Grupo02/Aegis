@@ -18,61 +18,61 @@ void UIComponent::render()
 {
 }
 
-void UIComponent::OnMouse(UIElement* other)
+void UIComponent::onMouse(UIElement* other)
 {
-	CallLuaRefFunc(OnMouseFunc, other);
+	callLuaRefFunc(onMouseFunc, other);
 }
 
-void UIComponent::OnClickDown(UIElement* other)
+void UIComponent::onClickDown(UIElement* other)
 {
-	CallLuaRefFunc(OnClickDownFunc, other);
+	callLuaRefFunc(onClickDownFunc, other);
 }
 
-void UIComponent::OnClickUp(UIElement* other)
+void UIComponent::onClickUp(UIElement* other)
 {
-	CallLuaRefFunc(OnClickUpFunc, other);
+	callLuaRefFunc(onClickUpFunc, other);
 }
 
 void UIComponent::setCallbacks(LuaRef updateFunc)
 {
 	this->initFunc = funcs["init"];
-	this->OnClickDownFunc = funcs["OnClickDown"];
-	this->OnClickUpFunc = funcs["OnClickUp"];
-	this->OnMouseFunc = funcs["OnMouse"];
-	this->OnMouseExitFunc = funcs["OnMouseExit"];
+	this->onClickDownFunc = funcs["OnClickDown"];
+	this->onClickUpFunc = funcs["OnClickUp"];
+	this->onMouseFunc = funcs["OnMouse"];
+	this->onMouseExitFunc = funcs["OnMouseExit"];
 }
 
-void UIComponent::SetData(LuaRef luaRef)
+void UIComponent::setData(LuaRef luaRef)
 {
-	PrintErrorModifyingTables("data", "table", true);
+	printErrorModifyingTables("data", "table", true);
 }
 
-LuaRef UIComponent::GetData() const
+LuaRef UIComponent::getData() const
 {
 	return data;
 }
 
-void UIComponent::SetType(LuaRef luaRef)
+void UIComponent::setType(LuaRef luaRef)
 {
 	type = luaRef;
 }
 
-void UIComponent::SetTypeLua(LuaRef luaRef)
+void UIComponent::setTypeLua(LuaRef luaRef)
 {
-	PrintErrorModifyingTables("type", "userdata", false);
+	printErrorModifyingTables("type", "userdata", false);
 }
 
-LuaRef UIComponent::GetType() const
+LuaRef UIComponent::getType() const
 {
 	return type;
 }
 
-void UIComponent::SetFuncs(LuaRef luaRef)
+void UIComponent::setFuncs(LuaRef luaRef)
 {
-	PrintErrorModifyingTables("funcs", "table", true);
+	printErrorModifyingTables("funcs", "table", true);
 }
 
-LuaRef UIComponent::GetFuncs() const
+LuaRef UIComponent::getFuncs() const
 {
 	return funcs;
 }
@@ -81,7 +81,7 @@ void UIComponent::ConvertToLua(lua_State* state)
 
 }
 
-void UIComponent::PrintErrorModifyingTables(std::string fieldName, std::string typeName, bool modifiableFields)
+void UIComponent::printErrorModifyingTables(std::string fieldName, std::string typeName, bool modifiableFields)
 {
 //#if defined _DEBUG
 //	std::string modifiable = modifiableFields ? "but you can modify its field\n" : "but you can read it\n";
@@ -96,7 +96,7 @@ UIComponent* CreateComponent(std::string componentName, UIElement* elem)
 }
 
 template<class T>
-void UIComponent::CallLuaRefFunc(LuaRef func, T args)
+void UIComponent::callLuaRefFunc(LuaRef func, T args)
 {
 #if defined _DEBUG
 	if (!func.isNil())

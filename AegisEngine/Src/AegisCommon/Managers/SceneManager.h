@@ -11,16 +11,16 @@ class SceneManager : public ILuaObject
 {
 private:
 	Scene* currentScene;
-	void LoadScene(std::string sceneName);
+	void loadScene(std::string sceneName);
 
 public:
 	SceneManager(Scene* scene);
 	~SceneManager();
 
-	void UpdateCurrentScene(float deltaTime);
-	void PreRenderScene();
-	void ChangeScene(std::string sceneName);
-	Scene* GetCurrentScene();
+	void updateCurrentScene(float deltaTime);
+	void preRenderScene();
+	void changeScene(std::string sceneName);
+	Scene* getCurrentScene();
 	static void ConvertToLua(lua_State* state);
 };
 #endif

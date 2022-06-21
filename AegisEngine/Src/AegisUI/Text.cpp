@@ -20,7 +20,7 @@ Text::Text(const std::string name, int order, const std::string font, float char
 	if (isVisible) overlay->show();
 	else overlay->hide();
 
-	SetDataAsInnerType(this);
+	setDataAsInnerType(this);
 }
 
 Text::~Text() {
@@ -59,14 +59,14 @@ void Text::setFontColor(float r, float g, float b) {
 Text* Text::CreateText(LuaRef args) //Doesn't belong to this class
 {//const std::string& name, int order, std::string material, float x, float y, float w, float h
 	//std::string bodyName = ent->getName();
-	std::string name = LuaMngr()->ParseString(args["name"], "Image" + num_text); //PETA SI HAY MAS DE 1 CON EL MISMO NOMBRE ==> CUIDADO
-	int order = LuaMngr()->ParseFloat(args["order"], 1);
-	std::string font = LuaMngr()->ParseString(args["material"], "Font1");
-	float x = LuaMngr()->ParseFloat(args["x"], 1);
-	float y = LuaMngr()->ParseFloat(args["y"], 1);
-	float charHeight = LuaMngr()->ParseFloat(args["charheight"], 0.05f);
-	bool isActive = LuaMngr()->ParseBool(args["visible"], true);
-	std::string text = LuaMngr()->ParseString(args["text"], "Example text");
+	std::string name = LuaMngr()->parseString(args["name"], "Image" + num_text); //PETA SI HAY MAS DE 1 CON EL MISMO NOMBRE ==> CUIDADO
+	int order = LuaMngr()->parseFloat(args["order"], 1);
+	std::string font = LuaMngr()->parseString(args["material"], "Font1");
+	float x = LuaMngr()->parseFloat(args["x"], 1);
+	float y = LuaMngr()->parseFloat(args["y"], 1);
+	float charHeight = LuaMngr()->parseFloat(args["charheight"], 0.05f);
+	bool isActive = LuaMngr()->parseBool(args["visible"], true);
+	std::string text = LuaMngr()->parseString(args["text"], "Example text");
 	num_text++;
 	return new Text(name, order, font, charHeight, x, y, isActive, text);
 }

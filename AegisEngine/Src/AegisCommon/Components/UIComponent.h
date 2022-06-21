@@ -17,15 +17,15 @@ class UIComponent:
 private:
 	UIElement* mElement_;
 
-	LuaRef type = LuaMngr()->GetSharedEmptyLuaRef();
-	LuaRef funcs = LuaMngr()->GetNewEmptyTable();
-	LuaRef initFunc = LuaMngr()->GetSharedEmptyLuaRef();
-	LuaRef OnMouseFunc = LuaMngr()->GetSharedEmptyLuaRef();
-	LuaRef OnMouseExitFunc = LuaMngr()->GetSharedEmptyLuaRef();
-	LuaRef OnClickDownFunc = LuaMngr()->GetSharedEmptyLuaRef();
-	LuaRef OnClickUpFunc = LuaMngr()->GetSharedEmptyLuaRef();
+	LuaRef type = LuaMngr()->getSharedEmptyLuaRef();
+	LuaRef funcs = LuaMngr()->getNewEmptyTable();
+	LuaRef initFunc = LuaMngr()->getSharedEmptyLuaRef();
+	LuaRef onMouseFunc = LuaMngr()->getSharedEmptyLuaRef();
+	LuaRef onMouseExitFunc = LuaMngr()->getSharedEmptyLuaRef();
+	LuaRef onClickDownFunc = LuaMngr()->getSharedEmptyLuaRef();
+	LuaRef onClickUpFunc = LuaMngr()->getSharedEmptyLuaRef();
 protected:
-	LuaRef data = LuaMngr()->GetNewEmptyTable();
+	LuaRef data = LuaMngr()->getNewEmptyTable();
 
 	template <class T>
 	void SetDataAsInnerType(T* component);
@@ -36,32 +36,32 @@ public:
 
 	virtual void init() override;
     virtual void render() override;
-    virtual void OnMouse(UIElement* other);
+    virtual void onMouse(UIElement* other);
 
-    virtual void OnClickDown(UIElement* other);
-    virtual void OnClickUp(UIElement* other);
+    virtual void onClickDown(UIElement* other);
+    virtual void onClickUp(UIElement* other);
 
 	inline UIElement* getElement() const { return mElement_; }
 
     //Lua stuff
 	void setCallbacks(LuaRef updateFunc);
 
-	void SetData(LuaRef luaRef);
-	LuaRef GetData() const;
+	void setData(LuaRef luaRef);
+	LuaRef getData() const;
 
-	void SetType(LuaRef luaRef);
-	void SetTypeLua(LuaRef luaRef);
-	LuaRef GetType() const;
+	void setType(LuaRef luaRef);
+	void setTypeLua(LuaRef luaRef);
+	LuaRef getType() const;
 
-	void SetFuncs(LuaRef luaRef);
-	LuaRef GetFuncs() const;
+	void setFuncs(LuaRef luaRef);
+	LuaRef getFuncs() const;
 
 	static void ConvertToLua(lua_State* state);
 
 	template <class T>
-	void CallLuaRefFunc(LuaRef func, T args = 0);
+	void callLuaRefFunc(LuaRef func, T args = 0);
 	// Soy consciente de que todos los cout deber�an llamarse desde otro lado, pero por ahora aqui
-	void PrintErrorModifyingTables(std::string fieldName, std::string typeName, bool modifiableFields);
+	void printErrorModifyingTables(std::string fieldName, std::string typeName, bool modifiableFields);
 };
 
 #endif

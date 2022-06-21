@@ -33,15 +33,15 @@ void UIElement::render()
 	}
 }
 
-void UIElement::OnClickUp()
+void UIElement::onClickUp()
 {
 }
 
-void UIElement::OnClickDown()
+void UIElement::onClickDown()
 {
 }
 
-void UIElement::OnMouseOver()
+void UIElement::onMouseOver()
 {
 }
 
@@ -51,7 +51,7 @@ void UIElement::OnMouseExit()
 
 inline void UIElement::addComponentFromLua(UIComponent* component)
 {
-	std::string key = component->GetComponentName();
+	std::string key = component->getComponentName();
 
 	if (mComponents_.count(key) == 0) { //si no est� lo a�adimos
 		//component->SetEntity(this);
@@ -105,7 +105,7 @@ void UIElement::setName(std::string name)
 
 inline void UIElement::addComponent(UIComponent* component)
 {
-	std::string key = component->GetComponentName();
+	std::string key = component->getComponentName();
 
 }
 

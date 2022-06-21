@@ -8,20 +8,20 @@
 RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m, bool useG, bool isK, bool isT,float scale)
 	: AegisComponent("Rigidbody", ent)
 {
-	transform = ent->GetTransform();
-	initialPos = transform->GetPosition();
+	transform = ent->getTransform();
+	initialPos = transform->getPosition();
 	
-	auto rot = transform->GetRotation();
+	auto rot = transform->getRotation();
 	Vector4 rotVec(rot.x, rot.y, rot.z, rot.w);
-	rigidbody = new RigidBody(bodyMeshName, transform->GetPosition(), transform->GetScale()*scale, rotVec,this, m, useG, isK,isT);
-	mEntity_->getScene()->AddPhysicsEntity(this);
-	SetDataAsInnerType(this);
+	rigidbody = new RigidBody(bodyMeshName, transform->getPosition(), transform->getScale()*scale, rotVec,this, m, useG, isK,isT);
+	mEntity_->getScene()->addPhysicsEntity(this);
+	setDataAsInnerType(this);
 }
 
 RigidbodyComponent::~RigidbodyComponent()
 {
 	delete rigidbody;
-	mEntity_->getScene()->RemovePhysicsEntity(this->physicsEntityIt);
+	mEntity_->getScene()->removePhysicsEntity(this->physicsEntityIt);
 };
 
 void RigidbodyComponent::lateUpdate(float deltaTime) {}
@@ -30,16 +30,16 @@ void RigidbodyComponent::fixedUpdate() {
 	
 }
 
-void RigidbodyComponent::SyncToTransform()
+void RigidbodyComponent::syncToTransform()
 {
 	Vector3 updatedPos = rigidbody->getRbPosition();
-	transform->SetPosition(updatedPos);
+	transform->setPosition(updatedPos);
 	auto quat = rigidbody->getRotation();
 	Ogre::Quaternion ogreQuat(quat.w, quat.x, quat.y, quat.z);
-	transform->SetRotation(ogreQuat);
+	transform->setRotation(ogreQuat);
 }
 
-void RigidbodyComponent::SetIterator(std::list<RigidbodyComponent*>::iterator physicsEntityIt)
+void RigidbodyComponent::setIterator(std::list<RigidbodyComponent*>::iterator physicsEntityIt)
 {
 	this->physicsEntityIt = physicsEntityIt;
 }
@@ -49,66 +49,66 @@ bool RigidbodyComponent::isActive() const
 	return rigidbody->isActive();
 }
 
-void RigidbodyComponent::AddForce(Vector3 force) {
+void RigidbodyComponent::addForce(Vector3 force) {
 	rigidbody->addForce(force);
 }
 
-Vector3 RigidbodyComponent::AccelerateTo(Vector3 targetVelocity, float maxAcceleration)
+Vector3 RigidbodyComponent::accelerateTo(Vector3 targetVelocity, float maxAcceleration)
 {
 	
-	return rigidbody->AccelerateTo(targetVelocity, Time()->deltaTime, maxAcceleration);
+	return rigidbody->accelerateTo(targetVelocity, Time()->deltaTime, maxAcceleration);
 
 }
 
-Vector3 RigidbodyComponent::AccelerateToRand()
+Vector3 RigidbodyComponent::accelerateToRand()
 {
 	Vector3 vec(rand() % 10, 0 ,rand() % 10);
-	return rigidbody->AccelerateTo(vec, Time()->deltaTime, 100000000000);
+	return rigidbody->accelerateTo(vec, Time()->deltaTime, 100000000000);
 	rigidbody->setLinearVelocity();
 }
 
-void RigidbodyComponent::AddForceForward(float force) {
-	Vector3 rot = transform->GetForward();
-	AddForce(rot * force);
+void RigidbodyComponent::addForceForward(float force) {
+	Vector3 rot = transform->getForward();
+	addForce(rot * force);
 }
 
-void RigidbodyComponent::ResetForce()
+void RigidbodyComponent::resetForce()
 {
 	rigidbody->clearForces();
 }
 
-void RigidbodyComponent::AddTorque(Vector3 torque) {
+void RigidbodyComponent::addTorque(Vector3 torque) {
 	rigidbody->addTorque(torque);
 }
 
-Vector3 RigidbodyComponent::GetForce() const {
+Vector3 RigidbodyComponent::getForce() const {
 	return rigidbody->getTotalForce();
 }
 
-Vector3 RigidbodyComponent::GetPosition() const {
+Vector3 RigidbodyComponent::getPosition() const {
 	return rigidbody->getRbPosition();
 } 
 
-void RigidbodyComponent::SetPosition(Vector3 pos) {
+void RigidbodyComponent::setPosition(Vector3 pos) {
 	rigidbody->setRbPosition(pos);
 }
 
-void RigidbodyComponent::SetRotationEuler(Vector3 rot) {
+void RigidbodyComponent::setRotationEuler(Vector3 rot) {
 	Vector4 eulerRot = MathUtils::EulerToVec4(rot);
 	rigidbody->setRbRotation(eulerRot);
 }
 
 //FREEZE ROT------------------------------------------------------------------------------------------------
-void RigidbodyComponent::FreezeRot (bool _x, bool _y, bool _z) {
+void RigidbodyComponent::freezeRot (bool _x, bool _y, bool _z) {
 	rigidbody->setFreezeRotation(_x, _y, _z);
 }
 
 //GRAVITY----------------------------------------------------------------------------------------------------
-bool RigidbodyComponent::GetUsingGravity()const {
+bool RigidbodyComponent::getUsingGravity()const {
 	return rigidbody->getUseGravity();
 }
 
-void RigidbodyComponent::SetUsingGravity(bool g_) {
+void RigidbodyComponent::setUsingGravity(bool g_) {
 	rigidbody->setUsingGravity(g_);
 }
 
@@ -118,11 +118,11 @@ void RigidbodyComponent::SetUsingGravity(bool g_) {
 RigidbodyComponent* CreateRigidbody(Entity* ent, LuaRef args) //Doesn't belong to this class
 {
 	std::string bodyName = ent->getName();
-	float mass = LuaMngr()->ParseFloat(args["mass"], 1);
-	bool useGravity = LuaMngr()->ParseBool(args["useGravity"], true);
-	bool isKinematic = LuaMngr()->ParseBool(args["isKinematic"], false);
-	bool isTrigger = LuaMngr()->ParseBool(args["isTrigger"], false);
-	float scale = LuaMngr()->ParseFloat(args["scale"], 1);
+	float mass = LuaMngr()->parseFloat(args["mass"], 1);
+	bool useGravity = LuaMngr()->parseBool(args["useGravity"], true);
+	bool isKinematic = LuaMngr()->parseBool(args["isKinematic"], false);
+	bool isTrigger = LuaMngr()->parseBool(args["isTrigger"], false);
+	float scale = LuaMngr()->parseFloat(args["scale"], 1);
 	return new RigidbodyComponent(ent, bodyName, mass, useGravity, isKinematic,isTrigger,scale);
 }
 
@@ -141,21 +141,21 @@ void RigidbodyComponent::ConvertToLua(lua_State* state)
 		beginNamespace("NativeComponents").
 			addFunction("CreateRigidbody", CreateRigidbody).
 				deriveClass<RigidbodyComponent, AegisComponent>("Rigidbody").
-					addProperty("position", &RigidbodyComponent::GetPosition, &RigidbodyComponent::SetPosition).
-					addProperty("useGravity", &RigidbodyComponent::GetUsingGravity, &RigidbodyComponent::SetUsingGravity).
-					addFunction("AddForce", &RigidbodyComponent::AddForce).
-					addFunction("GetForce", &RigidbodyComponent::GetForce).
-					addFunction("ClearForce", &RigidbodyComponent::ResetForce).
-					addFunction("AccelerateTo", &RigidbodyComponent::AccelerateTo).
-					addFunction("AccelerateToRand", &RigidbodyComponent::AccelerateToRand).
-					addFunction("AddTorque", &RigidbodyComponent::AddTorque).
-					addFunction("AddForceForward", &RigidbodyComponent::AddForceForward).
+					addProperty("position", &RigidbodyComponent::getPosition, &RigidbodyComponent::setPosition).
+					addProperty("useGravity", &RigidbodyComponent::getUsingGravity, &RigidbodyComponent::setUsingGravity).
+					addFunction("AddForce", &RigidbodyComponent::addForce).
+					addFunction("GetForce", &RigidbodyComponent::getForce).
+					addFunction("ClearForce", &RigidbodyComponent::resetForce).
+					addFunction("AccelerateTo", &RigidbodyComponent::accelerateTo).
+					addFunction("AccelerateToRand", &RigidbodyComponent::accelerateToRand).
+					addFunction("AddTorque", &RigidbodyComponent::addTorque).
+					addFunction("AddForceForward", &RigidbodyComponent::addForceForward).
 					addFunction("ChangeGravity", &RigidbodyComponent::changeGravity).
-					addFunction("RayCastWorld", &RigidbodyComponent::Raycast).
-					addFunction("SetRotationEuler", &RigidbodyComponent::SetRotationEuler).
-					addFunction("SetPosition", &RigidbodyComponent::SetPosition).
-					addFunction("SetAngular", &RigidbodyComponent::SetAngular).
-					addFunction("FreezeRot", &RigidbodyComponent::FreezeRot).
+					addFunction("RayCastWorld", &RigidbodyComponent::raycast).
+					addFunction("SetRotationEuler", &RigidbodyComponent::setRotationEuler).
+					addFunction("SetPosition", &RigidbodyComponent::setPosition).
+					addFunction("SetAngular", &RigidbodyComponent::setAngular).
+					addFunction("FreezeRot", &RigidbodyComponent::freezeRot).
 					addProperty("isActive", &RigidbodyComponent::isActive).
 					addFunction("EnableCol", &RigidbodyComponent::enableCollision).
 					
@@ -169,8 +169,8 @@ void RigidbodyComponent::changeGravity(Vector3 acc)
 	rigidbody->changeGravity(acc);
 }
 
-int RigidbodyComponent::Raycast(Vector3 origin, Vector3& dir, float distance)
+int RigidbodyComponent::raycast(Vector3 origin, Vector3& dir, float distance)
 {
 	dir = origin + dir.getNormalized() * distance;
-	return rigidbody->RayCast(origin, dir);
+	return rigidbody->rayCast(origin, dir);
 }

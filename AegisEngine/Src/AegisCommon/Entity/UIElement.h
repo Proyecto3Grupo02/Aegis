@@ -29,10 +29,10 @@ public:
 	void init();
 	void render();
 
-	void OnClickUp();
-	void OnClickDown();
+	void onClickUp();
+	void onClickDown();
 
-	void OnMouseOver();
+	void onMouseOver();
 	void OnMouseExit();
 
 	void addComponent(UIComponent* component);

@@ -11,28 +11,28 @@ SceneManager::~SceneManager() {
 	delete currentScene;
 }
 
-void SceneManager::LoadScene(std::string sceneName)
+void SceneManager::loadScene(std::string sceneName)
 {
 	//currentScene = new Scene();
 }
 
-void SceneManager::UpdateCurrentScene(float deltaTime) {
-	currentScene->UpdateScene(deltaTime);
+void SceneManager::updateCurrentScene(float deltaTime) {
+	currentScene->updateScene(deltaTime);
 }
 
-void SceneManager::PreRenderScene() {
-	currentScene->Render();
+void SceneManager::preRenderScene() {
+	currentScene->render();
 }
 
-Scene* SceneManager::GetCurrentScene()
+Scene* SceneManager::getCurrentScene()
 {
 	return currentScene;
 }
 
-void SceneManager::ChangeScene(std::string sceneName)
+void SceneManager::changeScene(std::string sceneName)
 {
 	delete currentScene;
-	LoadScene(sceneName);
+	loadScene(sceneName);
 }
 
 void SceneManager::ConvertToLua(lua_State* state)

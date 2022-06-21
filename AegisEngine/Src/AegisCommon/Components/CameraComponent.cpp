@@ -6,14 +6,14 @@ CameraComponent::CameraComponent(Entity* ent, LuaRef args):
 	AegisComponent("Camera", ent), mCamera_(nullptr), isMainCam_(args["isMainCam"])
 {
 	mCamera_ = new AegisCamera(args["name"], getEntity()->getNode(), isMainCam_);
-	SetDataAsInnerType(this);
+	setDataAsInnerType(this);
 	// deberiamos poner la camara principal como variable global? :think:
 }
 
 //CONSTRUCTURA DE LA ESCENA DE C++ (AegisCamera de OGREWRAPPER)
 CameraComponent::CameraComponent(Entity* ent, AegisCamera* cam) : AegisComponent("Camera", ent), mCamera_(cam), isMainCam_(true)
 {
-	SetDataAsInnerType(this);
+	setDataAsInnerType(this);
 }
 
 CameraComponent::~CameraComponent()

@@ -33,12 +33,12 @@ private:
 	/// Es una funcion auxiliar usada en <function>RemoveAndFreePendingEntities</function>
 	/// </summary>
 	/// <param name="entity">Iterador de la entidad a borrar</param>
-	void RemoveAndFreeEntity(std::list<Entity*>::iterator entity);
+	void removeAndFreeEntity(std::list<Entity*>::iterator entity);
 	
 	/// <summary>
 	///  Borra y destruye todas las entidades de <param>entitiesToDelete</param>
 	/// </summary>
-	void RemoveAndFreePendingEntities();
+	void removeAndFreePendingEntities();
 
 	/// <summary>
 	/// FixedUpdate se "ejecuta" cada PHYSICS_STEP (se ejecuta en el mismo hilo que lo demas). 
@@ -64,50 +64,50 @@ private:
 	/// Es decir, por ahora y hasta que no definamos mejor el render, este podria suceder este dos fixedUpdate, lo cual daria lugar a un 
 	/// movimiento como trabado, tembloroso. Hay que ver como sincronizar el render para que se ejecute cada frame y que sea despues del fixedUpdate
 	/// </summary>
-	void FixedUpdate(float dt);
+	void fixedUpdate(float dt);
 
-	void SyncTransforms();
-
-	/// <summary>
-	/// Llama al update de cada entidad para que actualice respectivamente sus componentes
-	/// </summary>
-	/// <param name="dt">deltaTime</param>
-	void Update(float dt);
+	void syncTransforms();
 
 	/// <summary>
 	/// Llama al update de cada entidad para que actualice respectivamente sus componentes
 	/// </summary>
 	/// <param name="dt">deltaTime</param>
-	void LateUpdate(float dt);
+	void update(float dt);
+
+	/// <summary>
+	/// Llama al update de cada entidad para que actualice respectivamente sus componentes
+	/// </summary>
+	/// <param name="dt">deltaTime</param>
+	void lateUpdate(float dt);
 
 	/// <summary>
 	/// Calls entity.init for every entity that has been added in the first frame
 	/// This allows to call "awake" for entities that are added in runtime
 	/// </summary>
-	void InitEntities();
+	void initEntities();
 
 public:
 	Scene(OgreWrapper* wrap);
 
 	~Scene();
 
-	bool Init();
+	bool init();
 
 	/// <summary>
 	/// Añade una entidad ya creada a la escena. No se comprueba que la entidad sea nula en ningún momento.
 	/// Añadir una entidad nula provocaria undefine behaviour o excepciones
 	/// </summary>
 	/// <param name="entity"></param>
-	void AddEntity(Entity* entity);
-	void AddPhysicsEntity(RigidbodyComponent* physicsEntity);
+	void addEntity(Entity* entity);
+	void addPhysicsEntity(RigidbodyComponent* physicsEntity);
 
 	/// <summary>
 	/// Añade un interador de entidad a la lista de entidades a destruir. La destruccion se realiza despues de lateUpdate y antes del render
 	/// Usamos un interador para no tener que buscar la entidad en la lista
 	/// </summary>
 	/// <param name="entity"></param>
-	void DestroyEntity(std::list<Entity*>::iterator entity);
-	void RemovePhysicsEntity(std::list<RigidbodyComponent*>::iterator physicsEntity);
+	void destroyEntity(std::list<Entity*>::iterator entity);
+	void removePhysicsEntity(std::list<RigidbodyComponent*>::iterator physicsEntity);
 
 	/// <summary>
 	/// Update principal de la escena que llamar a los demas updates. El orden de ejecucion es
@@ -119,12 +119,12 @@ public:
 	/// Render
 	/// </summary>
 	/// <param name="dt"></param>
-	void UpdateScene(float dt);
+	void updateScene(float dt);
 	
-	void Render();
+	void render();
 
-	Ogre::SceneNode* GetNewNode();
-	Ogre::SceneManager* GetOgreManager();
+	Ogre::SceneNode* getNewNode();
+	Ogre::SceneManager* getOgreManager();
 
 	static void ConvertToLua(lua_State* state);
 };

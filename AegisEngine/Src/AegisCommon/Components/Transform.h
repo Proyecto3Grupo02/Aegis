@@ -11,46 +11,46 @@ class Entity;
 class Transform : public AegisComponent, public ILuaObject {
 public:
 	Transform(Ogre::SceneNode* node, Entity* ent) : AegisComponent("Transform", ent), position(Vector3()), rotation(Ogre::Quaternion()), scale(Vector3(1.0f, 1.0f, 1.0f)), mNode(node), parentNode(node->getParentSceneNode()), parentEntity(nullptr) {
-		SetDataAsInnerType(this);
+		setDataAsInnerType(this);
 		//ComponentManager::getInstance()->RegisterComponent<Transform>("Transform");
 	};
 	Transform( Vector3 _pos, Ogre::Quaternion _rot, Vector3 _scale, Ogre::SceneNode* node, Entity* ent) :
 			AegisComponent("Transform", ent), position(_pos), rotation(_rot), scale(_scale), mNode(node), parentNode(node->getParentSceneNode()), parentEntity(nullptr) {
-		SetDataAsInnerType(this);
+		setDataAsInnerType(this);
 		//ComponentManager::getInstance()->RegisterComponent<Transform>("Transform");
 	};
 	virtual ~Transform();
 	virtual void init() override {}
 	virtual void update(float deltaTime) override;
 	virtual void render() override;
-	Vector3 GetPosition() const;
-	Ogre::Quaternion GetRotation() const;
-	Vector3 GetRotationEuler() const;
-	Vector3 GetScale() const;
+	Vector3 getPosition() const;
+	Ogre::Quaternion getRotation() const;
+	Vector3 getRotationEuler() const;
+	Vector3 getScale() const;
 
-	void SetParent(Entity* ent);
+	void setParent(Entity* ent);
 
-	void SetPosition(Vector3 newPos);
-	void SetRotation(Ogre::Quaternion newRot);
-	void SetRotationEuler(Vector3 newRot);
-	void SetScale(Vector3 newScale);
+	void setPosition(Vector3 newPos);
+	void setRotation(Ogre::Quaternion newRot);
+	void setRotationEuler(Vector3 newRot);
+	void setScale(Vector3 newScale);
 
-	Vector3 GetForward() const;
-	Vector3 GetRight() const;
-	Vector3 GetUp() const;
+	Vector3 getForward() const;
+	Vector3 getRight() const;
+	Vector3 getUp() const;
 
-	void Yaw(float degrees);
-	void Pitch(float degrees);
-	void Roll(float degrees);
+	void yaw(float degrees);
+	void pitch(float degrees);
+	void roll(float degrees);
 
 	// It does nothing, it's for faking the setter
-	void SetFoo(Vector3 nothign) {};
+	void setFoo(Vector3 nothign) {};
 
 	static void ConvertToLua(lua_State* state);
 
-	void AddChild(Entity* child);
-	void RemoveChild(Entity* child);
-	void DestroyChilds();
+	void addChild(Entity* child);
+	void removeChild(Entity* child);
+	void destroyChilds();
 
 protected:
 	Ogre::SceneNode* mNode;

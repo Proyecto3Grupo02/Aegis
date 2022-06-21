@@ -16,7 +16,7 @@ class Button : public Image
 {
 private:
 	InputSystem* inputSystem = nullptr;
-	luabridge::LuaRef callback = LuaMngr()->GetSharedEmptyLuaRef(); //necesistas inicializarlo
+	luabridge::LuaRef callback = LuaMngr()->getSharedEmptyLuaRef(); //necesistas inicializarlo
 
 public:
 	Button(const std::string& name, int order, std::string material, float x, float y, float w, float h, bool isActive, luabridge::LuaRef call);

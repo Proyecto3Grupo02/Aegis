@@ -5,14 +5,14 @@
 AnimationComponent::AnimationComponent(Entity* _ent, LuaRef args) : AegisComponent("Animation", _ent)
 {
 	this->data = args;
-	entTransform = _ent->GetTransform();
-	animation.loop = LuaMngr()->ParseBool(args["loop"]);
+	entTransform = _ent->getTransform();
+	animation.loop = LuaMngr()->parseBool(args["loop"]);
 
 	LuaRef keyframes = args["keyframes"];
 	if (!keyframes.isNil())
-		ReadKeyframes(keyframes);
+		readKeyframes(keyframes);
 
-	SetDataAsInnerType(this);
+	setDataAsInnerType(this);
 }
 
 //Esto hay que moverlo a otro sitio, pero en luaref causaria dependencias con aegiscommons asi que no se
@@ -21,14 +21,14 @@ Vector3 ParseVector3(LuaRef ref, int defaultValue)
 	if (ref.isNil())
 		return Vector3(defaultValue, defaultValue, defaultValue);
 
-	float x = LuaMngr()->ParseFloat(ref["x"], defaultValue);
-	float y = LuaMngr()->ParseFloat(ref["y"], defaultValue);
-	float z = LuaMngr()->ParseFloat(ref["z"], defaultValue);
+	float x = LuaMngr()->parseFloat(ref["x"], defaultValue);
+	float y = LuaMngr()->parseFloat(ref["y"], defaultValue);
+	float z = LuaMngr()->parseFloat(ref["z"], defaultValue);
 
 	return Vector3(x, y, z);
 }
 
-void AnimationComponent::ReadKeyframes(LuaRef frames)
+void AnimationComponent::readKeyframes(LuaRef frames)
 {
 	int numFrames = frames.length();
 	animation.numKeyFrames = numFrames;
@@ -46,7 +46,7 @@ void AnimationComponent::ReadKeyframes(LuaRef frames)
 		if (!frame["scale"].isNil())
 			currentFrame.scale = ParseVector3(frame["scale"], 1);
 		if (!frame["time"].isNil())
-			currentFrame.time = LuaMngr()->ParseFloat(frame["time"]);
+			currentFrame.time = LuaMngr()->parseFloat(frame["time"]);
 		else
 			std::cerr << "No time data given for this keyFrame, this can lead to undefined behaviour\n";
 
@@ -60,9 +60,9 @@ void AnimationComponent::update(float dt)
 
 	animation.addTime(dt);
 	
-	entTransform->SetPosition(animation.GetInterpolatedPos());
-	entTransform->SetRotationEuler(animation.GetInterpolatedEulerAngles());
-	entTransform->SetScale(animation.GetInterpolatedScale());
+	entTransform->setPosition(animation.getInterpolatedPos());
+	entTransform->setRotationEuler(animation.getInterpolatedEulerAngles());
+	entTransform->setScale(animation.getInterpolatedScale());
 }
 
 AnimationComponent* CreateAnimation(Entity* _ent, LuaRef args)

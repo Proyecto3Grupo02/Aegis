@@ -30,7 +30,7 @@ void SoundSystem::close() {
 	delete SR;
 }
 
-void SoundSystem::Init()
+void SoundSystem::init()
 {
 	generalVolume = 1;
 	musicVolume = 1;
@@ -54,7 +54,7 @@ void SoundSystem::Init()
 	result = master->addGroup(soundEffects);
 	ERRCHECK(result);
 
-	Debug()->Log("SOUND SYSTEM: System started");
+	Debug()->log("SOUND SYSTEM: System started");
 }
 /// <summary>
 /// Devuelve el tipo sonido si no da fallo al cargarlo
@@ -161,10 +161,10 @@ void SoundSystem::setGeneralVolume(float volume)
 void SoundSystem::setListenerAttributes(Vector3& position,  Vector3& forward,  Vector3& up)
 {
 	FMOD_VECTOR pos, vel, forwardTmp, upTmp;
-	pos = { float(position.GetX()) ,float(position.GetY()) ,float(position.GetZ()) };
+	pos = { float(position.getX()) ,float(position.getY()) ,float(position.getZ()) };
 	vel = { 0,0,0 };
-	forwardTmp = { float(forward.GetX()) ,float(forward.GetY()) ,float(forward.GetZ()) };
-	upTmp = { float(up.GetX()) ,float(up.GetY()) ,float(up.GetZ()) };
+	forwardTmp = { float(forward.getX()) ,float(forward.getY()) ,float(forward.getZ()) };
+	upTmp = { float(up.getX()) ,float(up.getY()) ,float(up.getZ()) };
 	system->set3DListenerAttributes(0, &pos, &vel, &forwardTmp, &upTmp);
 }
 
@@ -223,8 +223,8 @@ void SoundSystem::update(float deltaTime)
 		//float z = listener->position->GetZ();
 		//float y = listener->position->GetY();
 		
-		float z = listener->quaternion->GetZ();
-		float y = listener->quaternion->GetY();
+		float z = listener->quaternion->getZ();
+		float y = listener->quaternion->getY();
 		forward = Vector3 { 0, 0, z }; //Vector3 Forward
 		up = Vector3 { 0, y ,0 }; // Vector3 Up
 		setListenerAttributes(pos, forward, up);
@@ -286,9 +286,9 @@ SoundSystem::ListenerData* SoundSystem::createListener(Vector3* position,  Vecto
 FMOD_VECTOR SoundSystem::vecToFMOD(Vector3& in)
 {
 	FMOD_VECTOR out;
-	out.x = in.GetX();
-	out.y = in.GetY();
-	out.z = in.GetZ();
+	out.x = in.getX();
+	out.y = in.getY();
+	out.z = in.getZ();
 
 	return out;
 }
@@ -314,7 +314,7 @@ void SoundSystem::ERRCHECK(FMOD_RESULT result) const
 {
 	// Sacado de los apuntes de cuarto, la verdad
 	if (result != FMOD_RESULT::FMOD_OK)
-		Debug()->Log(FMOD_ErrorString(result));
+		Debug()->log(FMOD_ErrorString(result));
 }
 
 /// <summary>
@@ -337,7 +337,7 @@ Sound* SoundSystem::getSound(const std::string& name)
 
 	if (result != FMOD_OK) {
 		std::string errLog = name.c_str();
-		Debug()->Log("SOUND MANAGER: Error playing sound %s" + errLog);
+		Debug()->log("SOUND MANAGER: Error playing sound %s" + errLog);
 		ERRCHECK(result);
 		return nullptr;
 	}

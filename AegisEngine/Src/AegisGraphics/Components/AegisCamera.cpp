@@ -50,12 +50,12 @@ void AegisCamera::setClipDistances(double near, double far)
 	mCamera_->setFarClipDistance(far);
 }
 
-Ogre::Camera* AegisCamera::GetCamera()
+Ogre::Camera* AegisCamera::getCamera()
 {
 	return mCamera_;
 }
 
-Ogre::SceneNode* AegisCamera::GetNode()
+Ogre::SceneNode* AegisCamera::getNode()
 {
 	return mNode_;
 }

@@ -98,7 +98,7 @@ public:
 	float getMusicVolume() const;
 	float getSoundVolume() const;
 
-	void Init();
+	void init();
 	void close();
 	Channel* playSound(const std::string& name);
 	Channel* playMusic(const std::string& name);

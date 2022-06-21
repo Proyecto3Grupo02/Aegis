@@ -28,14 +28,14 @@ private:
 
 	std::vector<UIObject*>ui_objects;
 
-	void AddUIObject(UIObject* object_);
+	void addUIObject(UIObject* object_);
 public:
 	UISystem();
 	~UISystem();
-	UIObject* CreateUIElem(luabridge::LuaRef luaref);
-	void Init(Ogre::SceneManager* mScene, InputSystem* input);
-	void DeleteUIObject(const UIObject* obj_);
-	void Update(float deltaTime);
+	UIObject* createUIElem(luabridge::LuaRef luaref);
+	void init(Ogre::SceneManager* mScene, InputSystem* input);
+	void deleteUIObject(const UIObject* obj_);
+	void update(float deltaTime);
 	InputSystem* getInputSystem();
 	Ogre::Overlay* getOverlay();
 

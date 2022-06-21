@@ -6,7 +6,7 @@ LightComponent::LightComponent(Entity* ent, LuaRef args) :
 {
 	data = args;
 
-	setLightType(LuaMngr()->ParseString(args["lightType"], "PointLight"));
+	setLightType(LuaMngr()->parseString(args["lightType"], "PointLight"));
 	if (!args["direction"].isNil())
 		setDirection(Vector3::ParseVector3(args["direction"]));
 	mDiffuse_ = Vector3::ParseVector3(args["color"], Vector3Mode::RGB);
@@ -15,7 +15,7 @@ LightComponent::LightComponent(Entity* ent, LuaRef args) :
 	setLightColor(mDiffuse_);
 	setSpecularColor(mSpecular_);
 	
-	SetDataAsInnerType(this);	
+	setDataAsInnerType(this);	
 }
 
 LightComponent::~LightComponent()
@@ -74,7 +74,7 @@ void LightComponent::setLightType(std::string lightType)
 void LightComponent::setDirection(Vector3 dir)
 {
 	// Si el transform está activo actualizará la rotación y eso a su vez invalida la dirección
-	mEntity_->GetTransform()->setActive(false);
+	mEntity_->getTransform()->setActive(false);
 	mLight_->setDirection(dir.x, dir.y, dir.z);
 }
 

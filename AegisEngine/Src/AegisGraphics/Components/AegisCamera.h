@@ -17,8 +17,8 @@ public:
 	Ogre::Viewport* getViewport();
 
 	void setClipDistances(double near, double far);
-	Ogre::Camera* GetCamera();
-	Ogre::SceneNode* GetNode();
+	Ogre::Camera* getCamera();
+	Ogre::SceneNode* getNode();
 
 	void free();
 

@@ -11,7 +11,7 @@ ImageResources::~ImageResources()
 	struct dirent* dp;
 }
 
-void ImageResources::ParseDirectory(std::string dir)
+void ImageResources::parseDirectory(std::string dir)
 {
 	DIR* dirp;
 	struct dirent* dp;
@@ -30,7 +30,7 @@ void ImageResources::ParseDirectory(std::string dir)
 			if (strcmp(dp->d_name, ".") != 0 && strcmp(dp->d_name, "..") != 0)
 			{
 				string subdir = dir + "/" + dp->d_name;
-				ParseDirectory(subdir);
+				parseDirectory(subdir);
 			}
 		}
 		else

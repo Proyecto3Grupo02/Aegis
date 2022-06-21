@@ -11,14 +11,14 @@ DebugManager::~DebugManager()
 {
 }
 
-void DebugManager::Log(const std::string& msg) {
+void DebugManager::log(const std::string& msg) {
 	std::cout<<"DEBUG: " << msg << std::endl;
 }
 
-void DebugManager::LogWarning(const std::string& msg) {
+void DebugManager::logWarning(const std::string& msg) {
 	std::cout <<"WARNING: " << msg << std::endl;
 }
-void DebugManager::LogError(const std::string& msg) {
+void DebugManager::logError(const std::string& msg) {
 	std::cout <<"ERROR: " << msg << std::endl;
 }
 //
@@ -34,7 +34,7 @@ void DebugManager::LogError(const std::string& msg) {
 //	mLines_->colour(c);
 //}
 
-bool DebugManager::Init() {
+bool DebugManager::init() {
 
 	return true;
 }

@@ -26,10 +26,10 @@ using namespace luabridge;
 AegisMain::AegisMain() : IInitializable() {
 	exit = (false);
 	ogreWrap = new OgreWrapper();
-	ogreWrap->Init();
+	ogreWrap->init();
 	LuaMngr();
 
-	gameLoopData = new TimeManager();
+	gameLoopData = new GameLoopData();
 	sceneManager = new SceneManager(new Scene(ogreWrap));
 }
 
@@ -46,7 +46,7 @@ AegisMain::~AegisMain() {
 	LuaMngr()->deleteInstance();
 }
 
-void AegisMain::GameLoop() {
+void AegisMain::gameLoop() {
 	uint32_t frameTimeMS = (uint32_t)floor((1 / TARGET_FRAME_RATE) * 1000);
 	//SDL_SetRelativeMouseMode(SDL_TRUE); //comentar para que funcione el boton
 
@@ -60,7 +60,7 @@ void AegisMain::GameLoop() {
 		{
 			//Tiempo al inicio del frame
 			Time()->frameStartTime = SDL_GetTicks();
-			Input()->UpdateState();
+			Input()->updateState();
 			
 			while (SDL_PollEvent(&eventHandler) != 0)
 			{
@@ -73,21 +73,21 @@ void AegisMain::GameLoop() {
 					if (key == SDLK_ESCAPE)
 						exit = true;
 					//std::cout << "KeyDown (" << eventHandler.type << "): ";
-					Input()->OnKeyDown(key);
+					Input()->onKeyDown(key);
 					break;
 				case SDL_KEYUP:
 					//std::cout << "KeyUp (" << eventHandler.type << "): ";
-					Input()->OnKeyUp(key);
+					Input()->onKeyUp(key);
 					break;
 				case SDL_MOUSEBUTTONDOWN:
-					Input()->OnMouseButtonDown(eventHandler.button);
+					Input()->onMouseButtonDown(eventHandler.button);
 					break;
 				case SDL_MOUSEBUTTONUP:
-					Input()->OnMouseButtonUp(eventHandler.button);
+					Input()->onMouseButtonUp(eventHandler.button);
 					break;
 				case SDL_MOUSEMOTION:
 					// This is usually implemented as a callback but for now it will be this way, just for testing...
-					Input()->SetMouseMotion(Vector2(eventHandler.motion.xrel, eventHandler.motion.yrel));
+					Input()->setMouseMotion(Vector2(eventHandler.motion.xrel, eventHandler.motion.yrel));
 					break;
 				default:
 					//std::cout << "Default (" << eventHandler.type << ")\n";
@@ -95,12 +95,12 @@ void AegisMain::GameLoop() {
 				}
 			}
 
-			UIs()->Update(Time()->deltaTime); //boton
+			UIs()->update(Time()->deltaTime); //boton
 
-			sceneManager->UpdateCurrentScene(Time()->deltaTime);
-			sceneManager->PreRenderScene();
+			sceneManager->updateCurrentScene(Time()->deltaTime);
+			sceneManager->preRenderScene();
 
-			ogreWrap->Render();
+			ogreWrap->render();
 			Uint32 frameTime = SDL_GetTicks() - Time()->frameStartTime;
 
 			if (frameTime < frameTimeMS)
@@ -117,26 +117,26 @@ void AegisMain::GameLoop() {
 /// Inicializa todos los wrappers (Ogre, Input, Imgui...)
 /// </summary>
 /// <returns></returns>
-bool AegisMain::Init()
+bool AegisMain::init()
 {
-	Debug()->Log("Aegis loaded\n");
+	Debug()->log("Aegis loaded\n");
 	std::cout << '\n';
-	Input()->Init();
-	Audio()->Init();
-	Physics()->Init(ogreWrap->getSceneManager());
-	UIs()->Init(ogreWrap->getSceneManager(), Input());
-	ConvertObjectToLua();
-	sceneManager->GetCurrentScene()->Init();
-	LuaMngr()->Execute("init.lua");
+	Input()->init();
+	Audio()->init();
+	Physics()->init(ogreWrap->getSceneManager());
+	UIs()->init(ogreWrap->getSceneManager(), Input());
+	convertObjectToLua();
+	sceneManager->getCurrentScene()->init();
+	LuaMngr()->execute("init.lua");
 
 
-	GameLoop();
+	gameLoop();
 	return true;
 }
 
-void AegisMain::ConvertObjectToLua()
+void AegisMain::convertObjectToLua()
 {
-	auto state = LuaMngr()->GetState();
+	auto state = LuaMngr()->getState();
 
 	Scene::ConvertToLua(state);
 	InputSystem::ConvertToLua(state);
@@ -159,7 +159,7 @@ void AegisMain::ConvertObjectToLua()
 	UISystem::ConvertToLua(state);
 	LuaMaths::ConvertToLua(state);
 
-	ExportToLua(sceneManager->GetCurrentScene(), "currentScene");
-	ExportToLua(UIs(), "UISystem");
-	ExportToLua(Input(), "Input");
+	exportToLua(sceneManager->getCurrentScene(), "currentScene");
+	exportToLua(UIs(), "UISystem");
+	exportToLua(Input(), "Input");
 }

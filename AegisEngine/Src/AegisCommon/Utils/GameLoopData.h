@@ -7,7 +7,7 @@
 #include "Singleton.h"
  //BASURA
 
-struct TimeManager : public Singleton<TimeManager>
+struct GameLoopData : public Singleton<GameLoopData>
 {
 public:
 	float deltaTime = 0;
@@ -22,9 +22,9 @@ public:
 	}
 };
 
-inline TimeManager* Time()
+inline GameLoopData* Time()
 {
-	return TimeManager::getInstance();
+	return GameLoopData::getInstance();
 }
 
 # endif

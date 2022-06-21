@@ -9,9 +9,9 @@ public:
 };
 
 template <typename T>
-inline void ExportToLua(T item, const char* name)
+inline void exportToLua(T item, const char* name)
 {
-	auto state = LuaMngr()->GetState();
+	auto state = LuaMngr()->getState();
 	push(state, item);
 	lua_setglobal(state, name);
 }

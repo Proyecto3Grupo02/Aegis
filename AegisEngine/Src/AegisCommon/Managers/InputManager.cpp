@@ -8,12 +8,12 @@ InputSystem::~InputSystem() {
 
 }
 
-void InputSystem::Init() {
+void InputSystem::init() {
 	keyNums = 322;
 	keys = std::vector<key>(keyNums, { false, false, false });
 }
 
-void InputSystem::UpdateState() {
+void InputSystem::updateState() {
 
 	KEY_WAS_PRESSED = false;
 	KEY_WAS_RELEASED = false;
@@ -54,7 +54,7 @@ void InputSystem::UpdateState() {
 	mouseMotion = Vector2();
 }
 
-void InputSystem::ClearState() {
+void InputSystem::clearState() {
 	for (int i = 0; i < keyNums; i++) {
 		keys[i].wasPressed = false;
 		keys[i].down = false;
@@ -68,7 +68,7 @@ int InputSystem::getId(SDL_Keycode key) {
 }
 
 //UPDATE KEY STATE-------------------------------------------------------
-void InputSystem::OnKeyDown(SDL_Keycode key) {
+void InputSystem::onKeyDown(SDL_Keycode key) {
 	int i = getId(key);
 
 	//SE PULSA POR PRIMERA VEZ
@@ -82,7 +82,7 @@ void InputSystem::OnKeyDown(SDL_Keycode key) {
 
 }
 
-void InputSystem::OnKeyUp(SDL_Keycode key) {
+void InputSystem::onKeyUp(SDL_Keycode key) {
 	//std::cout << "33333333333\n";
 	int i = getId(key);
 	keys[i].wasPressed = false;
@@ -93,17 +93,17 @@ void InputSystem::OnKeyUp(SDL_Keycode key) {
 
 // MOUSE
 
-void InputSystem::SetMouseMotion(Vector2 motion)
+void InputSystem::setMouseMotion(Vector2 motion)
 {
 	this->mouseMotion = motion;
 }
 
-Vector2 InputSystem::GetMouseMotion() const
+Vector2 InputSystem::getMouseMotion() const
 {
 	return mouseMotion;
 }
 
-void InputSystem::OnMouseButtonDown(SDL_MouseButtonEvent buttonEvent)
+void InputSystem::onMouseButtonDown(SDL_MouseButtonEvent buttonEvent)
 {
 	switch (buttonEvent.button)
 	{
@@ -127,7 +127,7 @@ void InputSystem::OnMouseButtonDown(SDL_MouseButtonEvent buttonEvent)
 	}
 }
 
-void InputSystem::OnMouseButtonUp(SDL_MouseButtonEvent buttonEvent)
+void InputSystem::onMouseButtonUp(SDL_MouseButtonEvent buttonEvent)
 {
 	switch (buttonEvent.button)
 	{
@@ -151,7 +151,7 @@ void InputSystem::OnMouseButtonUp(SDL_MouseButtonEvent buttonEvent)
 	}
 }
 
-bool InputSystem::IsMouseButtonDownLua(int button)
+bool InputSystem::isMouseButtonDownLua(int button)
 {
 	switch (button)
 	{
@@ -170,7 +170,7 @@ bool InputSystem::IsMouseButtonDownLua(int button)
 	}
 }
 
-bool InputSystem::IsMouseButtonPressedLua(int button)
+bool InputSystem::isMouseButtonPressedLua(int button)
 {
 	switch (button)
 	{
@@ -189,7 +189,7 @@ bool InputSystem::IsMouseButtonPressedLua(int button)
 	}
 }
 
-bool InputSystem::IsMouseButtonReleasedLua(int button)
+bool InputSystem::isMouseButtonReleasedLua(int button)
 {
 	switch (button)
 	{
@@ -208,7 +208,7 @@ bool InputSystem::IsMouseButtonReleasedLua(int button)
 	}
 }
 
-Vector2 InputSystem::GetMousePosition() {
+Vector2 InputSystem::getMousePosition() {
 	int x, y;
 	SDL_GetMouseState(&x, &y);
 	return Vector2(x, y);
@@ -269,10 +269,10 @@ void InputSystem::ConvertToLua(lua_State* state)
 		addFunction("AnyKeyWasPressed", &InputSystem::oneKeyWasPressed).
 		addFunction("AnyKeyIsDown", &InputSystem::oneKeyIsDown).
 		addFunction("AnyKeyWasReleased", &InputSystem::oneKeyWasReleased).
-		addFunction("GetMouseMotion", &InputSystem::GetMouseMotion).
-		addFunction("IsMouseButtonDown", &InputSystem::IsMouseButtonDownLua).
-		addFunction("MouseButtonWasPressed", &InputSystem::IsMouseButtonPressedLua).
-		addFunction("MouseButtonWasReleased", &InputSystem::IsMouseButtonReleasedLua).
+		addFunction("GetMouseMotion", &InputSystem::getMouseMotion).
+		addFunction("IsMouseButtonDown", &InputSystem::isMouseButtonDownLua).
+		addFunction("MouseButtonWasPressed", &InputSystem::isMouseButtonPressedLua).
+		addFunction("MouseButtonWasReleased", &InputSystem::isMouseButtonReleasedLua).
 		endClass().
 		endNamespace();
 }

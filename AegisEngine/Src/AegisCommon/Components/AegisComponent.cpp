@@ -9,32 +9,32 @@ AegisComponent* CreateComponent(std::string componentName, Entity* entity)
 void AegisComponent::init()
 {
 	setCallbacks(funcs);
-	CallLuaRefFunc(initFunc, 0);
+	callLuaRefFunc(initFunc, 0);
 }
 
 void AegisComponent::update(float dt)
 {
-	CallLuaRefFunc(updateFunc, dt);
+	callLuaRefFunc(updateFunc, dt);
 }
 
 void AegisComponent::lateUpdate(float dt)
 {
-	CallLuaRefFunc(lateUpdateFunc, dt);
+	callLuaRefFunc(lateUpdateFunc, dt);
 }
 
 void AegisComponent::fixedUpdate()
 {
-	CallLuaRefFunc(fixedUpdateFunc, 0);
+	callLuaRefFunc(fixedUpdateFunc, 0);
 }
 
 void AegisComponent::onCollision(Entity* other)
 {
-	CallLuaRefFunc(onCollisionEnterFunc, other);
+	callLuaRefFunc(onCollisionEnterFunc, other);
 }
 
 void AegisComponent::onTrigger(Entity* other)
 {
-	CallLuaRefFunc(onTriggerEnterFunc, other);
+	callLuaRefFunc(onTriggerEnterFunc, other);
 }
 
 
@@ -48,39 +48,39 @@ void AegisComponent::setCallbacks(LuaRef funcs)
 	this->onTriggerEnterFunc = funcs["onTriggerEnter"];
 }
 
-void AegisComponent::SetData(LuaRef luaRef)
+void AegisComponent::setData(LuaRef luaRef)
 {
 	//this function only exist to make data a parameter, but you can't overwrite data table
-	PrintErrorModifyingTables("data", "table", true);
+	printErrorModifyingTables("data", "table", true);
 }
 
-LuaRef AegisComponent::GetData() const
+LuaRef AegisComponent::getData() const
 {
 	return data;
 }
 
-void AegisComponent::SetType(LuaRef luaRef)
+void AegisComponent::setType(LuaRef luaRef)
 {
 	type = luaRef;
 }
 
-void AegisComponent::SetTypeLua(LuaRef luaRef)
+void AegisComponent::setTypeLua(LuaRef luaRef)
 {
-	PrintErrorModifyingTables("type", "userdata", false);
+	printErrorModifyingTables("type", "userdata", false);
 }
 
-LuaRef AegisComponent::GetType() const
+LuaRef AegisComponent::getType() const
 {
 	return type;
 }
 
-void AegisComponent::SetFuncs(LuaRef luaRef)
+void AegisComponent::setFuncs(LuaRef luaRef)
 {
 	//this function only exist to make data a parameter, but you can't overwrite funcs table
-	PrintErrorModifyingTables("funcs", "table", true);
+	printErrorModifyingTables("funcs", "table", true);
 }
 
-LuaRef AegisComponent::GetFuncs() const
+LuaRef AegisComponent::getFuncs() const
 {
 	return funcs;
 }
@@ -91,18 +91,18 @@ void AegisComponent::ConvertToLua(lua_State* state)
 		beginNamespace("Aegis").
 		addFunction("CreateComponent", CreateComponent).
 		deriveClass<AegisComponent, Component>("Component").
-		addProperty("data", &AegisComponent::GetData, &AegisComponent::SetData).
-		addProperty("funcs", &AegisComponent::GetFuncs, &AegisComponent::SetFuncs).
-		addProperty("type", &AegisComponent::GetType, &AegisComponent::SetTypeLua).
+		addProperty("data", &AegisComponent::getData, &AegisComponent::setData).
+		addProperty("funcs", &AegisComponent::getFuncs, &AegisComponent::setFuncs).
+		addProperty("type", &AegisComponent::getType, &AegisComponent::setTypeLua).
 		endClass().
 		endNamespace();
 }
 
-void AegisComponent::PrintErrorModifyingTables(std::string fieldName, std::string typeName, bool modifiableFields)
+void AegisComponent::printErrorModifyingTables(std::string fieldName, std::string typeName, bool modifiableFields)
 {
 #if defined _DEBUG
 	std::string modifiable = modifiableFields ? "but you can modify its field\n" : "but you can read it\n";
-	std::cout << "Error on " << getEntity()->getName() << " " << GetComponentName() << "." << fieldName << ": ";
+	std::cout << "Error on " << getEntity()->getName() << " " << getComponentName() << "." << fieldName << ": ";
 	std::cout << "You can't override this " << typeName << " with another one, " << modifiable;
 #endif
 }
