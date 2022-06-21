@@ -6,7 +6,7 @@
 #include "Singleton.h"
 #include "IInitializable.h"
 #include "Vector3.h"
- //BASURA
+
 #include <string>
 #include<vector>
 
@@ -27,11 +27,7 @@ public:
     //shows delta time, num of entities... 
     void showInfo();
 
-    
-
     bool init();
-
-protected:
 };
 
 inline DebugManager* Debug() {

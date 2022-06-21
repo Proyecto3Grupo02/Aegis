@@ -7,7 +7,7 @@
 #include "AegisComponent.h"
 #include "ILuaObject.h"
 #include "Rigidbody.h"
-#include "Transform.h"
+#include "TransformComponent.h"
 
 class Entity;
 
@@ -64,7 +64,7 @@ private:
 	
 	Vector3 initialPos;
 	RigidBody* rigidbody = nullptr;
-	Transform* transform = nullptr;
+	TransformComponent* transform = nullptr;
 	std::list<RigidbodyComponent*>::iterator physicsEntityIt;
 
 	int cooldown = 3000;

@@ -77,9 +77,6 @@ void InputSystem::onKeyDown(SDL_Keycode key) {
 		keys[i].wasPressed = true;
 		KEY_WAS_PRESSED = true;
 	}
-
-	//YA ESTBA PULSADA ==> QUEREMOS MANTENERLA
-
 }
 
 void InputSystem::onKeyUp(SDL_Keycode key) {

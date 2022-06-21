@@ -7,12 +7,13 @@
 #include "ILuaObject.h"
 #include "Animation.h"
 
-class Transform;
+class TransformComponent;
 
 class AnimationComponent : public AegisComponent, public ILuaObject {
 private:
 	Animation animation;
-	Transform* entTransform;
+	TransformComponent* entTransform = nullptr;
+
 public:
 	AnimationComponent(Entity* _ent, LuaRef args);
 	void readKeyframes(LuaRef frames);

@@ -4,7 +4,6 @@
 #include "RigidbodyComponent.h"
 #include "OgreWrapper.h"
 #include "CameraComponent.h"
-using namespace luabridge;
 
 void Scene::initEntities() {
 	for (Entity* entity : *uninitializedEntities) {
@@ -101,8 +100,7 @@ void Scene::syncTransforms()
 {
 	//Iterate physics entities and sync their transforms
 	for (RigidbodyComponent* physicsEntity : *physicsEntities)
-		physicsEntity->syncToTransform();
-	
+		physicsEntity->syncToTransform();	
 }
 
 void Scene::update(float dt) {

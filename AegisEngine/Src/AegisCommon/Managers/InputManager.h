@@ -44,15 +44,24 @@ public:
 	//UPDATE KEY STATE
 	void onKeyDown(SDL_Keycode key);
 	void onKeyUp(SDL_Keycode key);
+	//UPDATE MOUSE
+	void onMouseButtonDown(SDL_MouseButtonEvent buttonEvent);
+	void onMouseButtonUp(SDL_MouseButtonEvent buttonEvent);
+	void setMouseMotion(Vector2 motion);
 
 	//CONSULT KEY STATE
 	bool keyWasPressed(SDL_Keycode key);
 	bool isKeyDown(SDL_Keycode key);
 	bool keyWasReleased(SDL_Keycode key);
-	
 	bool oneKeyWasPressed();
 	bool oneKeyIsDown();
 	bool oneKeyWasReleased();	
+	//CONSULT MOUSE
+	bool isMouseButtonDownLua(int button);
+	bool isMouseButtonPressedLua(int button);
+	bool isMouseButtonReleasedLua(int button);	
+	Vector2 getMouseMotion() const;
+	Vector2 getMousePosition();
 
 	//For lua
 	bool keyWasPressedLua(const char* key);
@@ -60,17 +69,6 @@ public:
 	bool keyWasReleasedLua(const char* key);
 
 	static void ConvertToLua(lua_State* state);
-
-	void onMouseButtonDown(SDL_MouseButtonEvent buttonEvent);
-	void onMouseButtonUp(SDL_MouseButtonEvent buttonEvent);
-
-	bool isMouseButtonDownLua(int button);
-	bool isMouseButtonPressedLua(int button);
-	bool isMouseButtonReleasedLua(int button);
-
-	void setMouseMotion(Vector2 motion);
-	Vector2 getMouseMotion() const;
-	Vector2 getMousePosition();
 };
 
 

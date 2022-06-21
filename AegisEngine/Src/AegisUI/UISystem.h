@@ -4,9 +4,9 @@
 #define UI_SYSTEM_H
 
 #include "Singleton.h"
-#include <vector>
 #include "InputManager.h"
 #include "LuaManager.h"
+#include <vector>
 
 class OgreOverlay;
 class SDL_Image; 

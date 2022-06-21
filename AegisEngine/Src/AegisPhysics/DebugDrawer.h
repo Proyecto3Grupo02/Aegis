@@ -16,17 +16,19 @@ public:
     virtual void     draw3dText(const btVector3& location, const char* textString);
     virtual void     setDebugMode(int debugMode);
     virtual int     getDebugMode() const;
+
 protected:
     bool frameStarted(const Ogre::FrameEvent& evt);
     bool frameEnded(const Ogre::FrameEvent& evt);
+
 private:
     struct ContactPoint {
         Ogre::Vector3 from;
         Ogre::Vector3 to;
-        Ogre::ColourValue   color;
-        size_t        dieTime;
+        Ogre::ColourValue color;
+        size_t dieTime;
     };
-    DebugDrawModes               mDebugModes;
+    DebugDrawModes mDebugModes;
     Ogre::ManualObject* mLines;
     Ogre::ManualObject* mTriangles;
     std::vector< ContactPoint >* mContactPoints;

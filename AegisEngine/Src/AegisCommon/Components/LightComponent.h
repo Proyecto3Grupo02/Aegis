@@ -4,9 +4,9 @@
 #define LIGHT_COMPONENT_H
 
 #include "AegisComponent.h"
-#include "Transform.h"
+#include "TransformComponent.h"
 #include "Vector3.h"
-#include "Light.h"
+#include "AegisLight.h"
 
 class LightComponent: public AegisComponent
 {
@@ -29,7 +29,6 @@ public:
     ~LightComponent();
 
     virtual void init() override {};
-
 
     Vector3 getLightColor() const;
     void setLightColor(Vector3 diffuse);

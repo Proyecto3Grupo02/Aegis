@@ -1,6 +1,6 @@
 #include "AnimationComponent.h"
 #include "Entity.h"
-#include "Transform.h"
+#include "TransformComponent.h"
 
 AnimationComponent::AnimationComponent(Entity* _ent, LuaRef args) : AegisComponent("Animation", _ent)
 {

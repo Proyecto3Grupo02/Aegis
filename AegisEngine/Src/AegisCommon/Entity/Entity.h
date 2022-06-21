@@ -17,7 +17,7 @@ namespace Ogre {
 }
 
 class Component;
-class Transform;
+class TransformComponent;
 class Scene;
 struct Vector3;
 
@@ -59,8 +59,8 @@ public:
 	void onCollision(Entity* other);
 	void onTrigger(Entity* other);
 
-	Transform* getTransform() const;
-	void setTransform(Transform* transform);
+	TransformComponent* getTransform() const;
+	void setTransform(TransformComponent* transform);
 	void setParent(Entity* ent);
 
 	void destroy();
@@ -70,6 +70,7 @@ public:
 	void removeChild(Entity* ent) { mChildren_.remove(ent); };
 
 	static void ConvertToLua(lua_State* state);
+
 protected:
 	Scene* mScene_; //scene pointer 
 	std::unordered_map <std::string, AegisComponent*> mComponents_; //list of all the components in scene
@@ -80,10 +81,9 @@ protected:
 
 	std::list<Entity*> mChildren_;
 
-
 private:
 	std::string mName_;			//name of the entity
-	Transform* transform;		//native transform
+	TransformComponent* transform;		//native transform
 	std::list<Entity*>::iterator entityIterator;
 	bool nodeDestroyed;
 };

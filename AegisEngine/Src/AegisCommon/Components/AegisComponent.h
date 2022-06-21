@@ -23,17 +23,16 @@ public:
 	virtual void onCollision(Entity* other)  override;
 	virtual void onTrigger(Entity* other) override;
 
-	//Lua stuff
+	//SETS-------------------------------------
 	void setCallbacks(LuaRef updateFunc);
-
 	void setData(LuaRef luaRef);
-	LuaRef getData() const;
-
 	void setType(LuaRef luaRef);
 	void setTypeLua(LuaRef luaRef);
-	LuaRef getType() const;
-
 	void setFuncs(LuaRef luaRef);
+
+	//GETS--------------------------------------
+	LuaRef getData() const;
+	LuaRef getType() const;
 	LuaRef getFuncs() const;
 
 	static void ConvertToLua(lua_State* state);
@@ -42,8 +41,10 @@ public:
 	void callLuaRefFunc(LuaRef func, T args = 0);
 	// Soy consciente de que todos los cout deber�an llamarse desde otro lado, pero por ahora aqui
 	void printErrorModifyingTables(std::string fieldName, std::string typeName, bool modifiableFields);
+
 protected:
 	LuaRef data =LuaMngr()->getNewEmptyTable();
+
 private:
 	LuaRef type =LuaMngr()->getSharedEmptyLuaRef();
 	LuaRef funcs =LuaMngr()->getNewEmptyTable();

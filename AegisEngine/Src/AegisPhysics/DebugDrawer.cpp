@@ -1,14 +1,12 @@
 #include "DebugDrawer.h"
 #include "OgreBulletUtils.h"
 
-using namespace Ogre;
-
-OgreDebugDrawer::OgreDebugDrawer(SceneManager* scm)
+OgreDebugDrawer::OgreDebugDrawer(Ogre::SceneManager* scm)
 {
     mContactPoints = &mContactPoints1;
-    mLines = new ManualObject("physics lines");
+    mLines = new Ogre::ManualObject("physics lines");
     //ASSERT(mLines);
-    mTriangles = new ManualObject("physics triangles");
+    mTriangles = new Ogre::ManualObject("physics triangles");
     //ASSERT(mTriangles);
     mLines->setDynamic(true);
     mTriangles->setDynamic(true);
@@ -19,44 +17,44 @@ OgreDebugDrawer::OgreDebugDrawer(SceneManager* scm)
     scm->getRootSceneNode()->attachObject(mTriangles);
 
     static const char* matName = "OgreBulletCollisionsDebugDefault";
-    MaterialPtr mtl = MaterialManager::getSingleton().getDefaultSettings()->clone(matName);
+    Ogre::MaterialPtr mtl = Ogre::MaterialManager::getSingleton().getDefaultSettings()->clone(matName);
     mtl->setReceiveShadows(false);
-    mtl->setSceneBlending(SBT_TRANSPARENT_ALPHA);
+    mtl->setSceneBlending(Ogre::SBT_TRANSPARENT_ALPHA);
     mtl->setDepthBias(0.1, 0);
-    TextureUnitState* tu = mtl->getTechnique(0)->getPass(0)->createTextureUnitState();
+    Ogre::TextureUnitState* tu = mtl->getTechnique(0)->getPass(0)->createTextureUnitState();
     //ASSERT(tu);
-    tu->setColourOperationEx(LBX_SOURCE1, LBS_DIFFUSE);
+    tu->setColourOperationEx(Ogre::LBX_SOURCE1, Ogre::LBS_DIFFUSE);
     mtl->getTechnique(0)->setLightingEnabled(false);
     //mtl->getTechnique(0)->setSelfIllumination( ColourValue::White ); 
 
-    mLines->begin(matName, RenderOperation::OT_LINE_LIST);
-    mLines->position(Vector3::ZERO);
-    mLines->colour(ColourValue::Blue);
-    mLines->position(Vector3::ZERO);
-    mLines->colour(ColourValue::Blue);
+    mLines->begin(matName, Ogre::RenderOperation::OT_LINE_LIST);
+    mLines->position(Ogre::Vector3::ZERO);
+    mLines->colour(Ogre::ColourValue::Blue);
+    mLines->position(Ogre::Vector3::ZERO);
+    mLines->colour(Ogre::ColourValue::Blue);
 
-    mTriangles->begin(matName, RenderOperation::OT_TRIANGLE_LIST);
-    mTriangles->position(Vector3::ZERO);
-    mTriangles->colour(ColourValue::Blue);
-    mTriangles->position(Vector3::ZERO);
-    mTriangles->colour(ColourValue::Blue);
-    mTriangles->position(Vector3::ZERO);
-    mTriangles->colour(ColourValue::Blue);
+    mTriangles->begin(matName, Ogre::RenderOperation::OT_TRIANGLE_LIST);
+    mTriangles->position(Ogre::Vector3::ZERO);
+    mTriangles->colour(Ogre::ColourValue::Blue);
+    mTriangles->position(Ogre::Vector3::ZERO);
+    mTriangles->colour(Ogre::ColourValue::Blue);
+    mTriangles->position(Ogre::Vector3::ZERO);
+    mTriangles->colour(Ogre::ColourValue::Blue);
 
     mDebugModes = (DebugDrawModes)DBG_DrawWireframe;
-    Root::getSingleton().addFrameListener(this);
+    Ogre::Root::getSingleton().addFrameListener(this);
 }
 
 OgreDebugDrawer::~OgreDebugDrawer()
 {
-    Root::getSingleton().removeFrameListener(this);
+    Ogre::Root::getSingleton().removeFrameListener(this);
     delete mLines;
     delete mTriangles;
 }
 
 void OgreDebugDrawer::drawLine(const btVector3& from, const btVector3& to, const btVector3& color)
 {
-    ColourValue c(color.getX(), color.getY(), color.getZ());
+    Ogre::ColourValue c(color.getX(), color.getY(), color.getZ());
     c.saturate();
     mLines->position(cvt(from));
     mLines->colour(c);
@@ -66,7 +64,7 @@ void OgreDebugDrawer::drawLine(const btVector3& from, const btVector3& to, const
 
 void OgreDebugDrawer::drawTriangle(const btVector3& v0, const btVector3& v1, const btVector3& v2, const btVector3& color, btScalar alpha)
 {
-    ColourValue c(color.getX(), color.getY(), color.getZ(), alpha);
+    Ogre::ColourValue c(color.getX(), color.getY(), color.getZ(), alpha);
     c.saturate();
     mTriangles->position(cvt(v0));
     mTriangles->colour(c);
@@ -82,7 +80,7 @@ void OgreDebugDrawer::drawContactPoint(const btVector3& PointOnB, const btVector
     ContactPoint p = mContactPoints->back();
     p.from = cvt(PointOnB);
     p.to = p.from + cvt(normalOnB) * distance;
-    p.dieTime = Root::getSingleton().getTimer()->getMilliseconds() + lifeTime;
+    p.dieTime = Ogre::Root::getSingleton().getTimer()->getMilliseconds() + lifeTime;
     p.color.r = color.x();
     p.color.g = color.y();
     p.color.b = color.z();
@@ -90,7 +88,7 @@ void OgreDebugDrawer::drawContactPoint(const btVector3& PointOnB, const btVector
 
 bool OgreDebugDrawer::frameStarted(const Ogre::FrameEvent& evt)
 {
-    size_t now = Root::getSingleton().getTimer()->getMilliseconds();
+    size_t now = Ogre::Root::getSingleton().getTimer()->getMilliseconds();
     std::vector< ContactPoint >* newCP = mContactPoints == &mContactPoints1 ? &mContactPoints2 : &mContactPoints1;
     for (std::vector< ContactPoint >::iterator i = mContactPoints->begin(); i < mContactPoints->end(); i++) {
         ContactPoint& cp = *i;
@@ -118,7 +116,7 @@ bool OgreDebugDrawer::frameEnded(const Ogre::FrameEvent& evt)
 
 void OgreDebugDrawer::reportErrorWarning(const char* warningString)
 {
-    LogManager::getSingleton().getDefaultLog()->logMessage(warningString);
+    Ogre::LogManager::getSingleton().getDefaultLog()->logMessage(warningString);
 }
 
 void OgreDebugDrawer::draw3dText(const btVector3& location, const char* textString)

@@ -1,12 +1,12 @@
 ﻿#include "Entity.h"
-#include "Transform.h"
+#include "TransformComponent.h"
 #include "Scene.h"
 
 Entity::Entity(Scene* scene, Ogre::SceneNode* node) :
 	mNode_(node == nullptr ?  scene->getNewNode() : node), active_(true), mScene_(scene), nodeDestroyed(false)
 {
 	//Componente obligatorio para todas las entidades
-	transform = new Transform(Vector3(0,0,0), Ogre::Quaternion(), Vector3(1.0f, 1.0f, 1.0f), getNode(), this);
+	transform = new TransformComponent(Vector3(0,0,0), Ogre::Quaternion(), Vector3(1.0f, 1.0f, 1.0f), getNode(), this);
 	this->addComponentFromLua(transform);
 }
 
@@ -14,7 +14,7 @@ Entity::Entity(Scene* scene, Ogre::SceneNode* node) :
 Entity::Entity(Scene* scene, Vector3 pos) :
 	mNode_(scene->getNewNode()), active_(true), mScene_(scene), nodeDestroyed(false)
 {
-	transform = new Transform(pos, Ogre::Quaternion(), Vector3(1.0f, 1.0f, 1.0f), getNode(), this);
+	transform = new TransformComponent(pos, Ogre::Quaternion(), Vector3(1.0f, 1.0f, 1.0f), getNode(), this);
 	this->addComponentFromLua(transform);
 }
 
@@ -140,12 +140,12 @@ void Entity::onTrigger(Entity* other)
 	}
 }
 
-Transform* Entity::getTransform() const
+TransformComponent* Entity::getTransform() const
 {
 	return transform;
 }
 
-void Entity::setTransform(Transform* transform)
+void Entity::setTransform(TransformComponent* transform)
 {
 	transform->printErrorModifyingTables("transform", "Transform", true);
 }

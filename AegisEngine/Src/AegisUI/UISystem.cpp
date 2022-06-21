@@ -1,11 +1,12 @@
-#include <iostream>
 #include "UISystem.h"
+
 #include "OgreOverlayManager.h"
 #include "OgreSceneManager.h"
 #include "OgreOverlaySystem.h"
 #include "Button.h"
 #include "Text.h"
 #include "OgreFontManager.h"
+#include <iostream>
 
 UISystem::UISystem() {
 

@@ -2,8 +2,6 @@
 #ifndef IINITIALIZABLE_H 
 #define IINITIALIZABLE_H 
 
- //BASURA
-
 class IInitializable
 {
 public:

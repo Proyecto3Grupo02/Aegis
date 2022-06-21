@@ -5,7 +5,6 @@
 #include "OgreOverlayManager.h"
 #include "OgreOverlayContainer.h"
 
-
 UIObject::UIObject(const std::string& n, int order_, float x_, float y_, bool visble) {
 	isVisible = visble;
 	_id = num_ui_obj;

@@ -25,9 +25,6 @@
     <Filter Include="Archivos de origen\Entity">
       <UniqueIdentifier>{75fc12a1-5df9-45e4-aa8d-52374a4e508e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de origen\Interfaces">
-      <UniqueIdentifier>{7aaf3aed-38aa-4970-81eb-130d2be4cab8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Archivos de origen\Managers">
       <UniqueIdentifier>{3463b480-769b-4a17-a502-2c2f88056c8e}</UniqueIdentifier>
     </Filter>
@@ -46,9 +43,6 @@
     <Filter Include="Archivos de encabezado\Utils">
       <UniqueIdentifier>{59fed99f-dff1-47e8-830f-bcb469c28614}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de origen\Utils">
-      <UniqueIdentifier>{735ab698-df16-4390-9f03-9e0ac6b8d8a7}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AegisCommon\Components\AegisComponent.h">
@@ -57,10 +51,10 @@
     <ClInclude Include="..\..\Src\AegisCommon\Components\Component.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Components\Renderer.h">
+    <ClInclude Include="..\..\Src\AegisCommon\Components\RendererComponent.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\AegisCommon\Components\Transform.h">
+    <ClInclude Include="..\..\Src\AegisCommon\Components\TransformComponent.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AegisCommon\Entity\Entity.h">
@@ -140,10 +134,10 @@
     <ClCompile Include="..\..\Src\AegisCommon\Components\Component.cpp">
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\AegisCommon\Components\Renderer.cpp">
+    <ClCompile Include="..\..\Src\AegisCommon\Components\RendererComponent.cpp">
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\AegisCommon\Components\Transform.cpp">
+    <ClCompile Include="..\..\Src\AegisCommon\Components\TransformComponent.cpp">
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\AegisCommon\Entity\Entity.cpp">
@@ -160,12 +154,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\AegisCommon\Scene\Scene.cpp">
       <Filter>Archivos de origen\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\AegisCommon\Utils\Vector3.cpp">
-      <Filter>Archivos de origen\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\AegisCommon\Utils\Vector4.cpp">
-      <Filter>Archivos de origen\Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\AegisCommon\Components\AegisComponent.cpp">
       <Filter>Archivos de origen\Components</Filter>

@@ -114,11 +114,11 @@
     <ClInclude Include="..\..\Src\AegisCommon\Components\CameraComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\Component.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\LightComponent.h" />
-    <ClInclude Include="..\..\Src\AegisCommon\Components\Renderer.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Components\RendererComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\RigidbodyComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\SoundEmitterComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\SoundListenerComponent.h" />
-    <ClInclude Include="..\..\Src\AegisCommon\Components\Transform.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Components\TransformComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Entity\Entity.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Interfaces\IInitializable.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Interfaces\ILuaObject.h" />
@@ -144,18 +144,16 @@
     <ClCompile Include="..\..\Src\AegisCommon\Components\CameraComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\Component.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\LightComponent.cpp" />
-    <ClCompile Include="..\..\Src\AegisCommon\Components\Renderer.cpp" />
+    <ClCompile Include="..\..\Src\AegisCommon\Components\RendererComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\RigidbodyComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\SoundEmitterComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\SoundListenerComponent.cpp" />
-    <ClCompile Include="..\..\Src\AegisCommon\Components\Transform.cpp" />
+    <ClCompile Include="..\..\Src\AegisCommon\Components\TransformComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Entity\Entity.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Managers\DebugManager.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Managers\InputManager.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Managers\SceneManager.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Scene\Scene.cpp" />
-    <ClCompile Include="..\..\Src\AegisCommon\Utils\Vector3.cpp" />
-    <ClCompile Include="..\..\Src\AegisCommon\Utils\Vector4.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,5 @@
 #include "ImageResources.h"
 #include "dirent.h"
-using namespace std;
 
 ImageResources::ImageResources()
 {
@@ -29,7 +28,7 @@ void ImageResources::parseDirectory(std::string dir)
 		{
 			if (strcmp(dp->d_name, ".") != 0 && strcmp(dp->d_name, "..") != 0)
 			{
-				string subdir = dir + "/" + dp->d_name;
+				std::string subdir = dir + "/" + dp->d_name;
 				parseDirectory(subdir);
 			}
 		}

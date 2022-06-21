@@ -1,9 +1,10 @@
 #include "RigidbodyComponent.h"
 
 #include "Entity.h"
-#include <Scene.h>
 #include "GameLoopData.h"
 #include "MathUtils.h"
+
+#include <Scene.h>
 
 RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m, bool useG, bool isK, bool isT,float scale)
 	: AegisComponent("Rigidbody", ent)
@@ -55,9 +56,7 @@ void RigidbodyComponent::addForce(Vector3 force) {
 
 Vector3 RigidbodyComponent::accelerateTo(Vector3 targetVelocity, float maxAcceleration)
 {
-	
 	return rigidbody->accelerateTo(targetVelocity, GameTime()->getDeltaTime(), maxAcceleration);
-
 }
 
 Vector3 RigidbodyComponent::accelerateToRand()
@@ -111,8 +110,6 @@ bool RigidbodyComponent::getUsingGravity()const {
 void RigidbodyComponent::setUsingGravity(bool g_) {
 	rigidbody->setUsingGravity(g_);
 }
-
-
 
 //LUA-------------------------------------------------------------------------------------------------------
 RigidbodyComponent* CreateRigidbody(Entity* ent, LuaRef args) //Doesn't belong to this class

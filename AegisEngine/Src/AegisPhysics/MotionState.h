@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "btBulletDynamicsCommon.h"
 #include "Vector3.h"
 #include <functional>

@@ -1,13 +1,13 @@
-
 #include "Component.h"
 
 Component::Component(): 
-	mEntity_(nullptr), isActive_(true)
-{
+	mEntity_(nullptr), isActive_(true) {
 	
 }
 
-Component::Component(std::string componentName, Entity* entity) : componentName(componentName), mEntity_(entity), isActive_(true) {}
+Component::Component(std::string componentName, Entity* entity) 
+	:	componentName(componentName), mEntity_(entity), isActive_(true) {
+}
 
 void Component::ConvertToLua(lua_State* state)
 {

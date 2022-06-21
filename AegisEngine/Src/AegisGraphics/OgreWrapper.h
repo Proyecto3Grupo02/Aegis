@@ -4,11 +4,9 @@
 
 #include <OgreRoot.h>
 #include <SDL.h>
-//#include "checkML.h"
 
 class AegisCamera;
 class WindowManager;
-//BASURA
 
 class OgreWrapper
 {

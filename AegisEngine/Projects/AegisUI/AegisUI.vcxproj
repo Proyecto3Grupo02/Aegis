@@ -103,7 +103,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\AegisUI\Button.cpp" />
-    <ClCompile Include="..\..\Src\AegisUI\Font.cpp" />
     <ClCompile Include="..\..\Src\AegisUI\Image.cpp" />
     <ClCompile Include="..\..\Src\AegisUI\ImageResources.cpp" />
     <ClCompile Include="..\..\Src\AegisUI\Text.cpp" />
@@ -112,7 +111,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AegisUI\Button.h" />
-    <ClInclude Include="..\..\Src\AegisUI\Font.h" />
     <ClInclude Include="..\..\Src\AegisUI\Image.h" />
     <ClInclude Include="..\..\Src\AegisUI\ImageResources.h" />
     <ClInclude Include="..\..\Src\AegisUI\Text.h" />

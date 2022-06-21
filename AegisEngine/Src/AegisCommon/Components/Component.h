@@ -3,8 +3,8 @@
 #define COMPONENT_H
 
 #include <Ogre.h>
-#include "ILuaObject.h"
 #include <string>
+#include "ILuaObject.h"
 
 struct Entity;
 
@@ -41,6 +41,7 @@ class Component : public ILuaObject {
        };
        
        static void ConvertToLua(lua_State* state);
+
     protected:
         Entity* mEntity_;
         bool isActive_;

@@ -1,27 +1,29 @@
 #include "AegisMain.h"
 
-//OGRE
+//COMPONENTS
 #include "AnimationComponent.h"
 #include "CameraComponent.h"
 #include "LightComponent.h"
-#include "Renderer.h"
+#include "RendererComponent.h"
 #include "RigidbodyComponent.h"
-#include "Entity.h"
-#include "InputManager.h"
-#include "SceneManager.h"
-#include "DebugManager.h"
-#include "Scene.h"
+#include "TransformComponent.h"
+#include "SoundEmitterComponent.h"
+
+//MANAGERS
 #include "OgreWrapper.h"
+#include "InputManager.h"
+#include "DebugManager.h"
+#include "UISystem.h"
+#include "SceneManager.h"
 #include "PhysicsMain.h"
-#include "Transform.h"
+
+//COSAS
+#include "Scene.h"
 #include "GameLoopData.h"
 #include "LuaMaths.h"
-#include "SoundEmitterComponent.h"
 #include "Button.h"
-
-#include "UISystem.h"
-
-using namespace luabridge;
+#include "Entity.h"
+#include "Quaternion.h"
 
 AegisMain::AegisMain() : IInitializable() {
 	exit = (false);
@@ -134,25 +136,29 @@ void AegisMain::convertObjectToLua()
 {
 	auto state = LuaMngr()->getState();
 
+	//MANAGERS
 	Scene::ConvertToLua(state);
 	InputSystem::ConvertToLua(state);
 	SceneManager::ConvertToLua(state);
+	UISystem::ConvertToLua(state);
 	Entity::ConvertToLua(state);
+
+	//COMPONENTS
 	Component::ConvertToLua(state);
 	AegisComponent::ConvertToLua(state);
-
-	Transform::ConvertToLua(state);
-	Vector2::ConvertToLua(state);
-	Vector3::ConvertToLua(state);
-	Vector4::ConvertToLua(state);
-	Quaternion::ConvertToLua(state);
-	Renderer::ConvertToLua(state);
+	RendererComponent::ConvertToLua(state);
 	LightComponent::ConvertToLua(state);
 	CameraComponent::ConvertToLua(state);
 	AnimationComponent::ConvertToLua(state);
 	RigidbodyComponent::ConvertToLua(state);
 	SoundEmitterComponent::ConvertToLua(state);
-	UISystem::ConvertToLua(state);
+	TransformComponent::ConvertToLua(state);
+
+	//UTILS
+	Vector2::ConvertToLua(state);
+	Vector3::ConvertToLua(state);
+	Vector4::ConvertToLua(state);
+	Quaternion::ConvertToLua(state);
 	LuaMaths::ConvertToLua(state);
 
 	exportToLua(UIs(), "UISystem");
