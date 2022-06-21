@@ -44,13 +44,11 @@ bool AegisMain::init()
 	GameLoopData::tryCreateInstance();
 	DebugManager::tryCreateInstance();
 	InputSystem::tryCreateInstance();
-	
-	// Esto esta intercalado asi por ciertos motivos
-	// Cuando se haga la separacion motor-juego ya se podra crear SceneManager antes que lua
-	LuaManager::tryCreateInstance();
-	convertObjectToLua();
 	SceneManager::tryCreateInstance(ogreWrap);
-	LuaMngr()->execute("init.lua");
+	LuaManager::tryCreateInstance();
+	
+	convertObjectToLua();
+	LuaManager::getInstance()->execute("init.lua");
 
 	Debug()->log("Aegis loaded\n");
 	std::cout << '\n';

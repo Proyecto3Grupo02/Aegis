@@ -13,7 +13,8 @@ class SceneManager : public Singleton<SceneManager>, public ILuaObject
 {
 private:
 	Scene* currentScene;
-	void loadScene(std::string sceneName);
+	OgreWrapper* ogreWrapper;
+	void loadScene(luabridge::LuaRef scene);
 
 public:
 	SceneManager(OgreWrapper* ogreWrap);
@@ -21,7 +22,6 @@ public:
 
 	void updateCurrentScene(float deltaTime);
 	void preRenderScene();
-	void changeScene(std::string sceneName);
 	Scene* getCurrentScene();
 	static void ConvertToLua(lua_State* state);
 };

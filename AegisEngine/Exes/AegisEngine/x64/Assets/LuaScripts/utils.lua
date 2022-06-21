@@ -168,7 +168,6 @@ funcs.TreatSpecialCase = function(object)
 end;
 
 local entities = {};
-local mCanvas=nil;
 funcs.ParseSceneObject = function(object)
 	if object.type == "Entity" then
 		local entity = funcs.ParseEntity(object);

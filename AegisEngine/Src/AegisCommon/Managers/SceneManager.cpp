@@ -6,9 +6,7 @@
 SceneManager::SceneManager(OgreWrapper* ogreWrap)
 {
 	//LoadScene(sceneName);
-	currentScene = new Scene(ogreWrap);
-	currentScene->init();
-	exportToLua(SceneMngr()->getCurrentScene(), "currentScene");
+	this->ogreWrapper = ogreWrap;
 }
 
 SceneManager::~SceneManager() {
@@ -16,9 +14,14 @@ SceneManager::~SceneManager() {
 	currentScene = nullptr;
 }
 
-void SceneManager::loadScene(std::string sceneName)
+void SceneManager::loadScene(luabridge::LuaRef scene)
 {
-	//currentScene = new Scene();
+	currentScene = new Scene(ogreWrapper);
+	currentScene->init();
+	exportToLua(SceneMngr()->getCurrentScene(), "currentScene");
+
+	luabridge::LuaRef luaUtils = getGlobal(scene.state(), "utils");
+	luaUtils["ParseScene"](scene);
 }
 
 void SceneManager::updateCurrentScene(float deltaTime) {
@@ -34,13 +37,15 @@ Scene* SceneManager::getCurrentScene()
 	return currentScene;
 }
 
-void SceneManager::changeScene(std::string sceneName)
-{
-	delete currentScene;
-	loadScene(sceneName);
-}
-
 void SceneManager::ConvertToLua(lua_State* state)
 {
-	getGlobalNamespace(state).beginNamespace("Aegis").endNamespace();
+	getGlobalNamespace(state)
+		.beginNamespace("Aegis").
+			beginClass<SceneManager>("SceneManagerClass").
+				addFunction("GetCurrentScene", &SceneManager::getCurrentScene).
+				addFunction("LoadScene", &SceneManager::loadScene).
+			endClass().
+		endNamespace();
+
+	exportToLua(SceneManager::getInstance(), "SceneManager");
 }
