@@ -53,6 +53,10 @@ void SoundEmitterComponent::ConvertToLua(lua_State* state)
 		addFunction("createSoundEmitter", createSoundEmitter).
 		deriveClass<SoundEmitterComponent, AegisComponent>("SoundEmitter").
 		addProperty("sound", &SoundEmitterComponent::getSound, &SoundEmitterComponent::setSound).
+		addFunction("PlayMusic", &SoundEmitterComponent::playMusic).
+		addFunction("PlaySound", &SoundEmitterComponent::playSound).
+		addFunction("StopMusic", &SoundEmitterComponent::stopMusic).
+		addFunction("StopSound", &SoundEmitterComponent::stopSound).
 		endClass().
 		endNamespace().
 		endNamespace();
