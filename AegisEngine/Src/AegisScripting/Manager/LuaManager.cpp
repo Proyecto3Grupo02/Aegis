@@ -11,14 +11,19 @@ LuaManager::~LuaManager() {
 	lua_close(state);
 }
 
-void LuaManager::execute(const char* filename) {
+/// <summary>
+/// Carga un script y lo ejecuta. Devuelve true si se carga y ejecuta correctametne
+/// </summary>
+/// <param name="filename"></param>
+/// <returns></returns>
+bool LuaManager::execute(const char* filename) {
 
 	// Load the program; this supports both source code and bytecode files.
 	int result = luaL_loadfile(state, filename);
 
 	if (result != LUA_OK) {
 		printError(state);
-		return;
+		return false;
 	}
 
 	// Finally, execute the program by calling into it.
@@ -27,8 +32,10 @@ void LuaManager::execute(const char* filename) {
 
 	if (result != LUA_OK) {
 		printError(state);
-		return;
+		return false;
 	}
+
+	return true;
 }
 
 void LuaManager::printError(lua_State* state) {

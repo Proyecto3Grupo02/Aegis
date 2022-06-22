@@ -7,9 +7,17 @@
 #include "Text.h"
 #include "OgreFontManager.h"
 #include <iostream>
+#include "InputSystem.h"
 
-UISystem::UISystem(Ogre::SceneManager* mScene, WindowManager* window, InputSystem* input) {
-	inputSystem = input; //boton
+#define inputSystem InputSystem::getInstance()
+
+UISystem::UISystem(Ogre::SceneManager* mScene, WindowManager* window) : overlayMng(nullptr), overlaySys(nullptr) {
+	if (mScene == nullptr)
+	{
+		SetInitializationFailed();
+		return;
+	}
+
 	windowManager = window; //boton
 
 	overlaySys = new Ogre::OverlaySystem();
@@ -35,9 +43,12 @@ UISystem::~UISystem() {
 
 	ui_objects.clear();
 
-	delete overlaySys;
-	overlaySys = nullptr;
-	//no hacer delete ni de inputSystem ni windowManager objviously
+	if (overlaySys != nullptr)
+	{
+		delete overlaySys;
+		overlaySys = nullptr;
+		//no hacer delete ni de inputSystem ni windowManager objviously
+	}
 }
 
 Ogre::Overlay* UISystem::getOverlay() {

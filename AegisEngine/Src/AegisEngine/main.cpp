@@ -9,7 +9,10 @@ int main() {
 #endif // DEBUG	 
 
 	AegisMain a;
-	a.init();
+	if (a.init())
+		a.startGame();
+	else
+		a.free();
 
 	return 0;
 }

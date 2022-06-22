@@ -128,7 +128,7 @@ luabridge::LuaRef UIObject::getType() const
 
 void UIObject::ConvertToLua(lua_State* state)
 {
-	getGlobalNamespace(state).
+	luabridge::getGlobalNamespace(state).
 		beginNamespace("Aegis").
 			beginNamespace("UI").
 				beginClass<UIObject>("UIObject").

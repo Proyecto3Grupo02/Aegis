@@ -11,7 +11,7 @@
 
 // MANAGERS
 #include "OgreWrapper.h"
-#include "InputManager.h"
+#include "InputSystem.h"
 #include "DebugManager.h"
 #include "UISystem.h"
 #include "SceneManager.h"
@@ -27,6 +27,8 @@
 #include "Quaternion.h"
 
 #include "dirent.h"
+
+#define ogreWrap OgreWrapper::getInstance()
 
 AegisMain::AegisMain() : IInitializable()
 {
@@ -44,31 +46,42 @@ bool AegisMain::init()
 	if (config == nullptr)
 		return false;
 
-	ogreWrap = new OgreWrapper();
-	ogreWrap->init(config->resourcesCfgPath);
-	SoundSystem::tryCreateInstance(config->soundsPath);
-	PhysicsSystem::tryCreateInstance(ogreWrap->getSceneManager());
-	InputSystem::tryCreateInstance();
-	UISystem::tryCreateInstance(ogreWrap->getSceneManager(), ogreWrap->getWindowManager(), Input());
-	GameLoopData::tryCreateInstance();
-	DebugManager::tryCreateInstance();
-	SceneManager::tryCreateInstance(ogreWrap);
-	LuaManager::tryCreateInstance();
+	bool init = true;
+	init &= OgreWrapper::tryCreateInstance(config->resourcesCfgPath);
+	init &= SoundSystem::tryCreateInstance(config->soundsPath);
+	init &= PhysicsSystem::tryCreateInstance(ogreWrap->getSceneManager());
+	init &= InputSystem::tryCreateInstance();
+	init &= UISystem::tryCreateInstance(ogreWrap->getSceneManager(), ogreWrap->getWindowManager());
+	init &= GameLoopData::tryCreateInstance();
+	init &= DebugManager::tryCreateInstance();
+	init &= SceneManager::tryCreateInstance(ogreWrap);
+	init &= LuaManager::tryCreateInstance();
+
 	LuaManager::getInstance()->addPath("./Resources/Scripts");
 	LuaManager::getInstance()->addPath("./Resources/Scripts/?.lua");
 	LuaManager::getInstance()->addPath(config->scriptPath.c_str());
 	LuaManager::getInstance()->addPath((config->scriptPath + "/?.lua").c_str());
 
-	convertObjectToLua();
-	LuaManager::getInstance()->execute("Resources//Scripts//initLua.lua");
-	LuaManager::getInstance()->execute((config->scriptPath + "//init.lua").c_str());
+	if (!init)
+	{
+		delete config;
+		return false;
+	}
 
+	convertObjectToLua();
+	init &= LuaManager::getInstance()->execute("Resources//Scripts//initLua.lua");
+	init &= LuaManager::getInstance()->execute((config->scriptPath + "//init.lua").c_str());
+	
+	delete config;
+	return init;
+}
+
+void AegisMain::startGame()
+{
 	Debug()->log("Aegis loaded\n");
 	std::cout << '\n';
 
 	gameLoop();
-	delete config;
-	return true;
 }
 
 AegisMain::~AegisMain()
@@ -82,7 +95,7 @@ void AegisMain::free()
 	PhysicsSystem::tryDeleteInstance();
 	UISystem::tryDeleteInstance();
 	GameLoopData::tryDeleteInstance();
-	delete ogreWrap;
+	OgreWrapper::tryDeleteInstance();
 	DebugManager::tryDeleteInstance();
 	InputSystem::tryDeleteInstance();
 	SoundSystem::tryDeleteInstance();

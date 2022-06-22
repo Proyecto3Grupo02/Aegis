@@ -122,7 +122,7 @@
     <ClInclude Include="..\..\Src\AegisCommon\Interfaces\IInitializable.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Interfaces\ILuaObject.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Managers\DebugManager.h" />
-    <ClInclude Include="..\..\Src\AegisCommon\Managers\InputManager.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Managers\InputSystem.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Managers\SceneManager.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Scene\Scene.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Utils\Animation.h" />
@@ -149,7 +149,7 @@
     <ClCompile Include="..\..\Src\AegisCommon\Components\TransformComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Entity\Entity.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Managers\DebugManager.cpp" />
-    <ClCompile Include="..\..\Src\AegisCommon\Managers\InputManager.cpp" />
+    <ClCompile Include="..\..\Src\AegisCommon\Managers\InputSystem.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Managers\SceneManager.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Scene\Scene.cpp" />
   </ItemGroup>

@@ -7,7 +7,7 @@
 #include <string>
 #include "OgreOverlay.h"
 #include "Image.h"
-#include "InputManager.h"
+#include "InputSystem.h"
 #include "WindowManager.h"
 #include "LuaManager.h"
 

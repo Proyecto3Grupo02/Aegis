@@ -21,7 +21,7 @@ class LuaManager : public Singleton<LuaManager> {
 public:
 	LuaManager();
 	virtual ~LuaManager();
-	void execute(const char* filename);
+	bool execute(const char* filename);
 	void printError(lua_State* state);
 	void registerFunction(lua_CFunction function, const char* functionName);
 	lua_State* getState();

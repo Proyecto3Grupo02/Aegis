@@ -11,19 +11,19 @@ class OgreWrapper;
 class AegisMain : IInitializable
 {
 private:
-    OgreWrapper* ogreWrap;
-    bool exit;
+	bool exit;
 
-    void gameLoop();
-    void convertObjectToLua();
-    void free();
-    GameConfig* searchConfig();
-    std::string searchFile(std::string path, std::string file);
+	void gameLoop();
+	void convertObjectToLua();
+	GameConfig* searchConfig();
+	std::string searchFile(std::string path, std::string file);
 
 public:
-    AegisMain();
-    virtual ~AegisMain();
-    virtual bool init() override;
-    const float TARGET_FRAME_RATE = 60.0f;
-    };
+	AegisMain();
+	virtual ~AegisMain();
+	virtual bool init() override;
+	void startGame();
+	const float TARGET_FRAME_RATE = 60.0f;
+	void free();
+};
 #endif //

@@ -23,7 +23,13 @@ subject to the following restrictions:
 #include "OgreWrapper.h"
 #include "OgreSceneManager.h"
 
-PhysicsSystem::PhysicsSystem(Ogre::SceneManager* mScene) {
+PhysicsSystem::PhysicsSystem(Ogre::SceneManager* mScene) : dynamicsWorld(nullptr), solver(nullptr), overlappingPairCache(nullptr), dispatcher(nullptr), collisionConfiguration(nullptr) {
+	if (mScene == nullptr)
+	{
+		SetInitializationFailed();
+		return;
+	}
+
 	scene = mScene;
 	///collision configuration contains default setup for memory, collision setup. Advanced users can create their own configuration.
 	collisionConfiguration = new btDefaultCollisionConfiguration();
@@ -68,14 +74,19 @@ void PhysicsSystem::remove() {
 	clear();
 
 	//delete dynamics world
-	delete dynamicsWorld;
+	if (dynamicsWorld)
+		delete dynamicsWorld;
 	//delete solver
-	delete solver;
+	if (solver)
+		delete solver;
 	//delete broadphase
-	delete overlappingPairCache;
+	if (overlappingPairCache)
+		delete overlappingPairCache;
 	//delete dispatcher
-	delete dispatcher;
-	delete collisionConfiguration;
+	if (dispatcher)
+		delete dispatcher;
+	if (collisionConfiguration)
+		delete collisionConfiguration;
 	//
 	dynamicsWorld = nullptr;
 	solver = nullptr;
@@ -89,6 +100,9 @@ void PhysicsSystem::remove() {
 
 ///-----cleanup_start-----
 void PhysicsSystem::clear() {
+	if (!dynamicsWorld)
+		return;
+
 	//remove the rigidbodies from the dynamics world and delete them
 	for (int i = dynamicsWorld->getNumCollisionObjects() - 1; i >= 0; i--)
 	{

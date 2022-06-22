@@ -1,4 +1,4 @@
-#include "InputManager.h"
+#include "InputSystem.h"
 
 InputSystem::InputSystem() {
 	keyNums = 322;
