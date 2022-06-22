@@ -67,6 +67,7 @@ private:
 	void fixedUpdate(float dt);
 
 	void syncTransforms();
+	void syncRigidbodies();
 
 	/// <summary>
 	/// Llama al update de cada entidad para que actualice respectivamente sus componentes
@@ -90,6 +91,7 @@ public:
 	Scene(OgreWrapper* wrap);
 
 	~Scene();
+	void free();
 
 	bool init();
 

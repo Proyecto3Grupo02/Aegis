@@ -18,12 +18,10 @@ public:
 	template<typename ...Ts>
 	static bool tryCreateInstance(Ts... args)
 	{
-		if (Singleton<T>::mInstance_ == nullptr) {
+		if (Singleton<T>::mInstance_ == nullptr) 
 			Singleton<T>::mInstance_ = new T(args...);
-			return Singleton<T>::mInstance_->IsCorrectlyInitialiced();
-		}
 
-		return true;
+		return Singleton<T>::mInstance_->IsCorrectlyInitialiced();
 	};
 
 	bool IsCorrectlyInitialiced() const;

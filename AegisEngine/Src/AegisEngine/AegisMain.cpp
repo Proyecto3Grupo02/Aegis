@@ -29,6 +29,7 @@
 #include "dirent.h"
 
 #define ogreWrap OgreWrapper::getInstance()
+#define Input InputSystem::getInstance()
 
 AegisMain::AegisMain() : IInitializable()
 {
@@ -47,6 +48,8 @@ bool AegisMain::init()
 		return false;
 
 	bool init = true;
+	init &= LuaManager::tryCreateInstance();
+	convertObjectToLua();
 	init &= OgreWrapper::tryCreateInstance(config->resourcesCfgPath);
 	init &= SoundSystem::tryCreateInstance(config->soundsPath);
 	init &= PhysicsSystem::tryCreateInstance(ogreWrap->getSceneManager());
@@ -55,12 +58,15 @@ bool AegisMain::init()
 	init &= GameLoopData::tryCreateInstance();
 	init &= DebugManager::tryCreateInstance();
 	init &= SceneManager::tryCreateInstance(ogreWrap);
-	init &= LuaManager::tryCreateInstance();
 
 	LuaManager::getInstance()->addPath("./Resources/Scripts");
 	LuaManager::getInstance()->addPath("./Resources/Scripts/?.lua");
 	LuaManager::getInstance()->addPath(config->scriptPath.c_str());
 	LuaManager::getInstance()->addPath((config->scriptPath + "/?.lua").c_str());
+
+	exportToLua(UISystem::getInstance(), "UISystem");
+	exportToLua(Input, "Input");
+	exportToLua(SceneManager::getInstance(), "SceneManager");
 
 	if (!init)
 	{
@@ -68,7 +74,6 @@ bool AegisMain::init()
 		return false;
 	}
 
-	convertObjectToLua();
 	init &= LuaManager::getInstance()->execute("Resources//Scripts//initLua.lua");
 	init &= LuaManager::getInstance()->execute((config->scriptPath + "//init.lua").c_str());
 	
@@ -208,7 +213,7 @@ void AegisMain::gameLoop()
 		{
 			// Tiempo al inicio del frame
 			GameTime()->setFrameStartTime(SDL_GetTicks());
-			Input()->updateState();
+			Input->updateState();
 
 			while (SDL_PollEvent(&eventHandler) != 0)
 			{
@@ -223,20 +228,20 @@ void AegisMain::gameLoop()
 					if (key == SDLK_ESCAPE)
 						exit = true;
 					// std::cout << "KeyDown (" << eventHandler.type << "): ";
-					Input()->onKeyDown(key);
+					Input->onKeyDown(key);
 					break;
 				case SDL_KEYUP:
 					// std::cout << "KeyUp (" << eventHandler.type << "): ";
-					Input()->onKeyUp(key);
+					Input->onKeyUp(key);
 					break;
 				case SDL_MOUSEBUTTONDOWN:
-					Input()->onMouseButtonDown(eventHandler.button);
+					Input->onMouseButtonDown(eventHandler.button);
 					break;
 				case SDL_MOUSEBUTTONUP:
-					Input()->onMouseButtonUp(eventHandler.button);
+					Input->onMouseButtonUp(eventHandler.button);
 					break;
 				case SDL_MOUSEMOTION:
-					Input()->setMouseMotion(Vector2(eventHandler.motion.xrel, eventHandler.motion.yrel));
+					Input->setMouseMotion(Vector2(eventHandler.motion.xrel, eventHandler.motion.yrel));
 					break;
 				default:
 					// std::cout << "Default (" << eventHandler.type << ")\n";
@@ -289,7 +294,4 @@ void AegisMain::convertObjectToLua()
 	Vector4::ConvertToLua(state);
 	Quaternion::ConvertToLua(state);
 	LuaMaths::ConvertToLua(state);
-
-	exportToLua(UIs(), "UISystem");
-	exportToLua(Input(), "Input");
 }

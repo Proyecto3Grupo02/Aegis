@@ -6,33 +6,34 @@
 
 #include <Scene.h>
 
-RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m, bool useG, bool isK, bool isT,float scale)
+RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m, bool useG, bool isK, bool isT, float scale)
 	: AegisComponent("Rigidbody", ent)
 {
 	transform = ent->getTransform();
 	initialPos = transform->getPosition();
-	
+
 	auto rot = transform->getRotation();
 	Vector4 rotVec(rot.x, rot.y, rot.z, rot.w);
-	rigidbody = new RigidBody(bodyMeshName, transform->getPosition(), transform->getScale()*scale, rotVec,this, m, useG, isK,isT);
+	rigidbody = new RigidBody(bodyMeshName, transform->getPosition(), transform->getScale() * scale, rotVec, this, m, useG, isK, isT);
 	mEntity_->getScene()->addPhysicsEntity(this);
 	setDataAsInnerType(this);
 }
 
 RigidbodyComponent::~RigidbodyComponent()
 {
-	delete rigidbody;
+	if (rigidbody)
+		delete rigidbody;
 	mEntity_->getScene()->removePhysicsEntity(this->physicsEntityIt);
 	rigidbody = nullptr;
 };
 
 void RigidbodyComponent::lateUpdate(float deltaTime) {}
 
-void RigidbodyComponent::fixedUpdate() {	
-	
+void RigidbodyComponent::fixedUpdate() {
+
 }
 
-void RigidbodyComponent::syncToTransform()
+void RigidbodyComponent::syncTransformToRigidbody()
 {
 	Vector3 updatedPos = rigidbody->getRbPosition();
 	auto quat = rigidbody->getRotation();
@@ -42,6 +43,16 @@ void RigidbodyComponent::syncToTransform()
 	if (transform->hasParent()) transform->setPosition(updatedPos - transform->getParent()->getTransform()->getPosition());
 	else transform->setPosition(updatedPos);
 	transform->setRotation(ogreQuat);
+}
+
+// Syncs rigidbody to match transform but only for position
+void RigidbodyComponent::syncRigidbodyToTransform()
+{
+	Vector3 rbPos = rigidbody->getRbPosition();
+	Vector3 tPos = transform->getPosition();
+
+	if ((rbPos - tPos).magnitudeSquared() >= 0.01f)
+		rigidbody->setRbPosition(tPos);
 }
 
 void RigidbodyComponent::setIterator(std::list<RigidbodyComponent*>::iterator physicsEntityIt)
@@ -65,7 +76,7 @@ Vector3 RigidbodyComponent::accelerateTo(Vector3 targetVelocity, float maxAccele
 
 Vector3 RigidbodyComponent::accelerateToRand()
 {
-	Vector3 vec(rand() % 10, 0 ,rand() % 10);
+	Vector3 vec(rand() % 10, 0, rand() % 10);
 	return rigidbody->accelerateTo(vec, GameTime()->getDeltaTime(), 100000000000);
 	rigidbody->setLinearVelocity();
 }
@@ -90,7 +101,7 @@ Vector3 RigidbodyComponent::getForce() const {
 
 Vector3 RigidbodyComponent::getPosition() const {
 	return rigidbody->getRbPosition();
-} 
+}
 
 void RigidbodyComponent::setPosition(Vector3 pos) {
 	rigidbody->setRbPosition(pos);
@@ -102,7 +113,7 @@ void RigidbodyComponent::setRotationEuler(Vector3 rot) {
 }
 
 //FREEZE ROT------------------------------------------------------------------------------------------------
-void RigidbodyComponent::freezeRot (bool _x, bool _y, bool _z) {
+void RigidbodyComponent::freezeRot(bool _x, bool _y, bool _z) {
 	rigidbody->setFreezeRotation(_x, _y, _z);
 }
 
@@ -124,7 +135,7 @@ RigidbodyComponent* CreateRigidbody(Entity* ent, LuaRef args) //Doesn't belong t
 	bool isKinematic = LuaMngr()->parseBool(args["isKinematic"], false);
 	bool isTrigger = LuaMngr()->parseBool(args["isTrigger"], false);
 	float scale = LuaMngr()->parseFloat(args["scale"], 1);
-	return new RigidbodyComponent(ent, bodyName, mass, useGravity, isKinematic,isTrigger,scale);
+	return new RigidbodyComponent(ent, bodyName, mass, useGravity, isKinematic, isTrigger, scale);
 }
 
 void RigidbodyComponent::enableCollision(bool enable_) {
@@ -140,28 +151,28 @@ void RigidbodyComponent::ConvertToLua(lua_State* state)
 	getGlobalNamespace(state).
 		beginNamespace("Aegis").
 		beginNamespace("NativeComponents").
-			addFunction("CreateRigidbody", CreateRigidbody).
-				deriveClass<RigidbodyComponent, AegisComponent>("Rigidbody").
-					addProperty("position", &RigidbodyComponent::getPosition, &RigidbodyComponent::setPosition).
-					addProperty("useGravity", &RigidbodyComponent::getUsingGravity, &RigidbodyComponent::setUsingGravity).
-					addFunction("AddForce", &RigidbodyComponent::addForce).
-					addFunction("GetForce", &RigidbodyComponent::getForce).
-					addFunction("ClearForce", &RigidbodyComponent::resetForce).
-					addFunction("AccelerateTo", &RigidbodyComponent::accelerateTo).
-					addFunction("AccelerateToRand", &RigidbodyComponent::accelerateToRand).
-					addFunction("AddTorque", &RigidbodyComponent::addTorque).
-					addFunction("AddForceForward", &RigidbodyComponent::addForceForward).
-					addFunction("ChangeGravity", &RigidbodyComponent::changeGravity).
-					addFunction("RayCastWorld", &RigidbodyComponent::raycast).
-					addFunction("SetRotationEuler", &RigidbodyComponent::setRotationEuler).
-					addFunction("SetPosition", &RigidbodyComponent::setPosition).
-					addFunction("SetAngular", &RigidbodyComponent::setAngular).
-					addFunction("FreezeRot", &RigidbodyComponent::freezeRot).
-					addProperty("isActive", &RigidbodyComponent::isActive).
-					addFunction("EnableCol", &RigidbodyComponent::enableCollision).
-					
-				endClass().
-			endNamespace().
+		addFunction("CreateRigidbody", CreateRigidbody).
+		deriveClass<RigidbodyComponent, AegisComponent>("Rigidbody").
+		addProperty("position", &RigidbodyComponent::getPosition, &RigidbodyComponent::setPosition).
+		addProperty("useGravity", &RigidbodyComponent::getUsingGravity, &RigidbodyComponent::setUsingGravity).
+		addFunction("AddForce", &RigidbodyComponent::addForce).
+		addFunction("GetForce", &RigidbodyComponent::getForce).
+		addFunction("ClearForce", &RigidbodyComponent::resetForce).
+		addFunction("AccelerateTo", &RigidbodyComponent::accelerateTo).
+		addFunction("AccelerateToRand", &RigidbodyComponent::accelerateToRand).
+		addFunction("AddTorque", &RigidbodyComponent::addTorque).
+		addFunction("AddForceForward", &RigidbodyComponent::addForceForward).
+		addFunction("ChangeGravity", &RigidbodyComponent::changeGravity).
+		addFunction("RayCastWorld", &RigidbodyComponent::raycast).
+		addFunction("SetRotationEuler", &RigidbodyComponent::setRotationEuler).
+		addFunction("SetPosition", &RigidbodyComponent::setPosition).
+		addFunction("SetAngular", &RigidbodyComponent::setAngular).
+		addFunction("FreezeRot", &RigidbodyComponent::freezeRot).
+		addProperty("isActive", &RigidbodyComponent::isActive).
+		addFunction("EnableCol", &RigidbodyComponent::enableCollision).
+
+		endClass().
+		endNamespace().
 		endNamespace();
 }
 
