@@ -35,9 +35,12 @@ void RigidbodyComponent::fixedUpdate() {
 void RigidbodyComponent::syncToTransform()
 {
 	Vector3 updatedPos = rigidbody->getRbPosition();
-	transform->setPosition(updatedPos);
 	auto quat = rigidbody->getRotation();
 	Ogre::Quaternion ogreQuat(quat.w, quat.x, quat.y, quat.z);
+
+	// Si el transform tiene padre debe tenerse en cuenta, ya que sus coordenadas son locales (relativas a las del padre) mientras que las del rigidBody son globales
+	if (transform->hasParent()) transform->setPosition(updatedPos - transform->getParent()->getTransform()->getPosition());
+	else transform->setPosition(updatedPos);
 	transform->setRotation(ogreQuat);
 }
 

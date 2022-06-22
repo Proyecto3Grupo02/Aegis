@@ -29,6 +29,8 @@ public:
 	Vector3 getScale() const;
 
 	void setParent(Entity* ent);
+	bool hasParent();
+	Entity* getParent();
 
 	void setPosition(Vector3 newPos);
 	void setRotation(Ogre::Quaternion newRot);

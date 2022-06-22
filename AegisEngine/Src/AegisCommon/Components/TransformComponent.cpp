@@ -66,6 +66,16 @@ void TransformComponent::setParent(Entity* ent)
 	rotation = newParentRotation.Inverse() * rotation;
 }
 
+bool TransformComponent::hasParent()
+{
+	return (parentEntity != nullptr);
+}
+
+Entity* TransformComponent::getParent()
+{
+	return parentEntity;
+}
+
 void TransformComponent::setPosition(Vector3 newPos) {
 	position = newPos;
 }
