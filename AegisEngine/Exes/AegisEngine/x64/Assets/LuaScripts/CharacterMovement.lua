@@ -44,7 +44,8 @@ function table.GetNew(entity, params)
                 mouseB=false
             else mouseB = true
             end;
-            Input:BlockMouse(mouseB);  
+            Input:BlockMouse(mouseB);
+            data.camera:GetComponent("CameraTest").enabled = mouseB;
             data.homeButton:SetVisible(not mouseB)          
         end;
         if(Input:KeyWasPressed("Space"))then
@@ -71,6 +72,10 @@ function table.GetNew(entity, params)
     function LateUpdate(deltaTime) end;
 
 	function FixedUpdate()
+        if not mouseB then
+            return;
+        end;
+
         local mouseMotion = Input:GetMouseMotion();
         if mouseMotion.x ~= 0 and mouseMotion.y ~= 0 then
             local x = mouseMotion.x * data.sensitivity;

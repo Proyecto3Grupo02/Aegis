@@ -30,7 +30,7 @@ class Component : public ILuaObject {
        virtual void onCollision(Entity* other) {};
        virtual void onTrigger(Entity* other) {};
 
-       bool getActive() { return isActive_; }
+       bool getActive() const { return isActive_; }
        void setActive(bool active) { isActive_ = active; }
 
        std::string getComponentName() const { return componentName; };

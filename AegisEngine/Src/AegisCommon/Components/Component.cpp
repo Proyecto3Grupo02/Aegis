@@ -16,6 +16,7 @@ void Component::ConvertToLua(lua_State* state)
 		beginClass<Component>("ComponentBase").
 		addProperty("name", &Component::getComponentName).
 		addProperty("entity", &Component::getEntity).
+		addProperty("enabled", &Component::getActive, &Component::setActive).
 		endClass().
 		endNamespace();
 }

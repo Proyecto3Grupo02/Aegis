@@ -14,17 +14,20 @@ void AegisComponent::init()
 
 void AegisComponent::update(float dt)
 {
-	callLuaRefFunc(updateFunc, dt);
+	if (isActive_)
+		callLuaRefFunc(updateFunc, dt);
 }
 
 void AegisComponent::lateUpdate(float dt)
 {
-	callLuaRefFunc(lateUpdateFunc, dt);
+	if (isActive_)
+		callLuaRefFunc(lateUpdateFunc, dt);
 }
 
 void AegisComponent::fixedUpdate()
 {
-	callLuaRefFunc(fixedUpdateFunc, 0);
+	if (isActive_)
+		callLuaRefFunc(fixedUpdateFunc, 0);
 }
 
 void AegisComponent::onCollision(Entity* other)
