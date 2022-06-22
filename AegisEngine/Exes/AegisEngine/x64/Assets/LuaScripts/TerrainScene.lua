@@ -268,6 +268,21 @@ local scene = {
 			}
 		},
 -- UI
+{
+	type = "UI",
+	data = 
+		{
+			type = "Image",--Button/Image
+			nombre = "Controles",
+			material = "controles_material",
+			order = 0,
+			x = 0.05,
+			y = 0.05,
+			width =0.9,
+			height = 0.9,
+			visible = false,
+		},
+},
 	{
 		type = "UI",
 		data = 
