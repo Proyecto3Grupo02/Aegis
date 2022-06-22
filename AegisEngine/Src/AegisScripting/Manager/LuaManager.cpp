@@ -5,7 +5,6 @@ LuaManager::LuaManager()
 	state = luaL_newstate();
 	empty = luabridge::LuaRef(state);
 	luaL_openlibs(state);
-	setLuaPath(state, "../Resources/Scripts");
 }
 
 LuaManager::~LuaManager() {
@@ -13,12 +12,9 @@ LuaManager::~LuaManager() {
 }
 
 void LuaManager::execute(const char* filename) {
-	// ESTO ES TEMPORAL
-	std::string name = ".\\..\\Resources\\Scripts\\";
-	name.append(filename);
 
 	// Load the program; this supports both source code and bytecode files.
-	int result = luaL_loadfile(state, name.c_str());
+	int result = luaL_loadfile(state, filename);
 
 	if (result != LUA_OK) {
 		printError(state);
@@ -67,8 +63,9 @@ lua_State* LuaManager::getState()
 	return this->state;
 }
 
-int LuaManager::setLuaPath(lua_State* L, const char* path)
+int LuaManager::addPath(const char* path)
 {
+	lua_State* L = state;
 	lua_getglobal(L, "package");
 	lua_getfield(L, -1, "path"); // get field "path" from table at top of stack (-1)
 	std::string cur_path = lua_tostring(L, -1); // grab path string from top of stack

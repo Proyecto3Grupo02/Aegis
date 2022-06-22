@@ -2,9 +2,9 @@
 //using namespace std;
 #include <dirent.h>
 #include "DebugManager.h"
-SoundResources::SoundResources()
+SoundResources::SoundResources(std::string soundsPath)
 {
-	parseDirectory(rutaArchivo);
+	parseDirectory(soundsPath);
 }
 
 SoundResources::~SoundResources()

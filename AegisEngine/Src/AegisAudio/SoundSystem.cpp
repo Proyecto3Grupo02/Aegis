@@ -1,12 +1,12 @@
 #include "SoundSystem.h"
 #include <fmod_errors.h>
 #include "DebugManager.h"
-SoundSystem::SoundSystem() :
+SoundSystem::SoundSystem(std::string soundsPath) :
 	system(nullptr),
 	listener(nullptr),
 	music(nullptr),
 	soundEffects(nullptr),
-	SR(new SoundResources())
+	SR(new SoundResources(soundsPath))
 {
 	generalVolume = 1;
 	musicVolume = 1;

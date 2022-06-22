@@ -45,9 +45,8 @@ bool AegisMain::init()
 		return false;
 
 	ogreWrap = new OgreWrapper();
-	ogreWrap->init();
-	// Audio()->tryCreateInstance();
-	SoundSystem::tryCreateInstance();
+	ogreWrap->init(config->resourcesCfgPath);
+	SoundSystem::tryCreateInstance(config->soundsPath);
 	PhysicsSystem::tryCreateInstance(ogreWrap->getSceneManager());
 	InputSystem::tryCreateInstance();
 	UISystem::tryCreateInstance(ogreWrap->getSceneManager(), ogreWrap->getWindowManager(), Input());
@@ -55,9 +54,14 @@ bool AegisMain::init()
 	DebugManager::tryCreateInstance();
 	SceneManager::tryCreateInstance(ogreWrap);
 	LuaManager::tryCreateInstance();
+	LuaManager::getInstance()->addPath("./Resources/Scripts");
+	LuaManager::getInstance()->addPath("./Resources/Scripts/?.lua");
+	LuaManager::getInstance()->addPath(config->scriptPath.c_str());
+	LuaManager::getInstance()->addPath((config->scriptPath + "/?.lua").c_str());
 
 	convertObjectToLua();
-	LuaManager::getInstance()->execute("init.lua");
+	LuaManager::getInstance()->execute("Resources//Scripts//initLua.lua");
+	LuaManager::getInstance()->execute((config->scriptPath + "//init.lua").c_str());
 
 	Debug()->log("Aegis loaded\n");
 	std::cout << '\n';
@@ -93,6 +97,7 @@ GameConfig *AegisMain::searchConfig()
 		Debug()->log("No config file found\n");
 		return nullptr;
 	}
+	std::string configPathDir = pathToConfig.substr(0, pathToConfig.find_last_of("/") + 1);
 
 	// Open file
 	std::ifstream file(pathToConfig);
@@ -114,6 +119,8 @@ GameConfig *AegisMain::searchConfig()
 		std::string value;
 		std::getline(ss, key, '=');
 		std::getline(ss, value);
+		value = value.substr(value.find_first_of('"') + 1, value.find_last_of('"') - 2);
+		value = configPathDir + value;
 
 		//Trim end space
 		key.erase(std::remove(key.begin(), key.end(), ' '), key.end());

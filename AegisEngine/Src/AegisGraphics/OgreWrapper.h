@@ -36,7 +36,7 @@ public:
 	void handleEvent(SDL_Event& evt);
 	bool render();
 	virtual ~OgreWrapper();
-	bool init();
+	bool init(std::string resourcesPath);
 	Ogre::SceneNode* getRootNode();
 
 	inline SDL_Renderer* getRenderer()const { return renderer_; }

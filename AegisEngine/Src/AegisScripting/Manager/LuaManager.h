@@ -25,7 +25,7 @@ public:
 	void printError(lua_State* state);
 	void registerFunction(lua_CFunction function, const char* functionName);
 	lua_State* getState();
-	int setLuaPath(lua_State* L, const char* path);
+	int addPath(const char* path);
 	luabridge::LuaRef getSharedEmptyLuaRef();
 	luabridge::LuaRef getNewEmptyTable();
 	

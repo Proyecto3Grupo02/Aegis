@@ -48,11 +48,11 @@ OgreWrapper::~OgreWrapper() {
 	windowMan = nullptr;
 }
 
-bool OgreWrapper::init() {
+bool OgreWrapper::init(std::string resourcesPath) {
 	//files that contains the resources that ogre will use and the plugins used, specifically, Gl and D3D11 are
 //added in order to have a render winow
 
-	mResourcesCfg = "resources.cfg";
+	mResourcesCfg = resourcesPath;
 	mPluginsCfg = "plugins.cfg";
 
 	lm = new Ogre::LogManager();
