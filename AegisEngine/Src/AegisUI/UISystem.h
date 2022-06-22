@@ -5,6 +5,7 @@
 
 #include "Singleton.h"
 #include "InputManager.h"
+#include "WindowManager.h"
 #include "LuaManager.h"
 #include <vector>
 
@@ -22,6 +23,7 @@ namespace Ogre {
 class UISystem : public Singleton<UISystem> {
 private:
 	InputSystem* inputSystem = nullptr; 
+	WindowManager* windowManager = nullptr;
 	Ogre::OverlayManager* overlayMng = nullptr;
 	Ogre::OverlaySystem* overlaySys = nullptr;
 	Ogre::Overlay* overlay = nullptr;
@@ -30,12 +32,13 @@ private:
 
 	void addUIObject(UIObject* object_);
 public:
-	UISystem(Ogre::SceneManager* mScene, InputSystem* input);
+	UISystem(Ogre::SceneManager* mScene, WindowManager* window, InputSystem* input);
 	~UISystem();
 	UIObject* createUIElem(luabridge::LuaRef luaref);
 	void deleteUIObject(const UIObject* obj_);
 	void update(float deltaTime);
 	InputSystem* getInputSystem();
+	WindowManager* getWindowManager();
 	Ogre::Overlay* getOverlay();
 
 	static void ConvertToLua(lua_State* state);

@@ -41,10 +41,11 @@ bool AegisMain::init()
 	//Audio()->tryCreateInstance();
 	SoundSystem::tryCreateInstance();
 	PhysicsSystem::tryCreateInstance(ogreWrap->getSceneManager());
-	UISystem::tryCreateInstance(ogreWrap->getSceneManager(), Input());
+	InputSystem::tryCreateInstance();
+	UISystem::tryCreateInstance(ogreWrap->getSceneManager(), ogreWrap->getWindowManager(), Input());
+	//no deberia crearse el inputsystem antes q el UI????????
 	GameLoopData::tryCreateInstance();
 	DebugManager::tryCreateInstance();
-	InputSystem::tryCreateInstance();
 	SceneManager::tryCreateInstance(ogreWrap);
 	LuaManager::tryCreateInstance();
 	

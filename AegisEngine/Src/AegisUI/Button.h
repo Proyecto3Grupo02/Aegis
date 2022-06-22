@@ -8,6 +8,7 @@
 #include "OgreOverlay.h"
 #include "Image.h"
 #include "InputManager.h"
+#include "WindowManager.h"
 #include "LuaManager.h"
 
 static int id = 0; // cada boton necesita tener un boton distinto
@@ -16,6 +17,7 @@ class Button : public Image
 {
 private:
 	InputSystem* inputSystem = nullptr;
+	WindowManager* windowManager = nullptr;
 	luabridge::LuaRef callback = LuaMngr()->getSharedEmptyLuaRef(); //necesistas inicializarlo
 
 public:

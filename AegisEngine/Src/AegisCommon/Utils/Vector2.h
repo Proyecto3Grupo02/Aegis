@@ -44,6 +44,8 @@ public:
         
     }
 
+private:
+
     float x;
     float y;
     

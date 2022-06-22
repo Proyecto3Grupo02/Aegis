@@ -5,13 +5,14 @@
 Button::Button(const std::string& name, int order, std::string material, float x, float y, float w, float h, bool isActive, luabridge::LuaRef call)
 	: Image(name, order, material, x, y, w, h, isActive) {
 	inputSystem = UIs()->getInputSystem();
+	windowManager = UIs()->getWindowManager();
 	callback = call;
 	id++;
 	setDataAsInnerType(this);
 }
 
 Button::~Button() {
-
+	//no hacer delete ni de inputSystem ni windowManager objviously
 }
 
 void Button::update() {
@@ -19,8 +20,21 @@ void Button::update() {
 
 		//comprobar que la posicion del raton (inputSystem) cae dentro de la imagen (metodos getpos y getsize)
 		//este metodo tendria que ser llamado desde algun sitio siempre que se detecta click
+		//La pos/w/h del boton pertenece al intervalo [0,1]. 
+		//hay que multiplicarlo por las dimensiones de la ventana para obtener los atributos reales
 		Vector2 mouseMotion = inputSystem->getMousePosition();
-		if ((mouseMotion.x >= x && mouseMotion.x <= x + w) && mouseMotion.y >= y && mouseMotion.y <= y + h
+		Vector2 esquinaInf(x * windowManager->getWidth(), y * windowManager->getHeight());
+		Vector2 esquinaSup(esquinaInf.getX() + w * windowManager->getWidth(), esquinaInf.getY() + h * windowManager->getHeight());
+
+		//std::cout <<"PosRaton: "<< mouseMotion.getX() << " " << mouseMotion.getY() << "\n";
+		//std::cout<<"Ventana: " << windowManager->getWidth() << " " << windowManager->getHeight() << "\n";
+		///*std::cout << "Boton:" << x << " "<<y << "\n";
+		//std::cout << "Esquina:" << x+w << " " << y+h << "\n";
+		//std::cout << "Boton2:" << esquinaInf.getX() << " " << esquinaInf.getY() << "\n";
+		//std::cout << "Esquina2:" << esquinaSup.getX() << " " << esquinaSup.getY() << "\n";*/
+
+		if ((mouseMotion.getX() >= esquinaInf.getX() && mouseMotion.getX() <= esquinaSup.getX()) 
+			&& mouseMotion.getY() >= esquinaInf.getY() && mouseMotion.getY() <= esquinaSup.getY()
 			&& inputSystem->isMouseButtonPressedLua(0)) {
 			std::cout << "- Button was clicked in C++\n";
 

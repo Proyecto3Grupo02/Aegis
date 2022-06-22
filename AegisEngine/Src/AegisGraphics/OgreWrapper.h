@@ -46,6 +46,7 @@ public:
 	}
 
 	inline Ogre::SceneManager* getSceneManager() { return mSceneMgr; }
+	inline WindowManager* getWindowManager() { return windowMan; } //para el UISystem
 };
 
 #endif

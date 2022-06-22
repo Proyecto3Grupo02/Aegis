@@ -57,10 +57,11 @@ void WindowManager::update()
 	SDL_Event evt ;
 
 	while (SDL_PollEvent(&evt)) {
-		//if (evt.type == SDL_WINDOWEVENT) {
-			render->resize(evt.window.data1, evt.window.data2);
-			width_ = evt.window.data1;
-			height_ = evt.window.data2;
-		//}
+		////if (evt.type == SDL_WINDOWEVENT) {
+		//	render->resize(evt.window.data1, evt.window.data2);
+		//	width_ = evt.window.data1;
+		//	height_ = evt.window.data2;
+		////}
+		//std::cout << width_<<" "<<height_<<"\n";
 	}
 }
