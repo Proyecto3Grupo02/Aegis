@@ -13,7 +13,7 @@ function table.GetNew(entity, params)
 	function Update(deltaTime) 
     if  Input:AnyKeyWasPressed() then -- GENERIC CHECK BEFORE CHECKING INDIVIDUAL KEY ==> NECESSARY
         if Input:KeyWasPressed("l") then
-            updateScore();
+            UpdateScore();
         end;
     end        
 

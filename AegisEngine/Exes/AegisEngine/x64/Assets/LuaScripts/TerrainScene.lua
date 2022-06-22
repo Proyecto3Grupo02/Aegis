@@ -56,7 +56,8 @@ local scene = {
 				{
 					camera = "@MainCamera",
 					bait = "@Anzuelo",
-					canya = "@Canya"
+					canya = "@Canya",
+					homeButton = "@HomeButton"
 				}			
 			}
 		}

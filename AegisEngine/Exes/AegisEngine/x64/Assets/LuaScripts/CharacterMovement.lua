@@ -12,12 +12,16 @@ function table.GetNew(entity, params)
     data.camera = "mainCam";
     data.bait = "Bait"; --ANZUELO------------------
     data.canya = "Canya"; --CAÑA DE PESCAR------------------------
+    data.homeButton = "HomeButton";
     local cameraTf = nil;
     local forward
     local euAng;
+    local mouseB;
     data.sensitivity = 0.2;
 
     function Init()
+        mouseB=true;
+        Input:BlockMouse(true);
         rigidbody = component.entity:GetComponent("Rigidbody").type;
         renderer = component.entity:GetComponent("Renderer").type;
         w=false; a=false; s=false; d=false; fishing = false;
@@ -35,6 +39,14 @@ function table.GetNew(entity, params)
      end;
 
 	function Update(deltaTime)
+        if(Input:KeyWasPressed("P"))then
+            if(mouseB)then 
+                mouseB=false
+            else mouseB = true
+            end;
+            Input:BlockMouse(mouseB);  
+            data.homeButton:SetVisible(not mouseB)          
+        end;
         if(Input:KeyWasPressed("Space"))then
             fishing = not fishing;
             renderer.visible = not renderer.visible;
@@ -51,7 +63,7 @@ function table.GetNew(entity, params)
             d = Input:IsKeyDown("d");
             -- IF key is f then set rigidbody pos to init pos
             if Input:IsKeyDown("f") then
-            rigidbody.position = data.initPos; 
+                rigidbody.position = data.initPos; 
             end;
         end;   
     end;
