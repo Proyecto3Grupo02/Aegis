@@ -22,8 +22,12 @@ AegisCamera* OgreWrapper::getCamera()
 	return mCamera;
 }
 
+void OgreWrapper::handleEvent(SDL_Event& evt)
+{
+	windowMan->handleEvent(evt);
+}
+
 bool OgreWrapper::render() {
-	windowMan->update();
 	return mRoot->renderOneFrame();
 }
 

@@ -36,7 +36,7 @@ public:
     void setRenderer(Ogre::RenderWindow* rend);
     void setCamera(AegisCamera* cam);
 
-    void update();
+    void handleEvent(SDL_Event& evt);
 };
 
 #endif

@@ -43,12 +43,11 @@ bool AegisMain::init()
 	PhysicsSystem::tryCreateInstance(ogreWrap->getSceneManager());
 	InputSystem::tryCreateInstance();
 	UISystem::tryCreateInstance(ogreWrap->getSceneManager(), ogreWrap->getWindowManager(), Input());
-	//no deberia crearse el inputsystem antes q el UI????????
 	GameLoopData::tryCreateInstance();
 	DebugManager::tryCreateInstance();
 	SceneManager::tryCreateInstance(ogreWrap);
 	LuaManager::tryCreateInstance();
-	
+
 	convertObjectToLua();
 	LuaManager::getInstance()->execute("init.lua");
 
@@ -78,22 +77,24 @@ void AegisMain::free()
 
 void AegisMain::gameLoop() {
 	uint32_t frameTimeMS = (uint32_t)floor((1 / TARGET_FRAME_RATE) * 1000);
-	
+
 
 	while (!exit)
 	{
 		SDL_Event eventHandler;
 		//Audio()->playMusic("clin"); //Esto hay q quitarlo
-		
+
 		//SDL_EnableKeyRepeat(0, 0);
 		while (!exit)
 		{
 			//Tiempo al inicio del frame
 			GameTime()->setFrameStartTime(SDL_GetTicks());
 			Input()->updateState();
-			
+
 			while (SDL_PollEvent(&eventHandler) != 0)
 			{
+				ogreWrap->handleEvent(eventHandler);
+
 				auto key = eventHandler.key.keysym.sym;
 				switch (eventHandler.type)
 				{
@@ -116,7 +117,6 @@ void AegisMain::gameLoop() {
 					Input()->onMouseButtonUp(eventHandler.button);
 					break;
 				case SDL_MOUSEMOTION:
-					// This is usually implemented as a callback but for now it will be this way, just for testing...
 					Input()->setMouseMotion(Vector2(eventHandler.motion.xrel, eventHandler.motion.yrel));
 					break;
 				default:

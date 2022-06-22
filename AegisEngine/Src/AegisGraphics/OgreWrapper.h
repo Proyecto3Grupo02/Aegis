@@ -33,6 +33,7 @@ private:
 public:
 	OgreWrapper();
 	AegisCamera* getCamera();
+	void handleEvent(SDL_Event& evt);
 	bool render();
 	virtual ~OgreWrapper();
 	bool init();
