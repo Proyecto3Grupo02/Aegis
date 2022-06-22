@@ -4,6 +4,7 @@
 #define AEGIS_MAIN_H
 
 #include "IInitializable.h" 
+#include "GameConfig.h"
 
 class OgreWrapper;
 
@@ -16,6 +17,8 @@ private:
     void gameLoop();
     void convertObjectToLua();
     void free();
+    GameConfig* searchConfig();
+    std::string searchFile(std::string path, std::string file);
 
 public:
     AegisMain();

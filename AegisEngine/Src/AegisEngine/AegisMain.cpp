@@ -1,6 +1,6 @@
 #include "AegisMain.h"
 
-//COMPONENTS
+// COMPONENTS
 #include "AnimationComponent.h"
 #include "CameraComponent.h"
 #include "LightComponent.h"
@@ -9,7 +9,7 @@
 #include "TransformComponent.h"
 #include "SoundEmitterComponent.h"
 
-//MANAGERS
+// MANAGERS
 #include "OgreWrapper.h"
 #include "InputManager.h"
 #include "DebugManager.h"
@@ -18,7 +18,7 @@
 #include "PhysicsMain.h"
 #include "SoundSystem.h"
 
-//COSAS
+// COSAS
 #include "Scene.h"
 #include "GameLoopData.h"
 #include "LuaMaths.h"
@@ -26,7 +26,10 @@
 #include "Entity.h"
 #include "Quaternion.h"
 
-AegisMain::AegisMain() : IInitializable() {
+#include "dirent.h"
+
+AegisMain::AegisMain() : IInitializable()
+{
 	exit = (false);
 }
 
@@ -36,9 +39,14 @@ AegisMain::AegisMain() : IInitializable() {
 /// <returns></returns>
 bool AegisMain::init()
 {
+
+	GameConfig *config = searchConfig();
+	if (config == nullptr)
+		return false;
+
 	ogreWrap = new OgreWrapper();
 	ogreWrap->init();
-	//Audio()->tryCreateInstance();
+	// Audio()->tryCreateInstance();
 	SoundSystem::tryCreateInstance();
 	PhysicsSystem::tryCreateInstance(ogreWrap->getSceneManager());
 	InputSystem::tryCreateInstance();
@@ -55,10 +63,12 @@ bool AegisMain::init()
 	std::cout << '\n';
 
 	gameLoop();
+	delete config;
 	return true;
 }
 
-AegisMain::~AegisMain() {
+AegisMain::~AegisMain()
+{
 	free();
 }
 
@@ -75,19 +85,108 @@ void AegisMain::free()
 	LuaManager::tryDeleteInstance();
 }
 
-void AegisMain::gameLoop() {
-	uint32_t frameTimeMS = (uint32_t)floor((1 / TARGET_FRAME_RATE) * 1000);
+GameConfig *AegisMain::searchConfig()
+{
+	std::string pathToConfig = searchFile("./", "config.txt");
+	if (pathToConfig == "")
+	{
+		Debug()->log("No config file found\n");
+		return nullptr;
+	}
 
+	// Open file
+	std::ifstream file(pathToConfig);
+	if (!file.is_open())
+	{
+		Debug()->log("Error opening config file\n");
+		return nullptr;
+	}
+
+	// Read file line by line
+	std::string line;
+
+	GameConfig *config = new GameConfig();
+	while (std::getline(file, line))
+	{
+		// Split line by '='
+		std::stringstream ss(line);
+		std::string key;
+		std::string value;
+		std::getline(ss, key, '=');
+		std::getline(ss, value);
+
+		//Trim end space
+		key.erase(std::remove(key.begin(), key.end(), ' '), key.end());
+
+		// Set config value
+		if (key == "scripts")
+			config->scriptPath = value;
+		else if (key == "resources")
+			config->resourcesCfgPath = value;
+		else if (key == "sounds")
+			config->soundsPath = value;
+		else
+		{
+		}
+	}
+
+	return config;
+}
+
+std::string AegisMain::searchFile(std::string path, std::string file)
+{
+	// Using dirent, search file in path and subpaths recursively. If it exists return the path, if not return empty string.
+	DIR *dir;
+	struct dirent *ent;
+	std::string pathString = path;
+	std::string fileString = file;
+	std::string fullPath = "";
+
+	dir = opendir(pathString.c_str());
+	if (dir == NULL)
+	{
+		Debug()->log("Error al abrir el directorio");
+		return "";
+	}
+
+	while ((ent = readdir(dir)) != nullptr)
+	{
+		if (ent->d_type == DT_DIR)
+		{
+			if (strcmp(ent->d_name, ".") != 0 && strcmp(ent->d_name, "..") != 0)
+			{
+				fullPath = searchFile((pathString + "/" + ent->d_name), fileString);
+				if (fullPath != "")
+				{
+					closedir(dir);
+					return fullPath;
+				}
+			}
+		}
+		else if (strcmp(ent->d_name, fileString.c_str()) == 0)
+		{
+			closedir(dir);
+			return (pathString + "/" + fileString);
+		}
+	}
+	closedir(dir);
+
+	return "";
+}
+
+void AegisMain::gameLoop()
+{
+	uint32_t frameTimeMS = (uint32_t)floor((1 / TARGET_FRAME_RATE) * 1000);
 
 	while (!exit)
 	{
 		SDL_Event eventHandler;
-		//Audio()->playMusic("clin"); //Esto hay q quitarlo
+		// Audio()->playMusic("clin"); //Esto hay q quitarlo
 
-		//SDL_EnableKeyRepeat(0, 0);
+		// SDL_EnableKeyRepeat(0, 0);
 		while (!exit)
 		{
-			//Tiempo al inicio del frame
+			// Tiempo al inicio del frame
 			GameTime()->setFrameStartTime(SDL_GetTicks());
 			Input()->updateState();
 
@@ -103,11 +202,11 @@ void AegisMain::gameLoop() {
 				case SDL_KEYDOWN:
 					if (key == SDLK_ESCAPE)
 						exit = true;
-					//std::cout << "KeyDown (" << eventHandler.type << "): ";
+					// std::cout << "KeyDown (" << eventHandler.type << "): ";
 					Input()->onKeyDown(key);
 					break;
 				case SDL_KEYUP:
-					//std::cout << "KeyUp (" << eventHandler.type << "): ";
+					// std::cout << "KeyUp (" << eventHandler.type << "): ";
 					Input()->onKeyUp(key);
 					break;
 				case SDL_MOUSEBUTTONDOWN:
@@ -120,12 +219,12 @@ void AegisMain::gameLoop() {
 					Input()->setMouseMotion(Vector2(eventHandler.motion.xrel, eventHandler.motion.yrel));
 					break;
 				default:
-					//std::cout << "Default (" << eventHandler.type << ")\n";
+					// std::cout << "Default (" << eventHandler.type << ")\n";
 					break;
 				}
 			}
 
-			UIs()->update(GameTime()->getDeltaTime()); //boton
+			UIs()->update(GameTime()->getDeltaTime()); // boton
 
 			SceneMngr()->updateCurrentScene(GameTime()->getDeltaTime());
 			SceneMngr()->preRenderScene();
@@ -146,14 +245,14 @@ void AegisMain::convertObjectToLua()
 {
 	auto state = LuaMngr()->getState();
 
-	//MANAGERS
+	// MANAGERS
 	Scene::ConvertToLua(state);
 	InputSystem::ConvertToLua(state);
 	SceneManager::ConvertToLua(state);
 	UISystem::ConvertToLua(state);
 	Entity::ConvertToLua(state);
 
-	//COMPONENTS
+	// COMPONENTS
 	Component::ConvertToLua(state);
 	AegisComponent::ConvertToLua(state);
 	RendererComponent::ConvertToLua(state);
@@ -164,7 +263,7 @@ void AegisMain::convertObjectToLua()
 	SoundEmitterComponent::ConvertToLua(state);
 	TransformComponent::ConvertToLua(state);
 
-	//UTILS
+	// UTILS
 	Vector2::ConvertToLua(state);
 	Vector3::ConvertToLua(state);
 	Vector4::ConvertToLua(state);

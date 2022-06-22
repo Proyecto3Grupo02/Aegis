@@ -16,6 +16,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AegisEngine\AegisMain.h" />
+    <ClInclude Include="..\..\Src\AegisEngine\GameConfig.h" />
     <ClInclude Include="..\..\Src\checkML.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

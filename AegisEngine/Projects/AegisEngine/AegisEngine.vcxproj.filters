@@ -29,5 +29,8 @@
     <ClInclude Include="..\..\Src\checkML.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\AegisEngine\GameConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

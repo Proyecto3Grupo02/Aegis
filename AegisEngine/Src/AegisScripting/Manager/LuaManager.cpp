@@ -5,7 +5,7 @@ LuaManager::LuaManager()
 	state = luaL_newstate();
 	empty = luabridge::LuaRef(state);
 	luaL_openlibs(state);
-	setLuaPath(state, "../Assets/LuaScripts");
+	setLuaPath(state, "../Resources/Scripts");
 }
 
 LuaManager::~LuaManager() {
@@ -14,7 +14,7 @@ LuaManager::~LuaManager() {
 
 void LuaManager::execute(const char* filename) {
 	// ESTO ES TEMPORAL
-	std::string name = ".\\..\\Assets\\LuaScripts\\";
+	std::string name = ".\\..\\Resources\\Scripts\\";
 	name.append(filename);
 
 	// Load the program; this supports both source code and bytecode files.
