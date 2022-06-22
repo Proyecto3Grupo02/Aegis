@@ -44,7 +44,8 @@ bool OgreWrapper::render() {
 
 
 OgreWrapper::~OgreWrapper() {
-	delete mCamera;
+	if (mCamera)
+		delete mCamera;
 	if (render_)
 		render_->destroy();
 	if (mSceneMgr)

@@ -14,21 +14,18 @@ SceneManager::SceneManager(OgreWrapper* ogreWrap)
 		return;
 	}
 
-	//currentScene = new Scene(ogreWrapper);
-	//currentScene->init();
+	currentScene = new Scene(ogreWrapper);
 }
 
 SceneManager::~SceneManager() {
-	delete currentScene;
+	if (currentScene)
+		delete currentScene;
 	currentScene = nullptr;
 }
 
 void SceneManager::loadScene(luabridge::LuaRef scene)
 {
-	currentScene = new Scene(ogreWrapper);
-	currentScene->init();
-	//currentScene->free();
-	//currentScene->init();
+	currentScene->free();
 	exportToLua(SceneMngr()->getCurrentScene(), "currentScene");
 
 	luabridge::LuaRef luaUtils = getGlobal(scene.state(), "utils");
