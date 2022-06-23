@@ -1,0 +1,242 @@
+
+material red 
+{
+	technique 
+	{
+		pass 
+		{
+			diffuse 1.0 0.0 0.0
+			ambient 1.0 0.0 0.0
+		}
+	}
+}
+
+material LagoMat {
+    receive_shadows on
+    technique {
+        pass {
+            diffuse 0.8 0.8 0.8 1.0
+			ambient 0.8 0.8 0.8 1.0
+            specular 0.512 0.512 0.512 1.0 64.0
+            alpha_to_coverage off
+            colour_write on
+            depth_check on
+            depth_func less_equal
+            illumination_stage per_light
+            light_clip_planes off
+            light_scissor off
+            normalise_normals off
+            polygon_mode solid
+	    	scene_blend alpha_blend	
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+
+material aegis
+{
+	technique
+	{
+		pass
+		{
+			diffuse 1.0 1.0 1.0
+			texture_unit
+			{
+				tex_coord_set 0
+				texture aegis.png
+				tex_address_mode wrap
+			}
+		}
+	}
+}
+
+material VertexColor
+{
+	technique
+	{
+		pass
+		{
+			//vertex_colour_source true
+		}
+	}
+}
+
+material blue // nombre
+{
+	technique // al menos una
+	{
+		pass // al menos uno
+		{
+			ambient 0.616687 0.90461 1 0.7
+			diffuse 0.616687 0.90461 1 0.7
+			specular 1 1 1 1 20
+			depth_write off
+			scene_blend alpha_blend	
+		}
+	}
+}
+
+material yellow // nombre
+{
+	technique // al menos una
+	{
+		pass // al menos uno
+		{
+			diffuse 1.0 1.0 0.0
+			ambient 1.0 1.0 0.0
+		}
+	}
+}
+
+material green // nombre
+{
+	technique // al menos una
+	{
+		pass // al menos uno
+		{
+			diffuse 1.0 0.0 0.0 
+			ambient 0.0 1.0 0.0
+		}
+	}
+}
+
+material mountain // nombre
+{
+	technique // al menos una
+	{
+		pass // al menos uno
+		{
+			diffuse 0.63 0.5 0.38
+			ambient 0.63 0.5 0.38
+		}
+	}
+}
+
+material mountain2 // nombre
+{
+	technique // al menos una
+	{
+		pass // al menos uno
+		{
+			diffuse 0.42 0.23 0.16
+			ambient 0.42 0.23 0.16
+		}
+	}
+}
+
+
+material grass // nombre
+{
+	technique // al menos una
+	{
+		pass // al menos uno
+		{
+			diffuse 0.5 0.5 0.5 1.0
+			alpha_rejection greater 150
+			ambient 0.5 0.5 0.5
+			
+			//diffuse vertexcolour
+
+			texture_unit
+			{
+				texture hierba.jpg
+				colour_op modulate
+			}
+		}
+	}
+}
+
+material avestruz // nombre
+{
+	technique // al menos una
+	{
+		pass // al menos uno
+		{
+			
+			diffuse 0.5 0.5 0.5 
+			ambient 0.5 0.5 0.5
+			
+			texture_unit
+			{
+				texture avestruz.jpg
+				colour_op modulate
+			}
+		}
+	}
+}
+
+material pez // nombre
+{
+	technique // al menos una
+	{
+		pass // al menos uno
+		{
+			diffuse 0.3 0.3 0.3
+			ambient 0.3 0.3 0.3
+		}
+	}
+}
+
+material playerMat // nombre
+{
+	technique // al menos una
+	{
+		pass // al menos uno
+		{
+			diffuse 1.0 1.0 0.0
+			ambient 1.0 1.0 0.0
+		}
+	}
+}
+material Material.001 // nombre
+{
+	technique // al menos una
+	{
+		pass // al menos uno
+		{
+			diffuse 1.0 1.0 0.0
+			ambient 1.0 1.0 0.0
+		}
+	}
+}
+
+// UI materials
+
+material home_button_material
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.5 0.5 0.5 1
+			ambient 0.5 0.5 0.5 1
+			scene_blend alpha_blend
+			texture_unit
+			{
+				texture home_button.png
+				colour_op modulate
+			}
+		}
+	}
+}
+
+material controles_material
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.5 0.5 0.5 1
+			ambient 0.5 0.5 0.5 1
+			scene_blend alpha_blend
+			texture_unit
+			{
+				texture controles.jpg
+				colour_op modulate
+			}
+		}
+	}
+}

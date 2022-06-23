@@ -1,0 +1,7 @@
+scripts = "LuaScripts",
+--materials = "Materials",
+--textures = "Textures",
+--meshes = "Meshes", 
+--fonts = "Fonts",
+sounds = "Audios//sonidos",
+resources = "resources.cfg",
