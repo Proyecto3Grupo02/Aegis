@@ -234,6 +234,13 @@ funcs.ParseScene = function(scene)
 	entities = {}
 end;
 
+funcs.CollectGarbage = function (minGarbage)
+	if minGarbage == nil or collectgarbage("count") > (minGarbage * 1000) then
+		collectgarbage("collect")
+		print("Garbage collected");
+	end;
+end;
+
 funcs.ParseUI = function (object)
 	local uiO = UISystem:CreateUIElem(object.data);
 	local uiData = object.data.uiData;

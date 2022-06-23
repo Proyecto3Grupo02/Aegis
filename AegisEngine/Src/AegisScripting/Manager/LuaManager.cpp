@@ -1,4 +1,5 @@
 #include "LuaManager.h"
+#include "LuaManager.h"
 
 LuaManager::LuaManager()
 {
@@ -59,6 +60,12 @@ std::string LuaManager::parseString(luabridge::LuaRef ref, std::string defaultSt
 bool LuaManager::parseBool(luabridge::LuaRef ref, bool defaultBool)
 {
 	return ref.isNil() ? defaultBool : ref.cast<bool>();
+}
+
+void LuaManager::clearGarbage()
+{
+	luabridge::LuaRef luaUtils = luabridge::getGlobal(state, "utils");
+	luaUtils["CollectGarbage"](MAX_GARBAGE_ALLOWED_MB);
 }
 
 void LuaManager::registerFunction(lua_CFunction function, const char* functionName) {

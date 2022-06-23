@@ -216,6 +216,9 @@ void AegisMain::gameLoop()
 		// SDL_EnableKeyRepeat(0, 0);
 		while (!exit)
 		{
+			// Checks lua garbage and collects it if a threshold is reached
+			LuaManager::getInstance()->clearGarbage();
+			
 			// Tiempo al inicio del frame
 			GameTime->setFrameStartTime(SDL_GetTicks());
 			Input->updateState();

@@ -17,6 +17,8 @@
 template <typename T>
 extern void exportToLua(T item, const char* name);
 
+static const int MAX_GARBAGE_ALLOWED_MB = 5;
+
 class LuaManager : public Singleton<LuaManager> {
 public:
 	LuaManager();
@@ -34,6 +36,7 @@ public:
 
 	//if nil, it returns false
 	bool parseBool(luabridge::LuaRef ref, bool defaultBool = false);
+	void clearGarbage();
 private:
 	lua_State* state = nullptr;
 	luabridge::LuaRef empty = luabridge::LuaRef(state);
