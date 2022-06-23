@@ -1,6 +1,6 @@
 --Example of scene, it's just a table with list of entities
 
-local NAME = "TerrainScene";
+local NAME = "DebugScene";
 local scene = {
 -- camera and light
 		{
@@ -114,20 +114,20 @@ local scene = {
 	},
 
 -- spawner
-	-- {
-	-- 	type = "Entity",
-	-- 	name = "Spawner",
-	-- 	components = {	
-	-- 		{
-	-- 			type = "Spawner",
-	-- 			data = 
-	-- 			{
-	-- 				bait = "@Anzuelo",
-	-- 				score = "@ScoreManager.UIScoreManager"
-	-- 			}
-	-- 		}
-	-- 	}
-	-- },
+	{
+		type = "Entity",
+		name = "Spawner",
+		components = {	
+			{
+				type = "Spawner",
+				data = 
+				{
+					bait = "@Anzuelo",
+					score = "@ScoreManager.UIScoreManager"
+				}
+			}
+		}
+	},
 -- terrain
 		{
 			type = "Entity",
@@ -146,17 +146,17 @@ local scene = {
 		},
 		{
 			type = "Entity",
-			name = "Agua",
+			name = "Agua2",
 			position = { y = -50 },
-			scale = { x = 50, y = 50, z = 50},
+			scale = { x = 70, y = 60, z = 50},
 			components = {
 				{
 					type = "Renderer",
 					data = {
 						mesh = "Agua.mesh",
-						material= "blue"
+						material= "red"
 					}
-				}
+				},
 			}
 		},
 		{
@@ -289,11 +289,9 @@ local scene = {
 				width = 0.1,
 				height = 0.1,
 				visible = true,
-				uiData = { id = 1, text = "@scoreText" },
-				callback = function(uiData)
-					print("Button was clicked in LUA: " .. uiData.id .. " times");
-					uiData.id = uiData.id + 1;
-					uiData.text:SetVisible(false);
+				callback = function()
+					local testScene = require "TerrainScene";
+					SceneManager:LoadScene(testScene);
 				end 
 			},
 	},

@@ -100,7 +100,7 @@ public:
 	/// </summary>
 	/// <param name="entity"></param>
 	void addEntity(Entity* entity);
-	void instantiatePrefab(luabridge::LuaRef prefab);
+	Entity* instantiatePrefab(luabridge::LuaRef prefab);
 	void addPhysicsEntity(RigidbodyComponent* physicsEntity);
 
 	/// <summary>

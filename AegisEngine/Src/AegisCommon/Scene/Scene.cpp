@@ -81,10 +81,10 @@ void Scene::addEntity(Entity* entity)
 	entity->setIterator(--entities->end());
 }
 
-void Scene::instantiatePrefab(luabridge::LuaRef prefab)
+Entity* Scene::instantiatePrefab(luabridge::LuaRef prefab)
 {
 	luabridge::LuaRef luaUtils = getGlobal(prefab.state(), "utils");
-	luaUtils["ParseEntity"](prefab);
+	return luaUtils["ParseEntity"](prefab);
 }
 
 void Scene::addPhysicsEntity(RigidbodyComponent* physicsEntity)
