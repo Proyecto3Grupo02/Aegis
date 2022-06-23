@@ -30,15 +30,14 @@ void TransformComponent::setParent(Entity* ent)
 	parentNode = ent == nullptr ? root : ent->getNode();
 	parentEntity = ent;
 
-	if (oldParentEntity != ent && oldParentEntity != nullptr)
-	{
+	if (oldParentEntity == ent)
+		return;
+
+	if (oldParentEntity != nullptr)
 		oldParentEntity->getTransform()->removeChild(getEntity());
-	}
 
 	if (parentEntity != nullptr)
-	{
 		parentEntity->getTransform()->addChild(this->getEntity());
-	}
 
 	oldParent->removeChild(mNode);
 	parentNode->addChild(mNode);
