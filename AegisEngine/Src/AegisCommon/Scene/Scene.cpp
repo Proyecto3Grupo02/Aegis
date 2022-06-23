@@ -35,7 +35,7 @@ Scene::~Scene() {
 }
 
 void Scene::free()
-{		
+{
 	for (Entity* entity : *entities) {
 		delete entity;
 		entity = nullptr;
@@ -104,18 +104,14 @@ void Scene::removePhysicsEntity(std::list<RigidbodyComponent*>::iterator physics
 
 void Scene::fixedUpdate(float dt) {
 	accumulator += dt;
-	uint16_t remainingSteps = MAX_PHYSICS_STEP_PER_FRAME;
 
-	while (accumulator >= PHYSICS_STEP && remainingSteps > 0) {
+	if (accumulator >= PHYSICS_STEP) {
 		for (RigidbodyComponent* rb : *physicsEntities)
 			rb->getEntity()->fixedUpdate();
 
-		float timeBeforeUpdate = SDL_GetTicks();
-		Physics()->update(dt, PHYSICS_STEP, 1);
+		PhysicsSystem::getInstance()->update(dt, PHYSICS_STEP, MAX_PHYSICS_STEP_PER_FRAME);
 
-		dt = (SDL_GetTicks() - timeBeforeUpdate) / 1000.0f;
 		accumulator -= PHYSICS_STEP;
-		remainingSteps--;
 	}
 
 	syncTransforms();

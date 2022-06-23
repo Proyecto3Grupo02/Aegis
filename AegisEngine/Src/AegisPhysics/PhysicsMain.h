@@ -46,7 +46,7 @@ public:
 	PhysicsSystem(Ogre::SceneManager* mScene);
 	~PhysicsSystem();
 	btDiscreteDynamicsWorld* dynamicsWorld;
-	void update(float deltaTime, float timeStep, int maxSteps = 1);
+	void update(float timeStep, float fixedTimeStep, int maxSteps = 1);
 	void remove();
 	void removeRigidbody(btCollisionObject* rb);
 	btTransform parseToBulletTransform(Vector3 pos, Vector3 rot);
