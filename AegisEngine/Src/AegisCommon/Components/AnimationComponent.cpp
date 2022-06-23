@@ -6,7 +6,7 @@ AnimationComponent::AnimationComponent(Entity* _ent, LuaRef args) : AegisCompone
 {
 	this->data = args;
 	entTransform = _ent->getTransform();
-	animation.loop = LuaMngr()->parseBool(args["loop"]);
+	animation.loop = LuaMngr->parseBool(args["loop"]);
 
 	LuaRef keyframes = args["keyframes"];
 	if (!keyframes.isNil())
@@ -21,9 +21,9 @@ Vector3 ParseVector3(LuaRef ref, int defaultValue)
 	if (ref.isNil())
 		return Vector3(defaultValue, defaultValue, defaultValue);
 
-	float x = LuaMngr()->parseFloat(ref["x"], defaultValue);
-	float y = LuaMngr()->parseFloat(ref["y"], defaultValue);
-	float z = LuaMngr()->parseFloat(ref["z"], defaultValue);
+	float x = LuaMngr->parseFloat(ref["x"], defaultValue);
+	float y = LuaMngr->parseFloat(ref["y"], defaultValue);
+	float z = LuaMngr->parseFloat(ref["z"], defaultValue);
 
 	return Vector3(x, y, z);
 }
@@ -46,7 +46,7 @@ void AnimationComponent::readKeyframes(LuaRef frames)
 		if (!frame["scale"].isNil())
 			currentFrame.scale = ParseVector3(frame["scale"], 1);
 		if (!frame["time"].isNil())
-			currentFrame.time = LuaMngr()->parseFloat(frame["time"]);
+			currentFrame.time = LuaMngr->parseFloat(frame["time"]);
 		else
 			std::cerr << "No time data given for this keyFrame, this can lead to undefined behaviour\n";
 

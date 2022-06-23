@@ -146,7 +146,8 @@ local scene = {
 					type = "DestroyTest",
 					data =
 					{
-						child = "@Player"
+						child = "@Agua",
+						callback = false
 					}
 				}
 			}
@@ -162,6 +163,29 @@ local scene = {
 					data = {
 						mesh = "Agua.mesh",
 						material= "blue"
+					}
+				},
+				{
+					type = "DestroyTest",
+					data =
+					{
+						child = "@Agua2",
+						callback = true
+					}
+				}
+			}
+		},
+		{
+			type = "Entity",
+			name = "Agua2",
+			position = { y = -50 },
+			scale = { x = 70, y = 60, z = 50},
+			components = {
+				{
+					type = "Renderer",
+					data = {
+						mesh = "Agua.mesh",
+						material= "red"
 					}
 				},
 			}

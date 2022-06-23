@@ -19,10 +19,10 @@ CameraComponent::CameraComponent(Entity* ent, AegisCamera* cam) : AegisComponent
 CameraComponent::~CameraComponent()
 {
 	//delete mCamera_;
-	if (mCamera_ != nullptr) {
-		mCamera_->free();
-		mCamera_ = nullptr;
-	}
+	//if (mCamera_ != nullptr) {
+	//	mCamera_->free();
+	//	mCamera_ = nullptr;
+	//}
 }
 
 Vector3 CameraComponent::worldToScreen(const Vector3& worldPoint)

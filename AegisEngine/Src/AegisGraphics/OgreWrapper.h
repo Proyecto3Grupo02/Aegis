@@ -4,11 +4,12 @@
 
 #include <OgreRoot.h>
 #include <SDL.h>
+#include "Singleton.h"
 
 class AegisCamera;
 class WindowManager;
 
-class OgreWrapper
+class OgreWrapper : public Singleton<OgreWrapper>
 {
 private:
 	Ogre::Root* mRoot = nullptr;
@@ -29,14 +30,14 @@ private:
 
 	void createWindowNative();
 	AegisCamera* createCamera(Ogre::SceneNode* node = nullptr);
-
+protected:
+	bool init(std::string resourcesPath);
 public:
-	OgreWrapper();
+	OgreWrapper(std::string pathToResourcesCfg);
 	AegisCamera* getCamera();
 	void handleEvent(SDL_Event& evt);
 	bool render();
 	virtual ~OgreWrapper();
-	bool init();
 	Ogre::SceneNode* getRootNode();
 
 	inline SDL_Renderer* getRenderer()const { return renderer_; }

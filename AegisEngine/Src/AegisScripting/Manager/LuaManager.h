@@ -21,11 +21,11 @@ class LuaManager : public Singleton<LuaManager> {
 public:
 	LuaManager();
 	virtual ~LuaManager();
-	void execute(const char* filename);
+	bool execute(const char* filename);
 	void printError(lua_State* state);
 	void registerFunction(lua_CFunction function, const char* functionName);
 	lua_State* getState();
-	int setLuaPath(lua_State* L, const char* path);
+	int addPath(const char* path);
 	luabridge::LuaRef getSharedEmptyLuaRef();
 	luabridge::LuaRef getNewEmptyTable();
 	
@@ -38,9 +38,4 @@ private:
 	lua_State* state = nullptr;
 	luabridge::LuaRef empty = luabridge::LuaRef(state);
 };
-
-inline LuaManager* LuaMngr()
-{
-	return LuaManager::getInstance();
-}
 #endif

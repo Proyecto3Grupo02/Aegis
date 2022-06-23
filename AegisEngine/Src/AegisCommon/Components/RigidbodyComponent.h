@@ -21,7 +21,8 @@ public:
 	virtual void update(float deltaTime) override {};
 	virtual void lateUpdate(float deltaTime) override;
 	virtual void fixedUpdate() override;
-	void syncToTransform();
+	void syncTransformToRigidbody();
+	void syncRigidbodyToTransform();
 	void setIterator(std::list<RigidbodyComponent*>::iterator physicsEntityIt);
 
 	//GETS-------------------------------------------

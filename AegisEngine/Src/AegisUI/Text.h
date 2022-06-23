@@ -3,7 +3,7 @@
 #define TEXT_H
 
 #include "UIObject.h"
-#include "InputManager.h"
+#include "InputSystem.h"
 #include "LuaManager.h"
 
 namespace Ogre {

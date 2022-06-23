@@ -10,11 +10,22 @@
 #include "AegisCamera.h"
 
 #include "WindowManager.h"
+#include <iostream>
 
-OgreWrapper::OgreWrapper() : mRoot(0),
+OgreWrapper::OgreWrapper(std::string pathToResourcesCfg) : mRoot(0),
 mResourcesCfg(Ogre::BLANKSTRING),
 mPluginsCfg(Ogre::BLANKSTRING)
 {
+	try
+	{
+		if (!init(pathToResourcesCfg))
+			SetInitializationFailed();
+	}
+	catch (std::exception e)
+	{
+		std::cout << e.what();
+		SetInitializationFailed();
+	}
 }
 
 AegisCamera* OgreWrapper::getCamera()
@@ -33,12 +44,18 @@ bool OgreWrapper::render() {
 
 
 OgreWrapper::~OgreWrapper() {
-    delete mCamera; 
-	render_->destroy();
-	mSceneMgr->clearScene();
-	delete mRoot;
-	delete lm;
-	delete windowMan; //
+	if (mCamera)
+		delete mCamera;
+	if (render_)
+		render_->destroy();
+	if (mSceneMgr)
+		mSceneMgr->clearScene();
+	if (mRoot)
+		delete mRoot;
+	if (lm)
+		delete lm;
+	if (windowMan)
+		delete windowMan; //
 
 	mCamera = nullptr;
 	render_ = nullptr;
@@ -48,18 +65,18 @@ OgreWrapper::~OgreWrapper() {
 	windowMan = nullptr;
 }
 
-bool OgreWrapper::init() {
+bool OgreWrapper::init(std::string resourcesPath) {
 	//files that contains the resources that ogre will use and the plugins used, specifically, Gl and D3D11 are
 //added in order to have a render winow
 
-	mResourcesCfg = "resources.cfg";
+	mResourcesCfg = resourcesPath;
 	mPluginsCfg = "plugins.cfg";
 
 	lm = new Ogre::LogManager();
 	bool writeInConsole = false;
-	#if defined _DEBUG
-		writeInConsole = true;
-	#endif
+#if defined _DEBUG
+	writeInConsole = true;
+#endif
 	lm->createLog("./Logs/AegisOgreLog.txt", true, writeInConsole, false);
 
 	mRoot = new Ogre::Root(mPluginsCfg);
@@ -109,7 +126,7 @@ AegisCamera* OgreWrapper::createCamera(Ogre::SceneNode* node)
 	auto mCamera = new AegisCamera("MainCamera", ogreCamNode); ///-------------------------------------------------------
 	auto ogreCam = mCamera->getCamera();
 	Ogre::Viewport* vp = render_->addViewport(ogreCam);
-	
+
 	ogreCamNode->setPosition(0, 0, 10);
 	ogreCamNode->lookAt(Ogre::Vector3(0, 0, -300), Ogre::Node::TS_WORLD);
 	ogreCam->setNearClipDistance(1);
@@ -144,7 +161,7 @@ void OgreWrapper::createWindowNative()
 	Uint32 flags = SDL_WINDOW_RESIZABLE;
 	if (!SDL_WasInit(SDL_INIT_VIDEO)) SDL_InitSubSystem(SDL_INIT_VIDEO);
 
-	
+
 	windowMan = new WindowManager("WindowManager", 1280, 720, false, flags);
 	native = windowMan->getWindow();
 
@@ -166,6 +183,6 @@ void OgreWrapper::createWindowNative()
 	// assign the NSWindow pointer to the parentWindowHandle parameter
 	params.insert(std::make_pair("parentWindowHandle", winHandle));
 
-	render_ = mRoot->createRenderWindow("myWindowTitle", 1920,1080,false, &params);
-	
+	render_ = mRoot->createRenderWindow("myWindowTitle", 1920, 1080, false, &params);
+
 }

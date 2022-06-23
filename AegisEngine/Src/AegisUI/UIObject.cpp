@@ -121,6 +121,16 @@ void UIObject::setType(luabridge::LuaRef t)
 	this->type = t;
 }
 
+luabridge::LuaRef UIObject::getData() const
+{
+	return this->data;
+}
+
+void UIObject::setData(luabridge::LuaRef data)
+{
+	this->data = data;
+}
+
 luabridge::LuaRef UIObject::getType() const
 {
 	return type;
@@ -128,13 +138,14 @@ luabridge::LuaRef UIObject::getType() const
 
 void UIObject::ConvertToLua(lua_State* state)
 {
-	getGlobalNamespace(state).
+	luabridge::getGlobalNamespace(state).
 		beginNamespace("Aegis").
 			beginNamespace("UI").
 				beginClass<UIObject>("UIObject").
 					addFunction("SetVisible", &UIObject::setVisible).
 					addFunction("GetName", &UIObject::getName).
 					addProperty("type", &UIObject::getType, &UIObject::setType).
+					addProperty("data", &UIObject::getData).
 				endClass().
 			endNamespace().
 		endNamespace();

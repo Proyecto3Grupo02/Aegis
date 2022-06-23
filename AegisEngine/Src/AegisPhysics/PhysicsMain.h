@@ -24,6 +24,8 @@ class Entity;
 class RigidbodyComponent;
 class OgreDebugDrawer;
 
+#define PhysicsSys PhysicsSystem::getInstance()
+
 namespace Ogre {
 	class SceneManager;
 }
@@ -46,7 +48,7 @@ public:
 	PhysicsSystem(Ogre::SceneManager* mScene);
 	~PhysicsSystem();
 	btDiscreteDynamicsWorld* dynamicsWorld;
-	void update(float deltaTime, float timeStep, int maxSteps = 1);
+	void update(float timeStep, float fixedTimeStep, int maxSteps = 1);
 	void remove();
 	void removeRigidbody(btCollisionObject* rb);
 	btTransform parseToBulletTransform(Vector3 pos, Vector3 rot);
@@ -67,10 +69,5 @@ public:
 
 
 };
-
-inline PhysicsSystem* Physics()
-{
-	return PhysicsSystem::getInstance();
-}
 
 #endif

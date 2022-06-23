@@ -10,43 +10,58 @@ public:
 	static bool tryDeleteInstance();
 	/// <summary>
 	/// Intenta crear una nueva instancia del singleton de tipo T, si no existe se crea y se devuelve true
-	/// Si ya existía se devuelve false. Para acceder a la instancia hay que usar Singleton<T>::getInstance
+	/// Si hay algun error en su creacion se devuelve false.  Si ya existia se devuelve true
+	/// Para acceder a la instancia hay que usar Singleton<T>::getInstance
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	/// <returns></returns>
 	template<typename ...Ts>
 	static bool tryCreateInstance(Ts... args)
 	{
-		if (Singleton<T>::mInstance_ == nullptr) {
+		if (Singleton<T>::mInstance_ == nullptr) 
 			Singleton<T>::mInstance_ = new T(args...);
-			return true;
-		}
 
-		return false;
+		return Singleton<T>::mInstance_->IsCorrectlyInitialiced();
 	};
 
+	bool IsCorrectlyInitialiced() const;
 protected:
 	static T* mInstance_;
 	Singleton();
 	virtual ~Singleton();
 
+	void SetInitializationFailed();
 private:
 	//    //if it's called here is because there are multiple instances so we have to delete
 	Singleton(Singleton const&) = delete; //copy
 	Singleton& operator=(Singleton const&) = delete; //operator =
+	bool initialicedCorrectly;
 };
 
 template<typename T>
 typename T* Singleton<T>::mInstance_ = nullptr;
 
 template<typename T>
+inline bool Singleton<T>::IsCorrectlyInitialiced() const
+{
+	return initialicedCorrectly;
+}
+
+template<typename T>
 Singleton<T>::Singleton() {
 	Singleton::mInstance_ = static_cast<T*>(this);
+	this->initialicedCorrectly = true;
 }
 
 template<typename T>
 inline Singleton<T>::~Singleton() {
 
+}
+
+template<typename T>
+inline void Singleton<T>::SetInitializationFailed()
+{
+	initialicedCorrectly = false;
 }
 
 /// <summary>

@@ -17,13 +17,12 @@ typedef	std::string cancion;
 class SoundResources
 {
 public:
-	SoundResources();
+	SoundResources(std::string soundsPath);
 	~SoundResources();
 	void parseDirectory(std::string dir);
 	std::string getSong(std::string song);
 private:
 	std::map<cancion,std::string> mapSound;
-	std::string rutaArchivo = "../Assets/Audios";
 };
 
 

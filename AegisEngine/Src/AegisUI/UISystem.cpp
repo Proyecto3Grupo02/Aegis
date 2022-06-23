@@ -7,9 +7,17 @@
 #include "Text.h"
 #include "OgreFontManager.h"
 #include <iostream>
+#include "InputSystem.h"
 
-UISystem::UISystem(Ogre::SceneManager* mScene, WindowManager* window, InputSystem* input) {
-	inputSystem = input; //boton
+#define inputSystem InputSystem::getInstance()
+
+UISystem::UISystem(Ogre::SceneManager* mScene, WindowManager* window) : overlayMng(nullptr), overlaySys(nullptr) {
+	if (mScene == nullptr)
+	{
+		SetInitializationFailed();
+		return;
+	}
+
 	windowManager = window; //boton
 
 	overlaySys = new Ogre::OverlaySystem();
@@ -27,6 +35,18 @@ UISystem::UISystem(Ogre::SceneManager* mScene, WindowManager* window, InputSyste
 }
 
 UISystem::~UISystem() {
+	free();
+
+	if (overlaySys != nullptr)
+	{
+		delete overlaySys;
+		overlaySys = nullptr;
+		//no hacer delete ni de inputSystem ni windowManager objviously
+	}
+}
+
+void UISystem::free()
+{
 	for (auto uiObject : ui_objects)
 	{
 		delete uiObject;
@@ -34,10 +54,6 @@ UISystem::~UISystem() {
 	}
 
 	ui_objects.clear();
-
-	delete overlaySys;
-	overlaySys = nullptr;
-	//no hacer delete ni de inputSystem ni windowManager objviously
 }
 
 Ogre::Overlay* UISystem::getOverlay() {
@@ -72,7 +88,7 @@ void UISystem::update(float deltaTime) {
 
 //LUA----------------------------------------------------------------------------------
 UIObject* UISystem::createUIElem(luabridge::LuaRef luaref) {
-	std::string type = LuaMngr()->parseString(luaref["type"], "nil");
+	std::string type = LuaMngr->parseString(luaref["type"], "nil");
 	UIObject* uiObject = nullptr;
 
 	if (type == "nil")
@@ -90,6 +106,7 @@ UIObject* UISystem::createUIElem(luabridge::LuaRef luaref) {
 	if (uiObject != nullptr)
 		addUIObject(uiObject);
 
+	uiObject->setData(luaref["uiData"]);
 	return uiObject;
 }
 

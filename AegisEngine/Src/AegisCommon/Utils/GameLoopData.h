@@ -29,9 +29,5 @@ public:
 	}
 };
 
-inline GameLoopData* GameTime()
-{
-	return GameLoopData::getInstance();
-}
 
 # endif

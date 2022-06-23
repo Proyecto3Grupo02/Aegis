@@ -5,14 +5,13 @@
 #include <Ogre.h>
 #include <list>
 #include "ILuaObject.h"
-#include "IInitializable.h"
 
 struct Entity;
 class SceneNode;
 class RigidbodyComponent;
 class OgreWrapper;
 
-class Scene : public ILuaObject, public IInitializable
+class Scene : public ILuaObject
 {
 private:
 	std::list<Entity*>* entities = nullptr;
@@ -67,6 +66,7 @@ private:
 	void fixedUpdate(float dt);
 
 	void syncTransforms();
+	void syncRigidbodies();
 
 	/// <summary>
 	/// Llama al update de cada entidad para que actualice respectivamente sus componentes
@@ -86,12 +86,13 @@ private:
 	/// </summary>
 	void initEntities();
 
+	void createCamera();
 public:
 	Scene(OgreWrapper* wrap);
 
 	~Scene();
-
-	bool init();
+	void free();
+	void init();
 
 	/// <summary>
 	/// Añade una entidad ya creada a la escena. No se comprueba que la entidad sea nula en ningún momento.
@@ -99,6 +100,7 @@ public:
 	/// </summary>
 	/// <param name="entity"></param>
 	void addEntity(Entity* entity);
+	void instantiatePrefab(luabridge::LuaRef prefab);
 	void addPhysicsEntity(RigidbodyComponent* physicsEntity);
 
 	/// <summary>

@@ -15,7 +15,7 @@ private:
 	Scene* currentScene = nullptr;
 	OgreWrapper* ogreWrapper = nullptr;
 	void loadScene(luabridge::LuaRef scene);
-
+	luabridge::LuaRef sceneToLoad = LuaManager::getInstance()->getSharedEmptyLuaRef();
 public:
 	SceneManager(OgreWrapper* ogreWrap);
 	~SceneManager();
@@ -23,12 +23,7 @@ public:
 	void updateCurrentScene(float deltaTime);
 	void preRenderScene();
 	Scene* getCurrentScene();
+	void refresh();
 	static void ConvertToLua(lua_State* state);
 };
-
-inline SceneManager* SceneMngr()
-{
-	return SceneManager::getInstance();
-}
-
 #endif
