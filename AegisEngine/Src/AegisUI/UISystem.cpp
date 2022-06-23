@@ -106,6 +106,7 @@ UIObject* UISystem::createUIElem(luabridge::LuaRef luaref) {
 	if (uiObject != nullptr)
 		addUIObject(uiObject);
 
+	uiObject->setData(luaref["uiData"]);
 	return uiObject;
 }
 
