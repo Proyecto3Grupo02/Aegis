@@ -32,7 +32,7 @@ SoundSystem::SoundSystem(std::string soundsPath) :
 	result = master->addGroup(soundEffects);
 	ERRCHECK(result);
 
-	Debug()->log("SOUND SYSTEM: System started");
+	DebugManager::getInstance()->log("SOUND SYSTEM: System started");
 }
 
 SoundSystem::~SoundSystem()
@@ -340,7 +340,7 @@ void SoundSystem::ERRCHECK(FMOD_RESULT result) const
 {
 	// Sacado de los apuntes de cuarto, la verdad
 	if (result != FMOD_RESULT::FMOD_OK)
-		Debug()->log(FMOD_ErrorString(result));
+		DebugManager::getInstance()->log(FMOD_ErrorString(result));
 }
 
 /// <summary>
@@ -363,7 +363,7 @@ Sound* SoundSystem::getSound(const std::string& name)
 
 	if (result != FMOD_OK) {
 		std::string errLog = name.c_str();
-		Debug()->log("SOUND MANAGER: Error playing sound %s" + errLog);
+		DebugManager::getInstance()->log("SOUND MANAGER: Error playing sound %s" + errLog);
 		ERRCHECK(result);
 		return nullptr;
 	}

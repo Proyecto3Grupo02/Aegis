@@ -83,7 +83,7 @@ void UISystem::update(float deltaTime) {
 
 //LUA----------------------------------------------------------------------------------
 UIObject* UISystem::createUIElem(luabridge::LuaRef luaref) {
-	std::string type = LuaMngr()->parseString(luaref["type"], "nil");
+	std::string type = LuaMngr->parseString(luaref["type"], "nil");
 	UIObject* uiObject = nullptr;
 
 	if (type == "nil")

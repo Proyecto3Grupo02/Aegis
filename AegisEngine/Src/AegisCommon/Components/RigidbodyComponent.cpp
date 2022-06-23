@@ -71,13 +71,13 @@ void RigidbodyComponent::addForce(Vector3 force) {
 
 Vector3 RigidbodyComponent::accelerateTo(Vector3 targetVelocity, float maxAcceleration)
 {
-	return rigidbody->accelerateTo(targetVelocity, GameTime()->getDeltaTime(), maxAcceleration);
+	return rigidbody->accelerateTo(targetVelocity, GameLoopData::getInstance()->getDeltaTime(), maxAcceleration);
 }
 
 Vector3 RigidbodyComponent::accelerateToRand()
 {
 	Vector3 vec(rand() % 10, 0, rand() % 10);
-	return rigidbody->accelerateTo(vec, GameTime()->getDeltaTime(), 100000000000);
+	return rigidbody->accelerateTo(vec, GameLoopData::getInstance()->getDeltaTime(), 100000000000);
 	rigidbody->setLinearVelocity();
 }
 
@@ -130,11 +130,11 @@ void RigidbodyComponent::setUsingGravity(bool g_) {
 RigidbodyComponent* CreateRigidbody(Entity* ent, LuaRef args) //Doesn't belong to this class
 {
 	std::string bodyName = ent->getName();
-	float mass = LuaMngr()->parseFloat(args["mass"], 1);
-	bool useGravity = LuaMngr()->parseBool(args["useGravity"], true);
-	bool isKinematic = LuaMngr()->parseBool(args["isKinematic"], false);
-	bool isTrigger = LuaMngr()->parseBool(args["isTrigger"], false);
-	float scale = LuaMngr()->parseFloat(args["scale"], 1);
+	float mass = LuaMngr->parseFloat(args["mass"], 1);
+	bool useGravity = LuaMngr->parseBool(args["useGravity"], true);
+	bool isKinematic = LuaMngr->parseBool(args["isKinematic"], false);
+	bool isTrigger = LuaMngr->parseBool(args["isTrigger"], false);
+	float scale = LuaMngr->parseFloat(args["scale"], 1);
 	return new RigidbodyComponent(ent, bodyName, mass, useGravity, isKinematic, isTrigger, scale);
 }
 

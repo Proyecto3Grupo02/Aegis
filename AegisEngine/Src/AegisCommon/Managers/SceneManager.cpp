@@ -27,7 +27,6 @@ void SceneManager::loadScene(luabridge::LuaRef scene)
 {
 	currentScene->free();
 	currentScene->init();
-	exportToLua(SceneMngr()->getCurrentScene(), "currentScene");
 
 	luabridge::LuaRef luaUtils = getGlobal(scene.state(), "utils");
 	luaUtils["ParseScene"](scene);

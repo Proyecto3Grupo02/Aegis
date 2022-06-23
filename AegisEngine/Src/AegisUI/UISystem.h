@@ -43,9 +43,4 @@ public:
 	static void ConvertToLua(lua_State* state);
 };
 
-inline UISystem* UIs()
-{
-	return UISystem::getInstance();
-}
-
 # endif

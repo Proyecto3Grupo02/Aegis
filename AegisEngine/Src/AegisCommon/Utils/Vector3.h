@@ -65,7 +65,7 @@ public:
 	static Vector3 ParseVector3(LuaRef vector3Ref, Vector3Mode mode = Vector3Mode::XYZ)
 	{
 		std::string keys = (mode == Vector3Mode::XYZ ? "xyz" : "rgb");
-		return Vector3(LuaMngr()->parseFloat(vector3Ref[keys[0]]), LuaMngr()->parseFloat(vector3Ref[keys[1]]), LuaMngr()->parseFloat(vector3Ref[keys[2]]));
+		return Vector3(LuaMngr->parseFloat(vector3Ref[keys[0]]), LuaMngr->parseFloat(vector3Ref[keys[1]]), LuaMngr->parseFloat(vector3Ref[keys[2]]));
 	}
 
 	static void ConvertToLua(lua_State* state)

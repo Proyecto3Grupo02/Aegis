@@ -25,10 +25,4 @@ public:
 	Scene* getCurrentScene();
 	static void ConvertToLua(lua_State* state);
 };
-
-inline SceneManager* SceneMngr()
-{
-	return SceneManager::getInstance();
-}
-
 #endif

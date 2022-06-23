@@ -71,10 +71,4 @@ public:
 	static void ConvertToLua(lua_State* state);
 };
 
-
-inline InputSystem* Input()
-{
-	return InputSystem::getInstance();
-}
-
 #endif //

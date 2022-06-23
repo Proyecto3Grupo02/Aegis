@@ -24,6 +24,8 @@ class Entity;
 class RigidbodyComponent;
 class OgreDebugDrawer;
 
+#define PhysicsSys PhysicsSystem::getInstance()
+
 namespace Ogre {
 	class SceneManager;
 }
@@ -67,10 +69,5 @@ public:
 
 
 };
-
-inline PhysicsSystem* Physics()
-{
-	return PhysicsSystem::getInstance();
-}
 
 #endif

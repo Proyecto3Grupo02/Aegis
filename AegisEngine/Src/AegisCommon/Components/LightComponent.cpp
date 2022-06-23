@@ -6,7 +6,7 @@ LightComponent::LightComponent(Entity* ent, LuaRef args) :
 {
 	data = args;
 
-	setLightType(LuaMngr()->parseString(args["lightType"], "PointLight"));
+	setLightType(LuaMngr->parseString(args["lightType"], "PointLight"));
 	if (!args["direction"].isNil())
 		setDirection(Vector3::ParseVector3(args["direction"]));
 	mDiffuse_ = Vector3::ParseVector3(args["color"], Vector3Mode::RGB);

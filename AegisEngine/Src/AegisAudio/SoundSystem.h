@@ -128,9 +128,4 @@ private:
 
 };
 
-inline SoundSystem* Audio()
-{
-	return SoundSystem::getInstance();
-}
-
 #endif

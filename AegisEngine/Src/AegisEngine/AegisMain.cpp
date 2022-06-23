@@ -28,8 +28,13 @@
 
 #include "dirent.h"
 
-#define ogreWrap OgreWrapper::getInstance()
+/// Macros para este archivo porque se hacia tedioso escribir getInstance todo el rato0
+#define OgreWrap OgreWrapper::getInstance()
 #define Input InputSystem::getInstance()
+#define Debug DebugManager::getInstance()
+#define GameTime GameLoopData::getInstance()
+#define UI UISystem::getInstance()
+#define SceneMngr SceneManager::getInstance()
 
 AegisMain::AegisMain() : IInitializable()
 {
@@ -52,12 +57,12 @@ bool AegisMain::init()
 	convertObjectToLua();
 	init &= OgreWrapper::tryCreateInstance(config->resourcesCfgPath);
 	init &= SoundSystem::tryCreateInstance(config->soundsPath);
-	init &= PhysicsSystem::tryCreateInstance(ogreWrap->getSceneManager());
+	init &= PhysicsSystem::tryCreateInstance(OgreWrap->getSceneManager());
 	init &= InputSystem::tryCreateInstance();
-	init &= UISystem::tryCreateInstance(ogreWrap->getSceneManager(), ogreWrap->getWindowManager());
+	init &= UISystem::tryCreateInstance(OgreWrap->getSceneManager(), OgreWrap->getWindowManager());
 	init &= GameLoopData::tryCreateInstance();
 	init &= DebugManager::tryCreateInstance();
-	init &= SceneManager::tryCreateInstance(ogreWrap);
+	init &= SceneManager::tryCreateInstance(OgreWrap);
 
 	LuaManager::getInstance()->addPath("./Resources/Scripts");
 	LuaManager::getInstance()->addPath("./Resources/Scripts/?.lua");
@@ -83,7 +88,7 @@ bool AegisMain::init()
 
 void AegisMain::startGame()
 {
-	Debug()->log("Aegis loaded\n");
+	Debug->log("Aegis loaded\n");
 	std::cout << '\n';
 
 	gameLoop();
@@ -112,7 +117,7 @@ GameConfig *AegisMain::searchConfig()
 	std::string pathToConfig = searchFile("./", "config.txt");
 	if (pathToConfig == "")
 	{
-		Debug()->log("No config file found\n");
+		Debug->log("No config file found\n");
 		return nullptr;
 	}
 	std::string configPathDir = pathToConfig.substr(0, pathToConfig.find_last_of("/") + 1);
@@ -121,7 +126,7 @@ GameConfig *AegisMain::searchConfig()
 	std::ifstream file(pathToConfig);
 	if (!file.is_open())
 	{
-		Debug()->log("Error opening config file\n");
+		Debug->log("Error opening config file\n");
 		return nullptr;
 	}
 
@@ -170,7 +175,7 @@ std::string AegisMain::searchFile(std::string path, std::string file)
 	dir = opendir(pathString.c_str());
 	if (dir == NULL)
 	{
-		Debug()->log("Error al abrir el directorio");
+		Debug->log("Error al abrir el directorio");
 		return "";
 	}
 
@@ -212,12 +217,12 @@ void AegisMain::gameLoop()
 		while (!exit)
 		{
 			// Tiempo al inicio del frame
-			GameTime()->setFrameStartTime(SDL_GetTicks());
+			GameTime->setFrameStartTime(SDL_GetTicks());
 			Input->updateState();
 
 			while (SDL_PollEvent(&eventHandler) != 0)
 			{
-				ogreWrap->handleEvent(eventHandler);
+				OgreWrap->handleEvent(eventHandler);
 
 				auto key = eventHandler.key.keysym.sym;
 				switch (eventHandler.type)
@@ -249,26 +254,26 @@ void AegisMain::gameLoop()
 				}
 			}
 
-			UIs()->update(GameTime()->getDeltaTime()); // boton
+			UI->update(GameTime->getDeltaTime()); // boton
 
-			SceneMngr()->updateCurrentScene(GameTime()->getDeltaTime());
-			SceneMngr()->preRenderScene();
+			SceneMngr->updateCurrentScene(GameTime->getDeltaTime());
+			SceneMngr->preRenderScene();
 
-			ogreWrap->render();
-			Uint32 frameTime = SDL_GetTicks() - GameTime()->getFrameStartTime();
+			OgreWrap->render();
+			Uint32 frameTime = SDL_GetTicks() - GameTime->getFrameStartTime();
 
 			if (frameTime < frameTimeMS)
 				SDL_Delay(frameTimeMS - frameTime);
 
 			// Actualiza deltaTime y timeSinceSceneStart
-			GameTime()->UpdateTimeRegistry(SDL_GetTicks());
+			GameTime->UpdateTimeRegistry(SDL_GetTicks());
 		}
 	}
 }
 
 void AegisMain::convertObjectToLua()
 {
-	auto state = LuaMngr()->getState();
+	auto state = LuaManager::getInstance()->getState();
 
 	// MANAGERS
 	Scene::ConvertToLua(state);

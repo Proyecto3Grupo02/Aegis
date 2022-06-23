@@ -38,9 +38,4 @@ private:
 	lua_State* state = nullptr;
 	luabridge::LuaRef empty = luabridge::LuaRef(state);
 };
-
-inline LuaManager* LuaMngr()
-{
-	return LuaManager::getInstance();
-}
 #endif

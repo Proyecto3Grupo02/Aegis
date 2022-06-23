@@ -26,7 +26,7 @@ void RigidBody::init() {
 RigidBody::~RigidBody()
 {
 	delete rigidBody->getCollisionShape();
-	Physics()->removeRigidbody(this->rigidBody);
+	PhysicsSys->removeRigidbody(this->rigidBody);
 	rigidBody = nullptr;
 }
 
@@ -50,7 +50,7 @@ Vector3 RigidBody::getRbPosition()
 {
 	btTransform t;
 	rigidBody->getMotionState()->getWorldTransform(t);
-	return Physics()->parseFromBulletVector(t.getOrigin());
+	return PhysicsSys->parseFromBulletVector(t.getOrigin());
 }
 
 Vector4 RigidBody::getRotation()
@@ -109,12 +109,12 @@ void RigidBody::setFreezeRotation(bool _x, bool _y, bool _z) {
 }
 
 int RigidBody::rayCast(Vector3 origin, Vector3& dest) {
-	btVector3 _origin = Physics()->parseToBulletVector(origin);
-	btVector3 _dest = Physics()->parseToBulletVector(dest);
+	btVector3 _origin = PhysicsSys->parseToBulletVector(origin);
+	btVector3 _dest = PhysicsSys->parseToBulletVector(dest);
 	btCollisionWorld::ClosestRayResultCallback RayCallback(_origin, _dest);
 
 	// Perform raycast
-	Physics()->dynamicsWorld->rayTest(_origin, _dest, RayCallback);
+	PhysicsSys->dynamicsWorld->rayTest(_origin, _dest, RayCallback);
 	if (RayCallback.hasHit()) {
 		//std::cout << "a";
 		RigidBody* rb = (RigidBody*)RayCallback.m_collisionObject->getUserPointer();
@@ -133,7 +133,7 @@ int RigidBody::rayCast(Vector3 origin, Vector3& dest) {
 
 void RigidBody::setRbPosition(Vector3 vec)
 {
-	btTransform t = Physics()->parseToBulletTransform(vec, getRotation());
+	btTransform t = PhysicsSys->parseToBulletTransform(vec, getRotation());
 	rigidBody->setWorldTransform(t);
 	rigidBody->getMotionState()->setWorldTransform(t);
 	rigidBody->setLinearVelocity({ 0, 0, 0 });
@@ -143,7 +143,7 @@ void RigidBody::setRbPosition(Vector3 vec)
 
 void RigidBody::setRbRotation(Vector4 vec)
 {
-	btTransform t = Physics()->parseToBulletTransform(getRbPosition(), vec);
+	btTransform t = PhysicsSys->parseToBulletTransform(getRbPosition(), vec);
 	rigidBody->setWorldTransform(t);
 	rigidBody->setLinearVelocity({ 0, 0, 0 });
 	rigidBody->setAngularVelocity({ 0, 0, 0 });
@@ -159,7 +159,7 @@ void RigidBody::addForce(Vector3 vec) {
 
 Vector3 RigidBody::accelerateTo(Vector3 targetVelocity, float deltaTime, float maxAcceleration)
 {
-	Vector3 deltaVelocity = targetVelocity - Physics()->parseFromBulletVector(rigidBody->getLinearVelocity());
+	Vector3 deltaVelocity = targetVelocity - PhysicsSys->parseFromBulletVector(rigidBody->getLinearVelocity());
 	Vector3 acceleration = deltaVelocity / deltaTime;
 
 	if (acceleration.magnitudeSquared() > maxAcceleration * maxAcceleration)
@@ -185,7 +185,7 @@ void RigidBody::clearForces()
 
 void RigidBody::changeGravity(Vector3 acc)
 {
-	rigidBody->setGravity(Physics()->parseToBulletVector(acc));
+	rigidBody->setGravity(PhysicsSys->parseToBulletVector(acc));
 }
 
 void RigidBody::setAngularFactor() {
