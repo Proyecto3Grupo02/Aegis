@@ -14,10 +14,11 @@ UIObject::UIObject(const std::string& n, int order_, float x_, float y_, bool vi
 
 	name = n; zOrder = order_;
 	
-	setPosition(x_, y_);
+	setPosition(x_, y_);	
 	w = h = 0;
 
 	overlay = overlayMng->create(name + std::to_string(num_ui_obj));
+	setRenderDepth(zOrder);
 	num_ui_obj++;
 	
 }
@@ -34,8 +35,8 @@ UIObject::UIObject(const std::string& n, int order, float x_, float y_, float w_
 	//The setPosition() depends on w and h, so the first method must be setDimensions
 	setDimensions(w_, h_); //dimension (1,1) = fullscreen
 	setPosition(x_, y_); //position (0,0) = top left (1,1) = bottom right	
-
 	overlay = overlayMng->create(name + std::to_string(num_ui_obj));
+	setRenderDepth(zOrder);
 	num_ui_obj++;
 }
 

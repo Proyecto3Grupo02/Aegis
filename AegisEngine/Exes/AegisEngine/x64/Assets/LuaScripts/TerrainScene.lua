@@ -288,12 +288,14 @@ local scene = {
 				y = 0,
 				width = 0.1,
 				height = 0.1,
-				visible = true,
+				visible = false,
 				uiData = { id = 1, text = "@scoreText" },
 				callback = function(uiData)
 					print("Button was clicked in LUA: " .. uiData.id .. " times");
-					uiData.id = uiData.id + 1;
-					uiData.text:SetVisible(false);
+					local menuScene = require "menu";
+					SceneManager:LoadScene(menuScene);
+					-- uiData.id = uiData.id + 1;
+					-- uiData.text:SetVisible(false);
 				end 
 			},
 	},
