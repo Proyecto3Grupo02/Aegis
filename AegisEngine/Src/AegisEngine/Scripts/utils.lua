@@ -152,9 +152,13 @@ funcs.ResolveDependencies = function(scene, entities)
 			end;
 		elseif  v.type == "UI" then
 			local uiData = entities[v.data.name].data;
+			local onlyOnce = false;
 			for p, data in pairs(v.data.uiData or {}) do
 				if  type(data) == "string" and data:sub(1, 1) == "@" then
-					print("UI: Solving dependencies for " .. v.data.name .. ":");
+					if not onlyOnce then
+						print("Solving dependencies for " .. v.data.name .. ":");
+						onlyOnce = true;
+					end;
 					resolvedCorrectly = true;
 						local dependencyData = funcs.SearchEntityOrComponent(entities, data:sub(2));
 						if dependencyData == nil then
@@ -164,15 +168,17 @@ funcs.ResolveDependencies = function(scene, entities)
 							print("* Inyecting " ..  data:sub(2) .. " into " .. v.data.type);
 							uiData[p] = dependencyData;
 						end;
-					print();
-					if resolvedCorrectly == false then
-						print("* Could not resolve dependencies for " .. v.name);
-					else
-						print("* Dependency solved correctly");
-					end;
-					print("-------------------");
 				end;
 			end;
+			if (onlyOnce) then
+			print();
+			if resolvedCorrectly == false then
+				print("* Could not resolve dependencies for " .. v.name);
+			else
+				print("* Dependency solved correctly");
+			end;
+			print("-------------------");
+		end
 		end;
 	end;
 end;
