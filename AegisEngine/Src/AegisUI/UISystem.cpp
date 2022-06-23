@@ -35,13 +35,7 @@ UISystem::UISystem(Ogre::SceneManager* mScene, WindowManager* window) : overlayM
 }
 
 UISystem::~UISystem() {
-	for (auto uiObject : ui_objects)
-	{
-		delete uiObject;
-		uiObject = nullptr;
-	}
-
-	ui_objects.clear();
+	free();
 
 	if (overlaySys != nullptr)
 	{
@@ -49,6 +43,17 @@ UISystem::~UISystem() {
 		overlaySys = nullptr;
 		//no hacer delete ni de inputSystem ni windowManager objviously
 	}
+}
+
+void UISystem::free()
+{
+	for (auto uiObject : ui_objects)
+	{
+		delete uiObject;
+		uiObject = nullptr;
+	}
+
+	ui_objects.clear();
 }
 
 Ogre::Overlay* UISystem::getOverlay() {

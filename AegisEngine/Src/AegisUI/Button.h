@@ -22,7 +22,7 @@ private:
 
 public:
 	Button(const std::string& name, int order, std::string material, float x, float y, float w, float h, bool isActive, luabridge::LuaRef call);
-	~Button();
+	virtual ~Button();
 	void update();
 	static Button* CreateButton(LuaRef args);
 	static void ConvertToLua(lua_State* state);

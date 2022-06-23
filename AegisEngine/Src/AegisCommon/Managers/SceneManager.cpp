@@ -1,8 +1,8 @@
 #include "SceneManager.h"
-#include "SceneManager.h"
 #include "Scene.h"
 #include "OgreWrapper.h"
 #include "AegisCamera.h"
+#include "UISystem.h"
 
 SceneManager::SceneManager(OgreWrapper* ogreWrap)
 {
@@ -35,6 +35,7 @@ void SceneManager::refresh()
 	{
 		currentScene->free();
 		currentScene->init();
+		UISystem::getInstance()->free();
 
 		luabridge::LuaRef luaUtils = getGlobal(sceneToLoad.state(), "utils");
 		luaUtils["ParseScene"](sceneToLoad);

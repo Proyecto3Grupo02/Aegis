@@ -33,6 +33,7 @@ private:
 public:
 	UISystem(Ogre::SceneManager* mScene, WindowManager* window);
 	~UISystem();
+	void free();
 	UIObject* createUIElem(luabridge::LuaRef luaref);
 	void deleteUIObject(const UIObject* obj_);
 	void update(float deltaTime);

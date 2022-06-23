@@ -16,6 +16,7 @@ Image::Image(const std::string& name, int order, std::string material, float x, 
 }
 
 Image::~Image() {
+	overlay->remove2D(overlayCont);
 }
 
 Image* Image::CreateImage(LuaRef args) //Doesn't belong to this class
