@@ -38,10 +38,15 @@ void RigidbodyComponent::syncTransformToRigidbody()
 	Vector3 updatedPos = rigidbody->getRbPosition();
 	auto quat = rigidbody->getRotation();
 	Ogre::Quaternion ogreQuat(quat.w, quat.x, quat.y, quat.z);
+	TransformComponent* t = transform;
 
 	// Si el transform tiene padre debe tenerse en cuenta, ya que sus coordenadas son locales (relativas a las del padre) mientras que las del rigidBody son globales
-	if (transform->hasParent()) transform->setPosition(updatedPos - transform->getParent()->getTransform()->getPosition());
-	else transform->setPosition(updatedPos);
+	while (t->hasParent())
+	{
+		updatedPos = updatedPos - t->getParent()->getTransform()->getPosition();
+		t = t->getParent()->getTransform();
+	}
+	transform->setPosition(updatedPos);
 	transform->setRotation(ogreQuat);
 }
 
@@ -53,6 +58,8 @@ void RigidbodyComponent::syncRigidbodyToTransform()
 
 	if ((rbPos - tPos).magnitudeSquared() >= 0.01f)
 		rigidbody->setRbPosition(tPos);
+
+
 }
 
 void RigidbodyComponent::setIterator(std::list<RigidbodyComponent*>::iterator physicsEntityIt)
