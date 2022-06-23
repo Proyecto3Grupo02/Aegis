@@ -40,7 +40,6 @@ funcs.CopyComponentData = function(from, to, componentName, entityName)
 -- if key in to is not in from, dont copy and print warning
     for k, v in pairs(from) do
         if to[k] == nil then
-            bool = false;   
             print("Error: " .. k .. " is not a field of " .. componentName .. ".data, " .. k .. " wasn't copied (" .. entityName ..")");
         else
             -- Intended for debug
@@ -48,6 +47,12 @@ funcs.CopyComponentData = function(from, to, componentName, entityName)
             to[k] = from[k];
         end
     end
+end
+
+funcs.CopyComponentDataForced = function(from, to)
+	for k, v in pairs(from) do
+		to[k] = from[k];
+	end
 end
 
 
@@ -204,6 +209,11 @@ funcs.ParseSceneObject = function(object)
 	elseif object.type == "UI" then
 		local uiObject = funcs.ParseUI(object);
 		entities[object.data.name] = uiObject.type;
+
+		local uiData = entities[object.data.name].data;
+		if uiData ~= nil and uiData.image ~= nil then
+		print(uiData.image) 
+		end
 	else
 		local entity = funcs.TreatSpecialCase(object);
 		if entity ~= nil then
@@ -221,10 +231,16 @@ funcs.ParseScene = function(scene)
     print("\nResolving dependencies:");
     print("-------------------");
 	funcs.ResolveDependencies(scene, entities);
+	entities = {}
 end;
 
 funcs.ParseUI = function (object)
-	return UISystem:CreateUIElem(object.data);
+	local uiO = UISystem:CreateUIElem(object.data);
+	local uiData = object.data.uiData;
+	if uiData ~= nil then
+		funcs.CopyComponentDataForced(uiData, uiO.data);
+	end
+	return uiO;
 end
 
 return funcs;

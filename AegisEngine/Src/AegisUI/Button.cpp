@@ -36,7 +36,7 @@ void Button::update() {
 		if ((mouseMotion.getX() >= esquinaInf.getX() && mouseMotion.getX() <= esquinaSup.getX()) 
 			&& mouseMotion.getY() >= esquinaInf.getY() && mouseMotion.getY() <= esquinaSup.getY()
 			&& inputSystem->isMouseButtonPressedLua(0)) {
-			std::cout << "- Button was clicked in C++\n";
+			//std::cout << "- Button was clicked in C++\n";
 
 			//PARA DEPURAR ==> CAPTURAR LA EXCEPCION PARA QUE TE DIGA DONDE FALLO EN LUA
 			#if defined _DEBUG

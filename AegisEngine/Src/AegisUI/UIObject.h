@@ -57,7 +57,6 @@ public:
 	void setName(std::string n);
 	void setType(luabridge::LuaRef t);
 	luabridge::LuaRef getData() const;
-	void setData(luabridge::LuaRef data);
 	luabridge::LuaRef getType() const;
 
 	bool getVisible() { return isVisible; };

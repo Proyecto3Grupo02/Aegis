@@ -38,6 +38,8 @@ UIObject::UIObject(const std::string& n, int order, float x_, float y_, float w_
 	overlay = overlayMng->create(name + std::to_string(num_ui_obj));
 	setRenderDepth(zOrder);
 	num_ui_obj++;
+
+	this->data = LuaManager::getInstance()->getNewEmptyTable();
 }
 
 UIObject::~UIObject() {
@@ -125,11 +127,6 @@ void UIObject::setType(luabridge::LuaRef t)
 luabridge::LuaRef UIObject::getData() const
 {
 	return this->data;
-}
-
-void UIObject::setData(luabridge::LuaRef data)
-{
-	this->data = data;
 }
 
 luabridge::LuaRef UIObject::getType() const
