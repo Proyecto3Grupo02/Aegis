@@ -14,13 +14,14 @@ LightComponent::LightComponent(Entity* ent, LuaRef args) :
 
 	setLightColor(mDiffuse_);
 	setSpecularColor(mSpecular_);
-	
-	setDataAsInnerType(this);	
+
+	setDataAsInnerType(this);
 }
 
 LightComponent::~LightComponent()
 {
-	delete mLight_;
+	if (mLight_)
+		delete mLight_;
 	mLight_ = nullptr;
 }
 

@@ -260,6 +260,7 @@ void AegisMain::gameLoop()
 			SceneMngr->preRenderScene();
 
 			OgreWrap->render();
+			SceneMngr->refresh();
 			Uint32 frameTime = SDL_GetTicks() - GameTime->getFrameStartTime();
 
 			if (frameTime < frameTimeMS)

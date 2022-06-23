@@ -2,6 +2,7 @@
 #include "SceneManager.h"
 #include "Scene.h"
 #include "OgreWrapper.h"
+#include "AegisCamera.h"
 
 SceneManager::SceneManager(OgreWrapper* ogreWrap)
 {
@@ -25,11 +26,20 @@ SceneManager::~SceneManager() {
 
 void SceneManager::loadScene(luabridge::LuaRef scene)
 {
-	currentScene->free();
-	currentScene->init();
+	this->sceneToLoad = scene;
+}
 
-	luabridge::LuaRef luaUtils = getGlobal(scene.state(), "utils");
-	luaUtils["ParseScene"](scene);
+void SceneManager::refresh()
+{
+	if (!sceneToLoad.isNil())
+	{
+		currentScene->free();
+		currentScene->init();
+
+		luabridge::LuaRef luaUtils = getGlobal(sceneToLoad.state(), "utils");
+		luaUtils["ParseScene"](sceneToLoad);
+		sceneToLoad = LuaManager::getInstance()->getSharedEmptyLuaRef();
+	}
 }
 
 void SceneManager::updateCurrentScene(float deltaTime) {

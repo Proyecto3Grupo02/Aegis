@@ -16,7 +16,7 @@ public:
 		setPointLight();
 	}
 	~AegisLight() {
-		mNode_->detachObject(mLight_);
+		mngr_->destroyLight(mLight_);
 	}
 
 	static std::string LightTypeToString(LightType mType)
