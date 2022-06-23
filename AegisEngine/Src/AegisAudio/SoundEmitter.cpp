@@ -154,14 +154,14 @@ void SoundEmitter::handleData(ComponentData* data)
 			if (ss >> volume)
 				setVolume(volume);
 			else
-				Debug()->Log("SOUND EMITTER: Wrong value for property %s", prop.first.c_str());
+				DebugManager::getInstance()->Log("SOUND EMITTER: Wrong value for property %s", prop.first.c_str());
 		}
 		else if (prop.first == "pitch") {
 			float pitch;
 			if (ss >> pitch)
 				setPitch(pitch);
 			else
-				Debug()->Log("SOUND EMITTER: Wrong value for property %s", prop.first.c_str());
+				DebugManager::getInstance()->Log("SOUND EMITTER: Wrong value for property %s", prop.first.c_str());
 		}
 		else if (prop.first == "playSound")
 		{
@@ -173,7 +173,7 @@ void SoundEmitter::handleData(ComponentData* data)
 		}
 		else
 		{
-			Debug()->Log("SOUND EMITTER: Invalid property name \"%s\"", prop.first.c_str());
+			DebugManager::getInstance()->Log("SOUND EMITTER: Invalid property name \"%s\"", prop.first.c_str());
 		}
 	}
 

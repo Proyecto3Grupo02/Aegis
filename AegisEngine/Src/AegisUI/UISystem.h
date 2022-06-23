@@ -4,7 +4,6 @@
 #define UI_SYSTEM_H
 
 #include "Singleton.h"
-#include "InputManager.h"
 #include "WindowManager.h"
 #include "LuaManager.h"
 #include <vector>
@@ -12,6 +11,7 @@
 class OgreOverlay;
 class SDL_Image; 
 class UIObject;
+class InputSystem;
 
 namespace Ogre {
 	class OverlayManager;
@@ -22,7 +22,6 @@ namespace Ogre {
 
 class UISystem : public Singleton<UISystem> {
 private:
-	InputSystem* inputSystem = nullptr; 
 	WindowManager* windowManager = nullptr;
 	Ogre::OverlayManager* overlayMng = nullptr;
 	Ogre::OverlaySystem* overlaySys = nullptr;
@@ -32,8 +31,9 @@ private:
 
 	void addUIObject(UIObject* object_);
 public:
-	UISystem(Ogre::SceneManager* mScene, WindowManager* window, InputSystem* input);
+	UISystem(Ogre::SceneManager* mScene, WindowManager* window);
 	~UISystem();
+	void free();
 	UIObject* createUIElem(luabridge::LuaRef luaref);
 	void deleteUIObject(const UIObject* obj_);
 	void update(float deltaTime);
@@ -43,10 +43,5 @@ public:
 
 	static void ConvertToLua(lua_State* state);
 };
-
-inline UISystem* UIs()
-{
-	return UISystem::getInstance();
-}
 
 # endif

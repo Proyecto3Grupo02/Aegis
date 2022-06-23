@@ -40,7 +40,8 @@ private:
 	std::string name;
 	void show();
 	void hide();
-	luabridge::LuaRef type = LuaMngr()->getSharedEmptyLuaRef();
+	luabridge::LuaRef type = LuaManager::getInstance()->getSharedEmptyLuaRef();
+	luabridge::LuaRef data = LuaManager::getInstance()->getSharedEmptyLuaRef();
 
 public:
 	UIObject(const std::string& n, int order, float x_, float y_, float w_, float h_, bool isActive = true);
@@ -55,6 +56,8 @@ public:
 	void setRenderDepth(int d); //PROFUNDIDAD
 	void setName(std::string n);
 	void setType(luabridge::LuaRef t);
+	luabridge::LuaRef getData() const;
+	void setData(luabridge::LuaRef data);
 	luabridge::LuaRef getType() const;
 
 	bool getVisible() { return isVisible; };

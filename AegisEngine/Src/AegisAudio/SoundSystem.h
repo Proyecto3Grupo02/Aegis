@@ -86,7 +86,7 @@ private:
 	Sound* getSound(const std::string& name);	// Gets a sound from a resource
 
 public:
-	SoundSystem();
+	SoundSystem(std::string soundPaths);
 	virtual ~SoundSystem();
 
 	// Setters y getters
@@ -127,10 +127,5 @@ private:
 	ListenerData* createListener( Vector3* position,  Vector4* quaternion);
 
 };
-
-inline SoundSystem* Audio()
-{
-	return SoundSystem::getInstance();
-}
 
 #endif

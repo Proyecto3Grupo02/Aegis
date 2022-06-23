@@ -20,23 +20,24 @@ Vector3 TransformComponent::getScale() const
 
 void TransformComponent::setParent(Entity* ent)
 {
+	auto mNode = getNode();
+	if (!mNode)
+		return;
+
 	auto root = mNode->getCreator()->getRootSceneNode();
 	auto oldParent = parentNode;
 	auto oldParentEntity = parentEntity;
 	parentNode = ent == nullptr ? root : ent->getNode();
 	parentEntity = ent;
-	
-	if (oldParentEntity != ent && oldParentEntity != nullptr)
-	{
+
+	if (oldParentEntity == ent)
+		return;
+
+	if (oldParentEntity != nullptr)
 		oldParentEntity->getTransform()->removeChild(getEntity());
-		oldParentEntity->removeChild(getEntity());
-	}
 
 	if (parentEntity != nullptr)
-	{
 		parentEntity->getTransform()->addChild(this->getEntity());
-		parentEntity->addChild(this->getEntity());
-	}
 
 	oldParent->removeChild(mNode);
 	parentNode->addChild(mNode);
@@ -117,34 +118,36 @@ Vector3 TransformComponent::getUp() const
 
 void TransformComponent::yaw(float degrees)
 {
-	mNode->yaw(Ogre::Degree(degrees));
-	rotation = mNode->getOrientation();
+	getNode()->yaw(Ogre::Degree(degrees));
+	rotation = getNode()->getOrientation();
 }
 
 void TransformComponent::pitch(float degrees)
 {
-	mNode->pitch(Ogre::Degree(degrees));
-	rotation = mNode->getOrientation();
+	getNode()->pitch(Ogre::Degree(degrees));
+	rotation = getNode()->getOrientation();
 }
 
 void TransformComponent::roll(float degrees)
 {
-	mNode->roll(Ogre::Degree(degrees));
-	rotation = mNode->getOrientation();
+	getNode()->roll(Ogre::Degree(degrees));
+	rotation = getNode()->getOrientation();
 }
 
 TransformComponent::~TransformComponent() {
 	/*for (Entity* child : childs)
 		delete child;*/
+	setParent(nullptr);
+	destroyChildren();
 }
 
 void TransformComponent::update(float deltaTime) {}
 
 void TransformComponent::render()
 {
-	mNode->setPosition(MathUtils::Vector3ToOgre(position));
-	mNode->setScale(MathUtils::Vector3ToOgre(scale));
-	mNode->setOrientation(rotation);
+	getNode()->setPosition(MathUtils::Vector3ToOgre(position));
+	getNode()->setScale(MathUtils::Vector3ToOgre(scale));
+	getNode()->setOrientation(rotation);
 }
 
 void TransformComponent::ConvertToLua(lua_State* state)
@@ -171,18 +174,44 @@ void TransformComponent::ConvertToLua(lua_State* state)
 
 void TransformComponent::addChild(Entity* child)
 {
-	childs.push_back(child);
+	childrenTransforms.push_back(child);
 }
 
 void TransformComponent::removeChild(Entity* child)
 {
-	childs.remove(child);
+	childrenTransforms.remove(child);
 }
 
-void TransformComponent::destroyChilds()
+void TransformComponent::detachChildren()
+{
+	for (auto c : childrenTransforms)
+		c->setParent(nullptr);
+
+	childrenTransforms.clear();
+}
+
+void TransformComponent::destroyChildren()
 {
 	//Destroys every child calling its Destroy function
-	for (Entity* child : childs)
-		child->destroy();
+	std::list<Entity*> childrenEnts;
+	for (Entity* child : childrenTransforms)
+		if (child)
+		{
+			child->destroy();
+			childrenEnts.push_back(child);
+		}
+
+	while (!childrenEnts.empty())
+	{
+		childrenEnts.back()->getTransform()->setParent(nullptr);
+		childrenEnts.pop_back();
+	}
+
+	childrenTransforms.clear();
+}
+
+Ogre::SceneNode* TransformComponent::getNode()
+{
+	return getEntity()->getNode();
 }
 

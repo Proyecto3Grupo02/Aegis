@@ -10,12 +10,13 @@ class Entity;
 
 class TransformComponent : public AegisComponent, public ILuaObject {
 public:
-	TransformComponent(Ogre::SceneNode* node, Entity* ent) : AegisComponent("Transform", ent), position(Vector3()), rotation(Ogre::Quaternion()), scale(Vector3(1.0f, 1.0f, 1.0f)), mNode(node), parentNode(node->getParentSceneNode()), parentEntity(nullptr) {
+	TransformComponent(Ogre::SceneNode* node, Entity* ent) : AegisComponent("Transform", ent), position(Vector3()), rotation(Ogre::Quaternion()), scale(Vector3(1.0f, 1.0f, 1.0f)), parentNode(node->getParentSceneNode()), parentEntity(nullptr), childrenTransforms(std::list<Entity*>()) {
 		setDataAsInnerType(this);
 		//ComponentManager::getInstance()->RegisterComponent<Transform>("Transform");
 	};
 	TransformComponent( Vector3 _pos, Ogre::Quaternion _rot, Vector3 _scale, Ogre::SceneNode* node, Entity* ent) :
-			AegisComponent("Transform", ent), position(_pos), rotation(_rot), scale(_scale), mNode(node), parentNode(node->getParentSceneNode()), parentEntity(nullptr) {
+			AegisComponent("Transform", ent), position(_pos), rotation(_rot), scale(_scale), parentNode(node->getParentSceneNode()), parentEntity(nullptr),
+		childrenTransforms(std::list<Entity*>()) {
 		setDataAsInnerType(this);
 		//ComponentManager::getInstance()->RegisterComponent<Transform>("Transform");
 	};
@@ -52,10 +53,11 @@ public:
 
 	void addChild(Entity* child);
 	void removeChild(Entity* child);
-	void destroyChilds();
+	void detachChildren();
+	void destroyChildren();
 
 protected:
-	Ogre::SceneNode* mNode = nullptr;
+	Ogre::SceneNode* getNode();
 	Vector3 position;
 	Ogre::Quaternion rotation;
 	Vector3 scale;
@@ -63,7 +65,7 @@ protected:
 	Entity* parentEntity = nullptr;
 
 private:
-	std::list<Entity*> childs;
+	std::list<Entity*> childrenTransforms;
 };
 
 #endif //TRANSFORM

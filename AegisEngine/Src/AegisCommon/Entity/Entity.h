@@ -44,7 +44,8 @@ public:
 	inline Ogre::SceneNode* getNode() { return mNode_; }
 
 	void destroyNode();
-
+	void detachChildren();
+	void removeAllComponents();
 	inline void addComponentFromLua(AegisComponent* component);
 	AegisComponent* getComponentLua(std::string componentName);
 
@@ -64,10 +65,7 @@ public:
 	void setParent(Entity* ent);
 
 	void destroy();
-	void setNodeDestroyed(bool isDestroyed) { nodeDestroyed = isDestroyed;  };
-
-	void addChild(Entity* ent) { mChildren_.push_back(ent); };
-	void removeChild(Entity* ent) { mChildren_.remove(ent); };
+	void setNodeDestroyedOrBlocked(bool isDestroyed) { nodeDestroyedOrBlocked = isDestroyed;  };
 
 	static void ConvertToLua(lua_State* state);
 
@@ -79,13 +77,11 @@ protected:
 
 	Ogre::SceneNode* mNode_ = nullptr;
 
-	std::list<Entity*> mChildren_;
-
 private:
 	std::string mName_;			//name of the entity
 	TransformComponent* transform;		//native transform
 	std::list<Entity*>::iterator entityIterator;
-	bool nodeDestroyed;
+	bool nodeDestroyedOrBlocked;
 };
 
 #endif //

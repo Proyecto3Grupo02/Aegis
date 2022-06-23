@@ -30,8 +30,5 @@ public:
     bool init();
 };
 
-inline DebugManager* Debug() {
-    return DebugManager::getInstance();
-}
 #endif
 

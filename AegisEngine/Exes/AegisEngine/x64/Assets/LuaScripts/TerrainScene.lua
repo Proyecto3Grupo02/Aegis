@@ -114,20 +114,20 @@ local scene = {
 	},
 
 -- spawner
-	{
-		type = "Entity",
-		name = "Spawner",
-		components = {	
-			{
-				type = "Spawner",
-				data = 
-				{
-					bait = "@Anzuelo",
-					score = "@ScoreManager.UIScoreManager"
-				}
-			}
-		}
-	},
+	-- {
+	-- 	type = "Entity",
+	-- 	name = "Spawner",
+	-- 	components = {	
+	-- 		{
+	-- 			type = "Spawner",
+	-- 			data = 
+	-- 			{
+	-- 				bait = "@Anzuelo",
+	-- 				score = "@ScoreManager.UIScoreManager"
+	-- 			}
+	-- 		}
+	-- 	}
+	-- },
 -- terrain
 		{
 			type = "Entity",
@@ -140,13 +140,6 @@ local scene = {
 					data = {
 						mesh = "Lago.mesh",
 						material= "mountain"
-					}
-				},
-				{
-					type = "DestroyTest",
-					data =
-					{
-						child = "@Player"
 					}
 				}
 			}
@@ -163,7 +156,7 @@ local scene = {
 						mesh = "Agua.mesh",
 						material= "blue"
 					}
-				},
+				}
 			}
 		},
 		{
@@ -273,7 +266,7 @@ local scene = {
 	data = 
 		{
 			type = "Image",--Button/Image
-			nombre = "Controles",
+			name = "Controles",
 			material = "controles_material",
 			order = 0,
 			x = 0.05,
@@ -288,7 +281,7 @@ local scene = {
 		data = 
 			{
 				type = "Button",--Button/Image
-				nombre = "HomeButton",
+				name = "HomeButton",
 				material = "home_button_material",
 				order = 0,
 				x = 1,
@@ -296,8 +289,11 @@ local scene = {
 				width = 0.1,
 				height = 0.1,
 				visible = true,
-				callback = function()
-					print("Button was clicked in LUA");
+				uiData = { id = 1, text = "@scoreText" },
+				callback = function(uiData)
+					print("Button was clicked in LUA: " .. uiData.id .. " times");
+					uiData.id = uiData.id + 1;
+					uiData.text:SetVisible(false);
 				end 
 			},
 	},
@@ -306,7 +302,7 @@ local scene = {
 		data = 
 			{
 				type = "Text",
-				nombre = "scoreText",
+				name = "scoreText",
 				order = 0,
 				x = 0.025,
 				y = 0.025,

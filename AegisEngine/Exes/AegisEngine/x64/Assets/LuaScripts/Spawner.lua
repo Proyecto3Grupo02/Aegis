@@ -8,7 +8,6 @@ function table.GetNew(entity, params)
     local funcs = component.funcs;
 	local acumulatedDT;
     local lastTime;
-	local utility = require "Utils";
     local prefabs = require "Prefabs";
     local maxFish = 6;
     data.currFish = 0;
@@ -25,7 +24,7 @@ function table.GetNew(entity, params)
             acumulatedDT = acumulatedDT - lastTime;
             --print("Spawning fesh");
             --print(acumulatedDT);
-                local fish = utility.ParseEntity(prefabs[math.random(#prefabs)]);
+                local fish = SceneManager:GetCurrentScene():InstantiatePrefab(prefabs[math.random(#prefabs)]);
                 local rbFish = fish:GetComponent("Rigidbody").type;
                 local randomMovement = fish:GetComponent("RandomMovement");
                 randomMovement.data.bait = data.bait;

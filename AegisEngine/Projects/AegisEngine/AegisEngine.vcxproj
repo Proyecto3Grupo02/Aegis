@@ -16,6 +16,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AegisEngine\AegisMain.h" />
+    <ClInclude Include="..\..\Src\AegisEngine\GameConfig.h" />
     <ClInclude Include="..\..\Src\checkML.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -96,7 +97,9 @@ xcopy /y /d "$(SolutionDir)"\Dependencias\SDL2_image-2.0.1\lib\x64\libwebp-4.dll
 xcopy /y /d "$(SolutionDir)"\Dependencias\SDL2_image-2.0.1\lib\x64\libtiff-5.dll "$(OutDir)"
 xcopy /y /d "$(SolutionDir)"\Dependencias\SDL2_image-2.0.1\lib\x64\libpng16-16.dll "$(OutDir)"
 xcopy /y /d "$(SolutionDir)"\Dependencias\SDL2_image-2.0.1\lib\x64\libjpeg-9.dll "$(OutDir)"
-xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\build\bin\debug\OgreOverlay_d.dll "$(OutDir)" </Command>
+xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\build\bin\debug\OgreOverlay_d.dll "$(OutDir)" 
+mkdir "$(OutDir)\Resources\Scripts" 
+xcopy /y /d "$(SolutionDir)\Src\AegisEngine\Scripts"  "$(OutDir)\Resources\Scripts" /i</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -136,7 +139,10 @@ xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo\S
 
 xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo\SDL2main.pdb "$(OutDir)"
 
-xcopy /y /d "$(SolutionDir)"\Dependencias\fmod\lib\x64\fmod.dll "$(OutDir)"</Command>
+xcopy /y /d "$(SolutionDir)"\Dependencias\fmod\lib\x64\fmod.dll "$(OutDir)"
+
+mkdir "$(OutDir)\Resources\Scripts" 
+xcopy /y /d "$(SolutionDir)\Src\AegisEngine\Scripts"  "$(OutDir)\Resources\Scripts" /i</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

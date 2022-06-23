@@ -15,42 +15,55 @@ void Scene::initEntities() {
 
 // Es posible que aqui queramos inicializar una escena de ogre y sincronizarla con las entidades
 Scene::Scene(OgreWrapper* wrap) :
-	accumulator(0), entities(new std::list<Entity*>()), entitiesToDelete(std::list<std::list<Entity*>::iterator>()) , ogreNode(wrap->getRootNode()), uninitializedEntities(new std::list<Entity*>()),
+	accumulator(0), entities(new std::list<Entity*>()), entitiesToDelete(std::list<std::list<Entity*>::iterator>()), ogreNode(wrap->getRootNode()), uninitializedEntities(new std::list<Entity*>()),
 	physicsEntities(new std::list<RigidbodyComponent*>()), ogreWrapper(wrap)
-{
-}
+{}
 
 Scene::~Scene() {
-	for (Entity* entity : *entities) {
-		delete entity;
-		entity = nullptr;
-	}
-	
-	removeAndFreePendingEntities();
+	free();
 
-	delete this->entities; 
-	delete this->uninitializedEntities; 
-	delete this->physicsEntities;
+	if (entities)
+		delete this->entities;
+	if (uninitializedEntities)
+		delete this->uninitializedEntities;
+	if (physicsEntities)
+		delete this->physicsEntities;
+
 	this->entities = nullptr;
 	this->uninitializedEntities = nullptr;
 	this->physicsEntities = nullptr;
 }
 
-bool Scene::init()
+void Scene::free()
 {
-	// Create entity with camera, default entity every scene has
-	auto camera = ogreWrapper->getCamera(); //AegisCamera* 
-	Entity* cameraEntity = new Entity(this, camera->getNode());
-	cameraEntity->setName("MainCamera");
-	addEntity(cameraEntity);
-	cameraEntity->addComponentFromLua(new CameraComponent(cameraEntity, camera));
-	exportToLua(cameraEntity, "MainCamera");
+	for (Entity* entity : *entities) {
+		delete entity;
+		entity = nullptr;
+	}
 
-	return true;
+	entities->clear();
+	physicsEntities->clear();
+	entitiesToDelete.clear();
+	uninitializedEntities->clear();
+}
+
+void Scene::init()
+{
+	createCamera();
+}
+
+void Scene::createCamera()
+{
+	Entity* cameraEntity = new Entity(this, ogreWrapper->getCamera()->getNode());
+	cameraEntity->setName("MainCamera");
+	cameraEntity->setNodeDestroyedOrBlocked(true);
+	cameraEntity->addComponentFromLua(new CameraComponent(cameraEntity, ogreWrapper->getCamera()));
+	addEntity(cameraEntity);
+	exportToLua(cameraEntity, "MainCamera");
 }
 
 void Scene::removeAndFreeEntity(std::list<Entity*>::iterator entity) {
-	delete *entity; //Destroy()
+	delete* entity; //Destroy()
 	this->entities->erase(entity);
 }
 
@@ -66,6 +79,12 @@ void Scene::addEntity(Entity* entity)
 	this->uninitializedEntities->push_back(entity);
 	this->entities->push_back(entity);
 	entity->setIterator(--entities->end());
+}
+
+Entity* Scene::instantiatePrefab(luabridge::LuaRef prefab)
+{
+	luabridge::LuaRef luaUtils = getGlobal(prefab.state(), "utils");
+	return luaUtils["ParseEntity"](prefab);
 }
 
 void Scene::addPhysicsEntity(RigidbodyComponent* physicsEntity)
@@ -85,27 +104,30 @@ void Scene::removePhysicsEntity(std::list<RigidbodyComponent*>::iterator physics
 
 void Scene::fixedUpdate(float dt) {
 	accumulator += dt;
-	uint16_t remainingSteps = MAX_PHYSICS_STEP_PER_FRAME;
 
-	while (accumulator >= PHYSICS_STEP && remainingSteps > 0)	{
-		for(RigidbodyComponent* rb : *physicsEntities)
+	if (accumulator >= PHYSICS_STEP) {
+		for (RigidbodyComponent* rb : *physicsEntities)
 			rb->getEntity()->fixedUpdate();
 
-		float timeBeforeUpdate = SDL_GetTicks();
-		Physics()->update(dt, PHYSICS_STEP, 1);
-		syncTransforms();
+		PhysicsSystem::getInstance()->update(dt, PHYSICS_STEP, MAX_PHYSICS_STEP_PER_FRAME);
 
-		dt = (SDL_GetTicks() - timeBeforeUpdate) / 1000.0f;
 		accumulator -= PHYSICS_STEP;
-		remainingSteps--;
 	}
+
+	syncTransforms();
 }
 
 void Scene::syncTransforms()
 {
 	//Iterate physics entities and sync their transforms
 	for (RigidbodyComponent* physicsEntity : *physicsEntities)
-		physicsEntity->syncToTransform();	
+		physicsEntity->syncTransformToRigidbody();
+}
+
+void Scene::syncRigidbodies()
+{
+	for (RigidbodyComponent* physicsEntity : *physicsEntities)
+		physicsEntity->syncRigidbodyToTransform();
 }
 
 void Scene::update(float dt) {
@@ -123,6 +145,7 @@ void Scene::updateScene(float dt) {
 	fixedUpdate(dt);
 	update(dt);
 	lateUpdate(dt);
+	syncRigidbodies();
 	removeAndFreePendingEntities();
 }
 
@@ -147,8 +170,9 @@ void Scene::ConvertToLua(lua_State* state)
 {
 	getGlobalNamespace(state).
 		beginNamespace("Aegis").
-			beginClass<Scene>("Scene").
-			addFunction("AddEntity", &Scene::addEntity).
-			endClass().
+		beginClass<Scene>("Scene").
+		addFunction("AddEntity", &Scene::addEntity).
+		addFunction("InstantiatePrefab", &Scene::instantiatePrefab).
+		endClass().
 		endNamespace();
 }

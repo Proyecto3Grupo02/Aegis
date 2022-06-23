@@ -43,19 +43,19 @@ public:
 	void printErrorModifyingTables(std::string fieldName, std::string typeName, bool modifiableFields);
 
 protected:
-	LuaRef data =LuaMngr()->getNewEmptyTable();
+	LuaRef data =LuaMngr->getNewEmptyTable();
 	template <class T>
 	void setDataAsInnerType(T* component);
 
 private:
-	LuaRef type =LuaMngr()->getSharedEmptyLuaRef();
-	LuaRef funcs =LuaMngr()->getNewEmptyTable();
-	LuaRef initFunc =LuaMngr()->getSharedEmptyLuaRef();
-	LuaRef updateFunc =LuaMngr()->getSharedEmptyLuaRef();
-	LuaRef lateUpdateFunc =LuaMngr()->getSharedEmptyLuaRef();
-	LuaRef fixedUpdateFunc =LuaMngr()->getSharedEmptyLuaRef();
-	LuaRef onCollisionEnterFunc =LuaMngr()->getSharedEmptyLuaRef();
-	LuaRef onTriggerEnterFunc =LuaMngr()->getSharedEmptyLuaRef();
+	LuaRef type =LuaMngr->getSharedEmptyLuaRef();
+	LuaRef funcs =LuaMngr->getNewEmptyTable();
+	LuaRef initFunc =LuaMngr->getSharedEmptyLuaRef();
+	LuaRef updateFunc =LuaMngr->getSharedEmptyLuaRef();
+	LuaRef lateUpdateFunc =LuaMngr->getSharedEmptyLuaRef();
+	LuaRef fixedUpdateFunc =LuaMngr->getSharedEmptyLuaRef();
+	LuaRef onCollisionEnterFunc =LuaMngr->getSharedEmptyLuaRef();
+	LuaRef onTriggerEnterFunc =LuaMngr->getSharedEmptyLuaRef();
 };
 #endif
 

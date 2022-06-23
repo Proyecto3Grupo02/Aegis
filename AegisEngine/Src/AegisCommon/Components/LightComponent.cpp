@@ -6,7 +6,7 @@ LightComponent::LightComponent(Entity* ent, LuaRef args) :
 {
 	data = args;
 
-	setLightType(LuaMngr()->parseString(args["lightType"], "PointLight"));
+	setLightType(LuaMngr->parseString(args["lightType"], "PointLight"));
 	if (!args["direction"].isNil())
 		setDirection(Vector3::ParseVector3(args["direction"]));
 	mDiffuse_ = Vector3::ParseVector3(args["color"], Vector3Mode::RGB);
@@ -14,13 +14,14 @@ LightComponent::LightComponent(Entity* ent, LuaRef args) :
 
 	setLightColor(mDiffuse_);
 	setSpecularColor(mSpecular_);
-	
-	setDataAsInnerType(this);	
+
+	setDataAsInnerType(this);
 }
 
 LightComponent::~LightComponent()
 {
-	delete mLight_;
+	if (mLight_)
+		delete mLight_;
 	mLight_ = nullptr;
 }
 
