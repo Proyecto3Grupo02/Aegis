@@ -294,8 +294,6 @@ local scene = {
 					print("Button was clicked in LUA: " .. uiData.id .. " times");
 					local menuScene = require "menu";
 					SceneManager:LoadScene(menuScene);
-					-- uiData.id = uiData.id + 1;
-					-- uiData.text:SetVisible(false);
 				end 
 			},
 	},

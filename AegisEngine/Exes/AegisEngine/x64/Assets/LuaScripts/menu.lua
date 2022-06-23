@@ -95,8 +95,6 @@ local scene = {
 					print("START");	
 					local terrainScene = require "TerrainScene";
 					SceneManager:LoadScene(terrainScene);
-					-- local fondo = "@Fondo"
-					-- fondo:SetVisible(false)
 				end 
 			},
 	},
@@ -109,12 +107,15 @@ local scene = {
 				material = "story_material",
 				order = 1,
 				x = 0,
-				y = 0.1,
+				y = 0.2,
 				width = 0.1,
 				height = 0.1,
 				visible = true,
-				callback = function()
+				uiData = { id = 1, image = "@Historia", backButton="@Back" },
+				callback = function(uiData)
 					print("STORY");	
+					uiData.image:SetVisible(true)
+					uiData.backButton:SetVisible(true)
 				end 
 			},
 	},
@@ -127,12 +128,15 @@ local scene = {
 				material = "htp_material",
 				order = 1,
 				x = 0,
-				y = 0.3,
+				y = 0.4,
 				width = 0.1,
 				height = 0.1,
 				visible = true,
-				callback = function()
+				uiData = { id = 1, image = "@Controles", backButton="@Back" },
+				callback = function(uiData)
 					print("HTP");	
+					uiData.image:SetVisible(true)
+					uiData.backButton:SetVisible(true)
 				end 
 			},
 	},
@@ -144,9 +148,9 @@ local scene = {
 				type = "Image",--Button/Image
 				name = "Controles",
 				material = "controles_material",
-				order = 3,
-				x = 0.15,
-				y = 0.15,
+				order = 4,
+				x = 0,
+				y = 0,
 				width = 0.999,
 				height = 0.999,
 				visible = false,
@@ -180,8 +184,12 @@ local scene = {
 				width = 0.2,
 				height = 0.2,
 				visible = false,
-				callback = function()
+				uiData = { id = 1, imageH ="@Historia", imageC = "@Controles", backButton="@Back" },
+				callback = function(uiData)
 					print("BACK");	
+					uiData.imageH:SetVisible(false)
+					uiData.imageC:SetVisible(false)
+					uiData.backButton:SetVisible(false)
 				end 
 			},
 	},
