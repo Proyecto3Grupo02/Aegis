@@ -118,12 +118,12 @@ end;
 funcs.ResolveDependencies = function(scene, entities)
 	for i, v in ipairs(scene) do
 		if v.type == "Entity" then
-			for p, cmp in ipairs(v.components or {}) do
-				if cmp.data ~= nil and funcs.HasDependencies(cmp.data) then
+			for p, data in ipairs(v.components or {}) do
+				if data.data ~= nil and funcs.HasDependencies(data.data) then
 					print("Solving dependencies for " .. v.name .. ":");
 					local resolvedCorrectly = true;
-					local entityData = entities[v.name]:GetComponent(cmp.type).data;
-					for key, cmpData in pairs(cmp.data) do
+					local entityData = entities[v.name]:GetComponent(data.type).data;
+					for key, cmpData in pairs(data.data) do
 						if entityData[key] ~= nil then
 						
 						if type(cmpData) == "string" and cmpData:sub(1, 1) == "@" then
@@ -132,15 +132,38 @@ funcs.ResolveDependencies = function(scene, entities)
 								print("* Error: Data " .. cmpData:sub(2) .. " was not found, field is untouched");
 								resolvedCorrectly = false;
 							else
-								print("* Inyecting " ..  cmpData:sub(2) .. " into " .. cmp.type .. "." .. key);
+								print("* Inyecting " ..  cmpData:sub(2) .. " into " .. data.type .. "." .. key);
 								entityData[key] = dependencyData;
 							end;
 						end;
 					else
-						print("* Error: " .. key .. " is not a field of " .. cmp.type .. ".data, " .. key .. " wasn't was copied");
+						print("* Error: " .. key .. " is not a field of " .. data.type .. ".data, " .. key .. " wasn't was copied");
 						resolvedCorrectly = false;
 					end;
 					end;
+					print();
+					if resolvedCorrectly == false then
+						print("* Could not resolve dependencies for " .. v.name);
+					else
+						print("* Dependency solved correctly");
+					end;
+					print("-------------------");
+				end;
+			end;
+		elseif  v.type == "UI" then
+			local uiData = entities[v.data.name].data;
+			for p, data in pairs(v.data.uiData or {}) do
+				if  type(data) == "string" and data:sub(1, 1) == "@" then
+					print("UI: Solving dependencies for " .. v.data.name .. ":");
+					resolvedCorrectly = true;
+						local dependencyData = funcs.SearchEntityOrComponent(entities, data:sub(2));
+						if dependencyData == nil then
+							print("* Error: Data " .. data:sub(2) .. " was not found, field is untouched");
+							resolvedCorrectly = false;
+						else
+							print("* Inyecting " ..  data:sub(2) .. " into " .. v.data.type);
+							uiData[p] = dependencyData;
+						end;
 					print();
 					if resolvedCorrectly == false then
 						print("* Could not resolve dependencies for " .. v.name);
@@ -174,7 +197,7 @@ funcs.ParseSceneObject = function(object)
 		entities[entity:GetName()] = entity;
 	elseif object.type == "UI" then
 		local uiObject = funcs.ParseUI(object);
-		entities[object.data.nombre] = uiObject.type;
+		entities[object.data.name] = uiObject.type;
 	else
 		local entity = funcs.TreatSpecialCase(object);
 		if entity ~= nil then
