@@ -3,16 +3,16 @@
 #include "Scene.h"
 
 Entity::Entity(Scene* scene, Ogre::SceneNode* node) :
-	mNode_(node == nullptr ?  scene->getNewNode() : node), active_(true), mScene_(scene), nodeDestroyed(false)
+	mNode_(node == nullptr ? scene->getNewNode() : node), active_(true), mScene_(scene), nodeDestroyedOrBlocked(false)
 {
 	//Componente obligatorio para todas las entidades
-	transform = new TransformComponent(Vector3(0,0,0), Ogre::Quaternion(), Vector3(1.0f, 1.0f, 1.0f), getNode(), this);
+	transform = new TransformComponent(Vector3(0, 0, 0), Ogre::Quaternion(), Vector3(1.0f, 1.0f, 1.0f), getNode(), this);
 	this->addComponentFromLua(transform);
 }
 
 
 Entity::Entity(Scene* scene, Vector3 pos) :
-	mNode_(scene->getNewNode()), active_(true), mScene_(scene), nodeDestroyed(false)
+	mNode_(scene->getNewNode()), active_(true), mScene_(scene), nodeDestroyedOrBlocked(false)
 {
 	transform = new TransformComponent(pos, Ogre::Quaternion(), Vector3(1.0f, 1.0f, 1.0f), getNode(), this);
 	this->addComponentFromLua(transform);
@@ -20,19 +20,10 @@ Entity::Entity(Scene* scene, Vector3 pos) :
 
 Entity::~Entity()
 {
-	for (Component* c : mComponentsArray_) {
-		delete c;
-	}
-	mComponentsArray_.clear();
-	mComponents_.clear();
+	removeAllComponents();
 
-	if(!nodeDestroyed)
+	if (!nodeDestroyedOrBlocked)
 		destroyNode();
-	
-	for (auto c : mChildren_)
-		c->setNodeDestroyed(true);
-
-	mChildren_.clear();
 }
 
 template<typename T>
@@ -93,6 +84,20 @@ void Entity::destroyNode()
 		mParent->removeAndDestroyChild(mNode_);
 		mNode_ = nullptr;
 	}
+}
+
+void Entity::detachChildren()
+{
+	getTransform()->detachChildren();
+}
+
+void Entity::removeAllComponents()
+{
+	for (Component* c : mComponentsArray_) {
+		delete c;
+	}
+	mComponentsArray_.clear();
+	mComponents_.clear();
 }
 
 inline void Entity::addComponentFromLua(AegisComponent* component)
@@ -160,7 +165,8 @@ void Entity::setParent(Entity* ent)
 
 void Entity::destroy()
 {
-	getTransform()->destroyChilds();
+	//getTransform()->setParent(nullptr);
+	//getTransform()->destroyChildren();
 	mScene_->destroyEntity(entityIterator);
 }
 

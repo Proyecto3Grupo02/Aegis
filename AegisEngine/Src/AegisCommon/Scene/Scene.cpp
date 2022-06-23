@@ -17,13 +17,7 @@ void Scene::initEntities() {
 Scene::Scene(OgreWrapper* wrap) :
 	accumulator(0), entities(new std::list<Entity*>()), entitiesToDelete(std::list<std::list<Entity*>::iterator>()), ogreNode(wrap->getRootNode()), uninitializedEntities(new std::list<Entity*>()),
 	physicsEntities(new std::list<RigidbodyComponent*>()), ogreWrapper(wrap)
-{
-	auto camera = ogreWrapper->getCamera(); //AegisCamera* 
-	cameraEntity = new Entity(this, camera->getNode());
-	cameraEntity->setName("MainCamera");
-	cameraEntity->addComponentFromLua(new CameraComponent(cameraEntity, camera));
-	exportToLua(cameraEntity, "MainCamera");
-}
+{}
 
 Scene::~Scene() {
 	free();
@@ -34,25 +28,38 @@ Scene::~Scene() {
 		delete this->uninitializedEntities;
 	if (physicsEntities)
 		delete this->physicsEntities;
-	if (cameraEntity)
-		delete cameraEntity;
 
 	this->entities = nullptr;
 	this->uninitializedEntities = nullptr;
 	this->physicsEntities = nullptr;
-	this->cameraEntity = nullptr;
 }
 
 void Scene::free()
-{
-	cameraEntity->setParent(nullptr);
-
+{		
 	for (Entity* entity : *entities) {
 		delete entity;
 		entity = nullptr;
 	}
 
-	removeAndFreePendingEntities();
+	entities->clear();
+	physicsEntities->clear();
+	entitiesToDelete.clear();
+	uninitializedEntities->clear();
+}
+
+void Scene::init()
+{
+	createCamera();
+}
+
+void Scene::createCamera()
+{
+	Entity* cameraEntity = new Entity(this, ogreWrapper->getCamera()->getNode());
+	cameraEntity->setName("MainCamera");
+	cameraEntity->setNodeDestroyedOrBlocked(true);
+	cameraEntity->addComponentFromLua(new CameraComponent(cameraEntity, ogreWrapper->getCamera()));
+	addEntity(cameraEntity);
+	exportToLua(cameraEntity, "MainCamera");
 }
 
 void Scene::removeAndFreeEntity(std::list<Entity*>::iterator entity) {
@@ -128,13 +135,11 @@ void Scene::syncRigidbodies()
 }
 
 void Scene::update(float dt) {
-	cameraEntity->update(dt);
 	for (Entity* entity : *entities)
 		entity->update(dt);
 }
 
 void Scene::lateUpdate(float dt) {
-	cameraEntity->lateUpdate(dt);
 	for (Entity* entity : *entities)
 		entity->lateUpdate(dt);
 }

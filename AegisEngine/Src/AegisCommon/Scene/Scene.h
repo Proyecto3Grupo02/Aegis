@@ -20,7 +20,6 @@ private:
 	std::list<std::list<Entity*>::iterator> entitiesToDelete;
 	Ogre::SceneNode* ogreNode = nullptr;
 	OgreWrapper* ogreWrapper = nullptr;
-	Entity* cameraEntity = nullptr;
 	// Fixed Update arguments
 
 	// Este parametro quizas sea mejor a la clase application cuando la tengamos
@@ -87,11 +86,13 @@ private:
 	/// </summary>
 	void initEntities();
 
+	void createCamera();
 public:
 	Scene(OgreWrapper* wrap);
 
 	~Scene();
 	void free();
+	void init();
 
 	/// <summary>
 	/// Añade una entidad ya creada a la escena. No se comprueba que la entidad sea nula en ningún momento.
