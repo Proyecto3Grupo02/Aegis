@@ -37,7 +37,7 @@ local scene = {
 		data = 
 			{
 				type = "Image",--Button/Image
-				nombre = "Fondo",
+				name = "Fondo",
 				material = "fondo_menu_material",
 				order = 0,
 				x = 0,
@@ -52,7 +52,7 @@ local scene = {
 		data = 
 			{
 				type = "Image",--Button/Image
-				nombre = "Titulo",
+				name = "Titulo",
 				material = "nombre_material",
 				order = 1,
 				x = 0.35,
@@ -68,7 +68,7 @@ local scene = {
 		data = 
 			{
 				type = "Image",--Button/Image
-				nombre = "Logo",
+				name = "Logo",
 				material = "logo_aegis_material",
 				order = 1,
 				x = 0,
@@ -83,7 +83,7 @@ local scene = {
 		data = 
 			{
 				type = "Button",--Button/Image
-				nombre = "Play",
+				name = "Play",
 				material = "start_material",
 				order = 1,
 				x = 0.475,
@@ -93,6 +93,8 @@ local scene = {
 				visible = true,
 				callback = function()
 					print("START");	
+					local terrainScene = require "TerrainScene";
+					SceneManager:LoadScene(terrainScene);
 					-- local fondo = "@Fondo"
 					-- fondo:SetVisible(false)
 				end 
@@ -103,7 +105,7 @@ local scene = {
 		data = 
 			{
 				type = "Button",--Button/Image
-				nombre = "Story",
+				name = "Story",
 				material = "story_material",
 				order = 1,
 				x = 0,
@@ -121,7 +123,7 @@ local scene = {
 		data = 
 			{
 				type = "Button",--Button/Image
-				nombre = "HowToPlay",
+				name = "HowToPlay",
 				material = "htp_material",
 				order = 1,
 				x = 0,
@@ -140,7 +142,7 @@ local scene = {
 		data = 
 			{
 				type = "Image",--Button/Image
-				nombre = "Controles",
+				name = "Controles",
 				material = "controles_material",
 				order = 3,
 				x = 0.15,
@@ -155,7 +157,7 @@ local scene = {
 		data = 
 			{
 				type = "Image",--Button/Image
-				nombre = "Historia",
+				name = "Historia",
 				material = "historia_material",
 				order = 3,
 				x = 0,
@@ -170,7 +172,7 @@ local scene = {
 		data = 
 			{
 				type = "Button",--Button/Image
-				nombre = "Back",
+				name = "Back",
 				material = "back_material",
 				order = 4,
 				x = 0,
