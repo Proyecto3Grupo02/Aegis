@@ -81,7 +81,7 @@ local scene = {
 				data = 
 				{
 					useGravity = false,
-					scale = 20
+					scale = 0.2
 				}
 			},
 			{

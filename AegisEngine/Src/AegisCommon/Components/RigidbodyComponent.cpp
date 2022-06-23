@@ -40,7 +40,7 @@ void RigidbodyComponent::syncTransformToRigidbody()
 	Ogre::Quaternion ogreQuat(quat.w, quat.x, quat.y, quat.z);
 	TransformComponent* t = transform;
 
-	// Si el transform tiene padre debe tenerse en cuenta, ya que sus coordenadas son locales (relativas a las del padre) mientras que las del rigidBody son globales
+	// If the transform has a parent its position is substracted to the final position as the child has local coordinates centered on the parent while the rigidBodyComponent uses global coords
 	while (t->hasParent())
 	{
 		updatedPos = updatedPos - t->getParent()->getTransform()->getPosition();
@@ -54,8 +54,58 @@ void RigidbodyComponent::syncTransformToRigidbody()
 void RigidbodyComponent::syncRigidbodyToTransform()
 {
 	Vector3 rbPos = rigidbody->getRbPosition();
+	
 	Vector3 tPos = transform->getPosition();
+	TransformComponent* t = transform;
+	/*while (t->hasParent())
+	{
+		tPos = tPos + t->getParent()->getTransform()->getPosition();
+		t = t->getParent()->getTransform();
+	}*/
 
+	// Ajuste en base a la rotación
+	if (t->hasParent())
+	{
+		float offset = tPos.magnitude();
+		Ogre::Quaternion rotPadreQ = t->getParent()->getTransform()->getRotation();
+		Vector3 rotPadre;
+		rotPadre.x = -2 * (rotPadreQ.x * rotPadreQ.z - rotPadreQ.w * rotPadreQ.y);
+		rotPadre.y = 2 * (rotPadreQ.y * rotPadreQ.z + rotPadreQ.w * rotPadreQ.x);
+		rotPadre.z = 1 - 2 * (rotPadreQ.x * rotPadreQ.x + rotPadreQ.y * rotPadreQ.y);
+		//rotPadre = rotPadre.scalarMult(Vector3(0, 0, 1));
+		/*std::cout << "ROTACION DE LA BARCA\n";
+		std::cout << rotPadre.x;
+		std::cout << "\n";
+		std::cout << rotPadre.y;
+		std::cout << "\n";
+		std::cout << rotPadre.z;
+		std::cout << "\n";std::cout << "\n";*/
+		rotPadre = rotPadre.getNormalized();
+		rotPadre = rotPadre*offset;
+		rotPadre = rotPadre.inverse();
+		rbPos = rotPadre + t->getParent()->getTransform()->getPosition();
+		rigidbody->setRbPosition(rbPos);
+		std::cout << "POSICION DEF DEL RIGIDBODY\n";
+		std::cout << rbPos.x;
+		std::cout << "\n";
+		std::cout << rbPos.y;
+		std::cout << "\n";
+		std::cout << rbPos.z;
+		std::cout << "\n";
+		std::cout << "\n";
+
+		std::cout << "POSICION DEF DEL TRANSFORM\n";
+		std::cout << t->getPosition().x + t->getParent()->getTransform()->getPosition().x;
+		std::cout << "\n";
+		std::cout << t->getPosition().y + t->getParent()->getTransform()->getPosition().y;
+		std::cout << "\n";
+		std::cout << t->getPosition().z + t->getParent()->getTransform()->getPosition().z;
+		std::cout << "\n";
+		std::cout << "\n";
+		return;
+	}
+
+	// RigidBody is only updated if there has been a change in the transformComponent
 	if ((rbPos - tPos).magnitudeSquared() >= 0.01f)
 		rigidbody->setRbPosition(tPos);
 
