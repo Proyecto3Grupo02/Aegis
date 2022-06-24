@@ -34,8 +34,43 @@ La solución del motor viene estructurada en proyectos, cada uno encargado de re
 ### Jerarquía de los Proyectos:
 ![Copia de Diagrama Proyectos](https://user-images.githubusercontent.com/62613312/166960800-33933d06-c510-432e-8fba-342dd802cd41.jpg)
 
-### Organización de los Proyectos:
-![Diagrama Proyectos drawio](https://user-images.githubusercontent.com/62613312/166960843-3bf62eb9-0eb1-4a19-92b1-00195deb26d9.png)
+### Organización y funcionalidad de los Proyectos:
+#### AegisAudio:
+#### AegisCommon:
+#### AegisEngine:
+#### AegisGraphics:
+#### AegisPhysics:
+#### AegisScripting:
+#### AegisUI:
+##### UISystem:
+UISystem es un **Singleton** encardo de la gestión de **UIObjects**.
+
+En la constructora crea un **OverlaySystem** y accede al **OverlayManager** con el fin de inicializar un nuevo **Overlay** para la gestión de imágenes. Contiene un **vector<UIObject*>ui_objects** donde se guardaran los objetos de tipo UI creados desde lua mediante la función **createUIElem(luabridge::LuaRef luaref)**. Dicha función leerá el string identificador que recibe como argumento LuaRef para crear el tipo de objeto oportuno.
+
+El sistema también contiene una función **update** que recorre el vector ui_objects para que se actualicen.
+
+##### UIObjects:
+Debido a que de esta clase hereda tanto **Image** como **Text**, contamos con 2 constructoras distintas. En ambos casos, la constructora de UIObjects crea un nuevo **OverlayElement** de tipo Panel. Devido a que no se puede crear más de 1 elemento con el mismo nombre, se usa un int estático **num_ui_obj** para identificar al objeto. Dicho int incrmenta cada vez que se llama a la constructora.
+
+Una vez creado el elemento, se le modifica mediante la posición, profundidad (eje z), dimenisones, visibilidad, y material definidas por los argumentos de la constructora. La clase cuenta con varias funciones setter y get para acceder y modificar dichas variables/estados.
+
+También hay una función **onClick** que comprueba si la posición del ratón está dentro de la superficie definida por el UIObject si este es visible. En dicho caso, se ejecutará el **function<void()> clickCallback**.
+
+##### Image:
+Image hereda de **UIObject** y expande la funcionalidad de dicha clase añadiéndole un material que recibe como argumento en la constructora. Dicha constructora es llamada desde un método estático de la misma clase, **CreateImage(LuaRef args)**, la cual realiza la parsea los argumentos LuaRef al tipo recibido por la constructora. CreateImage es llamado desde **UISystem::createUIElem** cuando se crea un objeto de tipo UI en lua.
+
+##### Button:
+Button hereda de **Image** y contiene un método **buttonClickCallback()** que es asignado al **clickCallback** de **UIObject**. En buttonClickCallback se llamará a la función definida en lua.
+
+Al igual que en Image, hay un método estático **CreateButton(LuaRef args)** que es llamado desde **UISystem::createUIElem**.
+
+##### Text:
+Text hereda de **UIObject** y crea un texto a partir de los argumentos recibidos en la constructora.
+
+Hay un método estático **CreateText(LuaRef args)** que es llamado desde **UISystem::createUIElem**.
+
+##### ImageResources:
+ImageResources **parseDirectory(string dir)** incializa un **map<image,std::string> mapImage** con las imágenes encontradas en el directorio **dir**. Tambíen tiene un método **getImage(string name)** para devolver la imagen con dicho nombre en caso de estar contenida en el mapImage. 
 
 ## Organización del directorio:
 Aegis Engine  (carpeta principal)
