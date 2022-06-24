@@ -9,12 +9,13 @@ class SoundEmitterComponent : public AegisComponent
 {
 	public:
 
-		SoundEmitterComponent(Entity* ent, std::string sound);
+		SoundEmitterComponent(Entity* ent, std::string sound,std::string mode);
 		~SoundEmitterComponent();
 		void playMusic();
 		void playSound();
 		void stopMusic();
 		void stopSound();
+		//void isPlaying();
 
 		std::string getSound() const;
 		void setSound(std::string name);

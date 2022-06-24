@@ -1,7 +1,7 @@
 #include "SoundEmitterComponent.h"
 #include "SoundSystem.h"
 
-SoundEmitterComponent::SoundEmitterComponent(Entity* ent, std::string sound):
+SoundEmitterComponent::SoundEmitterComponent(Entity* ent, std::string sound, std::string mode):
 	AegisComponent("SoundEmitter", ent),soundName(sound)
 {
 	setDataAsInnerType(this);
@@ -31,6 +31,7 @@ void SoundEmitterComponent::stopSound()
 	SoundSystem::getInstance()->stopSound(soundName);
 }
 
+
 std::string SoundEmitterComponent::getSound() const
 {
 	return soundName;
@@ -41,8 +42,8 @@ void SoundEmitterComponent::setSound(std::string name)
 	soundName = name;
 }
 
-inline SoundEmitterComponent* createSoundEmitter(Entity* ent, std::string sound) {
-	return new SoundEmitterComponent(ent,sound);
+inline SoundEmitterComponent* createSoundEmitter(Entity* ent, std::string sound, std::string mode) {
+	return new SoundEmitterComponent(ent,sound,mode);
 }
 
 void SoundEmitterComponent::ConvertToLua(lua_State* state)
@@ -57,6 +58,7 @@ void SoundEmitterComponent::ConvertToLua(lua_State* state)
 		addFunction("PlaySound", &SoundEmitterComponent::playSound).
 		addFunction("StopMusic", &SoundEmitterComponent::stopMusic).
 		addFunction("StopSound", &SoundEmitterComponent::stopSound).
+		
 		endClass().
 		endNamespace().
 		endNamespace();

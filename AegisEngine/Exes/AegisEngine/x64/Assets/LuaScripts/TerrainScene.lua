@@ -308,5 +308,17 @@ local scene = {
 			},
 		}
 	},
+	{
+		type = "Entity",
+		name = "MusicLoop",
+		components = {
+			{
+				type ="SoundEmitter",
+				data = {
+					sound = "Menu-Ukulele"
+				}
+			}
+		}
+	},
 };
 return scene;
