@@ -73,7 +73,7 @@ local scene = {
 				type = "Renderer",
 				data = {
 					mesh = "hook.mesh",
-					material= "blue"
+					material= "metal_material"
 				}
 			},
 			{
@@ -81,7 +81,7 @@ local scene = {
 				data = 
 				{
 					useGravity = false,
-					scale = 0.2
+					scale = 20
 				}
 			},
 			{
@@ -103,7 +103,7 @@ local scene = {
 				type = "Renderer",
 				data = {
 					mesh = "fishingRod.mesh",
-					material= "pez"
+					material= "madera_material"
 				}
 				
 			},
@@ -139,7 +139,7 @@ local scene = {
 					type = "Renderer",
 					data = {
 						mesh = "Lago.mesh",
-						material= "mountain"
+						material= "roca_material"
 					}
 				}
 			}
@@ -154,7 +154,7 @@ local scene = {
 					type = "Renderer",
 					data = {
 						mesh = "Agua.mesh",
-						material= "blue"
+						material= "agua_material"
 					}
 				}
 			}
@@ -261,21 +261,6 @@ local scene = {
 			}
 		},
 -- UI
-{
-	type = "UI",
-	data = 
-		{
-			type = "Image",--Button/Image
-			name = "Controles",
-			material = "controles_material",
-			order = 0,
-			x = 0.05,
-			y = 0.05,
-			width =0.9,
-			height = 0.9,
-			visible = false,
-		},
-},
 	{
 		type = "UI",
 		data = 

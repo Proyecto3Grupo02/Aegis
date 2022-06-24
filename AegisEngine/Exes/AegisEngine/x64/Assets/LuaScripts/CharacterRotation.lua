@@ -5,12 +5,13 @@ function table.GetNew(entity, params)
 	local data = component.data;
 	local transform = entity.transform;
     local funcs = component.funcs;
-    data.senstivity = 0.1;
+    data.senstivity = 2;
     function Init() 
         euAng = transform.localEulerAngles;
         rigidbody = component.entity:GetComponent("Rigidbody").type;
     end;
 	function Update(deltaTime)
+        print("data sens"..data.senstivity)
     end        
 
     function LateUpdate(deltaTime) end;

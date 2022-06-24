@@ -1,4 +1,3 @@
-
 material red 
 {
 	technique 
@@ -7,59 +6,6 @@ material red
 		{
 			diffuse 1.0 0.0 0.0
 			ambient 1.0 0.0 0.0
-		}
-	}
-}
-
-material LagoMat {
-    receive_shadows on
-    technique {
-        pass {
-            diffuse 0.8 0.8 0.8 1.0
-			ambient 0.8 0.8 0.8 1.0
-            specular 0.512 0.512 0.512 1.0 64.0
-            alpha_to_coverage off
-            colour_write on
-            depth_check on
-            depth_func less_equal
-            illumination_stage per_light
-            light_clip_planes off
-            light_scissor off
-            normalise_normals off
-            polygon_mode solid
-	    	scene_blend alpha_blend	
-            scene_blend_op add
-            shading gouraud
-            transparent_sorting on
-
-        }
-    }
-}
-
-material aegis
-{
-	technique
-	{
-		pass
-		{
-			diffuse 1.0 1.0 1.0
-			texture_unit
-			{
-				tex_coord_set 0
-				texture aegis.png
-				tex_address_mode wrap
-			}
-		}
-	}
-}
-
-material VertexColor
-{
-	technique
-	{
-		pass
-		{
-			//vertex_colour_source true
 		}
 	}
 }
@@ -103,6 +49,78 @@ material green // nombre
 	}
 }
 
+material roca_material
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.5 0.5 0.5
+			ambient 0.5 0.5 0.5
+			texture_unit
+			{
+				texture textura_roca.jpg
+				colour_op modulate
+			}
+		}
+	}
+}
+
+material agua_material
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.5 0.5 0.7 0.5
+			ambient 0.5 0.5 0.7 0.5
+			scene_blend alpha_blend
+			texture_unit
+			{
+				texture agua.jpg
+				colour_op modulate
+				scroll_anim -0.001 0.01
+				rotate 90
+			}
+		}
+	}
+}
+
+material metal_material
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.5 0.5 0.5 
+			ambient 0.5 0.5 0.5
+			texture_unit
+			{
+				texture metal.jpg
+				colour_op modulate
+			}
+		}
+	}
+}
+
+material madera_material
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.5 0.5 0.5 
+			ambient 0.5 0.5 0.5
+			texture_unit
+			{
+				texture madera.jpg
+				colour_op modulate
+			}
+		}
+	}
+}
+
+
 material mountain // nombre
 {
 	technique // al menos una
@@ -128,46 +146,6 @@ material mountain2 // nombre
 }
 
 
-material grass // nombre
-{
-	technique // al menos una
-	{
-		pass // al menos uno
-		{
-			diffuse 0.5 0.5 0.5 1.0
-			alpha_rejection greater 150
-			ambient 0.5 0.5 0.5
-			
-			//diffuse vertexcolour
-
-			texture_unit
-			{
-				texture hierba.jpg
-				colour_op modulate
-			}
-		}
-	}
-}
-
-material avestruz // nombre
-{
-	technique // al menos una
-	{
-		pass // al menos uno
-		{
-			
-			diffuse 0.5 0.5 0.5 
-			ambient 0.5 0.5 0.5
-			
-			texture_unit
-			{
-				texture avestruz.jpg
-				colour_op modulate
-			}
-		}
-	}
-}
-
 material pez // nombre
 {
 	technique // al menos una
@@ -181,17 +159,6 @@ material pez // nombre
 }
 
 material playerMat // nombre
-{
-	technique // al menos una
-	{
-		pass // al menos uno
-		{
-			diffuse 1.0 1.0 0.0
-			ambient 1.0 1.0 0.0
-		}
-	}
-}
-material Material.001 // nombre
 {
 	technique // al menos una
 	{

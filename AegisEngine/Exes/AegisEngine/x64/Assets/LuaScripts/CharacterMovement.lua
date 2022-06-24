@@ -17,7 +17,7 @@ function table.GetNew(entity, params)
     local forward
     local euAng;
     local mouseB;
-    data.sensitivity = 0.2;
+    data.sensitivity=0
 
     function Init()
         mouseB=true;
@@ -54,7 +54,7 @@ function table.GetNew(entity, params)
         end;
         if (fishing)then
             cameraTf.position = Aegis.Maths.Vector3(0,0,0)
-            data.sensitivity=0.01
+            data.sensitivity=0.1
         else   
             data.sensitivity = 0.2
             cameraTf.position= offset;
