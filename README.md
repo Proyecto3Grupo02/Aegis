@@ -1,6 +1,6 @@
 # Aegis
 
-Documento de diseño de motor
+Documento de diseño del motor
 
 ---------------------------------
 
@@ -36,8 +36,81 @@ La solución del motor viene estructurada en proyectos, cada uno encargado de re
 
 ## Organización y funcionalidad de los Proyectos:
 ### AegisAudio:
+AegisAudio funciona como enlace entre la librería **fmod** y Aegis, nuestro motor.
+
+#### SoundEmitter:
+
+#### SoundListener:
+
+#### SoundResources:
+
+#### SoundSystem:
+
 ------
 ### AegisCommon:
+
+#### ILuaObject:
+El struct ILuaObject solo cuenta con la definción de un método estático **ConvertToLua(lua_State state)**. Dicho método es sobreescrito por las clases que heredan de ILuaObject.
+
+En el archivo ILuaObject.h también hay una función **exportToLua(T item, string name)**.
+
+#### Component:
+Component hereda de **ILuaObject** y contiene métodos virtuales vacíos **init, fixedUpdate, update, lateUpdate, render, onCollision y onTrigger** que pueden ser sobreescritos por clases que hereden de él.
+
+En esta clase tambíen se guarda un puntero al **Entity** al que está asociado el componente, junto con un string **componentName** y un bool **isActive**.
+
+#### AegisComponent:
+AegisComponent hereda de **Component** e **ILuaObject** y es la clase de la que heredan todos los demás componentes. Sobreescribe los métodos virtuales de Component haciendo que llamen a **AegisComponent::callLuaRefFunc(LuaRef func, T args)**.
+
+AegisComponent tiene variables privadas de tipo **LuaRef** para **type y funcs**, además de los callbacks **initFunc, updateFunc, lateUpdateFunc, fixedUpdateFunc, onCollisionFunc, onTriggerFunc**. Debido a que LuaRef no tiene una constructora por defecto, estas son incializadas en AegisComponent.h por **LuaMngr->getSharedEmptyLuaRef()**.
+
+AegisComponent cuenta también con métodos set y get que reciben/devuelven dichos **LuaRef**. Se sobreescribe **ConverToLua** para poder acceder a dichos métodos mediante el operador **=**.
+
+Hay un método **CameraComponent* createCamera(Entity* ent, LuaRef args)** que será llamado desde Lua gracias al **ConvertToLua**.
+
+Esta clase tambíen contiene métodos **worldToScreen(const Vector3& worldPoint)** y **worldToScreenPixel(const Vector3& worldPoint)**
+
+#### AnimationComponent:
+
+#### CameraComponent:
+CameraComponent guarda tanto un bool que determina si es "MainCamera" y un puntero a la **AegisCamera** a la que está asociada.
+
+Esta clase cuenta 2 constructoras. Una que es llamada desde Lua (reciviendo argumentos de tipo LuaRef), y otra que es llamada desde C++ (recibiendo una **AegisCamera** ya creada). La de Lua crea un AegisCamera y llama a la segunda constructora pasándosela como argumento.
+
+#### LightComponent:
+De manera similar a **CameraComponent**, LightComponent guarda un puntero a un **AegisLight**, la cual crea en la constructora. Cuenta con métodos set y get para modificar los atributos de la luz.
+
+#### TransformComponent:
+Transform guarda un puntero al **Ogre::SceneNode** y la **Entity** padre de la entidad, junto con una lista de entidades de los hijos. 
+
+#### RenderComponent:
+
+#### RigidbodyComponent:
+
+#### SoundEmitterComponent:
+
+#### Entity:
+
+#### Initializable
+
+#### DebugManager:
+
+#### Scene:
+
+#### SceneManager:
+
+#### Utils:
+Diversos archivos .h que facilitan la gestión de recursos, ya sean Vector, Quaternion, includes, etc.
+
+De estos recursos, el más notable es **Singleton**:
+
+#### GameLoopData:
+
+#### InputSystem:
+
+
+
+
 ------
 ### AegisEngine:
 AegisEngine es el poryecto principal de la solución, desde el cual se instancian y gestionan los otros managers.
@@ -58,6 +131,7 @@ La clase cuenta también con un método **GameLoop** que se ejecuta el bucle pri
 
 #### main.cpp:
 main.cpp contiene el método main. Inicializa **AegisMain**, y en caso de que no haya fallo da paso al **GameLoop** a traves de **AegisMain::startGame**. En caso de error hace **free** y termina. En modo DEBUG se muestra la memoria no liberada (**Memory Leaks**) en la pestaña de Salida de Visual Studio gracias al archivo **checkML.h**.
+
 ------
 ### AegisGraphics:
 AegisGraphics sirve de enlace entre el motor y **Ogre**.
@@ -170,18 +244,14 @@ El repositorio de GitHub incluiye:
 
 ## Licencias
 
-Aegis Engine ha sido diseñado y creado por **Kirin Studios**
+Aegis Engine ha sido diseñado y creado por **Kirin Studios** usando las siguientes librerías:
 
-**Ogre3D** (Copyright (c) 2000-2013 [Torus Knot Software Ltd](https://www.ogre3d.org/))
+* **Ogre3D** (Copyright (c) 2000-2013 [Torus Knot Software Ltd](https://www.ogre3d.org/))
 
-**Bullet Continuous Collision Detection and Physics Library** (Copyright (c) 2003-2006 [Erwin Coumans](https://pybullet.org/Bullet/phpBB3/))
+* **Bullet Continuous Collision Detection and Physics Library** (Copyright (c) 2003-2006 [Erwin Coumans](https://pybullet.org/Bullet/phpBB3/))
 
-**FMOD Studio** (Copyright (c)[Firelight Technologies Pty Ltd](https://www.fmod.com/))
+* **FMOD Studio** (Copyright (c)[Firelight Technologies Pty Ltd](https://www.fmod.com/))
 
-**SDL 2.0** (Copyright (c) [SDL Community](https://github.com/libsdl-org/SDL))
+* **Lua** (Copyright (c) [The Lua Team](https://www.lua.org/))
 
-**CEGUI** (Copyright (c) [The CEGUI Team](http://cegui.org.uk/wiki/))
-
-**Lua** (Copyright (c) [The Lua Team](https://www.lua.org/))
-
-**LuaBridge** (Copyright (c) [Vinnie Falco](https://github.com/vinniefalco/LuaBridge))
+* **LuaBridge** (Copyright (c) [Vinnie Falco](https://github.com/vinniefalco/LuaBridge))
