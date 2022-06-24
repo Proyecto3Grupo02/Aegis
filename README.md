@@ -41,6 +41,12 @@ La solución del motor viene estructurada en proyectos, cada uno encargado de re
 ### AegisGraphics:
 ### AegisPhysics:
 ### AegisScripting:
+#### LuaBasic:
+Contiene unicamente los include de Lua. Tiene como función reducir el número de includes en otros scripts.
+
+#### LuaManager:
+LuaManager es el eslavón del motor que une C++ con Lua. Hereda de **Singleton** y se encarga tanto de la creación de un nuevo **LuaState**, como de parsear parámetros **LuaRef** a C++. También cuenta con una función **execute(string filename)** para  cargar y ejecutar el archivo.lua "filename". Devuelve true si se carga y ejecuta correctamente.
+
 ### AegisUI:
 #### UISystem:
 UISystem es un **Singleton** encardo de la gestión de **UIObjects**.
