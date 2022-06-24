@@ -6,8 +6,8 @@
 
 #include<iostream>
 
-Image::Image(const std::string& name, int order, std::string material, float x, float y, float w, float h, bool isVisible_)
-	: UIObject(name, order, x, y, w, h, isVisible_) {
+Image::Image(const std::string& name, int order, std::string material, float x, float y, float w, float h, bool isVisible_, luabridge::LuaRef updateFunc)
+	: UIObject(name, order, x, y, w, h, isVisible_, updateFunc) {
 	overlayCont->setMaterialName(material);
 	overlay->add2D(overlayCont);
 	if (isVisible) overlay->show();
@@ -31,7 +31,7 @@ Image* Image::CreateImage(LuaRef args) //Doesn't belong to this class
 	float h = LuaMngr->parseFloat(args["height"], 1);
 	bool isActive = LuaMngr->parseBool(args["visible"], true);
 	id_img++;
-	return new Image(name, order, material, x, y, w, h, isActive);
+	return new Image(name, order, material, x, y, w, h, isActive, args["updateFunc"]);
 }
 
 void Image::ConvertToLua(lua_State* state)

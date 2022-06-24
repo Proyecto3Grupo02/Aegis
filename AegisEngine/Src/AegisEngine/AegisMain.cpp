@@ -244,6 +244,7 @@ void AegisMain::gameLoop()
 					break;
 				case SDL_MOUSEBUTTONDOWN:
 					Input->onMouseButtonDown(eventHandler.button);
+					UI->onClickEvent(); // boton
 					break;
 				case SDL_MOUSEBUTTONUP:
 					Input->onMouseButtonUp(eventHandler.button);

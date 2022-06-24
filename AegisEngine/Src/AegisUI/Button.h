@@ -7,7 +7,6 @@
 #include <string>
 #include "OgreOverlay.h"
 #include "Image.h"
-#include "InputSystem.h"
 #include "WindowManager.h"
 #include "LuaManager.h"
 
@@ -21,9 +20,9 @@ private:
 	luabridge::LuaRef callback = LuaMngr->getSharedEmptyLuaRef(); //necesistas inicializarlo
 
 public:
-	Button(const std::string& name, int order, std::string material, float x, float y, float w, float h, bool isActive, luabridge::LuaRef call);
+	Button(const std::string& name, int order, std::string material, float x, float y, float w, float h, bool isActive, luabridge::LuaRef call, luabridge::LuaRef update);
 	virtual ~Button();
-	void update();
+	void buttonClickCallback();
 	static Button* CreateButton(LuaRef args);
 	static void ConvertToLua(lua_State* state);
 };

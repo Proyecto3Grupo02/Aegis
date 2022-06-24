@@ -5,6 +5,7 @@
 
 #include <string>
 #include "LuaManager.h"
+#include <functional>
 //Imágenes renderizadas a partir de una textura
 //En esta clase se añade la posición x e y
 
@@ -42,10 +43,11 @@ private:
 	void hide();
 	luabridge::LuaRef type = LuaManager::getInstance()->getSharedEmptyLuaRef();
 	luabridge::LuaRef data = LuaManager::getInstance()->getSharedEmptyLuaRef();
-
+	std::function<void()> clickCallback;
+	float scale;
 public:
-	UIObject(const std::string& n, int order, float x_, float y_, float w_, float h_, bool isActive = true);
-	UIObject(const std::string& n, int order, float x_, float y_, bool isActive = true);
+	UIObject(const std::string& n, int order, float x_, float y_, float w_, float h_, bool isActive = true, luabridge::LuaRef updateFuncl = LuaManager::getInstance()->getSharedEmptyLuaRef());
+	UIObject(const std::string& n, int order, float x_, float y_, bool isActive = true, luabridge::LuaRef updateFuncl = LuaManager::getInstance()->getSharedEmptyLuaRef());
 	virtual ~UIObject();
 	
 	//void setMetricsMode(MetricsMode mmode);
@@ -56,13 +58,21 @@ public:
 	void setRenderDepth(int d); //PROFUNDIDAD
 	void setName(std::string n);
 	void setType(luabridge::LuaRef t);
+	void setClickCallback(std::function<void()> clickCallback);
+	float getScale() const;
+	void setScale(float scale);
+	// Por si quieres hacer que un boton tenga una animacion de escalado o un texto se revele o cualquier otra cosa
+	virtual void update(float deltaTime);
+	bool onClick();
 	luabridge::LuaRef getData() const;
 	luabridge::LuaRef getType() const;
+	luabridge::LuaRef updateFunc = LuaManager::getInstance()->getSharedEmptyLuaRef();
+	int getZOrder();
 
 	bool getVisible() { return isVisible; };
 	std::string getName() { return name; };
-	std::pair<float, float> getPosition() { return { x, y }; }
-	std::pair<float, float> getSize() { return { w, h }; }
+	std::pair<float, float> getPosition() const { return { x, y }; }
+	std::pair<float, float> getSize() const { return { w, h }; }
 	std::string getMaterial() { return  material; }
 	static void ConvertToLua(lua_State* state);
 };

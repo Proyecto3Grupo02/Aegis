@@ -8,6 +8,7 @@
 #include "OgreFontManager.h"
 #include <iostream>
 #include "InputSystem.h"
+#include <algorithm>
 
 #define inputSystem InputSystem::getInstance()
 
@@ -70,6 +71,11 @@ WindowManager* UISystem::getWindowManager() {
 
 void UISystem::addUIObject(UIObject* object_) {
 	ui_objects.push_back(object_);
+
+	// Order list by zOrder
+	std::sort(ui_objects.begin(), ui_objects.end(), [](UIObject* a, UIObject* b) {
+		return a->getZOrder() > b->getZOrder();
+	});
 }
 
 void UISystem::deleteUIObject(const UIObject* obj_) {
@@ -80,9 +86,17 @@ void UISystem::deleteUIObject(const UIObject* obj_) {
 }
 
 void UISystem::update(float deltaTime) {
+
 	for (auto obj : ui_objects) {
-		auto button = dynamic_cast<Button*>(obj);
-		if (button != nullptr)button->update();
+		obj->update(deltaTime);
+	}
+}
+
+void UISystem::onClickEvent()
+{
+	for (auto obj : ui_objects) {
+		if (obj->onClick())
+			return;
 	}
 }
 
