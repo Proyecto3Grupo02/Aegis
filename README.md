@@ -40,6 +40,24 @@ La solución del motor viene estructurada en proyectos, cada uno encargado de re
 ### AegisCommon:
 ------
 ### AegisEngine:
+AegisEngine es el poryecto principal de la solución, desde el cual se instancian y gestionan los otros managers.
+
+#### GameConfig:
+Contiene un struct GameConfig donde se guardan 3 strings: **scriptPath, soundPath, resourcesCfgPath**. Dichas cadenas guardan las rutas a los scripts de lua usados en el juego, los sonidos, y el resources.cfg respecivamente.
+
+#### AegisMain:
+AegisMain hereda de **IInitializable**.
+
+En el método **init()**, utiliza el método **searchConfig()** para crear una variable temporal de tipo **GameConfig** en la que se guarden las rutas de directorios y/o archivos necesarias para arrancar el juego. En caso de que se hayan localizado dichas rutas se instancia el **LuaManager** y se llama al método **convertToLua**, el cual a su vez llamará a los **ConvertToLua** estáticos de todas las demás clases.
+
+Con el LuaManager creado, se instancian los otros managers y se exporta a Lua el **SceneManager**, **InputSystem** y **UISystem** mediante el método **ILuaObject::exportToLua**.
+
+En caso de que se haya incializado todo correctamente, se ejecutarán los scripts **initLua.lua** del motor, e **init.lua** del juego mediante **execute** del **LuaManager**.
+
+La clase cuenta también con un método **GameLoop** que se ejecuta el bucle principal del motor, gestionando el tiempo, eventos de la ventana, y llamando a los métodos **update**, **render**, **refresh** y **clear** de los otros managers.
+
+#### main.cpp:
+main.cpp contiene el método main. Inicializa **AegisMain**, y en caso de que no haya fallo da paso al **GameLoop** a traves de **AegisMain::startGame**. En caso de error hace **free** y termina. En modo DEBUG se muestra la memoria no liberada (**Memory Leaks**) en la pestaña de Salida de Visual Studio gracias al archivo **checkML.h**.
 ------
 ### AegisGraphics:
 AegisGraphics sirve de enlace entre el motor y **Ogre**.
@@ -100,7 +118,7 @@ LuaManager es el eslavón del motor que une C++ con Lua. Hereda de **Singleton**
 #### UISystem:
 UISystem es un **Singleton** encardo de la gestión de **UIObjects**.
 
-En la constructora crea un **OverlaySystem** y accede al **OverlayManager** con el fin de inicializar un nuevo **Overlay** para la gestión de imágenes. Contiene un **vector<UIObject*>ui_objects** donde se guardaran los objetos de tipo UI creados desde lua mediante la función **createUIElem(luabridge::LuaRef luaref)**. Dicha función leerá el string identificador que recibe como argumento LuaRef para crear el tipo de objeto oportuno.
+En la constructora crea un **OverlaySystem** y accede al **OverlayManager** con el fin de inicializar un nuevo **Overlay** para la gestión de imágenes. Contiene un **vector<UIObject>ui_objects** donde se guardaran los objetos de tipo UI creados desde lua mediante la función **createUIElem(luabridge::LuaRef luaref)**. Dicha función leerá el string identificador que recibe como argumento LuaRef para crear el tipo de objeto oportuno.
 
 El sistema también contiene una función **update** que recorre el vector ui_objects para que se actualicen.
 
