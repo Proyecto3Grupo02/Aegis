@@ -42,6 +42,26 @@ La solución del motor viene estructurada en proyectos, cada uno encargado de re
 ### AegisEngine:
 ------
 ### AegisGraphics:
+AegisGraphics sirve de enlace entre el motor y **Ogre**.
+
+#### AegisCamera:
+AeggisCamera se encarga de crear una Cámara en ogre y agregarla a un nodo. Contiene métodos set y get para acceder a la matriz vista, matriz de proyección, el viewport, y otros atributos.
+
+También cuenta con un método **free()** que separa a todos los nodos adheridos al de la cámara, para luego destruir la misma.
+
+#### AegisLight:
+De manera similar a la cámara, se crea una luz de Ogre y se asocia a un nodo. Hay funciones para modificar o consultar los atributos de dicha luz.
+
+#### WindowManager:
+WindowManager se encarga de gestionar la ventana donde se renderiza el juego, principalmente el tamaño. A parte de crear la ventana de acuerdo a los argumentos recibidos por la constructora, la clase contiene un método **handleEvent(SDL_Event& evt)** que redimensiona el **render** en caso de recibir el evento de **SDL_WINDOWEVENT_RESIZED**.
+
+También cuenta con métodos **getWidth/getHeight** que devuelven las dimensiones actuales de la ventana.
+
+#### OgreWrapper:
+OgreWrapper hereda de **Singleton**, y como su nombre indica, se encarga de englobar **Ogre**.
+
+La constructora llama al método **init(std::string resourcesPath)**, el cual se encarga de cargar los archivos **resourcesCFG** y **pluginsCFG**. Una vez cargados los recursos crea un **WindowManager** y un **AegisCamera** que asocia al viewport del render.
+
 ------
 ### AegisPhysics:
 AegisPhysics utiliza la librería **Bullet** para gestionar las físicas.
@@ -89,7 +109,7 @@ Debido a que de esta clase hereda tanto **Image** como **Text**, contamos con 2 
 
 Una vez creado el elemento, se le modifica mediante la posición, profundidad (eje z), dimenisones, visibilidad, y material definidas por los argumentos de la constructora. La clase cuenta con varias funciones setter y get para acceder y modificar dichas variables/estados.
 
-También hay una función **onClick** que comprueba si la posición del ratón está dentro de la superficie definida por el UIObject si este es visible. En dicho caso, se ejecutará el **function<void()> clickCallback**.
+También hay una función **onClick** que comprueba si la posición del ratón está dentro de la superficie definida por el UIObject si este es visible. Debido a que las posiciones de los UIObjects pertenecen al intervalo [(0,0), (1,1)] y no se miden en píxeles, se usan los métodos **getWidth/getHeight** del **WindowManager** de **AegisGraphics** para realizar la conversión a píxeles de la ventana. En dicho caso de se cumplan las condiciones, se ejecutará el **function<void()> clickCallback**.
 
 #### Image:
 Image hereda de **UIObject** y expande la funcionalidad de dicha clase añadiéndole un material que recibe como argumento en la constructora. Dicha constructora es llamada desde un método estático de la misma clase, **CreateImage(LuaRef args)**, la cual realiza la parsea los argumentos LuaRef al tipo recibido por la constructora. CreateImage es llamado desde **UISystem::createUIElem** cuando se crea un objeto de tipo UI en lua.
