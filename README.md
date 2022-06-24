@@ -64,6 +64,7 @@ EXPLICAR CollisionEnterCallbacks, update, collisionEntersCallback!!!!!!!!!!!!!!!
 
 #### Rigidbody:
 Rigidbody crea una entidad física en Bullet. Contiene métodos setter y get para modificar sus atributos.
+
 ------
 ### AegisScripting:
 AegisScripting es el eslavón del motor que une C++ con Lua.
@@ -73,6 +74,7 @@ Contiene unicamente los include de Lua. Tiene como función reducir el número d
 
 #### LuaManager:
 LuaManager es el eslavón del motor que une C++ con Lua. Hereda de **Singleton** y se encarga tanto de la creación de un nuevo **LuaState**, como de parsear parámetros **LuaRef** a C++. También cuenta con una función **execute(string filename)** para  cargar y ejecutar el archivo.lua "filename". Devuelve true si se carga y ejecuta correctamente.
+
 ------
 ### AegisUI:
 #### UISystem:
@@ -104,6 +106,7 @@ Hay un método estático **CreateText(LuaRef args)** que es llamado desde **UISy
 
 #### ImageResources:
 ImageResources **parseDirectory(string dir)** incializa un **map<image,std::string> mapImage** con las imágenes encontradas en el directorio **dir**. Tambíen tiene un método **getImage(string name)** para devolver la imagen con dicho nombre en caso de estar contenida en el mapImage. 
+
 ------
 ## Organización del directorio:
 Aegis Engine  (carpeta principal)
