@@ -81,7 +81,7 @@ material logo_aegis_material
 			scene_blend alpha_blend
 			texture_unit
 			{
-				texture logo_aegis.png
+				texture logo_aegis_menu.png
 				colour_op modulate
 			}
 		}
