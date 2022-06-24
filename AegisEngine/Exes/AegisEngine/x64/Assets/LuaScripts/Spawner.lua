@@ -22,7 +22,7 @@ function table.GetNew(entity, params)
 	function Update(deltaTime) 
 		if acumulatedDT > lastTime and data.currFish < maxFish then
             acumulatedDT = acumulatedDT - lastTime;
-            --print("Spawning fesh");
+            print("Spawning fesh");
             --print(acumulatedDT);
                 local fish = SceneManager:GetCurrentScene():InstantiatePrefab(prefabs[math.random(#prefabs)]);
                 local rbFish = fish:GetComponent("Rigidbody").type;

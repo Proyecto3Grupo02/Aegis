@@ -30,12 +30,12 @@ function table.GetNew(entity, params)
 		random2 = 0;
 		rigidbody:SetAngular();
 		print(data.bait:GetName());
+		rigidbody:SetPosition(Aegis.Maths.Vector3(0,-57,0));
+		rigidbody:FreezeRot(true,false,true)
     end;
 
 	function Update(deltaTime) 
-		if rigidbody.position.y > -40 then
-			rigidbody:SetPosition(Aegis.Maths.Vector3(0,-57,0));
-		end;
+		
 		if acumulatedDT > lastTime then
 			canRoot=true;
 			root = math.random(-10,10);
@@ -52,10 +52,7 @@ function table.GetNew(entity, params)
 		
 		rigidbody:SetRotationEuler(transform.localEulerAngles + Aegis.Maths.Vector3(0,root / 10,0));
 		rigidbody:AccelerateTo(transform.forward * -1 * 7, 10000000);
-		if rigidbody.position.y > -40 then
-			print(rigidbody.position.y);
-			rigidbody:SetPosition(Aegis.Maths.Vector3(0,-57,0));
-		end;
+		
 		
 		if ray then
 			local dest = transform.forward * -1;

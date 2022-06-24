@@ -69,7 +69,7 @@ protected:
 	float mass;
 	bool useGravity;
 	bool isKinematic;
-	std::vector<bool> freezePosition;
+	
 	std::vector<bool> freezeRotation;
 
 	void createRigidBodyComponent(RigidBodyType rbType, Vector3 pos, Vector3 scale, Vector4 rotation, std::string bodyMeshName = "", bool isConvex = true);
