@@ -39,8 +39,32 @@ La solución del motor viene estructurada en proyectos, cada uno encargado de re
 ### AegisCommon:
 ### AegisEngine:
 ### AegisGraphics:
+
 ### AegisPhysics:
+AegisPhysics utiliza la librería **Bullet** para gestionar las físicas.
+
+#### DebugDrawer.
+OgreDebugDrawer hereda de **btIDebugDraw** y **Ogre::FrameListener** y se encarga de dibujar las aristas del cubo definido por el collider de una entidad física.
+
+#### MotionState:
+MotionState se encarga de la sincronizar la posición/rotación del **Transform** con la del **Rigidbody** y viceversa, mediante los métodos **getWorldTransform** y **setWorldTransform**.
+
+#### OgreBulletUtils:
+OgreBulletUtils contiene funciones para realizar la conversión de objetos de Ogre a objetos de Bullet, y viceversa.
+
+#### PhysicsMain:
+PhysicsMain hereda de **Singleton**, y se encarga de gestionar las físicas, principalmente las colisiones entre **Rigidbodies** mediante el **map<std::pair<RigidBody*, RigidBody*>, bool> contact**.
+
+En la constructora inicializa las cosas de Bullet, y en caso de que esté en modo DEBUG, también crea un **OgreDebugDrawer**.
+
+EXPLICAR CollisionEnterCallbacks, update, collisionEntersCallback!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+#### Rigidbody:
+Rigidbody crea una entidad física en Bullet. Contiene métodos setter y get para modificar sus atributos.
+
 ### AegisScripting:
+AegisScripting es el eslavón del motor que une C++ con Lua.
+
 #### LuaBasic:
 Contiene unicamente los include de Lua. Tiene como función reducir el número de includes en otros scripts.
 
