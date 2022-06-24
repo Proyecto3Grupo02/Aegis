@@ -1,3 +1,5 @@
+-- Play unico (menu con loop)
+
 local NAME = "PlayOnInit";
 
 local table = {};
@@ -9,8 +11,7 @@ function table.GetNew(entity, params)
 
     function Init() 
 		local sonic = component.entity:GetComponent("SoundEmitter").type;
-        
-        sonic:play(sonic.data.sound);
+        sonic:PlayMusic();
 
     end;
    
@@ -19,7 +20,6 @@ function table.GetNew(entity, params)
 end;
 return table;
 
--- Play unico (menu con loop)
 -- Play tecla
 -- Play raton
 -- Play collision
