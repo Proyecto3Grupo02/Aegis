@@ -260,10 +260,11 @@ void AegisMain::gameLoop()
 			}
 
 			UI->update(GameTime->getDeltaTime()); // boton
-			
+
 			SceneMngr->updateCurrentScene(GameTime->getDeltaTime());
 			SceneMngr->preRenderScene();
 			SoundSys->update(GameTime->getDeltaTime());
+
 			OgreWrap->render();
 			SceneMngr->refresh();
 			Uint32 frameTime = SDL_GetTicks() - GameTime->getFrameStartTime();
@@ -288,6 +289,7 @@ void AegisMain::convertObjectToLua()
 	UISystem::ConvertToLua(state);
 	Entity::ConvertToLua(state);
 	SoundSystem::ConvertToLua(state);
+
 	// COMPONENTS
 	Component::ConvertToLua(state);
 	AegisComponent::ConvertToLua(state);

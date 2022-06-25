@@ -11,9 +11,7 @@ function table.GetNew(entity, params)
 
     function Init() 
 		local sonic = component.entity:GetComponent("SoundEmitter").type;
-        --sonic:PlayMusic();
-        
-        sonic:playMusic(sonic.data.sound);
+        sonic:PlayMusic();
 
     end;
    

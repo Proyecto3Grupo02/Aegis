@@ -70,13 +70,12 @@ Sound* SoundSystem::createSound(const std::string& name, SoundMode mode)
 }
 
 /// <summary>
-/// Ejecuta el sonido //actualiza la lista de canales a reproducir en update
+/// Ejecuta el sonido
 /// </summary>
 /// <param name="name"> Nombre del efecto </param>
 /// <returns></returns>
 FMOD::Channel* SoundSystem::playSound(const std::string& name)
 {
-	
 	Channel* channel;
 	Sound* sound = getSound(name);
 	if (sound == nullptr) return nullptr;
@@ -96,9 +95,6 @@ FMOD::Channel* SoundSystem::playMusic(const std::string& name)
 	Channel* channel;
 	Sound* sound = getSound(name);
 	if (sound == nullptr) return nullptr;
-	/// ////////////LOOP
-	channel->setMode(FMOD_LOOP_NORMAL);
-	channel->setLoopCount(-1);
 
 	FMOD_RESULT result = system->playSound(sound, music, false, &channel);
 	ERRCHECK(result);
