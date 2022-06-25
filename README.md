@@ -94,6 +94,7 @@ Crea un **Rigidbody** del proyecto **AegisPhysics** y lo guarda en un puntero. T
 También cuenta con una **list<RigidbodyComponent*>::iterator physicsEntityIt** de sis mismo para cuando haya que borrarlo.
 
 #### SoundEmitterComponent:
+??????
 
 #### Entity:
 Entity hereda de **ILuaObject**. Cuenta con los siguientes atributos:
