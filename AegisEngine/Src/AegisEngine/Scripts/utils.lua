@@ -245,6 +245,7 @@ funcs.ParseUI = function (object)
 	local uiO = UISystem:CreateUIElem(object.data);
 	local uiData = object.data.uiData;
 	if uiData ~= nil then
+		print(uiO:GetName() .. " tiene UIData");
 		funcs.CopyComponentDataForced(uiData, uiO.data);
 	end
 	return uiO;

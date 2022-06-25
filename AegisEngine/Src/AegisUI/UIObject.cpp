@@ -159,7 +159,7 @@ void UIObject::update(float deltaTime)
 	}
 #else
 	if (!updateFunc.isNil())
-		updateFunc();
+		updateFunc(getData(), type, deltaTime);
 #endif
 }
 

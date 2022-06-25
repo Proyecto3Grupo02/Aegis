@@ -31,7 +31,7 @@ void Button::buttonClickCallback()
 	}
 #else
 	if (!callback.isNil())
-		callback();
+		callback(getData(), getType());
 #endif
 }
 

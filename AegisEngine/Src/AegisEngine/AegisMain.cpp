@@ -35,7 +35,7 @@
 #define GameTime GameLoopData::getInstance()
 #define UI UISystem::getInstance()
 #define SceneMngr SceneManager::getInstance()
-#define SoundSys SoundSystem::getInstance()
+//#define SoundSys SoundSystem::getInstance()
 
 AegisMain::AegisMain() : IInitializable()
 {
@@ -109,7 +109,7 @@ void AegisMain::free()
 	OgreWrapper::tryDeleteInstance();
 	DebugManager::tryDeleteInstance();
 	InputSystem::tryDeleteInstance();
-	SoundSystem::tryDeleteInstance();
+	//SoundSystem::tryDeleteInstance();
 	LuaManager::tryDeleteInstance();
 }
 
@@ -263,7 +263,7 @@ void AegisMain::gameLoop()
 
 			SceneMngr->updateCurrentScene(GameTime->getDeltaTime());
 			SceneMngr->preRenderScene();
-			SoundSys->update(GameTime->getDeltaTime());
+			//SoundSys->update(GameTime->getDeltaTime());
 
 			OgreWrap->render();
 			SceneMngr->refresh();
