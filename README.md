@@ -272,6 +272,10 @@ Aegis Engine ha sido diseñado y creado por **Kirin Studios** usando las siguien
 
 * **Ogre3D** (Copyright (c) 2000-2013 [Torus Knot Software Ltd](https://www.ogre3d.org/))
 
+  
+* **OgreOverlays** (Copyright (c) 2000-2013 [Torus Knot Software Ltd](https://www.ogre3d.org/))
+  
+
 * **Bullet Continuous Collision Detection and Physics Library** (Copyright (c) 2003-2006 [Erwin Coumans](https://pybullet.org/Bullet/phpBB3/))
 
 * **FMOD Studio** (Copyright (c)[Firelight Technologies Pty Ltd](https://www.fmod.com/))
