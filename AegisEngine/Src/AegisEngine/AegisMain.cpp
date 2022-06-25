@@ -35,6 +35,7 @@
 #define GameTime GameLoopData::getInstance()
 #define UI UISystem::getInstance()
 #define SceneMngr SceneManager::getInstance()
+#define SoundSys SoundSystem::getInstance()
 
 AegisMain::AegisMain() : IInitializable()
 {
@@ -262,6 +263,7 @@ void AegisMain::gameLoop()
 
 			SceneMngr->updateCurrentScene(GameTime->getDeltaTime());
 			SceneMngr->preRenderScene();
+			SoundSys->update(GameTime->getDeltaTime());
 
 			OgreWrap->render();
 			SceneMngr->refresh();
@@ -286,6 +288,7 @@ void AegisMain::convertObjectToLua()
 	SceneManager::ConvertToLua(state);
 	UISystem::ConvertToLua(state);
 	Entity::ConvertToLua(state);
+	SoundSystem::ConvertToLua(state);
 
 	// COMPONENTS
 	Component::ConvertToLua(state);

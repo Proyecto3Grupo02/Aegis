@@ -89,6 +89,8 @@ public:
 	SoundSystem(std::string soundPaths);
 	virtual ~SoundSystem();
 
+	void update(float deltaTime);
+	
 	// Setters y getters
 	void setMusicVolume(float volume);
 	void setSoundEffectsVolume(float volume);
@@ -112,7 +114,6 @@ private:
 
 	Sound* createSound(const std::string& name,  SoundMode mode);
 
-	void update(float deltaTime);
 	void setListenerAttributes(Vector3& position, Vector3& forward, Vector3& up);
 
 	void removeEmitter(EmitterData* emitter);
