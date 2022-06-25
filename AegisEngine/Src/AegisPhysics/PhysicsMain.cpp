@@ -308,6 +308,8 @@ btRigidBody* PhysicsSystem::createRigidBody(RigidBody::RigidBodyType rbType, flo
 	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, rbShape, localInertia);
 	btRigidBody* body = new btRigidBody(rbInfo);
 
+	body->setDamping(0.9999f, 0.9999f);
+
 	if (isKinematic)
 		body->setCollisionFlags(btCollisionObject::CF_KINEMATIC_OBJECT);
 	else

@@ -260,6 +260,7 @@ void RigidbodyComponent::ConvertToLua(lua_State* state)
 		addFunction("RayCastWorld", &RigidbodyComponent::raycast).
 		addFunction("SetRotationEuler", &RigidbodyComponent::setRotationEuler).
 		addFunction("SetPosition", &RigidbodyComponent::setPosition).
+		addFunction("ResetVelocity", &RigidbodyComponent::resetVelocity).
 		addFunction("SetAngular", &RigidbodyComponent::setAngular).
 		addFunction("FreezeRot", &RigidbodyComponent::freezeRot).
 		addProperty("isActive", &RigidbodyComponent::isActive).

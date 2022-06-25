@@ -56,6 +56,7 @@ public:
 	friend class RigidbodyComponent;
 	void setAngularFactor()  ;
 	void setLinearVelocity();
+	void resetVelocity();
 
 	//void setRot(Vector3);
 	void disableCol();

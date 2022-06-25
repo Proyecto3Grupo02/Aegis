@@ -137,8 +137,8 @@ void RigidBody::setRbPosition(Vector3 vec)
 	btTransform t = PhysicsSys->parseToBulletTransform(vec, getRotation());
 	rigidBody->setWorldTransform(t);
 	rigidBody->getMotionState()->setWorldTransform(t);
-	rigidBody->setLinearVelocity({ 0, 0, 0 });
-	rigidBody->setAngularVelocity({ 0, 0, 0 });
+	//rigidBody->setLinearVelocity({ 0, 0, 0 });
+	//rigidBody->setAngularVelocity({ 0, 0, 0 });
 	rigidBody->clearForces();
 }
 
@@ -146,8 +146,8 @@ void RigidBody::setRbRotation(Vector4 vec)
 {
 	btTransform t = PhysicsSys->parseToBulletTransform(getRbPosition(), vec);
 	rigidBody->setWorldTransform(t);
-	rigidBody->setLinearVelocity({ 0, 0, 0 });
-	rigidBody->setAngularVelocity({ 0, 0, 0 });
+	//rigidBody->setLinearVelocity({ 0, 0, 0 });
+	//rigidBody->setAngularVelocity({ 0, 0, 0 });
 	rigidBody->clearForces();
 }
 
@@ -206,4 +206,9 @@ void RigidBody::disableCol()
 void RigidBody::setLinearVelocity() {
 	btVector3 velocity = rigidBody->getAngularVelocity();
 	rigidBody->setAngularFactor({ velocity.getX(), 0, velocity.getZ() });
+}
+
+void RigidBody::resetVelocity()
+{
+	rigidBody->setLinearVelocity({0.0, 0.0, 0.0});
 }

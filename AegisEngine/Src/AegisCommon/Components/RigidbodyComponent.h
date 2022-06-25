@@ -42,6 +42,7 @@ public:
 	void addTorque(Vector3 torque);
 	void addForceForward(float force);
 
+	void resetVelocity() { rigidbody->resetVelocity(); };
 	void setAngular() { rigidbody->setAngularFactor(); }
 	void resetForce();
 
