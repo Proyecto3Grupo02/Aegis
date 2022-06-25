@@ -51,7 +51,6 @@ function table.GetNew(entity, params)
         if(Input:KeyWasPressed("Space"))then
             fishing = not fishing;
             renderer.visible = not renderer.visible;
-            rigidbody:ResetVelocity()
         end;
         if (fishing)then
             cameraTf.position = Aegis.Maths.Vector3(0,0,0)
@@ -88,8 +87,8 @@ function table.GetNew(entity, params)
 
         -- MOVE CHARACTER:
         local force = 10;
-        local targetSpeed = 200;
-        local maxAcceleration = 200;
+        local targetSpeed = 1000;
+        local maxAcceleration = 1000;
         forward = cameraTf.forward;
         forward.y = 0;
         if(fishing)then

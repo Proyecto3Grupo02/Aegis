@@ -286,10 +286,25 @@ local scene = {
 		type = "UI",
 		data = 
 			{
+				type = "Image",--Button/Image
+				name = "FishLogo",
+				material = "fish_material",
+				order = 0,
+				x = 0.01,
+				y = 0.025,
+				width = 0.08,
+				height = 0.08,
+				visible = true,
+			},
+	},
+	{
+		type = "UI",
+		data = 
+			{
 				type = "Text",
 				name = "scoreText",
 				order = 0,
-				x = 0.025,
+				x = 0.1,
 				y = 0.025,
 				charheight = 0.1,
 				visible = true,
@@ -308,22 +323,17 @@ local scene = {
 			},
 		}
 	},
-	{
-		type = "Entity",
-		name = "MusicLoop",
-		components = {			
-			
-			{
-				type ="SoundEmitter",
-				data = {
-					sound = "Game-Acoustic"
-				}
-			},	
-			{
-				type = "PlayOnInit",
-				
-			},
-		}
-	},
+	-- {
+	-- 	type = "Entity",
+	-- 	name = "MusicLoop",
+	-- 	components = {
+	-- 		{
+	-- 			type ="SoundEmitter",
+	-- 			data = {
+	-- 				sound = "Menu-Ukulele"
+	-- 			}
+	-- 		}
+	-- 	}
+	-- },
 };
 return scene;
