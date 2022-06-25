@@ -311,13 +311,18 @@ local scene = {
 	{
 		type = "Entity",
 		name = "MusicLoop",
-		components = {
+		components = {			
+			
 			{
 				type ="SoundEmitter",
 				data = {
-					sound = "Menu-Ukulele"
+					sound = "Game-Acoustic"
 				}
-			}
+			},	
+			{
+				type = "PlayOnInit",
+				
+			},
 		}
 	},
 };
