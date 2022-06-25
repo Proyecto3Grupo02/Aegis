@@ -265,18 +265,6 @@ Aegis Engine  (carpeta principal)
 * **AegisEngine.sln**
 * **build_up.bat:** Archivo .bat que compila las librerías en Dependencias.
 
-## Repositorio GitHub
-El repositorio de GitHub incluiye:
-* Readme.md con el GDD del juego y el documento de la arquitectura.
-* Carpeta de la solución con el proyecto del motor y el proyecto del juego, sin ningún tipo de archivo innecesario (.dll, archivos temporales…)
-
-## Pipeline
-* Se crea la historia de usuario.
-* Durante un meeting se le asigna a uno o más desarrolladores en función de los puntos.
-* Las personas encargadas de esta historia crean una rama en Github con una pull request en la que se encargaran de esa historia.
-* Una vez finalizada, en un meeting se comprobará su validez.
-* Se une esta rama a la principal y se finaliza la historia.
-
 ## Licencias
 
 Aegis Engine ha sido diseñado y creado por **Kirin Studios** usando las siguientes librerías:
