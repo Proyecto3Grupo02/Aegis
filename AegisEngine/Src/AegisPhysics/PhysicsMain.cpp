@@ -123,10 +123,9 @@ void PhysicsSystem::clear() {
 /// Do some simulation
 void PhysicsSystem::update(float timeStep, float fixedTimeStep, int maxSteps) {
 	///-----stepsimulation_start-----
-	dynamicsWorld->stepSimulation(timeStep, maxSteps, fixedTimeStep);
-	dynamicsWorld->debugDrawWorld();
-	auto a = dynamicsWorld->getDebugDrawer();
-	//btIDebugDraw::drawBox(btVector3(0, 0, 0), btVector3(20, 20, 20), btVector3(1, 0, 0));
+	dynamicsWorld->stepSimulation(timeStep, maxSteps, fixedTimeStep);	
+	checkCollision();
+	
 	dynamicsWorld->clearForces();
 #if defined _DEBUG
 	dynamicsWorld->debugDrawWorld();
