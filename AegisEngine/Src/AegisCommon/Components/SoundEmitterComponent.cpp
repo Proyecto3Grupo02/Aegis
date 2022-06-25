@@ -18,6 +18,7 @@ void SoundEmitterComponent::playMusic()
 
 void SoundEmitterComponent::playSound()
 {
+	//llama soundsystem.cpp->playSound y agrega la cancion a la lista
 	SoundSystem::getInstance()->playSound(soundName);
 }
 

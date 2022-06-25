@@ -109,6 +109,7 @@ public:
 	void stopSound(const std::string& name);
 
 	static void ConvertToLua(lua_State* state);
+	void update(float deltaTime);
 private:
 	
 
