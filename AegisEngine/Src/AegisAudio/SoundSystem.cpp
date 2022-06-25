@@ -95,8 +95,10 @@ FMOD::Channel* SoundSystem::playMusic(const std::string& name)
 	Channel* channel;
 	Sound* sound = getSound(name);
 	if (sound == nullptr) return nullptr;
-
 	FMOD_RESULT result = system->playSound(sound, music, false, &channel);
+	/// ////////////LOOP
+	channel->setMode(FMOD_LOOP_NORMAL);
+	channel->setLoopCount(-1);
 	ERRCHECK(result);
 	channel->set3DMinMaxDistance(50, 10000);
 	return channel;
