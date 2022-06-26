@@ -335,7 +335,8 @@ local scene = {
 				data = {
 					text = "@scoreText",
 					win = "@WinMsg",
-					home = "@HomeButton"
+					home = "@HomeButton",
+					camera = "@MainCamera"
 				}
 			},
 		}

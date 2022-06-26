@@ -48,7 +48,6 @@ AegisMain::AegisMain() : IInitializable()
 /// <returns></returns>
 bool AegisMain::init()
 {
-
 	GameConfig *config = searchConfig();
 	if (config == nullptr)
 		return false;
@@ -263,7 +262,7 @@ void AegisMain::gameLoop()
 
 			SceneMngr->updateCurrentScene(GameTime->getDeltaTime());
 			SceneMngr->preRenderScene();
-			//SoundSys->update(GameTime->getDeltaTime());
+			SoundSys->update(GameTime->getDeltaTime());
 
 			OgreWrap->render();
 			SceneMngr->refresh();

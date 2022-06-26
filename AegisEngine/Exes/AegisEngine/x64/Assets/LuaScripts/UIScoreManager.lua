@@ -8,6 +8,7 @@ function table.GetNew(entity, params)
     data.text = "nil";
     data.win = "WinMsg";
     data.home ="HomeButton";
+    data.camera = "mainCam";
     local numFish;
     function Init()
         numFish = 10;
@@ -34,6 +35,8 @@ function table.GetNew(entity, params)
                 print("Enhorabuena! Todos los peces han sido pescados.\n");
                 data.win:SetVisible(true);
                 -- DEBERIA BLOQUEARSE LA CAMARA && DESPLOQUEAR RATON
+                data.camera:GetComponent("CameraTest").enabled = false;
+                Input:BlockMouse(false);
                 data.home:SetVisible(true);
             end;
         end;
