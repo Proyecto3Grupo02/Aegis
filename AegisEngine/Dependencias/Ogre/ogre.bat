@@ -3,15 +3,15 @@
 set BUILD_DIR=.\build
 set SOURCE_DIR=.\src
 set CMAKE_DIR=..\cmake\bin\cmake.exe
+set SDL2_BUILD_SOL=.\build\SDL2-build\SDL2.sln
+set OGRE_BUILD_SOL=.\build\OGRE.sln
 set DEBUG_DLLS_DIR=..\..\Exes\AegisEngine\x64\Debug
 set RELEASE_DLLS_DIR=..\..\Exes\AegisEngine\x64\Release
-set OGRE_BUILD_SOL=.\build\OGRE.sln
-set SDL2_BUILD_SOL=.\build\SDL2-build\SDL2.sln
 
 if exist %BUILD_DIR% goto buildsol
 mkdir %BUILD_DIR%
 
-:: Creamos el proyecto y lo compilamos en debug y release
+:: Building Ogre project
 %CMAKE_DIR% -S %SOURCE_DIR% -B %BUILD_DIR% 
         -D CMAKE_CONFIGURATION_TYPES:STRING 
         -D CMAKE_CONFIGURATION_TYPES:STRING=Debug;Release 
@@ -29,7 +29,7 @@ mkdir %BUILD_DIR%
 echo Ogre and SDL build generated
 
 :buildsol
-::Compilamos Ogre y SDL
+::Compiling Ogre and SDL projects
 echo Compiling SDL2
 msbuild %SDL2_BUILD_SOL%   /p:platform=x64 /p:configuration=Debug
 msbuild %SDL2_BUILD_SOL%   /p:platform=x64 /p:configuration=Release
