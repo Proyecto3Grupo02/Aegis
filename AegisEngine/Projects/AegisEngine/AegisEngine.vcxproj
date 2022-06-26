@@ -93,12 +93,6 @@ xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo\S
 xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo\SDL2.pdb "$(OutDir)"
 xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\Build\SDL2-build\RelWithDebInfo\SDL2main.pdb "$(OutDir)"
 xcopy /y /d "$(SolutionDir)"\Dependencias\fmod\lib\x64\fmod.dll "$(OutDir)"
-xcopy /y /d "$(SolutionDir)"\Dependencias\SDL2_image-2.0.1\lib\x64\SDL2_image.dll "$(OutDir)"
-xcopy /y /d "$(SolutionDir)"\Dependencias\SDL2_image-2.0.1\lib\x64\zlib1.dll "$(OutDir)"
-xcopy /y /d "$(SolutionDir)"\Dependencias\SDL2_image-2.0.1\lib\x64\libwebp-4.dll "$(OutDir)"
-xcopy /y /d "$(SolutionDir)"\Dependencias\SDL2_image-2.0.1\lib\x64\libtiff-5.dll "$(OutDir)"
-xcopy /y /d "$(SolutionDir)"\Dependencias\SDL2_image-2.0.1\lib\x64\libpng16-16.dll "$(OutDir)"
-xcopy /y /d "$(SolutionDir)"\Dependencias\SDL2_image-2.0.1\lib\x64\libjpeg-9.dll "$(OutDir)"
 xcopy /y /d "$(SolutionDir)"\Dependencias\Ogre\build\bin\debug\OgreOverlay_d.dll "$(OutDir)" 
 mkdir "$(OutDir)\Resources\Scripts" 
 xcopy /y "$(SolutionDir)\Src\AegisEngine\Scripts"  "$(OutDir)\Resources\Scripts" /i</Command>
