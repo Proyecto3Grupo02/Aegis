@@ -104,47 +104,47 @@ void RigidbodyComponent::syncRigidbodyToTransform()
 		t = t->getParent()->getTransform();
 	}*/
 
-	// Ajuste en base a la rotación
-	//if (t->hasParent())
-	//{
-	//	float offset = tPos.magnitude();
-	//	Ogre::Quaternion rotPadreQ = t->getParent()->getTransform()->getRotation();
-	//	Vector3 rotPadre;
-	//	rotPadre.x = -2 * (rotPadreQ.x * rotPadreQ.z - rotPadreQ.w * rotPadreQ.y);
-	//	rotPadre.y = 2 * (rotPadreQ.y * rotPadreQ.z + rotPadreQ.w * rotPadreQ.x);
-	//	rotPadre.z = 1 - 2 * (rotPadreQ.x * rotPadreQ.x + rotPadreQ.y * rotPadreQ.y);
-	//	//rotPadre = rotPadre.scalarMult(Vector3(0, 0, 1));
-	//	/*std::cout << "ROTACION DE LA BARCA\n";
-	//	std::cout << rotPadre.x;
-	//	std::cout << "\n";
-	//	std::cout << rotPadre.y;
-	//	std::cout << "\n";
-	//	std::cout << rotPadre.z;
-	//	std::cout << "\n";std::cout << "\n";*/
-	//	rotPadre = rotPadre.getNormalized();
-	//	rotPadre = rotPadre*offset;
-	//	rotPadre = rotPadre.inverse();
-	//	rbPos = rotPadre + t->getParent()->getTransform()->getPosition();
-	//	rigidbody->setRbPosition(rbPos);
-	//	std::cout << "POSICION DEF DEL RIGIDBODY\n";
-	//	std::cout << rbPos.x;
-	//	std::cout << "\n";
-	//	std::cout << rbPos.y;
-	//	std::cout << "\n";
-	//	std::cout << rbPos.z;
-	//	std::cout << "\n";
-	//	std::cout << "\n";
+	// Ajuste en base a la rotaciï¿½n
+	if (t->hasParent())
+	{
+		float offset = tPos.magnitude();
+		Ogre::Quaternion rotPadreQ = t->getParent()->getTransform()->getRotation();
+		Vector3 rotPadre;
+		rotPadre.x = -2 * (rotPadreQ.x * rotPadreQ.z - rotPadreQ.w * rotPadreQ.y);
+		rotPadre.y = 2 * (rotPadreQ.y * rotPadreQ.z + rotPadreQ.w * rotPadreQ.x);
+		rotPadre.z = 1 - 2 * (rotPadreQ.x * rotPadreQ.x + rotPadreQ.y * rotPadreQ.y);
+		//rotPadre = rotPadre.scalarMult(Vector3(0, 0, 1));
+		/*std::cout << "ROTACION DE LA BARCA\n";
+		std::cout << rotPadre.x;
+		std::cout << "\n";
+		std::cout << rotPadre.y;
+		std::cout << "\n";
+		std::cout << rotPadre.z;
+		std::cout << "\n";std::cout << "\n";*/
+		rotPadre = rotPadre.getNormalized();
+		rotPadre = rotPadre*offset;
+		rotPadre = rotPadre.inverse();
+		rbPos = rotPadre + t->getParent()->getTransform()->getPosition();
+		rigidbody->setRbPosition(rbPos);
+		//std::cout << "POSICION DEF DEL RIGIDBODY\n";
+		//std::cout << rbPos.x;
+		//std::cout << "\n";
+		//std::cout << rbPos.y;
+		//std::cout << "\n";
+		//std::cout << rbPos.z;
+		//std::cout << "\n";
+		//std::cout << "\n";
 
-	//	std::cout << "POSICION DEF DEL TRANSFORM\n";
-	//	std::cout << t->getPosition().x + t->getParent()->getTransform()->getPosition().x;
-	//	std::cout << "\n";
-	//	std::cout << t->getPosition().y + t->getParent()->getTransform()->getPosition().y;
-	//	std::cout << "\n";
-	//	std::cout << t->getPosition().z + t->getParent()->getTransform()->getPosition().z;
-	//	std::cout << "\n";
-	//	std::cout << "\n";
-	//	return;
-	//}
+		//std::cout << "POSICION DEF DEL TRANSFORM\n";
+		//std::cout << t->getPosition().x + t->getParent()->getTransform()->getPosition().x;
+		//std::cout << "\n";
+		//std::cout << t->getPosition().y + t->getParent()->getTransform()->getPosition().y;
+		//std::cout << "\n";
+		//std::cout << t->getPosition().z + t->getParent()->getTransform()->getPosition().z;
+		//std::cout << "\n";
+		//std::cout << "\n";
+		return;
+	}
 
 	
 }
