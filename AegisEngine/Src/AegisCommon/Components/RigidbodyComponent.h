@@ -14,7 +14,7 @@ class Entity;
 class RigidbodyComponent : public AegisComponent, public ILuaObject
 {
 public:
-	RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m = 1, bool useG = true, bool isK = false,bool isT =false,float scale = 1);
+	RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m = 1, bool useG = true, bool isK = false,bool isT =false,float scale = 1, float damp = 0);
 	virtual ~RigidbodyComponent();
 
 	virtual void init() override {};
@@ -47,7 +47,7 @@ public:
 	void resetVelocity();
 	void setAngular();
 	void setDamping(float damp);
-	float getDamping();
+	float getDamping() const;
 	void resetForce();
 
 	//FREEZE ROT------------------------------------

@@ -3,13 +3,13 @@
 #include "Vector4.h"
 #include <btBulletDynamicsCommon.h>
 
-RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, Vector4 rotation, RigidbodyComponent* r, float m, bool useG, bool isK, bool isT) :
-	mass(m), useGravity(useG), isKinematic(isK) {
+RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, Vector4 rotation, RigidbodyComponent* r, float m, bool useG, bool isK, bool isT, float damp) :
+	mass(m), useGravity(useG), isKinematic(isK), damping(damp) {
 	
 	freezeRotation = std::vector<bool>(3, false);
 	rbC = r;
 	trigger = isT;
-	createRigidBodyComponent(RigidBodyType::Box, pos, scale, rotation, bodyMeshName);
+	createRigidBodyComponent(RigidBodyType::Box, pos, scale, rotation, bodyMeshName, damp);
 	if (trigger)
 		rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
 	
@@ -31,9 +31,9 @@ RigidBody::~RigidBody()
 	rigidBody = nullptr;
 }
 
-void RigidBody::createRigidBodyComponent(RigidBodyType rbType, Vector3 pos, Vector3 scale, Vector4 rotation, std::string bodyMeshName, bool isConvex)
+void RigidBody::createRigidBodyComponent(RigidBodyType rbType, Vector3 pos, Vector3 scale, Vector4 rotation, std::string bodyMeshName, bool isConvex, float damp)
 {
-	rigidBody = PhysicsSystem::getInstance()->createRigidBody(rbType, mass, scale, pos, rotation, bodyMeshName, isConvex, isKinematic, useGravity);
+	rigidBody = PhysicsSystem::getInstance()->createRigidBody(rbType, mass, scale, pos, rotation, bodyMeshName, isConvex, isKinematic, useGravity, damp);
 	rigidBody->setUserPointer(this);
 }
 

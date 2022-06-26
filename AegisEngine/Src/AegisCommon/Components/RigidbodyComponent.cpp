@@ -6,7 +6,7 @@
 
 #include <Scene.h>
 
-RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m, bool useG, bool isK, bool isT, float scale)
+RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m, bool useG, bool isK, bool isT, float scale, float damp)
 	: AegisComponent("Rigidbody", ent)
 {
 	transform = ent->getTransform();
@@ -14,7 +14,7 @@ RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, fl
 
 	auto rot = transform->getRotation();
 	Vector4 rotVec(rot.x, rot.y, rot.z, rot.w);
-	rigidbody = new RigidBody(bodyMeshName, transform->getPosition(), transform->getScale() * scale, rotVec, this, m, useG, isK, isT);
+	rigidbody = new RigidBody(bodyMeshName, transform->getPosition(), transform->getScale() * scale, rotVec, this, m, useG, isK, isT, damp);
 	mEntity_->getScene()->addPhysicsEntity(this);
 	setDataAsInnerType(this);
 }
@@ -195,7 +195,7 @@ void RigidbodyComponent::setDamping(float damp)
 	rigidbody->setDamping(damp);
 }
 
-float RigidbodyComponent::getDamping()
+float RigidbodyComponent::getDamping() const
 {
 	return rigidbody->getDamping();
 }
@@ -259,7 +259,8 @@ RigidbodyComponent* CreateRigidbody(Entity* ent, LuaRef args) //Doesn't belong t
 	bool isKinematic = LuaMngr->parseBool(args["isKinematic"], false);
 	bool isTrigger = LuaMngr->parseBool(args["isTrigger"], false);
 	float scale = LuaMngr->parseFloat(args["scale"], 1);
-	return new RigidbodyComponent(ent, bodyName, mass, useGravity, isKinematic, isTrigger, scale);
+	float damping = LuaMngr->parseFloat(args["damping"], 0);
+	return new RigidbodyComponent(ent, bodyName, mass, useGravity, isKinematic, isTrigger, scale, damping);
 }
 
 void RigidbodyComponent::enableCollision(bool enable_) {
@@ -280,7 +281,6 @@ void RigidbodyComponent::ConvertToLua(lua_State* state)
 		addProperty("trigger", &RigidbodyComponent::getTrigger, &RigidbodyComponent::setTrigger).
 		addProperty("position", &RigidbodyComponent::getPosition, &RigidbodyComponent::setPosition).
 		addProperty("useGravity", &RigidbodyComponent::getUsingGravity, &RigidbodyComponent::setUsingGravity).
-		addProperty("damping", &RigidbodyComponent::getDamping, &RigidbodyComponent::setDamping).
 		addFunction("AddForce", &RigidbodyComponent::addForce).
 		addFunction("GetForce", &RigidbodyComponent::getForce).
 		addFunction("ClearForce", &RigidbodyComponent::resetForce).

@@ -19,7 +19,7 @@ public:
 	enum RigidBodyType { Box, Sphere, CapsuleX, CapsuleZ, Custom };
 
 
-	RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, Vector4 rotation, RigidbodyComponent* r, float m = 1, bool useG = true, bool isK = false,bool isT=false);
+	RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, Vector4 rotation, RigidbodyComponent* r, float m = 1, bool useG = true, bool isK = false,bool isT=false, float damp = 0);
 	void init();
 	~RigidBody();
 	//void fixedUpdate();
@@ -79,7 +79,7 @@ protected:
 	
 	std::vector<bool> freezeRotation;
 
-	void createRigidBodyComponent(RigidBodyType rbType, Vector3 pos, Vector3 scale, Vector4 rotation, std::string bodyMeshName = "", bool isConvex = true);
+	void createRigidBodyComponent(RigidBodyType rbType, Vector3 pos, Vector3 scale, Vector4 rotation, std::string bodyMeshName = "", bool isConvex = true, float damp = 0.0f);
 };
 
 #endif // ! RIGIDBODY_H

@@ -283,7 +283,7 @@ btCollisionShape* PhysicsSystem::createBodyShape(RigidBody::RigidBodyType rbType
 	return rbShape;
 }
 
-btRigidBody* PhysicsSystem::createRigidBody(RigidBody::RigidBodyType rbType, float _mass, Vector3 _dim, Vector3 _pos, Vector4 rotation, std::string bodyMeshName, bool isConvex, bool isKinematic, bool useGravity) {
+btRigidBody* PhysicsSystem::createRigidBody(RigidBody::RigidBodyType rbType, float _mass, Vector3 _dim, Vector3 _pos, Vector4 rotation, std::string bodyMeshName, bool isConvex, bool isKinematic, bool useGravity, float damp) {
 	btCollisionShape* rbShape = createBodyShape(rbType, _dim, bodyMeshName, isConvex);
 	rbShape->setMargin(0.0f);
 
@@ -307,7 +307,7 @@ btRigidBody* PhysicsSystem::createRigidBody(RigidBody::RigidBodyType rbType, flo
 	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, rbShape, localInertia);
 	btRigidBody* body = new btRigidBody(rbInfo);
 
-	//body->setDamping(0.9999f, 0.9999f);
+	body->setDamping(damp, damp);
 
 	if (isKinematic)
 		body->setCollisionFlags(btCollisionObject::CF_KINEMATIC_OBJECT);
