@@ -55,7 +55,7 @@ local scene = {
 				name = "Titulo",
 				material = "nombre_material",
 				order = 1,
-				x = 0.35,
+				x = 0.3,
 				y = 0,
 				width = 0.4,
 				height = 0.2,
@@ -67,7 +67,7 @@ local scene = {
         type = "UI",
 		data = 
 			{
-				type = "Image",--Button/Image
+				type = "Button",--Button/Image
 				name = "Logo",
 				material = "logo_aegis_material",
 				order = 1,
@@ -76,6 +76,12 @@ local scene = {
 				width = 0.1,
 				height = 0.2,
 				visible = true,
+				uiData = { id = 1, image = "@Members", backButton="@Back" },
+				callback = function(uiData)
+					print("HTP");	
+					uiData.image:SetVisible(true)
+					uiData.backButton:SetVisible(true)
+				end 
 			},
 	},
 	{
@@ -86,8 +92,8 @@ local scene = {
 				name = "Play",
 				material = "start_material",
 				order = 1,
-				x = 0.475,
-				y = 0.7,
+				x = 0.4,
+				y = 0.3,
 				width = 0.2,
 				height = 0.2,
 				visible = true,
@@ -106,8 +112,8 @@ local scene = {
 				name = "Story",
 				material = "story_material",
 				order = 1,
-				x = 0,
-				y = 0.2,
+				x = 0.45,
+				y = 0.55,
 				width = 0.1,
 				height = 0.1,
 				visible = true,
@@ -127,8 +133,8 @@ local scene = {
 				name = "HowToPlay",
 				material = "htp_material",
 				order = 1,
-				x = 0,
-				y = 0.4,
+				x = 0.45,
+				y = 0.7,
 				width = 0.1,
 				height = 0.1,
 				visible = true,
@@ -172,23 +178,39 @@ local scene = {
 			},
 	},
 	{
+		type = "UI",
+		data = 
+			{
+				type = "Image",--Button/Image
+				name = "Members",
+				material = "members_material",
+				order = 3,
+				x = 0,
+				y = 0,
+				width = 0.999,
+				height = 0.999,
+				visible = false,
+			},
+	},
+	{
         type = "UI",
 		data = 
 			{
 				type = "Button",--Button/Image
 				name = "Back",
-				material = "back_material",
+				material = "home_button_material",
 				order = 4,
-				x = 0,
-				y = 0,
-				width = 0.2,
-				height = 0.2,
+				x = 0.98,
+				y = 0.02,
+				width = 0.07,
+				height = 0.11,
 				visible = false,
-				uiData = { id = 1, imageH ="@Historia", imageC = "@Controles", backButton="@Back" },
+				uiData = { id = 1, imageH ="@Historia", imageC = "@Controles", imageM ="@Members",backButton="@Back" },
 				callback = function(uiData)
 					print("BACK");	
 					uiData.imageH:SetVisible(false)
 					uiData.imageC:SetVisible(false)
+					uiData.imageM:SetVisible(false)
 					uiData.backButton:SetVisible(false)
 				end 
 			},
