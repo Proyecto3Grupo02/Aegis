@@ -301,6 +301,21 @@ local scene = {
 		type = "UI",
 		data = 
 			{
+				type = "Image",--Button/Image
+				name = "WinMsg",
+				material = "win_material",
+				order = 0,
+				x = 0.1,
+				y = 0.15,
+				width = 0.8,
+				height = 0.8,
+				visible = false,
+			},
+	},
+	{
+		type = "UI",
+		data = 
+			{
 				type = "Text",
 				name = "scoreText",
 				order = 0,
@@ -318,22 +333,24 @@ local scene = {
 			{
 				type = "UIScoreManager",
 				data = {
-					text = "@scoreText"
+					text = "@scoreText",
+					win = "@WinMsg",
+					home = "@HomeButton"
 				}
 			},
 		}
 	},
-	-- {
-	-- 	type = "Entity",
-	-- 	name = "MusicLoop",
-	-- 	components = {
-	-- 		{
-	-- 			type ="SoundEmitter",
-	-- 			data = {
-	-- 				sound = "Menu-Ukulele"
-	-- 			}
-	-- 		}
-	-- 	}
-	-- },
+	{
+		type = "Entity",
+		name = "MusicLoop",
+		components = {
+			{
+				type ="SoundEmitter",
+				data = {
+					sound = "Menu-Ukulele"
+				}
+			}
+		}
+	},
 };
 return scene;

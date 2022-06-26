@@ -5,7 +5,9 @@ function table.GetNew(entity, params)
 	local data = component.data;
 	local transform = entity.transform;
     local funcs = component.funcs;
-    data.text = "nil"
+    data.text = "nil";
+    data.win = "WinMsg";
+    data.home ="HomeButton";
     local numFish;
     function Init()
         numFish = 10;
@@ -28,6 +30,12 @@ function table.GetNew(entity, params)
         if numFish > 0 then
             numFish = numFish -1;
             data.text:SetText(numFish);
+            if numFish == 0 then
+                print("Enhorabuena! Todos los peces han sido pescados.\n");
+                data.win:SetVisible(true);
+                -- DEBERIA BLOQUEARSE LA CAMARA && DESPLOQUEAR RATON
+                data.home:SetVisible(true);
+            end;
         end;
     end; 
 

@@ -194,3 +194,21 @@ material fish_material
 		}
 	}
 }
+
+material win_material
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.5 0.5 0.5 1
+			ambient 0.5 0.5 0.5 1
+			scene_blend alpha_blend
+			texture_unit
+			{
+				texture win.jpg
+				colour_op modulate
+			}
+		}
+	}
+}
