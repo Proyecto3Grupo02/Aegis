@@ -9,7 +9,7 @@ RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, Vecto
 	freezeRotation = std::vector<bool>(3, false);
 	rbC = r;
 	trigger = isT;
-	createRigidBodyComponent(RigidBodyType::Box, pos, scale, rotation, bodyMeshName, damp);
+	createRigidBodyComponent(RigidBodyType::Box, pos, scale, rotation, bodyMeshName, isT, damping);
 	if (trigger)
 		rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
 	

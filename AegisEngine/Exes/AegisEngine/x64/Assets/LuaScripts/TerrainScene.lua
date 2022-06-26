@@ -47,7 +47,8 @@ local scene = {
 				data = 
 				{
 					scale = 5,
-					useGravity = false
+					useGravity = false,
+					damping = 0.9999
 				}
 			},
 			{
