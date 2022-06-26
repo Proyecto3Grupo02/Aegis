@@ -193,6 +193,11 @@ Vector3 RigidbodyComponent::getForce() const {
 	return rigidbody->getTotalForce();
 }
 
+bool RigidbodyComponent::getTrigger() const
+{
+	return rigidbody->isTrigger();
+}
+
 Vector3 RigidbodyComponent::getPosition() const {
 	return rigidbody->getRbPosition();
 }
@@ -204,6 +209,11 @@ void RigidbodyComponent::setPosition(Vector3 pos) {
 void RigidbodyComponent::setRotationEuler(Vector3 rot) {
 	Vector4 eulerRot = MathUtils::EulerToVec4(rot);
 	rigidbody->setRbRotation(eulerRot);
+}
+
+void RigidbodyComponent::setTrigger(bool trigger) 
+{
+	 rigidbody->setTrigger(trigger);
 }
 
 //FREEZE ROT------------------------------------------------------------------------------------------------
@@ -247,6 +257,7 @@ void RigidbodyComponent::ConvertToLua(lua_State* state)
 		beginNamespace("NativeComponents").
 		addFunction("CreateRigidbody", CreateRigidbody).
 		deriveClass<RigidbodyComponent, AegisComponent>("Rigidbody").
+		addProperty("trigger", &RigidbodyComponent::getTrigger, &RigidbodyComponent::setTrigger).
 		addProperty("position", &RigidbodyComponent::getPosition, &RigidbodyComponent::setPosition).
 		addProperty("useGravity", &RigidbodyComponent::getUsingGravity, &RigidbodyComponent::setUsingGravity).
 		addFunction("AddForce", &RigidbodyComponent::addForce).

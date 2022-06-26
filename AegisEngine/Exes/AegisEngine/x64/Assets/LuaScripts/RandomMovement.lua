@@ -30,7 +30,7 @@ function table.GetNew(entity, params)
 		random2 = 0;
 		rigidbody:SetAngular();
 		print(data.bait:GetName());
-		rigidbody:SetPosition(Aegis.Maths.Vector3(0,-57,0));
+		--rigidbody:SetPosition(Aegis.Maths.Vector3(0,-57,0));
 		rigidbody:FreezeRot(true,false,true)
     end;
 
@@ -73,8 +73,8 @@ function table.GetNew(entity, params)
 	end;
 
 	function OnCollision(other)
-		print("Colision general pez");
-		if other == data.bait then
+		print(other:GetName());
+		if other:GetName() == 'Anzuelo' then
 			print("Colision de un pez con el anzuelo");
 			data.score.funcs.updateScore();
 			entity:Destroy();			

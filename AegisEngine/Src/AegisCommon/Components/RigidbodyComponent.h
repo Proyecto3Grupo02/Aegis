@@ -30,11 +30,13 @@ public:
 	Vector3 getPosition() const;
 	//Vector4 getRotation();
 	Vector3 getForce() const;
+	bool getTrigger() const;
 
 	//SETS------------------------------------------
 	void setPosition(Vector3 pos);
 	void setRotationEuler(Vector3 rot);
 
+	void setTrigger(bool trig);
 	//FORCES----------------------------------------
 	void addForce(Vector3 force);
 	Vector3 accelerateTo(Vector3 targetVelocity, float maxAcceleration = 1000000000000);

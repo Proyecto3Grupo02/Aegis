@@ -32,8 +32,11 @@ public:
 	Vector3 getTotalForce();
 	Vector4 getRotation();
 
-	//SETS--------------------------------------
 	bool isTrigger();
+
+	//SETS--------------------------------------
+	
+	void setTrigger(bool trig);
 	void setActive(bool active = true);
 	void setKinematic(bool sK);
 	void setUsingGravity(bool uG);

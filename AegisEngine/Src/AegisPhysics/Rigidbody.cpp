@@ -72,6 +72,20 @@ bool RigidBody::isTrigger()
 	return trigger;
 }
 
+void RigidBody::setTrigger(bool trig)
+{	
+	if (trig)
+	{
+		rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+		trigger = true;
+	}
+	else {
+		rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_DYNAMIC_OBJECT);
+		trigger = false;
+	}
+}
+
+
 //SETS------------------------------------------------------------------------------------------------------
 void RigidBody::setActive(bool active)
 {
@@ -139,7 +153,7 @@ void RigidBody::setRbPosition(Vector3 vec)
 	rigidBody->getMotionState()->setWorldTransform(t);
 	//rigidBody->setLinearVelocity({ 0, 0, 0 });
 	//rigidBody->setAngularVelocity({ 0, 0, 0 });
-	rigidBody->clearForces();
+	//rigidBody->clearForces();
 }
 
 void RigidBody::setRbRotation(Vector4 vec)
@@ -148,7 +162,7 @@ void RigidBody::setRbRotation(Vector4 vec)
 	rigidBody->setWorldTransform(t);
 	//rigidBody->setLinearVelocity({ 0, 0, 0 });
 	//rigidBody->setAngularVelocity({ 0, 0, 0 });
-	rigidBody->clearForces();
+	//rigidBody->clearForces();
 }
 
 //FORCES---------------------------------------------------------------------------------------------------------

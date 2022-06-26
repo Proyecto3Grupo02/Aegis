@@ -9,13 +9,13 @@ function table.GetNew(entity, params)
 	local acumulatedDT;
     local lastTime;
     local prefabs = require "Prefabs";
-    local maxFish = 6;
+    local maxFish = 10;
     data.currFish = 0;
     local randomMovement;
     data.bait = "bait";
     data.score = "score"
     function Init() 
-		lastTime = 10;
+		lastTime = 1;
 		acumulatedDT=0;
         
     end;
@@ -29,7 +29,7 @@ function table.GetNew(entity, params)
                 local randomMovement = fish:GetComponent("RandomMovement");
                 randomMovement.data.bait = data.bait;
                 randomMovement.data.score = data.score;
-                rbFish:SetPosition(Aegis.Maths.Vector3(0,-57,0));
+                
                 data.currFish = data.currFish+1;
 		end;
 		acumulatedDT = acumulatedDT + deltaTime;
