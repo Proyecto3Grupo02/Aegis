@@ -44,6 +44,8 @@ public:
 	void setRbPosition(Vector3 vec);
 	void setRbRotation(Vector4 vec);
 	void setFreezeRotation(bool _x, bool _y, bool _z);
+	void setDamping(float damp);
+	float getDamping();
 	int rayCast(Vector3 origin, Vector3& dest);
 
 	//FORCES---------------------------------
@@ -73,6 +75,7 @@ protected:
 	float mass;
 	bool useGravity;
 	bool isKinematic;
+	float damping;
 	
 	std::vector<bool> freezeRotation;
 

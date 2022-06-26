@@ -123,6 +123,17 @@ void RigidBody::setFreezeRotation(bool _x, bool _y, bool _z) {
 
 }
 
+void RigidBody::setDamping(float damp)
+{
+	damping = damp;
+	rigidBody->setDamping(damp, damp);
+}
+
+float RigidBody::getDamping()
+{
+	return damping;
+}
+
 int RigidBody::rayCast(Vector3 origin, Vector3& dest) {
 	btVector3 _origin = PhysicsSys->parseToBulletVector(origin);
 	btVector3 _dest = PhysicsSys->parseToBulletVector(dest);

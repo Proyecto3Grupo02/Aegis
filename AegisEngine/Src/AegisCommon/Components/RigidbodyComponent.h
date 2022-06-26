@@ -44,8 +44,10 @@ public:
 	void addTorque(Vector3 torque);
 	void addForceForward(float force);
 
-	void resetVelocity() { rigidbody->resetVelocity(); };
-	void setAngular() { rigidbody->setAngularFactor(); }
+	void resetVelocity();
+	void setAngular();
+	void setDamping(float damp);
+	float getDamping();
 	void resetForce();
 
 	//FREEZE ROT------------------------------------

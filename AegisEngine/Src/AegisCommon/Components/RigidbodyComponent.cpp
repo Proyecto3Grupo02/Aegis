@@ -180,6 +180,26 @@ void RigidbodyComponent::addForceForward(float force) {
 	addForce(rot * force);
 }
 
+void RigidbodyComponent::resetVelocity()
+{
+	rigidbody->resetVelocity();
+}
+
+void RigidbodyComponent::setAngular()
+{
+	rigidbody->setAngularFactor();
+}
+
+void RigidbodyComponent::setDamping(float damp)
+{
+	rigidbody->setDamping(damp);
+}
+
+float RigidbodyComponent::getDamping()
+{
+	return rigidbody->getDamping();
+}
+
 void RigidbodyComponent::resetForce()
 {
 	rigidbody->clearForces();
@@ -260,6 +280,7 @@ void RigidbodyComponent::ConvertToLua(lua_State* state)
 		addProperty("trigger", &RigidbodyComponent::getTrigger, &RigidbodyComponent::setTrigger).
 		addProperty("position", &RigidbodyComponent::getPosition, &RigidbodyComponent::setPosition).
 		addProperty("useGravity", &RigidbodyComponent::getUsingGravity, &RigidbodyComponent::setUsingGravity).
+		addProperty("damping", &RigidbodyComponent::getDamping, &RigidbodyComponent::setDamping).
 		addFunction("AddForce", &RigidbodyComponent::addForce).
 		addFunction("GetForce", &RigidbodyComponent::getForce).
 		addFunction("ClearForce", &RigidbodyComponent::resetForce).
