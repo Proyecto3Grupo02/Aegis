@@ -14,7 +14,7 @@ class Entity;
 class RigidbodyComponent : public AegisComponent, public ILuaObject
 {
 public:
-	RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m = 1, bool useG = true, bool isK = false,bool isT =false,float scale = 1);
+	RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m = 1, bool useG = true, bool isK = false,bool isT =false,float scale = 1, float damp = 0);
 	virtual ~RigidbodyComponent();
 
 	virtual void init() override {};
@@ -30,10 +30,15 @@ public:
 	Vector3 getPosition() const;
 	//Vector4 getRotation();
 	Vector3 getForce() const;
+	bool getTrigger() const;
+	float getDamping() const;
 
 	//SETS------------------------------------------
 	void setPosition(Vector3 pos);
 	void setRotationEuler(Vector3 rot);
+	void setTrigger(bool trig);
+	void setAngular();
+	void setDamping(float damp);
 
 	//FORCES----------------------------------------
 	void addForce(Vector3 force);
@@ -42,8 +47,9 @@ public:
 	void addTorque(Vector3 torque);
 	void addForceForward(float force);
 
-	void resetVelocity() { rigidbody->resetVelocity(); };
-	void setAngular() { rigidbody->setAngularFactor(); }
+	void resetVelocity();
+
+
 	void resetForce();
 
 	//FREEZE ROT------------------------------------

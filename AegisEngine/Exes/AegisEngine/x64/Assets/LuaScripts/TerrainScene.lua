@@ -47,7 +47,8 @@ local scene = {
 				data = 
 				{
 					scale = 5,
-					useGravity = false
+					useGravity = false,
+					damping = 0.9999
 				}
 			},
 			{
@@ -113,21 +114,21 @@ local scene = {
 		}
 	},
 
--- spawner
-	-- {
-	-- 	type = "Entity",
-	-- 	name = "Spawner",
-	-- 	components = {	
-	-- 		{
-	-- 			type = "Spawner",
-	-- 			data = 
-	-- 			{
-	-- 				bait = "@Anzuelo",
-	-- 				score = "@ScoreManager.UIScoreManager"
-	-- 			}
-	-- 		}
-	-- 	}
-	-- },
+--spawner
+	{
+		type = "Entity",
+		name = "Spawner",
+		components = {	
+			{
+				type = "Spawner",
+				data = 
+				{
+					bait = "@Anzuelo",
+					score = "@ScoreManager.UIScoreManager"
+				}
+			}
+		}
+	},
 -- terrain
 		{
 			type = "Entity",
@@ -144,21 +145,21 @@ local scene = {
 				}
 			}
 		},
-		{
-			type = "Entity",
-			name = "Agua",
-			position = { y = -50 },
-			scale = { x = 50, y = 50, z = 50},
-			components = {
-				{
-					type = "Renderer",
-					data = {
-						mesh = "Agua.mesh",
-						material= "agua_material"
-					}
-				}
-			}
-		},
+		-- {
+		-- 	type = "Entity",
+		-- 	name = "Agua",
+		-- 	position = { y = -50 },
+		-- 	scale = { x = 50, y = 50, z = 50},
+		-- 	components = {
+		-- 		{
+		-- 			type = "Renderer",
+		-- 			data = {
+		-- 				mesh = "Agua.mesh",
+		-- 				material= "agua_material"
+		-- 			}
+		-- 		}
+		-- 	}
+		-- },
 		{
 			type = "Entity",
 			name = "ParedFrontal",
@@ -269,10 +270,10 @@ local scene = {
 				name = "HomeButton",
 				material = "home_button_material",
 				order = 0,
-				x = 1,
-				y = 0,
-				width = 0.1,
-				height = 0.1,
+				x = 0.98,
+				y = 0.02,
+				width = 0.07,
+				height = 0.11,
 				visible = false,
 				uiData = { id = 1, text = "@scoreText" },
 				callback = function(uiData)
