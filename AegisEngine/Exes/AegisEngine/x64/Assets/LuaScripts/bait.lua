@@ -39,7 +39,7 @@ function table.GetNew(entity, params)
         end;   
         if ready then
             if Input:IsMouseButtonDown(0)then
-               throwForce = throwForce + deltaTime * 3
+               throwForce = throwForce + deltaTime * 3               
             end
             if Input:MouseButtonWasReleased(0)then
                 if throwForce>maxForce then
@@ -71,14 +71,14 @@ function table.GetNew(entity, params)
 
     end;
 
-	function OnCollision(other)
+	function OnTrigger(other)
         print("Colision del anzuelo con algo");
     end;
 
 	funcs.init = Init;
     funcs.update = Update;
     funcs.fixedUpdate = FixedUpdate;
-    funcs.onCollisionEnter = OnCollision;
+    funcs.onTriggerEnter = OnTrigger;
 	return component;
 end;
 return table;

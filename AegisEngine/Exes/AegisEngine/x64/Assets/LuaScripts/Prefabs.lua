@@ -19,7 +19,8 @@ local scene =
 			{
 				type = "Rigidbody",
 				data= {
-					scale = 3
+					scale = 3,
+					isTrigger = true
 				}
 			},
 			{
@@ -43,7 +44,8 @@ local scene =
 			{
 				type = "Rigidbody",
 				data= {
-					scale = 3
+					scale = 3,
+					isTrigger = true
 				}
 			},
 			{
@@ -67,7 +69,8 @@ local scene =
 			{
 				type = "Rigidbody",
 				data= {
-					scale = 3
+					scale = 3,
+					isTrigger = true
 				}
 			},
 			{
@@ -91,7 +94,8 @@ local scene =
 			{
 				type = "Rigidbody",
 				data= {
-					scale = 3
+					scale = 3,
+					isTrigger = true
 				}
 			},
 			{
@@ -115,7 +119,8 @@ local scene =
 			{
 				type = "Rigidbody",
 				data= {
-					scale = 3
+					scale = 3,
+					isTrigger = true
 				}
 			},
 			{
@@ -139,7 +144,8 @@ local scene =
 			{
 				type = "Rigidbody",
 				data= {
-					scale = 3
+					scale = 3,
+					isTrigger = true
 				}
 			},
 			{
@@ -163,7 +169,8 @@ local scene =
 			{
 				type = "Rigidbody",
 				data = {
-					scale = 3
+					scale = 3,
+					isTrigger = true
 				}
 			},
 			{
