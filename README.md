@@ -223,7 +223,7 @@ PhysicsMain hereda de **Singleton**, y se encarga de gestionar las físicas, pri
 
 En la constructora inicializa las cosas de Bullet, y en caso de que esté en modo DEBUG, también crea un **OgreDebugDrawer**.
 
-EXPLICAR CollisionEnterCallbacks, update, collisionEntersCallback!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+En el update hace avanzar el mundo fisico y comprueba si ha habido colisiones, en cuyo caso, para cada par de colisiones se llama a CollisionEnterCallbacks desde donde se llama a los oncollision/ontrigger respectivos de cada entidad.
 
 #### Rigidbody:
 Rigidbody crea una entidad física en Bullet. Contiene métodos setter y get para modificar sus atributos.
