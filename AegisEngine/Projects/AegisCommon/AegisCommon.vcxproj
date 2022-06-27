@@ -117,6 +117,7 @@
     <ClInclude Include="..\..\Src\AegisCommon\Components\RendererComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\RigidbodyComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\SoundEmitterComponent.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Components\SoundListenerComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\TransformComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Entity\Entity.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Interfaces\IInitializable.h" />
@@ -152,6 +153,7 @@
     <ClCompile Include="..\..\Src\AegisCommon\Managers\InputSystem.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Managers\SceneManager.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Scene\Scene.cpp" />
+    <ClCompile Include="SoundListenerComponent.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

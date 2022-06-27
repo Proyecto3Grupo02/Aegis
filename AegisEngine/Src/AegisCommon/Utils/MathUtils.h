@@ -210,6 +210,11 @@ namespace MathUtils
 		return result;
 	}
 
+	static Vector4 OgreQuatToVec4(Ogre::Quaternion q)
+	{
+		return Vector4(q.x, q.y, q.z, q.w);
+	}
+
 	static Vector3 RotateVector3ByQuaternion(Ogre::Quaternion q, const Vector3& v)
 	{
 		// Using quaternions is easier to understand but uses way more CPU

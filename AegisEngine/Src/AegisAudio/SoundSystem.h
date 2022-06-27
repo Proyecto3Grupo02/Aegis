@@ -40,7 +40,7 @@ class SoundSystem : public Singleton<SoundSystem>, public ILuaObject
 public:
 	// Canales para la emision de sonidos
 	struct SoundChannel {
-		Channel* channel; 
+		Channel* channel;
 		bool paused;
 
 		SoundChannel();
@@ -51,9 +51,9 @@ public:
 	struct EmitterData
 	{
 		std::map<std::string, SoundChannel*> channels;
-		const Vector3* position;
+		FMOD_VECTOR position;
 
-		EmitterData(const Vector3* position);
+		EmitterData(FMOD_VECTOR position);
 		~EmitterData();
 		bool isPaused();
 	};
@@ -61,20 +61,17 @@ public:
 	// Camera/Player data for 3D enviroments
 	struct ListenerData
 	{
-		 Vector3* position;
-		 Vector4* quaternion;
+		 Vector3 position;
+		 Vector4 quaternion;
 	};
 
 private:
 	System* system; // FMOD Initialization
 	
 	// Group channels for menu volumes control
-	ChannelGroup* music;
-	ChannelGroup* soundEffects;
+	std::map<std::string, ChannelGroup*> channelGroups;
 
 	float generalVolume; // General game Volume
-	float soundVolume;	 // Sound channel volume
-	float musicVolume;	 // Music channel volume
 
 	// ECS structure; Manager functionality
 	std::vector<EmitterData*> emitters;
@@ -86,47 +83,45 @@ private:
 	Sound* getSound(const std::string& name);	// Gets a sound from a resource
 
 public:
+
 	SoundSystem(std::string soundPaths);
 	virtual ~SoundSystem();
-
 	void update(float deltaTime);
-	
-	// Setters y getters
-	void setMusicVolume(float volume);
-	void setSoundEffectsVolume(float volume);
-	void setGeneralVolume(float volume);
-	void setPauseAllSounds(bool pause);
-
-	float getGeneralVolume() const;
-	float getMusicVolume() const;
-	float getSoundVolume() const;
-
 	void close();
-	Channel* playSound(const std::string& name);
-	Channel* playMusic(const std::string& name);
-
-	void stopMusic(const std::string& name);
-	void stopSound(const std::string& name);
-
-	static void ConvertToLua(lua_State* state);
-private:
 	
+	// ChannelGroupControls
+	void setPauseAllSounds(bool pause);
+	
+	void setGeneralVolume(float volume);
+	float getGeneralVolume() const;
 
-	Sound* createSound(const std::string& name,  SoundMode mode);
+	void setChannelVolume(float volume, const std::string& channel);
+	float getChannelVolume(const std::string channel);
 
-	void setListenerAttributes(Vector3& position, Vector3& forward, Vector3& up);
+	 
+	Channel* playSound(const std::string& name, const std::string& channelName = "default");
+	void stopChannel(EmitterData* emitterName, const std::string& name);
+	void pauseSound(EmitterData* emitterName, const std::string& name);
+	void resumeSound(EmitterData* emitterName, const std::string& name);
 
-	void removeEmitter(EmitterData* emitter);
-	void removeListener();
-
-	// Utiles de Fmod
-	FMOD_VECTOR vecToFMOD(Vector3& in);
-	FMOD::Reverb3D* createReverb();
+	void updatePosition(EmitterData* emitterName, Vector3 position);
 
 	// ECS system classes
-	EmitterData* createEmitter(const Vector3* position);
-	ListenerData* createListener( Vector3* position,  Vector4* quaternion);
+	FMOD::ChannelGroup* getChannelGroup(const std::string channelName);
+	SoundChannel* createSoundChannel(Channel* channel);	
+	EmitterData* createEmitter(const Vector3 position);
+	void removeEmitter(EmitterData* emitter);
+	ListenerData* createListener(Vector3 position, Vector4 quaternion);
+	void removeListener();
+	void updateListener(Vector3 position, Vector4 quaternion);
 
+	static void ConvertToLua(lua_State* state);
+
+private:
+	Sound* createSound(const std::string& name,  SoundMode mode);
+	void setListenerAttributes(Vector3& position, Vector3& forward, Vector3& up);
+
+	FMOD_VECTOR vecToFMOD(Vector3& in);
+	FMOD::Reverb3D* createReverb();
 };
-
 #endif

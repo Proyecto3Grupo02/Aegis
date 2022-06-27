@@ -8,6 +8,7 @@
 #include "RigidbodyComponent.h"
 #include "TransformComponent.h"
 #include "SoundEmitterComponent.h"
+#include "SoundListenerComponent.h"
 
 // MANAGERS
 #include "OgreWrapper.h"
@@ -56,6 +57,13 @@ bool AegisMain::init()
 	init &= LuaManager::tryCreateInstance();
 	convertObjectToLua();
 	init &= OgreWrapper::tryCreateInstance(config->resourcesCfgPath);
+
+	if (!init)
+	{
+		delete config;
+		return false;
+	}
+
 	init &= SoundSystem::tryCreateInstance(config->soundsPath);
 	init &= PhysicsSystem::tryCreateInstance(OgreWrap->getSceneManager());
 	init &= InputSystem::tryCreateInstance();
@@ -72,12 +80,7 @@ bool AegisMain::init()
 	exportToLua(UISystem::getInstance(), "UISystem");
 	exportToLua(Input, "Input");
 	exportToLua(SceneManager::getInstance(), "SceneManager");
-
-	if (!init)
-	{
-		delete config;
-		return false;
-	}
+	exportToLua(SoundSystem::getInstance(), "SoundManager");
 
 	init &= LuaManager::getInstance()->execute("Resources//Scripts//initLua.lua");
 	init &= LuaManager::getInstance()->execute((config->scriptPath + "//init.lua").c_str());
@@ -298,6 +301,7 @@ void AegisMain::convertObjectToLua()
 	AnimationComponent::ConvertToLua(state);
 	RigidbodyComponent::ConvertToLua(state);
 	SoundEmitterComponent::ConvertToLua(state);
+	SoundListenerComponent::ConvertToLua(state);
 	TransformComponent::ConvertToLua(state);
 
 	// UTILS

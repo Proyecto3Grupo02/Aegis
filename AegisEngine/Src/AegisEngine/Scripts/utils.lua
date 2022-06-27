@@ -116,7 +116,7 @@ funcs.SearchEntityOrComponent = function(entities,data)
 		print("Searcher: Component " .. splitStr[2] .. " not found");
 		return nil;
 	else
-		return component;
+		return component.type;
 	end;
 end;
 
