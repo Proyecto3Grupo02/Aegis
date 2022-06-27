@@ -31,12 +31,15 @@ public:
 	//Vector4 getRotation();
 	Vector3 getForce() const;
 	bool getTrigger() const;
+	float getDamping() const;
 
 	//SETS------------------------------------------
 	void setPosition(Vector3 pos);
 	void setRotationEuler(Vector3 rot);
-
 	void setTrigger(bool trig);
+	void setAngular();
+	void setDamping(float damp);
+
 	//FORCES----------------------------------------
 	void addForce(Vector3 force);
 	Vector3 accelerateTo(Vector3 targetVelocity, float maxAcceleration = 1000000000000);
@@ -45,9 +48,8 @@ public:
 	void addForceForward(float force);
 
 	void resetVelocity();
-	void setAngular();
-	void setDamping(float damp);
-	float getDamping() const;
+
+
 	void resetForce();
 
 	//FREEZE ROT------------------------------------
