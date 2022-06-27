@@ -1,6 +1,8 @@
 #include "SoundSystem.h"
 #include <fmod_errors.h>
 #include "DebugManager.h"
+#include <algorithm>
+
 SoundSystem::SoundSystem(std::string soundsPath) :
 	system(nullptr),
 	listener(nullptr),
@@ -81,27 +83,17 @@ FMOD::Channel* SoundSystem::playSound(const std::string& name)
 	if (sound == nullptr) return nullptr;
 
 	FMOD_RESULT result = system->playSound(sound, soundEffects, false, &channel);
+	
+	//channel->setMode(FMOD_LOOP_NORMAL);
+	//channel->setLoopCount(-1);
 	ERRCHECK(result);
 	channel->set3DMinMaxDistance(50, 10000);
 	return channel;
 }
 
-/// <summary>
-/// Plays the music
-/// </summary>
-/// <param name="name"> Song name </param>
-FMOD::Channel* SoundSystem::playMusic(const std::string& name)
+void SoundSystem::updatePosition(EmitterData* emitterName, Vector3 position)
 {
-	Channel* channel;
-	Sound* sound = getSound(name);
-	if (sound == nullptr) return nullptr;
-	FMOD_RESULT result = system->playSound(sound, music, false, &channel);
-	/// ////////////LOOP
-	channel->setMode(FMOD_LOOP_NORMAL);
-	channel->setLoopCount(-1);
-	ERRCHECK(result);
-	channel->set3DMinMaxDistance(50, 10000);
-	return channel;
+	emitterName->position = vecToFMOD(position);
 }
 
 /// <summary>
@@ -110,7 +102,7 @@ FMOD::Channel* SoundSystem::playMusic(const std::string& name)
 /// <param name="pause"> True o false </param>
 void SoundSystem::setPauseAllSounds(bool pause)
 {
-	ChannelGroup* master;
+	ChannelGroup* master;	// Master channel group is a default FMOD channel group
 
 	FMOD_RESULT result = system->getMasterChannelGroup(&master);
 	ERRCHECK(result);
@@ -139,7 +131,7 @@ void SoundSystem::setSoundEffectsVolume(float volume)
 }
 
 /// <summary>
-/// Sets all volumes
+/// Sets ALL volumes
 /// </summary>
 /// <param name="volume"> Volume in % </param>
 void SoundSystem::setGeneralVolume(float volume)
@@ -185,7 +177,7 @@ float SoundSystem::getSoundVolume() const
 }
 
 /// <summary>
-/// Removes an emitter from the array
+/// Removes an emitter from the vector
 /// </summary>
 /// <param name="emitter"> Emitter to be removed </param>
 void SoundSystem::removeEmitter(EmitterData* emitter)
@@ -212,29 +204,21 @@ void SoundSystem::removeListener()
 	}
 }
 
-void SoundSystem::stopMusic(const std::string& name)
+
+/// <summary>
+/// Searchs the given channel by name in the given emitter
+/// </summary>
+void SoundSystem::stopChannel(EmitterData* emitterData, const std::string& name) 
 {
-	Channel* channel;
-	Sound* sound = getSound(name);
-	if (sound == nullptr) return;
-
-	FMOD_RESULT result = system->playSound(sound, soundEffects, false, &channel);
-	ERRCHECK(result);
-	channel->setPaused(true);
-
+	auto it = emitterData->channels.find(name);
+	if (it != emitterData->channels.end()) {
+		it->second->channel->stop();
+		delete it->second;
+		emitterData->channels.erase(it);
+	}
 }
 
-void SoundSystem::stopSound(const std::string& name)
-{
-	Channel* channel;
-	Sound* sound = getSound(name);
-	if (sound == nullptr) return;
 
-	FMOD_RESULT result = system->playSound(sound, soundEffects, false, &channel);
-	ERRCHECK(result);
-	channel->setPaused(true);
-
-}
 
 /// <summary>
 /// Updates position of the Listener and Emitters for 3D sound
@@ -253,25 +237,22 @@ void SoundSystem::update(float deltaTime)
 
 		float z = listener->quaternion->getZ();
 		float y = listener->quaternion->getY();
-		forward = Vector3{ 0, 0, z }; //Vector3 Forward
-		up = Vector3{ 0, y ,0 }; // Vector3 Up
+		forward = Vector3{ 0, 0, z };	//	Vector3 Forward
+		up = Vector3{ 0, y ,0 };		//	Vector3 Up
 		setListenerAttributes(pos, forward, up);
 	}
+
 	// Emitters position update
-	FMOD_VECTOR emitterPosition, zero;
+	FMOD_VECTOR zero;
 	zero = { 0,0,0 };
 	for (int i = 0; i < emitters.size(); i++)
 	{
-		bool paused = true;
 		SoundSystem::EmitterData* data = emitters[i];
+
 		for (auto it = data->channels.begin(); it != data->channels.end(); it++) {
-			bool aux = (*it).second->paused;
-			paused = paused && aux;
-			if (!aux)
-				(*it).second->channel->set3DAttributes(&emitterPosition, &zero);
+			if (!(*it).second->paused)
+				(*it).second->channel->set3DAttributes(&data->position, &zero);
 		}
-		Vector3 pos = *data->position;
-		if (!paused) emitterPosition = vecToFMOD(pos);
 	}
 
 	FMOD_RESULT result = system->update();
@@ -282,9 +263,9 @@ void SoundSystem::update(float deltaTime)
 /// Adds an emitter to the list
 /// </summary>
 /// <param name="position"> Vector3 with the position of the Object its part from </param>
-SoundSystem::EmitterData* SoundSystem::createEmitter(const Vector3* position)
+SoundSystem::EmitterData* SoundSystem::createEmitter(Vector3 position)
 {
-	SoundSystem::EmitterData* data = new SoundSystem::EmitterData(position);
+	SoundSystem::EmitterData* data = new SoundSystem::EmitterData(vecToFMOD(position));
 	emitters.push_back(data);
 	return data;
 }
@@ -411,17 +392,16 @@ SoundSystem::EmitterData::~EmitterData()
 	for (auto it = channels.begin(); it != channels.end(); it++)
 		delete it->second;
 	channels.clear();
-	delete position;
-	position = nullptr;
+	//delete position;
+	//position = nullptr;
 }
 
 /// <summary>
 /// Metodo para modificar si es necesario por herencia
 /// </summary>
 /// <param name="position"></param>
-SoundSystem::EmitterData::EmitterData(const Vector3* position) : position(position), channels(std::map<std::string, SoundChannel*>())
+SoundSystem::EmitterData::EmitterData(FMOD_VECTOR pos) : position(pos), channels(std::map<std::string, SoundChannel*>())
 {
-
 }
 
 /// <summary>
@@ -438,6 +418,24 @@ bool SoundSystem::EmitterData::isPaused()
 	}
 
 	return paused;
+}
+
+void SoundSystem::pauseSound(EmitterData* emitterData, const std::string& name)
+{
+	auto it = emitterData->channels.find(name);
+	if (it != emitterData->channels.end()) {
+		it->second->paused = true;
+		it->second->channel->setPaused(true);
+	}
+}
+
+void SoundSystem::resumeSound(EmitterData* emitterData, const std::string& name)
+{
+	auto it = emitterData->channels.find(name);
+	if (it != emitterData->channels.end()) {
+		it->second->paused = false;
+		it->second->channel->setPaused(false);
+	}
 }
 
 void SoundSystem::ConvertToLua(lua_State* state) {

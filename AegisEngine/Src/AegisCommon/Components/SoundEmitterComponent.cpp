@@ -1,10 +1,15 @@
 #include "SoundEmitterComponent.h"
 #include "SoundSystem.h"
+#include "Entity.h"
+#include "TransformComponent.h"
+
+#define SoundSys SoundSystem::getInstance()
 
 SoundEmitterComponent::SoundEmitterComponent(Entity* ent, std::string sound, std::string mode):
 	AegisComponent("SoundEmitter", ent),soundName(sound)
 {
 	setDataAsInnerType(this);
+	SoundSys->createEmitter(ent->getTransform()->getPosition());
 }
 
 SoundEmitterComponent::~SoundEmitterComponent()
@@ -13,23 +18,32 @@ SoundEmitterComponent::~SoundEmitterComponent()
 
 void SoundEmitterComponent::playMusic()
 {
-	SoundSystem::getInstance()->playMusic(soundName);
+	//emitterData->channels[soundName] = new SoundChannel(SoundSys->playMusic(soundName));
+	//SoundSystem::getInstance()->playMusic(soundName);
 }
 
 void SoundEmitterComponent::playSound()
 {
+	//emitterData->channels[soundName] = new SoundChannel(SoundSystem::GetInstance()->playSound(soundName));
 	SoundSystem::getInstance()->playSound(soundName);
 }
 
-void SoundEmitterComponent::stopMusic()
-{
-	SoundSystem::getInstance()->stopMusic(soundName);
+void SoundEmitterComponent::stop(const std::string name) {
+
+	auto it = emitterData->channels.find(name);
+	if (it != emitterData->channels.end()) {
+		it->second->channel->stop();
+		delete it->second;
+		emitterData->channels.erase(it);
+	}
 }
 
-void SoundEmitterComponent::stopSound()
+void SoundEmitterComponent::update(float deltaTime)
 {
-	SoundSystem::getInstance()->stopSound(soundName);
+	SoundSys->updatePosition(emitterData, getEntity()->getTransform()->getPosition());
 }
+
+
 
 
 std::string SoundEmitterComponent::getSound() const
@@ -56,8 +70,7 @@ void SoundEmitterComponent::ConvertToLua(lua_State* state)
 		addProperty("sound", &SoundEmitterComponent::getSound, &SoundEmitterComponent::setSound).
 		addFunction("PlayMusic", &SoundEmitterComponent::playMusic).
 		addFunction("PlaySound", &SoundEmitterComponent::playSound).
-		addFunction("StopMusic", &SoundEmitterComponent::stopMusic).
-		addFunction("StopSound", &SoundEmitterComponent::stopSound).
+		addFunction("StopMusic", &SoundEmitterComponent::stop).
 		
 		endClass().
 		endNamespace().
