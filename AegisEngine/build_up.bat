@@ -45,6 +45,6 @@ cd ../
 echo Copying release .exe in Build folder
 mkdir Build
 xcopy /y /d /s .\Exes\AegisEngine\x64\Release .\Build
-xcopy /y /d /s ..\..\Assets .\Build
+xcopy /y /d /s ..\..\Game .\Build
 
 :end
