@@ -15,9 +15,20 @@ Documento de diseño del motor
 * [**Scripting API**](Aegis_Arquitecture/LuaScriptingApi.md)
 * [**Documentación del juego**](https://github.com/Proyecto3Grupo02/ThrowTheLine/blob/main/README.md)
 
-## Intro
-Aegis es un motor de videojuegos desarrollado por Kirin Studios en C++ con el fin de proporcionar un soporte para programar juegos usando LUA como lenguaje de scripting. ([**Consultar la documentación de la API**](Aegis_Arquitecture/LuaScriptingApi.md))
+## Índice:
+- [Introducción](#introducción)
+- [Organización y funcionalidad de los Proyectos](#organización-y-funcionalidad-de-los-proyectos)
+  - [AegisAudio](#aegisaudio)
+  - [AegisCommon](#aegiscommon)
+  - [AegisEngine](#aegisengine)
+  - [AegisGraphics](#aegisgraphics)
+  - [AegisPhysics](#aegisphysics)
+  - [AegisUI](#aegisui)
+ - [Organización del directorio](#organización-del-directorio)
+ - [Licencias](#licencias)
 
+## Introducción:
+Aegis es un motor de videojuegos desarrollado por Kirin Studios en C++ con el fin de proporcionar un soporte para programar juegos usando LUA como lenguaje de scripting. ([**Consultar la documentación de la API**](Aegis_Arquitecture/LuaScriptingApi.md))
 
 El motor esta estructurado mediante la política de Entity-Component:
 * **Entidades:** Equivalentes a los gameobject en Unity. Se les puede asociar Componentes para dotarles funciones y/o comportamientos especificos.
