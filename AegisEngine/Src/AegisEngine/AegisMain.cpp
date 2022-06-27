@@ -56,6 +56,13 @@ bool AegisMain::init()
 	init &= LuaManager::tryCreateInstance();
 	convertObjectToLua();
 	init &= OgreWrapper::tryCreateInstance(config->resourcesCfgPath);
+
+	if (!init)
+	{
+		delete config;
+		return false;
+	}
+
 	init &= SoundSystem::tryCreateInstance(config->soundsPath);
 	init &= PhysicsSystem::tryCreateInstance(OgreWrap->getSceneManager());
 	init &= InputSystem::tryCreateInstance();
@@ -72,12 +79,6 @@ bool AegisMain::init()
 	exportToLua(UISystem::getInstance(), "UISystem");
 	exportToLua(Input, "Input");
 	exportToLua(SceneManager::getInstance(), "SceneManager");
-
-	if (!init)
-	{
-		delete config;
-		return false;
-	}
 
 	init &= LuaManager::getInstance()->execute("Resources//Scripts//initLua.lua");
 	init &= LuaManager::getInstance()->execute((config->scriptPath + "//init.lua").c_str());

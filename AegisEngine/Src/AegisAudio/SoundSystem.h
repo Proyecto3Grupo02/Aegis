@@ -111,6 +111,7 @@ public:
 	void updatePosition(EmitterData* emitterName, Vector3 position);
 
 	// ECS system classes
+	SoundChannel* createSoundChannel(Channel* channel);	
 	EmitterData* createEmitter(const Vector3 position);
 	ListenerData* createListener(Vector3* position, Vector4* quaternion);
 	void removeEmitter(EmitterData* emitter);

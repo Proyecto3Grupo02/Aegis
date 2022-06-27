@@ -9,42 +9,48 @@ SoundEmitterComponent::SoundEmitterComponent(Entity* ent, std::string sound, std
 	AegisComponent("SoundEmitter", ent),soundName(sound)
 {
 	setDataAsInnerType(this);
-	SoundSys->createEmitter(ent->getTransform()->getPosition());
+	emitterData = SoundSys->createEmitter(ent->getTransform()->getPosition());
 }
 
 SoundEmitterComponent::~SoundEmitterComponent()
 {
-}
-
-void SoundEmitterComponent::playMusic()
-{
-	//emitterData->channels[soundName] = new SoundChannel(SoundSys->playMusic(soundName));
-	//SoundSystem::getInstance()->playMusic(soundName);
+	SoundSys->removeEmitter(emitterData);
 }
 
 void SoundEmitterComponent::playSound()
 {
-	//emitterData->channels[soundName] = new SoundChannel(SoundSystem::GetInstance()->playSound(soundName));
-	SoundSystem::getInstance()->playSound(soundName);
+	auto it = emitterData->channels.find(soundName);
+
+	if (it != emitterData->channels.end())
+		emitterData->channels[soundName]->channel = SoundSys->playSound(soundName);
+	else
+		emitterData->channels.insert({ soundName, SoundSys->createSoundChannel(SoundSys->playSound(soundName)) });
 }
 
-void SoundEmitterComponent::stop(const std::string name) {
+void SoundEmitterComponent::stop() 
+{
+	SoundSys->stopChannel(emitterData, soundName);
+}
 
-	auto it = emitterData->channels.find(name);
-	if (it != emitterData->channels.end()) {
-		it->second->channel->stop();
-		delete it->second;
-		emitterData->channels.erase(it);
-	}
+void SoundEmitterComponent::pause()
+{
+	SoundSys->pauseSound(emitterData, soundName);
+}
+
+void SoundEmitterComponent::resume()
+{
+	SoundSys->resumeSound(emitterData, soundName);
+}
+
+void SoundEmitterComponent::setVolume(float volume)
+{
+	SoundSys->setGeneralVolume(volume);
 }
 
 void SoundEmitterComponent::update(float deltaTime)
 {
 	SoundSys->updatePosition(emitterData, getEntity()->getTransform()->getPosition());
 }
-
-
-
 
 std::string SoundEmitterComponent::getSound() const
 {
@@ -64,15 +70,16 @@ void SoundEmitterComponent::ConvertToLua(lua_State* state)
 {
 	getGlobalNamespace(state).
 		beginNamespace("Aegis").
-		beginNamespace("NativeComponents").
-		addFunction("createSoundEmitter", createSoundEmitter).
-		deriveClass<SoundEmitterComponent, AegisComponent>("SoundEmitter").
-		addProperty("sound", &SoundEmitterComponent::getSound, &SoundEmitterComponent::setSound).
-		addFunction("PlayMusic", &SoundEmitterComponent::playMusic).
-		addFunction("PlaySound", &SoundEmitterComponent::playSound).
-		addFunction("StopMusic", &SoundEmitterComponent::stop).
-		
-		endClass().
-		endNamespace().
+			beginNamespace("NativeComponents").
+				addFunction("createSoundEmitter", createSoundEmitter).
+				deriveClass<SoundEmitterComponent, AegisComponent>("SoundEmitter").
+					addProperty("sound", &SoundEmitterComponent::getSound, &SoundEmitterComponent::setSound).
+					addFunction("PlayClip", &SoundEmitterComponent::playSound).
+					addFunction("StopClip", &SoundEmitterComponent::stop).
+					addFunction("PauseClip", &SoundEmitterComponent::pause).
+					addFunction("ResumeClip", &SoundEmitterComponent::resume).
+					addFunction("SetVolume", &SoundEmitterComponent::setVolume).
+				endClass().
+			endNamespace().
 		endNamespace();
 }

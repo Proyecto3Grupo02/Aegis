@@ -259,6 +259,12 @@ void SoundSystem::update(float deltaTime)
 	ERRCHECK(result);
 }
 
+SoundSystem::SoundChannel* SoundSystem::createSoundChannel(Channel* channel)
+{
+	return new SoundSystem::SoundChannel(channel);
+}
+
+
 /// <summary>
 /// Adds an emitter to the list
 /// </summary>
@@ -361,7 +367,7 @@ SoundSystem::SoundChannel::~SoundChannel()
 {
 	if (channel != nullptr)
 	{
-		delete channel;
+		//delete channel;
 		channel = nullptr;
 	}
 }
@@ -392,8 +398,6 @@ SoundSystem::EmitterData::~EmitterData()
 	for (auto it = channels.begin(); it != channels.end(); it++)
 		delete it->second;
 	channels.clear();
-	//delete position;
-	//position = nullptr;
 }
 
 /// <summary>

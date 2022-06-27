@@ -4,6 +4,7 @@
 #define SOUNDEMITTER_H
 
 #include "AegisComponent.h"
+#include "SoundSystem.h"
 
 class SoundEmitterComponent : public AegisComponent
 {
@@ -11,9 +12,11 @@ class SoundEmitterComponent : public AegisComponent
 
 		SoundEmitterComponent(Entity* ent, std::string sound, std::string mode);
 		~SoundEmitterComponent();
-		void playMusic();
 		void playSound();
-		void stop(const std::string name);
+		void stop();
+		void pause();
+		void resume();
+		void setVolume(float volume);
 		virtual void update(float deltaTime);
 
 		std::string getSound() const;
