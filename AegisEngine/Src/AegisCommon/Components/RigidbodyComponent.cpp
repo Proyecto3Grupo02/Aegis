@@ -6,7 +6,7 @@
 
 #include <Scene.h>
 
-RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m, bool useG, bool isK, bool isT, float scale)
+RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, float m, bool useG, bool isK, bool isT, float scale, float damp)
 	: AegisComponent("Rigidbody", ent)
 {
 	transform = ent->getTransform();
@@ -14,7 +14,7 @@ RigidbodyComponent::RigidbodyComponent(Entity* ent, std::string bodyMeshName, fl
 
 	auto rot = transform->getRotation();
 	Vector4 rotVec(rot.x, rot.y, rot.z, rot.w);
-	rigidbody = new RigidBody(bodyMeshName, transform->getPosition(), transform->getScale() * scale, rotVec, this, m, useG, isK, isT);
+	rigidbody = new RigidBody(bodyMeshName, transform->getPosition(), transform->getScale() * scale, rotVec, this, m, useG, isK, isT, damp);
 	mEntity_->getScene()->addPhysicsEntity(this);
 	setDataAsInnerType(this);
 }
@@ -180,6 +180,26 @@ void RigidbodyComponent::addForceForward(float force) {
 	addForce(rot * force);
 }
 
+void RigidbodyComponent::resetVelocity()
+{
+	rigidbody->resetVelocity();
+}
+
+void RigidbodyComponent::setAngular()
+{
+	rigidbody->setAngularFactor();
+}
+
+void RigidbodyComponent::setDamping(float damp)
+{
+	rigidbody->setDamping(damp);
+}
+
+float RigidbodyComponent::getDamping() const
+{
+	return rigidbody->getDamping();
+}
+
 void RigidbodyComponent::resetForce()
 {
 	rigidbody->clearForces();
@@ -193,6 +213,11 @@ Vector3 RigidbodyComponent::getForce() const {
 	return rigidbody->getTotalForce();
 }
 
+bool RigidbodyComponent::getTrigger() const
+{
+	return rigidbody->isTrigger();
+}
+
 Vector3 RigidbodyComponent::getPosition() const {
 	return rigidbody->getRbPosition();
 }
@@ -204,6 +229,11 @@ void RigidbodyComponent::setPosition(Vector3 pos) {
 void RigidbodyComponent::setRotationEuler(Vector3 rot) {
 	Vector4 eulerRot = MathUtils::EulerToVec4(rot);
 	rigidbody->setRbRotation(eulerRot);
+}
+
+void RigidbodyComponent::setTrigger(bool trigger) 
+{
+	 rigidbody->setTrigger(trigger);
 }
 
 //FREEZE ROT------------------------------------------------------------------------------------------------
@@ -229,7 +259,8 @@ RigidbodyComponent* CreateRigidbody(Entity* ent, LuaRef args) //Doesn't belong t
 	bool isKinematic = LuaMngr->parseBool(args["isKinematic"], false);
 	bool isTrigger = LuaMngr->parseBool(args["isTrigger"], false);
 	float scale = LuaMngr->parseFloat(args["scale"], 1);
-	return new RigidbodyComponent(ent, bodyName, mass, useGravity, isKinematic, isTrigger, scale);
+	float damping = LuaMngr->parseFloat(args["damping"], 0);
+	return new RigidbodyComponent(ent, bodyName, mass, useGravity, isKinematic, isTrigger, scale, damping);
 }
 
 void RigidbodyComponent::enableCollision(bool enable_) {
@@ -247,6 +278,7 @@ void RigidbodyComponent::ConvertToLua(lua_State* state)
 		beginNamespace("NativeComponents").
 		addFunction("CreateRigidbody", CreateRigidbody).
 		deriveClass<RigidbodyComponent, AegisComponent>("Rigidbody").
+		addProperty("trigger", &RigidbodyComponent::getTrigger, &RigidbodyComponent::setTrigger).
 		addProperty("position", &RigidbodyComponent::getPosition, &RigidbodyComponent::setPosition).
 		addProperty("useGravity", &RigidbodyComponent::getUsingGravity, &RigidbodyComponent::setUsingGravity).
 		addFunction("AddForce", &RigidbodyComponent::addForce).

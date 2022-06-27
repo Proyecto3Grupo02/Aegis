@@ -53,7 +53,7 @@ public:
 	void removeRigidbody(btCollisionObject* rb);
 	btTransform parseToBulletTransform(Vector3 pos, Vector3 rot);
 	btTransform parseToBulletTransform(Vector3 pos, Vector4 rot);
-	btRigidBody* createRigidBody(RigidBody::RigidBodyType rbType, float _mass, Vector3 _dim, Vector3 _pos, Vector4 rotation, std::string bodyMeshName = "", bool isConvex = true, bool isKinematic = false, bool useGravity = true);
+	btRigidBody* createRigidBody(RigidBody::RigidBodyType rbType, float _mass, Vector3 _dim, Vector3 _pos, Vector4 rotation, std::string bodyMeshName = "", bool isConvex = true, bool isKinematic = false, bool useGravity = true, float damp = 0.0f);
 
 	const btVector3 parseToBulletVector(const Vector3& v) const;
 	const Vector3 parseFromBulletVector(const btVector3& v) const;

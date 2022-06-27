@@ -19,7 +19,7 @@ public:
 	enum RigidBodyType { Box, Sphere, CapsuleX, CapsuleZ, Custom };
 
 
-	RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, Vector4 rotation, RigidbodyComponent* r, float m = 1, bool useG = true, bool isK = false,bool isT=false);
+	RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, Vector4 rotation, RigidbodyComponent* r, float m = 1, bool useG = true, bool isK = false,bool isT=false, float damp = 0);
 	void init();
 	~RigidBody();
 	//void fixedUpdate();
@@ -32,8 +32,11 @@ public:
 	Vector3 getTotalForce();
 	Vector4 getRotation();
 
-	//SETS--------------------------------------
 	bool isTrigger();
+
+	//SETS--------------------------------------
+	
+	void setTrigger(bool trig);
 	void setActive(bool active = true);
 	void setKinematic(bool sK);
 	void setUsingGravity(bool uG);
@@ -41,6 +44,8 @@ public:
 	void setRbPosition(Vector3 vec);
 	void setRbRotation(Vector4 vec);
 	void setFreezeRotation(bool _x, bool _y, bool _z);
+	void setDamping(float damp);
+	float getDamping();
 	int rayCast(Vector3 origin, Vector3& dest);
 
 	//FORCES---------------------------------
@@ -70,10 +75,11 @@ protected:
 	float mass;
 	bool useGravity;
 	bool isKinematic;
+	float damping;
 	
 	std::vector<bool> freezeRotation;
 
-	void createRigidBodyComponent(RigidBodyType rbType, Vector3 pos, Vector3 scale, Vector4 rotation, std::string bodyMeshName = "", bool isConvex = true);
+	void createRigidBodyComponent(RigidBodyType rbType, Vector3 pos, Vector3 scale, Vector4 rotation, std::string bodyMeshName = "", bool isConvex = true, float damp = 0.0f);
 };
 
 #endif // ! RIGIDBODY_H
