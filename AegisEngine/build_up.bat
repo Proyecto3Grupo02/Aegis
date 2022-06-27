@@ -4,6 +4,7 @@ set OGRE_BAT=.\ogre.bat
 set BULLET_BAT=.\bullet.bat
 set LUA_BAT=.\lua.bat
 set AEGIS_BAT=.\aegis.bat
+goto a
 
 cd .\Dependencias\Ogre
 if not exist %OGRE_BAT% goto errorOgre
@@ -39,5 +40,13 @@ goto end
 :errorAegis
 echo ERROR: aegis.bat does not exist
 goto end
+
+:a
+dir
+::Creating build folder with a release version
+echo copiandoAssets
+mkdir Build
+dir
+XCOPY /y /d /s .\Exes\AegisEngine\x64\Release .\Build
 
 :end
