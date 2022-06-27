@@ -143,7 +143,7 @@ Ogre::SceneNode* OgreWrapper::getRootNode()
 {
 	return mSceneMgr->getRootSceneNode();
 }
-
+	
 
 void OgreWrapper::createWindowNative()
 {

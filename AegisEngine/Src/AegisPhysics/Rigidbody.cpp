@@ -154,7 +154,7 @@ int RigidBody::rayCast(Vector3 origin, Vector3& dest) {
 	}
 
 	return 0;
-	//return false;
+	
 }
 
 void RigidBody::setRbPosition(Vector3 vec)

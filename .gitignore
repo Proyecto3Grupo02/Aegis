@@ -22,6 +22,7 @@ AegisEngine/[Dd]ebug/
 AegisEngine/[Rr]elease/
 AegisEngine/[Rr]eleases/
 AegisEngine/Temp/
+AegisEngine/Build/
 
 # Lua dependencies
 AegisEngine/Dependencias/Lua/build
