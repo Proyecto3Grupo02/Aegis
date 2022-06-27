@@ -9,7 +9,9 @@ Documento de diseño del motor
 |--|--|--|--|--|--|--|--|--|
 
 ## **¿Cómo usar el motor?
-depuracion > directorio de trabajo > $(SolutionDir)Exes$(ProjectName)$(Platform)$(Configuration)\
+```
+depuracion > directorio de trabajo > $(SolutionDir)\Exes\$(ProjectName)\$(Platform)\$(Configuration)\
+````
 
 ## **Páginas de interés**
 * [**Pivotal Tracker**](https://www.pivotaltracker.com/n/projects/2555675)
