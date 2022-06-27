@@ -8,28 +8,58 @@
 
 class SoundEmitterComponent : public AegisComponent
 {
+public:
+	struct FloatPair
+	{
 	public:
+		float x, y;
+	};
 
-		SoundEmitterComponent(Entity* ent, std::string sound, std::string mode);
-		~SoundEmitterComponent();
-		void playSound();
-		void stop();
-		void pause();
-		void resume();
-		void setVolume(float volume);
-		virtual void update(float deltaTime);
+	struct SoundEmitterComponentData
+	{
+	public:
+		std::string sound;
+		std::string channelName;
+		FloatPair minMax3DDistance;
+		float volume;
+		int loopCount;
+		float pitch;
+		bool playOnInit;
+	};
 
-		std::string getSound() const;
-		void setSound(std::string name);
+public:
+	SoundEmitterComponent(Entity* ent, SoundEmitterComponentData data);
+	~SoundEmitterComponent();
+	virtual void init() override;
+	void playSound();
+	void stop();
+	void pause();
+	void resume();
+	void setChannelProperties(Channel* channel);
+	virtual void update(float deltaTime);
+	
+	int getLoopCount() const;
+	void setLoopCount(int loopCount);
 
-		static void ConvertToLua(lua_State* state);
-	private:
-		std::string soundName;
-		SoundSystem::EmitterData* emitterData;
+	float getVolume() const;
+	void setVolume(float volume);
 
-		// // Esto viene de SoundSystem y tiene los componentes
-		//		std::map<std::string, SoundChannel*> channels;
-		//		const Vector3* position;
+	float getPitch() const;
+	void setPitch(float pitch);
+
+	std::string getSound() const;
+	void setSound(std::string name);
+
+	std::string getChannelName() const;
+	void setChannelName(const std::string& name);
+
+	static void ConvertToLua(lua_State* state);
+private:
+	SoundSystem::EmitterData* emitterData;
+	SoundEmitterComponentData soundEmitterData;
+	// // Esto viene de SoundSystem y tiene los componentes
+	//		std::map<std::string, SoundChannel*> channels;
+	//		const Vector3* position;
 };
 
 #endif

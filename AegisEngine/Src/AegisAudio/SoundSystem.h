@@ -69,12 +69,9 @@ private:
 	System* system; // FMOD Initialization
 	
 	// Group channels for menu volumes control
-	ChannelGroup* music;
-	ChannelGroup* soundEffects;
+	std::map<std::string, ChannelGroup*> channelGroups;
 
 	float generalVolume; // General game Volume
-	float soundVolume;	 // Sound channel volume
-	float musicVolume;	 // Music channel volume
 
 	// ECS structure; Manager functionality
 	std::vector<EmitterData*> emitters;
@@ -93,17 +90,16 @@ public:
 	void close();
 	
 	// ChannelGroupControls
-	void setMusicVolume(float volume);
-	void setSoundEffectsVolume(float volume);
-	void setGeneralVolume(float volume);
 	void setPauseAllSounds(bool pause);
-
-	// Useful for UI representation
+	
+	void setGeneralVolume(float volume);
 	float getGeneralVolume() const;
-	float getMusicVolume() const;
-	float getSoundVolume() const;
+
+	void setChannelVolume(float volume, const std::string& channel);
+	float getChannelVolume(const std::string channel);
+
 	 
-	Channel* playSound(const std::string& name);
+	Channel* playSound(const std::string& name, const std::string& channelName = "default");
 	void stopChannel(EmitterData* emitterName, const std::string& name);
 	void pauseSound(EmitterData* emitterName, const std::string& name);
 	void resumeSound(EmitterData* emitterName, const std::string& name);
@@ -111,10 +107,11 @@ public:
 	void updatePosition(EmitterData* emitterName, Vector3 position);
 
 	// ECS system classes
+	FMOD::ChannelGroup* getChannelGroup(const std::string channelName);
 	SoundChannel* createSoundChannel(Channel* channel);	
 	EmitterData* createEmitter(const Vector3 position);
-	ListenerData* createListener(Vector3* position, Vector4* quaternion);
 	void removeEmitter(EmitterData* emitter);
+	ListenerData* createListener(Vector3* position, Vector4* quaternion);
 	void removeListener();
 
 	static void ConvertToLua(lua_State* state);

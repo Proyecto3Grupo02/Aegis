@@ -79,6 +79,7 @@ bool AegisMain::init()
 	exportToLua(UISystem::getInstance(), "UISystem");
 	exportToLua(Input, "Input");
 	exportToLua(SceneManager::getInstance(), "SceneManager");
+	exportToLua(SoundSystem::getInstance(), "SoundManager");
 
 	init &= LuaManager::getInstance()->execute("Resources//Scripts//initLua.lua");
 	init &= LuaManager::getInstance()->execute((config->scriptPath + "//init.lua").c_str());

@@ -5,7 +5,7 @@ local table = { }
 table.isNative = true
 
 function table.GetNew(entity, args) 
-    local component = Aegis.NativeComponents.createSoundEmitter(entity,args.sound);
+    local component = Aegis.NativeComponents.createSoundEmitter(entity,args);
     return component;
 end
     

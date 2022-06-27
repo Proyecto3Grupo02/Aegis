@@ -6,32 +6,15 @@
 SoundSystem::SoundSystem(std::string soundsPath) :
 	system(nullptr),
 	listener(nullptr),
-	music(nullptr),
-	soundEffects(nullptr),
 	SR(new SoundResources(soundsPath))
 {
 	generalVolume = 1;
-	musicVolume = 1;
-	soundVolume = 1;
 
 	// Error codes are stored in result
 	// We create and check all the system while we create them
 	FMOD_RESULT result = FMOD::System_Create(&system);
 	ERRCHECK(result);
 	result = system->init(128, FMOD_INIT_NORMAL, 0);
-	ERRCHECK(result);
-	
-	result = system->createChannelGroup("music", &music);
-	ERRCHECK(result);
-	result = system->createChannelGroup("soundEffect", &soundEffects);
-	ERRCHECK(result);
-
-	ChannelGroup* master;
-	result = system->getMasterChannelGroup(&master);
-	ERRCHECK(result);
-	result = master->addGroup(music);
-	ERRCHECK(result);
-	result = master->addGroup(soundEffects);
 	ERRCHECK(result);
 
 	DebugManager::getInstance()->log("SOUND SYSTEM: System started");
@@ -53,6 +36,7 @@ void SoundSystem::close() {
 
 	system->close();
 	system->release();
+	channelGroups.clear();
 	if (SR != nullptr)
 		delete SR;
 }
@@ -76,18 +60,14 @@ Sound* SoundSystem::createSound(const std::string& name, SoundMode mode)
 /// </summary>
 /// <param name="name"> Nombre del efecto </param>
 /// <returns></returns>
-FMOD::Channel* SoundSystem::playSound(const std::string& name)
+FMOD::Channel* SoundSystem::playSound(const std::string& name, const std::string& channelName)
 {
 	Channel* channel;
 	Sound* sound = getSound(name);
 	if (sound == nullptr) return nullptr;
 
-	FMOD_RESULT result = system->playSound(sound, soundEffects, false, &channel);
-	
-	//channel->setMode(FMOD_LOOP_NORMAL);
-	//channel->setLoopCount(-1);
+	FMOD_RESULT result = system->playSound(sound, getChannelGroup(channelName), false, &channel);
 	ERRCHECK(result);
-	channel->set3DMinMaxDistance(50, 10000);
 	return channel;
 }
 
@@ -111,26 +91,6 @@ void SoundSystem::setPauseAllSounds(bool pause)
 }
 
 /// <summary>
-/// Sets the MUSIC volume
-/// </summary>
-/// <param name="volume"> Volume in % </param>
-void SoundSystem::setMusicVolume(float volume)
-{
-	music->setVolume(volume);
-	musicVolume = volume;
-}
-
-/// <summary>
-/// Sets the EFFECT volume
-/// </summary>
-/// <param name="volume"> Volume in % </param>
-void SoundSystem::setSoundEffectsVolume(float volume)
-{
-	soundEffects->setVolume(volume);
-	soundVolume = volume;
-}
-
-/// <summary>
 /// Sets ALL volumes
 /// </summary>
 /// <param name="volume"> Volume in % </param>
@@ -143,6 +103,22 @@ void SoundSystem::setGeneralVolume(float volume)
 
 	master->setVolume(volume);
 	generalVolume = volume;
+}
+
+void SoundSystem::setChannelVolume(float volume, const std::string& channel)
+{
+	auto it = channelGroups.find(channel);
+	if (it != channelGroups.end())
+		(*it).second->setVolume(volume);
+}
+
+float SoundSystem::getChannelVolume(const std::string channel)
+{
+	float volume = 0;
+	auto it = channelGroups.find(channel);
+	if (it != channelGroups.end())
+		(*it).second->getVolume(&volume);
+	return volume;
 }
 
 /// <summary>
@@ -164,16 +140,6 @@ void SoundSystem::setListenerAttributes(Vector3& position, Vector3& forward, Vec
 float SoundSystem::getGeneralVolume() const
 {
 	return generalVolume;
-}
-
-float SoundSystem::getMusicVolume() const
-{
-	return musicVolume;
-}
-
-float SoundSystem::getSoundVolume() const
-{
-	return soundVolume;
 }
 
 /// <summary>
@@ -208,7 +174,7 @@ void SoundSystem::removeListener()
 /// <summary>
 /// Searchs the given channel by name in the given emitter
 /// </summary>
-void SoundSystem::stopChannel(EmitterData* emitterData, const std::string& name) 
+void SoundSystem::stopChannel(EmitterData* emitterData, const std::string& name)
 {
 	auto it = emitterData->channels.find(name);
 	if (it != emitterData->channels.end()) {
@@ -257,6 +223,26 @@ void SoundSystem::update(float deltaTime)
 
 	FMOD_RESULT result = system->update();
 	ERRCHECK(result);
+}
+
+FMOD::ChannelGroup* SoundSystem::getChannelGroup(const std::string channelName)
+{
+	auto it = channelGroups.find(channelName);
+
+	if (it == channelGroups.end())
+	{
+		channelGroups.insert({ channelName, nullptr });
+		auto result = system->createChannelGroup(channelName.c_str(), &channelGroups.at(channelName));
+		ERRCHECK(result);
+		ChannelGroup* master;
+		result = system->getMasterChannelGroup(&master);
+		ERRCHECK(result);
+		result = master->addGroup(channelGroups.at(channelName));
+		ERRCHECK(result);
+	}
+	return channelGroups.at(channelName);
+
+	return nullptr;
 }
 
 SoundSystem::SoundChannel* SoundSystem::createSoundChannel(Channel* channel)
@@ -367,7 +353,6 @@ SoundSystem::SoundChannel::~SoundChannel()
 {
 	if (channel != nullptr)
 	{
-		//delete channel;
 		channel = nullptr;
 	}
 }
@@ -445,13 +430,16 @@ void SoundSystem::resumeSound(EmitterData* emitterData, const std::string& name)
 void SoundSystem::ConvertToLua(lua_State* state) {
 	getGlobalNamespace(state).
 		beginNamespace("Aegis").
-		beginClass<SoundSystem>("SoundManagerClass").
-		addProperty("generalVolume", &SoundSystem::getGeneralVolume, &SoundSystem::setGeneralVolume).
-		addProperty("musicVolume", &SoundSystem::getMusicVolume, &SoundSystem::setMusicVolume).
-		addProperty("SFXVolume", &SoundSystem::getSoundVolume, &SoundSystem::setSoundEffectsVolume).
+			beginClass<SoundSystem>("SoundManagerClass").
+				addProperty("generalVolume", &SoundSystem::getGeneralVolume, &SoundSystem::setGeneralVolume).
+				addFunction("GetChannelVolume", &SoundSystem::getChannelVolume).
+				addFunction("SetChannelVolume", &SoundSystem::setChannelVolume).
+				addFunction("PlayOneShot", &SoundSystem::playSound).
+			endClass().
+		beginClass< FMOD::Channel>("FMODChannel").
+			addFunction("SetVolume", &FMOD::Channel::setVolume).
+			addFunction("SetPaused", &FMOD::Channel::setPaused).
+			addFunction("Stop", &FMOD::Channel::stop).
 		endClass().
 		endNamespace();
-
-	exportToLua(SoundSystem::getInstance(), "SoundManager");
-
 }
