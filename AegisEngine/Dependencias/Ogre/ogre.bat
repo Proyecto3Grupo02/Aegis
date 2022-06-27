@@ -5,8 +5,6 @@ set SOURCE_DIR=.\src
 set CMAKE_DIR=..\cmake\bin\cmake.exe
 set SDL2_BUILD_SOL=.\build\SDL2-build\SDL2.sln
 set OGRE_BUILD_SOL=.\build\OGRE.sln
-set DEBUG_DLLS_DIR=..\..\Exes\AegisEngine\x64\Debug
-set RELEASE_DLLS_DIR=..\..\Exes\AegisEngine\x64\Release
 
 if exist %BUILD_DIR% goto buildsol
 mkdir %BUILD_DIR%
@@ -38,27 +36,4 @@ echo Compiling Ogre
 msbuild %OGRE_BUILD_SOL%   /p:platform=x64 /p:configuration=Debug
 msbuild %OGRE_BUILD_SOL%  /p:platform=x64 /p:configuration=Release
 
-echo Ogre and Lua compilation finsished. Copying .dll files
-
-::Copiamos los dlls 
-XCOPY /y /d .\build\bin\debug\OgreMain_d.dll %DEBUG_DLLS_DIR%
-XCOPY /y /d .\build\bin\debug\OgreMain_d.pdb %DEBUG_DLLS_DIR%
-XCOPY /y /d .\build\bin\debug\OgreOverlay_d.dll %DEBUG_DLLS_DIR%
-XCOPY /y /d .\build\bin\debug\Codec_STBI_d.dll %DEBUG_DLLS_DIR%
-XCOPY /y /d .\build\bin\debug\RenderSystem_Direct3D11_d.dll %DEBUG_DLLS_DIR%
-XCOPY /y /d .\build\bin\debug\RenderSystem_Direct3D11_d.pdb %DEBUG_DLLS_DIR%
-XCOPY /y /d .\build\bin\debug\RenderSystem_GL_d.dll %DEBUG_DLLS_DIR%
-XCOPY /y /d .\build\bin\debug\RenderSystem_GL_d.pdb %DEBUG_DLLS_DIR%
-XCOPY /y /d .\build\SDL2-build\RelWithDebInfo\SDL2.dll %DEBUG_DLLS_DIR%
-XCOPY /y /d .\build\SDL2-build\RelWithDebInfo\SDL2.pdb %DEBUG_DLLS_DIR% 
-XCOPY /y /d .\build\SDL2-build\RelWithDebInfo\SDL2main.pdb %DEBUG_DLLS_DIR% 
-
-
-XCOPY /y /d .\build\bin\release\OgreMain.dll %RELEASE_DLLS_DIR%
-XCOPY /y /d .\build\bin\release\OgreOverlay.dll %RELEASE_DLLS_DIR%
-XCOPY /y /d .\build\bin\release\Codec_STBI.dll %RELEASE_DLLS_DIR%
-XCOPY /y /d .\build\bin\release\RenderSystem_Direct3D11.dll %RELEASE_DLLS_DIR%
-XCOPY /y /d .\build\bin\release\RenderSystem_GL.dll %RELEASE_DLLS_DIR%
-XCOPY /y /d .\build\SDL2-build\RelWithDebInfo\SDL2.dll %RELEASE_DLLS_DIR%
-XCOPY /y /d .\build\SDL2-build\RelWithDebInfo\SDL2.pdb %RELEASE_DLLS_DIR%
-XCOPY /y /d .\build\SDL2-build\RelWithDebInfo\SDL2main.pdb %RELEASE_DLLS_DIR%  
+echo Ogre and Lua compilation finsished.

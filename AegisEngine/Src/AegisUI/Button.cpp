@@ -31,7 +31,11 @@ void Button::buttonClickCallback()
 	}
 #else
 	if (!callback.isNil())
+<<<<<<< HEAD
 		callback(getData(), getType());
+=======
+		callback(getData(),getType());
+>>>>>>> batch
 #endif
 }
 

@@ -1,23 +1,25 @@
 @echo off
 
-set OGRE_BAT=.\Dependencias\Ogre\ogre.bat
-set BULLET_BAT=.\Dependencias\Bullet\bullet.bat
-set FMOD_BAT=.\Dependencias\fmod\fmod.bat
-set LUA_BAT=.\Dependencias\Lua\lua.bat
-set AEGIS_BAT=.\Exes\aegis.bat
+set OGRE_BAT=.\ogre.bat
+set BULLET_BAT=.\bullet.bat
+set LUA_BAT=.\lua.bat
+set AEGIS_BAT=.\aegis.bat
+goto a
 
+cd .\Dependencias\Ogre
 if not exist %OGRE_BAT% goto errorOgre
 if exist %OGRE_BAT% call %OGRE_BAT%
 
+cd ..\Bullet
 if not exist %BULLET_BAT% goto errorBullet
 if exist %BULLET_BAT% call %BULLET_BAT%
 
-if not exist %FMOD_BAT% goto errorFmod
-if exist %FMOD_BAT% call %FMOD_BAT%
-
+cd ..\Lua
 if not exist %LUA_BAT% goto errorLua
 if exist %LUA_BAT% call %LUA_BAT%
 
+cd ..\..\Exes
+dir
 if not exist %AEGIS_BAT% goto errorAegis
 if exist %AEGIS_BAT% call %AEGIS_BAT%
 
@@ -31,10 +33,6 @@ goto end
 echo ERROR: bullet.bat does not exist
 goto end
 
-:errorFmod
-echo ERROR: fmod.bat does not exist
-goto end
-
 :errorLua
 echo ERROR: lua.bat does not exist
 goto end
@@ -42,5 +40,13 @@ goto end
 :errorAegis
 echo ERROR: aegis.bat does not exist
 goto end
+
+:a
+dir
+::Creating build folder with a release version
+echo copiandoAssets
+mkdir Build
+dir
+XCOPY /y /d /s .\Exes\AegisEngine\x64\Release .\Build
 
 :end
