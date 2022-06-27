@@ -61,8 +61,8 @@ public:
 	// Camera/Player data for 3D enviroments
 	struct ListenerData
 	{
-		 Vector3* position;
-		 Vector4* quaternion;
+		 Vector3 position;
+		 Vector4 quaternion;
 	};
 
 private:
@@ -111,13 +111,13 @@ public:
 	SoundChannel* createSoundChannel(Channel* channel);	
 	EmitterData* createEmitter(const Vector3 position);
 	void removeEmitter(EmitterData* emitter);
-	ListenerData* createListener(Vector3* position, Vector4* quaternion);
+	ListenerData* createListener(Vector3 position, Vector4 quaternion);
 	void removeListener();
+	void updateListener(Vector3 position, Vector4 quaternion);
 
 	static void ConvertToLua(lua_State* state);
 
 private:
-
 	Sound* createSound(const std::string& name,  SoundMode mode);
 	void setListenerAttributes(Vector3& position, Vector3& forward, Vector3& up);
 

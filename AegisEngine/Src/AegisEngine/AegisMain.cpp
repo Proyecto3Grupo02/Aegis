@@ -8,6 +8,7 @@
 #include "RigidbodyComponent.h"
 #include "TransformComponent.h"
 #include "SoundEmitterComponent.h"
+#include "SoundListenerComponent.h"
 
 // MANAGERS
 #include "OgreWrapper.h"
@@ -300,6 +301,7 @@ void AegisMain::convertObjectToLua()
 	AnimationComponent::ConvertToLua(state);
 	RigidbodyComponent::ConvertToLua(state);
 	SoundEmitterComponent::ConvertToLua(state);
+	SoundListenerComponent::ConvertToLua(state);
 	TransformComponent::ConvertToLua(state);
 
 	// UTILS

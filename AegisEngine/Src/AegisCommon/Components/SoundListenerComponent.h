@@ -1,24 +1,22 @@
-#pragma once 
-
 #ifndef SOUND_LISTENER_H
-#define SOUND_LISTENER_
+#define SOUND_LISTENER_H
 
-#include "SoundEmitter.h"
 #include "AegisComponent.h"
 #include "ILuaObject.h"
-#include "SoundListener.h"
+
+class TransformComponent;
 
 class SoundListenerComponent: public AegisComponent
 {
-private:
-    SoundListener* mListener_ = nullptr;
-    
 public:
-    SoundListenerComponent(/* args */);
-    ~SoundListenerComponent();
+    SoundListenerComponent(Entity* ent);
+    virtual ~SoundListenerComponent();
+
+    virtual void update(float deltaTime) override;
 
     static void ConvertToLua(lua_State* state);
+private:
+    TransformComponent* transform;
 };
-
 
 #endif

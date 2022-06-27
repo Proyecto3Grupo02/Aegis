@@ -2,6 +2,7 @@
 #include <fmod_errors.h>
 #include "DebugManager.h"
 #include <algorithm>
+#include <functional>
 
 SoundSystem::SoundSystem(std::string soundsPath) :
 	system(nullptr),
@@ -156,20 +157,6 @@ void SoundSystem::removeEmitter(EmitterData* emitter)
 	}
 }
 
-/// <summary>
-/// Removes Listener, which SHOULD be done only on destruction I guess 
-/// (For legal reasons the "I guess" expression is only used for sarcastic value
-/// I actually know it does that)
-/// </summary>
-void SoundSystem::removeListener()
-{
-	if (listener != nullptr)
-	{
-		delete listener;
-		listener = nullptr;
-	}
-}
-
 
 /// <summary>
 /// Searchs the given channel by name in the given emitter
@@ -196,13 +183,10 @@ void SoundSystem::update(float deltaTime)
 	// Listener position and quaternion update
 	if (listener != nullptr)
 	{
-		pos = *listener->position;
+		pos = listener->position;
 
-		//float z = listener->position->GetZ();
-		//float y = listener->position->GetY();
-
-		float z = listener->quaternion->getZ();
-		float y = listener->quaternion->getY();
+		float z = listener->quaternion.getZ();
+		float y = listener->quaternion.getY();
 		forward = Vector3{ 0, 0, z };	//	Vector3 Forward
 		up = Vector3{ 0, y ,0 };		//	Vector3 Up
 		setListenerAttributes(pos, forward, up);
@@ -268,7 +252,7 @@ SoundSystem::EmitterData* SoundSystem::createEmitter(Vector3 position)
 /// <param name="position"> Necesita ubicancia </param>
 /// <param name="quaternion"> Necesita orientacion </param>
 /// <returns></returns>
-SoundSystem::ListenerData* SoundSystem::createListener(Vector3* position, Vector4* quaternion)
+SoundSystem::ListenerData* SoundSystem::createListener(Vector3 position, Vector4 quaternion)
 {
 	if (listener != nullptr)
 		delete listener;
@@ -277,6 +261,26 @@ SoundSystem::ListenerData* SoundSystem::createListener(Vector3* position, Vector
 	data->quaternion = quaternion;
 	listener = data;
 	return data;
+}
+
+/// <summary>
+/// Removes Listener, which SHOULD be done only on destruction I guess 
+/// (For legal reasons the "I guess" expression is only used for sarcastic value
+/// I actually know it does that)
+/// </summary>
+void SoundSystem::removeListener()
+{
+	if (listener != nullptr)
+	{
+		delete listener;
+		listener = nullptr;
+	}
+}
+
+void SoundSystem::updateListener(Vector3 position, Vector4 quaternion)
+{
+	listener->position = position;
+	listener->quaternion = quaternion;
 }
 
 /// <summary>
@@ -440,6 +444,15 @@ void SoundSystem::ConvertToLua(lua_State* state) {
 			addFunction("SetVolume", &FMOD::Channel::setVolume).
 			addFunction("SetPaused", &FMOD::Channel::setPaused).
 			addFunction("Stop", &FMOD::Channel::stop).
+		addFunction("SetLoopCount",								// Funcion proxy, para no tener que declarar una funcion extra en SoundSystem
+			std::function<void(FMOD::Channel* , int)>
+			(
+				[](FMOD::Channel* channel, int loopCount) 
+				{
+					channel->setMode(loopCount != 0 ? FMOD_LOOP_NORMAL : FMOD_LOOP_OFF);
+					channel->setLoopCount(loopCount);
+				}
+			)).
 		endClass().
 		endNamespace();
 }
