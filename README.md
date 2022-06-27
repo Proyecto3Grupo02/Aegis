@@ -1,5 +1,4 @@
 # Aegis
-
 Documento de diseño del motor
 
 ---------------------------------
@@ -8,6 +7,9 @@ Documento de diseño del motor
 
 |Jonathan Sebastián Andrade Gordillo|Rubén González Ortiz | Álvaro Cuerva Hernández |Sergio Alberto Luis Cano |Javier Meitín Moreno| Nicolás Rosa Caballero | Amparo Rubio Bellón |Rodrigo Tobar Guillén|Jorge Zurdo Izquierdo|
 |--|--|--|--|--|--|--|--|--|
+
+## **¿Cómo usar el motor?
+depuracion > directorio de trabajo > $(SolutionDir)Exes$(ProjectName)$(Platform)$(Configuration)\
 
 ## **Páginas de interés**
 * [**Pivotal Tracker**](https://www.pivotaltracker.com/n/projects/2555675)
