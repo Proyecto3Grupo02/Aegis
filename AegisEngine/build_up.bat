@@ -49,6 +49,6 @@ xcopy /y /d /s ..\..\Game .\Build
 
 echo Copying assets in Debug to execute in VisualStudio 
 xcopy /y /d /s ..\..\Game .\Exes\AegisEngine\x64\Debug
-::xcopy /y /d /s ..\..\Game .\Exes\AegisEngine\x64\Release
+xcopy /y /d /s ..\..\Game .\Exes\AegisEngine\x64\Release
 
 :end
