@@ -47,7 +47,7 @@ public:
 	void detachChildren();
 	void removeAllComponents();
 	inline void addComponentFromLua(AegisComponent* component);
-	AegisComponent* getComponentLua(std::string componentName);
+	luabridge::LuaRef getComponentLua(std::string componentName);
 
 	template <typename T>
 	inline T* getComponent(const char* componentName);

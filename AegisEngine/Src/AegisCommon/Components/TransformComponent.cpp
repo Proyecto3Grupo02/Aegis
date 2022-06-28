@@ -155,7 +155,7 @@ void TransformComponent::ConvertToLua(lua_State* state)
 	getGlobalNamespace(state).
 		beginNamespace("Aegis").
 		beginNamespace("NativeComponents").
-		beginClass<TransformComponent>("Transform").
+		deriveClass<TransformComponent, AegisComponent>("Transform").
 		addProperty("position", &TransformComponent::getPosition, &TransformComponent::setPosition).
 		addProperty("scale", &TransformComponent::getScale, &TransformComponent::setScale).
 		addProperty("rotation", &TransformComponent::getRotation, &TransformComponent::setRotation).

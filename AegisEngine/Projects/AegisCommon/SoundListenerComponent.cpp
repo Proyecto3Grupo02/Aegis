@@ -27,7 +27,7 @@ void SoundListenerComponent::ConvertToLua(lua_State* state)
 	getGlobalNamespace(state).
 		beginNamespace("Aegis").
 		beginNamespace("NativeComponents").
-		addFunction("createSoundListener", createSoundListener).
+		addFunction("CreateSoundListener", createSoundListener).
 		deriveClass<SoundListenerComponent, AegisComponent>("SoundEmitter").
 		endClass().
 		endNamespace().

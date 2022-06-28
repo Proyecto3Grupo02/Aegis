@@ -117,11 +117,11 @@ inline void Entity::addComponentFromLua(AegisComponent* component)
 	}
 }
 
-AegisComponent* Entity::getComponentLua(std::string componentName)
+luabridge::LuaRef Entity::getComponentLua(std::string componentName)
 {
 	if (mComponents_.count(componentName) == 0)
 		return nullptr;
-	else return  mComponents_[componentName];
+	else return  mComponents_[componentName]->getType();
 }
 
 void Entity::setIterator(std::list<Entity*>::iterator entityIterator)

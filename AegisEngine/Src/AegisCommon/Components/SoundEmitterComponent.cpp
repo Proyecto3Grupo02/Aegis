@@ -162,7 +162,7 @@ void SoundEmitterComponent::ConvertToLua(lua_State* state)
 	getGlobalNamespace(state).
 		beginNamespace("Aegis").
 			beginNamespace("NativeComponents").
-				addFunction("createSoundEmitter", createSoundEmitter).
+				addFunction("CreateSoundEmitter", createSoundEmitter).
 				deriveClass<SoundEmitterComponent, AegisComponent>("SoundEmitter").
 					addProperty("sound", &SoundEmitterComponent::getSound, &SoundEmitterComponent::setSound).
 					addProperty("loopCount", &SoundEmitterComponent::getLoopCount, &SoundEmitterComponent::setLoopCount).

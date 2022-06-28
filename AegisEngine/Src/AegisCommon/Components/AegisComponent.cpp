@@ -6,6 +6,11 @@ AegisComponent* CreateComponent(std::string componentName, Entity* entity)
 	return new AegisComponent(componentName, entity);
 }
 
+AegisComponent::AegisComponent(std::string componentName, Entity* entity) : Component(componentName, entity)
+{
+	setDataAsInnerType(this);
+}
+
 void AegisComponent::init()
 {
 	setCallbacks(funcs);

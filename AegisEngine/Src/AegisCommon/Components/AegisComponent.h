@@ -14,7 +14,7 @@ struct Entity;
 class	AegisComponent : public Component, public ILuaObject {
 public:
 	AegisComponent() : Component() {}
-	AegisComponent(std::string componentName, Entity* entity) : Component(componentName, entity) {}
+	AegisComponent(std::string componentName, Entity* entity);
 	virtual ~AegisComponent() {}
 	virtual void init() override;
 	virtual void update(float dt) override;
