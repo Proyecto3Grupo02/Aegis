@@ -68,12 +68,13 @@ void RigidbodyComponent::syncTransformToRigidbody()
 void RigidbodyComponent::syncRigidbodyToTransform()
 {
 	TransformComponent* t = transform;
+	Vector3 tPos = t->getPosition();
 
 	if (t->hasParent()) {
 		Entity* parent = t->getParent();
 		t->setParent(nullptr);
 
-		Vector3 tPos = t->getPosition();
+		
 		Ogre::Quaternion tRot = t->getRotation();
 		Vector4 rbRot(tRot.x, tRot.y, tRot.z, tRot.w);
 
@@ -84,7 +85,7 @@ void RigidbodyComponent::syncRigidbodyToTransform()
 	}
 
 	else {
-		Vector3 tPos = t->getPosition();
+		
 		Ogre::Quaternion tRot = t->getRotation();
 		Vector4 rbRot = Vector4(tRot.x, tRot.y, tRot.z, tRot.w);
 		Vector3 rbPos = rigidbody->getRbPosition();
@@ -107,6 +108,7 @@ void RigidbodyComponent::syncRigidbodyToTransform()
 	// Ajuste en base a la rotaci�n
 	if (t->hasParent())
 	{
+		Vector3 rbPos = rigidbody->getRbPosition();
 		float offset = tPos.magnitude();
 		Ogre::Quaternion rotPadreQ = t->getParent()->getTransform()->getRotation();
 		Vector3 rotPadre;
