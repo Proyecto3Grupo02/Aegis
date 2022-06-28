@@ -357,6 +357,7 @@ SoundSystem::SoundChannel::~SoundChannel()
 {
 	if (channel != nullptr)
 	{
+		channel->stop();
 		channel = nullptr;
 	}
 }
