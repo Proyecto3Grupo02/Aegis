@@ -68,13 +68,13 @@ void RigidbodyComponent::syncTransformToRigidbody()
 void RigidbodyComponent::syncRigidbodyToTransform()
 {
 	TransformComponent* t = transform;
-	Vector3 tPos = t->getPosition();
 
 	if (t->hasParent()) {
 		Entity* parent = t->getParent();
 		t->setParent(nullptr);
 
-		
+		Vector3 tPos = t->getPosition();
+
 		Ogre::Quaternion tRot = t->getRotation();
 		Vector4 rbRot(tRot.x, tRot.y, tRot.z, tRot.w);
 
@@ -85,7 +85,7 @@ void RigidbodyComponent::syncRigidbodyToTransform()
 	}
 
 	else {
-		
+		Vector3 tPos = t->getPosition();
 		Ogre::Quaternion tRot = t->getRotation();
 		Vector4 rbRot = Vector4(tRot.x, tRot.y, tRot.z, tRot.w);
 		Vector3 rbPos = rigidbody->getRbPosition();
@@ -94,61 +94,6 @@ void RigidbodyComponent::syncRigidbodyToTransform()
 		if ((rbPos - tPos).magnitudeSquared() >= 0.01f)
 			rigidbody->setRbPosition(tPos);
 	}
-
-	//Ogre::Quaternion ogreQuat(rbRot.w, rbRot.x, rbRot.y, rbRot.z);
-	
-	//Vector3 tPos = transform->getPosition();
-	
-	/*while (t->hasParent())
-	{
-		tPos = tPos + t->getParent()->getTransform()->getPosition();
-		t = t->getParent()->getTransform();
-	}*/
-
-	// Ajuste en base a la rotaci�n
-	if (t->hasParent())
-	{
-		Vector3 rbPos = rigidbody->getRbPosition();
-		float offset = tPos.magnitude();
-		Ogre::Quaternion rotPadreQ = t->getParent()->getTransform()->getRotation();
-		Vector3 rotPadre;
-		rotPadre.x = -2 * (rotPadreQ.x * rotPadreQ.z - rotPadreQ.w * rotPadreQ.y);
-		rotPadre.y = 2 * (rotPadreQ.y * rotPadreQ.z + rotPadreQ.w * rotPadreQ.x);
-		rotPadre.z = 1 - 2 * (rotPadreQ.x * rotPadreQ.x + rotPadreQ.y * rotPadreQ.y);
-		//rotPadre = rotPadre.scalarMult(Vector3(0, 0, 1));
-		/*std::cout << "ROTACION DE LA BARCA\n";
-		std::cout << rotPadre.x;
-		std::cout << "\n";
-		std::cout << rotPadre.y;
-		std::cout << "\n";
-		std::cout << rotPadre.z;
-		std::cout << "\n";std::cout << "\n";*/
-		rotPadre = rotPadre.getNormalized();
-		rotPadre = rotPadre*offset;
-		rotPadre = rotPadre.inverse();
-		rbPos = rotPadre + t->getParent()->getTransform()->getPosition();
-		rigidbody->setRbPosition(rbPos);
-		//std::cout << "POSICION DEF DEL RIGIDBODY\n";
-		//std::cout << rbPos.x;
-		//std::cout << "\n";
-		//std::cout << rbPos.y;
-		//std::cout << "\n";
-		//std::cout << rbPos.z;
-		//std::cout << "\n";
-		//std::cout << "\n";
-
-		//std::cout << "POSICION DEF DEL TRANSFORM\n";
-		//std::cout << t->getPosition().x + t->getParent()->getTransform()->getPosition().x;
-		//std::cout << "\n";
-		//std::cout << t->getPosition().y + t->getParent()->getTransform()->getPosition().y;
-		//std::cout << "\n";
-		//std::cout << t->getPosition().z + t->getParent()->getTransform()->getPosition().z;
-		//std::cout << "\n";
-		//std::cout << "\n";
-		return;
-	}
-
-	
 }
 
 void RigidbodyComponent::setIterator(std::list<RigidbodyComponent*>::iterator physicsEntityIt)
