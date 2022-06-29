@@ -1,6 +1,8 @@
 #include "RigidBody.h"
 #include "PhysicsMain.h"
 #include "Vector4.h"
+#include "RigidbodyComponent.h"
+#include "Entity.h"
 #include <btBulletDynamicsCommon.h>
 
 RigidBody::RigidBody(std::string bodyMeshName, Vector3 pos, Vector3 scale, Vector4 rotation, RigidbodyComponent* r, float m, bool useG, bool isK, bool isT, float damp) :
@@ -61,7 +63,10 @@ Vector4 RigidBody::getRotation()
 	auto quat = t.getRotation();
 	return Vector4(quat.getX(), quat.getY(), quat.getZ(), quat.getW());
 }
-
+float RigidBody::getMass()
+{
+	return rigidBody->getMass();
+}
 bool RigidBody::isActive() const
 {
 	return rigidBody->isActive();
@@ -134,26 +139,19 @@ float RigidBody::getDamping()
 	return damping;
 }
 
-int RigidBody::rayCast(Vector3 origin, Vector3& dest) {
+Entity* RigidBody::rayCast(Vector3 origin, Vector3& dest) {
 	btVector3 _origin = PhysicsSys->parseToBulletVector(origin);
 	btVector3 _dest = PhysicsSys->parseToBulletVector(dest);
 	btCollisionWorld::ClosestRayResultCallback RayCallback(_origin, _dest);
 
 	// Perform raycast
 	PhysicsSys->dynamicsWorld->rayTest(_origin, _dest, RayCallback);
-	if (RayCallback.hasHit()) {
-		//std::cout << "a";
+	if (RayCallback.hasHit()) {		
 		RigidBody* rb = (RigidBody*)RayCallback.m_collisionObject->getUserPointer();
-		if (!rb->rigidBody->getInvMass())
-			return 1;
-		if (!rb->isTrigger()) {
-			dest = rb->getRbPosition();
-			return 2;
-		}
-		return 3;
+		return rb->getRbComponent()->getEntity();
 	}
 
-	return 0;
+	return nullptr;
 	
 }
 
@@ -222,6 +220,10 @@ void RigidBody::enableCol()
 {
 	//rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() ^ btCollisionObject::CF_NO_CONTACT_RESPONSE);
 	rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() & (~btCollisionObject::CF_NO_CONTACT_RESPONSE));
+}
+RigidbodyComponent* RigidBody::getRbComponent()
+{
+	return rbC;
 }
 void RigidBody::disableCol()
 {

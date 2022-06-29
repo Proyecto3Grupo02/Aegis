@@ -142,9 +142,18 @@ void RigidbodyComponent::setDamping(float damp)
 	rigidbody->setDamping(damp);
 }
 
+void RigidbodyComponent::setMass(float mass)
+{
+}
+
 float RigidbodyComponent::getDamping() const
 {
 	return rigidbody->getDamping();
+}
+
+float RigidbodyComponent::getMass() const
+{
+	return rigidbody->getMass();
 }
 
 void RigidbodyComponent::resetForce()
@@ -227,6 +236,7 @@ void RigidbodyComponent::ConvertToLua(lua_State* state)
 		deriveClass<RigidbodyComponent, AegisComponent>("Rigidbody").
 		addProperty("trigger", &RigidbodyComponent::getTrigger, &RigidbodyComponent::setTrigger).
 		addProperty("position", &RigidbodyComponent::getPosition, &RigidbodyComponent::setPosition).
+		addProperty("mass", &RigidbodyComponent::getMass, &RigidbodyComponent::setMass).
 		addProperty("useGravity", &RigidbodyComponent::getUsingGravity, &RigidbodyComponent::setUsingGravity).
 		addFunction("AddForce", &RigidbodyComponent::addForce).
 		addFunction("GetForce", &RigidbodyComponent::getForce).
@@ -255,7 +265,7 @@ void RigidbodyComponent::changeGravity(Vector3 acc)
 	rigidbody->changeGravity(acc);
 }
 
-int RigidbodyComponent::raycast(Vector3 origin, Vector3& dir, float distance)
+Entity* RigidbodyComponent::raycast(Vector3 origin, Vector3& dir, float distance)
 {
 	dir = origin + dir.getNormalized() * distance;
 	return rigidbody->rayCast(origin, dir);

@@ -32,6 +32,7 @@ public:
 	Vector3 getForce() const;
 	bool getTrigger() const;
 	float getDamping() const;
+	float getMass() const;
 
 	//SETS------------------------------------------
 	void setPosition(Vector3 pos);
@@ -39,7 +40,7 @@ public:
 	void setTrigger(bool trig);
 	void setAngular();
 	void setDamping(float damp);
-
+	void setMass(float mass);
 	//FORCES----------------------------------------
 	void addForce(Vector3 force);
 	Vector3 accelerateTo(Vector3 targetVelocity, float maxAcceleration = 1000000000000);
@@ -62,8 +63,9 @@ public:
 	//LUA------------
 	static void ConvertToLua(lua_State* state);
 	void changeGravity(Vector3 acc);
-	int raycast(Vector3 origin, Vector3 &dest, float distance);
+	Entity* raycast(Vector3 origin, Vector3 &dest, float distance);
 	friend class PhysicsSystem;
+	friend class Rigidbody;
 
 	//Activar o desactivar collider
 	void enableCollision(bool enable_);

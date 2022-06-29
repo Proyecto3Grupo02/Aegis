@@ -13,6 +13,7 @@ class Transform;
 class Vector3;
 class Vector4;
 class RigidbodyComponent;
+class Entity;
 
 class RigidBody {
 public:
@@ -31,6 +32,7 @@ public:
 	Vector3 getRbPosition();
 	Vector3 getTotalForce();
 	Vector4 getRotation();
+	float getMass();
 
 	bool isTrigger();
 
@@ -46,7 +48,7 @@ public:
 	void setFreezeRotation(bool _x, bool _y, bool _z);
 	void setDamping(float damp);
 	float getDamping();
-	int rayCast(Vector3 origin, Vector3& dest);
+	Entity* rayCast(Vector3 origin, Vector3& dest);
 
 	//FORCES---------------------------------
 	void addForce(Vector3 vec);
@@ -66,6 +68,8 @@ public:
 	//void setRot(Vector3);
 	void disableCol();
 	void enableCol();
+
+	RigidbodyComponent* getRbComponent();
 	
 protected:
 	btRigidBody* rigidBody;
