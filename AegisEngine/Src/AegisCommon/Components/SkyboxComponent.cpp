@@ -3,20 +3,21 @@
 
 #include "MathUtils.h"
 
-SkyboxComponent::SkyboxComponent(Entity* _ent, std::string meshName, std::string matName, Ogre::SceneManager* sceneMng, bool ir) :
+SkyboxComponent::SkyboxComponent(Entity* _ent, std::string matName, Ogre::SceneManager* sceneMng, bool ir) :
 	AegisComponent("Skybox", _ent)
 {
+	mesh = new Ogre::Plane(Ogre::Vector3(0, 0, 1);
 	isVisible = ir;
 	setDataAsInnerType(this);
-	constructoraSkybox(_ent, meshName, matName, sceneMng, isVisible);
+	constructoraSkybox(_ent, matName, sceneMng, isVisible);
 }
 
-SkyboxComponent::SkyboxComponent(Entity* _ent, std::string meshName, std::string matName) :
+SkyboxComponent::SkyboxComponent(Entity* _ent, std::string matName) :
 	AegisComponent("Skybox", _ent)
 {
 	isVisible = true;
 	setDataAsInnerType(this);
-	constructoraSkybox(_ent, meshName, matName, _ent->getNode()->getCreator(), isVisible);
+	constructoraSkybox(_ent, matName, _ent->getNode()->getCreator(), isVisible);
 }
 
 SkyboxComponent::SkyboxComponent()
@@ -26,11 +27,11 @@ SkyboxComponent::SkyboxComponent()
 	setComponentName("Skybox");
 }
 
-void SkyboxComponent::constructoraSkybox(Entity* _ent, std::string meshName, std::string matName, Ogre::SceneManager* sceneMng, bool ir)
+void SkyboxComponent::constructoraSkybox(Entity* _ent, std::string matName, Ogre::SceneManager* sceneMng, bool ir)
 {
-	sceneMng->setSkyBox(true, meshName);
-	sceneMng->setSkyPlane(true, Ogre::Plane(Ogre::Vector3(0, 0, 1), -100), meshName, 1, 1, true, 1, 10, 10);
-	mesh = sceneMng->createEntity(meshName);
+	//sceneMng->setSkyBox(true, meshName);
+	sceneMng->setSkyPlane(true, Ogre::Plane(Ogre::Vector3(0, 0, 1), -100), matName, 1, 1, true, 1, 10, 10);
+	//mesh = sceneMng->createEntity(meshName);
 	mesh->setMaterialName(matName);
 
 	node = getEntity()->getNode();
@@ -40,14 +41,14 @@ void SkyboxComponent::constructoraSkybox(Entity* _ent, std::string meshName, std
 	transform = getEntity()->getTransform(); //como transform es un componente nativo, no es necesario comprobar si es null
 }
 
-void SkyboxComponent::constructoraSkyboxLua(Entity* _ent, std::string meshName, std::string matName)
+void SkyboxComponent::constructoraSkyboxLua(Entity* _ent, std::string matName)
 {
-	constructoraSkybox(_ent, meshName, matName, _ent->getNode()->getCreator(), isVisible);
+	constructoraSkybox(_ent, matName, _ent->getNode()->getCreator(), isVisible);
 }
 
-SkyboxComponent* CreateSkybox(Entity* _ent, std::string meshName, std::string matName)
+SkyboxComponent* CreateSkybox(Entity* _ent, std::string matName)
 {
-	return new SkyboxComponent(_ent, meshName, matName);
+	return new SkyboxComponent(_ent, matName);
 }
 
 void SkyboxComponent::ConvertToLua(lua_State* state)

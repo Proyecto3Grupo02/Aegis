@@ -12,8 +12,8 @@ class AegisComponent;
 class SkyboxComponent : public AegisComponent, public ILuaObject {
 public:
 	// Constructoras
-	SkyboxComponent(Entity* _ent, std::string meshName, std::string matName, Ogre::SceneManager* sceneMng, bool ir = true);
-	SkyboxComponent(Entity* _ent, std::string meshName, std::string matName);
+	SkyboxComponent(Entity* _ent, std::string matName, Ogre::SceneManager* sceneMng, bool ir = true);
+	SkyboxComponent(Entity* _ent, std::string matName);
 	SkyboxComponent();
 	~SkyboxComponent() {};
 
@@ -28,8 +28,8 @@ public:
 	static void ConvertToLua(lua_State* state);
 
 protected:
-	void constructoraSkybox(Entity* _ent, std::string meshName, std::string matName, Ogre::SceneManager* sceneMng, bool ir);
-	void constructoraSkyboxLua(Entity* _ent, std::string meshName, std::string matName);
+	void constructoraSkybox(Entity* _ent, std::string matName, Ogre::SceneManager* sceneMng, bool ir);
+	void constructoraSkyboxLua(Entity* _ent, std::string matName);
 
 	Ogre::SceneNode* node = nullptr;
 	TransformComponent* transform = nullptr;
