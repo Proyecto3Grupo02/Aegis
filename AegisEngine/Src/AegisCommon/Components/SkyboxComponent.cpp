@@ -32,7 +32,7 @@ void SkyboxComponent::constructoraSkybox(Entity* _ent, std::string matName, Ogre
 {
 	//sceneMng->setSkyBox(true, meshName);
 	mesh = new Ogre::Plane(Ogre::Vector3(0, 0, 1), -100);
-	sceneMng->setSkyPlane(true,*mesh , matName, 1, 1, true, 1, 10, 10);
+	sceneMng->setSkyPlane(true,*mesh , matName, 1.0f, 1.0f, true, 1, 10, 10);
 	entity = sceneMng->createEntity(_ent->getName() + " " + matName);
 	entity->setMaterialName(matName);
 

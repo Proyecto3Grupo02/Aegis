@@ -9,6 +9,7 @@
 #include "TransformComponent.h"
 #include "SoundEmitterComponent.h"
 #include "SoundListenerComponent.h"
+#include "SkyboxComponent.h"
 
 // MANAGERS
 #include "OgreWrapper.h"
@@ -303,7 +304,7 @@ void AegisMain::convertObjectToLua()
 	SoundEmitterComponent::ConvertToLua(state);
 	SoundListenerComponent::ConvertToLua(state);
 	TransformComponent::ConvertToLua(state);
-
+	SkyboxComponent::ConvertToLua(state);
 	// UTILS
 	Vector2::ConvertToLua(state);
 	Vector3::ConvertToLua(state);
