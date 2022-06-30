@@ -8,11 +8,6 @@ Documento de diseño del motor
 |Jonathan Sebastián Andrade Gordillo|Rubén González Ortiz | Álvaro Cuerva Hernández |Sergio Alberto Luis Cano |Javier Meitín Moreno| Nicolás Rosa Caballero | Amparo Rubio Bellón |Rodrigo Tobar Guillén|Jorge Zurdo Izquierdo|
 |--|--|--|--|--|--|--|--|--|
 
-## **¿Cómo usar el motor?
-```
-depuracion > directorio de trabajo > $(SolutionDir)\Exes\$(ProjectName)\$(Platform)\$(Configuration)\
-````
-
 ## **Páginas de interés**
 * [**Pivotal Tracker**](https://www.pivotaltracker.com/n/projects/2555675)
 * [**Repositorio**](https://github.com/Proyecto3Grupo02)
@@ -47,6 +42,15 @@ Aegis cuenta con las siguientes Fatures:
 * **Creación de botones, imágenes, y textos** (Ogre Overlay)
 
 La solución del motor viene estructurada en proyectos, cada uno encargado de realizar una función concreta. Los proyectos más básicos se encargan de la comunicación entre Aegis y las librerías que hemos usado (Ogre, Bullet, etc). Estos  proyectos son a su vez la base de proyectos mas generales encargados de gestionar las escenas, entidades, y componentes.
+
+### ¿Cómo usar el motor?
+Para poder ejecutar el motor, será necesario seguir los siguientes pasos:
+1) Configura el **Directorio de Trabajo** de AegisEngine en Debug y Release:
+```
+AegisEngine > Propiedades > Depuración > Directorio de trabajo > $(SolutionDir)Exes\AegisEngine\$(Platform)\$(Configuration)
+```
+2) Ejecuta Ctrl+Ñ ==> Ejecuta **./build_up.bat**. Esto compilará las librerías en la carpeta Dependencias, y los proyectos del propio motor, además de generar un ejecutable que se guardará en una carpeta **Build**.
+
 ## Jerarquía de los Proyectos:
 ![Copia de Diagrama Proyectos](https://user-images.githubusercontent.com/62613312/166960800-33933d06-c510-432e-8fba-342dd802cd41.jpg)
 
@@ -79,9 +83,6 @@ AegisComponent hereda de **Component** e **ILuaObject** y es la clase de la que 
 AegisComponent tiene variables privadas de tipo **LuaRef** para **type y funcs**, además de los callbacks **initFunc, updateFunc, lateUpdateFunc, fixedUpdateFunc, onCollisionFunc, onTriggerFunc**. Debido a que LuaRef no tiene una constructora por defecto, estas son incializadas en AegisComponent.h por **LuaMngr->getSharedEmptyLuaRef()**.
 
 AegisComponent cuenta también con métodos set y get que reciben/devuelven dichos **LuaRef**. Se sobreescribe **ConverToLua** para poder acceder/modificar dichos métodos mediante el operador **=** desde lua.
-
-#### AnimationComponent:
-???
 
 #### CameraComponent:
 CameraComponent guarda tanto un bool que determina si es "MainCamera" como un puntero a la **AegisCamera** a la que está asociada.
