@@ -164,7 +164,7 @@ Hay métodos tanto para consultar los diversos estados de dichas variables, como
 
 ------
 ### AegisEngine:
-AegisEngine es el prOyecto principal de la solución desde el cual se instancian y gestionan los otros managers.
+AegisEngine es el proyecto principal de la solución desde el cual se instancian y gestionan los otros managers.
 
 #### GameConfig:
 Contiene un struct GameConfig donde se guardan 3 strings: **scriptPath, soundPath, resourcesCfgPath**. Dichas cadenas guardan las rutas a los scripts de lua usados en el juego, los sonidos, y el resources.cfg respecivamente.
@@ -223,7 +223,11 @@ PhysicsMain hereda de **Singleton**, y se encarga de gestionar las físicas, pri
 
 En la constructora inicializa las cosas de Bullet, y en caso de que esté en modo DEBUG, también crea un **OgreDebugDrawer**.
 
-En el update hace avanzar el mundo fisico y comprueba si ha habido colisiones, en cuyo caso, para cada par de colisiones se llama a CollisionEnterCallbacks desde donde se llama a los oncollision/ontrigger respectivos de cada entidad.
+Esta clase usa una variable scene, que es la agrupación de objetos físicos la cual debe encargarse de actualizar, tanto las fuerzas que les afectan como sus colisiones.
+
+En el método update hace avanzar el mundo fisico y comprueba si ha habido colisiones en el método checkCollision, en cuyo caso, para cada par de colisiones se llama a CollisionEnterCallbacks desde donde se llama a los oncollision/ontrigger respectivos de cada entidad.
+
+También tiene el método createRigidBody que permite crear un nuevo rigidBody, además de los métodos parseToBulletTransform, parseToBulletTransform con los cuales a partir de un vector3 y de un vector3/4 se puede obtener un btTransform.
 
 #### Rigidbody:
 Rigidbody crea una entidad física en Bullet. Contiene métodos setter y get para modificar sus atributos.
