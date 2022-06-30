@@ -116,6 +116,7 @@
     <ClInclude Include="..\..\Src\AegisCommon\Components\LightComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\RendererComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\RigidbodyComponent.h" />
+    <ClInclude Include="..\..\Src\AegisCommon\Components\SkyboxComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\SoundEmitterComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\SoundListenerComponent.h" />
     <ClInclude Include="..\..\Src\AegisCommon\Components\TransformComponent.h" />
@@ -146,6 +147,7 @@
     <ClCompile Include="..\..\Src\AegisCommon\Components\LightComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\RendererComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\RigidbodyComponent.cpp" />
+    <ClCompile Include="..\..\Src\AegisCommon\Components\SkyboxComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\SoundEmitterComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Components\TransformComponent.cpp" />
     <ClCompile Include="..\..\Src\AegisCommon\Entity\Entity.cpp" />

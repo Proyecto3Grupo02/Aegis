@@ -29,7 +29,7 @@ SkyboxComponent::SkyboxComponent()
 void SkyboxComponent::constructoraSkybox(Entity* _ent, std::string meshName, std::string matName, Ogre::SceneManager* sceneMng, bool ir)
 {
 	sceneMng->setSkyBox(true, meshName);
-	//sceneMng->setSkyPlane(true, Ogre::Plane(Ogre::Vector3(0, 0, 1), -100), meshName, 1, 1, true, 1, 10, 10);
+	sceneMng->setSkyPlane(true, Ogre::Plane(Ogre::Vector3(0, 0, 1), -100), meshName, 1, 1, true, 1, 10, 10);
 	mesh = sceneMng->createEntity(meshName);
 	mesh->setMaterialName(matName);
 
@@ -37,8 +37,7 @@ void SkyboxComponent::constructoraSkybox(Entity* _ent, std::string meshName, std
 	node->attachObject(mesh);
 	setRendering(ir);
 
-	transform = getEntity()->getTransform();
-	if (transform == nullptr) throw "ENTITY WITHOUT TRANSFORM"; //Pulir excepcion
+	transform = getEntity()->getTransform(); //como transform es un componente nativo, no es necesario comprobar si es null
 }
 
 void SkyboxComponent::constructoraSkyboxLua(Entity* _ent, std::string meshName, std::string matName)
