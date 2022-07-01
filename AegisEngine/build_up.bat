@@ -45,6 +45,7 @@ cd ../
 echo Copying release .exe in Build folder
 mkdir Build
 xcopy /y /d /s .\Exes\AegisEngine\x64\Release .\Build
+del .\Build\*.pdb
 xcopy /y /d /s ..\..\Game .\Build
 
 echo Copying assets in Debug to execute in VisualStudio 
