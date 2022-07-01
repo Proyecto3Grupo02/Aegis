@@ -1,6 +1,6 @@
 #pragma once
-#ifndef  RENDERER_H 
-#define RENDERER_H
+#ifndef  SKYBOX_H 
+#define SKYBOX_H
 
 #include "AegisComponent.h" 
 #include "ILuaObject.h"
@@ -40,5 +40,4 @@ protected:
 	bool isVisible = true;
 };
 
-
-#endif //RENDERER_H
+#endif //SKYBOX_H

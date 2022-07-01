@@ -1,13 +1,11 @@
 #include "SkyboxComponent.h"
 #include "Entity.h"
+
 #include "MathUtils.h"
-
-
 
 SkyboxComponent::SkyboxComponent(Entity* _ent, std::string matName, Ogre::SceneManager* sceneMng, bool ir) :
 	AegisComponent("Skybox", _ent)
 {
-
 	isVisible = ir;
 	setDataAsInnerType(this);
 	constructoraSkybox(_ent, matName, sceneMng, isVisible);
@@ -30,7 +28,7 @@ SkyboxComponent::SkyboxComponent()
 
 void SkyboxComponent::constructoraSkybox(Entity* _ent, std::string matName, Ogre::SceneManager* sceneMng, bool ir)
 {
-	//sceneMng->setSkyBox(true, meshName);
+	// Mesh se separa de Entity para la gestion del ssistema,d ado que la mesh no se va a cargar, sino crear
 	mesh = new Ogre::Plane(Ogre::Vector3(0, 0, 1), -100);
 	sceneMng->setSkyPlane(true,*mesh , matName, 1, 1, true, 1, 10, 10);
 	entity = sceneMng->createEntity(_ent->getName() + " " + matName);
