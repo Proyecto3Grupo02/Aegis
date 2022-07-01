@@ -3,20 +3,20 @@
 
 #include "MathUtils.h"
 
-SkyboxComponent::SkyboxComponent(Entity* _ent, std::string matName, Ogre::SceneManager* sceneMng, bool ir) :
+SkyboxComponent::SkyboxComponent(Entity* _ent, std::string matName, bool ir) :
 	AegisComponent("Skybox", _ent)
 {
 	isVisible = ir;
 	setDataAsInnerType(this);
-	constructoraSkybox(_ent, matName, sceneMng, isVisible);
+	constructoraSkybox(_ent, matName, isVisible);
 }
 
 SkyboxComponent::SkyboxComponent(Entity* _ent, std::string matName) :
 	AegisComponent("Skybox", _ent)
 {
 	isVisible = true;
+	constructoraSkybox(_ent, matName, isVisible);
 	setDataAsInnerType(this);
-	constructoraSkybox(_ent, matName, _ent->getNode()->getCreator(), isVisible);
 }
 
 SkyboxComponent::SkyboxComponent()
@@ -26,29 +26,19 @@ SkyboxComponent::SkyboxComponent()
 	setComponentName("Skybox");
 }
 
-void SkyboxComponent::constructoraSkybox(Entity* _ent, std::string matName, Ogre::SceneManager* sceneMng, bool ir)
+void SkyboxComponent::constructoraSkybox(Entity* _ent, std::string matName, bool ir)
 {
-	// Mesh se separa de Entity para la gestion del ssistema,d ado que la mesh no se va a cargar, sino crear
-	mesh = new Ogre::Plane(Ogre::Vector3(0, 0, 1), -100);
-	sceneMng->setSkyPlane(true,*mesh , matName, 1, 1, true, 1, 10, 10);
-	entity = sceneMng->createEntity(_ent->getName() + " " + matName);
-	entity->setMaterialName(matName);
-
-	node = getEntity()->getNode();
-	node->attachObject(entity);
-	setRendering(ir);
-
-	transform = getEntity()->getTransform(); //como transform es un componente nativo, no es necesario comprobar si es null
+	_ent->getNode()->getCreator()->setSkyBox(true,matName);
 }
 
 void SkyboxComponent::constructoraSkyboxLua(Entity* _ent, std::string matName)
 {
-	constructoraSkybox(_ent, matName, _ent->getNode()->getCreator(), isVisible);
+	constructoraSkybox(_ent, matName, isVisible);
 }
 
 SkyboxComponent* CreateSkybox(Entity* _ent, std::string matName)
 {
-	return new SkyboxComponent(_ent, matName);
+	return new SkyboxComponent(_ent, matName,true);
 }
 
 void SkyboxComponent::ConvertToLua(lua_State* state)
