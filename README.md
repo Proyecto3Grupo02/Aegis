@@ -29,11 +29,11 @@ Documento de diseño del motor
 ## Introducción:
 Aegis es un motor de videojuegos desarrollado por Kirin Studios en C++ con el fin de proporcionar un soporte para programar juegos usando LUA como lenguaje de scripting. ([**Consultar la documentación de la API**](Aegis_Arquitecture/LuaScriptingApi.md))
 
-El motor está estructurado mediante la política de Entity-Component:
+El motor esta estructurado mediante la política de Entity-Component:
 * **Entidades:** Equivalentes a los gameobject en Unity. Se les puede asociar Componentes para dotarles funciones y/o comportamientos especificos.
-* **Componentes:** Hay dos tipos. El programador que use Aegis puede o bien utilizar componentes proporcionados por el propio motor (Ejemplos: Transform, Renderer, Rigidbody), o bien programar en LUA sus propios componentes que doten a la entidad de distintos comportamientos.
+* **Componentes:** Hay dos tipos. El programador que use Aegis puede o bien utilizar componentes proporcionados por el propio motor (Ejemplos: Tranform, Renderer, Rigidbody), o bien programar en LUA sus propios componentes que doten a la entidad de distintos comportamientos.
 
-Aegis cuenta con las siguientes Features:
+Aegis cuenta con las siguientes Fatures:
 * **Renderizado en 3D con shaders** (OGRE)
 * **Manejo de eventos por teclado y ratón** (SDL)
 * **Uso de física** (Bullet)
@@ -59,10 +59,26 @@ AegisEngine > Propiedades > Depuración > Directorio de trabajo > $(SolutionDir)
 AegisAudio funciona como enlace entre la librería **fmod** y Aegis, nuestro motor.
 
 #### SoundResources:
-SoundResources cuenta con un método **parseDirectory(string dir)** que incializa un **map<cancion,std::string> mapSound** con los sonidos encontrados en el directorio dir. También tiene un método **getSound(string name)** para devolver el sonido con dicho nombre en caso de estar contenido en el mapSound.
+SoundResources cuenta con un método **parseDirectory(string dir)** que incializa un **map<cancion,std::string> mapSound** con las sonidos encontrados en el directorio dir. Tambíen tiene un método **getSound(string name)** para devolver el sonido con dicho nombre en caso de estar contenida en el mapSound.
 
 #### SoundSystem:
 SoundSystem hereda de **Singleton** e **ILuaObject**, y se encarga de gestionar los sonidos.
+Actua a modo de puente entre la libreria FMOD y las caracteristicas del motor.
+Cuenta con los struct SoundChannel para la gestion de los canales y su play/pause, EmitterData para contener las posiciones de los emisores y soportar que tengan más de un canal de sonido y ListenerData que contiene la posición y el angulo del Listener para crear el sonido espacial.
+Contiene tambien un putero a SoundResources para los sonidos gestionados del directorio.
+Contiene metodos para cambiar manualmente las caracteristicas del sonido (SetVolume para los canales y los grupos)
+El sistema llama a la inicializacion del Sistema de FMOD y carga los sonidos cuando se llama, en los metodos Update y Stop se encarga de compobrar las características del SoundSystem y las actualiza en el System de FMOD.
+
+#### SoundListener:
+Se usa para obtener la posición y el angulo de lo que queremos que sea el listener (Camara, jugador...)
+Actualiza su posición en el sistema cuando se actualiza la del objeto.
+
+#### SoundEmitter:
+Hereda de **AegisComponent**
+Se usa para cargar en el sistema los sonidos y la posición del objeto emisor.
+Un objeto emisor puede contener varios canales para reproducir varios sonidos a la vez.
+Contiene una implementación que permite reproducir sonidos en loop configurable, en caso de, por ejemplo, querer crear un objeto para la musica del nivel.
+La gestión del sonido se realiza sobre el SoundSystem, no reproduce por si mismo.
 
 ------
 ### AegisCommon:
@@ -87,7 +103,7 @@ AegisComponent cuenta también con métodos set y get que reciben/devuelven dich
 #### CameraComponent:
 CameraComponent guarda tanto un bool que determina si es "MainCamera" como un puntero a la **AegisCamera** a la que está asociada.
 
-Esta clase cuenta con 2 constructoras. Una que es llamada desde Lua (recibiendo argumentos de tipo LuaRef), y otra que es llamada desde C++ (recibiendo una **AegisCamera** ya creada). La de Lua crea un AegisCamera y llama a la segunda constructora pasándosela como argumento.
+Esta clase cuenta con 2 constructoras. Una que es llamada desde Lua (reciviendo argumentos de tipo LuaRef), y otra que es llamada desde C++ (recibiendo una **AegisCamera** ya creada). La de Lua crea un AegisCamera y llama a la segunda constructora pasándosela como argumento.
 
 Hay un método **CameraComponent* createCamera(Entity* ent, LuaRef args)** que será llamado desde Lua gracias al **ConvertToLua**. La función de este método es llamar a la primera constructora.
 
@@ -105,7 +121,7 @@ Dota a la entidad de una **mesh** y le asigna un material.
 #### RigidbodyComponent:
 Crea un **Rigidbody** del proyecto **AegisPhysics** y lo guarda en un puntero. También guarda otra referencia al **Transform** de la entidad, con el fin de sincronizar sus atributos (posición, rotación, ...) cuando se modifiquen los del RigidbodyComponent (método **syncTransformToRigidbody**).
 
-También cuenta con una **list<RigidbodyComponent*>::iterator physicsEntityIt** de sí mismo para cuando haya que borrarlo.
+También cuenta con una **list<RigidbodyComponent*>::iterator physicsEntityIt** de si mismo para cuando haya que borrarlo.
 
 #### SoundEmitterComponent:
 SoundEmitterComponent guarda un string con el sonido asociado a la entidad. En caso de que se desee utilizar dicho sonido, la clase cuenta con métodos para comunicarse con la instancia de **SoundSystem**.
@@ -123,7 +139,7 @@ Entity hereda de **ILuaObject**. Cuenta con los siguientes atributos:
 * **string mName_;**
 * **TransformComponent* transform;**
 
-Cuenta con los métodos **init, fixedUpdate, update, lateUpdate, y render**. En dichos métodos recorre **mComponentsArray_**, ejecutando los métodos correspondientes.
+Cuenta con métodos **init, fixedUpdate, update, lateUpdate, y render**. En dichos métodos recorre **mComponentsArray_**, ejecutando los métodos correspondientes.
 
 #### Initializable:
 Contiene un método **virtual bool init() = 0** con el fin de obligar a sobreescribir dicho método en las clases que hereden de él.
@@ -152,7 +168,7 @@ Hereda de **ILuaObject** y contiene varias **listas** para gestionar las **Entid
 * Hay un método **instantiatePrefab** que como su nombre indica, permite instanciar prefabs.
 
 #### SceneManager:
-SceneManager hereda de **Singelton** e **ILuaObject**. Guarda una referencia tanto a **OgreWrapper**, como a **currentScene**. También guarda un **LuaRef sceneToLoad** inicializado con **LuaManager::getInstance()->getSharedEmptyLuaRef()** por razones explicadas anteriormente. Cuando se desee cargar una nueva escena desde Lua, se llamará al método **loadScene (LuaRef newScenecene)** para que actualice el valor de sceneToLoad. En el método **refresh**, se borrará **currentScene** para cargar sceneToLoad si se detecta que sceneToLoad ya no es NilValue.
+SceneManager hereda de **Singelton** e **ILuaObject**. Guarda una referencia tanto a **OgreWrapper**, como a **currentScene**. También guarda un **LuaRef sceneToLoad** inicializado con **LuaManager::getInstance()->getSharedEmptyLuaRef()** por razones explicadas anteriormente. Cuando se desee cargar una nueva escena desde Lua, se llamará al método **loadScene (LuaRef newScenecene)** para que actualice el valor de sceneToLoad. En el método **refresh**, se borrará **currentScene** para cargar sceneToLoad sise detecta que sceneToLoad ya no es NilValue.
 
 #### InputSystem:
 InputSystem hereda de **Singleton** e **ILuaObject**. Contiene 2 strcuts:
@@ -226,7 +242,7 @@ En la constructora inicializa las cosas de Bullet, y en caso de que esté en mod
 
 Esta clase usa una variable scene, que es la agrupación de objetos físicos la cual debe encargarse de actualizar, tanto las fuerzas que les afectan como sus colisiones.
 
-En el método update hace avanzar el mundo físico y comprueba si ha habido colisiones en el método checkCollision, en cuyo caso, para cada par de colisiones se llama a CollisionEnterCallbacks desde donde se llama a los oncollision/ontrigger respectivos de cada entidad.
+En el método update hace avanzar el mundo fisico y comprueba si ha habido colisiones en el método checkCollision, en cuyo caso, para cada par de colisiones se llama a CollisionEnterCallbacks desde donde se llama a los oncollision/ontrigger respectivos de cada entidad.
 
 También tiene el método createRigidBody que permite crear un nuevo rigidBody, además de los métodos parseToBulletTransform, parseToBulletTransform con los cuales a partir de un vector3 y de un vector3/4 se puede obtener un btTransform.
 
@@ -235,20 +251,20 @@ Rigidbody crea una entidad física en Bullet. Contiene métodos setter y get par
 
 ------
 ### AegisScripting:
-AegisScripting es el eslabón del motor que une C++ con Lua.
+AegisScripting es el eslavón del motor que une C++ con Lua.
 
 #### LuaBasic:
-Contiene únicamente los include de Lua. Tiene como función reducir el número de includes en otros scripts.
+Contiene unicamente los include de Lua. Tiene como función reducir el número de includes en otros scripts.
 
 #### LuaManager:
-LuaManager es el eslabón del motor que une C++ con Lua. Hereda de **Singleton** y se encarga tanto de la creación de un nuevo **LuaState**, como de parsear parámetros **LuaRef** a C++. También cuenta con una función **execute(string filename)** para  cargar y ejecutar el archivo.lua "filename". Devuelve true si se carga y ejecuta correctamente.
+LuaManager es el eslavón del motor que une C++ con Lua. Hereda de **Singleton** y se encarga tanto de la creación de un nuevo **LuaState**, como de parsear parámetros **LuaRef** a C++. También cuenta con una función **execute(string filename)** para  cargar y ejecutar el archivo.lua "filename". Devuelve true si se carga y ejecuta correctamente.
 
 ------
 ### AegisUI:
 #### UISystem:
 UISystem es un **Singleton** encardo de la gestión de **UIObjects**.
 
-En la constructora crea un **OverlaySystem** y accede al **OverlayManager** con el fin de inicializar un nuevo **Overlay** para la gestión de imágenes. Contiene un **vector de UIObjects** donde se guardarán los objetos de tipo UI creados desde lua mediante la función **createUIElem(luabridge::LuaRef luaref)**. Dicha función leerá el string identificador que recibe como argumento LuaRef para crear el tipo de objeto oportuno.
+En la constructora crea un **OverlaySystem** y accede al **OverlayManager** con el fin de inicializar un nuevo **Overlay** para la gestión de imágenes. Contiene un **vector de UIObjects** donde se guardaran los objetos de tipo UI creados desde lua mediante la función **createUIElem(luabridge::LuaRef luaref)**. Dicha función leerá el string identificador que recibe como argumento LuaRef para crear el tipo de objeto oportuno.
 
 * El sistema también contiene una función **update** que recorre el vector ui_objects para que se actualicen.
 
@@ -260,7 +276,7 @@ Una vez creado el elemento, se le modifica mediante la posición, profundidad (e
 * También hay una función **onClick** que comprueba si la posición del ratón está dentro de la superficie definida por el UIObject si este es visible. Debido a que las posiciones de los UIObjects pertenecen al intervalo [(0,0), (1,1)] y no se miden en píxeles, se usan los métodos **getWidth/getHeight** del **WindowManager** de **AegisGraphics** para realizar la conversión a píxeles de la ventana. En dicho caso de se cumplan las condiciones, se ejecutará el **function<void()> clickCallback**.
 
 #### Image:
-Image hereda de **UIObject** y expande la funcionalidad de dicha clase añadiéndole un material que recibe como argumento en la constructora. Dicha constructora es llamada desde un método estático de la misma clase, **CreateImage(LuaRef args)**, la cual parsea los argumentos LuaRef al tipo recibido por la constructora. CreateImage es llamado desde **UISystem::createUIElem** cuando se crea un objeto de tipo UI en lua.
+Image hereda de **UIObject** y expande la funcionalidad de dicha clase añadiéndole un material que recibe como argumento en la constructora. Dicha constructora es llamada desde un método estático de la misma clase, **CreateImage(LuaRef args)**, la cual realiza la parsea los argumentos LuaRef al tipo recibido por la constructora. CreateImage es llamado desde **UISystem::createUIElem** cuando se crea un objeto de tipo UI en lua.
 
 #### Button:
 Button hereda de **Image** y contiene un método **buttonClickCallback()** que es asignado al **clickCallback** de **UIObject**. En buttonClickCallback se llamará a la función definida en lua.
@@ -273,13 +289,13 @@ Text hereda de **UIObject** y crea un texto a partir de los argumentos recibidos
 * Hay un método estático **CreateText(LuaRef args)** que es llamado desde **UISystem::createUIElem**.
 
 #### ImageResources:
-ImageResources **parseDirectory(string dir)** incializa un **map<image,std::string> mapImage** con las imágenes encontradas en el directorio **dir**. También tiene un método **getImage(string name)** para devolver la imagen con dicho nombre en caso de estar contenida en el mapImage. 
+ImageResources **parseDirectory(string dir)** incializa un **map<image,std::string> mapImage** con las imágenes encontradas en el directorio **dir**. Tambíen tiene un método **getImage(string name)** para devolver la imagen con dicho nombre en caso de estar contenida en el mapImage. 
 
 ------
 ## Organización del directorio:
 Aegis Engine  (carpeta principal)
 * **Dependencias:** Contiene las librerías utilizadas; Bullet, FMOD, LUA, OGRE.
-* **Exes:** Contiene los archivos autogenerados al compilar cada proyecto, junto con el juego programado en LUA que se desea ejecutar mediante Aegis
+* **Exes:** Contiene los archivos autogenerados al compilar cada poryecto, junto con el juego programado en LUA que se desea ejecutar mediante Aegis
 * **Proyects:** Contiene los archivos .vcxproj y filters de cada proyecto.
 * **Src:** Contiene los archivos .h y .cpp del motor. En la carpeta correspondiente a AegisEngine también hay un subdirectorio **Scripts** donde se guardan init.lua, utils.lua, y los componentes de lua proporcionados por el motor.
 * **Temp:** Guarda los archivos objetos autogenerados al compilar.
